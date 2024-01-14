@@ -7,6 +7,9 @@
 
 
 install go
+```
+sudo apt install golang
+```
 
 ```
 go run main.go
