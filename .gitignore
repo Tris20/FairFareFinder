@@ -7,7 +7,7 @@
 *.dll
 *.so
 *.dylib
-
+*FairFareFinder*
 # Test binary, built with `go test -c`
 *.test
 
