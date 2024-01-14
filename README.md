@@ -5,3 +5,9 @@
 # test from jared
 # Test from Tristan who uses uppecase When he Feels like it :)
 
+
+install go
+
+```
+go run src/main.go
+```
