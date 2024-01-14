@@ -46,7 +46,7 @@ func main() {
 	}
 
 	// Define the city and build the API URL
-	city := "YourCityName" // Replace with your city name
+	city := "Berlin" // Replace with your city name
 	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city, apiKey)
 
 	// Make the HTTP request
@@ -69,10 +69,10 @@ func main() {
 	}
 
 	// Display the weather data
-	fmt.Printf("Temperature: %.2f°C\nWind Speed: %.2fm/s\nWeather Condition: %s\n",
+	fmt.Printf("Temperature: %.2f°C\nWind Speed: %.2f \n",
 		weather.Main.Temp-273.15, // Convert Kelvin to Celsius
-		weather.Wind.Speed,
-		weather.Weather[0].Main)
+		weather.Wind.Speed)
+	// weather.Weather[0].Main)
 
 	// rest of your code...
 }
