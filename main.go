@@ -1,12 +1,3 @@
-// package main
-
-// import (
-// 	"fmt"
-// )
-
-// func main() {
-// 	fmt.Println("Hello World")
-// }
 
 package main
 
@@ -16,6 +7,8 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+	"strings"
 
 	"gopkg.in/yaml.v2"
 )
@@ -39,14 +32,18 @@ type Secrets struct {
 }
 
 func main() {
+	if len(os.Args) < 2 {
+		log.Fatal("Error: No location provided. Please provide a location as a command-line argument.")
+	}
+	city := strings.Title(os.Args[1]) // Capitalize the first letter of the location argument
+
 	// Load API key from secrets.yaml
 	apiKey, err := loadApiKey("ignore/secrets.yaml", "openweathermap.org")
 	if err != nil {
 		log.Fatal("Error loading API key:", err)
 	}
 
-	// Define the city and build the API URL
-	city := "Berlin" // Replace with your city name
+	// Build the API URL with the provided city
 	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city, apiKey)
 
 	// Make the HTTP request
@@ -68,19 +65,12 @@ func main() {
 		log.Fatalf("Error parsing JSON response: %v", err)
 	}
 
-	// // Display the weather data
-	// fmt.Printf("Temperature: %.2f°C\nWind Speed: %.2f \n",
-	// 	weather.Main.Temp-273.15, // Convert Kelvin to Celsius
-	// 	weather.Wind.Speed)
-	// // weather.Weather[0].Main)
-
 	// Display the weather data
-	fmt.Printf("Temperature: %.2f°C\nWind Speed: %.2fm/s\nWeather Condition: %s\n",
+	fmt.Printf("Temperature in %s: %.2f°C\nWind Speed: %.2fm/s\nWeather Condition: %s\n",
+		city,
 		weather.Main.Temp-273.15, // Convert Kelvin to Celsius
 		weather.Wind.Speed,
 		weather.Weather[0].Main)
-
-	// rest of your code...
 }
 
 // loadApiKey loads the API key for a given domain from a YAML file
@@ -104,3 +94,4 @@ func loadApiKey(filePath, domain string) (string, error) {
 
 	return apiKey, nil
 }
+
