@@ -11,3 +11,9 @@ install go
 ```
 go run src/main.go
 ```
+
+
+## installing go packges
+```
+go get gopkg.in/yaml.v2
+```
