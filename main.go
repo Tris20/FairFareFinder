@@ -68,11 +68,17 @@ func main() {
 		log.Fatalf("Error parsing JSON response: %v", err)
 	}
 
+	// // Display the weather data
+	// fmt.Printf("Temperature: %.2f°C\nWind Speed: %.2f \n",
+	// 	weather.Main.Temp-273.15, // Convert Kelvin to Celsius
+	// 	weather.Wind.Speed)
+	// // weather.Weather[0].Main)
+
 	// Display the weather data
-	fmt.Printf("Temperature: %.2f°C\nWind Speed: %.2f \n",
+	fmt.Printf("Temperature: %.2f°C\nWind Speed: %.2fm/s\nWeather Condition: %s\n",
 		weather.Main.Temp-273.15, // Convert Kelvin to Celsius
-		weather.Wind.Speed)
-	// weather.Weather[0].Main)
+		weather.Wind.Speed,
+		weather.Weather[0].Main)
 
 	// rest of your code...
 }
