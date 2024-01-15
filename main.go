@@ -66,11 +66,12 @@ func main() {
 	}
 
 	// Display the weather data
-	fmt.Printf("Temperature in %s: %.2f°C\nWind Speed: %.2fm/s\nWeather Condition: %s\n",
+	fmt.Printf("Temperature in %s: %.2f°C\nWind Speed: %.2fm/s\nWeather Condition: %s\nWPI of: %.2f\n",
 		city,
 		weather.Main.Temp-273.15, // Convert Kelvin to Celsius
 		weather.Wind.Speed,
-		weather.Weather[0].Main)
+		weather.Weather[0].Main,
+        weatherPleasantness(weather.Main.Temp-273.15, weather.Wind.Speed, weather.Weather[0].Main))
 }
 
 // loadApiKey loads the API key for a given domain from a YAML file
@@ -93,5 +94,86 @@ func loadApiKey(filePath, domain string) (string, error) {
 	}
 
 	return apiKey, nil
+}
+
+// return the "weather pleasentness index" (WPI) between 0 and 10 based on the conditions. (10=best)
+func weatherPleasantness(temp float64, wind float64, cond string) float64 {
+
+    // weights for how much the index is affected by a factor compared to others
+    weightTemp := 3.0
+    weightWind := 1.0
+    weightCond := 2.0
+
+    // calculate the average index taking weights into account
+    tempindex := tempPleasantness(temp) * weightTemp
+    windindex := windPleasantness(wind) * weightWind
+    weathindex := weatherCondPleasantness(cond) * weightCond
+
+    index := (tempindex + windindex + weathindex) / (weightTemp + weightWind + weightCond)
+
+    return index
+}
+
+
+// return a value between 0 and 10 how nice the temperature is (10=best)
+func tempPleasantness(temperature float64) float64 {
+
+    // configuration of linear slope and cut-off for perfect temp
+    GoodTemp := 20.0
+    indexAtGoodTemp := 7.0
+    PerfectTemp := 23.0
+    
+    // linear slope is used between 0°C and GoodTemp
+    slope := indexAtGoodTemp / GoodTemp
+
+    if temperature <= 0 {
+        return 0
+    } else if temperature > PerfectTemp {
+        return 10
+    } else {
+        return slope * temperature
+    }
+}
+
+// return a value between 0 and 10 how nice the weather condition is (10=best)
+func weatherCondPleasantness(cond string) float64 {
+    
+    // weather conditions from openweather.org rated with pleasantness
+    weatherConditions := map[string]float64{
+        "Thunderstorm": 0,
+        "Drizzle":      1,
+        "Rain":         0,
+        "Snow":         3,
+        "Mist":         3,
+        "Smoke":        1,
+        "Haze":         4,
+        "Dust":         2,
+        "Fog":          2,
+        "Sand":         3,
+        "Ash":          1,
+        "Squall":       1,
+        "Tornado":      0,
+        "Clear":        10,
+        "Clouds":       7,
+    }
+
+    pleasantness, ok := weatherConditions[cond]
+    if !ok {
+        return 0
+    }
+    return pleasantness
+}
+
+// return a value between 0 and 10 how nice the wind condition is (10=best)
+func windPleasantness(windSpeed float64) float64 {
+    
+    // 0 m/s is perfect, anything higher is linear worse. 13.8 m/s (50 km/h) is worst.
+    worstWind := 13.8
+
+    if windSpeed >= worstWind {
+        return 0
+    } else {
+        return 10 - windSpeed*10/worstWind
+    }
 }
 
