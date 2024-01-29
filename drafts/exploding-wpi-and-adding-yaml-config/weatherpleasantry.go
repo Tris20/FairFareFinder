@@ -110,24 +110,29 @@ func calculateDailyAverageWPI(weatherData []WeatherData, config WeatherPleasantn
 // Assuming each WeatherData entry is for a 3-hour segment
 
 
-//func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]float64, float64) {
-func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]DailyWeatherDetails, float64){
-    dailyData := make(map[time.Weekday][]WeatherData)
-    for _, data := range weeklyData {
-        timestamp := time.Unix(data.Dt, 0)
-        day := timestamp.Weekday()
-        hour := timestamp.Hour()
+//func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]DailyWeatherDetails, float64){
+    
+func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]DailyWeatherDetails, float64) {
+    currentDay := time.Now().Weekday()
+    startDay, endDay := determineRangeBasedOnCurrentDay(currentDay)
 
-    //  fmt.Printf("Day info %s, Hour: %d\n", day.String(), hour)
-
-        if day >= time.Thursday && day <= time.Saturday {
-            // Only include data points between 9 am and 9 pm
-            if hour >= 9 && hour <= 21 {
-                dailyData[day] = append(dailyData[day], data)
-            }
-        }
-    }
-
+    dailyData := filterDataByDayRange(weeklyData, startDay, endDay)
+//  dailyData := make(map[time.Weekday][]WeatherData)
+//    for _, data := range weeklyData {
+//        timestamp := time.Unix(data.Dt, 0)
+//        day := timestamp.Weekday()
+//        hour := timestamp.Hour()
+//
+//    //  fmt.Printf("Day info %s, Hour: %d\n", day.String(), hour)
+//
+//        if day >= time.Thursday && day <= time.Saturday {
+//            // Only include data points between 9 am and 9 pm
+//            if hour >= 9 && hour <= 21 {
+//                dailyData[day] = append(dailyData[day], data)
+//            }
+//        }
+//    }
+//
     dailyDetails := make(map[time.Weekday]DailyWeatherDetails)
     var totalWPI float64
     for day, data := range dailyData {
@@ -165,26 +170,54 @@ func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessCon
 }
 
 
-//  dailyAverages := make(map[time.Weekday]float64)
-//	var totalAverage float64
-//	var daysCounted float64
-//
-//	for day, data := range dailyData {
-//		dailyAvg := calculateDailyAverageWPI(data, config)
-//		dailyAverages[day] = dailyAvg
-//		totalAverage += dailyAvg
-//		daysCounted++
-//
-//    fmt.Printf("Processing data for day: %s\n", day.String())
-//    fmt.Printf("Day average WPI: %.2f\n", dailyAvg)
-//	}
-//
-//	if daysCounted == 0 {
-//		return dailyAverages, 0
-//	}
-//
-//	totalAverage /= daysCounted
-//	return dailyAverages, totalAverage
-//}
+// determineRangeBasedOnCurrentDay calculates the range of days to consider based on the current day
+func determineRangeBasedOnCurrentDay(currentDay time.Weekday) (time.Weekday, time.Weekday) {
+    switch currentDay {
+    case time.Sunday:
+        return time.Wednesday, time.Friday
+    case time.Monday:
+        return time.Wednesday, time.Saturday
+    case time.Tuesday:
+        return time.Thursday, time.Sunday
+    case time.Wednesday:
+        return time.Thursday, time.Monday
+    case time.Thursday:
+        return time.Friday, time.Tuesday
+    case time.Friday:
+        return time.Saturday, time.Wednesday
+    case time.Saturday:
+        return time.Sunday, time.Thursday
+    default:
+        return time.Thursday, time.Monday // Default range
+    }
+}
 
+// filterDataByDayRange filters the weather data for a specific range of days
+func filterDataByDayRange(weeklyData []WeatherData, startDay, endDay time.Weekday) map[time.Weekday][]WeatherData {
+    dailyData := make(map[time.Weekday][]WeatherData)
+    for _, data := range weeklyData {
+        timestamp := time.Unix(data.Dt, 0)
+        day := timestamp.Weekday()
+        hour := timestamp.Hour()
 
+        if shouldIncludeDay(day, startDay, endDay) {
+            if hour >= 9 && hour <= 21 { // Include data points between 9 am and 9 pm
+                dailyData[day] = append(dailyData[day], data)
+            }
+        }
+    }
+    return dailyData
+}
+
+// shouldIncludeDay checks if a day is within the specified range
+func shouldIncludeDay(day, startDay, endDay time.Weekday) bool {
+    for d := startDay; d != endDay; d = (d + 1) % 7 {
+        if d == day {
+            return true
+        }
+        if d == endDay {
+            break
+        }
+    }
+    return day == endDay
+}

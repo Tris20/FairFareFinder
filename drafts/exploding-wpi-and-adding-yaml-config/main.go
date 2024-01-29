@@ -89,7 +89,7 @@ func main() {
 
   dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
    
-  orderedDays := []time.Weekday{time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday}
+  orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
 
   for _, day := range orderedDays {
       details, ok := dailyDetails[day]
