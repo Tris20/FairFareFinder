@@ -47,27 +47,28 @@ type CityAverageWPI struct {
 
 func main() {
 	if len(os.Args) < 2 {
-		log.Fatal("Error: No argument provided. Please provide a location or 'favourites'.")
+    log.Fatal("Error: No argument provided. Please provide a location, 'local_favourites', or 'international_favourites'.")
 	}
-
-	if os.Args[1] == "favourites" {
-		// Handle favourites
-		handleFavourites()
-	} else {
-		// Process a single location
-		location := strings.Join(os.Args[1:], " ")
-		processLocation(location)
+  switch os.Args[1] {
+      case "local_favourites":
+          handleFavourites("local_favourites.yaml")
+      case "international_favourites":
+          handleFavourites("international_favourites.yaml")
+      default:
+          location := strings.Join(os.Args[1:], " ")
+          processLocation(location)
+  
 	}
 }
 
-func handleFavourites() {
+func handleFavourites(yamlFile string)  {
 	var favs Favourites
-	yamlFile, err := ioutil.ReadFile("favourites.yaml")
+	fileContents, err := ioutil.ReadFile(yamlFile)
 	if err != nil {
 		log.Fatalf("Error reading favourites file: %v", err)
 	}
 
-	err = yaml.Unmarshal(yamlFile, &favs)
+	err = yaml.Unmarshal(fileContents, &favs)
 	if err != nil {
 		log.Fatalf("Error parsing favourites file: %v", err)
 	}
@@ -138,22 +139,6 @@ func displayForecastData(location string, dailyDetails map[time.Weekday]DailyWea
     }
 }
 
-//func displayForecastData(location string, forecast ForecastResponse, config WeatherPleasantnessConfig) {
-//	dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
-//
-//	orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
-//
-//	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
-//	for _, day := range orderedDays {
-//		details, ok := dailyDetails[day]
-//		if ok {
-//			fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, WPI: %.2f\n",
-//				day.String(), details.AverageTemp, details.CommonWeather, details.WPI)
-//		}
-//	}
-//	fmt.Printf("Average WPI: %.2f\n", overallAverage)
-//}
-//
 // loadApiKey loads the API key for a given domain from a YAML file
 func loadApiKey(filePath, domain string) (string, error) {
 	var secrets Secrets
