@@ -4,13 +4,18 @@ package main
 import (
 	"io/ioutil"
 	"time"
-  "fmt"
 	"gopkg.in/yaml.v2"
 )
 
 // WeatherPleasantnessConfig holds the configuration for weather pleasantness ratings.
 type WeatherPleasantnessConfig struct {
 	Conditions map[string]float64 `yaml:"conditions"`
+}
+
+type DailyWeatherDetails struct {
+    AverageTemp  float64
+    CommonWeather string
+    WPI          float64
 }
 
 // LoadWeatherPleasantnessConfig loads the weather pleasantness configuration from a YAML file.
@@ -105,14 +110,15 @@ func calculateDailyAverageWPI(weatherData []WeatherData, config WeatherPleasantn
 // Assuming each WeatherData entry is for a 3-hour segment
 
 
-func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]float64, float64) {
+//func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]float64, float64) {
+func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]DailyWeatherDetails, float64){
     dailyData := make(map[time.Weekday][]WeatherData)
     for _, data := range weeklyData {
         timestamp := time.Unix(data.Dt, 0)
         day := timestamp.Weekday()
         hour := timestamp.Hour()
 
-        fmt.Printf("Day info %s, Hour: %d\n", day.String(), hour)
+    //  fmt.Printf("Day info %s, Hour: %d\n", day.String(), hour)
 
         if day >= time.Thursday && day <= time.Saturday {
             // Only include data points between 9 am and 9 pm
@@ -122,25 +128,63 @@ func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessCon
         }
     }
 
-  dailyAverages := make(map[time.Weekday]float64)
-	var totalAverage float64
-	var daysCounted float64
+    dailyDetails := make(map[time.Weekday]DailyWeatherDetails)
+    var totalWPI float64
+    for day, data := range dailyData {
+        var sumTemp, count float64
+        weatherCount := make(map[string]int)
+        var maxWeather string
+        var maxCount int
 
-	for day, data := range dailyData {
-		dailyAvg := calculateDailyAverageWPI(data, config)
-		dailyAverages[day] = dailyAvg
-		totalAverage += dailyAvg
-		daysCounted++
+        for _, segment := range data {
+            sumTemp += segment.Main.Temp
+            weatherCount[segment.Weather[0].Main]++
+            if weatherCount[segment.Weather[0].Main] > maxCount {
+                maxCount = weatherCount[segment.Weather[0].Main]
+                maxWeather = segment.Weather[0].Main
+            }
+            count++
+        }
 
-    fmt.Printf("Processing data for day: %s\n", day.String())
-    fmt.Printf("Day average WPI: %.2f\n", dailyAvg)
-	}
+        if count == 0 {
+            continue
+        }
 
-	if daysCounted == 0 {
-		return dailyAverages, 0
-	}
+        avgTemp := sumTemp / count
+        wpi := calculateDailyAverageWPI(data, config)
+        dailyDetails[day] = DailyWeatherDetails{
+            AverageTemp:  avgTemp,
+            CommonWeather: maxWeather,
+            WPI:          wpi,
+        }
+        totalWPI += wpi
+    }
 
-	totalAverage /= daysCounted
-	return dailyAverages, totalAverage
+    averageWPI := totalWPI / float64(len(dailyDetails))
+    return dailyDetails, averageWPI
 }
+
+
+//  dailyAverages := make(map[time.Weekday]float64)
+//	var totalAverage float64
+//	var daysCounted float64
+//
+//	for day, data := range dailyData {
+//		dailyAvg := calculateDailyAverageWPI(data, config)
+//		dailyAverages[day] = dailyAvg
+//		totalAverage += dailyAvg
+//		daysCounted++
+//
+//    fmt.Printf("Processing data for day: %s\n", day.String())
+//    fmt.Printf("Day average WPI: %.2f\n", dailyAvg)
+//	}
+//
+//	if daysCounted == 0 {
+//		return dailyAverages, 0
+//	}
+//
+//	totalAverage /= daysCounted
+//	return dailyAverages, totalAverage
+//}
+
 

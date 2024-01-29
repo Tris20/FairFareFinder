@@ -1,4 +1,6 @@
+
 package main
+
 
 import (
 	"encoding/json"
@@ -8,7 +10,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
-
+  "time"
 	"gopkg.in/yaml.v2"
 )
 
@@ -24,6 +26,12 @@ type WeatherData struct {
 		Main string `json:"main"`
 	} `json:"weather"`
 }
+//
+//type DailyWeatherDetails struct {
+//    AverageTemp  float64
+//    CommonWeather string
+//    WPI          float64
+//}
 
 type ForecastResponse struct {
 	List []WeatherData `json:"list"`
@@ -78,15 +86,39 @@ func main() {
 		log.Fatal("Error loading weather pleasantness config:", err)
 	}
 
-	// Process the forecast data
-	dailyAverages, overallAverage := ProcessForecastData(forecast.List, config)
 
-	// Display the results
-	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", city)
-	for day, avgWPI := range dailyAverages {
-		fmt.Printf("%s: %.2f\n", day.String(), avgWPI)
-	}
-	fmt.Printf("Average WPI (Thursday to Sunday): %.2f\n", overallAverage)
+  dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
+   
+  orderedDays := []time.Weekday{time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday}
+
+  for _, day := range orderedDays {
+      details, ok := dailyDetails[day]
+      if ok {
+          fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, WPI: %.2f\n",
+              day.String(), details.AverageTemp, details.CommonWeather, details.WPI)
+      }
+  }
+  fmt.Printf("Average WPI (Thursday to Monday): %.2f\n", overallAverage)
+  
+  
+ // for day, details := range dailyDetails {
+ //     fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, WPI: %.2f\n",
+ //         day.String(), details.AverageTemp, details.CommonWeather, details.WPI)
+ // }
+ // fmt.Printf("Average WPI (Thursday to Monday): %.2f\n", overallAverage)
+ // 
+
+
+	// Process the forecast data
+//	dailyAverages, overallAverage := ProcessForecastData(forecast.List, config)
+
+//  
+//	// Display the results
+//	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", city)
+//	for day, avgWPI := range dailyAverages {
+//		fmt.Printf("%s: %.2f\n", day.String(), avgWPI)
+//	}
+//	fmt.Printf("Average WPI (Thursday to Sunday): %.2f\n", overallAverage)
 }
 
 // loadApiKey loads the API key for a given domain from a YAML file
