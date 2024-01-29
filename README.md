@@ -11,6 +11,42 @@
 - **Customizable Search Parameters**: Users can specify their preferences for travel time, budget, and type of activities.
 - **Automatic Updates**: Regularly updates destination suggestions based on changing weather forecasts and prices.
 
+## Usage
+### Single Location
+Checking Weather Pleasantness Index (WPI) for a Single Location
+To check the WPI for a single location, use the following command:
+```
+./exploding-wpi-and-adding-yaml-config [Location]
+```
+Replace [Location] with the name of the city or location you want to check.
+
+Example:
+```
+./exploding-wpi-and-adding-yaml-config berlin
+```
+### Multiple locations at once
+Checking WPI for Multiple Locations (Favorites)
+You can define a list of favorite locations in a YAML file. To check the WPI for multiple favorite locations, edit the local or international YAML file retaining the following structure:
+
+```
+locations:
+  - Location1
+  - Location2
+  - Location3
+  # Add more locations as needed
+```
+Then, use the following command:
+
+```
+./exploding-wpi-and-adding-yaml-config favourites [YAMLFilename]
+```
+Replace [YAMLFilename] with either local_favourites or international_favourites
+
+Example:
+```
+./exploding-wpi-and-adding-yaml-config international_favourites
+```
+
 ## Getting Started
 
 ### Prerequisites
