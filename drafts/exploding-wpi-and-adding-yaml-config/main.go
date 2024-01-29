@@ -10,6 +10,7 @@ import (
 	"strings"
 	"time"
 	"gopkg.in/yaml.v2"
+  "sort"
 )
 
 type WeatherData struct {
@@ -36,6 +37,12 @@ type ForecastResponse struct {
 // Secrets represents the structure of the secrets.yaml file.
 type Secrets struct {
 	APIKeys map[string]string `yaml:"api_keys"`
+}
+
+
+type CityAverageWPI struct {
+    Name string
+    WPI  float64
 }
 
 func main() {
@@ -65,12 +72,22 @@ func handleFavourites() {
 		log.Fatalf("Error parsing favourites file: %v", err)
 	}
 
+  var cityWPIs []CityAverageWPI
 	for _, location := range favs.Locations {
-		processLocation(location)
+    wpi := processLocation(location)
+    cityWPIs = append(cityWPIs, CityAverageWPI{Name: location, WPI: wpi})
 	}
+  sort.Slice(cityWPIs, func(i, j int) bool {
+        return cityWPIs[i].WPI > cityWPIs[j].WPI
+  })
+
+  fmt.Println("\nAverage WPI of Cities (Highest to Lowest):")
+  for _, cityWPI := range cityWPIs {
+      fmt.Printf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
+  }
 }
 
-func processLocation(location string) {
+func processLocation(location string) float64 {
 	// Load API key from secrets.yaml
 	apiKey, err := loadApiKey("../../ignore/secrets.yaml", "openweathermap.org")
 	if err != nil {
@@ -100,27 +117,43 @@ func processLocation(location string) {
 	if err != nil {
 		log.Fatal("Error loading weather pleasantness config:", err)
 	}
+  
+  dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
+  displayForecastData(location, dailyDetails)
 
-	// Process and display the forecast data
-	displayForecastData(location, forecast, config)
+  return overallAverage
 }
 
-func displayForecastData(location string, forecast ForecastResponse, config WeatherPleasantnessConfig) {
-	dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
 
-	orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
+func displayForecastData(location string, dailyDetails map[time.Weekday]DailyWeatherDetails) {
+    orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
 
-	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
-	for _, day := range orderedDays {
-		details, ok := dailyDetails[day]
-		if ok {
-			fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, WPI: %.2f\n",
-				day.String(), details.AverageTemp, details.CommonWeather, details.WPI)
-		}
-	}
-	fmt.Printf("Average WPI: %.2f\n", overallAverage)
+    fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
+    for _, day := range orderedDays {
+        details, ok := dailyDetails[day]
+        if ok {
+            fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, WPI: %.2f\n",
+                day.String(), details.AverageTemp, details.CommonWeather, details.WPI)
+        }
+    }
 }
 
+//func displayForecastData(location string, forecast ForecastResponse, config WeatherPleasantnessConfig) {
+//	dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
+//
+//	orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
+//
+//	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
+//	for _, day := range orderedDays {
+//		details, ok := dailyDetails[day]
+//		if ok {
+//			fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, WPI: %.2f\n",
+//				day.String(), details.AverageTemp, details.CommonWeather, details.WPI)
+//		}
+//	}
+//	fmt.Printf("Average WPI: %.2f\n", overallAverage)
+//}
+//
 // loadApiKey loads the API key for a given domain from a YAML file
 func loadApiKey(filePath, domain string) (string, error) {
 	var secrets Secrets
