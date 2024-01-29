@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -13,17 +12,21 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-// WeatherData represents the structure for OpenWeatherMap API response.
 type WeatherData struct {
-	Main struct {
+	Dt     int64 `json:"dt"` // Unix timestamp of the forecasted data
+	Main   struct {
 		Temp float64 `json:"temp"`
 	} `json:"main"`
-	Wind struct {
+	Wind   struct {
 		Speed float64 `json:"speed"`
 	} `json:"wind"`
 	Weather []struct {
 		Main string `json:"main"`
 	} `json:"weather"`
+}
+
+type ForecastResponse struct {
+	List []WeatherData `json:"list"`
 }
 
 // Secrets represents the structure of the secrets.yaml file.
@@ -35,7 +38,7 @@ func main() {
 	if len(os.Args) < 2 {
 		log.Fatal("Error: No location provided. Please provide a location as a command-line argument.")
 	}
-	city := strings.Title(os.Args[1]) // Capitalize the first letter of the location argument
+	city := strings.Title(os.Args[1])
 
 	// Load API key from secrets.yaml
 	apiKey, err := loadApiKey("../../ignore/secrets.yaml", "openweathermap.org")
@@ -43,8 +46,8 @@ func main() {
 		log.Fatal("Error loading API key:", err)
 	}
 
-	// Build the API URL with the provided city
-	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city, apiKey)
+	// Build the forecast API URL with the provided city
+	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric", city, apiKey)
 
 	// Make the HTTP request
 	resp, err := http.Get(url)
@@ -58,10 +61,14 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error reading response body: %v", err)
 	}
+  
+  // After reading the response body
+//  fmt.Println(string(body)) // Print raw JSON response
 
-	// Parse the JSON response
-	var weather WeatherData
-	if err := json.Unmarshal(body, &weather); err != nil {
+
+  // Parse the JSON forecast response
+ 	var forecast ForecastResponse
+	if err := json.Unmarshal(body, &forecast); err != nil {
 		log.Fatalf("Error parsing JSON response: %v", err)
 	}
 
@@ -71,13 +78,15 @@ func main() {
 		log.Fatal("Error loading weather pleasantness config:", err)
 	}
 
-	// Display the weather data
-	fmt.Printf("Temperature in %s: %.2f°C\nWind Speed: %.2fm/s\nWeather Condition: %s\nWPI of: %.2f\n",
-		city,
-		weather.Main.Temp-273.15, // Convert Kelvin to Celsius
-		weather.Wind.Speed,
-		weather.Weather[0].Main,
-		weatherPleasantness(weather.Main.Temp-273.15, weather.Wind.Speed, weather.Weather[0].Main, config))
+	// Process the forecast data
+	dailyAverages, overallAverage := ProcessForecastData(forecast.List, config)
+
+	// Display the results
+	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", city)
+	for day, avgWPI := range dailyAverages {
+		fmt.Printf("%s: %.2f\n", day.String(), avgWPI)
+	}
+	fmt.Printf("Average WPI (Thursday to Sunday): %.2f\n", overallAverage)
 }
 
 // loadApiKey loads the API key for a given domain from a YAML file

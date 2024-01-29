@@ -3,6 +3,8 @@ package main
 
 import (
 	"io/ioutil"
+	"time"
+  "fmt"
 	"gopkg.in/yaml.v2"
 )
 
@@ -34,11 +36,11 @@ func weatherPleasantness(temp float64, wind float64, cond string, config Weather
 	weightWind := 1.0
 	weightCond := 2.0
 
-	tempindex := tempPleasantness(temp) * weightTemp
-	windindex := windPleasantness(wind) * weightWind
-	weathindex := weatherCondPleasantness(cond, config) * weightCond
+	tempIndex := tempPleasantness(temp) * weightTemp
+	windIndex := windPleasantness(wind) * weightWind
+	weatherIndex := weatherCondPleasantness(cond, config) * weightCond
 
-	index := (tempindex + windindex + weathindex) / (weightTemp + weightWind + weightCond)
+	index := (tempIndex + windIndex + weatherIndex) / (weightTemp + weightWind + weightCond)
 	return index
 }
 
@@ -58,15 +60,6 @@ func tempPleasantness(temperature float64) float64 {
 	}
 }
 
-// weatherCondPleasantness returns a value between 0 and 10 for weather condition pleasantness
-func weatherCondPleasantness(cond string, config WeatherPleasantnessConfig) float64 {
-	pleasantness, ok := config.Conditions[cond]
-	if !ok {
-		return 0
-	}
-	return pleasantness
-}
-
 // windPleasantness returns a value between 0 and 10 for wind condition pleasantness
 func windPleasantness(windSpeed float64) float64 {
 	worstWind := 13.8
@@ -76,3 +69,78 @@ func windPleasantness(windSpeed float64) float64 {
 		return 10 - windSpeed*10/worstWind
 	}
 }
+
+// weatherCondPleasantness returns a value between 0 and 10 for weather condition pleasantness
+func weatherCondPleasantness(cond string, config WeatherPleasantnessConfig) float64 {
+	pleasantness, ok := config.Conditions[cond]
+	if !ok {
+		return 0
+	}
+	return pleasantness
+}
+
+// calculateDailyAverageWPI calculates the average WPI for a single day
+// This function assumes it receives weather data for each 3-hour segment between 9 am and 9 pm
+func calculateDailyAverageWPI(weatherData []WeatherData, config WeatherPleasantnessConfig) float64 {
+	var totalWPI float64
+	var count float64
+
+	for _, data := range weatherData {
+		// Assuming WeatherData contains Temp, Wind.Speed, and Weather[0].Main
+		wpi := weatherPleasantness(data.Main.Temp, data.Wind.Speed, data.Weather[0].Main, config)
+		totalWPI += wpi
+		count++
+	}
+
+	if count == 0 {
+		return 0
+	}
+
+	return totalWPI / count
+}
+
+// ProcessForecastData takes a slice of WeatherData for an entire week
+// and returns a map of average WPI for Thursday to Monday.
+// It also calculates the overall average for these days.
+// Assuming each WeatherData entry is for a 3-hour segment
+
+
+func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]float64, float64) {
+    dailyData := make(map[time.Weekday][]WeatherData)
+    for _, data := range weeklyData {
+        timestamp := time.Unix(data.Dt, 0)
+        day := timestamp.Weekday()
+        hour := timestamp.Hour()
+
+        fmt.Printf("Day info %s, Hour: %d\n", day.String(), hour)
+
+        if day >= time.Thursday && day <= time.Saturday {
+            // Only include data points between 9 am and 9 pm
+            if hour >= 9 && hour <= 21 {
+                dailyData[day] = append(dailyData[day], data)
+            }
+        }
+    }
+
+  dailyAverages := make(map[time.Weekday]float64)
+	var totalAverage float64
+	var daysCounted float64
+
+	for day, data := range dailyData {
+		dailyAvg := calculateDailyAverageWPI(data, config)
+		dailyAverages[day] = dailyAvg
+		totalAverage += dailyAvg
+		daysCounted++
+
+    fmt.Printf("Processing data for day: %s\n", day.String())
+    fmt.Printf("Day average WPI: %.2f\n", dailyAvg)
+	}
+
+	if daysCounted == 0 {
+		return dailyAverages, 0
+	}
+
+	totalAverage /= daysCounted
+	return dailyAverages, totalAverage
+}
+
