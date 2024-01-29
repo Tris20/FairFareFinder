@@ -3,15 +3,15 @@ conditions:
   Thunderstorm: 0
   Drizzle: 1
   Rain: 0
-  Snow: 3
-  Mist: 3
+  Snow: 0
+  Mist: 2
   Smoke: 1
-  Haze: 4
+  Haze: 3
   Dust: 2
-  Fog: 2
-  Sand: 3
+  Fog: 1
+  Sand: 1
   Ash: 1
   Squall: 1
   Tornado: 0
   Clear: 10
-  Clouds: 7
+  Clouds: 4 
