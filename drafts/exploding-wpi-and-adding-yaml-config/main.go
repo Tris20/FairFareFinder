@@ -1,6 +1,4 @@
-
 package main
-
 
 import (
 	"encoding/json"
@@ -10,7 +8,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
-  "time"
+	"time"
 	"gopkg.in/yaml.v2"
 )
 
@@ -26,12 +24,10 @@ type WeatherData struct {
 		Main string `json:"main"`
 	} `json:"weather"`
 }
-//
-//type DailyWeatherDetails struct {
-//    AverageTemp  float64
-//    CommonWeather string
-//    WPI          float64
-//}
+
+type Favourites struct {
+    Locations []string `yaml:"locations"`
+}
 
 type ForecastResponse struct {
 	List []WeatherData `json:"list"`
@@ -44,10 +40,37 @@ type Secrets struct {
 
 func main() {
 	if len(os.Args) < 2 {
-		log.Fatal("Error: No location provided. Please provide a location as a command-line argument.")
+		log.Fatal("Error: No argument provided. Please provide a location or 'favourites'.")
 	}
-	city := strings.Title(os.Args[1])
 
+	if os.Args[1] == "favourites" {
+		// Handle favourites
+		handleFavourites()
+	} else {
+		// Process a single location
+		location := strings.Join(os.Args[1:], " ")
+		processLocation(location)
+	}
+}
+
+func handleFavourites() {
+	var favs Favourites
+	yamlFile, err := ioutil.ReadFile("favourites.yaml")
+	if err != nil {
+		log.Fatalf("Error reading favourites file: %v", err)
+	}
+
+	err = yaml.Unmarshal(yamlFile, &favs)
+	if err != nil {
+		log.Fatalf("Error parsing favourites file: %v", err)
+	}
+
+	for _, location := range favs.Locations {
+		processLocation(location)
+	}
+}
+
+func processLocation(location string) {
 	// Load API key from secrets.yaml
 	apiKey, err := loadApiKey("../../ignore/secrets.yaml", "openweathermap.org")
 	if err != nil {
@@ -55,7 +78,7 @@ func main() {
 	}
 
 	// Build the forecast API URL with the provided city
-	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric", city, apiKey)
+	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric", location, apiKey)
 
 	// Make the HTTP request
 	resp, err := http.Get(url)
@@ -64,19 +87,11 @@ func main() {
 	}
 	defer resp.Body.Close()
 
-	// Read the response body
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
+	// Read and parse the response body
+	var forecast ForecastResponse
+	if body, err := ioutil.ReadAll(resp.Body); err != nil {
 		log.Fatalf("Error reading response body: %v", err)
-	}
-  
-  // After reading the response body
-//  fmt.Println(string(body)) // Print raw JSON response
-
-
-  // Parse the JSON forecast response
- 	var forecast ForecastResponse
-	if err := json.Unmarshal(body, &forecast); err != nil {
+	} else if err := json.Unmarshal(body, &forecast); err != nil {
 		log.Fatalf("Error parsing JSON response: %v", err)
 	}
 
@@ -86,39 +101,24 @@ func main() {
 		log.Fatal("Error loading weather pleasantness config:", err)
 	}
 
+	// Process and display the forecast data
+	displayForecastData(location, forecast, config)
+}
 
-  dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
-   
-  orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
+func displayForecastData(location string, forecast ForecastResponse, config WeatherPleasantnessConfig) {
+	dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
 
-  for _, day := range orderedDays {
-      details, ok := dailyDetails[day]
-      if ok {
-          fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, WPI: %.2f\n",
-              day.String(), details.AverageTemp, details.CommonWeather, details.WPI)
-      }
-  }
-  fmt.Printf("Average WPI (Thursday to Monday): %.2f\n", overallAverage)
-  
-  
- // for day, details := range dailyDetails {
- //     fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, WPI: %.2f\n",
- //         day.String(), details.AverageTemp, details.CommonWeather, details.WPI)
- // }
- // fmt.Printf("Average WPI (Thursday to Monday): %.2f\n", overallAverage)
- // 
+	orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
 
-
-	// Process the forecast data
-//	dailyAverages, overallAverage := ProcessForecastData(forecast.List, config)
-
-//  
-//	// Display the results
-//	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", city)
-//	for day, avgWPI := range dailyAverages {
-//		fmt.Printf("%s: %.2f\n", day.String(), avgWPI)
-//	}
-//	fmt.Printf("Average WPI (Thursday to Sunday): %.2f\n", overallAverage)
+	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
+	for _, day := range orderedDays {
+		details, ok := dailyDetails[day]
+		if ok {
+			fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, WPI: %.2f\n",
+				day.String(), details.AverageTemp, details.CommonWeather, details.WPI)
+		}
+	}
+	fmt.Printf("Average WPI: %.2f\n", overallAverage)
 }
 
 // loadApiKey loads the API key for a given domain from a YAML file
