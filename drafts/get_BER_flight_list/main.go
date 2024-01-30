@@ -16,7 +16,8 @@ type FlightResponse struct {
 
 type Flight struct {
     ArrivalDeparture      bool   `json:"is_departure"`
-    DestinationCity       string `json:"arr_airport_name"`
+    OriginCity            string `json:"dep_airport_name"`
+    OriginIATACode        string `json:"dep_airport_iata"`
     DestinationIATACode   string `json:"arr_airport_iata"`
     ScheduledDepartureTime string `json:"scheduled_time"`
 }
@@ -27,47 +28,104 @@ func main() {
     // Get the date 7 days from today
     sevenDaysLater := today.Add(7 * 24 * time.Hour)
 
-    // Replace the dates in the URL
-    url := "https://ber.berlin-airport.de//api.flights.json?arrivalDeparture=D" +
+    // Replace the dates in the URL for departures (Thursday and Friday)
+    departureURL := "https://ber.berlin-airport.de//api.flights.json?arrivalDeparture=D" +
         "&dateFrom=" + today.Format("2006-01-02") +
         "&dateUntil=" + sevenDaysLater.Format("2006-01-02") +
         "&search=&lang=en&page=1&terminal=&itemsPerPage=1600"
 
-    // Make an HTTP GET request to the URL
-    response, err := http.Get(url)
+    // Make an HTTP GET request for departures
+    departureResponse, err := http.Get(departureURL)
     if err != nil {
         fmt.Println("Error:", err)
         return
     }
-    defer response.Body.Close()
+    defer departureResponse.Body.Close()
 
-    // Decode the JSON response into a struct
-    var flightResponse FlightResponse
-    err = json.NewDecoder(response.Body).Decode(&flightResponse)
+    // Decode the JSON response for departures into a struct
+    var departureResponseData FlightResponse
+    err = json.NewDecoder(departureResponse.Body).Decode(&departureResponseData)
     if err != nil {
-        fmt.Println("Error decoding JSON:", err)
+        fmt.Println("Error decoding departure JSON:", err)
         return
     }
 
-    // Create a map to store unique cities
-    uniqueCities := make(map[string]string)
+    // Create a map to store unique departure IATA codes for Thursday and Friday departures
+    departureIATACodes := make(map[string]bool)
 
-    // Filter cities that appear on Thursday or Friday
-    for _, flight := range flightResponse.Data.Items {
-        departureTime, err := time.Parse("2006-01-02T15:04:05-07:00", flight.ScheduledDepartureTime)
+    // Filter and store unique departure IATA codes for Thursday and Friday departures
+    for _, flight := range departureResponseData.Data.Items {
+        departureTime, err := time.Parse(time.RFC3339, flight.ScheduledDepartureTime)
         if err != nil {
-            fmt.Println("Error parsing time:", err)
             continue
         }
-
         if departureTime.Weekday() == time.Thursday || departureTime.Weekday() == time.Friday {
-            uniqueCities[flight.DestinationIATACode] = flight.DestinationCity
+            departureIATACodes[flight.DestinationIATACode] = true
         }
     }
 
-    // Print the unique cities and their IATI codes
-    for code, city := range uniqueCities {
-        fmt.Printf("City: %s, IATI Code: %s\n", city, code)
+    // Replace the dates in the URL for arrivals (Sunday, Monday, and Tuesday)
+    arrivalURL := "https://ber.berlin-airport.de//api.flights.json?arrivalDeparture=A" +
+        "&dateFrom=" + today.Format("2006-01-02") +
+        "&dateUntil=" + sevenDaysLater.Format("2006-01-02") +
+        "&search=&lang=en&page=1&terminal=&itemsPerPage=1600"
+
+    // Make an HTTP GET request for arrivals
+    arrivalResponse, err := http.Get(arrivalURL)
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
     }
+    defer arrivalResponse.Body.Close()
+
+    // Decode the JSON response for arrivals into a struct
+    var arrivalResponseData FlightResponse
+    err = json.NewDecoder(arrivalResponse.Body).Decode(&arrivalResponseData)
+    if err != nil {
+        fmt.Println("Error decoding arrival JSON:", err)
+        return
+    }
+
+    // Create a map to store unique arrival IATA codes for Sunday, Monday, and Tuesday arrivals
+    arrivalIATACodes := make(map[string]bool)
+
+    // Filter and store unique arrival IATA codes for Sunday, Monday, and Tuesday arrivals
+    for _, flight := range arrivalResponseData.Data.Items {
+        arrivalTime, err := time.Parse(time.RFC3339, flight.ScheduledDepartureTime)
+        if err != nil {
+            continue
+        }
+        if arrivalTime.Weekday() == time.Sunday || arrivalTime.Weekday() == time.Monday || arrivalTime.Weekday() == time.Tuesday {
+            arrivalIATACodes[flight.OriginIATACode] = true
+        }
+    }
+
+    // Create a map to store combinations of departures and arrivals
+    combinations := make(map[string][]string)
+
+    // Populate the combinations map
+    combinations["Thursday to Tuesday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes, []time.Weekday{time.Thursday}, []time.Weekday{time.Tuesday})
+    combinations["Thursday to Monday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes, []time.Weekday{time.Thursday}, []time.Weekday{time.Monday})
+    combinations["Thursday to Sunday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes, []time.Weekday{time.Thursday}, []time.Weekday{time.Sunday})
+    combinations["Friday to Tuesday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes, []time.Weekday{time.Friday}, []time.Weekday{time.Tuesday})
+    combinations["Friday to Monday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes, []time.Weekday{time.Friday}, []time.Weekday{time.Monday})
+    combinations["Friday to Sunday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes, []time.Weekday{time.Friday}, []time.Weekday{time.Sunday})
+
+    // Print the final table
+    fmt.Println("Final Table:")
+    for key, value := range combinations {
+        fmt.Printf("%s: %v\n", key, value)
+    }
+}
+
+// getMatchingFlights returns a list of matching IATA codes for departures and arrivals
+func getMatchingFlights(departureCodes, arrivalCodes map[string]bool, departureDays, arrivalDays []time.Weekday) []string {
+    matchingFlights := []string{}
+    for code := range departureCodes {
+        if arrivalCodes[code] {
+            matchingFlights = append(matchingFlights, code)
+        }
+    }
+    return matchingFlights
 }
 
