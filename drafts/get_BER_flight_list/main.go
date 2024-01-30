@@ -20,6 +20,7 @@ type Flight struct {
     OriginIATACode        string `json:"dep_airport_iata"`
     DestinationIATACode   string `json:"arr_airport_iata"`
     ScheduledDepartureTime string `json:"scheduled_time"`
+    DestinationCity       string `json:"arr_airport_name"`
 }
 
 func main() {
@@ -51,7 +52,7 @@ func main() {
     }
 
     // Create a map to store unique departure IATA codes for Thursday and Friday departures
-    departureIATACodes := make(map[string]bool)
+    departureIATACodes := make(map[string]string)
 
     // Filter and store unique departure IATA codes for Thursday and Friday departures
     for _, flight := range departureResponseData.Data.Items {
@@ -60,7 +61,7 @@ func main() {
             continue
         }
         if departureTime.Weekday() == time.Thursday || departureTime.Weekday() == time.Friday {
-            departureIATACodes[flight.DestinationIATACode] = true
+            departureIATACodes[flight.OriginIATACode] = flight.OriginCity
         }
     }
 
@@ -87,7 +88,7 @@ func main() {
     }
 
     // Create a map to store unique arrival IATA codes for Sunday, Monday, and Tuesday arrivals
-    arrivalIATACodes := make(map[string]bool)
+    arrivalIATACodes := make(map[string]string)
 
     // Filter and store unique arrival IATA codes for Sunday, Monday, and Tuesday arrivals
     for _, flight := range arrivalResponseData.Data.Items {
@@ -96,7 +97,7 @@ func main() {
             continue
         }
         if arrivalTime.Weekday() == time.Sunday || arrivalTime.Weekday() == time.Monday || arrivalTime.Weekday() == time.Tuesday {
-            arrivalIATACodes[flight.OriginIATACode] = true
+            arrivalIATACodes[flight.OriginIATACode] = flight.OriginCity
         }
     }
 
@@ -104,25 +105,44 @@ func main() {
     combinations := make(map[string][]string)
 
     // Populate the combinations map
-    combinations["Thursday to Tuesday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes, []time.Weekday{time.Thursday}, []time.Weekday{time.Tuesday})
-    combinations["Thursday to Monday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes, []time.Weekday{time.Thursday}, []time.Weekday{time.Monday})
-    combinations["Thursday to Sunday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes, []time.Weekday{time.Thursday}, []time.Weekday{time.Sunday})
-    combinations["Friday to Tuesday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes, []time.Weekday{time.Friday}, []time.Weekday{time.Tuesday})
-    combinations["Friday to Monday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes, []time.Weekday{time.Friday}, []time.Weekday{time.Monday})
-    combinations["Friday to Sunday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes, []time.Weekday{time.Friday}, []time.Weekday{time.Sunday})
+    combinations["Thursday to Tuesday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes)
+    combinations["Thursday to Monday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes)
+    combinations["Thursday to Sunday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes)
+    combinations["Friday to Tuesday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes)
+    combinations["Friday to Monday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes)
+    combinations["Friday to Sunday"] = getMatchingFlights(departureIATACodes, arrivalIATACodes)
 
     // Print the final table
     fmt.Println("Final Table:")
     for key, value := range combinations {
         fmt.Printf("%s: %v\n", key, value)
     }
+
+    // Create a map to store unique cities and their IATA codes
+    uniqueCities := make(map[string]string)
+
+    // Populate the uniqueCities map with departures
+    for code, city := range departureIATACodes {
+        uniqueCities[code] = city
+    }
+
+    // Populate the uniqueCities map with arrivals
+    for code, city := range arrivalIATACodes {
+        uniqueCities[code] = city
+    }
+
+    // Print the final list of unique cities and their IATA codes
+    fmt.Println("\nFinal List of Unique Cities:")
+    for code, city := range uniqueCities {
+        fmt.Printf("%s - %s\n", code, city)
+    }
 }
 
 // getMatchingFlights returns a list of matching IATA codes for departures and arrivals
-func getMatchingFlights(departureCodes, arrivalCodes map[string]bool, departureDays, arrivalDays []time.Weekday) []string {
+func getMatchingFlights(departureCodes, arrivalCodes map[string]string) []string {
     matchingFlights := []string{}
     for code := range departureCodes {
-        if arrivalCodes[code] {
+        if arrivalCodes[code] != "" {
             matchingFlights = append(matchingFlights, code)
         }
     }

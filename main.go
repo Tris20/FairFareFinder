@@ -11,6 +11,9 @@ import (
 	"strings"
 	"time"
 
+	"math"
+	"sort"
+
 	"gopkg.in/yaml.v2"
 )
 
@@ -89,7 +92,7 @@ func handleFavourites(yamlFile string) {
 	var favs Favourites
 	fileContents, err := ioutil.ReadFile(yamlFile)
 	if err != nil {
-		log.Fatalf("Error reading favourites file: %v", err)
+		log.Fatalf("Error reading %s file: %v", yamlFile, err)
 	}
 
 	err = yaml.Unmarshal(fileContents, &favs)
@@ -98,20 +101,25 @@ func handleFavourites(yamlFile string) {
 	}
 
 	var cityWPIs []CityAverageWPI
+	var cityWPIs []CityAverageWPI
 	for _, location := range favs.Locations {
 		wpi := processLocation(location)
-		cityWPIs = append(cityWPIs, CityAverageWPI{Name: location, WPI: wpi})
+		if !math.IsNaN(wpi) {
+			cityWPIs = append(cityWPIs, CityAverageWPI{Name: location, WPI: wpi})
+		}
 	}
+
+	// Sort the cities by WPI in descending order
 	sort.Slice(cityWPIs, func(i, j int) bool {
 		return cityWPIs[i].WPI > cityWPIs[j].WPI
 	})
 
+	// Display the sorted results
 	fmt.Println("\nAverage WPI of Cities (Highest to Lowest):")
 	for _, cityWPI := range cityWPIs {
 		fmt.Printf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
 	}
 }
-
 func processLocation(location string) float64 {
 	// Load API key from secrets.yaml
 	apiKey, err := loadApiKey("ignore/secrets.yaml", "openweathermap.org")
