@@ -65,6 +65,8 @@ func main() {
 		if err := http.ListenAndServe(":8080", nil); err != nil {
 			log.Fatalf("Error starting server: %v", err)
 		}
+	case "lakes_near_berlin":
+		handleFavourites("lakes.yaml")
 	default:
 		location := strings.Join(os.Args[1:], " ")
 		processLocation(location)
@@ -163,9 +165,10 @@ func displayForecastData(location string, dailyDetails map[time.Weekday]DailyWea
 	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
 	for _, day := range orderedDays {
 		details, ok := dailyDetails[day]
+		wind_kmh := 3.6 * details.AverageWind
 		if ok {
-			fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, WPI: %.2f\n",
-				day.String(), details.AverageTemp, details.CommonWeather, details.WPI)
+			fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, Wind: %.2fkm/h, WPI: %.2f\n",
+				day.String(), details.AverageTemp, details.CommonWeather, wind_kmh, details.WPI)
 		}
 	}
 }

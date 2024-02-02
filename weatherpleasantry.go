@@ -16,6 +16,7 @@ type DailyWeatherDetails struct {
     AverageTemp  float64
     CommonWeather string
     WPI          float64
+    AverageWind float64
 }
 
 // LoadWeatherPleasantnessConfig loads the weather pleasantness configuration from a YAML file.
@@ -37,7 +38,7 @@ func LoadWeatherPleasantnessConfig(filePath string) (WeatherPleasantnessConfig, 
 
 // weatherPleasantness calculates the "weather pleasentness index" (WPI)
 func weatherPleasantness(temp float64, wind float64, cond string, config WeatherPleasantnessConfig) float64 {
-	weightTemp := 3.0
+	weightTemp := 5.0
 	weightWind := 1.0
 	weightCond := 2.0
 
@@ -49,21 +50,43 @@ func weatherPleasantness(temp float64, wind float64, cond string, config Weather
 	return index
 }
 
-// tempPleasantness returns a value between 0 and 10 for temperature pleasantness
-func tempPleasantness(temperature float64) float64 {
-	GoodTemp := 20.0
-	indexAtGoodTemp := 7.0
-	PerfectTemp := 23.0
-	slope := indexAtGoodTemp / GoodTemp
 
-	if temperature <= 0 {
-		return 0
-	} else if temperature > PerfectTemp {
-		return 10
-	} else {
-		return slope * temperature
-	}
+
+
+func tempPleasantness(temperature float64) float64 {
+    // Optimal range
+    if temperature >= 22 && temperature <= 26 {
+        return 10
+    }
+    
+//     Interpolation between key temperatures below the optimal range
+    if temperature > 18 && temperature < 22 {
+        return interpolate(temperature, 18, 22, 7, 10)
+    }
+    
+    // Interpolation between key temperatures above the optimal range
+    if temperature > 26 && temperature < 40 {
+        return interpolate(temperature, 26, 40, 10, 0)
+    }
+    
+    // Below 18 down to 0
+    if temperature >= 5 && temperature <= 18 {
+        return interpolate(temperature, 5, 18, 0, 7)
+    }
+    
+    // Anything below 0 or above 40
+    if temperature <= 5 || temperature >= 40 {
+        return 0
+    }
+    
+    return 0 // Default case if needed
 }
+
+// Helper function to interpolate between two points
+func interpolate(temp, temp1, temp2, score1, score2 float64) float64 {
+    return ((temp-temp1)/(temp2-temp1))*(score2-score1) + score1
+}
+
 
 // windPleasantness returns a value between 0 and 10 for wind condition pleasantness
 func windPleasantness(windSpeed float64) float64 {
@@ -135,36 +158,40 @@ func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessCon
 //
     dailyDetails := make(map[time.Weekday]DailyWeatherDetails)
     var totalWPI float64
-    for day, data := range dailyData {
-        var sumTemp, count float64
-        weatherCount := make(map[string]int)
-        var maxWeather string
-        var maxCount int
+   
+// Assuming this part needs correction
+for day, data := range dailyData {
+    var sumTemp, sumWind, count float64
+    weatherCount := make(map[string]int)
+    var maxWeather string
+    var maxCount int
 
-        for _, segment := range data {
-            sumTemp += segment.Main.Temp
-            weatherCount[segment.Weather[0].Main]++
-            if weatherCount[segment.Weather[0].Main] > maxCount {
-                maxCount = weatherCount[segment.Weather[0].Main]
-                maxWeather = segment.Weather[0].Main
-            }
-            count++
+    for _, segment := range data {
+        sumTemp += segment.Main.Temp
+        sumWind += segment.Wind.Speed // Correctly access Wind.Speed here
+        weatherCount[segment.Weather[0].Main]++
+        if weatherCount[segment.Weather[0].Main] > maxCount {
+            maxCount = weatherCount[segment.Weather[0].Main]
+            maxWeather = segment.Weather[0].Main
         }
-
-        if count == 0 {
-            continue
-        }
-
-        avgTemp := sumTemp / count
-        wpi := calculateDailyAverageWPI(data, config)
-        dailyDetails[day] = DailyWeatherDetails{
-            AverageTemp:  avgTemp,
-            CommonWeather: maxWeather,
-            WPI:          wpi,
-        }
-        totalWPI += wpi
+        count++
     }
 
+    if count == 0 {
+        continue
+    }
+
+    avgWind := sumWind / count // Calculate average wind here
+    avgTemp := sumTemp / count
+    wpi := calculateDailyAverageWPI(data, config)
+    dailyDetails[day] = DailyWeatherDetails{
+        AverageTemp:  avgTemp,
+        CommonWeather: maxWeather,
+        WPI:          wpi,
+        AverageWind: avgWind, // Use the calculated avgWind
+    }
+    totalWPI += wpi
+}
     averageWPI := totalWPI / float64(len(dailyDetails))
     return dailyDetails, averageWPI
 }
