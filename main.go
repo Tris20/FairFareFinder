@@ -111,6 +111,7 @@ func handleFavourites(yamlFile string) {
 	var cityWPIs []CityAverageWPI
 	for _, location := range favs.Locations {
 		wpi := processLocation(location)
+		fmt.Println("\n")
 		if !math.IsNaN(wpi) {
 			cityWPIs = append(cityWPIs, CityAverageWPI{Name: location, WPI: wpi})
 		}
@@ -137,15 +138,8 @@ func handleFavourites(yamlFile string) {
 	content := contentBuilder.String()
 
 	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
-	//err :=
 	PostToDiscourse(content)
-	//	if err != nil {
-	//		fmt.Println("Error posting to Discourse:", err)
-	//	} else {
-	//		fmt.Println("Content posted successfully.")
-	//	}
-	//	// Display the sorted results
-
+	fmt.Println(content)
 	//fmt.Println("\nAverage WPI of Cities (Highest to Lowest):")
 	//for _, cityWPI := range cityWPIs {
 	//	fmt.Printf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
@@ -196,11 +190,8 @@ func displayForecastData(location string, dailyDetails map[time.Weekday]DailyWea
 		details, ok := dailyDetails[day]
 		wind_kmh := 3.6 * details.AverageWind
 		if ok {
-			content := fmt.Sprintf("%s: Avg Temp: %.2f°C, Weather: %s, Wind: %.2fkm/h, WPI: %.2f\n",
+			fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, Wind: %.2fkm/h, WPI: %.2f\n",
 				day.String(), details.AverageTemp, details.CommonWeather, wind_kmh, details.WPI)
-			//          PostToDiscourse(content)
-			fmt.Println("\n", content)
-
 		}
 	}
 }
