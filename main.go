@@ -67,6 +67,8 @@ func main() {
 		}
 	case "lakes_near_berlin":
 		handleFavourites("lakes.yaml")
+	case "all":
+		handleFavourites("all.yaml")
 	default:
 		location := strings.Join(os.Args[1:], " ")
 		processLocation(location)
@@ -116,11 +118,35 @@ func handleFavourites(yamlFile string) {
 		return cityWPIs[i].WPI > cityWPIs[j].WPI
 	})
 
-	// Display the sorted results
-	fmt.Println("\nAverage WPI of Cities (Highest to Lowest):")
+	// Initialize a StringBuilder to efficiently build the content string
+	var contentBuilder strings.Builder
+
+	// Header for the content
+	contentBuilder.WriteString("Average WPI of Cities (Highest to Lowest):\n")
+
+	// Loop through sorted results and append each to the contentBuilder
 	for _, cityWPI := range cityWPIs {
-		fmt.Printf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
+		line := fmt.Sprintf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
+		contentBuilder.WriteString(line)
 	}
+
+	// Convert the StringBuilder content to a string
+	content := contentBuilder.String()
+
+	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
+	//err :=
+	PostToDiscourse(content)
+	//	if err != nil {
+	//		fmt.Println("Error posting to Discourse:", err)
+	//	} else {
+	//		fmt.Println("Content posted successfully.")
+	//	}
+	//	// Display the sorted results
+
+	//fmt.Println("\nAverage WPI of Cities (Highest to Lowest):")
+	//for _, cityWPI := range cityWPIs {
+	//	fmt.Printf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
+	//}
 }
 func processLocation(location string) float64 {
 	// Load API key from secrets.yaml
@@ -167,8 +193,11 @@ func displayForecastData(location string, dailyDetails map[time.Weekday]DailyWea
 		details, ok := dailyDetails[day]
 		wind_kmh := 3.6 * details.AverageWind
 		if ok {
-			fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, Wind: %.2fkm/h, WPI: %.2f\n",
+			content := fmt.Sprintf("%s: Avg Temp: %.2f°C, Weather: %s, Wind: %.2fkm/h, WPI: %.2f\n",
 				day.String(), details.AverageTemp, details.CommonWeather, wind_kmh, details.WPI)
+			//          PostToDiscourse(content)
+			fmt.Println("\n", content)
+
 		}
 	}
 }
