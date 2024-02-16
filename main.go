@@ -13,11 +13,6 @@ import (
 	"time"
 
 	"gopkg.in/yaml.v2"
-
-	"math"
-	"sort"
-
-	"gopkg.in/yaml.v2"
 )
 
 type WeatherData struct {
@@ -62,7 +57,9 @@ func main() {
 		handleFavourites("international_favourites.yaml")
 	case "web":
 		http.HandleFunc("/", homeHandler)
-		// http.HandleFunc("/forecast", forecastHandler)
+		http.HandleFunc("/forecast", forecastHandler)
+		http.HandleFunc("/getforecast", getForecastHandler)
+
 		// Start the web server
 		fmt.Println("Starting server on :8080")
 		if err := http.ListenAndServe(":8080", nil); err != nil {
@@ -95,6 +92,45 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(pageContent)
 }
 
+func getForecastHandler(w http.ResponseWriter, r *http.Request) {
+	// fmt.Println("Handling request to /getforecast")
+
+	if r.Method != "POST" {
+		http.Error(w, "Only POST method is allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// fmt.Println("Handling POST request")
+
+	// Parse form data
+	if err := r.ParseForm(); err != nil {
+		log.Printf("Error parsing form: %v", err)
+		http.Error(w, "Error parsing form", http.StatusInternalServerError)
+		return
+	}
+	city := r.FormValue("city")
+	// fmt.Println("City:", city)
+
+	// Call the processLocation function
+	wpi := processLocation(city)
+
+	response := fmt.Sprintf("The Weather Pleasantness Index (WPI) for %s is %.2f", city, wpi)
+	w.Header().Set("Content-Type", "text/html")
+	fmt.Fprint(w, response)
+}
+
+// handles requests to the forecast page
+func forecastHandler(w http.ResponseWriter, r *http.Request) {
+	// serving a static file
+	pageContent, err := ioutil.ReadFile("src/html/forecast.html")
+	if err != nil {
+		log.Printf("Error reading forecast page file: %v", err)
+		http.Error(w, "Internal server error", 500)
+		return
+	}
+	w.Write(pageContent)
+}
+
 func handleFavourites(yamlFile string) {
 	var favs Favourites
 	fileContents, err := ioutil.ReadFile(yamlFile)
@@ -107,7 +143,6 @@ func handleFavourites(yamlFile string) {
 		log.Fatalf("Error parsing favourites file: %v", err)
 	}
 
-	var cityWPIs []CityAverageWPI
 	var cityWPIs []CityAverageWPI
 	for _, location := range favs.Locations {
 		wpi := processLocation(location)

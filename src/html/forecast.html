@@ -1,0 +1,52 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Fair Fare Finder</title>
+</head>
+<body>
+    <h1>The forcast is... FUCK-a U-a</h1>
+    <h1>Enter the name of the city to get the forecast</h1>
+    <form action="/getforecast" method="POST">
+        <input type="text" name="city" placeholder="Enter City Name" required>
+        <button type="submit">Get Forecast</button>
+    </form>
+    <div id="forecastResult"></div>
+    <a href="/">Back to Home</a>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fair Fare Finder</title>
+</head>
+<body>
+    <h1>The forecast is...</h1>
+    <h2>Enter the name of the city to get the forecast</h2>
+    <form id="forecastForm">
+        <input type="text" name="city" placeholder="Enter City Name" required>
+        <button type="submit">Get Forecast</button>
+    </form>
+    <div id="forecastResult"></div>
+    <a href="/">Back to Home</a>
+
+    <script>
+        document.getElementById('forecastForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
+            var city = document.querySelector('input[name="city"]').value;
+            fetch('/getforecast', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'city=' + encodeURIComponent(city)
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('forecastResult').innerHTML = data;
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
