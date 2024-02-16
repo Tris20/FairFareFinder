@@ -62,7 +62,7 @@ func main() {
 		handleFavourites("international_favourites.yaml")
 	case "web":
 		http.HandleFunc("/", homeHandler)
-		// http.HandleFunc("/forecast", forecastHandler)
+		http.HandleFunc("/forecast", forecastHandler)
 		// Start the web server
 		fmt.Println("Starting server on :8080")
 		if err := http.ListenAndServe(":8080", nil); err != nil {
@@ -89,6 +89,18 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	pageContent, err := ioutil.ReadFile("src/html/landingPage.html")
 	if err != nil {
 		log.Printf("Error reading landing page file: %v", err)
+		http.Error(w, "Internal server error", 500)
+		return
+	}
+	w.Write(pageContent)
+}
+
+// handles requests to the forecast page
+func forecastHandler(w http.ResponseWriter, r *http.Request) {
+	// serving a static file
+	pageContent, err := ioutil.ReadFile("src/html/forecast.html")
+	if err != nil {
+		log.Printf("Error reading forecast page file: %v", err)
 		http.Error(w, "Internal server error", 500)
 		return
 	}
