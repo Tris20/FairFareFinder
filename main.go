@@ -63,6 +63,8 @@ func main() {
 	case "web":
 		http.HandleFunc("/", homeHandler)
 		http.HandleFunc("/forecast", forecastHandler)
+		http.HandleFunc("/getforecast", getForecastHandler)
+
 		// Start the web server
 		fmt.Println("Starting server on :8080")
 		if err := http.ListenAndServe(":8080", nil); err != nil {
@@ -93,6 +95,33 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Write(pageContent)
+}
+
+func getForecastHandler(w http.ResponseWriter, r *http.Request) {
+	// fmt.Println("Handling request to /getforecast")
+
+	if r.Method != "POST" {
+		http.Error(w, "Only POST method is allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// fmt.Println("Handling POST request")
+
+	// Parse form data
+	if err := r.ParseForm(); err != nil {
+		log.Printf("Error parsing form: %v", err)
+		http.Error(w, "Error parsing form", http.StatusInternalServerError)
+		return
+	}
+	city := r.FormValue("city")
+	// fmt.Println("City:", city)
+
+	// Call the processLocation function
+	wpi := processLocation(city)
+
+	response := fmt.Sprintf("The Weather Pleasantness Index (WPI) for %s is %.2f", city, wpi)
+	w.Header().Set("Content-Type", "text/html")
+	fmt.Fprint(w, response)
 }
 
 // handles requests to the forecast page
