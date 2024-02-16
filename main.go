@@ -5,11 +5,17 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math"
 	"net/http"
 	"os"
 	"sort"
 	"strings"
 	"time"
+
+	"gopkg.in/yaml.v2"
+
+	"math"
+	"sort"
 
 	"gopkg.in/yaml.v2"
 )
@@ -62,6 +68,10 @@ func main() {
 		if err := http.ListenAndServe(":8080", nil); err != nil {
 			log.Fatalf("Error starting server: %v", err)
 		}
+	case "lakes_near_berlin":
+		handleFavourites("lakes.yaml")
+	case "all":
+		handleFavourites("all.yaml")
 	default:
 		location := strings.Join(os.Args[1:], " ")
 		processLocation(location)
@@ -89,7 +99,7 @@ func handleFavourites(yamlFile string) {
 	var favs Favourites
 	fileContents, err := ioutil.ReadFile(yamlFile)
 	if err != nil {
-		log.Fatalf("Error reading favourites file: %v", err)
+		log.Fatalf("Error reading %s file: %v", yamlFile, err)
 	}
 
 	err = yaml.Unmarshal(fileContents, &favs)
@@ -98,20 +108,43 @@ func handleFavourites(yamlFile string) {
 	}
 
 	var cityWPIs []CityAverageWPI
+	var cityWPIs []CityAverageWPI
 	for _, location := range favs.Locations {
 		wpi := processLocation(location)
-		cityWPIs = append(cityWPIs, CityAverageWPI{Name: location, WPI: wpi})
+		fmt.Println("\n")
+		if !math.IsNaN(wpi) {
+			cityWPIs = append(cityWPIs, CityAverageWPI{Name: location, WPI: wpi})
+		}
 	}
+
+	// Sort the cities by WPI in descending order
 	sort.Slice(cityWPIs, func(i, j int) bool {
 		return cityWPIs[i].WPI > cityWPIs[j].WPI
 	})
 
-	fmt.Println("\nAverage WPI of Cities (Highest to Lowest):")
-	for _, cityWPI := range cityWPIs {
-		fmt.Printf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
-	}
-}
+	// Initialize a StringBuilder to efficiently build the content string
+	var contentBuilder strings.Builder
 
+	// Header for the content
+	contentBuilder.WriteString("Average WPI of Cities (Highest to Lowest):\n")
+
+	// Loop through sorted results and append each to the contentBuilder
+	for _, cityWPI := range cityWPIs {
+		line := fmt.Sprintf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
+		contentBuilder.WriteString(line)
+	}
+
+	// Convert the StringBuilder content to a string
+	content := contentBuilder.String()
+
+	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
+	PostToDiscourse(content)
+	fmt.Println(content)
+	//fmt.Println("\nAverage WPI of Cities (Highest to Lowest):")
+	//for _, cityWPI := range cityWPIs {
+	//	fmt.Printf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
+	//}
+}
 func processLocation(location string) float64 {
 	// Load API key from secrets.yaml
 	apiKey, err := loadApiKey("ignore/secrets.yaml", "openweathermap.org")
@@ -155,9 +188,10 @@ func displayForecastData(location string, dailyDetails map[time.Weekday]DailyWea
 	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
 	for _, day := range orderedDays {
 		details, ok := dailyDetails[day]
+		wind_kmh := 3.6 * details.AverageWind
 		if ok {
-			fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, WPI: %.2f\n",
-				day.String(), details.AverageTemp, details.CommonWeather, details.WPI)
+			fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, Wind: %.2fkm/h, WPI: %.2f\n",
+				day.String(), details.AverageTemp, details.CommonWeather, wind_kmh, details.WPI)
 		}
 	}
 }
