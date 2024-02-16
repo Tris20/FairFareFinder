@@ -3,6 +3,10 @@
 
 `FairFareFinder` is a tool designed to help travelers find the best destinations for weekend getaways, prioritizing locations with ideal weather conditions and cost-effective travel options. It combines weather forecasts, event schedules, and price comparisons (including travel and accommodation costs) to suggest the most suitable locations for a short trip.
 
+## Design Documentation
+
+Need to get an invitation to view the [miro board](https://miro.com/app/board/uXjVNsQxcQg=/#tpicker-content)
+
 ## Features
 
 - **Weather Forecast Integration**: Retrieves up-to-date weather information to suggest destinations with the best upcoming weather conditions.

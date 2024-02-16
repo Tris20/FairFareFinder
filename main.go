@@ -7,18 +7,19 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"sort"
 	"strings"
 	"time"
+
 	"gopkg.in/yaml.v2"
-  "sort"
 )
 
 type WeatherData struct {
-	Dt     int64 `json:"dt"` // Unix timestamp of the forecasted data
-	Main   struct {
+	Dt   int64 `json:"dt"` // Unix timestamp of the forecasted data
+	Main struct {
 		Temp float64 `json:"temp"`
 	} `json:"main"`
-	Wind   struct {
+	Wind struct {
 		Speed float64 `json:"speed"`
 	} `json:"wind"`
 	Weather []struct {
@@ -27,7 +28,7 @@ type WeatherData struct {
 }
 
 type Favourites struct {
-    Locations []string `yaml:"locations"`
+	Locations []string `yaml:"locations"`
 }
 
 type ForecastResponse struct {
@@ -39,29 +40,52 @@ type Secrets struct {
 	APIKeys map[string]string `yaml:"api_keys"`
 }
 
-
 type CityAverageWPI struct {
-    Name string
-    WPI  float64
+	Name string
+	WPI  float64
 }
 
 func main() {
 	if len(os.Args) < 2 {
-    log.Fatal("Error: No argument provided. Please provide a location, 'local_favourites', or 'international_favourites'.")
+		log.Fatal("Error: No argument provided. Please provide a location, 'local_favourites', or 'international_favourites'.")
 	}
-  switch os.Args[1] {
-      case "local_favourites":
-          handleFavourites("local_favourites.yaml")
-      case "international_favourites":
-          handleFavourites("international_favourites.yaml")
-      default:
-          location := strings.Join(os.Args[1:], " ")
-          processLocation(location)
-  
+	switch os.Args[1] {
+	case "local_favourites":
+		handleFavourites("local_favourites.yaml")
+	case "international_favourites":
+		handleFavourites("international_favourites.yaml")
+	case "web":
+		http.HandleFunc("/", homeHandler)
+		// http.HandleFunc("/forecast", forecastHandler)
+		// Start the web server
+		fmt.Println("Starting server on :8080")
+		if err := http.ListenAndServe(":8080", nil); err != nil {
+			log.Fatalf("Error starting server: %v", err)
+		}
+	default:
+		location := strings.Join(os.Args[1:], " ")
+		processLocation(location)
+
 	}
 }
 
-func handleFavourites(yamlFile string)  {
+// handles requests to the home page
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		http.Error(w, "404 not found.", http.StatusNotFound)
+		return
+	}
+	// server an html file or generate html content here
+	pageContent, err := ioutil.ReadFile("src/html/landingPage.html")
+	if err != nil {
+		log.Printf("Error reading landing page file: %v", err)
+		http.Error(w, "Internal server error", 500)
+		return
+	}
+	w.Write(pageContent)
+}
+
+func handleFavourites(yamlFile string) {
 	var favs Favourites
 	fileContents, err := ioutil.ReadFile(yamlFile)
 	if err != nil {
@@ -73,19 +97,19 @@ func handleFavourites(yamlFile string)  {
 		log.Fatalf("Error parsing favourites file: %v", err)
 	}
 
-  var cityWPIs []CityAverageWPI
+	var cityWPIs []CityAverageWPI
 	for _, location := range favs.Locations {
-    wpi := processLocation(location)
-    cityWPIs = append(cityWPIs, CityAverageWPI{Name: location, WPI: wpi})
+		wpi := processLocation(location)
+		cityWPIs = append(cityWPIs, CityAverageWPI{Name: location, WPI: wpi})
 	}
-  sort.Slice(cityWPIs, func(i, j int) bool {
-        return cityWPIs[i].WPI > cityWPIs[j].WPI
-  })
+	sort.Slice(cityWPIs, func(i, j int) bool {
+		return cityWPIs[i].WPI > cityWPIs[j].WPI
+	})
 
-  fmt.Println("\nAverage WPI of Cities (Highest to Lowest):")
-  for _, cityWPI := range cityWPIs {
-      fmt.Printf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
-  }
+	fmt.Println("\nAverage WPI of Cities (Highest to Lowest):")
+	for _, cityWPI := range cityWPIs {
+		fmt.Printf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
+	}
 }
 
 func processLocation(location string) float64 {
@@ -118,25 +142,24 @@ func processLocation(location string) float64 {
 	if err != nil {
 		log.Fatal("Error loading weather pleasantness config:", err)
 	}
-  
-  dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
-  displayForecastData(location, dailyDetails)
 
-  return overallAverage
+	dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
+	displayForecastData(location, dailyDetails)
+
+	return overallAverage
 }
 
-
 func displayForecastData(location string, dailyDetails map[time.Weekday]DailyWeatherDetails) {
-    orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
+	orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
 
-    fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
-    for _, day := range orderedDays {
-        details, ok := dailyDetails[day]
-        if ok {
-            fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, WPI: %.2f\n",
-                day.String(), details.AverageTemp, details.CommonWeather, details.WPI)
-        }
-    }
+	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
+	for _, day := range orderedDays {
+		details, ok := dailyDetails[day]
+		if ok {
+			fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, WPI: %.2f\n",
+				day.String(), details.AverageTemp, details.CommonWeather, details.WPI)
+		}
+	}
 }
 
 // loadApiKey loads the API key for a given domain from a YAML file
