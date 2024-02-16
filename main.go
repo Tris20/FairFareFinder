@@ -13,11 +13,6 @@ import (
 	"time"
 
 	"gopkg.in/yaml.v2"
-
-	"math"
-	"sort"
-
-	"gopkg.in/yaml.v2"
 )
 
 type WeatherData struct {
@@ -148,7 +143,6 @@ func handleFavourites(yamlFile string) {
 		log.Fatalf("Error parsing favourites file: %v", err)
 	}
 
-	var cityWPIs []CityAverageWPI
 	var cityWPIs []CityAverageWPI
 	for _, location := range favs.Locations {
 		wpi := processLocation(location)
