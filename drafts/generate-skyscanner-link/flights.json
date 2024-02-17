@@ -1,0 +1,492 @@
+[
+    {
+        "IATA": "STR",
+        "City_name": "Stuttgart",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/STR/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "EMA",
+        "City_name": "Nottingham",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/EMA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "FAO",
+        "City_name": "Faro",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/FAO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "TLV",
+        "City_name": "Tel Aviv",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/TLV/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "CGN",
+        "City_name": "Cologne/Bonn",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/CGN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "FNC",
+        "City_name": "Funchal",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/FNC/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "HEL",
+        "City_name": "Helsinki",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/HEL/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "GRZ",
+        "City_name": "Graz",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/GRZ/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "SOF",
+        "City_name": "Sofia",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/SOF/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "AGP",
+        "City_name": "Malaga",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/AGP/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "EDI",
+        "City_name": "Edinburgh",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/EDI/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "GYD",
+        "City_name": "Baku",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/GYD/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "ORY",
+        "City_name": "Paris Orly",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/ORY/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "WAW",
+        "City_name": "Warsaw",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/WAW/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "TOS",
+        "City_name": "Tromsoe",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/TOS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "EBL",
+        "City_name": "Erbil",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/EBL/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "FUE",
+        "City_name": "Fuerteventura",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/FUE/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "LYS",
+        "City_name": "Lyon",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/LYS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "ATH",
+        "City_name": "Athens",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/ATH/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "SZG",
+        "City_name": "Salzburg",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/SZG/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "VIE",
+        "City_name": "Vienna",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/VIE/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "VLC",
+        "City_name": "Valencia",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/VLC/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "EWR",
+        "City_name": "New York",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/EWR/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "DWC",
+        "City_name": "Dubai",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/DWC/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "SAW",
+        "City_name": "Istanbul",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/SAW/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "SIN",
+        "City_name": "Singapore",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/SIN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "PMO",
+        "City_name": "Palermo",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/PMO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "GOT",
+        "City_name": "Gothenburg",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/GOT/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "DUS",
+        "City_name": "Dusseldorf",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/DUS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "ALC",
+        "City_name": "Alicante",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/ALC/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "ARN",
+        "City_name": "Stockholm",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/ARN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "PSA",
+        "City_name": "Pisa",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/PSA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "OTP",
+        "City_name": "Bucharest",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/OTP/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "VNO",
+        "City_name": "Vilnius",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/VNO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "BCN",
+        "City_name": "Barcelona",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/BCN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "STN",
+        "City_name": "London",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/STN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "MAD",
+        "City_name": "Madrid",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/MAD/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "TSF",
+        "City_name": "Treviso",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/TSF/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "SXB",
+        "City_name": "Strasbourg",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/SXB/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "RMO",
+        "City_name": "Chisinau",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/RMO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "SKP",
+        "City_name": "Skopje",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/SKP/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "PEK",
+        "City_name": "Beijing",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/PEK/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "RAK",
+        "City_name": "Marrakech",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/RAK/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "BZO",
+        "City_name": "Bolzano",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/BZO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "VAR",
+        "City_name": "Varna",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/VAR/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "CTA",
+        "City_name": "Catania",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/CTA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "LPA",
+        "City_name": "Gran Canaria",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/LPA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "TGD",
+        "City_name": "Podgorica",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/TGD/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "KEF",
+        "City_name": "Reykjavik",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/KEF/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "NAP",
+        "City_name": "Naples",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/NAP/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "TIA",
+        "City_name": "Tirana",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/TIA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "ZRH",
+        "City_name": "Zurich",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/ZRH/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "VCE",
+        "City_name": "Venice",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/VCE/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "TLL",
+        "City_name": "Tallinn",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/TLL/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "FRA",
+        "City_name": "Frankfurt",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/FRA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "TFS",
+        "City_name": "Tenerife",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/TFS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "PMI",
+        "City_name": "Palma de Mallorca",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/PMI/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "OPO",
+        "City_name": "Porto",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/OPO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "FCO",
+        "City_name": "Rome",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/FCO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "RIX",
+        "City_name": "Riga",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/RIX/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "BSL",
+        "City_name": "Basel",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/BSL/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "CAI",
+        "City_name": "Cairo",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/CAI/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "LIS",
+        "City_name": "Lisbon",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/LIS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "MUC",
+        "City_name": "Munich",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/MUC/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "PFO",
+        "City_name": "Paphos",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/PFO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "BRU",
+        "City_name": "Brussels",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/BRU/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "AYT",
+        "City_name": "Antalya",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/AYT/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "PRN",
+        "City_name": "Pristina",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/PRN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "AMS",
+        "City_name": "Amsterdam",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/AMS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "RMF",
+        "City_name": "Marsa Alam",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/RMF/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "LCA",
+        "City_name": "Larnaca",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/LCA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "BRS",
+        "City_name": "Bristol",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/BRS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "BLQ",
+        "City_name": "Bologna",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/BLQ/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "SCN",
+        "City_name": "Saarbrücken",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/SCN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "TUN",
+        "City_name": "Tunis",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/TUN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "NCE",
+        "City_name": "Nice",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/NCE/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "KUT",
+        "City_name": "Kutaisi",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/KUT/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "LUX",
+        "City_name": "Luxembourg",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/LUX/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "ESB",
+        "City_name": "Ankara",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/ESB/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "CDG",
+        "City_name": "Paris",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/CDG/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "CPH",
+        "City_name": "Copenhagen",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/CPH/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "ADB",
+        "City_name": "Izmir",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/ADB/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "IAS",
+        "City_name": "Iasi",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/IAS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "HRG",
+        "City_name": "Hurghada",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/HRG/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "BUD",
+        "City_name": "Budapest",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/BUD/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "ACE",
+        "City_name": "Lanzarote",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/ACE/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "KRK",
+        "City_name": "Krakow",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/KRK/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "GVA",
+        "City_name": "Geneva",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/GVA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "OSL",
+        "City_name": "Oslo",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/OSL/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "LIN",
+        "City_name": "Milan",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/LIN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "DUB",
+        "City_name": "Dublin",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/DUB/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "BEG",
+        "City_name": "Belgrade",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/BEG/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "MAN",
+        "City_name": "Manchester",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/MAN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "SKG",
+        "City_name": "Thessaloniki",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/SKG/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "GLA",
+        "City_name": "Glasgow",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/GLA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "BER",
+        "City_name": "Berlin",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/BER/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "BRI",
+        "City_name": "Bari",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/BRI/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    },
+    {
+        "IATA": "DOH",
+        "City_name": "Doha",
+        "URL": "https://www.skyscanner.de/transport/fluge/ber/DOH/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1"
+    }
+]
