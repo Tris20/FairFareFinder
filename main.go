@@ -11,7 +11,6 @@ import (
 	"sort"
 	"strings"
 	"time"
-
 	"gopkg.in/yaml.v2"
 )
 
@@ -41,44 +40,48 @@ type Secrets struct {
 	APIKeys map[string]string `yaml:"api_keys"`
 }
 
+
 type CityAverageWPI struct {
-	Name string
-	WPI  float64
+	Name           string
+	WPI            float64
+	SkyScannerURL  string
+	AirbnbURL     string
+	BookingURL    string
 }
 
 func main() {
-	if len(os.Args) < 2 {
-		log.Fatal("Error: No argument provided. Please provide a location, 'local_favourites', or 'international_favourites'.")
-	}
-	switch os.Args[1] {
-	case "local_favourites":
-		handleFavourites("local_favourites.yaml")
-	case "international_favourites":
-		handleFavourites("international_favourites.yaml")
-	case "web":
-		http.HandleFunc("/", homeHandler)
-		http.HandleFunc("/forecast", forecastHandler)
-		http.HandleFunc("/getforecast", getForecastHandler)
+    if len(os.Args) < 2 {
+        log.Fatal("Error: No argument provided. Please provide a location, 'web', or a YAML file.")
+    }
 
-		// Serve static files from the `images` directory
-		fs := http.FileServer(http.Dir("src/images"))
-		http.Handle("/images/", http.StripPrefix("/images/", fs))
+    switch os.Args[1] {
+    case "web":
+        // Handle starting the web server
+        http.HandleFunc("/", homeHandler)
+        http.HandleFunc("/forecast", forecastHandler)
+        http.HandleFunc("/getforecast", getForecastHandler)
 
-		// Start the web server
-		fmt.Println("Starting server on :8080")
-		if err := http.ListenAndServe(":8080", nil); err != nil {
-			log.Fatalf("Error starting server: %v", err)
-		}
-	case "lakes_near_berlin":
-		handleFavourites("lakes.yaml")
-	case "all":
-		handleFavourites("all.yaml")
-	default:
-		location := strings.Join(os.Args[1:], " ")
-		processLocation(location)
+        // Serve static files from the `images` directory
+        fs := http.FileServer(http.Dir("src/images"))
+        http.Handle("/images/", http.StripPrefix("/images/", fs))
 
-	}
+        // Start the web server
+        fmt.Println("Starting server on :8080")
+        if err := http.ListenAndServe(":8080", nil); err != nil {
+            log.Fatalf("Error starting server: %v", err)
+        }
+    default:
+        // Check if the argument is a YAML file
+        if strings.HasSuffix(os.Args[1], ".json") {
+            handleFavourites(os.Args[1])
+        } else {
+            // Assuming it's a city name
+            location := strings.Join(os.Args[1:], " ")
+            processLocation(location)
+        }
+    }
 }
+
 
 // handles requests to the home page
 func homeHandler(w http.ResponseWriter, r *http.Request) {
@@ -135,24 +138,37 @@ func forecastHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(pageContent)
 }
 
-func handleFavourites(yamlFile string) {
-	var favs Favourites
-	fileContents, err := ioutil.ReadFile(yamlFile)
-	if err != nil {
-		log.Fatalf("Error reading %s file: %v", yamlFile, err)
+
+
+func handleFavourites(jsonFile string) {
+	var flights []struct {
+		CityName     string `json:"City_name"`
+		SkyScannerURL string `json:"SkyScannerURL"`
+		AirbnbURL    string `json:"airbnbURL"`
+		BookingURL   string `json:"bookingURL"`
 	}
 
-	err = yaml.Unmarshal(fileContents, &favs)
+	fileContents, err := ioutil.ReadFile(jsonFile)
 	if err != nil {
-		log.Fatalf("Error parsing favourites file: %v", err)
+		log.Fatalf("Error reading %s file: %v", jsonFile, err)
+	}
+
+	err = json.Unmarshal(fileContents, &flights)
+	if err != nil {
+		log.Fatalf("Error parsing JSON file: %v", err)
 	}
 
 	var cityWPIs []CityAverageWPI
-	for _, location := range favs.Locations {
-		wpi := processLocation(location)
-		fmt.Println("\n")
+	for _, flight := range flights {
+		wpi := processLocation(flight.CityName)
 		if !math.IsNaN(wpi) {
-			cityWPIs = append(cityWPIs, CityAverageWPI{Name: location, WPI: wpi})
+			cityWPIs = append(cityWPIs, CityAverageWPI{
+				Name:          flight.CityName,
+				WPI:           wpi,
+				SkyScannerURL: replaceSpaceWithURLEncoding(flight.SkyScannerURL),
+				AirbnbURL:     replaceSpaceWithURLEncoding(flight.AirbnbURL),
+				BookingURL:    replaceSpaceWithURLEncoding(flight.BookingURL),
+			})
 		}
 	}
 
@@ -165,11 +181,12 @@ func handleFavourites(yamlFile string) {
 	var contentBuilder strings.Builder
 
 	// Header for the content
-	contentBuilder.WriteString("Average WPI of Cities (Highest to Lowest):\n")
+	contentBuilder.WriteString("City Name | WPI | SkyScannerURL | AirbnbURL | BookingURL\n")
+	contentBuilder.WriteString("|--|--|--|--|--|\n") // Additional line after headers
 
 	// Loop through sorted results and append each to the contentBuilder
 	for _, cityWPI := range cityWPIs {
-		line := fmt.Sprintf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
+		line := fmt.Sprintf("%s | %.2f | [SkyScanner](%s) | [Airbnb](%s) | [Booking.com](%s)\n", cityWPI.Name, cityWPI.WPI, cityWPI.SkyScannerURL, cityWPI.AirbnbURL, cityWPI.BookingURL)
 		contentBuilder.WriteString(line)
 	}
 
@@ -179,11 +196,8 @@ func handleFavourites(yamlFile string) {
 	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
 	PostToDiscourse(content)
 	fmt.Println(content)
-	//fmt.Println("\nAverage WPI of Cities (Highest to Lowest):")
-	//for _, cityWPI := range cityWPIs {
-	//	fmt.Printf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
-	//}
 }
+
 func processLocation(location string) float64 {
 	// Load API key from secrets.yaml
 	apiKey, err := loadApiKey("ignore/secrets.yaml", "openweathermap.org")
@@ -256,3 +270,9 @@ func loadApiKey(filePath, domain string) (string, error) {
 
 	return apiKey, nil
 }
+
+// replaceSpaceWithURLEncoding replaces space characters with %20 in the URL
+func replaceSpaceWithURLEncoding(urlString string) string {
+	return strings.ReplaceAll(urlString, " ", "%20")
+}
+
