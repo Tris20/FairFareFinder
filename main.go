@@ -11,7 +11,6 @@ import (
 	"sort"
 	"strings"
 	"time"
-
 	"gopkg.in/yaml.v2"
 )
 
@@ -41,11 +40,14 @@ type Secrets struct {
 	APIKeys map[string]string `yaml:"api_keys"`
 }
 
-type CityAverageWPI struct {
-	Name string
-	WPI  float64
-}
 
+type CityAverageWPI struct {
+	Name           string
+	WPI            float64
+	SkyScannerURL  string
+	AirbnbURL     string
+	BookingURL    string
+}
 
 func main() {
     if len(os.Args) < 2 {
@@ -136,6 +138,8 @@ func forecastHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(pageContent)
 }
 
+
+
 func handleFavourites(jsonFile string) {
 	var flights []struct {
 		CityName     string `json:"City_name"`
@@ -157,9 +161,14 @@ func handleFavourites(jsonFile string) {
 	var cityWPIs []CityAverageWPI
 	for _, flight := range flights {
 		wpi := processLocation(flight.CityName)
-		fmt.Println("\n")
 		if !math.IsNaN(wpi) {
-			cityWPIs = append(cityWPIs, CityAverageWPI{Name: flight.CityName, WPI: wpi})
+			cityWPIs = append(cityWPIs, CityAverageWPI{
+				Name:          flight.CityName,
+				WPI:           wpi,
+				SkyScannerURL: replaceSpaceWithURLEncoding(flight.SkyScannerURL),
+				AirbnbURL:     replaceSpaceWithURLEncoding(flight.AirbnbURL),
+				BookingURL:    replaceSpaceWithURLEncoding(flight.BookingURL),
+			})
 		}
 	}
 
@@ -172,11 +181,12 @@ func handleFavourites(jsonFile string) {
 	var contentBuilder strings.Builder
 
 	// Header for the content
-	contentBuilder.WriteString("Average WPI of Cities (Highest to Lowest):\n")
+	contentBuilder.WriteString("City Name | WPI | SkyScannerURL | AirbnbURL | BookingURL\n")
+	contentBuilder.WriteString("|--|--|--|--|--|\n") // Additional line after headers
 
 	// Loop through sorted results and append each to the contentBuilder
 	for _, cityWPI := range cityWPIs {
-		line := fmt.Sprintf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
+		line := fmt.Sprintf("%s | %.2f | [SkyScanner](%s) | [Airbnb](%s) | [Booking.com](%s)\n", cityWPI.Name, cityWPI.WPI, cityWPI.SkyScannerURL, cityWPI.AirbnbURL, cityWPI.BookingURL)
 		contentBuilder.WriteString(line)
 	}
 
@@ -260,3 +270,9 @@ func loadApiKey(filePath, domain string) (string, error) {
 
 	return apiKey, nil
 }
+
+// replaceSpaceWithURLEncoding replaces space characters with %20 in the URL
+func replaceSpaceWithURLEncoding(urlString string) string {
+	return strings.ReplaceAll(urlString, " ", "%20")
+}
+
