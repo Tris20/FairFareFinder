@@ -6,6 +6,8 @@ import (
     "net/http"
     "encoding/json"
     "time"
+    "os"
+    "strings"
 )
 
 type FlightResponse struct {
@@ -21,6 +23,12 @@ type Flight struct {
     DestinationIATACode   string `json:"arr_airport_iata"`
     ScheduledDepartureTime string `json:"scheduled_time"`
     DestinationCity       string `json:"arr_airport_name"`
+}
+
+// Define a struct to hold city information with labels for JSON
+type Destination struct {
+    IATACode string `json:"IATA_code"`
+    CityName string `json:"city_name"`
 }
 
 func main() {
@@ -136,6 +144,7 @@ func main() {
     for code, city := range uniqueCities {
         fmt.Printf("%s - %s\n", code, city)
     }
+    saveDestinationsAsJSON(uniqueCities)
 }
 
 // getMatchingFlights returns a list of matching IATA codes for departures and arrivals
@@ -149,3 +158,47 @@ func getMatchingFlights(departureCodes, arrivalCodes map[string]string) []string
     return matchingFlights
 }
 
+
+
+// Function to save destinations to JSON with appropriate labels
+func saveDestinationsAsJSON(cities map[string]string) {
+    uniqueDestinations := make(map[string]Destination)
+
+    for iataCode, cityName := range cities {
+        // Check if the city name contains the IATA code and remove it
+        if strings.Contains(cityName, iataCode) {
+            cityName = strings.Replace(cityName, iataCode, "", -1)
+            cityName = strings.TrimSpace(cityName)
+        }
+
+        // Use cityName as the key to ensure uniqueness
+        if _, exists := uniqueDestinations[cityName]; !exists {
+            uniqueDestinations[cityName] = Destination{
+                IATACode: iataCode,
+                CityName: cityName,
+            }
+        }
+    }
+
+    // Convert the map to a slice for JSON marshaling
+    destinationsSlice := make([]Destination, 0, len(uniqueDestinations))
+    for _, dest := range uniqueDestinations {
+        destinationsSlice = append(destinationsSlice, dest)
+    }
+
+    // Marshal the slice to JSON
+    jsonData, err := json.MarshalIndent(destinationsSlice, "", "    ")
+    if err != nil {
+        fmt.Println("Error marshaling destinations to JSON:", err)
+        return
+    }
+
+    // Write the JSON data to a file
+    err = os.WriteFile("destinations.json", jsonData, 0644)
+    if err != nil {
+        fmt.Println("Error writing destinations to file:", err)
+        return
+    }
+
+    fmt.Println("Saved destinations and their IATA codes to destinations.json")
+}
