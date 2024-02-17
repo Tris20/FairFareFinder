@@ -70,7 +70,7 @@ func main() {
         }
     default:
         // Check if the argument is a YAML file
-        if strings.HasSuffix(os.Args[1], ".yaml") {
+        if strings.HasSuffix(os.Args[1], ".json") {
             handleFavourites(os.Args[1])
         } else {
             // Assuming it's a city name
@@ -136,24 +136,30 @@ func forecastHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(pageContent)
 }
 
-func handleFavourites(yamlFile string) {
-	var favs Favourites
-	fileContents, err := ioutil.ReadFile(yamlFile)
-	if err != nil {
-		log.Fatalf("Error reading %s file: %v", yamlFile, err)
+func handleFavourites(jsonFile string) {
+	var flights []struct {
+		CityName     string `json:"City_name"`
+		SkyScannerURL string `json:"SkyScannerURL"`
+		AirbnbURL    string `json:"airbnbURL"`
+		BookingURL   string `json:"bookingURL"`
 	}
 
-	err = yaml.Unmarshal(fileContents, &favs)
+	fileContents, err := ioutil.ReadFile(jsonFile)
 	if err != nil {
-		log.Fatalf("Error parsing favourites file: %v", err)
+		log.Fatalf("Error reading %s file: %v", jsonFile, err)
+	}
+
+	err = json.Unmarshal(fileContents, &flights)
+	if err != nil {
+		log.Fatalf("Error parsing JSON file: %v", err)
 	}
 
 	var cityWPIs []CityAverageWPI
-	for _, location := range favs.Locations {
-		wpi := processLocation(location)
+	for _, flight := range flights {
+		wpi := processLocation(flight.CityName)
 		fmt.Println("\n")
 		if !math.IsNaN(wpi) {
-			cityWPIs = append(cityWPIs, CityAverageWPI{Name: location, WPI: wpi})
+			cityWPIs = append(cityWPIs, CityAverageWPI{Name: flight.CityName, WPI: wpi})
 		}
 	}
 
@@ -180,11 +186,8 @@ func handleFavourites(yamlFile string) {
 	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
 	PostToDiscourse(content)
 	fmt.Println(content)
-	//fmt.Println("\nAverage WPI of Cities (Highest to Lowest):")
-	//for _, cityWPI := range cityWPIs {
-	//	fmt.Printf("%s: %.2f\n", cityWPI.Name, cityWPI.WPI)
-	//}
 }
+
 func processLocation(location string) float64 {
 	// Load API key from secrets.yaml
 	apiKey, err := loadApiKey("ignore/secrets.yaml", "openweathermap.org")
