@@ -46,39 +46,40 @@ type CityAverageWPI struct {
 	WPI  float64
 }
 
+
 func main() {
-	if len(os.Args) < 2 {
-		log.Fatal("Error: No argument provided. Please provide a location, 'local_favourites', or 'international_favourites'.")
-	}
-	switch os.Args[1] {
-	case "local_favourites":
-		handleFavourites("local_favourites.yaml")
-	case "international_favourites":
-		handleFavourites("international_favourites.yaml")
-	case "web":
-		http.HandleFunc("/", homeHandler)
-		http.HandleFunc("/forecast", forecastHandler)
-		http.HandleFunc("/getforecast", getForecastHandler)
+    if len(os.Args) < 2 {
+        log.Fatal("Error: No argument provided. Please provide a location, 'web', or a YAML file.")
+    }
 
-		// Serve static files from the `images` directory
-		fs := http.FileServer(http.Dir("src/images"))
-		http.Handle("/images/", http.StripPrefix("/images/", fs))
+    switch os.Args[1] {
+    case "web":
+        // Handle starting the web server
+        http.HandleFunc("/", homeHandler)
+        http.HandleFunc("/forecast", forecastHandler)
+        http.HandleFunc("/getforecast", getForecastHandler)
 
-		// Start the web server
-		fmt.Println("Starting server on :8080")
-		if err := http.ListenAndServe(":8080", nil); err != nil {
-			log.Fatalf("Error starting server: %v", err)
-		}
-	case "lakes_near_berlin":
-		handleFavourites("lakes.yaml")
-	case "all":
-		handleFavourites("all.yaml")
-	default:
-		location := strings.Join(os.Args[1:], " ")
-		processLocation(location)
+        // Serve static files from the `images` directory
+        fs := http.FileServer(http.Dir("src/images"))
+        http.Handle("/images/", http.StripPrefix("/images/", fs))
 
-	}
+        // Start the web server
+        fmt.Println("Starting server on :8080")
+        if err := http.ListenAndServe(":8080", nil); err != nil {
+            log.Fatalf("Error starting server: %v", err)
+        }
+    default:
+        // Check if the argument is a YAML file
+        if strings.HasSuffix(os.Args[1], ".yaml") {
+            handleFavourites(os.Args[1])
+        } else {
+            // Assuming it's a city name
+            location := strings.Join(os.Args[1:], " ")
+            processLocation(location)
+        }
+    }
 }
+
 
 // handles requests to the home page
 func homeHandler(w http.ResponseWriter, r *http.Request) {
