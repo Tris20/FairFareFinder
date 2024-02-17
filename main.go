@@ -186,7 +186,7 @@ func handleFavourites(jsonFile string) {
 
 	// Loop through sorted results and append each to the contentBuilder
 	for _, cityWPI := range cityWPIs {
-		line := fmt.Sprintf("%s | %.2f | [SkyScanner](%s) | [Airbnb](%s) | [Booking.com](%s)\n", cityWPI.Name, cityWPI.WPI, cityWPI.SkyScannerURL, cityWPI.AirbnbURL, cityWPI.BookingURL)
+		line := fmt.Sprintf("%s | [%.2f](https://www.google.com/search?q=weather+%s) | [SkyScanner](%s) | [Airbnb](%s) | [Booking.com](%s)\n", cityWPI.Name, cityWPI.WPI, replaceSpaceWithURLEncoding(cityWPI.Name), cityWPI.SkyScannerURL, cityWPI.AirbnbURL, cityWPI.BookingURL)
 		contentBuilder.WriteString(line)
 	}
 
