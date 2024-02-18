@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #012553
+}
+
+.title-container {
+    text-align: center;
+    /* Animation Name */
+    background: linear-gradient(to right, #d87d6d, #005a84, #012353);
+    background-size: 200% 200%; /* Enlarge background size to allow movement */
+    animation: GradientMove 8s linear infinite; /* Apply the animation */
+    padding: 20px;
+}
+
+@keyframes GradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+h1 {
+    color: white;
+    margin: 0;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.navbar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar-container nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.nav-button {
+    background-color: #eea53c; /* Green background */
+    border: none;
+    color: white;
+    padding: 20px; /* Fixed height */
+    text-align: center;
+    text-decoration: wavy;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    flex: 1; /* Allows dynamic width */
+}
+
+.nav-button:hover {
+    background-color: #1ca2b3; /* Slightly lighter or different color */
+    transform: scale(1.05); /* Slightly increase size */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Add shadow for depth */
+    transition: all 0.3s ease-in-out; /* Smooth transition for the effect */
+}
+
+
+/* Optional: Add responsiveness to navigation buttons */
+@media screen and (max-width: 600px) {
+    .navbar-container nav {
+        flex-direction: column;
+    }
+
+    .nav-button {
+        width: 100%;
+        margin: 2px 0;
+    }
+}
