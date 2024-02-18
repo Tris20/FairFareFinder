@@ -179,7 +179,8 @@ func handleFavourites(jsonFile string) {
 
 	// Initialize a StringBuilder to efficiently build the content string
 	var contentBuilder strings.Builder
-
+  // add image to topic
+  contentBuilder.WriteString("![image|690x394](upload://jGDO8BaFIvS1MVO53MDmqlS27vQ.jpeg)\n")
 	// Header for the content
 	contentBuilder.WriteString("City Name | WPI | SkyScannerURL | AirbnbURL | BookingURL\n")
 	contentBuilder.WriteString("|--|--|--|--|--|\n") // Additional line after headers
