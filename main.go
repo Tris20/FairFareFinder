@@ -60,7 +60,7 @@ func main() {
         http.HandleFunc("/", homeHandler)
         http.HandleFunc("/forecast", forecastHandler)
         http.HandleFunc("/getforecast", getForecastHandler)
-
+        http.HandleFunc("/berlin-flight-destinations", presentBerlinFlightDestinations)
         // Serve static files from the `images` directory
         fs := http.FileServer(http.Dir("src/images"))
         http.Handle("/images/", http.StripPrefix("/images/", fs))
@@ -151,6 +151,18 @@ func forecastHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(pageContent)
 }
 
+// handles requests to the forecast page
+func presentBerlinFlightDestinations(w http.ResponseWriter, r *http.Request) {
+	// serving a static file
+	pageContent, err := ioutil.ReadFile("src/html/berlin-flight-destinations.html")
+	if err != nil {
+		log.Printf("Error reading forecast page file: %v", err)
+		http.Error(w, "Internal server error", 500)
+		return
+	}
+	w.Write(pageContent)
+}
+
 
 
 func handleFavourites(jsonFile string) {
@@ -206,10 +218,17 @@ func handleFavourites(jsonFile string) {
 
 	// Convert the StringBuilder content to a string
 	content := contentBuilder.String()
-
-	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
+  fmt.Println(content)
+	
+  // Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
 	PostToDiscourse(content)
-	fmt.Println(content)
+
+  // Call the function to convert markdown to HTML and save it
+	err = ConvertMarkdownToHTML(content, "src/html/berlin-flight-destinations.html")
+	if err != nil {
+		log.Fatalf("Failed to convert markdown to HTML: %v", err)
+	}
+
 }
 
 func processLocation(location string) float64 {
