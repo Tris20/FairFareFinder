@@ -56,6 +56,15 @@ func main() {
 
     switch os.Args[1] {
     case "web":
+
+    	  // Update WPI data every 6 hours 
+        ticker := time.NewTicker(6 * time.Hour)
+      	go func() {
+    	  	for range ticker.C {
+    	  		handleFavourites("flights.json")
+            fmt.Println("hello")
+    	  	}
+      	}()
         // Handle starting the web server
         http.HandleFunc("/", homeHandler)
         http.HandleFunc("/forecast", forecastHandler)
