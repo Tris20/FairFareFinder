@@ -61,6 +61,7 @@ func main() {
         ticker := time.NewTicker(6 * time.Hour)
       	go func() {
     	  	for range ticker.C {
+            generateLinks()
     	  		handleFavourites("flights.json")
             fmt.Println("hello")
     	  	}
