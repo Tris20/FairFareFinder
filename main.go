@@ -66,8 +66,8 @@ func main() {
         http.Handle("/images/", http.StripPrefix("/images/", fs))
 
         // Start the web server
-        fmt.Println("Starting server on :8080")
-        if err := http.ListenAndServe(":8080", nil); err != nil {
+        fmt.Println("Starting server on :6969")
+        if err := http.ListenAndServe(":6969", nil); err != nil {
             log.Fatalf("Error starting server: %v", err)
         }
     default:
