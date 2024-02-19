@@ -27,7 +27,20 @@ func ConvertMarkdownToHTML(markdownContent, outputPath string) error {
 	writer := bufio.NewWriter(outputFile)
 
 	// Start writing the HTML content
-	writer.WriteString("<table>\n")
+	writer.WriteString(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flights from Berlin</title>
+    <link rel="stylesheet" href="../tableStyles.css">
+</head>
+<body>`)
+
+
+
+
+  writer.WriteString("<table>\n")
 	scanner := bufio.NewScanner(strings.NewReader(markdownContent))
 	isHeader := true
 	for scanner.Scan() {
@@ -55,7 +68,11 @@ func ConvertMarkdownToHTML(markdownContent, outputPath string) error {
 		}
 	}
 	writer.WriteString("</table>\n")
-
+  
+	writer.WriteString(`</body>
+</html>
+`)
+ 
 	if err := scanner.Err(); err != nil {
 		return fmt.Errorf("error reading markdown content: %w", err)
 	}
