@@ -1,0 +1,92 @@
+name: Continuous Integration and Deployment
+
+on:
+  push:
+    branches: [ main, jared_test2 ]
+
+jobs:
+
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go 1.x
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.13.8
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
+      - name: Get dependencies
+        run: go get -v -t -d ./...
+      - name: Test
+        run: go test -v ./...
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/jared_test2'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
+
+      - name: Deployment Step
+        run: |
+          # Ensure SSH does not prompt for verification of the host key.
+          SSH_ARGS="-o BatchMode=yes -o StrictHostKeyChecking=no"
+          # SSH into the server and run the deployment script.
+          ssh -t $SSH_ARGS root@fairfarefinder.com << 'EOF'
+            # Navigate to the project directory
+            cd /root/FairFareFinder
+            
+            # Pull the latest changes
+            git pull
+            
+            # Build the project
+            go build
+            
+            # Check if a screen session is running and kill it
+            SCREEN_SESSION=$(screen -ls | grep FairFareFinder | awk '{print $1}')
+            if [ -n "$SCREEN_SESSION" ]; then
+              screen -S "$SCREEN_SESSION" -X quit
+            fi
+            
+            # Start a new screen session and run the application
+            screen -dmS FairFareFinder ./FairFareFinder web
+          EOF
+
+  # deploy:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/jared_test2'
+  #   steps:
+  #     - name: Deployment Step
+  #       env:
+  #         DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+  #       run: |
+  #         # Ensure SSH does not prompt for verification of the host key.
+  #         export SSH_ARGS="-o BatchMode=yes -o StrictHostKeyChecking=no"
+  #         # SSH into the server and run the deployment script.
+  #         ssh -t $SSH_ARGS -i <(echo "$DEPLOY_SSH_KEY") root@fairfarefinder.com << 'EOF'
+  #           # Navigate to the project directory
+  #           cd /root/FairFareFinder
+            
+  #           # Pull the latest changes
+  #           git pull
+            
+  #           # Build the project
+  #           go build
+            
+  #           # Check if a screen session is running and kill it
+  #           SCREEN_SESSION=\$(screen -ls | grep FairFareFinder | awk '{print \$1}')
+  #           if [ -n "\$SCREEN_SESSION" ]; then
+  #             screen -S "\$SCREEN_SESSION" -X quit
+  #           fi
+            
+  #           # Start a new screen session and run the application
+  #           screen -dmS FairFareFinder ./FairFareFinder web
+  #         EOF
