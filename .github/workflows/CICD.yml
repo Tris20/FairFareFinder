@@ -3,6 +3,8 @@ name: Continuous Integration and Deployment
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
 
