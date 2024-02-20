@@ -217,12 +217,12 @@ func handleFavourites(jsonFile string) {
   // add image to topic
   contentBuilder.WriteString("![image|690x394](upload://jGDO8BaFIvS1MVO53MDmqlS27vQ.jpeg)\n")
 	// Header for the content
-	contentBuilder.WriteString("|City Name | WPI | Flights | Accommodation |\n")
-	contentBuilder.WriteString("|--|--|--|--|\n") // Additional line after headers
+	contentBuilder.WriteString("|City Name | WPI | Flights | Accommodation | Things to Do|\n")
+	contentBuilder.WriteString("|--|--|--|--|--|\n") // Additional line after headers
 
 	// Loop through sorted results and append each to the contentBuilder
 	for _, cityWPI := range cityWPIs {
-    line := fmt.Sprintf("| [%s](https://www.google.com/maps/place/%s) | [%.2f](https://www.google.com/search?q=weather+%s) | [SkyScanner](%s) | [Airbnb](%s) [Booking.com](%s) | \n", cityWPI.Name, replaceSpaceWithURLEncoding(cityWPI.Name), cityWPI.WPI, replaceSpaceWithURLEncoding(cityWPI.Name), cityWPI.SkyScannerURL, cityWPI.AirbnbURL, cityWPI.BookingURL)
+    line := fmt.Sprintf("| [%s](https://www.google.com/maps/place/%s) | [%.2f](https://www.google.com/search?q=weather+%s) | [SkyScanner](%s) | [Airbnb](%s) [Booking.com](%s) | [Google Results](https://www.google.com/search?q=things+to+do+dubai+this+weekend+%s)| \n", cityWPI.Name, replaceSpaceWithURLEncoding(cityWPI.Name), cityWPI.WPI, replaceSpaceWithURLEncoding(cityWPI.Name), cityWPI.SkyScannerURL, cityWPI.AirbnbURL, cityWPI.BookingURL, cityWPI.Name)
 		contentBuilder.WriteString(line)
 	}
 
