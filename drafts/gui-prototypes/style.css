@@ -1,0 +1,54 @@
+@font-face {
+    font-family: "LTSaeada";
+    src: url('fonts/LTSaeada-Medium.otf');
+}
+
+body{
+    background: #012553;
+}
+
+
+
+/*********************************************/
+/* Design of location boxes with WPI display */
+/*********************************************/
+
+.loc-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding-top: 15px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.407);
+    background: linear-gradient(158deg, #d87d6d, #005a84 50%, #012353);
+}
+
+/* fade in effect */
+@keyframes fadeIn {
+    from { opacity: 0;}
+    to { opacity: 1;}
+}
+
+.location {
+    font-size: 24px;
+    font-family: "LTSaeada";
+}
+
+.wpi-container {
+    display: flex;
+    align-items: baseline;
+}
+
+.wpi {
+    font-size: 24px;
+    margin-right: 5px;
+    font-family: "LTSaeada";
+}
+
+.wpi-scale {
+    font-size: 12px; /* Smaller font for "/10" */
+    font-family: "LTSaeada";
+}
