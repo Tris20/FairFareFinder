@@ -12,9 +12,8 @@ import (
 	"strings"
 	"time"
 
-	"gopkg.in/yaml.v2"
-
 	"github.com/Tris20/FairFareFinder/src/go_files"
+	"gopkg.in/yaml.v2"
 )
 
 type WeatherData struct {
@@ -53,7 +52,7 @@ type CityAverageWPI struct {
 
 func main() {
 	go_files.Setup_database()
-
+	dbPath := "user_database.db"
 	if len(os.Args) < 2 {
 		log.Fatal("Error: No argument provided. Please provide a location, 'web', or a YAML file.")
 	}
@@ -84,6 +83,9 @@ func main() {
 		if err := http.ListenAndServe(":6969", nil); err != nil {
 			log.Fatalf("Error starting server: %v", err)
 		}
+	case "init-db":
+		init_database(dbPath)
+		insert_test_user(dbPath)
 	default:
 		// Check if the argument is a YAML file
 		if strings.HasSuffix(os.Args[1], ".json") {
@@ -94,6 +96,25 @@ func main() {
 			processLocation(location)
 		}
 	}
+}
+
+func init_database(dbPath string) {
+	// Check if the database file exists
+	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
+		// Database does not exist; create it
+		go_files.CreateDatabase(dbPath)
+	} else {
+		// Database exists
+		log.Println("Database already exists.")
+	}
+}
+
+func insert_test_user(dbPath string) {
+	username := "newuser"
+	email := "newuser@example.com"
+	preference := "dark mode"
+
+	go_files.AddNewUserWithPreferences(dbPath, username, email, preference)
 }
 
 // handles requests to the home page
