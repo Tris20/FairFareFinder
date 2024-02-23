@@ -107,6 +107,10 @@ func init_database(dbPath string) {
 		// Database exists
 		log.Println("Database already exists.")
 	}
+
+	// go_files.AddColumnToPreferencesTable(dbPath, "temp_min", "REAL")
+	// go_files.AddColumnToPreferencesTable(dbPath, "temp_max", "REAL")
+
 }
 
 func insert_test_user(dbPath string) {
