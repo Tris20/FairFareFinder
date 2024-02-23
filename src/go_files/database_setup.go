@@ -97,3 +97,26 @@ func AddNewUserWithPreferences(dbPath, username, email, preference string) {
 
 	log.Printf("New user added with ID %d and corresponding preferences entry created.\n", userID)
 }
+
+// AddColumnToPreferencesTable adds a new column to the preferences table
+// func AddColumnToPreferencesTable(dbPath, columnName, columnType string) {
+// 	// print formated string with the column name and type
+// 	fmt.Printf("Adding column '%s' of type '%s' to preferences table...\n", columnName, columnType)
+
+// 	db, err := sql.Open("sqlite3", dbPath)
+// 	if err != nil {
+// 		log.Fatalf("Failed to open database: %v", err)
+// 	}
+// 	defer db.Close()
+
+// 	// Prepare the SQL statement to add a new column
+// 	alterTableSQL := fmt.Sprintf("ALTER TABLE preferences ADD COLUMN IF NOT EXISTS %s %s;", columnName, columnType)
+
+// 	// Execute the SQL statement
+// 	_, err = db.Exec(alterTableSQL)
+// 	if err != nil {
+// 		log.Fatalf("Failed to add new column to preferences table: %v", err)
+// 	}
+
+// 	log.Printf("Column '%s' added to preferences table.\n", columnName)
+// }
