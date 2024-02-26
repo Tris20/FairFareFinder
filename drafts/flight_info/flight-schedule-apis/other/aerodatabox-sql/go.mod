@@ -1,4 +1,4 @@
-module aerodatabod-sql
+module aerodatabox-sql
 
 go 1.18
 
