@@ -1,15 +1,14 @@
-
 package main
 
 import (
 	"flag"
 	"fmt"
+	"gopkg.in/yaml.v2"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"strings"
-	"gopkg.in/yaml.v2"
 )
 
 // Struct to match the YAML structure
@@ -69,13 +68,27 @@ func main() {
 		return
 	}
 
-	// Convert date from DD-MM-YYYY to YYYY-MM-DD for API
+	// Ensure the results directory exists
+	resultsDir := "./results"
+	if _, err := os.Stat(resultsDir); os.IsNotExist(err) {
+		err = os.Mkdir(resultsDir, os.ModePerm)
+		if err != nil {
+			fmt.Println("Error creating results directory:", err)
+			return
+		}
+	}
+
 	dateParts := strings.Split(*date, "-")
 	if len(dateParts) != 3 {
 		fmt.Println("Invalid date format. Please use DD-MM-YYYY.")
 		return
 	}
 	dateFormatted := fmt.Sprintf("%s-%s-%s", dateParts[2], dateParts[1], dateParts[0])
+
+	directionPrefix := "DEP"
+	if *direction == "Arrival" {
+		directionPrefix = "ARR"
+	}
 
 	intervals := []struct {
 		urlSuffix  string
@@ -92,8 +105,8 @@ func main() {
 			fmt.Println("Error fetching data:", err)
 			return
 		}
-		// Filename uses the original DD-MM-YYYY format provided by the user
-		fileName := fmt.Sprintf("%s-%s-%s.json", *airport, *date, interval.fileSuffix)
+		// Corrected filename formatting to avoid EXTRA string issue
+		fileName := fmt.Sprintf("%s/%s-%s-%s-%s-%s-%s.json", resultsDir, *airport, directionPrefix, dateParts[0], dateParts[1], dateParts[2], interval.fileSuffix)
 		err = os.WriteFile(fileName, []byte(body), 0644)
 		if err != nil {
 			fmt.Println("Error writing file:", err)
@@ -101,5 +114,5 @@ func main() {
 		}
 		fmt.Printf("Data saved to %s\n", fileName)
 	}
-}
 
+}
