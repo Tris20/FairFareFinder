@@ -1,0 +1,4016 @@
+[
+    {
+        "id": 689,
+        "flightNumber": "BA 981",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 06:25+01:00",
+        "arrivalTime": "2024-03-07 07:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 690,
+        "flightNumber": "FR 144",
+        "departureAirport": "BER",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-07 06:45+01:00",
+        "arrivalTime": "2024-03-07 07:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 692,
+        "flightNumber": "LH 173",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 06:25+01:00",
+        "arrivalTime": "2024-03-07 07:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 695,
+        "flightNumber": "AF 1135",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 06:55+01:00",
+        "arrivalTime": "2024-03-07 08:45+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 696,
+        "flightNumber": "EW 8186",
+        "departureAirport": "BER",
+        "arrivalAirport": "LPA",
+        "departureTime": "2024-03-07 07:05+01:00",
+        "arrivalTime": "2024-03-07 11:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 697,
+        "flightNumber": "BA 8490",
+        "departureAirport": "BER",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 06:55+01:00",
+        "arrivalTime": "2024-03-07 07:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 699,
+        "flightNumber": "U2 5101",
+        "departureAirport": "BER",
+        "arrivalAirport": "FUE",
+        "departureTime": "2024-03-07 07:15+01:00",
+        "arrivalTime": "2024-03-07 11:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 700,
+        "flightNumber": "U2 5147",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 07:15+01:00",
+        "arrivalTime": "2024-03-07 09:05+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 702,
+        "flightNumber": "LH 45",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 07:10+01:00",
+        "arrivalTime": "2024-03-07 08:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 703,
+        "flightNumber": "U2 5107",
+        "departureAirport": "BER",
+        "arrivalAirport": "BCN",
+        "departureTime": "2024-03-07 07:30+01:00",
+        "arrivalTime": "2024-03-07 10:05+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 705,
+        "flightNumber": "U2 8628",
+        "departureAirport": "BER",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-07 07:15+01:00",
+        "arrivalTime": "2024-03-07 08:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 706,
+        "flightNumber": "LH 175",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 07:40+01:00",
+        "arrivalTime": "2024-03-07 08:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 710,
+        "flightNumber": "KL 1818",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 06:00+01:00",
+        "arrivalTime": "2024-03-07 07:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 711,
+        "flightNumber": "FR 8524",
+        "departureAirport": "BER",
+        "arrivalAirport": "OTP",
+        "departureTime": "2024-03-07 06:00+01:00",
+        "arrivalTime": "2024-03-07 09:10+02:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 712,
+        "flightNumber": "FR 234",
+        "departureAirport": "BER",
+        "arrivalAirport": "AGP",
+        "departureTime": "2024-03-07 06:00+01:00",
+        "arrivalTime": "2024-03-07 09:35+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 722,
+        "flightNumber": "LH 177",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 08:40+01:00",
+        "arrivalTime": "2024-03-07 09:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 725,
+        "flightNumber": "FR 40",
+        "departureAirport": "BER",
+        "arrivalAirport": "FCO",
+        "departureTime": "2024-03-07 08:35+01:00",
+        "arrivalTime": "2024-03-07 10:45+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 734,
+        "flightNumber": "LH 181",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 09:40+01:00",
+        "arrivalTime": "2024-03-07 10:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 740,
+        "flightNumber": "KL 1822",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 10:10+01:00",
+        "arrivalTime": "2024-03-07 11:35+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 743,
+        "flightNumber": "U2 5183",
+        "departureAirport": "BER",
+        "arrivalAirport": "GVA",
+        "departureTime": "2024-03-07 10:35+01:00",
+        "arrivalTime": "2024-03-07 12:20+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 744,
+        "flightNumber": "EI 333",
+        "departureAirport": "BER",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 10:20+01:00",
+        "arrivalTime": "2024-03-07 11:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 747,
+        "flightNumber": "FR 2418",
+        "departureAirport": "BER",
+        "arrivalAirport": "TFS",
+        "departureTime": "2024-03-07 10:45+01:00",
+        "arrivalTime": "2024-03-07 15:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 748,
+        "flightNumber": "VY 1883",
+        "departureAirport": "BER",
+        "arrivalAirport": "BCN",
+        "departureTime": "2024-03-07 10:45+01:00",
+        "arrivalTime": "2024-03-07 13:20+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 749,
+        "flightNumber": "EW 8180",
+        "departureAirport": "BER",
+        "arrivalAirport": "FUE",
+        "departureTime": "2024-03-07 11:05+01:00",
+        "arrivalTime": "2024-03-07 15:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 751,
+        "flightNumber": "LH 183",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 10:40+01:00",
+        "arrivalTime": "2024-03-07 11:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 752,
+        "flightNumber": "BA 991",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 11:05+01:00",
+        "arrivalTime": "2024-03-07 12:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 753,
+        "flightNumber": "U2 5281",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 07:10+01:00",
+        "arrivalTime": "2024-03-07 08:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 754,
+        "flightNumber": "OG 701",
+        "departureAirport": "BER",
+        "arrivalAirport": "KEF",
+        "departureTime": "2024-03-07 11:30+01:00",
+        "arrivalTime": "2024-03-07 14:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 761,
+        "flightNumber": "BA 8492",
+        "departureAirport": "BER",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 11:55+01:00",
+        "arrivalTime": "2024-03-07 12:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 763,
+        "flightNumber": "LH 185",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 11:40+01:00",
+        "arrivalTime": "2024-03-07 12:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 764,
+        "flightNumber": "FR 110",
+        "departureAirport": "BER",
+        "arrivalAirport": "PMI",
+        "departureTime": "2024-03-07 11:55+01:00",
+        "arrivalTime": "2024-03-07 14:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 766,
+        "flightNumber": "KL 1824",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 11:50+01:00",
+        "arrivalTime": "2024-03-07 13:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 771,
+        "flightNumber": "U2 2602",
+        "departureAirport": "BER",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-07 11:00+01:00",
+        "arrivalTime": "2024-03-07 11:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 772,
+        "flightNumber": "FR 3670",
+        "departureAirport": "BER",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 10:00+01:00",
+        "arrivalTime": "2024-03-07 11:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 773,
+        "flightNumber": "U2 5113",
+        "departureAirport": "BER",
+        "arrivalAirport": "TFS",
+        "departureTime": "2024-03-07 11:00+01:00",
+        "arrivalTime": "2024-03-07 15:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 775,
+        "flightNumber": "PC 5008",
+        "departureAirport": "BER",
+        "arrivalAirport": "AYT",
+        "departureTime": "2024-03-07 12:10+01:00",
+        "arrivalTime": "2024-03-07 17:25+03:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 776,
+        "flightNumber": "FH 914",
+        "departureAirport": "BER",
+        "arrivalAirport": "AYT",
+        "departureTime": "2024-03-07 12:20+01:00",
+        "arrivalTime": "2024-03-07 17:40+03:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 777,
+        "flightNumber": "AF 1735",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 12:25+01:00",
+        "arrivalTime": "2024-03-07 14:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 778,
+        "flightNumber": "BA 993",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 12:30+01:00",
+        "arrivalTime": "2024-03-07 13:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 783,
+        "flightNumber": "LH 187",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 12:40+01:00",
+        "arrivalTime": "2024-03-07 13:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 784,
+        "flightNumber": "U2 5105",
+        "departureAirport": "BER",
+        "arrivalAirport": "AGP",
+        "departureTime": "2024-03-07 12:55+01:00",
+        "arrivalTime": "2024-03-07 16:30+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 789,
+        "flightNumber": "FI 529",
+        "departureAirport": "BER",
+        "arrivalAirport": "KEF",
+        "departureTime": "2024-03-07 12:55+01:00",
+        "arrivalTime": "2024-03-07 15:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 790,
+        "flightNumber": "XQ 161",
+        "departureAirport": "BER",
+        "arrivalAirport": "AYT",
+        "departureTime": "2024-03-07 13:25+01:00",
+        "arrivalTime": "2024-03-07 18:45+03:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 793,
+        "flightNumber": "LH 189",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 13:40+01:00",
+        "arrivalTime": "2024-03-07 14:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 797,
+        "flightNumber": "BA 7026",
+        "departureAirport": "BER",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 14:10+01:00",
+        "arrivalTime": "2024-03-07 15:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 798,
+        "flightNumber": "FR 5573",
+        "departureAirport": "BER",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 13:40+01:00",
+        "arrivalTime": "2024-03-07 15:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 799,
+        "flightNumber": "BA 983",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 14:00+01:00",
+        "arrivalTime": "2024-03-07 15:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 802,
+        "flightNumber": "U2 5121",
+        "departureAirport": "BER",
+        "arrivalAirport": "PMI",
+        "departureTime": "2024-03-07 13:45+01:00",
+        "arrivalTime": "2024-03-07 16:30+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 807,
+        "flightNumber": "FR 146",
+        "departureAirport": "BER",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-07 14:30+01:00",
+        "arrivalTime": "2024-03-07 15:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 809,
+        "flightNumber": "KL 1778",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 14:35+01:00",
+        "arrivalTime": "2024-03-07 16:00+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 810,
+        "flightNumber": "LH 191",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 14:40+01:00",
+        "arrivalTime": "2024-03-07 15:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 811,
+        "flightNumber": "KL 1826",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 14:30+01:00",
+        "arrivalTime": "2024-03-07 15:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 820,
+        "flightNumber": "LH 193",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 15:40+01:00",
+        "arrivalTime": "2024-03-07 16:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 824,
+        "flightNumber": "AF 1235",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 15:45+01:00",
+        "arrivalTime": "2024-03-07 17:35+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 825,
+        "flightNumber": "U2 4634",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 15:40+01:00",
+        "arrivalTime": "2024-03-07 17:30+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 829,
+        "flightNumber": "BA 985",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 16:30+01:00",
+        "arrivalTime": "2024-03-07 17:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 831,
+        "flightNumber": "FR 132",
+        "departureAirport": "BER",
+        "arrivalAirport": "BCN",
+        "departureTime": "2024-03-07 16:40+01:00",
+        "arrivalTime": "2024-03-07 19:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 833,
+        "flightNumber": "KL 1830",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 16:30+01:00",
+        "arrivalTime": "2024-03-07 17:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 835,
+        "flightNumber": "U2 5079",
+        "departureAirport": "BER",
+        "arrivalAirport": "FCO",
+        "departureTime": "2024-03-07 16:20+01:00",
+        "arrivalTime": "2024-03-07 18:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 836,
+        "flightNumber": "BA 8494",
+        "departureAirport": "BER",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 17:00+01:00",
+        "arrivalTime": "2024-03-07 17:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 837,
+        "flightNumber": "XQ 661",
+        "departureAirport": "BER",
+        "arrivalAirport": "AYT",
+        "departureTime": "2024-03-07 16:50+01:00",
+        "arrivalTime": "2024-03-07 22:10+03:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 841,
+        "flightNumber": "BA 995",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 17:35+01:00",
+        "arrivalTime": "2024-03-07 18:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 846,
+        "flightNumber": "XC 2025",
+        "departureAirport": "BER",
+        "arrivalAirport": "AYT",
+        "departureTime": "2024-03-07 18:00+01:00",
+        "arrivalTime": "2024-03-07 23:20+03:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 847,
+        "flightNumber": "LH 197",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 17:40+01:00",
+        "arrivalTime": "2024-03-07 18:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 850,
+        "flightNumber": "AF 1835",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 18:20+01:00",
+        "arrivalTime": "2024-03-07 20:10+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 851,
+        "flightNumber": "FR 177",
+        "departureAirport": "BER",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-07 18:20+01:00",
+        "arrivalTime": "2024-03-07 19:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 852,
+        "flightNumber": "XQ 663",
+        "departureAirport": "BER",
+        "arrivalAirport": "AYT",
+        "departureTime": "2024-03-07 17:40+01:00",
+        "arrivalTime": "2024-03-07 23:00+03:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 853,
+        "flightNumber": "FR 253",
+        "departureAirport": "BER",
+        "arrivalAirport": "FAO",
+        "departureTime": "2024-03-07 18:20+01:00",
+        "arrivalTime": "2024-03-07 21:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 856,
+        "flightNumber": "U2 8630",
+        "departureAirport": "BER",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-07 18:15+01:00",
+        "arrivalTime": "2024-03-07 19:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 858,
+        "flightNumber": "U2 5185",
+        "departureAirport": "BER",
+        "arrivalAirport": "GVA",
+        "departureTime": "2024-03-07 18:35+01:00",
+        "arrivalTime": "2024-03-07 20:20+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 859,
+        "flightNumber": "KL 1832",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 18:25+01:00",
+        "arrivalTime": "2024-03-07 19:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 866,
+        "flightNumber": "U2 5285",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 19:00+01:00",
+        "arrivalTime": "2024-03-07 20:30+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 874,
+        "flightNumber": "LH 201",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 19:40+01:00",
+        "arrivalTime": "2024-03-07 20:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 882,
+        "flightNumber": "LH 199",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 18:40+01:00",
+        "arrivalTime": "2024-03-07 19:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 883,
+        "flightNumber": "BA 987",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 19:35+01:00",
+        "arrivalTime": "2024-03-07 20:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 885,
+        "flightNumber": "AF 1535",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 20:15+01:00",
+        "arrivalTime": "2024-03-07 22:05+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 899,
+        "flightNumber": "VY 1885",
+        "departureAirport": "BER",
+        "arrivalAirport": "BCN",
+        "departureTime": "2024-03-07 21:20+01:00",
+        "arrivalTime": "2024-03-07 23:59+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 900,
+        "flightNumber": "U2 8626",
+        "departureAirport": "BER",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-07 21:45+01:00",
+        "arrivalTime": "2024-03-07 22:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 901,
+        "flightNumber": "KL 1834",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 21:50+01:00",
+        "arrivalTime": "2024-03-07 23:20+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 279,
+        "flightNumber": "BA 1475",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 06:50+00:00",
+        "arrivalTime": "2024-03-07 08:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 280,
+        "flightNumber": "U2 401",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-07 07:05+00:00",
+        "arrivalTime": "2024-03-07 08:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 281,
+        "flightNumber": "U2 3163",
+        "departureAirport": "GLA",
+        "arrivalAirport": "FAO",
+        "departureTime": "2024-03-07 07:05+00:00",
+        "arrivalTime": "2024-03-07 10:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 282,
+        "flightNumber": "U2 411",
+        "departureAirport": "GLA",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-07 07:15+00:00",
+        "arrivalTime": "2024-03-07 08:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 283,
+        "flightNumber": "FR 5150",
+        "departureAirport": "GLA",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 07:25+00:00",
+        "arrivalTime": "2024-03-07 08:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 284,
+        "flightNumber": "LS 173",
+        "departureAirport": "GLA",
+        "arrivalAirport": "FAO",
+        "departureTime": "2024-03-07 07:00+00:00",
+        "arrivalTime": "2024-03-07 10:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 285,
+        "flightNumber": "BA 1481",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-07 07:00+00:00",
+        "arrivalTime": "2024-03-07 08:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 287,
+        "flightNumber": "U2 3177",
+        "departureAirport": "GLA",
+        "arrivalAirport": "FCO",
+        "departureTime": "2024-03-07 07:25+00:00",
+        "arrivalTime": "2024-03-07 11:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 288,
+        "flightNumber": "EI 3221",
+        "departureAirport": "GLA",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 08:20+00:00",
+        "arrivalTime": "2024-03-07 09:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 290,
+        "flightNumber": "LS 109",
+        "departureAirport": "GLA",
+        "arrivalAirport": "AYT",
+        "departureTime": "2024-03-07 07:45+00:00",
+        "arrivalTime": "2024-03-07 15:35+03:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 291,
+        "flightNumber": "BA 8723",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 08:40+00:00",
+        "arrivalTime": "2024-03-07 10:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 292,
+        "flightNumber": "LS 155",
+        "departureAirport": "GLA",
+        "arrivalAirport": "TFS",
+        "departureTime": "2024-03-07 08:45+00:00",
+        "arrivalTime": "2024-03-07 13:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 293,
+        "flightNumber": "U2 202",
+        "departureAirport": "GLA",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-07 08:45+00:00",
+        "arrivalTime": "2024-03-07 10:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 294,
+        "flightNumber": "BA 1491",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 08:50+00:00",
+        "arrivalTime": "2024-03-07 10:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 296,
+        "flightNumber": "LH 975",
+        "departureAirport": "GLA",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 06:10+00:00",
+        "arrivalTime": "2024-03-07 09:10+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 297,
+        "flightNumber": "KL 1470",
+        "departureAirport": "GLA",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 06:10+00:00",
+        "arrivalTime": "2024-03-07 08:50+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 298,
+        "flightNumber": "BA 8721",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 06:30+00:00",
+        "arrivalTime": "2024-03-07 08:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 299,
+        "flightNumber": "LS 177",
+        "departureAirport": "GLA",
+        "arrivalAirport": "ALC",
+        "departureTime": "2024-03-07 06:15+00:00",
+        "arrivalTime": "2024-03-07 10:30+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 300,
+        "flightNumber": "KL 1472",
+        "departureAirport": "GLA",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 09:05+00:00",
+        "arrivalTime": "2024-03-07 11:45+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 301,
+        "flightNumber": "U2 862",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-07 08:20+00:00",
+        "arrivalTime": "2024-03-07 09:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 302,
+        "flightNumber": "LS 167",
+        "departureAirport": "GLA",
+        "arrivalAirport": "ACE",
+        "departureTime": "2024-03-07 09:30+00:00",
+        "arrivalTime": "2024-03-07 14:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 303,
+        "flightNumber": "U2 7192",
+        "departureAirport": "GLA",
+        "arrivalAirport": "BCN",
+        "departureTime": "2024-03-07 09:35+00:00",
+        "arrivalTime": "2024-03-07 13:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 304,
+        "flightNumber": "BA 1479",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 09:50+00:00",
+        "arrivalTime": "2024-03-07 11:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 306,
+        "flightNumber": "U2 4674",
+        "departureAirport": "GLA",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 09:25+00:00",
+        "arrivalTime": "2024-03-07 12:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 309,
+        "flightNumber": "U2 3173",
+        "departureAirport": "GLA",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 10:50+00:00",
+        "arrivalTime": "2024-03-07 13:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 310,
+        "flightNumber": "U2 3123",
+        "departureAirport": "GLA",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 11:05+00:00",
+        "arrivalTime": "2024-03-07 13:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 311,
+        "flightNumber": "BA 1499",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 11:45+00:00",
+        "arrivalTime": "2024-03-07 13:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 313,
+        "flightNumber": "LS 143",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LPA",
+        "departureTime": "2024-03-07 10:10+00:00",
+        "arrivalTime": "2024-03-07 14:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 315,
+        "flightNumber": "EI 3225",
+        "departureAirport": "GLA",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 11:55+00:00",
+        "arrivalTime": "2024-03-07 13:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 317,
+        "flightNumber": "BA 1487",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 12:40+00:00",
+        "arrivalTime": "2024-03-07 14:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 318,
+        "flightNumber": "LH 961",
+        "departureAirport": "GLA",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 12:45+00:00",
+        "arrivalTime": "2024-03-07 15:45+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 321,
+        "flightNumber": "BA 1483",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 13:45+00:00",
+        "arrivalTime": "2024-03-07 15:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 324,
+        "flightNumber": "FI 431",
+        "departureAirport": "GLA",
+        "arrivalAirport": "KEF",
+        "departureTime": "2024-03-07 12:45+00:00",
+        "arrivalTime": "2024-03-07 15:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 327,
+        "flightNumber": "BA 1489",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 15:25+00:00",
+        "arrivalTime": "2024-03-07 16:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 328,
+        "flightNumber": "U2 866",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-07 14:50+00:00",
+        "arrivalTime": "2024-03-07 16:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 331,
+        "flightNumber": "KL 1476",
+        "departureAirport": "GLA",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 13:25+00:00",
+        "arrivalTime": "2024-03-07 16:00+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 334,
+        "flightNumber": "EI 3227",
+        "departureAirport": "GLA",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 16:45+00:00",
+        "arrivalTime": "2024-03-07 18:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 335,
+        "flightNumber": "U2 868",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-07 16:50+00:00",
+        "arrivalTime": "2024-03-07 18:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 337,
+        "flightNumber": "KL 1478",
+        "departureAirport": "GLA",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 17:15+00:00",
+        "arrivalTime": "2024-03-07 19:50+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 338,
+        "flightNumber": "BA 8727",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 17:20+00:00",
+        "arrivalTime": "2024-03-07 18:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 339,
+        "flightNumber": "U2 3107",
+        "departureAirport": "GLA",
+        "arrivalAirport": "ALC",
+        "departureTime": "2024-03-07 15:30+00:00",
+        "arrivalTime": "2024-03-07 19:35+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 342,
+        "flightNumber": "U2 407",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-07 18:50+00:00",
+        "arrivalTime": "2024-03-07 20:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 343,
+        "flightNumber": "BA 8729",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 18:55+00:00",
+        "arrivalTime": "2024-03-07 20:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 344,
+        "flightNumber": "BA 1495",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 19:15+00:00",
+        "arrivalTime": "2024-03-07 20:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 345,
+        "flightNumber": "U2 413",
+        "departureAirport": "GLA",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-07 19:15+00:00",
+        "arrivalTime": "2024-03-07 20:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 346,
+        "flightNumber": "U2 442",
+        "departureAirport": "GLA",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-07 15:00+00:00",
+        "arrivalTime": "2024-03-07 16:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 348,
+        "flightNumber": "U2 4676",
+        "departureAirport": "GLA",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 19:25+00:00",
+        "arrivalTime": "2024-03-07 22:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 350,
+        "flightNumber": "U2 206",
+        "departureAirport": "GLA",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-07 20:05+00:00",
+        "arrivalTime": "2024-03-07 21:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 351,
+        "flightNumber": "BA 8739",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 20:15+00:00",
+        "arrivalTime": "2024-03-07 21:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 352,
+        "flightNumber": "EI 3229",
+        "departureAirport": "GLA",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 20:15+00:00",
+        "arrivalTime": "2024-03-07 21:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 354,
+        "flightNumber": "BA 1497",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 20:30+00:00",
+        "arrivalTime": "2024-03-07 21:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 355,
+        "flightNumber": "FR 5771",
+        "departureAirport": "GLA",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 20:40+00:00",
+        "arrivalTime": "2024-03-07 21:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 357,
+        "flightNumber": "U2 652",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-07 20:55+00:00",
+        "arrivalTime": "2024-03-07 22:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 359,
+        "flightNumber": "U2 654",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-07 15:10+00:00",
+        "arrivalTime": "2024-03-07 16:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 360,
+        "flightNumber": "BA 1493",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 17:25+00:00",
+        "arrivalTime": "2024-03-07 18:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 1,
+        "flightNumber": "RK 813",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 06:00+00:00",
+        "arrivalTime": "2024-03-07 07:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 2,
+        "flightNumber": "FR 5579",
+        "departureAirport": "EDI",
+        "arrivalAirport": "ALC",
+        "departureTime": "2024-03-07 06:05+00:00",
+        "arrivalTime": "2024-03-07 10:10+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 3,
+        "flightNumber": "U2 3205",
+        "departureAirport": "EDI",
+        "arrivalAirport": "ALC",
+        "departureTime": "2024-03-07 06:10+00:00",
+        "arrivalTime": "2024-03-07 10:20+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 4,
+        "flightNumber": "RK 597",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-07 06:00+00:00",
+        "arrivalTime": "2024-03-07 07:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 5,
+        "flightNumber": "FR 5663",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AGP",
+        "departureTime": "2024-03-07 06:00+00:00",
+        "arrivalTime": "2024-03-07 10:20+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 6,
+        "flightNumber": "FR 2969",
+        "departureAirport": "EDI",
+        "arrivalAirport": "TFS",
+        "departureTime": "2024-03-07 06:00+00:00",
+        "arrivalTime": "2024-03-07 10:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 7,
+        "flightNumber": "U2 3315",
+        "departureAirport": "EDI",
+        "arrivalAirport": "KEF",
+        "departureTime": "2024-03-07 06:15+00:00",
+        "arrivalTime": "2024-03-07 08:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 8,
+        "flightNumber": "U2 806",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-07 06:15+00:00",
+        "arrivalTime": "2024-03-07 07:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 9,
+        "flightNumber": "BA 1435",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 06:30+00:00",
+        "arrivalTime": "2024-03-07 08:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 10,
+        "flightNumber": "BA 8711",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 07:00+00:00",
+        "arrivalTime": "2024-03-07 08:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 11,
+        "flightNumber": "BA 8701",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 06:40+00:00",
+        "arrivalTime": "2024-03-07 08:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 13,
+        "flightNumber": "U2 3245",
+        "departureAirport": "EDI",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 06:30+00:00",
+        "arrivalTime": "2024-03-07 09:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 14,
+        "flightNumber": "U2 301",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-07 07:00+00:00",
+        "arrivalTime": "2024-03-07 08:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 15,
+        "flightNumber": "U2 309",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-07 07:00+00:00",
+        "arrivalTime": "2024-03-07 08:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 16,
+        "flightNumber": "FR 5593",
+        "departureAirport": "EDI",
+        "arrivalAirport": "ACE",
+        "departureTime": "2024-03-07 07:00+00:00",
+        "arrivalTime": "2024-03-07 11:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 19,
+        "flightNumber": "BA 1443",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 07:30+00:00",
+        "arrivalTime": "2024-03-07 09:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 22,
+        "flightNumber": "BA 8713",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 07:30+00:00",
+        "arrivalTime": "2024-03-07 09:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 25,
+        "flightNumber": "LS 4095",
+        "departureAirport": "EDI",
+        "arrivalAirport": "KEF",
+        "departureTime": "2024-03-07 07:40+00:00",
+        "arrivalTime": "2024-03-07 10:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 26,
+        "flightNumber": "KL 1276",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 05:50+00:00",
+        "arrivalTime": "2024-03-07 08:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 28,
+        "flightNumber": "AF 1887",
+        "departureAirport": "EDI",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 06:00+00:00",
+        "arrivalTime": "2024-03-07 08:50+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 29,
+        "flightNumber": "LH 965",
+        "departureAirport": "EDI",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 05:50+00:00",
+        "arrivalTime": "2024-03-07 08:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 30,
+        "flightNumber": "LS 727",
+        "departureAirport": "EDI",
+        "arrivalAirport": "TFS",
+        "departureTime": "2024-03-07 07:55+00:00",
+        "arrivalTime": "2024-03-07 12:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 32,
+        "flightNumber": "BA 8703",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 08:45+00:00",
+        "arrivalTime": "2024-03-07 10:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 33,
+        "flightNumber": "U2 7836",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 08:25+00:00",
+        "arrivalTime": "2024-03-07 11:00+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 34,
+        "flightNumber": "EI 3251",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 08:15+00:00",
+        "arrivalTime": "2024-03-07 09:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 35,
+        "flightNumber": "LS 705",
+        "departureAirport": "EDI",
+        "arrivalAirport": "ACE",
+        "departureTime": "2024-03-07 08:45+00:00",
+        "arrivalTime": "2024-03-07 13:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 37,
+        "flightNumber": "U2 214",
+        "departureAirport": "EDI",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-07 08:45+00:00",
+        "arrivalTime": "2024-03-07 10:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 38,
+        "flightNumber": "BA 1439",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 08:40+00:00",
+        "arrivalTime": "2024-03-07 10:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 40,
+        "flightNumber": "LS 775",
+        "departureAirport": "EDI",
+        "arrivalAirport": "ALC",
+        "departureTime": "2024-03-07 09:30+00:00",
+        "arrivalTime": "2024-03-07 13:45+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 41,
+        "flightNumber": "KL 1278",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 09:15+00:00",
+        "arrivalTime": "2024-03-07 11:50+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 42,
+        "flightNumber": "RK 6624",
+        "departureAirport": "EDI",
+        "arrivalAirport": "KRK",
+        "departureTime": "2024-03-07 09:35+00:00",
+        "arrivalTime": "2024-03-07 13:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 43,
+        "flightNumber": "U2 3293",
+        "departureAirport": "EDI",
+        "arrivalAirport": "GVA",
+        "departureTime": "2024-03-07 09:50+00:00",
+        "arrivalTime": "2024-03-07 13:05+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 44,
+        "flightNumber": "RK 815",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 09:30+00:00",
+        "arrivalTime": "2024-03-07 10:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 46,
+        "flightNumber": "LS 815",
+        "departureAirport": "EDI",
+        "arrivalAirport": "FAO",
+        "departureTime": "2024-03-07 10:15+00:00",
+        "arrivalTime": "2024-03-07 13:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 47,
+        "flightNumber": "U2 3241",
+        "departureAirport": "EDI",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 10:30+00:00",
+        "arrivalTime": "2024-03-07 13:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 48,
+        "flightNumber": "BA 1441",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 10:00+00:00",
+        "arrivalTime": "2024-03-07 11:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 49,
+        "flightNumber": "U2 311",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-07 10:40+00:00",
+        "arrivalTime": "2024-03-07 12:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 50,
+        "flightNumber": "BA 8715",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 10:50+00:00",
+        "arrivalTime": "2024-03-07 12:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 52,
+        "flightNumber": "BA 1445",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 11:10+00:00",
+        "arrivalTime": "2024-03-07 12:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 54,
+        "flightNumber": "U2 3211",
+        "departureAirport": "EDI",
+        "arrivalAirport": "FUE",
+        "departureTime": "2024-03-07 11:05+00:00",
+        "arrivalTime": "2024-03-07 15:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 57,
+        "flightNumber": "EI 3253",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 11:40+00:00",
+        "arrivalTime": "2024-03-07 13:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 58,
+        "flightNumber": "AF 1687",
+        "departureAirport": "EDI",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 11:25+00:00",
+        "arrivalTime": "2024-03-07 14:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 59,
+        "flightNumber": "BA 1457",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 11:55+00:00",
+        "arrivalTime": "2024-03-07 13:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 60,
+        "flightNumber": "VY 7816",
+        "departureAirport": "EDI",
+        "arrivalAirport": "BCN",
+        "departureTime": "2024-03-07 10:25+00:00",
+        "arrivalTime": "2024-03-07 14:10+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 63,
+        "flightNumber": "U2 3297",
+        "departureAirport": "EDI",
+        "arrivalAirport": "GVA",
+        "departureTime": "2024-03-07 12:05+00:00",
+        "arrivalTime": "2024-03-07 15:20+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 65,
+        "flightNumber": "LH 963",
+        "departureAirport": "EDI",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-07 12:40+00:00",
+        "arrivalTime": "2024-03-07 15:30+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 66,
+        "flightNumber": "BA 8705",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 12:50+00:00",
+        "arrivalTime": "2024-03-07 14:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 67,
+        "flightNumber": "KL 1282",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 13:20+00:00",
+        "arrivalTime": "2024-03-07 15:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 70,
+        "flightNumber": "U2 7838",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 13:50+00:00",
+        "arrivalTime": "2024-03-07 16:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 73,
+        "flightNumber": "U2 313",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-07 14:25+00:00",
+        "arrivalTime": "2024-03-07 15:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 76,
+        "flightNumber": "U2 321",
+        "departureAirport": "EDI",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-07 14:55+00:00",
+        "arrivalTime": "2024-03-07 16:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 77,
+        "flightNumber": "U2 220",
+        "departureAirport": "EDI",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-07 15:25+00:00",
+        "arrivalTime": "2024-03-07 16:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 79,
+        "flightNumber": "BA 1433",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 13:20+00:00",
+        "arrivalTime": "2024-03-07 14:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 81,
+        "flightNumber": "BA 8707",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 15:55+00:00",
+        "arrivalTime": "2024-03-07 17:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 82,
+        "flightNumber": "BA 1455",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 16:15+00:00",
+        "arrivalTime": "2024-03-07 17:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 83,
+        "flightNumber": "BA 1437",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 15:10+00:00",
+        "arrivalTime": "2024-03-07 16:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 86,
+        "flightNumber": "U2 812",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-07 16:55+00:00",
+        "arrivalTime": "2024-03-07 18:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 87,
+        "flightNumber": "FR 6266",
+        "departureAirport": "EDI",
+        "arrivalAirport": "BCN",
+        "departureTime": "2024-03-07 17:25+00:00",
+        "arrivalTime": "2024-03-07 21:05+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 88,
+        "flightNumber": "EI 3257",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 16:45+00:00",
+        "arrivalTime": "2024-03-07 18:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 90,
+        "flightNumber": "BA 1447",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 17:45+00:00",
+        "arrivalTime": "2024-03-07 19:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 93,
+        "flightNumber": "KL 1286",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-07 17:00+00:00",
+        "arrivalTime": "2024-03-07 19:35+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 97,
+        "flightNumber": "U2 323",
+        "departureAirport": "EDI",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-07 18:35+00:00",
+        "arrivalTime": "2024-03-07 19:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 98,
+        "flightNumber": "U2 3243",
+        "departureAirport": "EDI",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-07 18:35+00:00",
+        "arrivalTime": "2024-03-07 21:30+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 99,
+        "flightNumber": "EI 3557",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 18:40+00:00",
+        "arrivalTime": "2024-03-07 20:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 100,
+        "flightNumber": "BA 1459",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 19:00+00:00",
+        "arrivalTime": "2024-03-07 20:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 101,
+        "flightNumber": "U2 814",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-07 19:10+00:00",
+        "arrivalTime": "2024-03-07 20:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 103,
+        "flightNumber": "U2 606",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-07 19:40+00:00",
+        "arrivalTime": "2024-03-07 20:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 104,
+        "flightNumber": "EI 3259",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 19:50+00:00",
+        "arrivalTime": "2024-03-07 21:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 107,
+        "flightNumber": "U2 315",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-07 18:05+00:00",
+        "arrivalTime": "2024-03-07 19:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 108,
+        "flightNumber": "BA 8709",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 17:30+00:00",
+        "arrivalTime": "2024-03-07 19:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 109,
+        "flightNumber": "BA 1449",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-07 14:10+00:00",
+        "arrivalTime": "2024-03-07 15:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 111,
+        "flightNumber": "U2 3313",
+        "departureAirport": "EDI",
+        "arrivalAirport": "KRK",
+        "departureTime": "2024-03-07 15:00+00:00",
+        "arrivalTime": "2024-03-07 18:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 114,
+        "flightNumber": "U2 218",
+        "departureAirport": "EDI",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-07 20:20+00:00",
+        "arrivalTime": "2024-03-07 21:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 115,
+        "flightNumber": "BA 8719",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-07 20:00+00:00",
+        "arrivalTime": "2024-03-07 21:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 116,
+        "flightNumber": "U2 816",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-07 20:50+00:00",
+        "arrivalTime": "2024-03-07 22:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 117,
+        "flightNumber": "FR 819",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-07 22:45+00:00",
+        "arrivalTime": "2024-03-07 23:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 120,
+        "flightNumber": "RK 1274",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-07 20:25+00:00",
+        "arrivalTime": "2024-03-07 21:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 121,
+        "flightNumber": "U2 3295",
+        "departureAirport": "EDI",
+        "arrivalAirport": "GVA",
+        "departureTime": "2024-03-07 16:10+00:00",
+        "arrivalTime": "2024-03-07 19:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 448,
+        "flightNumber": "U2 5119",
+        "departureAirport": "BER",
+        "arrivalAirport": "PMI",
+        "departureTime": "2024-03-08 06:40+01:00",
+        "arrivalTime": "2024-03-08 09:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 450,
+        "flightNumber": "BA 8490",
+        "departureAirport": "BER",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 06:55+01:00",
+        "arrivalTime": "2024-03-08 07:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 451,
+        "flightNumber": "FR 3366",
+        "departureAirport": "BER",
+        "arrivalAirport": "ACE",
+        "departureTime": "2024-03-08 06:20+01:00",
+        "arrivalTime": "2024-03-08 10:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 453,
+        "flightNumber": "AF 1135",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 06:55+01:00",
+        "arrivalTime": "2024-03-08 08:45+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 454,
+        "flightNumber": "FR 3670",
+        "departureAirport": "BER",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 06:15+01:00",
+        "arrivalTime": "2024-03-08 07:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 457,
+        "flightNumber": "EW 8186",
+        "departureAirport": "BER",
+        "arrivalAirport": "LPA",
+        "departureTime": "2024-03-08 07:10+01:00",
+        "arrivalTime": "2024-03-08 11:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 459,
+        "flightNumber": "BA 981",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 07:05+01:00",
+        "arrivalTime": "2024-03-08 08:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 461,
+        "flightNumber": "U2 8628",
+        "departureAirport": "BER",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 07:15+01:00",
+        "arrivalTime": "2024-03-08 08:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 462,
+        "flightNumber": "LH 45",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 07:10+01:00",
+        "arrivalTime": "2024-03-08 08:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 464,
+        "flightNumber": "U2 5147",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 07:25+01:00",
+        "arrivalTime": "2024-03-08 09:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 465,
+        "flightNumber": "LH 175",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 07:40+01:00",
+        "arrivalTime": "2024-03-08 08:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 466,
+        "flightNumber": "U2 5281",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 07:10+01:00",
+        "arrivalTime": "2024-03-08 08:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 467,
+        "flightNumber": "U2 5113",
+        "departureAirport": "BER",
+        "arrivalAirport": "TFS",
+        "departureTime": "2024-03-08 07:20+01:00",
+        "arrivalTime": "2024-03-08 11:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 469,
+        "flightNumber": "U2 5111",
+        "departureAirport": "BER",
+        "arrivalAirport": "LPA",
+        "departureTime": "2024-03-08 07:20+01:00",
+        "arrivalTime": "2024-03-08 11:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 472,
+        "flightNumber": "EW 8590",
+        "departureAirport": "BER",
+        "arrivalAirport": "PMI",
+        "departureTime": "2024-03-08 06:20+01:00",
+        "arrivalTime": "2024-03-08 09:05+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 474,
+        "flightNumber": "LH 173",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 06:25+01:00",
+        "arrivalTime": "2024-03-08 07:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 482,
+        "flightNumber": "LH 177",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 08:40+01:00",
+        "arrivalTime": "2024-03-08 09:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 486,
+        "flightNumber": "KL 1818",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 06:00+01:00",
+        "arrivalTime": "2024-03-08 07:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 490,
+        "flightNumber": "FR 144",
+        "departureAirport": "BER",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-08 09:35+01:00",
+        "arrivalTime": "2024-03-08 10:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 499,
+        "flightNumber": "FR 264",
+        "departureAirport": "BER",
+        "arrivalAirport": "PMI",
+        "departureTime": "2024-03-08 06:00+01:00",
+        "arrivalTime": "2024-03-08 08:45+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 500,
+        "flightNumber": "LH 181",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 09:40+01:00",
+        "arrivalTime": "2024-03-08 10:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 501,
+        "flightNumber": "KL 1822",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 10:10+01:00",
+        "arrivalTime": "2024-03-08 11:35+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 502,
+        "flightNumber": "EI 333",
+        "departureAirport": "BER",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 10:20+01:00",
+        "arrivalTime": "2024-03-08 11:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 504,
+        "flightNumber": "AF 1435",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 10:15+01:00",
+        "arrivalTime": "2024-03-08 12:10+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 505,
+        "flightNumber": "EW 8290",
+        "departureAirport": "BER",
+        "arrivalAirport": "TFS",
+        "departureTime": "2024-03-08 10:40+01:00",
+        "arrivalTime": "2024-03-08 15:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 506,
+        "flightNumber": "U2 8622",
+        "departureAirport": "BER",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 10:05+01:00",
+        "arrivalTime": "2024-03-08 11:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 509,
+        "flightNumber": "FR 40",
+        "departureAirport": "BER",
+        "arrivalAirport": "FCO",
+        "departureTime": "2024-03-08 10:15+01:00",
+        "arrivalTime": "2024-03-08 12:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 511,
+        "flightNumber": "FR 2502",
+        "departureAirport": "BER",
+        "arrivalAirport": "LPA",
+        "departureTime": "2024-03-08 06:00+01:00",
+        "arrivalTime": "2024-03-08 10:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 512,
+        "flightNumber": "FR 234",
+        "departureAirport": "BER",
+        "arrivalAirport": "AGP",
+        "departureTime": "2024-03-08 10:45+01:00",
+        "arrivalTime": "2024-03-08 14:20+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 514,
+        "flightNumber": "VY 1883",
+        "departureAirport": "BER",
+        "arrivalAirport": "BCN",
+        "departureTime": "2024-03-08 10:45+01:00",
+        "arrivalTime": "2024-03-08 13:20+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 515,
+        "flightNumber": "LH 183",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 10:40+01:00",
+        "arrivalTime": "2024-03-08 11:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 518,
+        "flightNumber": "BA 991",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 11:05+01:00",
+        "arrivalTime": "2024-03-08 12:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 520,
+        "flightNumber": "OG 701",
+        "departureAirport": "BER",
+        "arrivalAirport": "KEF",
+        "departureTime": "2024-03-08 11:30+01:00",
+        "arrivalTime": "2024-03-08 14:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 523,
+        "flightNumber": "FH 1282",
+        "departureAirport": "BER",
+        "arrivalAirport": "AYT",
+        "departureTime": "2024-03-08 11:40+01:00",
+        "arrivalTime": "2024-03-08 16:50+03:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 525,
+        "flightNumber": "2S 3008",
+        "departureAirport": "BER",
+        "arrivalAirport": "AYT",
+        "departureTime": "2024-03-08 11:40+01:00",
+        "arrivalTime": "2024-03-08 16:55+03:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 527,
+        "flightNumber": "LH 185",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 11:40+01:00",
+        "arrivalTime": "2024-03-08 12:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 531,
+        "flightNumber": "KL 1824",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 11:50+01:00",
+        "arrivalTime": "2024-03-08 13:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 532,
+        "flightNumber": "BA 8492",
+        "departureAirport": "BER",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 11:55+01:00",
+        "arrivalTime": "2024-03-08 12:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 537,
+        "flightNumber": "U2 5181",
+        "departureAirport": "BER",
+        "arrivalAirport": "GVA",
+        "departureTime": "2024-03-08 07:00+01:00",
+        "arrivalTime": "2024-03-08 08:45+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 539,
+        "flightNumber": "U2 5333",
+        "departureAirport": "BER",
+        "arrivalAirport": "FNC",
+        "departureTime": "2024-03-08 10:00+01:00",
+        "arrivalTime": "2024-03-08 13:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 541,
+        "flightNumber": "PC 5008",
+        "departureAirport": "BER",
+        "arrivalAirport": "AYT",
+        "departureTime": "2024-03-08 12:10+01:00",
+        "arrivalTime": "2024-03-08 17:25+03:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 543,
+        "flightNumber": "FR 132",
+        "departureAirport": "BER",
+        "arrivalAirport": "BCN",
+        "departureTime": "2024-03-08 12:10+01:00",
+        "arrivalTime": "2024-03-08 14:45+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 544,
+        "flightNumber": "AF 1735",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 12:25+01:00",
+        "arrivalTime": "2024-03-08 14:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 545,
+        "flightNumber": "BA 993",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 12:15+01:00",
+        "arrivalTime": "2024-03-08 13:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 546,
+        "flightNumber": "U2 5107",
+        "departureAirport": "BER",
+        "arrivalAirport": "BCN",
+        "departureTime": "2024-03-08 12:15+01:00",
+        "arrivalTime": "2024-03-08 14:50+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 550,
+        "flightNumber": "FR 2418",
+        "departureAirport": "BER",
+        "arrivalAirport": "TFS",
+        "departureTime": "2024-03-08 12:40+01:00",
+        "arrivalTime": "2024-03-08 17:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 551,
+        "flightNumber": "LH 187",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 12:40+01:00",
+        "arrivalTime": "2024-03-08 13:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 553,
+        "flightNumber": "U2 5083",
+        "departureAirport": "BER",
+        "arrivalAirport": "FCO",
+        "departureTime": "2024-03-08 12:35+01:00",
+        "arrivalTime": "2024-03-08 14:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 555,
+        "flightNumber": "FI 529",
+        "departureAirport": "BER",
+        "arrivalAirport": "KEF",
+        "departureTime": "2024-03-08 12:55+01:00",
+        "arrivalTime": "2024-03-08 15:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 564,
+        "flightNumber": "U2 5121",
+        "departureAirport": "BER",
+        "arrivalAirport": "PMI",
+        "departureTime": "2024-03-08 13:15+01:00",
+        "arrivalTime": "2024-03-08 16:00+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 565,
+        "flightNumber": "BA 7026",
+        "departureAirport": "BER",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 13:30+01:00",
+        "arrivalTime": "2024-03-08 14:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 569,
+        "flightNumber": "LH 189",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 13:40+01:00",
+        "arrivalTime": "2024-03-08 14:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 570,
+        "flightNumber": "XQ 161",
+        "departureAirport": "BER",
+        "arrivalAirport": "AYT",
+        "departureTime": "2024-03-08 13:25+01:00",
+        "arrivalTime": "2024-03-08 18:45+03:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 571,
+        "flightNumber": "FR 146",
+        "departureAirport": "BER",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-08 13:45+01:00",
+        "arrivalTime": "2024-03-08 14:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 573,
+        "flightNumber": "FR 216",
+        "departureAirport": "BER",
+        "arrivalAirport": "PMI",
+        "departureTime": "2024-03-08 13:55+01:00",
+        "arrivalTime": "2024-03-08 16:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 577,
+        "flightNumber": "BA 983",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 14:00+01:00",
+        "arrivalTime": "2024-03-08 15:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 580,
+        "flightNumber": "LH 191",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 14:40+01:00",
+        "arrivalTime": "2024-03-08 15:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 582,
+        "flightNumber": "KL 1778",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 14:35+01:00",
+        "arrivalTime": "2024-03-08 16:00+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 583,
+        "flightNumber": "KL 1826",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 14:30+01:00",
+        "arrivalTime": "2024-03-08 15:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 587,
+        "flightNumber": "BA 989",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 15:15+01:00",
+        "arrivalTime": "2024-03-08 16:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 591,
+        "flightNumber": "LH 193",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 15:40+01:00",
+        "arrivalTime": "2024-03-08 16:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 593,
+        "flightNumber": "FR 314",
+        "departureAirport": "BER",
+        "arrivalAirport": "OTP",
+        "departureTime": "2024-03-08 15:35+01:00",
+        "arrivalTime": "2024-03-08 18:45+02:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 597,
+        "flightNumber": "AF 1235",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 15:45+01:00",
+        "arrivalTime": "2024-03-08 17:35+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 604,
+        "flightNumber": "U2 5079",
+        "departureAirport": "BER",
+        "arrivalAirport": "FCO",
+        "departureTime": "2024-03-08 16:20+01:00",
+        "arrivalTime": "2024-03-08 18:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 609,
+        "flightNumber": "KL 1830",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 16:30+01:00",
+        "arrivalTime": "2024-03-08 17:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 613,
+        "flightNumber": "BA 8494",
+        "departureAirport": "BER",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 17:00+01:00",
+        "arrivalTime": "2024-03-08 17:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 624,
+        "flightNumber": "BA 995",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 17:45+01:00",
+        "arrivalTime": "2024-03-08 18:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 628,
+        "flightNumber": "LH 197",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 17:40+01:00",
+        "arrivalTime": "2024-03-08 18:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 630,
+        "flightNumber": "U2 8630",
+        "departureAirport": "BER",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 18:15+01:00",
+        "arrivalTime": "2024-03-08 19:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 631,
+        "flightNumber": "XQ 661",
+        "departureAirport": "BER",
+        "arrivalAirport": "AYT",
+        "departureTime": "2024-03-08 17:30+01:00",
+        "arrivalTime": "2024-03-08 22:50+03:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 633,
+        "flightNumber": "KL 1832",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 18:25+01:00",
+        "arrivalTime": "2024-03-08 19:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 634,
+        "flightNumber": "U2 5185",
+        "departureAirport": "BER",
+        "arrivalAirport": "GVA",
+        "departureTime": "2024-03-08 18:35+01:00",
+        "arrivalTime": "2024-03-08 20:20+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 641,
+        "flightNumber": "U2 5285",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 18:55+01:00",
+        "arrivalTime": "2024-03-08 20:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 647,
+        "flightNumber": "LH 199",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 18:40+01:00",
+        "arrivalTime": "2024-03-08 19:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 648,
+        "flightNumber": "EI 337",
+        "departureAirport": "BER",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 19:30+01:00",
+        "arrivalTime": "2024-03-08 21:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 650,
+        "flightNumber": "LH 201",
+        "departureAirport": "BER",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 19:40+01:00",
+        "arrivalTime": "2024-03-08 20:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 652,
+        "flightNumber": "BA 987",
+        "departureAirport": "BER",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 19:45+01:00",
+        "arrivalTime": "2024-03-08 20:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 662,
+        "flightNumber": "AF 1535",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 20:15+01:00",
+        "arrivalTime": "2024-03-08 22:05+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 668,
+        "flightNumber": "FR 134",
+        "departureAirport": "BER",
+        "arrivalAirport": "FCO",
+        "departureTime": "2024-03-08 20:45+01:00",
+        "arrivalTime": "2024-03-08 22:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 677,
+        "flightNumber": "FR 5419",
+        "departureAirport": "BER",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 21:15+01:00",
+        "arrivalTime": "2024-03-08 22:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 679,
+        "flightNumber": "FR 177",
+        "departureAirport": "BER",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-08 21:30+01:00",
+        "arrivalTime": "2024-03-08 22:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 680,
+        "flightNumber": "U2 2604",
+        "departureAirport": "BER",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-08 21:30+01:00",
+        "arrivalTime": "2024-03-08 22:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 682,
+        "flightNumber": "KL 1834",
+        "departureAirport": "BER",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 21:50+01:00",
+        "arrivalTime": "2024-03-08 23:20+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 683,
+        "flightNumber": "FR 2535",
+        "departureAirport": "BER",
+        "arrivalAirport": "KRK",
+        "departureTime": "2024-03-08 21:55+01:00",
+        "arrivalTime": "2024-03-08 23:10+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 684,
+        "flightNumber": "VY 1885",
+        "departureAirport": "BER",
+        "arrivalAirport": "BCN",
+        "departureTime": "2024-03-08 22:00+01:00",
+        "arrivalTime": "2024-03-09 00:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 685,
+        "flightNumber": "FR 110",
+        "departureAirport": "BER",
+        "arrivalAirport": "PMI",
+        "departureTime": "2024-03-08 22:30+01:00",
+        "arrivalTime": "2024-03-09 01:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 686,
+        "flightNumber": "U2 4634",
+        "departureAirport": "BER",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 21:25+01:00",
+        "arrivalTime": "2024-03-08 23:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 687,
+        "flightNumber": "U2 2934",
+        "departureAirport": "BER",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-08 21:40+01:00",
+        "arrivalTime": "2024-03-08 22:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 361,
+        "flightNumber": "KL 1470",
+        "departureAirport": "GLA",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 06:10+00:00",
+        "arrivalTime": "2024-03-08 08:50+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 362,
+        "flightNumber": "LS 177",
+        "departureAirport": "GLA",
+        "arrivalAirport": "ALC",
+        "departureTime": "2024-03-08 06:10+00:00",
+        "arrivalTime": "2024-03-08 10:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 363,
+        "flightNumber": "BA 8721",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 06:30+00:00",
+        "arrivalTime": "2024-03-08 08:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 364,
+        "flightNumber": "BA 1475",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 06:45+00:00",
+        "arrivalTime": "2024-03-08 08:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 365,
+        "flightNumber": "LS 135",
+        "departureAirport": "GLA",
+        "arrivalAirport": "FCO",
+        "departureTime": "2024-03-08 06:55+00:00",
+        "arrivalTime": "2024-03-08 11:05+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 366,
+        "flightNumber": "U2 401",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-08 06:55+00:00",
+        "arrivalTime": "2024-03-08 08:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 369,
+        "flightNumber": "U2 413",
+        "departureAirport": "GLA",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-08 07:15+00:00",
+        "arrivalTime": "2024-03-08 08:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 370,
+        "flightNumber": "U2 862",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 07:00+00:00",
+        "arrivalTime": "2024-03-08 08:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 373,
+        "flightNumber": "EI 3221",
+        "departureAirport": "GLA",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 08:20+00:00",
+        "arrivalTime": "2024-03-08 09:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 375,
+        "flightNumber": "BA 1477",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 08:45+00:00",
+        "arrivalTime": "2024-03-08 10:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 376,
+        "flightNumber": "FR 2522",
+        "departureAirport": "GLA",
+        "arrivalAirport": "ALC",
+        "departureTime": "2024-03-08 08:45+00:00",
+        "arrivalTime": "2024-03-08 12:50+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 377,
+        "flightNumber": "BA 1481",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 07:00+00:00",
+        "arrivalTime": "2024-03-08 08:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 379,
+        "flightNumber": "KL 1472",
+        "departureAirport": "GLA",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 09:05+00:00",
+        "arrivalTime": "2024-03-08 11:45+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 380,
+        "flightNumber": "LS 167",
+        "departureAirport": "GLA",
+        "arrivalAirport": "ACE",
+        "departureTime": "2024-03-08 09:30+00:00",
+        "arrivalTime": "2024-03-08 14:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 381,
+        "flightNumber": "U2 1598",
+        "departureAirport": "GLA",
+        "arrivalAirport": "GVA",
+        "departureTime": "2024-03-08 09:50+00:00",
+        "arrivalTime": "2024-03-08 13:05+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 382,
+        "flightNumber": "LS 189",
+        "departureAirport": "GLA",
+        "arrivalAirport": "PMI",
+        "departureTime": "2024-03-08 06:15+00:00",
+        "arrivalTime": "2024-03-08 10:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 383,
+        "flightNumber": "BA 1479",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 10:00+00:00",
+        "arrivalTime": "2024-03-08 11:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 386,
+        "flightNumber": "FR 5150",
+        "departureAirport": "GLA",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 07:40+00:00",
+        "arrivalTime": "2024-03-08 08:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 390,
+        "flightNumber": "LS 155",
+        "departureAirport": "GLA",
+        "arrivalAirport": "TFS",
+        "departureTime": "2024-03-08 08:45+00:00",
+        "arrivalTime": "2024-03-08 13:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 392,
+        "flightNumber": "BA 1499",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 11:45+00:00",
+        "arrivalTime": "2024-03-08 13:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 394,
+        "flightNumber": "EI 3225",
+        "departureAirport": "GLA",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 11:55+00:00",
+        "arrivalTime": "2024-03-08 13:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 396,
+        "flightNumber": "U2 403",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-08 10:50+00:00",
+        "arrivalTime": "2024-03-08 12:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 397,
+        "flightNumber": "U2 3173",
+        "departureAirport": "GLA",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 11:05+00:00",
+        "arrivalTime": "2024-03-08 13:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 398,
+        "flightNumber": "LS 133",
+        "departureAirport": "GLA",
+        "arrivalAirport": "AGP",
+        "departureTime": "2024-03-08 10:15+00:00",
+        "arrivalTime": "2024-03-08 14:35+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 400,
+        "flightNumber": "LH 961",
+        "departureAirport": "GLA",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 12:40+00:00",
+        "arrivalTime": "2024-03-08 15:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 401,
+        "flightNumber": "BA 1487",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 12:45+00:00",
+        "arrivalTime": "2024-03-08 14:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 404,
+        "flightNumber": "U2 4674",
+        "departureAirport": "GLA",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 13:20+00:00",
+        "arrivalTime": "2024-03-08 16:10+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 406,
+        "flightNumber": "BA 1483",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 13:55+00:00",
+        "arrivalTime": "2024-03-08 15:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 409,
+        "flightNumber": "U2 866",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 14:25+00:00",
+        "arrivalTime": "2024-03-08 15:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 410,
+        "flightNumber": "LS 113",
+        "departureAirport": "GLA",
+        "arrivalAirport": "KRK",
+        "departureTime": "2024-03-08 14:40+00:00",
+        "arrivalTime": "2024-03-08 18:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 412,
+        "flightNumber": "FI 431",
+        "departureAirport": "GLA",
+        "arrivalAirport": "KEF",
+        "departureTime": "2024-03-08 12:45+00:00",
+        "arrivalTime": "2024-03-08 15:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 413,
+        "flightNumber": "KL 1476",
+        "departureAirport": "GLA",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 13:25+00:00",
+        "arrivalTime": "2024-03-08 16:00+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 414,
+        "flightNumber": "BA 1489",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 16:10+00:00",
+        "arrivalTime": "2024-03-08 17:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 415,
+        "flightNumber": "BA 8725",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 16:15+00:00",
+        "arrivalTime": "2024-03-08 17:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 416,
+        "flightNumber": "U2 3103",
+        "departureAirport": "GLA",
+        "arrivalAirport": "AGP",
+        "departureTime": "2024-03-08 16:20+00:00",
+        "arrivalTime": "2024-03-08 20:35+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 419,
+        "flightNumber": "U2 206",
+        "departureAirport": "GLA",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-08 16:35+00:00",
+        "arrivalTime": "2024-03-08 17:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 420,
+        "flightNumber": "EI 3227",
+        "departureAirport": "GLA",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 16:45+00:00",
+        "arrivalTime": "2024-03-08 18:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 421,
+        "flightNumber": "U2 868",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 16:50+00:00",
+        "arrivalTime": "2024-03-08 18:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 423,
+        "flightNumber": "FR 5564",
+        "departureAirport": "GLA",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 17:05+00:00",
+        "arrivalTime": "2024-03-08 18:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 425,
+        "flightNumber": "U2 3111",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LPA",
+        "departureTime": "2024-03-08 12:05+00:00",
+        "arrivalTime": "2024-03-08 16:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 426,
+        "flightNumber": "BA 8727",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 17:20+00:00",
+        "arrivalTime": "2024-03-08 18:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 427,
+        "flightNumber": "BA 1493",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 17:25+00:00",
+        "arrivalTime": "2024-03-08 18:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 429,
+        "flightNumber": "U2 442",
+        "departureAirport": "GLA",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-08 15:40+00:00",
+        "arrivalTime": "2024-03-08 16:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 430,
+        "flightNumber": "BA 8729",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 18:55+00:00",
+        "arrivalTime": "2024-03-08 20:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 431,
+        "flightNumber": "U2 415",
+        "departureAirport": "GLA",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-08 19:15+00:00",
+        "arrivalTime": "2024-03-08 20:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 432,
+        "flightNumber": "KL 1478",
+        "departureAirport": "GLA",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 17:15+00:00",
+        "arrivalTime": "2024-03-08 19:50+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 433,
+        "flightNumber": "BA 1495",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 19:35+00:00",
+        "arrivalTime": "2024-03-08 20:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 435,
+        "flightNumber": "BA 8739",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 20:15+00:00",
+        "arrivalTime": "2024-03-08 21:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 436,
+        "flightNumber": "EI 3229",
+        "departureAirport": "GLA",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 20:15+00:00",
+        "arrivalTime": "2024-03-08 21:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 438,
+        "flightNumber": "BA 1497",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 20:30+00:00",
+        "arrivalTime": "2024-03-08 21:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 439,
+        "flightNumber": "U2 208",
+        "departureAirport": "GLA",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-08 20:30+00:00",
+        "arrivalTime": "2024-03-08 21:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 441,
+        "flightNumber": "U2 870",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 20:35+00:00",
+        "arrivalTime": "2024-03-08 22:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 442,
+        "flightNumber": "U2 654",
+        "departureAirport": "GLA",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-08 21:55+00:00",
+        "arrivalTime": "2024-03-08 23:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 443,
+        "flightNumber": "LS 103",
+        "departureAirport": "GLA",
+        "arrivalAirport": "FCO",
+        "departureTime": "2024-03-08 15:20+00:00",
+        "arrivalTime": "2024-03-08 19:30+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 444,
+        "flightNumber": "W4 3014",
+        "departureAirport": "GLA",
+        "arrivalAirport": "OTP",
+        "departureTime": "2024-03-08 22:30+00:00",
+        "arrivalTime": "2024-03-09 04:10+02:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 445,
+        "flightNumber": "U2 4676",
+        "departureAirport": "GLA",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 19:25+00:00",
+        "arrivalTime": "2024-03-08 22:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 446,
+        "flightNumber": "FR 5773",
+        "departureAirport": "GLA",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 22:15+00:00",
+        "arrivalTime": "2024-03-08 23:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 122,
+        "flightNumber": "LS 3915",
+        "departureAirport": "EDI",
+        "arrivalAirport": "FCO",
+        "departureTime": "2024-03-08 06:20+00:00",
+        "arrivalTime": "2024-03-08 10:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 124,
+        "flightNumber": "BA 1435",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 06:10+00:00",
+        "arrivalTime": "2024-03-08 07:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 125,
+        "flightNumber": "FR 6698",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LPA",
+        "departureTime": "2024-03-08 06:05+00:00",
+        "arrivalTime": "2024-03-08 10:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 126,
+        "flightNumber": "U2 3313",
+        "departureAirport": "EDI",
+        "arrivalAirport": "KRK",
+        "departureTime": "2024-03-08 06:20+00:00",
+        "arrivalTime": "2024-03-08 10:00+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 127,
+        "flightNumber": "U2 3291",
+        "departureAirport": "EDI",
+        "arrivalAirport": "GVA",
+        "departureTime": "2024-03-08 06:25+00:00",
+        "arrivalTime": "2024-03-08 09:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 129,
+        "flightNumber": "RK 597",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-08 06:35+00:00",
+        "arrivalTime": "2024-03-08 08:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 130,
+        "flightNumber": "LS 857",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AGP",
+        "departureTime": "2024-03-08 06:30+00:00",
+        "arrivalTime": "2024-03-08 10:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 131,
+        "flightNumber": "U2 309",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-08 06:30+00:00",
+        "arrivalTime": "2024-03-08 07:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 133,
+        "flightNumber": "FR 5580",
+        "departureAirport": "EDI",
+        "arrivalAirport": "ALC",
+        "departureTime": "2024-03-08 06:45+00:00",
+        "arrivalTime": "2024-03-08 10:50+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 134,
+        "flightNumber": "U2 3245",
+        "departureAirport": "EDI",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 06:55+00:00",
+        "arrivalTime": "2024-03-08 09:50+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 136,
+        "flightNumber": "BA 8711",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 07:00+00:00",
+        "arrivalTime": "2024-03-08 08:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 137,
+        "flightNumber": "BA 1443",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 07:35+00:00",
+        "arrivalTime": "2024-03-08 09:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 141,
+        "flightNumber": "BA 8713",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 07:30+00:00",
+        "arrivalTime": "2024-03-08 09:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 147,
+        "flightNumber": "U2 7836",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 08:25+00:00",
+        "arrivalTime": "2024-03-08 11:00+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 148,
+        "flightNumber": "BA 1439",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 08:30+00:00",
+        "arrivalTime": "2024-03-08 10:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 149,
+        "flightNumber": "U2 854",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 08:35+00:00",
+        "arrivalTime": "2024-03-08 10:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 150,
+        "flightNumber": "FR 5663",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AGP",
+        "departureTime": "2024-03-08 08:40+00:00",
+        "arrivalTime": "2024-03-08 13:00+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 151,
+        "flightNumber": "EI 3251",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 08:15+00:00",
+        "arrivalTime": "2024-03-08 09:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 152,
+        "flightNumber": "LS 727",
+        "departureAirport": "EDI",
+        "arrivalAirport": "TFS",
+        "departureTime": "2024-03-08 07:55+00:00",
+        "arrivalTime": "2024-03-08 12:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 153,
+        "flightNumber": "LS 705",
+        "departureAirport": "EDI",
+        "arrivalAirport": "ACE",
+        "departureTime": "2024-03-08 08:45+00:00",
+        "arrivalTime": "2024-03-08 13:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 156,
+        "flightNumber": "LS 715",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LPA",
+        "departureTime": "2024-03-08 08:45+00:00",
+        "arrivalTime": "2024-03-08 13:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 158,
+        "flightNumber": "U2 214",
+        "departureAirport": "EDI",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-08 08:50+00:00",
+        "arrivalTime": "2024-03-08 10:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 162,
+        "flightNumber": "LS 709",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AYT",
+        "departureTime": "2024-03-08 09:30+00:00",
+        "arrivalTime": "2024-03-08 17:15+03:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 163,
+        "flightNumber": "BA 1441",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 09:50+00:00",
+        "arrivalTime": "2024-03-08 11:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 164,
+        "flightNumber": "U2 3293",
+        "departureAirport": "EDI",
+        "arrivalAirport": "GVA",
+        "departureTime": "2024-03-08 09:55+00:00",
+        "arrivalTime": "2024-03-08 13:10+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 165,
+        "flightNumber": "KL 1278",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 09:15+00:00",
+        "arrivalTime": "2024-03-08 11:50+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 168,
+        "flightNumber": "RK 1274",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-08 10:15+00:00",
+        "arrivalTime": "2024-03-08 11:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 169,
+        "flightNumber": "U2 311",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-08 10:15+00:00",
+        "arrivalTime": "2024-03-08 11:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 171,
+        "flightNumber": "AF 1887",
+        "departureAirport": "EDI",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 06:00+00:00",
+        "arrivalTime": "2024-03-08 08:50+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 172,
+        "flightNumber": "U2 6566",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 10:25+00:00",
+        "arrivalTime": "2024-03-08 11:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 175,
+        "flightNumber": "KL 1276",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 05:50+00:00",
+        "arrivalTime": "2024-03-08 08:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 178,
+        "flightNumber": "FR 2969",
+        "departureAirport": "EDI",
+        "arrivalAirport": "TFS",
+        "departureTime": "2024-03-08 11:10+00:00",
+        "arrivalTime": "2024-03-08 15:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 179,
+        "flightNumber": "LH 965",
+        "departureAirport": "EDI",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 05:50+00:00",
+        "arrivalTime": "2024-03-08 08:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 182,
+        "flightNumber": "AF 1687",
+        "departureAirport": "EDI",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 11:25+00:00",
+        "arrivalTime": "2024-03-08 14:15+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 184,
+        "flightNumber": "EI 3253",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 11:40+00:00",
+        "arrivalTime": "2024-03-08 13:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 186,
+        "flightNumber": "RK 815",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 11:25+00:00",
+        "arrivalTime": "2024-03-08 12:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 187,
+        "flightNumber": "RK 813",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 05:45+00:00",
+        "arrivalTime": "2024-03-08 06:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 188,
+        "flightNumber": "BA 2217",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 11:50+00:00",
+        "arrivalTime": "2024-03-08 13:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 189,
+        "flightNumber": "BA 1457",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 11:55+00:00",
+        "arrivalTime": "2024-03-08 13:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 190,
+        "flightNumber": "U2 321",
+        "departureAirport": "EDI",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-08 07:00+00:00",
+        "arrivalTime": "2024-03-08 08:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 191,
+        "flightNumber": "FR 5683",
+        "departureAirport": "EDI",
+        "arrivalAirport": "FUE",
+        "departureTime": "2024-03-08 05:45+00:00",
+        "arrivalTime": "2024-03-08 10:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 192,
+        "flightNumber": "U2 301",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-08 07:00+00:00",
+        "arrivalTime": "2024-03-08 08:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 193,
+        "flightNumber": "FR 817",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 12:25+00:00",
+        "arrivalTime": "2024-03-08 13:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 194,
+        "flightNumber": "FR 5593",
+        "departureAirport": "EDI",
+        "arrivalAirport": "ACE",
+        "departureTime": "2024-03-08 12:20+00:00",
+        "arrivalTime": "2024-03-08 16:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 195,
+        "flightNumber": "BA 8705",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 12:50+00:00",
+        "arrivalTime": "2024-03-08 14:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 198,
+        "flightNumber": "LH 963",
+        "departureAirport": "EDI",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 12:40+00:00",
+        "arrivalTime": "2024-03-08 15:30+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 199,
+        "flightNumber": "BA 1433",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 12:55+00:00",
+        "arrivalTime": "2024-03-08 14:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 201,
+        "flightNumber": "U2 303",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-08 12:50+00:00",
+        "arrivalTime": "2024-03-08 14:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 202,
+        "flightNumber": "KL 1282",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 13:20+00:00",
+        "arrivalTime": "2024-03-08 15:55+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 203,
+        "flightNumber": "BA 1437",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 13:35+00:00",
+        "arrivalTime": "2024-03-08 15:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 204,
+        "flightNumber": "U2 3241",
+        "departureAirport": "EDI",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 13:15+00:00",
+        "arrivalTime": "2024-03-08 16:10+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 209,
+        "flightNumber": "U2 7838",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 13:50+00:00",
+        "arrivalTime": "2024-03-08 16:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 210,
+        "flightNumber": "U2 313",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-08 14:15+00:00",
+        "arrivalTime": "2024-03-08 15:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 216,
+        "flightNumber": "LS 751",
+        "departureAirport": "EDI",
+        "arrivalAirport": "TFS",
+        "departureTime": "2024-03-08 14:30+00:00",
+        "arrivalTime": "2024-03-08 19:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 217,
+        "flightNumber": "BA 1449",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 14:40+00:00",
+        "arrivalTime": "2024-03-08 16:05+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 218,
+        "flightNumber": "U2 216",
+        "departureAirport": "EDI",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-08 14:40+00:00",
+        "arrivalTime": "2024-03-08 15:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 222,
+        "flightNumber": "LS 717",
+        "departureAirport": "EDI",
+        "arrivalAirport": "PMI",
+        "departureTime": "2024-03-08 15:10+00:00",
+        "arrivalTime": "2024-03-08 19:05+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 223,
+        "flightNumber": "U2 810",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 15:00+00:00",
+        "arrivalTime": "2024-03-08 16:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 224,
+        "flightNumber": "BA 8707",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 15:55+00:00",
+        "arrivalTime": "2024-03-08 17:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 226,
+        "flightNumber": "U2 8877",
+        "departureAirport": "EDI",
+        "arrivalAirport": "FCO",
+        "departureTime": "2024-03-08 16:10+00:00",
+        "arrivalTime": "2024-03-08 20:05+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 228,
+        "flightNumber": "FR 5667",
+        "departureAirport": "EDI",
+        "arrivalAirport": "FAO",
+        "departureTime": "2024-03-08 16:35+00:00",
+        "arrivalTime": "2024-03-08 19:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 231,
+        "flightNumber": "U2 323",
+        "departureAirport": "EDI",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-08 16:20+00:00",
+        "arrivalTime": "2024-03-08 17:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 233,
+        "flightNumber": "U2 3295",
+        "departureAirport": "EDI",
+        "arrivalAirport": "GVA",
+        "departureTime": "2024-03-08 16:45+00:00",
+        "arrivalTime": "2024-03-08 20:00+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 235,
+        "flightNumber": "BA 1455",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 17:25+00:00",
+        "arrivalTime": "2024-03-08 18:50+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 236,
+        "flightNumber": "BA 8709",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LCY",
+        "departureTime": "2024-03-08 17:30+00:00",
+        "arrivalTime": "2024-03-08 19:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 238,
+        "flightNumber": "U2 3301",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 17:50+00:00",
+        "arrivalTime": "2024-03-08 20:25+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 239,
+        "flightNumber": "LH 1527",
+        "departureAirport": "EDI",
+        "arrivalAirport": "FRA",
+        "departureTime": "2024-03-08 17:55+00:00",
+        "arrivalTime": "2024-03-08 20:45+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 240,
+        "flightNumber": "FR 6624",
+        "departureAirport": "EDI",
+        "arrivalAirport": "KRK",
+        "departureTime": "2024-03-08 18:00+00:00",
+        "arrivalTime": "2024-03-08 21:40+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 243,
+        "flightNumber": "EI 3257",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 16:45+00:00",
+        "arrivalTime": "2024-03-08 18:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 245,
+        "flightNumber": "BA 1447",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 18:15+00:00",
+        "arrivalTime": "2024-03-08 19:40+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 246,
+        "flightNumber": "U2 305",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-08 18:15+00:00",
+        "arrivalTime": "2024-03-08 19:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 247,
+        "flightNumber": "U2 3243",
+        "departureAirport": "EDI",
+        "arrivalAirport": "CDG",
+        "departureTime": "2024-03-08 18:35+00:00",
+        "arrivalTime": "2024-03-08 21:30+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 248,
+        "flightNumber": "EI 3557",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 18:40+00:00",
+        "arrivalTime": "2024-03-08 20:00+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 250,
+        "flightNumber": "FR 841",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 16:40+00:00",
+        "arrivalTime": "2024-03-08 17:45+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 253,
+        "flightNumber": "U2 315",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-08 18:00+00:00",
+        "arrivalTime": "2024-03-08 19:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 254,
+        "flightNumber": "KL 1286",
+        "departureAirport": "EDI",
+        "arrivalAirport": "AMS",
+        "departureTime": "2024-03-08 17:00+00:00",
+        "arrivalTime": "2024-03-08 19:35+01:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 257,
+        "flightNumber": "U2 3201",
+        "departureAirport": "EDI",
+        "arrivalAirport": "TFS",
+        "departureTime": "2024-03-08 13:05+00:00",
+        "arrivalTime": "2024-03-08 17:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 258,
+        "flightNumber": "U2 814",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 19:10+00:00",
+        "arrivalTime": "2024-03-08 20:35+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 259,
+        "flightNumber": "U2 812",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 17:05+00:00",
+        "arrivalTime": "2024-03-08 18:30+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 260,
+        "flightNumber": "BA 1459",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureTime": "2024-03-08 19:30+00:00",
+        "arrivalTime": "2024-03-08 20:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 262,
+        "flightNumber": "U2 606",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LTN",
+        "departureTime": "2024-03-08 19:40+00:00",
+        "arrivalTime": "2024-03-08 20:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 263,
+        "flightNumber": "EI 3259",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 19:50+00:00",
+        "arrivalTime": "2024-03-08 21:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 265,
+        "flightNumber": "U2 317",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-08 19:55+00:00",
+        "arrivalTime": "2024-03-08 21:15+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 267,
+        "flightNumber": "RK 9816",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureTime": "2024-03-08 20:00+00:00",
+        "arrivalTime": "2024-03-08 21:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 269,
+        "flightNumber": "U2 816",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LGW",
+        "departureTime": "2024-03-08 20:45+00:00",
+        "arrivalTime": "2024-03-08 22:10+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 270,
+        "flightNumber": "FR 851",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 20:50+00:00",
+        "arrivalTime": "2024-03-08 21:55+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 271,
+        "flightNumber": "U2 220",
+        "departureAirport": "EDI",
+        "arrivalAirport": "BRS",
+        "departureTime": "2024-03-08 21:05+00:00",
+        "arrivalTime": "2024-03-08 22:20+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 272,
+        "flightNumber": "FR 819",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureTime": "2024-03-08 21:20+00:00",
+        "arrivalTime": "2024-03-08 22:25+00:00",
+        "direction": "Departure"
+    },
+    {
+        "id": 273,
+        "flightNumber": "FR 6266",
+        "departureAirport": "EDI",
+        "arrivalAirport": "BCN",
+        "departureTime": "2024-03-08 21:35+00:00",
+        "arrivalTime": "2024-03-09 01:15+01:00",
+        "direction": "Departure"
+    }
+]
