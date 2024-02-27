@@ -1,73 +1,70 @@
-# Flight Data Fetcher
+# Flight Data Fetcher 
 
-The Flight Data Fetcher is a powerful command-line tool designed to retrieve and store flight information based on user-specified parameters such as flight direction, airport, and date. Utilizing data from Aerodatabox via RapidAPI, this application efficiently captures both arrival and departure details, storing them in a local SQLite database for easy access and analysis.
+This Go program fetches flight data based on configurations specified in a YAML file and stores this information in a SQLite database. The application targets the Aerodatabox API to retrieve flight information for specified airports, dates, and directions (arrivals or departures). This README provides an overview of the application, including setup instructions, usage, and an explanation of its components.
 
-## Features
+## Setup Instructions
 
-- **Flight Direction**: Users can specify the flight direction to fetch data for either arrivals or departures.
-- **Airport Selection**: Allows users to input IATA airport codes to target specific airports.
-- **Date Specification**: Users can define the date for which they wish to retrieve flight data, using the DD-MM-YYYY format.
-- **Local Database Storage**: Retrieved flight information is stored in a SQLite database, enabling easy data management and retrieval.
-- **Flexible Time Intervals**: The program is designed to fetch data in AM and PM intervals, ensuring comprehensive coverage of daily flights.
+### Prerequisites
 
-## Requirements
+- Go (version 1.13 or higher)
+- SQLite3
+- An Aerodatabox API key
 
-- Go programming language setup
-- SQLite3 for database operations
-- Access to Aerodatabox API via RapidAPI (requires an API key)
+### Steps
 
-## Setup and Installation
+1. **Clone the Repository**: Clone or download the source code to your local machine.
 
-1. **Install Go**: Ensure that Go is installed on your system. Visit the [official Go website](https://golang.org/dl/) for installation instructions.
-2. **SQLite3**: Verify that SQLite3 is installed. If not, follow the [SQLite3 installation guide](https://www.sqlite.org/download.html).
-3. **API Key**: Obtain an Aerodatabox API key by creating an account on [RapidAPI](https://rapidapi.com/) and subscribing to the Aerodatabox API.
+2. **Obtain an Aerodatabox API Key**: Sign up at Aerodatabox's website and obtain an API key. You will need this to fetch flight data.
 
-## Configuration
+3. **Configure API Key**: Store your Aerodatabox API key in a `secrets.yaml` file located outside your project directory to avoid accidentally committing it to version control. The file should follow this structure:
 
-Before running the application, you must configure your API key:
-1. Create a YAML file named `secrets.yaml` in an accessible location.
-2. Add your Aerodatabox API key to the file as follows:
+   ```yaml
+   api_keys:
+     aerodatabox: YOUR_AERODATABOX_API_KEY
+   ```
 
-```yaml
-api_keys:
-  aerodatabox: YOUR_API_KEY_HERE
-```
+4. **Install Dependencies**: Install the required Go packages by running `go get` inside your project directory.
+
+5. **Build the Application**: Compile the application using `go build` to generate an executable.
 
 ## Usage
 
-To use the Flight Data Fetcher, navigate to the directory containing the program and run it using the command line. The following flags are available:
+### Configuration File
 
-- `-direction`: Specify "Arrival" or "Departure" to fetch respective flight data.
-- `-airport`: Enter the IATA code of the target airport.
-- `-date`: Specify the date for fetching flight data in the DD-MM-YYYY format.
+Create a `fetch-these-flights.yaml` configuration file to specify the flights you want to fetch. The file should follow this format:
 
-Example command:
-
-```sh
-go run main.go -direction Departure -airport EDI -date 27-02-2024
+```yaml
+flights:
+  - direction: "Departure"
+    airport: "BER"
+    startDate: "27-03-2024"
+    endDate: "29-03-2024"
+  - direction: "Arrival"
+    airport: "BER"
+    startDate: "01-04-2024"
+    endDate: "03-04-2024"
 ```
 
-This command fetches and stores departure data for Edinburgh Airport (EDI) on February 27, 2024.
+### Running the Application
 
-## Database Schema
+Execute the compiled program. Ensure the configuration file `fetch-these-flights.yaml` is in the same directory as the executable or provide the path to it. The application reads the configuration, fetches the flight data for the specified periods and directions, and stores the data in a SQLite database named `flights.db`.
 
-The SQLite database, `flights.db`, contains a single table named `flights` with the following columns:
-- `id`: Primary key.
-- `flightNumber`: Flight number.
-- `departureAirport`: Departure airport IATA code.
-- `arrivalAirport`: Arrival airport IATA code.
-- `departureTime`: Scheduled departure time.
-- `arrivalTime`: Scheduled arrival time.
-- `direction`: Flight direction ("Arrival" or "Departure").
+## Components
 
-## License
+### Main Application (`main.go`)
 
-This project is open-source and available under the [MIT License](https://opensource.org/licenses/MIT).
+- **API Key Reading**: Reads the Aerodatabox API key from the `secrets.yaml` file.
+- **Flight Data Fetching**: Fetches flight data from the Aerodatabox API based on the configurations specified in the `fetch-these-flights.yaml` file.
+- **Database Interaction**: Creates a SQLite database (if not existing) and stores fetched flight data for future reference.
 
-## Disclaimer
+### Configuration File (`fetch-these-flights.yaml`)
 
-This tool is for educational and informational purposes only. Please adhere to the Aerodatabox API's terms of use when fetching flight data.
+Specifies the flights for which data should be fetched, including direction, airport code, and date ranges.
 
----
+### SQLite Database (`flights.db`)
 
-Enjoy retrieving and analyzing flight data with ease and precision using the Flight Data Fetcher!
+Stores flight information retrieved from the Aerodatabox API, including flight numbers, departure and arrival airports, and times.
+
+## Final Note
+
+This application provides a straightforward way to fetch and store flight data for specified dates and airports. It can be modified or extended to include more detailed flight information or to interact with other APIs.njoy retrieving and analyzing flight data with ease and precision using the Flight Data Fetcher!
