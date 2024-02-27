@@ -62,7 +62,7 @@ func main() {
 	)
 	flag.Parse()
 
-	apiKey, err := readAPIKey("../../../../ignore/secrets.yaml")
+	apiKey, err := readAPIKey("../../../../../ignore/secrets.yaml")
 	if err != nil {
 		fmt.Println("Error reading API key:", err)
 		return
