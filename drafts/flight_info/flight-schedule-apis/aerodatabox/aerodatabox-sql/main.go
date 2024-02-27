@@ -10,7 +10,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strings"
+  "time"
 )
 
 // Secrets struct to match the YAML structure
@@ -19,6 +19,19 @@ type Secrets struct {
 		Aerodatabox string `yaml:"aerodatabox"`
 	} `yaml:"api_keys"`
 }
+
+// FlightConfig and Configs structs to handle a date range
+type FlightConfig struct {
+    Direction string `yaml:"direction"`
+    Airport   string `yaml:"airport"`
+    StartDate string `yaml:"startDate"`
+    EndDate   string `yaml:"endDate"`
+}
+
+type Configs struct {
+    Flights []FlightConfig `yaml:"flights"`
+}
+
 
 // FlightData structs to match the JSON structure
 type ArrivalData struct {
@@ -105,10 +118,23 @@ func fetchFlightData(url, apiKey string) ([]byte, error) {
 }
 
 func main() {
-	direction := flag.String("direction", "Departure", "Flight direction: Departure or Arrival")
-	airport := flag.String("airport", "EDI", "IATA airport code")
-	date := flag.String("date", "27-02-2024", "Date in DD-MM-YYYY format")
+	//direction := flag.String("direction", "Departure", "Flight direction: Departure or Arrival")
+	//airport := flag.String("airport", "EDI", "IATA airport code")
+//	date := flag.String("date", "27-02-2024", "Date in DD-MM-YYYY format")
 	flag.Parse()
+
+// Load configurations from YAML
+    var configs Configs
+    configFile, err := ioutil.ReadFile("fetch-these-flights.yaml")
+    if err != nil {
+        log.Fatalf("Error reading config file: %v", err)
+    }
+    err = yaml.Unmarshal(configFile, &configs)
+    if err != nil {
+        log.Fatalf("Error parsing config file: %v", err)
+    }
+
+
 
 	apiKey, err := readAPIKey("../../../../../ignore/secrets.yaml")
 	if err != nil {
@@ -136,12 +162,27 @@ func main() {
 		log.Fatalf("Error creating table: %v", err)
 	}
 
-	dateParts := strings.Split(*date, "-")
-	if len(dateParts) != 3 {
-		fmt.Println("Invalid date format. Please use DD-MM-YYYY.")
-		return
-	}
-	dateFormatted := fmt.Sprintf("%s-%s-%s", dateParts[2], dateParts[1], dateParts[0])
+
+    for _, flight := range configs.Flights {
+        // Convert start and end dates to time.Time
+        startDate, err := time.Parse("02-01-2006", flight.StartDate)
+        if err != nil {
+            log.Fatalf("Error parsing start date: %v", err)
+        }
+        endDate, err := time.Parse("02-01-2006", flight.EndDate)
+        if err != nil {
+            log.Fatalf("Error parsing end date: %v", err)
+        }
+
+        // Iterate over each day in the date range
+        for d := startDate; !d.After(endDate); d = d.AddDate(0, 0, 1) {
+            dateFormatted := d.Format("2006-01-02")
+//	dateParts := strings.Split(*date, "-")
+//	if len(dateParts) != 3 {
+//		fmt.Println("Invalid date format. Please use DD-MM-YYYY.")
+//		return
+//	}
+//	dateFormatted := fmt.Sprintf("%s-%s-%s", dateParts[2], dateParts[1], dateParts[0])
 
 	intervals := []struct {
 		urlSuffix  string
@@ -152,13 +193,13 @@ func main() {
 	}
 
 	for _, interval := range intervals {
-		url := fmt.Sprintf("https://aerodatabox.p.rapidapi.com/flights/airports/iata/%s/%s"+interval.urlSuffix+"?withLeg=true&direction=%s&withCancelled=true&withCodeshared=true&withLocation=false", *airport, dateFormatted, dateFormatted, *direction)
+		url := fmt.Sprintf("https://aerodatabox.p.rapidapi.com/flights/airports/iata/%s/%s"+interval.urlSuffix+"?withLeg=true&direction=%s&withCancelled=true&withCodeshared=true&withLocation=false", flight.Airport, dateFormatted, dateFormatted, flight.Direction)
 		data, err := fetchFlightData(url, apiKey)
 		if err != nil {
 			log.Fatalf("Error fetching flight data: %v", err)
 		}
 
-		if *direction == "Arrival" {
+		if flight.Direction == "Arrival" {
 			var arrivals ArrivalData
 			err = json.Unmarshal(data, &arrivals)
 			if err != nil {
@@ -167,7 +208,7 @@ func main() {
 
 			for _, arrival := range arrivals.Arrivals {
 				_, err = db.Exec("INSERT INTO flights (flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
-					arrival.Number, arrival.Departure.Airport.IATA, *airport, arrival.Departure.ScheduledTime.Local, arrival.Arrival.ScheduledTime.Local, "Arrival")
+					arrival.Number, arrival.Departure.Airport.IATA, flight.Airport, arrival.Departure.ScheduledTime.Local, arrival.Arrival.ScheduledTime.Local, "Arrival")
 				if err != nil {
 					log.Printf("Error inserting arrival into database: %v", err)
 				}
@@ -181,12 +222,14 @@ func main() {
 
 			for _, departure := range departures.Departures {
 				_, err = db.Exec("INSERT INTO flights (flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
-					departure.Number, *airport, departure.Arrival.Airport.IATA, departure.Departure.ScheduledTime.Local, departure.Arrival.ScheduledTime.Local, "Departure")
+					departure.Number, flight.Airport, departure.Arrival.Airport.IATA, departure.Departure.ScheduledTime.Local, departure.Arrival.ScheduledTime.Local, "Departure")
 				if err != nil {
 					log.Printf("Error inserting departure into database: %v", err)
 				}
 			}
 		}
 	}
+}
+}
 	fmt.Println("Flight data successfully fetched and stored.")
 }
