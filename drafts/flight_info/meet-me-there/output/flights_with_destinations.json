@@ -37,6 +37,24 @@
       "direction": "Departure"
     },
     {
+      "id": 693,
+      "flightNumber": "U2 5077",
+      "departureAirport": "BER",
+      "arrivalAirport": "CTA",
+      "departureTime": "2024-03-07 06:45+01:00",
+      "arrivalTime": "2024-03-07 09:30+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 694,
+      "flightNumber": "EW 6893",
+      "departureAirport": "BER",
+      "arrivalAirport": "",
+      "departureTime": "2024-03-07 07:05+01:00",
+      "arrivalTime": "",
+      "direction": "Departure"
+    },
+    {
       "id": 695,
       "flightNumber": "AF 1135",
       "departureAirport": "BER",
@@ -172,6 +190,15 @@
       "direction": "Departure"
     },
     {
+      "id": 711,
+      "flightNumber": "FR 8524",
+      "departureAirport": "BER",
+      "arrivalAirport": "OTP",
+      "departureTime": "2024-03-07 06:00+01:00",
+      "arrivalTime": "2024-03-07 09:10+02:00",
+      "direction": "Departure"
+    },
+    {
       "id": 712,
       "flightNumber": "FR 234",
       "departureAirport": "BER",
@@ -280,6 +307,15 @@
       "direction": "Departure"
     },
     {
+      "id": 729,
+      "flightNumber": "U2 4874",
+      "departureAirport": "BER",
+      "arrivalAirport": "ORY",
+      "departureTime": "2024-03-07 09:10+01:00",
+      "arrivalTime": "2024-03-07 11:00+01:00",
+      "direction": "Departure"
+    },
+    {
       "id": 731,
       "flightNumber": "DY 1103",
       "departureAirport": "BER",
@@ -313,6 +349,15 @@
       "arrivalAirport": "FRA",
       "departureTime": "2024-03-07 09:40+01:00",
       "arrivalTime": "2024-03-07 10:55+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 735,
+      "flightNumber": "U2 5145",
+      "departureAirport": "BER",
+      "arrivalAirport": "NCE",
+      "departureTime": "2024-03-07 09:30+01:00",
+      "arrivalTime": "2024-03-07 11:35+01:00",
       "direction": "Departure"
     },
     {
@@ -487,6 +532,15 @@
       "direction": "Departure"
     },
     {
+      "id": 759,
+      "flightNumber": "5F 612",
+      "departureAirport": "BER",
+      "arrivalAirport": "",
+      "departureTime": "2024-03-07 11:50+01:00",
+      "arrivalTime": "",
+      "direction": "Departure"
+    },
+    {
       "id": 760,
       "flightNumber": "IB 3677",
       "departureAirport": "BER",
@@ -658,6 +712,15 @@
       "direction": "Departure"
     },
     {
+      "id": 780,
+      "flightNumber": "DY 1161",
+      "departureAirport": "BER",
+      "arrivalAirport": "BGO",
+      "departureTime": "2024-03-07 12:25+01:00",
+      "arrivalTime": "2024-03-07 14:15+01:00",
+      "direction": "Departure"
+    },
+    {
       "id": 782,
       "flightNumber": "D8 4506",
       "departureAirport": "BER",
@@ -754,6 +817,15 @@
       "arrivalAirport": "FRA",
       "departureTime": "2024-03-07 13:40+01:00",
       "arrivalTime": "2024-03-07 14:55+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 794,
+      "flightNumber": "U2 5375",
+      "departureAirport": "BER",
+      "arrivalAirport": "LCA",
+      "departureTime": "2024-03-07 13:55+01:00",
+      "arrivalTime": "2024-03-07 18:40+02:00",
       "direction": "Departure"
     },
     {
@@ -883,6 +955,15 @@
       "direction": "Departure"
     },
     {
+      "id": 815,
+      "flightNumber": "FR 138",
+      "departureAirport": "BER",
+      "arrivalAirport": "VLC",
+      "departureTime": "2024-03-07 15:20+01:00",
+      "arrivalTime": "2024-03-07 18:20+01:00",
+      "direction": "Departure"
+    },
+    {
       "id": 816,
       "flightNumber": "OS 230",
       "departureAirport": "BER",
@@ -937,6 +1018,15 @@
       "direction": "Departure"
     },
     {
+      "id": 822,
+      "flightNumber": "EW 8220",
+      "departureAirport": "BER",
+      "arrivalAirport": "GOT",
+      "departureTime": "2024-03-07 15:40+01:00",
+      "arrivalTime": "2024-03-07 16:55+01:00",
+      "direction": "Departure"
+    },
+    {
       "id": 824,
       "flightNumber": "AF 1235",
       "departureAirport": "BER",
@@ -952,6 +1042,15 @@
       "arrivalAirport": "CDG",
       "departureTime": "2024-03-07 15:40+01:00",
       "arrivalTime": "2024-03-07 17:30+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 827,
+      "flightNumber": "FR 2130",
+      "departureAirport": "BER",
+      "arrivalAirport": "SOF",
+      "departureTime": "2024-03-07 15:45+01:00",
+      "arrivalTime": "2024-03-07 19:00+02:00",
       "direction": "Departure"
     },
     {
@@ -1495,12 +1594,48 @@
       "direction": "Departure"
     },
     {
+      "id": 903,
+      "flightNumber": "TO 3409",
+      "departureAirport": "BER",
+      "arrivalAirport": "ORY",
+      "departureTime": "2024-03-07 20:50+01:00",
+      "arrivalTime": "2024-03-07 22:45+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 905,
+      "flightNumber": "U2 4876",
+      "departureAirport": "BER",
+      "arrivalAirport": "ORY",
+      "departureTime": "2024-03-07 20:20+01:00",
+      "arrivalTime": "2024-03-07 22:10+01:00",
+      "direction": "Departure"
+    },
+    {
       "id": 1,
       "flightNumber": "RK 813",
       "departureAirport": "EDI",
       "arrivalAirport": "DUB",
       "departureTime": "2024-03-07 06:00+00:00",
       "arrivalTime": "2024-03-07 07:05+00:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 2,
+      "flightNumber": "FR 5579",
+      "departureAirport": "EDI",
+      "arrivalAirport": "ALC",
+      "departureTime": "2024-03-07 06:05+00:00",
+      "arrivalTime": "2024-03-07 10:10+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 3,
+      "flightNumber": "U2 3205",
+      "departureAirport": "EDI",
+      "arrivalAirport": "ALC",
+      "departureTime": "2024-03-07 06:10+00:00",
+      "arrivalTime": "2024-03-07 10:20+01:00",
       "direction": "Departure"
     },
     {
@@ -1753,6 +1888,15 @@
       "arrivalAirport": "EWR",
       "departureTime": "2024-03-07 09:25+00:00",
       "arrivalTime": "2024-03-07 12:25-05:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 40,
+      "flightNumber": "LS 775",
+      "departureAirport": "EDI",
+      "arrivalAirport": "ALC",
+      "departureTime": "2024-03-07 09:30+00:00",
+      "arrivalTime": "2024-03-07 13:45+01:00",
       "direction": "Departure"
     },
     {
@@ -2485,6 +2629,24 @@
       "direction": "Departure"
     },
     {
+      "id": 470,
+      "flightNumber": "FR 353",
+      "departureAirport": "BER",
+      "arrivalAirport": "PFO",
+      "departureTime": "2024-03-08 06:20+01:00",
+      "arrivalTime": "2024-03-08 10:55+02:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 471,
+      "flightNumber": "FR 351",
+      "departureAirport": "BER",
+      "arrivalAirport": "RHO",
+      "departureTime": "2024-03-08 06:05+01:00",
+      "arrivalTime": "2024-03-08 10:15+02:00",
+      "direction": "Departure"
+    },
+    {
       "id": 472,
       "flightNumber": "EW 8590",
       "departureAirport": "BER",
@@ -2518,6 +2680,15 @@
       "arrivalAirport": "BRU",
       "departureTime": "2024-03-08 06:05+01:00",
       "arrivalTime": "2024-03-08 07:30+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 476,
+      "flightNumber": "FR 136",
+      "departureAirport": "BER",
+      "arrivalAirport": "BLQ",
+      "departureTime": "2024-03-08 08:05+01:00",
+      "arrivalTime": "2024-03-08 09:45+01:00",
       "direction": "Departure"
     },
     {
@@ -2602,12 +2773,39 @@
       "direction": "Departure"
     },
     {
+      "id": 488,
+      "flightNumber": "W4 6612",
+      "departureAirport": "BER",
+      "arrivalAirport": "TIA",
+      "departureTime": "2024-03-08 09:05+01:00",
+      "arrivalTime": "2024-03-08 11:20+01:00",
+      "direction": "Departure"
+    },
+    {
       "id": 490,
       "flightNumber": "FR 144",
       "departureAirport": "BER",
       "arrivalAirport": "STN",
       "departureTime": "2024-03-08 09:35+01:00",
       "arrivalTime": "2024-03-08 10:25+00:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 491,
+      "flightNumber": "U2 4874",
+      "departureAirport": "BER",
+      "arrivalAirport": "ORY",
+      "departureTime": "2024-03-08 09:00+01:00",
+      "arrivalTime": "2024-03-08 10:50+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 493,
+      "flightNumber": "U2 5145",
+      "departureAirport": "BER",
+      "arrivalAirport": "NCE",
+      "departureTime": "2024-03-08 09:30+01:00",
+      "arrivalTime": "2024-03-08 11:35+01:00",
       "direction": "Departure"
     },
     {
@@ -2725,6 +2923,15 @@
       "arrivalAirport": "RIX",
       "departureTime": "2024-03-08 10:35+01:00",
       "arrivalTime": "2024-03-08 13:15+02:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 508,
+      "flightNumber": "FR 5474",
+      "departureAirport": "BER",
+      "arrivalAirport": "RAK",
+      "departureTime": "2024-03-08 10:40+01:00",
+      "arrivalTime": "2024-03-08 15:00+01:00",
       "direction": "Departure"
     },
     {
@@ -2971,6 +3178,15 @@
       "direction": "Departure"
     },
     {
+      "id": 539,
+      "flightNumber": "U2 5333",
+      "departureAirport": "BER",
+      "arrivalAirport": "FNC",
+      "departureTime": "2024-03-08 10:00+01:00",
+      "arrivalTime": "2024-03-08 13:45+00:00",
+      "direction": "Departure"
+    },
+    {
       "id": 541,
       "flightNumber": "PC 5008",
       "departureAirport": "BER",
@@ -3022,6 +3238,15 @@
       "arrivalAirport": "BCN",
       "departureTime": "2024-03-08 12:15+01:00",
       "arrivalTime": "2024-03-08 14:50+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 547,
+      "flightNumber": "FR 9956",
+      "departureAirport": "BER",
+      "arrivalAirport": "PSA",
+      "departureTime": "2024-03-08 12:30+01:00",
+      "arrivalTime": "2024-03-08 14:25+01:00",
       "direction": "Departure"
     },
     {
@@ -3097,6 +3322,15 @@
       "direction": "Departure"
     },
     {
+      "id": 558,
+      "flightNumber": "FR 3309",
+      "departureAirport": "BER",
+      "arrivalAirport": "BRI",
+      "departureTime": "2024-03-08 12:50+01:00",
+      "arrivalTime": "2024-03-08 15:00+01:00",
+      "direction": "Departure"
+    },
+    {
       "id": 559,
       "flightNumber": "LH 2207",
       "departureAirport": "BER",
@@ -3139,6 +3373,15 @@
       "arrivalAirport": "LCY",
       "departureTime": "2024-03-08 13:30+01:00",
       "arrivalTime": "2024-03-08 14:25+00:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 566,
+      "flightNumber": "EW 8220",
+      "departureAirport": "BER",
+      "arrivalAirport": "GOT",
+      "departureTime": "2024-03-08 13:25+01:00",
+      "arrivalTime": "2024-03-08 14:40+01:00",
       "direction": "Departure"
     },
     {
@@ -3313,12 +3556,30 @@
       "direction": "Departure"
     },
     {
+      "id": 593,
+      "flightNumber": "FR 314",
+      "departureAirport": "BER",
+      "arrivalAirport": "OTP",
+      "departureTime": "2024-03-08 15:35+01:00",
+      "arrivalTime": "2024-03-08 18:45+02:00",
+      "direction": "Departure"
+    },
+    {
       "id": 595,
       "flightNumber": "LH 1941",
       "departureAirport": "BER",
       "arrivalAirport": "MUC",
       "departureTime": "2024-03-08 15:45+01:00",
       "arrivalTime": "2024-03-08 16:55+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 596,
+      "flightNumber": "U2 5103",
+      "departureAirport": "BER",
+      "arrivalAirport": "VLC",
+      "departureTime": "2024-03-08 15:45+01:00",
+      "arrivalTime": "2024-03-08 18:45+01:00",
       "direction": "Departure"
     },
     {
@@ -3337,6 +3598,15 @@
       "arrivalAirport": "CPH",
       "departureTime": "2024-03-08 15:55+01:00",
       "arrivalTime": "2024-03-08 16:55+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 600,
+      "flightNumber": "FB 320",
+      "departureAirport": "BER",
+      "arrivalAirport": "SOF",
+      "departureTime": "2024-03-08 16:20+01:00",
+      "arrivalTime": "2024-03-08 19:25+02:00",
       "direction": "Departure"
     },
     {
@@ -3373,6 +3643,24 @@
       "arrivalAirport": "CGN",
       "departureTime": "2024-03-08 16:40+01:00",
       "arrivalTime": "2024-03-08 17:50+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 607,
+      "flightNumber": "TO 3405",
+      "departureAirport": "BER",
+      "arrivalAirport": "ORY",
+      "departureTime": "2024-03-08 16:30+01:00",
+      "arrivalTime": "2024-03-08 18:25+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 608,
+      "flightNumber": "FR 1576",
+      "departureAirport": "BER",
+      "arrivalAirport": "CTA",
+      "departureTime": "2024-03-08 16:35+01:00",
+      "arrivalTime": "2024-03-08 19:20+01:00",
       "direction": "Departure"
     },
     {
@@ -3457,6 +3745,15 @@
       "direction": "Departure"
     },
     {
+      "id": 621,
+      "flightNumber": "FR 3388",
+      "departureAirport": "BER",
+      "arrivalAirport": "MRS",
+      "departureTime": "2024-03-08 17:15+01:00",
+      "arrivalTime": "2024-03-08 19:25+01:00",
+      "direction": "Departure"
+    },
+    {
       "id": 623,
       "flightNumber": "EW 4601",
       "departureAirport": "BER",
@@ -3484,12 +3781,30 @@
       "direction": "Departure"
     },
     {
+      "id": 627,
+      "flightNumber": "FR 1148",
+      "departureAirport": "BER",
+      "arrivalAirport": "SOF",
+      "departureTime": "2024-03-08 18:05+01:00",
+      "arrivalTime": "2024-03-08 21:20+02:00",
+      "direction": "Departure"
+    },
+    {
       "id": 628,
       "flightNumber": "LH 197",
       "departureAirport": "BER",
       "arrivalAirport": "FRA",
       "departureTime": "2024-03-08 17:40+01:00",
       "arrivalTime": "2024-03-08 18:55+01:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 629,
+      "flightNumber": "U2 5377",
+      "departureAirport": "BER",
+      "arrivalAirport": "PSA",
+      "departureTime": "2024-03-08 18:00+01:00",
+      "arrivalTime": "2024-03-08 20:00+01:00",
       "direction": "Departure"
     },
     {
@@ -3835,6 +4150,15 @@
       "direction": "Departure"
     },
     {
+      "id": 678,
+      "flightNumber": "U2 4876",
+      "departureAirport": "BER",
+      "arrivalAirport": "ORY",
+      "departureTime": "2024-03-08 20:25+01:00",
+      "arrivalTime": "2024-03-08 22:15+01:00",
+      "direction": "Departure"
+    },
+    {
       "id": 679,
       "flightNumber": "FR 177",
       "departureAirport": "BER",
@@ -3976,6 +4300,15 @@
       "arrivalAirport": "STN",
       "departureTime": "2024-03-08 06:30+00:00",
       "arrivalTime": "2024-03-08 07:50+00:00",
+      "direction": "Departure"
+    },
+    {
+      "id": 133,
+      "flightNumber": "FR 5580",
+      "departureAirport": "EDI",
+      "arrivalAirport": "ALC",
+      "departureTime": "2024-03-08 06:45+00:00",
+      "arrivalTime": "2024-03-08 10:50+01:00",
       "direction": "Departure"
     },
     {
@@ -4591,6 +4924,15 @@
       "direction": "Departure"
     },
     {
+      "id": 227,
+      "flightNumber": "FR 6695",
+      "departureAirport": "EDI",
+      "arrivalAirport": "MLA",
+      "departureTime": "2024-03-08 16:10+00:00",
+      "arrivalTime": "2024-03-08 20:55+01:00",
+      "direction": "Departure"
+    },
+    {
       "id": 228,
       "flightNumber": "FR 5667",
       "departureAirport": "EDI",
@@ -4890,184 +5232,264 @@
   ],
   "destinations": [
     {
-      "iata": "HRG",
-      "municipality": "Hurghada"
+      "IATA_code": "CGN",
+      "city_name": "Cologne"
     },
     {
-      "iata": "LYS",
-      "municipality": "Lyon"
+      "IATA_code": "CPH",
+      "city_name": "Copenhagen"
     },
     {
-      "iata": "KRK",
-      "municipality": "KrakÃ³w"
+      "IATA_code": "OTP",
+      "city_name": "Bucharest"
     },
     {
-      "iata": "CDG",
-      "municipality": "Paris"
+      "IATA_code": "BSL",
+      "city_name": "BÃ¢le/Mulhouse"
     },
     {
-      "iata": "BSL",
-      "municipality": "BÃ¢le/Mulhouse"
+      "IATA_code": "RIX",
+      "city_name": "Riga"
     },
     {
-      "iata": "ZRH",
-      "municipality": "Zurich"
+      "IATA_code": "FCO",
+      "city_name": "Rome"
     },
     {
-      "iata": "EWR",
-      "municipality": "Newark"
+      "IATA_code": "DUS",
+      "city_name": "DÃ¼sseldorf"
     },
     {
-      "iata": "ARN",
-      "municipality": "Stockholm"
+      "IATA_code": "VCE",
+      "city_name": "Venice"
     },
     {
-      "iata": "FAO",
-      "municipality": "Faro"
+      "IATA_code": "EWR",
+      "city_name": "Newark"
     },
     {
-      "iata": "IST",
-      "municipality": "Istanbul"
+      "IATA_code": "AMS",
+      "city_name": "Amsterdam"
     },
     {
-      "iata": "LPA",
-      "municipality": "Gran Canaria Island"
+      "IATA_code": "VIE",
+      "city_name": "Vienna"
     },
     {
-      "iata": "BRU",
-      "municipality": "Brussels"
+      "IATA_code": "OSL",
+      "city_name": "Oslo"
     },
     {
-      "iata": "DOH",
-      "municipality": "Doha"
+      "IATA_code": "MRS",
+      "city_name": "Marseille"
     },
     {
-      "iata": "OPO",
-      "municipality": "Porto"
+      "IATA_code": "GVA",
+      "city_name": "Geneva"
     },
     {
-      "iata": "BUD",
-      "municipality": "Budapest"
+      "IATA_code": "AYT",
+      "city_name": "Antalya"
     },
     {
-      "iata": "VIE",
-      "municipality": "Vienna"
+      "IATA_code": "ALC",
+      "city_name": "Alicante"
     },
     {
-      "iata": "VCE",
-      "municipality": "Venice"
+      "IATA_code": "BCN",
+      "city_name": "Barcelona"
     },
     {
-      "iata": "OSL",
-      "municipality": "Oslo"
+      "IATA_code": "LCA",
+      "city_name": "Larnarca"
     },
     {
-      "iata": "DUB",
-      "municipality": "Dublin"
+      "IATA_code": "ACE",
+      "city_name": "Lanzarote Island"
     },
     {
-      "iata": "ATH",
-      "municipality": "Athens"
+      "IATA_code": "KRK",
+      "city_name": "KrakÃ³w"
     },
     {
-      "iata": "FRA",
-      "municipality": "Frankfurt am Main"
+      "IATA_code": "RHO",
+      "city_name": "Rodes Island"
     },
     {
-      "iata": "BGY",
-      "municipality": "Bergamo"
+      "IATA_code": "FUE",
+      "city_name": "Fuerteventura Island"
     },
     {
-      "iata": "AMS",
-      "municipality": "Amsterdam"
+      "IATA_code": "BRU",
+      "city_name": "Brussels"
     },
     {
-      "iata": "FCO",
-      "municipality": "Rome"
+      "IATA_code": "CTA",
+      "city_name": "Catania"
     },
     {
-      "iata": "CGN",
-      "municipality": "Cologne"
+      "IATA_code": "BGY",
+      "city_name": "Bergamo"
     },
     {
-      "iata": "FUE",
-      "municipality": "Fuerteventura Island"
+      "IATA_code": "HEL",
+      "city_name": "Helsinki"
     },
     {
-      "iata": "CPH",
-      "municipality": "Copenhagen"
+      "IATA_code": "TFS",
+      "city_name": "Tenerife Island"
     },
     {
-      "iata": "RIX",
-      "municipality": "Riga"
+      "IATA_code": "PSA",
+      "city_name": "Pisa"
     },
     {
-      "iata": "TFS",
-      "municipality": "Tenerife Island"
+      "IATA_code": "CDG",
+      "city_name": "Paris"
     },
     {
-      "iata": "KEF",
-      "municipality": "ReykjavÃ­k"
+      "IATA_code": "BUD",
+      "city_name": "Budapest"
     },
     {
-      "iata": "PMI",
-      "municipality": "Palma De Mallorca"
+      "IATA_code": "GOT",
+      "city_name": "Gothenburg"
     },
     {
-      "iata": "AYT",
-      "municipality": "Antalya"
+      "IATA_code": "MXP",
+      "city_name": "Milan"
     },
     {
-      "iata": "LGW",
-      "municipality": "London"
+      "IATA_code": "BLQ",
+      "city_name": "Bologna"
     },
     {
-      "iata": "BCN",
-      "municipality": "Barcelona"
+      "IATA_code": "RAK",
+      "city_name": "Marrakech"
     },
     {
-      "iata": "AGP",
-      "municipality": "MÃ¡laga"
+      "IATA_code": "BRI",
+      "city_name": "Bari"
     },
     {
-      "iata": "ACE",
-      "municipality": "Lanzarote Island"
+      "IATA_code": "MLA",
+      "city_name": "Valletta"
     },
     {
-      "iata": "MUC",
-      "municipality": "Munich"
+      "IATA_code": "IST",
+      "city_name": "Istanbul"
     },
     {
-      "iata": "MAD",
-      "municipality": "Madrid"
+      "IATA_code": "FRA",
+      "city_name": "Frankfurt am Main"
     },
     {
-      "iata": "GVA",
-      "municipality": "Geneva"
+      "IATA_code": "LIS",
+      "city_name": "Lisbon"
     },
     {
-      "iata": "MXP",
-      "municipality": "Milan"
+      "IATA_code": "BGO",
+      "city_name": "Bergen"
     },
     {
-      "iata": "NAP",
-      "municipality": "NÃ¡poli"
+      "IATA_code": "LGW",
+      "city_name": "London"
     },
     {
-      "iata": "BRS",
-      "municipality": "Bristol"
+      "IATA_code": "KEF",
+      "city_name": "ReykjavÃ­k"
     },
     {
-      "iata": "LIS",
-      "municipality": "Lisbon"
+      "IATA_code": "NAP",
+      "city_name": "NÃ¡poli"
     },
     {
-      "iata": "HEL",
-      "municipality": "Helsinki"
+      "IATA_code": "PFO",
+      "city_name": "Paphos"
     },
     {
-      "iata": "DUS",
-      "municipality": "DÃ¼sseldorf"
+      "IATA_code": "FNC",
+      "city_name": "Funchal"
+    },
+    {
+      "IATA_code": "OPO",
+      "city_name": "Porto"
+    },
+    {
+      "IATA_code": "NCE",
+      "city_name": "Nice"
+    },
+    {
+      "IATA_code": "VLC",
+      "city_name": "Valencia"
+    },
+    {
+      "IATA_code": "",
+      "city_name": "Unknown"
+    },
+    {
+      "IATA_code": "ZRH",
+      "city_name": "Zurich"
+    },
+    {
+      "IATA_code": "MAD",
+      "city_name": "Madrid"
+    },
+    {
+      "IATA_code": "BRS",
+      "city_name": "Bristol"
+    },
+    {
+      "IATA_code": "TIA",
+      "city_name": "Tirana"
+    },
+    {
+      "IATA_code": "HRG",
+      "city_name": "Hurghada"
+    },
+    {
+      "IATA_code": "LPA",
+      "city_name": "Gran Canaria Island"
+    },
+    {
+      "IATA_code": "ATH",
+      "city_name": "Athens"
+    },
+    {
+      "IATA_code": "AGP",
+      "city_name": "MÃ¡laga"
+    },
+    {
+      "IATA_code": "DUB",
+      "city_name": "Dublin"
+    },
+    {
+      "IATA_code": "ARN",
+      "city_name": "Stockholm"
+    },
+    {
+      "IATA_code": "FAO",
+      "city_name": "Faro"
+    },
+    {
+      "IATA_code": "LYS",
+      "city_name": "Lyon"
+    },
+    {
+      "IATA_code": "SOF",
+      "city_name": "Sofia"
+    },
+    {
+      "IATA_code": "MUC",
+      "city_name": "Munich"
+    },
+    {
+      "IATA_code": "DOH",
+      "city_name": "Doha"
+    },
+    {
+      "IATA_code": "PMI",
+      "city_name": "Palma De Mallorca"
     }
   ]
 }
