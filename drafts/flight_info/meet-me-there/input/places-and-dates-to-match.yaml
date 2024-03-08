@@ -1,10 +1,10 @@
 flights:
   - direction: "Departure"
-    airport: "BER"
+    airport: "EDI"
     startDate: "07-03-2024"
     endDate: "08-03-2024"
   - direction: "Arrival"
-    airport: "BER"
+    airport: "EDI"
     startDate: "10-03-2024"
     endDate: "11-03-2024"
   - direction: "Departure"
