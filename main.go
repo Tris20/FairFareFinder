@@ -42,7 +42,7 @@ func main() {
 	case "web":
 
 		// Update WPI data every 6 hours
-		ticker := time.NewTicker(6 * time.Minute)
+		ticker := time.NewTicker(6 * time.Hour)
 		go func() {
 			for range ticker.C {
         //Berlin
