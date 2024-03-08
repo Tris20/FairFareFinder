@@ -1,6 +1,4 @@
-
-
-package main
+package generateflightsdotjson
 
 import (
 	"encoding/json"
@@ -25,10 +23,10 @@ type DestinationWithURL struct {
 	BookingURL    string `json:"bookingURL"`
 }
 
-func generateLinks() {
+func GenerateLinks() {
 	// Load the JSON data from file
 	var destinations []Destination
-	data, err := ioutil.ReadFile("destinations.json")
+	data, err := ioutil.ReadFile("input/destinations.json")
 	if err != nil {
 		fmt.Println("Error reading JSON file:", err)
 		return
@@ -69,7 +67,7 @@ func generateLinks() {
 	}
 
 	// Save the modified JSON data to "flights.json"
-	err = ioutil.WriteFile("flights.json", modifiedData, 0644)
+	err = ioutil.WriteFile("input/flights.json", modifiedData, 0644)
 	if err != nil {
 		fmt.Println("Error writing modified data to file:", err)
 		return
