@@ -285,12 +285,12 @@ func ProcessLocation(location string) float64 {
 	}
 
 	dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
-	displayForecastData(location, dailyDetails)
+	DisplayForecastData(location, dailyDetails)
 
 	return overallAverage
 }
 
-func displayForecastData(location string, dailyDetails map[time.Weekday]DailyWeatherDetails) {
+func DisplayForecastData(location string, dailyDetails map[time.Weekday]DailyWeatherDetails) {
 	orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
 
 	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
