@@ -17,8 +17,10 @@ import (
 	"github.com/Tris20/FairFareFinder/src/go_files/discourse"
 	"github.com/Tris20/FairFareFinder/src/go_files/json_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
-	"github.com/Tris20/FairFareFinder/src/go_files/web_pages"
-	"gopkg.in/yaml.v2"
+	"github.com/Tris20/FairFareFinder/src/go_files/web_pages/html_generators"
+  "github.com/Tris20/FairFareFinder/src/go_files/server"
+
+  "gopkg.in/yaml.v2"
 )
 
 type Favourites struct {
@@ -46,7 +48,7 @@ func main() {
 	user_db.Setup_database()
 	dbPath := "user_database.db"
 	if len(os.Args) < 2 {
-		log.Fatal("Error: No argument provided. Please provide a location, 'web', or a YAML file.")
+		log.Fatal("Error: No argument provided. Please provide a location, 'web', or a json file.")
 	}
 
 	switch os.Args[1] {
@@ -61,25 +63,13 @@ func main() {
 				fmt.Println("hello")
 			}
 		}()
-		// Handle starting the web server
-		http.HandleFunc("/", homeHandler)
-		http.HandleFunc("/forecast", forecastHandler)
-		http.HandleFunc("/getforecast", getForecastHandler)
-		http.HandleFunc("/berlin-flight-destinations", presentBerlinFlightDestinations)
-		// Serve static files from the `images` directory
-		fs := http.FileServer(http.Dir("src/images"))
-		http.Handle("/images/", http.StripPrefix("/images/", fs))
-
-		// Start the web server
-		fmt.Println("Starting server on :6969")
-		if err := http.ListenAndServe(":6969", nil); err != nil {
-			log.Fatalf("Error starting server: %v", err)
-		}
-	case "init-db":
+	  	fffwebserver.SetupFFFWebServer()
+   
+  case "init-db":
 		user_db.Init_database(dbPath)
 		user_db.Insert_test_user(dbPath)
 	default:
-		// Check if the argument is a YAML file
+		// Check if the argument is a json file
 		if strings.HasSuffix(os.Args[1], ".json") {
 			handleFavourites(os.Args[1])
 		} else {
@@ -90,35 +80,8 @@ func main() {
 	}
 }
 
-// handles requests to the home page
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path == "/" {
-		// Serve the HTML landing page
-		pageContent, err := ioutil.ReadFile("src/html/landingPage.html")
-		if err != nil {
-			log.Printf("Error reading landing page file: %v", err)
-			http.Error(w, "Internal server error", http.StatusInternalServerError)
-			return
-		}
-		w.Header().Set("Content-Type", "text/html")
-		w.Write(pageContent)
-	} else if strings.HasSuffix(r.URL.Path, ".css") {
-		// Serve CSS files
-		cssPath := "src/css" + r.URL.Path
-		cssContent, err := ioutil.ReadFile(cssPath)
-		if err != nil {
-			log.Printf("Error reading CSS file: %v", err)
-			http.Error(w, "Internal server error", http.StatusInternalServerError)
-			return
-		}
-		w.Header().Set("Content-Type", "text/css")
-		w.Write(cssContent)
-	} else {
-		// 404 Not Found for other paths
-		http.Error(w, "404 not found.", http.StatusNotFound)
-	}
-}
 
+/*
 func getForecastHandler(w http.ResponseWriter, r *http.Request) {
 	// fmt.Println("Handling request to /getforecast")
 
@@ -157,18 +120,7 @@ func forecastHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Write(pageContent)
 }
-
-// handles requests to the forecast page
-func presentBerlinFlightDestinations(w http.ResponseWriter, r *http.Request) {
-	// serving a static file
-	pageContent, err := ioutil.ReadFile("src/html/berlin-flight-destinations.html")
-	if err != nil {
-		log.Printf("Error reading forecast page file: %v", err)
-		http.Error(w, "Internal server error", 500)
-		return
-	}
-	w.Write(pageContent)
-}
+*/
 
 func handleFavourites(jsonFile string) {
 	var flights []struct {
