@@ -1,33 +1,34 @@
 package main
 
 import (
+	"io/ioutil"
+	"os"
 	"testing"
 	"time"
-	"os"
-	"io/ioutil"
+  "github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
 )
 
 // test for displayForecastData function
 func TestDisplayForecastData(t *testing.T) {
 	location := "New York"
-	dailyDetails := map[time.Weekday]DailyWeatherDetails{
+	dailyDetails := map[time.Weekday]weather_pleasantry.DailyWeatherDetails{
 		time.Wednesday: {
-			AverageTemp:    25.0,
-			CommonWeather:  "Sunny",
-			AverageWind:    10.0,
-			WPI:            8.5,
+			AverageTemp:   25.0,
+			CommonWeather: "Sunny",
+			AverageWind:   10.0,
+			WPI:           8.5,
 		},
 		time.Thursday: {
-			AverageTemp:    22.5,
-			CommonWeather:  "Cloudy",
-			AverageWind:    15.0,
-			WPI:            7.2,
+			AverageTemp:   22.5,
+			CommonWeather: "Cloudy",
+			AverageWind:   15.0,
+			WPI:           7.2,
 		},
 		time.Friday: {
-			AverageTemp:    20.0,
-			CommonWeather:  "Rainy",
-			AverageWind:    12.5,
-			WPI:            6.0,
+			AverageTemp:   20.0,
+			CommonWeather: "Rainy",
+			AverageWind:   12.5,
+			WPI:           6.0,
 		},
 	}
 

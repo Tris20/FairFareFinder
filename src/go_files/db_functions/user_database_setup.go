@@ -1,11 +1,11 @@
-package go_files
+package user_db
 
 import (
 	"database/sql"
 	"fmt"
-	"log"
-
 	_ "github.com/mattn/go-sqlite3"
+	"log"
+	"os"
 )
 
 // SetupDatabase is now exported by starting with an uppercase letter
@@ -120,3 +120,26 @@ func AddNewUserWithPreferences(dbPath, username, email, preference string) {
 
 // 	log.Printf("Column '%s' added to preferences table.\n", columnName)
 // }
+
+func Init_database(dbPath string) {
+	// Check if the database file exists
+	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
+		// Database does not exist; create it
+		CreateDatabase(dbPath)
+	} else {
+		// Database exists
+		log.Println("Database already exists.")
+	}
+
+	// go_files.AddColumnToPreferencesTable(dbPath, "temp_min", "REAL")
+	// go_files.AddColumnToPreferencesTable(dbPath, "temp_max", "REAL")
+
+}
+
+func Insert_test_user(dbPath string) {
+	username := "newuser"
+	email := "newuser@example.com"
+	preference := "dark mode"
+
+	AddNewUserWithPreferences(dbPath, username, email, preference)
+}

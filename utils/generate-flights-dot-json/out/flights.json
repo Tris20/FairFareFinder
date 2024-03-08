@@ -1,0 +1,688 @@
+[
+    {
+        "IATA": "STR",
+        "City_name": "Stuttgart",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/STR/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Stuttgart/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Stuttgart\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "EMA",
+        "City_name": "Nottingham",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/EMA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Nottingham/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Nottingham\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "FAO",
+        "City_name": "Faro",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/FAO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Faro/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Faro\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "TLV",
+        "City_name": "Tel Aviv",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/TLV/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Tel Aviv/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Tel Aviv\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "CGN",
+        "City_name": "Cologne/Bonn",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/CGN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Cologne/Bonn/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Cologne/Bonn\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "FNC",
+        "City_name": "Funchal",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/FNC/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Funchal/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Funchal\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "HEL",
+        "City_name": "Helsinki",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/HEL/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Helsinki/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Helsinki\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "GRZ",
+        "City_name": "Graz",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/GRZ/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Graz/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Graz\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "SOF",
+        "City_name": "Sofia",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/SOF/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Sofia/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Sofia\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "AGP",
+        "City_name": "Malaga",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/AGP/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Malaga/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Malaga\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "EDI",
+        "City_name": "Edinburgh",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/EDI/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Edinburgh/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Edinburgh\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "GYD",
+        "City_name": "Baku",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/GYD/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Baku/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Baku\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "ORY",
+        "City_name": "Paris Orly",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/ORY/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Paris Orly/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Paris Orly\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "WAW",
+        "City_name": "Warsaw",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/WAW/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Warsaw/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Warsaw\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "TOS",
+        "City_name": "Tromsoe",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/TOS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Tromsoe/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Tromsoe\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "EBL",
+        "City_name": "Erbil",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/EBL/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Erbil/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Erbil\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "FUE",
+        "City_name": "Fuerteventura",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/FUE/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Fuerteventura/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Fuerteventura\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "LYS",
+        "City_name": "Lyon",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/LYS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Lyon/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Lyon\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "ATH",
+        "City_name": "Athens",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/ATH/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Athens/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Athens\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "SZG",
+        "City_name": "Salzburg",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/SZG/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Salzburg/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Salzburg\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "VIE",
+        "City_name": "Vienna",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/VIE/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Vienna/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Vienna\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "VLC",
+        "City_name": "Valencia",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/VLC/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Valencia/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Valencia\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "EWR",
+        "City_name": "New York",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/EWR/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/New York/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=New York\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "DWC",
+        "City_name": "Dubai",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/DWC/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Dubai/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Dubai\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "SAW",
+        "City_name": "Istanbul",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/SAW/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Istanbul/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Istanbul\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "SIN",
+        "City_name": "Singapore",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/SIN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Singapore/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Singapore\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "PMO",
+        "City_name": "Palermo",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/PMO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Palermo/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Palermo\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "GOT",
+        "City_name": "Gothenburg",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/GOT/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Gothenburg/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Gothenburg\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "DUS",
+        "City_name": "Dusseldorf",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/DUS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Dusseldorf/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Dusseldorf\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "ALC",
+        "City_name": "Alicante",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/ALC/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Alicante/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Alicante\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "ARN",
+        "City_name": "Stockholm",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/ARN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Stockholm/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Stockholm\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "PSA",
+        "City_name": "Pisa",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/PSA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Pisa/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Pisa\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "OTP",
+        "City_name": "Bucharest",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/OTP/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Bucharest/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Bucharest\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "VNO",
+        "City_name": "Vilnius",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/VNO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Vilnius/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Vilnius\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "BCN",
+        "City_name": "Barcelona",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/BCN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Barcelona/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Barcelona\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "STN",
+        "City_name": "London",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/STN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/London/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=London\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "MAD",
+        "City_name": "Madrid",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/MAD/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Madrid/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Madrid\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "TSF",
+        "City_name": "Treviso",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/TSF/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Treviso/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Treviso\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "SXB",
+        "City_name": "Strasbourg",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/SXB/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Strasbourg/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Strasbourg\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "RMO",
+        "City_name": "Chisinau",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/RMO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Chisinau/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Chisinau\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "SKP",
+        "City_name": "Skopje",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/SKP/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Skopje/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Skopje\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "PEK",
+        "City_name": "Beijing",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/PEK/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Beijing/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Beijing\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "RAK",
+        "City_name": "Marrakech",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/RAK/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Marrakech/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Marrakech\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "BZO",
+        "City_name": "Bolzano",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/BZO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Bolzano/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Bolzano\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "VAR",
+        "City_name": "Varna",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/VAR/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Varna/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Varna\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "CTA",
+        "City_name": "Catania",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/CTA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Catania/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Catania\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "LPA",
+        "City_name": "Gran Canaria",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/LPA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Gran Canaria/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Gran Canaria\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "TGD",
+        "City_name": "Podgorica",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/TGD/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Podgorica/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Podgorica\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "KEF",
+        "City_name": "Reykjavik",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/KEF/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Reykjavik/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Reykjavik\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "NAP",
+        "City_name": "Naples",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/NAP/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Naples/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Naples\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "TIA",
+        "City_name": "Tirana",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/TIA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Tirana/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Tirana\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "ZRH",
+        "City_name": "Zurich",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/ZRH/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Zurich/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Zurich\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "VCE",
+        "City_name": "Venice",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/VCE/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Venice/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Venice\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "TLL",
+        "City_name": "Tallinn",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/TLL/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Tallinn/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Tallinn\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "FRA",
+        "City_name": "Frankfurt",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/FRA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Frankfurt/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Frankfurt\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "TFS",
+        "City_name": "Tenerife",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/TFS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Tenerife/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Tenerife\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "PMI",
+        "City_name": "Palma de Mallorca",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/PMI/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Palma de Mallorca/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Palma de Mallorca\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "OPO",
+        "City_name": "Porto",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/OPO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Porto/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Porto\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "FCO",
+        "City_name": "Rome",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/FCO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Rome/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Rome\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "RIX",
+        "City_name": "Riga",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/RIX/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Riga/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Riga\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "BSL",
+        "City_name": "Basel",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/BSL/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Basel/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Basel\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "CAI",
+        "City_name": "Cairo",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/CAI/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Cairo/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Cairo\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "LIS",
+        "City_name": "Lisbon",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/LIS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Lisbon/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Lisbon\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "MUC",
+        "City_name": "Munich",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/MUC/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Munich/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Munich\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "PFO",
+        "City_name": "Paphos",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/PFO/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Paphos/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Paphos\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "BRU",
+        "City_name": "Brussels",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/BRU/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Brussels/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Brussels\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "AYT",
+        "City_name": "Antalya",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/AYT/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Antalya/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Antalya\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "PRN",
+        "City_name": "Pristina",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/PRN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Pristina/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Pristina\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "AMS",
+        "City_name": "Amsterdam",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/AMS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Amsterdam/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Amsterdam\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "RMF",
+        "City_name": "Marsa Alam",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/RMF/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Marsa Alam/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Marsa Alam\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "LCA",
+        "City_name": "Larnaca",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/LCA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Larnaca/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Larnaca\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "BRS",
+        "City_name": "Bristol",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/BRS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Bristol/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Bristol\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "BLQ",
+        "City_name": "Bologna",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/BLQ/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Bologna/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Bologna\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "SCN",
+        "City_name": "Saarbrücken",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/SCN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Saarbrücken/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Saarbrücken\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "TUN",
+        "City_name": "Tunis",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/TUN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Tunis/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Tunis\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "NCE",
+        "City_name": "Nice",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/NCE/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Nice/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Nice\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "KUT",
+        "City_name": "Kutaisi",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/KUT/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Kutaisi/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Kutaisi\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "LUX",
+        "City_name": "Luxembourg",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/LUX/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Luxembourg/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Luxembourg\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "ESB",
+        "City_name": "Ankara",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/ESB/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Ankara/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Ankara\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "CDG",
+        "City_name": "Paris",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/CDG/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Paris/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Paris\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "CPH",
+        "City_name": "Copenhagen",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/CPH/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Copenhagen/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Copenhagen\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "ADB",
+        "City_name": "Izmir",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/ADB/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Izmir/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Izmir\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "IAS",
+        "City_name": "Iasi",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/IAS/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Iasi/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Iasi\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "HRG",
+        "City_name": "Hurghada",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/HRG/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Hurghada/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Hurghada\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "BUD",
+        "City_name": "Budapest",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/BUD/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Budapest/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Budapest\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "ACE",
+        "City_name": "Lanzarote",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/ACE/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Lanzarote/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Lanzarote\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "KRK",
+        "City_name": "Krakow",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/KRK/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Krakow/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Krakow\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "GVA",
+        "City_name": "Geneva",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/GVA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Geneva/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Geneva\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "OSL",
+        "City_name": "Oslo",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/OSL/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Oslo/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Oslo\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "LIN",
+        "City_name": "Milan",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/LIN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Milan/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Milan\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "DUB",
+        "City_name": "Dublin",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/DUB/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Dublin/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Dublin\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "BEG",
+        "City_name": "Belgrade",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/BEG/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Belgrade/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Belgrade\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "MAN",
+        "City_name": "Manchester",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/MAN/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Manchester/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Manchester\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "SKG",
+        "City_name": "Thessaloniki",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/SKG/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Thessaloniki/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Thessaloniki\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "GLA",
+        "City_name": "Glasgow",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/GLA/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Glasgow/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Glasgow\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "BER",
+        "City_name": "Berlin",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/BER/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Berlin/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Berlin\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "BRI",
+        "City_name": "Bari",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/BRI/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Bari/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Bari\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    },
+    {
+        "IATA": "DOH",
+        "City_name": "Doha",
+        "SkyScannerURL": "https://www.skyscanner.de/transport/fluge/ber/DOH/?adults=1\u0026adultsv2=1\u0026cabinclass=economy\u0026children=0\u0026inboundaltsenabled=false\u0026infants=0\u0026outboundaltsenabled=false\u0026preferdirects=true\u0026ref=home\u0026rtn=1",
+        "airbnbURL": "https://www.airbnb.de/s/Doha/homes?adults=1\u0026checkin=2024-03-08\u0026checkout=2024-03-11\u0026flexible_trip_lengths%5B%5D=one_week\u0026price_filter_num_nights=3\u0026price_max=112",
+        "bookingURL": "https://www.booking.com/searchresults.en-gb.html?ss=Doha\u0026group_adults=1\u0026no_rooms=1\u0026group_children=0\u0026nflt=price%3DEUR-min-110-1%3Breview_score%3D80\u0026flex_window=2\u0026checkin=2024-03-08\u0026checkout=2024-03-11"
+    }
+]

@@ -26,7 +26,7 @@ type DestinationWithURL struct {
 func main() {
 	// Load the JSON data from file
 	var destinations []Destination
-	data, err := ioutil.ReadFile("destinations.json")
+	data, err := ioutil.ReadFile("in/destinations.json")
 	if err != nil {
 		fmt.Println("Error reading JSON file:", err)
 		return
@@ -67,7 +67,7 @@ func main() {
 	}
 
 	// Save the modified JSON data to "flights.json"
-	err = ioutil.WriteFile("flights.json", modifiedData, 0644)
+	err = ioutil.WriteFile("out/flights.json", modifiedData, 0644)
 	if err != nil {
 		fmt.Println("Error writing modified data to file:", err)
 		return
