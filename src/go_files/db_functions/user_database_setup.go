@@ -1,4 +1,4 @@
-package go_files
+package user_db
 
 import (
 	"database/sql"

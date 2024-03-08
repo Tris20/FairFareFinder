@@ -1,4 +1,4 @@
-package main
+package weather_pleasantry
 
 import (
 	"gopkg.in/yaml.v2"
