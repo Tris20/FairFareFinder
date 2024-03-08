@@ -43,7 +43,7 @@ Friday: Avg Temp: 20.00°C, Weather: Rainy, Wind: 45.00km/h, WPI: 6.00
 	r, w, _ := os.Pipe()
 	os.Stdout = w
 
-	displayForecastData(location, dailyDetails)
+	weather_pleasantry.DisplayForecastData(location, dailyDetails)
 
 	// Reset stdout
 	w.Close()
