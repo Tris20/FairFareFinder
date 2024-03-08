@@ -44,7 +44,9 @@ jobs:
           ssh -t $SSH_ARGS root@fairfarefinder.com << 'EOF'
             # Navigate to the project directory
             cd /root/FairFareFinder
-            
+
+            # Discard any local changes -- db is ignored
+            git reset --hard HEAD
             # Pull the latest changes
             git pull
             
