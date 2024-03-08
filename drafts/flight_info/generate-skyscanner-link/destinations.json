@@ -1,394 +1,205 @@
+
 [
     {
-        "IATA_code": "STR",
-        "city_name": "Stuttgart"
+      "IATA_code": "HRG",
+      "city_name": "Hurghada"
     },
     {
-        "IATA_code": "EMA",
-        "city_name": "Nottingham"
+      "IATA_code": "LYS",
+      "city_name": "Lyon"
     },
     {
-        "IATA_code": "FAO",
-        "city_name": "Faro"
+      "IATA_code": "KRK",
+      "city_name": "Kraków"
     },
     {
-        "IATA_code": "TLV",
-        "city_name": "Tel Aviv"
+      "IATA_code": "CDG",
+      "city_name": "Paris"
     },
     {
-        "IATA_code": "CGN",
-        "city_name": "Cologne/Bonn"
+      "IATA_code": "BSL",
+      "city_name": "Bâle/Mulhouse"
     },
     {
-        "IATA_code": "FNC",
-        "city_name": "Funchal"
+      "IATA_code": "ZRH",
+      "city_name": "Zurich"
     },
     {
-        "IATA_code": "HEL",
-        "city_name": "Helsinki"
+      "IATA_code": "EWR",
+      "city_name": "Newark"
     },
     {
-        "IATA_code": "GRZ",
-        "city_name": "Graz"
+      "IATA_code": "ARN",
+      "city_name": "Stockholm"
     },
     {
-        "IATA_code": "SOF",
-        "city_name": "Sofia"
+      "IATA_code": "FAO",
+      "city_name": "Faro"
     },
     {
-        "IATA_code": "AGP",
-        "city_name": "Malaga"
+      "IATA_code": "IST",
+      "city_name": "Istanbul"
     },
     {
-        "IATA_code": "EDI",
-        "city_name": "Edinburgh"
+      "IATA_code": "LPA",
+      "city_name": "Gran Canaria Island"
     },
     {
-        "IATA_code": "GYD",
-        "city_name": "Baku"
+      "IATA_code": "BRU",
+      "city_name": "Brussels"
     },
     {
-        "IATA_code": "ORY",
-        "city_name": "Paris Orly"
+      "IATA_code": "DOH",
+      "city_name": "Doha"
     },
     {
-        "IATA_code": "WAW",
-        "city_name": "Warsaw"
+      "IATA_code": "OPO",
+      "city_name": "Porto"
     },
     {
-        "IATA_code": "TOS",
-        "city_name": "Tromsoe"
+      "IATA_code": "BUD",
+      "city_name": "Budapest"
     },
     {
-        "IATA_code": "EBL",
-        "city_name": "Erbil"
+      "IATA_code": "VIE",
+      "city_name": "Vienna"
     },
     {
-        "IATA_code": "FUE",
-        "city_name": "Fuerteventura"
+      "IATA_code": "VCE",
+      "city_name": "Venice"
     },
     {
-        "IATA_code": "LYS",
-        "city_name": "Lyon"
+      "IATA_code": "OSL",
+      "city_name": "Oslo"
     },
     {
-        "IATA_code": "ATH",
-        "city_name": "Athens"
+      "IATA_code": "DUB",
+      "city_name": "Dublin"
     },
     {
-        "IATA_code": "SZG",
-        "city_name": "Salzburg"
+      "IATA_code": "ATH",
+      "city_name": "Athens"
     },
     {
-        "IATA_code": "VIE",
-        "city_name": "Vienna"
+      "IATA_code": "FRA",
+      "city_name": "Frankfurt am Main"
     },
     {
-        "IATA_code": "VLC",
-        "city_name": "Valencia"
+      "IATA_code": "BGY",
+      "city_name": "Bergamo"
     },
     {
-        "IATA_code": "EWR",
-        "city_name": "New York"
+      "IATA_code": "AMS",
+      "city_name": "Amsterdam"
     },
     {
-        "IATA_code": "DWC",
-        "city_name": "Dubai"
+      "IATA_code": "FCO",
+      "city_name": "Rome"
     },
     {
-        "IATA_code": "SAW",
-        "city_name": "Istanbul"
+      "IATA_code": "CGN",
+      "city_name": "Cologne"
     },
     {
-        "IATA_code": "SIN",
-        "city_name": "Singapore"
+      "IATA_code": "FUE",
+      "city_name": "Fuerteventura Island"
     },
     {
-        "IATA_code": "PMO",
-        "city_name": "Palermo"
+      "IATA_code": "CPH",
+      "city_name": "Copenhagen"
     },
     {
-        "IATA_code": "GOT",
-        "city_name": "Gothenburg"
+      "IATA_code": "RIX",
+      "city_name": "Riga"
     },
     {
-        "IATA_code": "DUS",
-        "city_name": "Dusseldorf"
+      "IATA_code": "TFS",
+      "city_name": "Tenerife Island"
     },
     {
-        "IATA_code": "ALC",
-        "city_name": "Alicante"
+      "IATA_code": "KEF",
+      "city_name": "Reykjavík"
     },
     {
-        "IATA_code": "ARN",
-        "city_name": "Stockholm"
+      "IATA_code": "PMI",
+      "city_name": "Palma De Mallorca"
     },
     {
-        "IATA_code": "PSA",
-        "city_name": "Pisa"
+      "IATA_code": "AYT",
+      "city_name": "Antalya"
     },
     {
-        "IATA_code": "OTP",
-        "city_name": "Bucharest"
+      "IATA_code": "LGW",
+      "city_name": "London"
     },
     {
-        "IATA_code": "VNO",
-        "city_name": "Vilnius"
+      "IATA_code": "BCN",
+      "city_name": "Barcelona"
     },
     {
-        "IATA_code": "BCN",
-        "city_name": "Barcelona"
+      "IATA_code": "AGP",
+      "city_name": "Málaga"
     },
     {
-        "IATA_code": "STN",
-        "city_name": "London"
+      "IATA_code": "ACE",
+      "city_name": "Lanzarote Island"
     },
     {
-        "IATA_code": "MAD",
-        "city_name": "Madrid"
+      "IATA_code": "MUC",
+      "city_name": "Munich"
     },
     {
-        "IATA_code": "TSF",
-        "city_name": "Treviso"
+      "IATA_code": "MAD",
+      "city_name": "Madrid"
     },
     {
-        "IATA_code": "SXB",
-        "city_name": "Strasbourg"
+      "IATA_code": "GVA",
+      "city_name": "Geneva"
     },
     {
-        "IATA_code": "RMO",
-        "city_name": "Chisinau"
+      "IATA_code": "MXP",
+      "city_name": "Milan"
     },
     {
-        "IATA_code": "SKP",
-        "city_name": "Skopje"
+      "IATA_code": "NAP",
+      "city_name": "Nápoli"
     },
     {
-        "IATA_code": "PEK",
-        "city_name": "Beijing"
+      "IATA_code": "BRS",
+      "city_name": "Bristol"
     },
     {
-        "IATA_code": "RAK",
-        "city_name": "Marrakech"
+      "IATA_code": "LIS",
+      "city_name": "Lisbon"
     },
     {
-        "IATA_code": "BZO",
-        "city_name": "Bolzano"
+      "IATA_code": "HEL",
+      "city_name": "Helsinki"
     },
     {
-        "IATA_code": "VAR",
-        "city_name": "Varna"
+      "IATA_code": "DUS",
+      "city_name": "Düsseldorf"
     },
-    {
-        "IATA_code": "CTA",
-        "city_name": "Catania"
-    },
-    {
-        "IATA_code": "LPA",
-        "city_name": "Gran Canaria"
-    },
-    {
-        "IATA_code": "TGD",
-        "city_name": "Podgorica"
-    },
-    {
-        "IATA_code": "KEF",
-        "city_name": "Reykjavik"
-    },
-    {
-        "IATA_code": "NAP",
-        "city_name": "Naples"
-    },
-    {
-        "IATA_code": "TIA",
-        "city_name": "Tirana"
-    },
-    {
-        "IATA_code": "ZRH",
-        "city_name": "Zurich"
-    },
-    {
-        "IATA_code": "VCE",
-        "city_name": "Venice"
-    },
-    {
-        "IATA_code": "TLL",
-        "city_name": "Tallinn"
-    },
-    {
-        "IATA_code": "FRA",
-        "city_name": "Frankfurt"
-    },
-    {
-        "IATA_code": "TFS",
-        "city_name": "Tenerife"
-    },
-    {
-        "IATA_code": "PMI",
-        "city_name": "Palma de Mallorca"
-    },
-    {
-        "IATA_code": "OPO",
-        "city_name": "Porto"
-    },
-    {
-        "IATA_code": "FCO",
-        "city_name": "Rome"
-    },
-    {
-        "IATA_code": "RIX",
-        "city_name": "Riga"
-    },
-    {
-        "IATA_code": "BSL",
-        "city_name": "Basel"
-    },
-    {
-        "IATA_code": "CAI",
-        "city_name": "Cairo"
-    },
-    {
-        "IATA_code": "LIS",
-        "city_name": "Lisbon"
-    },
-    {
-        "IATA_code": "MUC",
-        "city_name": "Munich"
-    },
-    {
-        "IATA_code": "PFO",
-        "city_name": "Paphos"
-    },
-    {
-        "IATA_code": "BRU",
-        "city_name": "Brussels"
-    },
-    {
-        "IATA_code": "AYT",
-        "city_name": "Antalya"
-    },
-    {
-        "IATA_code": "PRN",
-        "city_name": "Pristina"
-    },
-    {
-        "IATA_code": "AMS",
-        "city_name": "Amsterdam"
-    },
-    {
-        "IATA_code": "RMF",
-        "city_name": "Marsa Alam"
-    },
-    {
-        "IATA_code": "LCA",
-        "city_name": "Larnaca"
-    },
-    {
-        "IATA_code": "BRS",
-        "city_name": "Bristol"
-    },
-    {
-        "IATA_code": "BLQ",
-        "city_name": "Bologna"
-    },
-    {
-        "IATA_code": "SCN",
-        "city_name": "Saarbrücken"
-    },
-    {
-        "IATA_code": "TUN",
-        "city_name": "Tunis"
-    },
-    {
-        "IATA_code": "NCE",
-        "city_name": "Nice"
-    },
-    {
-        "IATA_code": "KUT",
-        "city_name": "Kutaisi"
-    },
-    {
-        "IATA_code": "LUX",
-        "city_name": "Luxembourg"
-    },
-    {
-        "IATA_code": "ESB",
-        "city_name": "Ankara"
-    },
-    {
-        "IATA_code": "CDG",
-        "city_name": "Paris"
-    },
-    {
-        "IATA_code": "CPH",
-        "city_name": "Copenhagen"
-    },
-    {
-        "IATA_code": "ADB",
-        "city_name": "Izmir"
-    },
-    {
-        "IATA_code": "IAS",
-        "city_name": "Iasi"
-    },
-    {
-        "IATA_code": "HRG",
-        "city_name": "Hurghada"
-    },
-    {
-        "IATA_code": "BUD",
-        "city_name": "Budapest"
-    },
-    {
-        "IATA_code": "ACE",
-        "city_name": "Lanzarote"
-    },
-    {
-        "IATA_code": "KRK",
-        "city_name": "Krakow"
-    },
-    {
-        "IATA_code": "GVA",
-        "city_name": "Geneva"
-    },
-    {
-        "IATA_code": "OSL",
-        "city_name": "Oslo"
-    },
-    {
-        "IATA_code": "LIN",
-        "city_name": "Milan"
-    },
-    {
-        "IATA_code": "DUB",
-        "city_name": "Dublin"
-    },
-    {
-        "IATA_code": "BEG",
-        "city_name": "Belgrade"
-    },
-    {
-        "IATA_code": "MAN",
-        "city_name": "Manchester"
-    },
-    {
-        "IATA_code": "SKG",
-        "city_name": "Thessaloniki"
-    },
-    {
-        "IATA_code": "GLA",
-        "city_name": "Glasgow"
-    },
-    {
-        "IATA_code": "BER",
-        "city_name": "Berlin"
-    },
-    {
-        "IATA_code": "BRI",
-        "city_name": "Bari"
-    },
-    {
-        "IATA_code": "DOH",
-        "city_name": "Doha"
-    }
+ {"IATA_code": "AGP", "city_name": "Málaga"},
+  {"IATA_code": "FCO", "city_name": "Rome"},
+  {"IATA_code": "TFS", "city_name": "Tenerife Island"},
+  {"IATA_code": "FAO", "city_name": "Faro"},
+  {"IATA_code": "FRA", "city_name": "Frankfurt am Main"},
+  {"IATA_code": "BCN", "city_name": "Barcelona"},
+  {"IATA_code": "OTP", "city_name": "Bucharest"},
+  {"IATA_code": "DUB", "city_name": "Dublin"},
+  {"IATA_code": "PMI", "city_name": "Palma De Mallorca"},
+  {"IATA_code": "DXB", "city_name": "Dubai"},
+  {"IATA_code": "LTN", "city_name": "London"},
+  {"IATA_code": "", "city_name": "Unknown"},
+  {"IATA_code": "CDG", "city_name": "Paris"},
+  {"IATA_code": "AMS", "city_name": "Amsterdam"},
+  {"IATA_code": "GVA", "city_name": "Geneva"},
+  {"IATA_code": "KEF", "city_name": "Reykjavík"},
+  {"IATA_code": "AYT", "city_name": "Antalya"},
+  {"IATA_code": "LPA", "city_name": "Gran Canaria Island"},
+  {"IATA_code": "BRS", "city_name": "Bristol"},
+  {"IATA_code": "ACE", "city_name": "Lanzarote Island"},
+  {"IATA_code": "KRK", "city_name": "Kraków"}
 ]
+
