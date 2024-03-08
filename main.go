@@ -46,7 +46,7 @@ func main() {
 		go func() {
 			for range ticker.C {
 				generateflightsdotjson.GenerateLinks()
-				handleFavourites("input/flights.json")
+				GenerateAndPostCityRankings("input/flights.json")
 				fmt.Println("hello")
 			}
 		}()
@@ -58,7 +58,7 @@ func main() {
 	default:
 		// Check if the argument is a json file
 		if strings.HasSuffix(os.Args[1], ".json") {
-			handleFavourites(os.Args[1])
+			GenerateAndPostCityRankings(os.Args[1])
 		} else {
 			// Assuming it's a city name
 			location := strings.Join(os.Args[1:], " ")
@@ -67,7 +67,7 @@ func main() {
 	}
 }
 
-func handleFavourites(jsonFile string) {
+func GenerateAndPostCityRankings(jsonFile string) {
 	var flights []struct {
 		CityName      string `json:"City_name"`
 		SkyScannerURL string `json:"SkyScannerURL"`
@@ -104,22 +104,7 @@ func handleFavourites(jsonFile string) {
 		return cityWPIs[i].WPI > cityWPIs[j].WPI
 	})
 
-	// Initialize a StringBuilder to efficiently build the content string
-	var contentBuilder strings.Builder
-	// add image to topic
-	contentBuilder.WriteString("![image|690x394](upload://jGDO8BaFIvS1MVO53MDmqlS27vQ.jpeg)\n")
-	// Header for the content
-	contentBuilder.WriteString("|City Name | WPI | Flights | Accommodation | Things to Do|\n")
-	contentBuilder.WriteString("|--|--|--|--|--|\n") // Additional line after headers
-
-	// Loop through sorted results and append each to the contentBuilder
-	for _, cityWPI := range cityWPIs {
-		line := fmt.Sprintf("| [%s](https://www.google.com/maps/place/%s) | [%.2f](https://www.google.com/search?q=weather+%s) | [SkyScanner](%s) | [Airbnb](%s) [Booking.com](%s) | [Google Results](https://www.google.com/search?q=things+to+do+dubai+this+weekend+%s)| \n", cityWPI.Name, replaceSpaceWithURLEncoding(cityWPI.Name), cityWPI.WPI, replaceSpaceWithURLEncoding(cityWPI.Name), cityWPI.SkyScannerURL, cityWPI.AirbnbURL, cityWPI.BookingURL, cityWPI.Name)
-		contentBuilder.WriteString(line)
-	}
-
-	// Convert the StringBuilder content to a string
-	content := contentBuilder.String()
+	content := buildContentString(cityWPIs)
 	fmt.Println(content)
 
 	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
@@ -136,4 +121,22 @@ func handleFavourites(jsonFile string) {
 // replaceSpaceWithURLEncoding replaces space characters with %20 in the URL
 func replaceSpaceWithURLEncoding(urlString string) string {
 	return strings.ReplaceAll(urlString, " ", "%20")
+}
+
+func buildContentString(cityWPIs []CityAverageWPI) string {
+	var contentBuilder strings.Builder
+	// Add image to topic
+	contentBuilder.WriteString("![image|690x394](upload://jGDO8BaFIvS1MVO53MDmqlS27vQ.jpeg)\n")
+	// Header for the content
+	contentBuilder.WriteString("|City Name | WPI | Flights | Accommodation | Things to Do|\n")
+	contentBuilder.WriteString("|--|--|--|--|--|\n") // Additional line after headers
+
+	// Loop through cityWPIs and append each to the contentBuilder
+	for _, cityWPI := range cityWPIs {
+		line := fmt.Sprintf("| [%s](https://www.google.com/maps/place/%s) | [%.2f](https://www.google.com/search?q=weather+%s) | [SkyScanner](%s) | [Airbnb](%s) [Booking.com](%s) | [Google Results](https://www.google.com/search?q=things+to+do+this+weekend+%s)| \n", cityWPI.Name, replaceSpaceWithURLEncoding(cityWPI.Name), cityWPI.WPI, replaceSpaceWithURLEncoding(cityWPI.Name), cityWPI.SkyScannerURL, cityWPI.AirbnbURL, cityWPI.BookingURL, cityWPI.Name)
+		contentBuilder.WriteString(line)
+	}
+
+	// Convert the StringBuilder content to a string and return it
+	return contentBuilder.String()
 }
