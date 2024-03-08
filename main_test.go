@@ -1,11 +1,11 @@
 package main
 
 import (
+	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
 	"io/ioutil"
 	"os"
 	"testing"
 	"time"
-  "github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
 )
 
 // test for displayForecastData function
@@ -43,7 +43,7 @@ Friday: Avg Temp: 20.00°C, Weather: Rainy, Wind: 45.00km/h, WPI: 6.00
 	r, w, _ := os.Pipe()
 	os.Stdout = w
 
-	displayForecastData(location, dailyDetails)
+	weather_pleasantry.DisplayForecastData(location, dailyDetails)
 
 	// Reset stdout
 	w.Close()
