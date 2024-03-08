@@ -51,4 +51,3 @@ func main() {
 		fmt.Println("Error walking through files:", err)
 	}
 }
-

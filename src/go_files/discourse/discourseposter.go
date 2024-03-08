@@ -2,11 +2,11 @@ package discourse
 
 import (
 	"fmt"
+	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-	"gopkg.in/yaml.v2"
 )
 
 // Config struct adjusted for the nested api_keys
@@ -40,16 +40,16 @@ func readApiKey() (string, error) {
 // PostToDiscourse is an exported function to post content to a Discourse post
 func PostToDiscourse(content string) error {
 	apiKey, err := readApiKey()
-  if err != nil {
+	if err != nil {
 		return err
 	}
-  
+
 	apiUsername := "tristan"
 	postURL := "https://partybus.community/posts/392.json"
 	client := &http.Client{}
 	data := url.Values{}
 	data.Set("post[raw]", content)
-  fmt.Println("\nPOSTING")
+	fmt.Println("\nPOSTING")
 	req, err := http.NewRequest("PUT", postURL, strings.NewReader(data.Encode()))
 	if err != nil {
 		return err
@@ -72,4 +72,3 @@ func PostToDiscourse(content string) error {
 	fmt.Println("Response body:", string(body))
 	return nil
 }
-

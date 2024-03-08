@@ -1,10 +1,10 @@
-package weather_pleasantry 
+package weather_pleasantry
 
 import (
+	"github.com/Tris20/FairFareFinder/src/go_files"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"time"
-  "github.com/Tris20/FairFareFinder/src/go_files"
 )
 
 // WeatherPleasantnessConfig holds the configuration for weather pleasantness ratings.

@@ -1,4 +1,3 @@
-
 package mdtabletohtml
 
 import (
@@ -37,10 +36,7 @@ func ConvertMarkdownToHTML(markdownContent, outputPath string) error {
 </head>
 <body>`)
 
-
-
-
-  writer.WriteString("<table>\n")
+	writer.WriteString("<table>\n")
 	scanner := bufio.NewScanner(strings.NewReader(markdownContent))
 	isHeader := true
 	for scanner.Scan() {
@@ -68,11 +64,11 @@ func ConvertMarkdownToHTML(markdownContent, outputPath string) error {
 		}
 	}
 	writer.WriteString("</table>\n")
-  
+
 	writer.WriteString(`</body>
 </html>
 `)
- 
+
 	if err := scanner.Err(); err != nil {
 		return fmt.Errorf("error reading markdown content: %w", err)
 	}

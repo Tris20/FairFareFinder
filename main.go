@@ -12,13 +12,13 @@ import (
 	"strings"
 	"time"
 
-  "github.com/Tris20/FairFareFinder/src/go_files"
+	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions"
+	"github.com/Tris20/FairFareFinder/src/go_files/discourse"
+	"github.com/Tris20/FairFareFinder/src/go_files/json_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
-  "github.com/Tris20/FairFareFinder/src/go_files/discourse"
 	"github.com/Tris20/FairFareFinder/src/go_files/web_pages"
-    "github.com/Tris20/FairFareFinder/src/go_files/json_functions"
-  "gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v2"
 )
 
 type Favourites struct {
@@ -76,8 +76,8 @@ func main() {
 			log.Fatalf("Error starting server: %v", err)
 		}
 	case "init-db":
-		init_database(dbPath)
-		insert_test_user(dbPath)
+		user_db.Init_database(dbPath)
+		user_db.Insert_test_user(dbPath)
 	default:
 		// Check if the argument is a YAML file
 		if strings.HasSuffix(os.Args[1], ".json") {
@@ -88,29 +88,6 @@ func main() {
 			processLocation(location)
 		}
 	}
-}
-
-func init_database(dbPath string) {
-	// Check if the database file exists
-	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
-		// Database does not exist; create it
-		user_db.CreateDatabase(dbPath)
-	} else {
-		// Database exists
-		log.Println("Database already exists.")
-	}
-
-	// go_files.AddColumnToPreferencesTable(dbPath, "temp_min", "REAL")
-	// go_files.AddColumnToPreferencesTable(dbPath, "temp_max", "REAL")
-
-}
-
-func insert_test_user(dbPath string) {
-	username := "newuser"
-	email := "newuser@example.com"
-	preference := "dark mode"
-
-	user_db.AddNewUserWithPreferences(dbPath, username, email, preference)
 }
 
 // handles requests to the home page
@@ -250,7 +227,7 @@ func handleFavourites(jsonFile string) {
 
 	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
 	discourse.PostToDiscourse(content)
-  
+
 	// Call the function to convert markdown to HTML and save it
 	err = mdtabletohtml.ConvertMarkdownToHTML(content, "src/html/berlin-flight-destinations.html")
 	if err != nil {
