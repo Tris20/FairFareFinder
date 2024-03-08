@@ -11,9 +11,10 @@ import (
 // ConvertMarkdownToHTML converts markdown content to HTML and saves it to the specified file path.
 func ConvertMarkdownToHTML(markdownContent, outputPath string) error {
 	// Ensure the output directory exists
-	if err := os.MkdirAll(strings.TrimSuffix(outputPath, "/berlin-flight-destinations.html"), os.ModePerm); err != nil {
-		return fmt.Errorf("error creating output directory: %w", err)
-	}
+  
+//  if err := os.MkdirAll(strings.TrimSuffix(outputPath, outputPath[len("src/html"):]), os.ModePerm); err != nil {
+	//	return fmt.Errorf("error creating output directory: %w", err)
+	//}
 
 	// Create or open the output file for writing
 	outputFile, err := os.Create(outputPath)
@@ -31,7 +32,7 @@ func ConvertMarkdownToHTML(markdownContent, outputPath string) error {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flights from Berlin</title>
+    <title>Flights from Chosen City</title>
     <link rel="stylesheet" href="../tableStyles.css">
 </head>
 <body>`)
