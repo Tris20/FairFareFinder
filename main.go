@@ -12,8 +12,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Tris20/FairFareFinder/src/go_files"
-	"gopkg.in/yaml.v2"
+	"github.com/Tris20/FairFareFinder/src/go_files/db_functions"
+	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleaseantness"
+  "gopkg.in/yaml.v2"
 )
 
 type WeatherData struct {
@@ -51,7 +52,7 @@ type CityAverageWPI struct {
 }
 
 func main() {
-	go_files.Setup_database()
+	user_db.Setup_database()
 	dbPath := "user_database.db"
 	if len(os.Args) < 2 {
 		log.Fatal("Error: No argument provided. Please provide a location, 'web', or a YAML file.")
@@ -102,7 +103,7 @@ func init_database(dbPath string) {
 	// Check if the database file exists
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		// Database does not exist; create it
-		go_files.CreateDatabase(dbPath)
+		user_db.CreateDatabase(dbPath)
 	} else {
 		// Database exists
 		log.Println("Database already exists.")
@@ -118,7 +119,7 @@ func insert_test_user(dbPath string) {
 	email := "newuser@example.com"
 	preference := "dark mode"
 
-	go_files.AddNewUserWithPreferences(dbPath, username, email, preference)
+	user_db.AddNewUserWithPreferences(dbPath, username, email, preference)
 }
 
 // handles requests to the home page
@@ -293,18 +294,18 @@ func processLocation(location string) float64 {
 	}
 
 	// Load weather pleasantness config
-	config, err := LoadWeatherPleasantnessConfig("weatherPleasantness.yaml")
+	config, err := weather_pleasantry.LoadWeatherPleasantnessConfig("weatherPleasantness.yaml")
 	if err != nil {
 		log.Fatal("Error loading weather pleasantness config:", err)
 	}
 
-	dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
+	dailyDetails, overallAverage := weather_pleasantry.ProcessForecastData(forecast.List, config)
 	displayForecastData(location, dailyDetails)
 
 	return overallAverage
 }
 
-func displayForecastData(location string, dailyDetails map[time.Weekday]DailyWeatherDetails) {
+func displayForecastData(location string, dailyDetails map[time.Weekday]weather_pleasantry.DailyWeatherDetails) {
 	orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
 
 	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
