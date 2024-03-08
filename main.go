@@ -15,6 +15,8 @@ import (
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
 	"github.com/Tris20/FairFareFinder/src/go_files"
+  "github.com/Tris20/FairFareFinder/src/go_files/discourse"
+
   "gopkg.in/yaml.v2"
 )
 
@@ -246,8 +248,8 @@ func handleFavourites(jsonFile string) {
 	fmt.Println(content)
 
 	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
-	PostToDiscourse(content)
-
+	discourse.PostToDiscourse(content)
+  
 	// Call the function to convert markdown to HTML and save it
 	err = ConvertMarkdownToHTML(content, "src/html/berlin-flight-destinations.html")
 	if err != nil {
