@@ -1,6 +1,7 @@
-package main
+package weather_pleasantry
 
 import (
+	"github.com/Tris20/FairFareFinder/src/go_files"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"time"
@@ -104,7 +105,7 @@ func weatherCondPleasantness(cond string, config WeatherPleasantnessConfig) floa
 
 // calculateDailyAverageWPI calculates the average WPI for a single day
 // This function assumes it receives weather data for each 3-hour segment between 9 am and 9 pm
-func calculateDailyAverageWPI(weatherData []WeatherData, config WeatherPleasantnessConfig) float64 {
+func calculateDailyAverageWPI(weatherData []model.WeatherData, config WeatherPleasantnessConfig) float64 {
 	var totalWPI float64
 	var count float64
 
@@ -129,7 +130,7 @@ func calculateDailyAverageWPI(weatherData []WeatherData, config WeatherPleasantn
 
 //func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]DailyWeatherDetails, float64){
 
-func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]DailyWeatherDetails, float64) {
+func ProcessForecastData(weeklyData []model.WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]DailyWeatherDetails, float64) {
 	currentDay := time.Now().Weekday()
 	startDay, endDay := determineRangeBasedOnCurrentDay(currentDay)
 
@@ -213,8 +214,8 @@ func determineRangeBasedOnCurrentDay(currentDay time.Weekday) (time.Weekday, tim
 }
 
 // filterDataByDayRange filters the weather data for a specific range of days
-func filterDataByDayRange(weeklyData []WeatherData, startDay, endDay time.Weekday) map[time.Weekday][]WeatherData {
-	dailyData := make(map[time.Weekday][]WeatherData)
+func filterDataByDayRange(weeklyData []model.WeatherData, startDay, endDay time.Weekday) map[time.Weekday][]model.WeatherData {
+	dailyData := make(map[time.Weekday][]model.WeatherData)
 	for _, data := range weeklyData {
 		timestamp := time.Unix(data.Dt, 0)
 		day := timestamp.Weekday()

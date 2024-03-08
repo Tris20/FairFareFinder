@@ -1,13 +1,12 @@
-
-package main
+package discourse
 
 import (
 	"fmt"
+	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-	"gopkg.in/yaml.v2"
 )
 
 // Config struct adjusted for the nested api_keys
@@ -17,6 +16,7 @@ type config struct {
 
 // readApiKey reads the API key for partybus from secrets.yaml
 func readApiKey() (string, error) {
+
 	filePath := "./ignore/secrets.yaml" // Adjust the path as needed
 	yamlFile, err := ioutil.ReadFile(filePath)
 	if err != nil {
@@ -49,7 +49,7 @@ func PostToDiscourse(content string) error {
 	client := &http.Client{}
 	data := url.Values{}
 	data.Set("post[raw]", content)
-
+	fmt.Println("\nPOSTING")
 	req, err := http.NewRequest("PUT", postURL, strings.NewReader(data.Encode()))
 	if err != nil {
 		return err
@@ -58,7 +58,6 @@ func PostToDiscourse(content string) error {
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Set("Api-Key", apiKey)
 	req.Header.Set("Api-Username", apiUsername)
-
 	resp, err := client.Do(req)
 	if err != nil {
 		return err
@@ -73,4 +72,3 @@ func PostToDiscourse(content string) error {
 	fmt.Println("Response body:", string(body))
 	return nil
 }
-

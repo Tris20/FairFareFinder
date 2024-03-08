@@ -13,28 +13,20 @@ import (
 	"time"
 
 	"github.com/Tris20/FairFareFinder/src/go_files"
+	"github.com/Tris20/FairFareFinder/src/go_files/db_functions"
+	"github.com/Tris20/FairFareFinder/src/go_files/discourse"
+	"github.com/Tris20/FairFareFinder/src/go_files/json_functions"
+	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
+	"github.com/Tris20/FairFareFinder/src/go_files/web_pages"
 	"gopkg.in/yaml.v2"
 )
-
-type WeatherData struct {
-	Dt   int64 `json:"dt"` // Unix timestamp of the forecasted data
-	Main struct {
-		Temp float64 `json:"temp"`
-	} `json:"main"`
-	Wind struct {
-		Speed float64 `json:"speed"`
-	} `json:"wind"`
-	Weather []struct {
-		Main string `json:"main"`
-	} `json:"weather"`
-}
 
 type Favourites struct {
 	Locations []string `yaml:"locations"`
 }
 
 type ForecastResponse struct {
-	List []WeatherData `json:"list"`
+	List []model.WeatherData `json:"list"`
 }
 
 // Secrets represents the structure of the secrets.yaml file.
@@ -51,7 +43,7 @@ type CityAverageWPI struct {
 }
 
 func main() {
-	go_files.Setup_database()
+	user_db.Setup_database()
 	dbPath := "user_database.db"
 	if len(os.Args) < 2 {
 		log.Fatal("Error: No argument provided. Please provide a location, 'web', or a YAML file.")
@@ -64,8 +56,8 @@ func main() {
 		ticker := time.NewTicker(6 * time.Hour)
 		go func() {
 			for range ticker.C {
-				generateLinks()
-				handleFavourites("flights.json")
+				generateflightsdotjson.GenerateLinks()
+				handleFavourites("input/flights.json")
 				fmt.Println("hello")
 			}
 		}()
@@ -84,8 +76,8 @@ func main() {
 			log.Fatalf("Error starting server: %v", err)
 		}
 	case "init-db":
-		init_database(dbPath)
-		insert_test_user(dbPath)
+		user_db.Init_database(dbPath)
+		user_db.Insert_test_user(dbPath)
 	default:
 		// Check if the argument is a YAML file
 		if strings.HasSuffix(os.Args[1], ".json") {
@@ -96,29 +88,6 @@ func main() {
 			processLocation(location)
 		}
 	}
-}
-
-func init_database(dbPath string) {
-	// Check if the database file exists
-	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
-		// Database does not exist; create it
-		go_files.CreateDatabase(dbPath)
-	} else {
-		// Database exists
-		log.Println("Database already exists.")
-	}
-
-	// go_files.AddColumnToPreferencesTable(dbPath, "temp_min", "REAL")
-	// go_files.AddColumnToPreferencesTable(dbPath, "temp_max", "REAL")
-
-}
-
-func insert_test_user(dbPath string) {
-	username := "newuser"
-	email := "newuser@example.com"
-	preference := "dark mode"
-
-	go_files.AddNewUserWithPreferences(dbPath, username, email, preference)
 }
 
 // handles requests to the home page
@@ -257,10 +226,10 @@ func handleFavourites(jsonFile string) {
 	fmt.Println(content)
 
 	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
-	PostToDiscourse(content)
+	discourse.PostToDiscourse(content)
 
 	// Call the function to convert markdown to HTML and save it
-	err = ConvertMarkdownToHTML(content, "src/html/berlin-flight-destinations.html")
+	err = mdtabletohtml.ConvertMarkdownToHTML(content, "src/html/berlin-flight-destinations.html")
 	if err != nil {
 		log.Fatalf("Failed to convert markdown to HTML: %v", err)
 	}
@@ -293,18 +262,18 @@ func processLocation(location string) float64 {
 	}
 
 	// Load weather pleasantness config
-	config, err := LoadWeatherPleasantnessConfig("weatherPleasantness.yaml")
+	config, err := weather_pleasantry.LoadWeatherPleasantnessConfig("input/weatherPleasantness.yaml")
 	if err != nil {
 		log.Fatal("Error loading weather pleasantness config:", err)
 	}
 
-	dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
+	dailyDetails, overallAverage := weather_pleasantry.ProcessForecastData(forecast.List, config)
 	displayForecastData(location, dailyDetails)
 
 	return overallAverage
 }
 
-func displayForecastData(location string, dailyDetails map[time.Weekday]DailyWeatherDetails) {
+func displayForecastData(location string, dailyDetails map[time.Weekday]weather_pleasantry.DailyWeatherDetails) {
 	orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
 
 	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
