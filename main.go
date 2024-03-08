@@ -12,11 +12,12 @@ import (
 	"strings"
 	"time"
 
+  "github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
-	"github.com/Tris20/FairFareFinder/src/go_files"
   "github.com/Tris20/FairFareFinder/src/go_files/discourse"
-
+	"github.com/Tris20/FairFareFinder/src/go_files/web_pages"
+    "github.com/Tris20/FairFareFinder/src/go_files/json_functions"
   "gopkg.in/yaml.v2"
 )
 
@@ -55,8 +56,8 @@ func main() {
 		ticker := time.NewTicker(6 * time.Hour)
 		go func() {
 			for range ticker.C {
-				generateLinks()
-				handleFavourites("flights.json")
+				generateflightsdotjson.GenerateLinks()
+				handleFavourites("input/flights.json")
 				fmt.Println("hello")
 			}
 		}()
@@ -251,7 +252,7 @@ func handleFavourites(jsonFile string) {
 	discourse.PostToDiscourse(content)
   
 	// Call the function to convert markdown to HTML and save it
-	err = ConvertMarkdownToHTML(content, "src/html/berlin-flight-destinations.html")
+	err = mdtabletohtml.ConvertMarkdownToHTML(content, "src/html/berlin-flight-destinations.html")
 	if err != nil {
 		log.Fatalf("Failed to convert markdown to HTML: %v", err)
 	}
@@ -284,7 +285,7 @@ func processLocation(location string) float64 {
 	}
 
 	// Load weather pleasantness config
-	config, err := weather_pleasantry.LoadWeatherPleasantnessConfig("weatherPleasantness.yaml")
+	config, err := weather_pleasantry.LoadWeatherPleasantnessConfig("input/weatherPleasantness.yaml")
 	if err != nil {
 		log.Fatal("Error loading weather pleasantness config:", err)
 	}

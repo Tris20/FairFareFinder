@@ -49,7 +49,7 @@ func PostToDiscourse(content string) error {
 	client := &http.Client{}
 	data := url.Values{}
 	data.Set("post[raw]", content)
-
+  fmt.Println("\nPOSTING")
 	req, err := http.NewRequest("PUT", postURL, strings.NewReader(data.Encode()))
 	if err != nil {
 		return err
