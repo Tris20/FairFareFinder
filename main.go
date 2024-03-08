@@ -13,29 +13,17 @@ import (
 	"time"
 
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions"
-	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleaseantness"
+	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
+	"github.com/Tris20/FairFareFinder/src/go_files"
   "gopkg.in/yaml.v2"
 )
-
-type WeatherData struct {
-	Dt   int64 `json:"dt"` // Unix timestamp of the forecasted data
-	Main struct {
-		Temp float64 `json:"temp"`
-	} `json:"main"`
-	Wind struct {
-		Speed float64 `json:"speed"`
-	} `json:"wind"`
-	Weather []struct {
-		Main string `json:"main"`
-	} `json:"weather"`
-}
 
 type Favourites struct {
 	Locations []string `yaml:"locations"`
 }
 
 type ForecastResponse struct {
-	List []WeatherData `json:"list"`
+	List []model.WeatherData `json:"list"`
 }
 
 // Secrets represents the structure of the secrets.yaml file.
