@@ -23,10 +23,10 @@ type DestinationWithURL struct {
 	BookingURL    string `json:"bookingURL"`
 }
 
-func GenerateLinks() {
+func GenerateLinks(inputJson string, outputJson string, iata_url string) {
 	// Load the JSON data from file
 	var destinations []Destination
-	data, err := ioutil.ReadFile("input/destinations.json")
+	data, err := ioutil.ReadFile(inputJson)
 	if err != nil {
 		fmt.Println("Error reading JSON file:", err)
 		return
@@ -40,7 +40,7 @@ func GenerateLinks() {
 	}
 
 	// Prepare the base URLs with placeholders
-	baseSkyScannerURL := "https://www.skyscanner.de/transport/fluge/ber/$$$/?adults=1&adultsv2=1&cabinclass=economy&children=0&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1"
+  baseSkyScannerURL := fmt.Sprintf("https://www.skyscanner.de/transport/fluge/%s/$$$/?adults=1&adultsv2=1&cabinclass=economy&children=0&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1",iata_url)
 
 	// Create a new slice for the modified destinations
 	var destinationsWithUrls []DestinationWithURL
@@ -67,7 +67,7 @@ func GenerateLinks() {
 	}
 
 	// Save the modified JSON data to "flights.json"
-	err = ioutil.WriteFile("input/flights.json", modifiedData, 0644)
+	err = ioutil.WriteFile(outputJson, modifiedData, 0644)
 	if err != nil {
 		fmt.Println("Error writing modified data to file:", err)
 		return
