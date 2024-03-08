@@ -45,9 +45,14 @@ func main() {
 		ticker := time.NewTicker(6 * time.Hour)
 		go func() {
 			for range ticker.C {
-				generateflightsdotjson.GenerateLinks()
-				GenerateAndPostCityRankings("input/flights.json")
-				fmt.Println("hello")
+        //Berlin
+				generateflightsdotjson.GenerateLinks("input/berlin-destinations.json", "input/berlin-flights.json", "ber")
+				GenerateAndPostCityRankings("input/berlin-flights.json", "src/html/berlin-flight-destinations.html")
+        // Glasgow
+        generateflightsdotjson.GenerateLinks("input/glasgow-edi-destinations.json", "input/glasgow-edi-flights.json", "gla")
+				GenerateAndPostCityRankings("input/glasgow-edi-flights.json", "src/html/glasgow-flight-destinations.html")
+
+        fmt.Println("hello")
 			}
 		}()
 		fffwebserver.SetupFFFWebServer()
@@ -58,7 +63,8 @@ func main() {
 	default:
 		// Check if the argument is a json file
 		if strings.HasSuffix(os.Args[1], ".json") {
-			GenerateAndPostCityRankings(os.Args[1])
+      out := fmt.Sprintf("input/%s-flights.json",os.Args[1:] )
+			GenerateAndPostCityRankings(os.Args[1], out)
 		} else {
 			// Assuming it's a city name
 			location := strings.Join(os.Args[1:], " ")
@@ -67,7 +73,7 @@ func main() {
 	}
 }
 
-func GenerateAndPostCityRankings(jsonFile string) {
+func GenerateAndPostCityRankings(jsonFile string, target_url string) {
 	var flights []struct {
 		CityName      string `json:"City_name"`
 		SkyScannerURL string `json:"SkyScannerURL"`
@@ -111,7 +117,7 @@ func GenerateAndPostCityRankings(jsonFile string) {
 	discourse.PostToDiscourse(content)
 
 	// Call the function to convert markdown to HTML and save it
-	err = mdtabletohtml.ConvertMarkdownToHTML(content, "src/html/berlin-flight-destinations.html")
+	err = mdtabletohtml.ConvertMarkdownToHTML(content, target_url)
 	if err != nil {
 		log.Fatalf("Failed to convert markdown to HTML: %v", err)
 	}
