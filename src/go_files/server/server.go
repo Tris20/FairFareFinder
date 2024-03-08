@@ -12,7 +12,7 @@ func SetupFFFWebServer() {
 	http.HandleFunc("/", fffwebpages.HomeHandler)
 	http.HandleFunc("/forecast", fffwebpages.PresentBerlinFlightDestinations)
 //fffwebpages.ForecastHandler)
-	http.HandleFunc("/getforecast", fffwebpages.PresentBerlinFlightDestinations)
+	//http.HandleFunc("/getforecast", fffwebpages.PresentBerlinFlightDestinations)
 //fffwebpages.GetForecastHandler)
 	http.HandleFunc("/berlin-flight-destinations", fffwebpages.PresentBerlinFlightDestinations)
 	// Serve static files from the `images` directory
