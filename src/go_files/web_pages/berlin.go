@@ -1,12 +1,10 @@
 package fffwebpages
 
 import (
-  "log"
-  "net/http"
-  "io/ioutil"
+	"io/ioutil"
+	"log"
+	"net/http"
 )
-
-
 
 // handles requests to the forecast page
 func PresentBerlinFlightDestinations(w http.ResponseWriter, r *http.Request) {

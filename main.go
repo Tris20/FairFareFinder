@@ -6,34 +6,21 @@ import (
 	"io/ioutil"
 	"log"
 	"math"
-	"net/http"
 	"os"
 	"sort"
 	"strings"
 	"time"
 
-	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/discourse"
 	"github.com/Tris20/FairFareFinder/src/go_files/json_functions"
+	"github.com/Tris20/FairFareFinder/src/go_files/server"
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
 	"github.com/Tris20/FairFareFinder/src/go_files/web_pages/html_generators"
-  "github.com/Tris20/FairFareFinder/src/go_files/server"
-
-  "gopkg.in/yaml.v2"
 )
 
 type Favourites struct {
 	Locations []string `yaml:"locations"`
-}
-
-type ForecastResponse struct {
-	List []model.WeatherData `json:"list"`
-}
-
-// Secrets represents the structure of the secrets.yaml file.
-type Secrets struct {
-	APIKeys map[string]string `yaml:"api_keys"`
 }
 
 type CityAverageWPI struct {
@@ -63,9 +50,9 @@ func main() {
 				fmt.Println("hello")
 			}
 		}()
-	  	fffwebserver.SetupFFFWebServer()
-   
-  case "init-db":
+		fffwebserver.SetupFFFWebServer()
+
+	case "init-db":
 		user_db.Init_database(dbPath)
 		user_db.Insert_test_user(dbPath)
 	default:
@@ -75,52 +62,10 @@ func main() {
 		} else {
 			// Assuming it's a city name
 			location := strings.Join(os.Args[1:], " ")
-			processLocation(location)
+			weather_pleasantry.ProcessLocation(location)
 		}
 	}
 }
-
-
-/*
-func getForecastHandler(w http.ResponseWriter, r *http.Request) {
-	// fmt.Println("Handling request to /getforecast")
-
-	if r.Method != "POST" {
-		http.Error(w, "Only POST method is allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
-	// fmt.Println("Handling POST request")
-
-	// Parse form data
-	if err := r.ParseForm(); err != nil {
-		log.Printf("Error parsing form: %v", err)
-		http.Error(w, "Error parsing form", http.StatusInternalServerError)
-		return
-	}
-	city := r.FormValue("city")
-	// fmt.Println("City:", city)
-
-	// Call the processLocation function
-	wpi := processLocation(city)
-
-	response := fmt.Sprintf("The Weather Pleasantness Index (WPI) for %s is %.2f", city, wpi)
-	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprint(w, response)
-}
-
-// handles requests to the forecast page
-func forecastHandler(w http.ResponseWriter, r *http.Request) {
-	// serving a static file
-	pageContent, err := ioutil.ReadFile("src/html/forecast.html")
-	if err != nil {
-		log.Printf("Error reading forecast page file: %v", err)
-		http.Error(w, "Internal server error", 500)
-		return
-	}
-	w.Write(pageContent)
-}
-*/
 
 func handleFavourites(jsonFile string) {
 	var flights []struct {
@@ -142,7 +87,7 @@ func handleFavourites(jsonFile string) {
 
 	var cityWPIs []CityAverageWPI
 	for _, flight := range flights {
-		wpi := processLocation(flight.CityName)
+		wpi := weather_pleasantry.ProcessLocation(flight.CityName)
 		if !math.IsNaN(wpi) {
 			cityWPIs = append(cityWPIs, CityAverageWPI{
 				Name:          flight.CityName,
@@ -186,79 +131,6 @@ func handleFavourites(jsonFile string) {
 		log.Fatalf("Failed to convert markdown to HTML: %v", err)
 	}
 
-}
-
-func processLocation(location string) float64 {
-	// Load API key from secrets.yaml
-	apiKey, err := loadApiKey("ignore/secrets.yaml", "openweathermap.org")
-	if err != nil {
-		log.Fatal("Error loading API key:", err)
-	}
-
-	// Build the forecast API URL with the provided city
-	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric", location, apiKey)
-
-	// Make the HTTP request
-	resp, err := http.Get(url)
-	if err != nil {
-		log.Fatalf("Error making HTTP request: %v", err)
-	}
-	defer resp.Body.Close()
-
-	// Read and parse the response body
-	var forecast ForecastResponse
-	if body, err := ioutil.ReadAll(resp.Body); err != nil {
-		log.Fatalf("Error reading response body: %v", err)
-	} else if err := json.Unmarshal(body, &forecast); err != nil {
-		log.Fatalf("Error parsing JSON response: %v", err)
-	}
-
-	// Load weather pleasantness config
-	config, err := weather_pleasantry.LoadWeatherPleasantnessConfig("input/weatherPleasantness.yaml")
-	if err != nil {
-		log.Fatal("Error loading weather pleasantness config:", err)
-	}
-
-	dailyDetails, overallAverage := weather_pleasantry.ProcessForecastData(forecast.List, config)
-	displayForecastData(location, dailyDetails)
-
-	return overallAverage
-}
-
-func displayForecastData(location string, dailyDetails map[time.Weekday]weather_pleasantry.DailyWeatherDetails) {
-	orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
-
-	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
-	for _, day := range orderedDays {
-		details, ok := dailyDetails[day]
-		wind_kmh := 3.6 * details.AverageWind
-		if ok {
-			fmt.Printf("%s: Avg Temp: %.2f°C, Weather: %s, Wind: %.2fkm/h, WPI: %.2f\n",
-				day.String(), details.AverageTemp, details.CommonWeather, wind_kmh, details.WPI)
-		}
-	}
-}
-
-// loadApiKey loads the API key for a given domain from a YAML file
-func loadApiKey(filePath, domain string) (string, error) {
-	var secrets Secrets
-
-	yamlFile, err := ioutil.ReadFile(filePath)
-	if err != nil {
-		return "", err
-	}
-
-	err = yaml.Unmarshal(yamlFile, &secrets)
-	if err != nil {
-		return "", err
-	}
-
-	apiKey, ok := secrets.APIKeys[domain]
-	if !ok {
-		return "", fmt.Errorf("API key for %s not found", domain)
-	}
-
-	return apiKey, nil
 }
 
 // replaceSpaceWithURLEncoding replaces space characters with %20 in the URL
