@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -107,4 +106,3 @@ func nextThursdayFridaySaturday() time.Time {
 		today = today.Add(24 * time.Hour)
 	}
 }
-

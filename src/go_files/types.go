@@ -13,5 +13,3 @@ type WeatherData struct {
 		Main string `json:"main"`
 	} `json:"weather"`
 }
-
-
