@@ -11,8 +11,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Tris20/FairFareFinder/src/go_files/db_functions"
-	"github.com/Tris20/FairFareFinder/src/go_files/discourse"
+	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/user_db_functions"
+	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/flight_db_functions"
+  "github.com/Tris20/FairFareFinder/src/go_files/discourse"
 	"github.com/Tris20/FairFareFinder/src/go_files/json_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/server"
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
@@ -38,8 +39,12 @@ func main() {
 		log.Fatal("Error: No argument provided. Please provide a location, 'web', or a json file.")
 	}
 
+  
 	switch os.Args[1] {
-	case "web":
+  case "db_test":
+  flightdb.GetCitiesAndIATACodes()
+
+  case "web":
 
 		// Update WPI data every 6 hours
 		ticker := time.NewTicker(6 * time.Hour)
