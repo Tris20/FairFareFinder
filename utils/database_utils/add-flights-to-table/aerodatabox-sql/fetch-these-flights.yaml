@@ -1,0 +1,13 @@
+flights:
+  - direction: "Departure"
+    airport: "BER"
+    startDate: "08-03-2024"
+    endDate: "09-03-2024"
+  - direction: "Arrival"
+    airport: "BER"
+    startDate: "10-04-2024"
+    endDate: "13-04-2024"
+
+
+      # You can add more entries with different airports, directions, and date ranges.
+
