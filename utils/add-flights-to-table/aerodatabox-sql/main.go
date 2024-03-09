@@ -133,12 +133,12 @@ func main() {
 		log.Fatalf("Error parsing config file: %v", err)
 	}
 
-	apiKey, err := readAPIKey("../../../../../ignore/secrets.yaml")
+	apiKey, err := readAPIKey("../../../ignore/secrets.yaml")
 	if err != nil {
 		log.Fatalf("Error reading API key: %v", err)
 	}
 
-	db, err := sql.Open("sqlite3", "flights.db")
+  db, err := sql.Open("sqlite3", "../../../data/flights.db")
 	if err != nil {
 		log.Fatalf("Error opening database: %v", err)
 	}
