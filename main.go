@@ -42,8 +42,8 @@ func main() {
   
 	switch os.Args[1] {
   case "db_test":
-  flightdb.GetCitiesAndIATACodes()
-
+  //flightdb.GetCitiesAndIATACodes()
+  flightdb.DetermineFlightsFromConfig()
   case "web":
 
 		// Update WPI data every 6 hours
