@@ -10,10 +10,8 @@ import (
 func SetupFFFWebServer() {
 	// Handle starting the web server
 	http.HandleFunc("/", fffwebpages.HomeHandler)
-	http.HandleFunc("/forecast", fffwebpages.PresentBerlinFlightDestinations)
-//fffwebpages.ForecastHandler)
-	//http.HandleFunc("/getforecast", fffwebpages.PresentBerlinFlightDestinations)
-//fffwebpages.GetForecastHandler)
+	http.HandleFunc("/forecast", fffwebpages.ForecastHandler)
+	http.HandleFunc("/getforecast", fffwebpages.GetForecastHandler)
 	http.HandleFunc("/berlin-flight-destinations", fffwebpages.PresentBerlinFlightDestinations)
 	
   http.HandleFunc("/glasgow-flight-destinations", fffwebpages.PresentGlasgowFlightDestinations)
