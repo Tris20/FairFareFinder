@@ -14,7 +14,7 @@ type Destination struct {
 }
 
 
-func GenerateFlightsAndHotelsURLs(origin model.DestinationInfo ,destinationsWithUrls []model.DestinationInfo) []model.DestinationInfo {  
+func GenerateFlightsAndHotelsURLs(origin model.OriginInfo,destinationsWithUrls []model.DestinationInfo) []model.DestinationInfo {  
 	
 	// Prepare the base URLs with placeholders
 	baseSkyScannerURL := fmt.Sprintf("https://www.skyscanner.de/transport/fluge/%s/$$$/?adults=1&adultsv2=1&cabinclass=economy&children=0&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1", origin.IATA)

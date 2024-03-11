@@ -46,13 +46,14 @@ func main() {
 	switch os.Args[1] {
   case "db_test":
 
-    origin:= model.DestinationInfo{
+    origin:= model.OriginInfo{
 			IATA:          "BER",
 			City:          "Berlin",
 			Country:       "Germany",
-			SkyScannerURL: "",
-			AirbnbURL:     "",
-			BookingURL:    "",
+      DepartureStartDate: "2024-03-20", 
+      DepartureEndDate: "2024-03-22", 
+      ArrivalStartDate: "2024-03-24",
+      ArrivalEndDate: "2024-03-26",
 		}
 
 

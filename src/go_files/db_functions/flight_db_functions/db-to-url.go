@@ -89,23 +89,8 @@ func intersectSets(sets []map[string]bool) []string {
 
 
 
-func DetermineFlightsFromConfig(origin model.DestinationInfo) []model.DestinationInfo  {
-	// Example YAML input.
+func DetermineFlightsFromConfig(origin model.OriginInfo) []model.DestinationInfo  {
 
-/*
-  yamlInput := []byte(`
-flights:
-  - direction: "Departure"
-    airport: "BER"
-    startDate: "2024-03-08"
-    endDate: "2024-03-09"
-  - direction: "Arrival"
-    airport: "BER"
-    startDate: "2024-04-10"
-    endDate: "2024-04-13"
-`)
-
-*/
 	// Assuming the YAML to SQL query conversion is done elsewhere and we have the queries ready.
 // Connect to the SQLite database.
 	db, err := sql.Open("sqlite3", "data/flights.db")
@@ -116,8 +101,8 @@ flights:
 
 // Define your queries here.
 	queries := []string{
-		fmt.Sprintf("SELECT arrivalAirport FROM flights WHERE departureAirport = '%s' AND departureTime BETWEEN '2024-03-20' AND '2024-03-22'", origin.IATA),
-		fmt.Sprintf("SELECT departureAirport FROM flights WHERE arrivalAirport = '%s' AND arrivalTime BETWEEN '2024-03-24' AND '2024-03-26'",origin.IATA),
+		fmt.Sprintf("SELECT arrivalAirport FROM flights WHERE departureAirport = '%s' AND departureTime BETWEEN '%s' AND '%s'", origin.IATA, origin.DepartureStartDate, origin.DepartureEndDate),
+		fmt.Sprintf("SELECT departureAirport FROM flights WHERE arrivalAirport = '%s' AND arrivalTime BETWEEN '%s' AND '%s'",origin.IATA, origin.ArrivalStartDate, origin.ArrivalEndDate),
 		//"SELECT arrivalAirport FROM flights WHERE departureAirport = 'EDI' AND departureTime BETWEEN '2024-03-20' AND '2024-03-22'",
     //"SELECT departureAirport FROM flights WHERE arrivalAirport = 'EDI' AND arrivalTime BETWEEN '2024-03-24' AND '2024-03-26'",
 
