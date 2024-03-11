@@ -19,6 +19,7 @@ import (
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
 	"github.com/Tris20/FairFareFinder/src/go_files/web_pages/html_generators"
 	"github.com/Tris20/FairFareFinder/src/go_files/url_generators"
+	"github.com/Tris20/FairFareFinder/src/go_files"
 
 )
 
@@ -44,8 +45,19 @@ func main() {
   
 	switch os.Args[1] {
   case "db_test":
-    airportDetailsList := flightdb.DetermineFlightsFromConfig()
-    detinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(airportDetailsList )
+
+    origin:= model.DestinationInfo{
+			IATA:          "BER",
+			City:          "Berlin",
+			Country:       "Germany",
+			SkyScannerURL: "",
+			AirbnbURL:     "",
+			BookingURL:    "",
+		}
+
+
+    airportDetailsList := flightdb.DetermineFlightsFromConfig(origin)
+    detinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(origin, airportDetailsList )
 // Iterate through the slice and print details of each DestinationInfo
 	for _, dest := range detinationsWithUrls {
 		fmt.Printf("IATA: %s, City: %s, Country: %s\n", dest.IATA, dest.City, dest.Country)

@@ -14,10 +14,10 @@ type Destination struct {
 }
 
 
-func GenerateFlightsAndHotelsURLs(destinationsWithUrls []model.DestinationInfo) []model.DestinationInfo {  
+func GenerateFlightsAndHotelsURLs(origin model.DestinationInfo ,destinationsWithUrls []model.DestinationInfo) []model.DestinationInfo {  
 	
 	// Prepare the base URLs with placeholders
-	baseSkyScannerURL := "https://www.skyscanner.de/transport/fluge/%s/$$$/?adults=1&adultsv2=1&cabinclass=economy&children=0&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1"
+	baseSkyScannerURL := fmt.Sprintf("https://www.skyscanner.de/transport/fluge/%s/$$$/?adults=1&adultsv2=1&cabinclass=economy&children=0&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1", origin.IATA)
 
 	// Replace the placeholders in the URLs with actual values for each destination
 	for i := range destinationsWithUrls {
