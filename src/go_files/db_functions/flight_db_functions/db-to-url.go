@@ -89,7 +89,7 @@ func intersectSets(sets []map[string]bool) []string {
 
 
 
-func DetermineFlightsFromConfig() []model.DestinationInfo  {
+func DetermineFlightsFromConfig(origin model.DestinationInfo) []model.DestinationInfo  {
 	// Example YAML input.
 
 /*
@@ -116,8 +116,8 @@ flights:
 
 // Define your queries here.
 	queries := []string{
-		"SELECT arrivalAirport FROM flights WHERE departureAirport = 'BER' AND departureTime BETWEEN '2024-03-20' AND '2024-03-22'",
-		"SELECT departureAirport FROM flights WHERE arrivalAirport = 'BER' AND arrivalTime BETWEEN '2024-03-24' AND '2024-03-26'",
+		fmt.Sprintf("SELECT arrivalAirport FROM flights WHERE departureAirport = '%s' AND departureTime BETWEEN '2024-03-20' AND '2024-03-22'", origin.IATA),
+		fmt.Sprintf("SELECT departureAirport FROM flights WHERE arrivalAirport = '%s' AND arrivalTime BETWEEN '2024-03-24' AND '2024-03-26'",origin.IATA),
 		//"SELECT arrivalAirport FROM flights WHERE departureAirport = 'EDI' AND departureTime BETWEEN '2024-03-20' AND '2024-03-22'",
     //"SELECT departureAirport FROM flights WHERE arrivalAirport = 'EDI' AND arrivalTime BETWEEN '2024-03-24' AND '2024-03-26'",
 
