@@ -27,3 +27,21 @@ type DestinationInfo struct {
   BookingURL string
 }
 
+// AirportInfo holds the details for an airport.
+type OriginInfo struct {
+	IATA    string
+	City    string
+	Country string
+  DepartureStartDate string
+  DepartureEndDate string
+  ArrivalStartDate string
+  ArrivalEndDate string
+}
+
+
+
+
+
+
+
+
