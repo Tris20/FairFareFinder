@@ -13,3 +13,17 @@ type WeatherData struct {
 		Main string `json:"main"`
 	} `json:"weather"`
 }
+
+
+
+
+// AirportInfo holds the details for an airport.
+type DestinationInfo struct {
+	IATA    string
+	City    string
+	Country string
+  SkyScannerURL string
+  AirbnbURL string
+  BookingURL string
+}
+

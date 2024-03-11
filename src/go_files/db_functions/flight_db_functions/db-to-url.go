@@ -5,56 +5,9 @@ import (
 	"fmt"
 	"log"
 	_ "github.com/mattn/go-sqlite3"
+  "github.com/Tris20/FairFareFinder/src/go_files" //import types
 )
 
-type Airport struct {
-	IATACode string
-	CityName string
-}
-
-
-func GetCitiesAndIATACodes() {
-
-  DetermineFlightsFromConfig() 
-
-  // Example list of IATA codes
-	iataCodes := []string{"CDG", "KOI", "AYT", "BRS", "LSI", "DXB", "KEF", "STN", "BEB", "FCO", "SYY", "PRG", "FRA", "AMS", "ALC", "FAO", "ILY", "BER", "DUB", "LGW", "BCN", "BRR", "BHX", "TRE", "LPA", "LHR", "LTN", "TFS", "ACE", "BFS", "SOU", "BHD", "LCY", "LIS", "ATH", "CRL", "VCE", "FUE", "GVA", "NQY", "CGN", "MAD", "IST", "DOH", "LYS", "BGY", "EXT", "MUC", "ARN", "ORK", "CWL", "OSL", "EWR", "KRK", "MXP", "RTM", "HEL"}
-  fmt.Println("Opening Flights")
-	// Open the SQLite database
-	db, err := sql.Open("sqlite3", "data/flights.db")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Close()
-
-	// Prepare the query statement for performance
-	stmt, err := db.Prepare("SELECT city FROM airport_info WHERE iata = ?")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer stmt.Close()
-
-	var airports []Airport
-
-	for _, code := range iataCodes {
-		var cityName string
-		err := stmt.QueryRow(code).Scan(&cityName)
-		if err != nil {
-			log.Printf("Failed to get city for IATA code %s: %v", code, err)
-			continue // Skip to the next code
-		}
-		airports = append(airports, Airport{IATACode: code, CityName: cityName})
-	}
-
-	// Print the result
-	for _, airport := range airports {
-		fmt.Printf("IATA Code: %s, City Name: %s\n", airport.IATACode, airport.CityName)
-	}
-}
-
-
-
-/* GET IATIA */
 
 
 
@@ -136,7 +89,7 @@ func intersectSets(sets []map[string]bool) []string {
 
 
 
-func DetermineFlightsFromConfig() {
+func DetermineFlightsFromConfig() []model.DestinationInfo  {
 	// Example YAML input.
 
 /*
@@ -165,8 +118,8 @@ flights:
 	queries := []string{
 		"SELECT arrivalAirport FROM flights WHERE departureAirport = 'BER' AND departureTime BETWEEN '2024-03-20' AND '2024-03-22'",
 		"SELECT departureAirport FROM flights WHERE arrivalAirport = 'BER' AND arrivalTime BETWEEN '2024-03-24' AND '2024-03-26'",
-		"SELECT arrivalAirport FROM flights WHERE departureAirport = 'GLA' AND departureTime BETWEEN '2024-03-20' AND '2024-03-22'",
-    "SELECT departureAirport FROM flights WHERE arrivalAirport = 'GLA' AND arrivalTime BETWEEN '2024-03-24' AND '2024-03-26'",
+		//"SELECT arrivalAirport FROM flights WHERE departureAirport = 'EDI' AND departureTime BETWEEN '2024-03-20' AND '2024-03-22'",
+    //"SELECT departureAirport FROM flights WHERE arrivalAirport = 'EDI' AND arrivalTime BETWEEN '2024-03-24' AND '2024-03-26'",
 
     // Add your third, fourth, ... queries here.
 	}
@@ -185,4 +138,46 @@ flights:
 	intersection := intersectSets(sets)
 
 	fmt.Println("Airports meeting all conditions:", intersection)
+ airportDetailsList :=  buildAirportDetails(db, intersection)
+	for _, airportInfo := range airportDetailsList {
+		fmt.Printf("%s: %s, %s\n", airportInfo.IATA, airportInfo.City, airportInfo.Country)
+	}
+return airportDetailsList
+}
+
+
+
+// printAirportDetails prints the details for each airport IATA code.
+func buildAirportDetails(db *sql.DB, iataCodes []string) []model.DestinationInfo { 
+  var airportDetailsList []model.DestinationInfo
+	for _, iata := range iataCodes {
+//skip empty or blank IATA codes
+    if iata == "" {
+			continue
+		}
+		city, country, err := fetchAirportDetails(db, iata)
+		if err != nil {
+			log.Printf("Error fetching details for IATA %s: %v", iata, err)
+			continue
+		}
+// Append the fetched details to the list
+		airportDetailsList = append(airportDetailsList, model.DestinationInfo{
+			IATA:    iata,
+			City:    city,
+			Country: country,
+		})
+	}
+  return airportDetailsList
+}
+
+
+// fetchAirportDetails executes a query to fetch city and country for a given IATA code.
+func fetchAirportDetails(db *sql.DB, iataCode string) (string, string, error) {
+	var city, country string
+	query := "SELECT city, country FROM airport_info WHERE iata = ?"
+	err := db.QueryRow(query, iataCode).Scan(&city, &country)
+	if err != nil {
+		return "", "", err
+	}
+	return city, country, nil
 }
