@@ -84,33 +84,57 @@ type Flight struct {
 	Direction       string
 }
 
-// executeQueries connects to the SQLite database and executes the SQL queries.
-func executeQueries(db *sql.DB, queries []string) error {
-	for _, query := range queries {
-		fmt.Println("Executing query:", query)
-		rows, err := db.Query(query)
-		if err != nil {
-			return err
-		}
-		defer rows.Close()
+// executeQueryForAirports executes a given SQL query and returns a set of airports.
+func executeQueryForAirports(db *sql.DB, query string) (map[string]bool, error) {
+	airports := make(map[string]bool)
+	rows, err := db.Query(query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
 
-		// Iterate through the result set.
-		for rows.Next() {
-			var flight Flight
-			if err := rows.Scan(&flight.Id, &flight.FlightNumber, &flight.DepartureAirport, &flight.ArrivalAirport, &flight.DepartureTime, &flight.ArrivalTime, &flight.Direction); err != nil {
-				return err
-			}
-			fmt.Printf("Flight: %#v\n", flight)
+	for rows.Next() {
+		var airport string
+		if err := rows.Scan(&airport); err != nil {
+			return nil, err
 		}
-
-		// Check for errors from iterating over rows.
-		if err = rows.Err(); err != nil {
-			return err
-		}
+		airports[airport] = true
 	}
 
-	return nil
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return airports, nil
 }
+
+// intersectSets finds the intersection of an array of sets.
+func intersectSets(sets []map[string]bool) []string {
+	intersection := make([]string, 0)
+	if len(sets) == 0 {
+		return intersection
+	}
+
+	// Initialize intersection with the first set's elements.
+	for item := range sets[0] {
+		intersection = append(intersection, item)
+	}
+
+	// Intersect with remaining sets.
+	for _, set := range sets[1:] {
+		temp := intersection[:0] // reuse the existing slice but start filling from the beginning
+		for _, item := range intersection {
+			if set[item] {
+				temp = append(temp, item)
+			}
+		}
+		intersection = temp
+	}
+
+	return intersection
+}
+
+
 
 func DetermineFlightsFromConfig() {
 	// Example YAML input.
@@ -130,20 +154,35 @@ flights:
 
 */
 	// Assuming the YAML to SQL query conversion is done elsewhere and we have the queries ready.
-	queries := []string{
-		"SELECT * FROM flights WHERE departureAirport = 'BER' AND departureTime BETWEEN '2024-03-08' AND '2024-03-09'",
-		"SELECT * FROM flights WHERE arrivalAirport = 'BER' AND arrivalTime BETWEEN '2024-04-10' AND '2024-04-13'",
-	}
-
-	// Connect to the SQLite database.
-	db, err := sql.Open("sqlite3", "./data/flights.db")
+// Connect to the SQLite database.
+	db, err := sql.Open("sqlite3", "data/flights.db")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	// Execute the queries.
-	if err := executeQueries(db, queries); err != nil {
-		log.Fatal(err)
+// Define your queries here.
+	queries := []string{
+		"SELECT arrivalAirport FROM flights WHERE departureAirport = 'BER' AND departureTime BETWEEN '2024-03-20' AND '2024-03-22'",
+		"SELECT departureAirport FROM flights WHERE arrivalAirport = 'BER' AND arrivalTime BETWEEN '2024-03-24' AND '2024-03-26'",
+		"SELECT arrivalAirport FROM flights WHERE departureAirport = 'GLA' AND departureTime BETWEEN '2024-03-20' AND '2024-03-22'",
+    "SELECT departureAirport FROM flights WHERE arrivalAirport = 'GLA' AND arrivalTime BETWEEN '2024-03-24' AND '2024-03-26'",
+
+    // Add your third, fourth, ... queries here.
 	}
+
+	// Execute all queries and collect their results in a slice of sets.
+	var sets []map[string]bool
+	for _, query := range queries {
+		airports, err := executeQueryForAirports(db, query)
+		if err != nil {
+			log.Fatal("Error executing query:", err)
+		}
+		sets = append(sets, airports)
+	}
+
+	// Find the intersection of all sets.
+	intersection := intersectSets(sets)
+
+	fmt.Println("Airports meeting all conditions:", intersection)
 }
