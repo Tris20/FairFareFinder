@@ -11,8 +11,8 @@ import (
 // ConvertMarkdownToHTML converts markdown content to HTML and saves it to the specified file path.
 func ConvertMarkdownToHTML(markdownContent, outputPath string) error {
 	// Ensure the output directory exists
-  
-//  if err := os.MkdirAll(strings.TrimSuffix(outputPath, outputPath[len("src/html"):]), os.ModePerm); err != nil {
+
+	//  if err := os.MkdirAll(strings.TrimSuffix(outputPath, outputPath[len("src/html"):]), os.ModePerm); err != nil {
 	//	return fmt.Errorf("error creating output directory: %w", err)
 	//}
 

@@ -1,14 +1,12 @@
-
-
 package main
 
 import (
 	"database/sql"
 	"encoding/csv"
 	"fmt"
+	_ "github.com/mattn/go-sqlite3"
 	"log"
 	"os"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 // CorrectCityMap provides a mapping for airports where the city information in the CSV might not be accurate.
@@ -21,10 +19,10 @@ var CorrectCityMap = map[string]string{
 
 func main() {
 	// Open the database connection
-  fmt.Println("Note: the default is to create a flights.db in this folder. If you are absolutely sure you want to update the data/flights.db then modify the main.go 'sql.open' lines and recompile")
+	fmt.Println("Note: the default is to create a flights.db in this folder. If you are absolutely sure you want to update the data/flights.db then modify the main.go 'sql.open' lines and recompile")
 	db, err := sql.Open("sqlite3", "./flights.db")
-//	db, err := sql.Open("sqlite3", "../../../data/flights.db")
-  if err != nil {
+	//	db, err := sql.Open("sqlite3", "../../../data/flights.db")
+	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
@@ -98,4 +96,3 @@ func main() {
 
 	fmt.Println("Data successfully inserted into airport_info table.")
 }
-

@@ -2,9 +2,9 @@ package urlgenerators
 
 import (
 	"fmt"
+	"github.com/Tris20/FairFareFinder/src/go_files" //import types
 	"strings"
 	"time"
-  "github.com/Tris20/FairFareFinder/src/go_files" //import types
 )
 
 // Define a struct for the JSON data
@@ -13,9 +13,8 @@ type Destination struct {
 	CityName string `json:"city_name"`
 }
 
+func GenerateFlightsAndHotelsURLs(origin model.OriginInfo, destinationsWithUrls []model.DestinationInfo) []model.DestinationInfo {
 
-func GenerateFlightsAndHotelsURLs(origin model.OriginInfo,destinationsWithUrls []model.DestinationInfo) []model.DestinationInfo {  
-	
 	// Prepare the base URLs with placeholders
 	baseSkyScannerURL := fmt.Sprintf("https://www.skyscanner.de/transport/fluge/%s/$$$/?adults=1&adultsv2=1&cabinclass=economy&children=0&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1", origin.IATA)
 
@@ -30,10 +29,8 @@ func GenerateFlightsAndHotelsURLs(origin model.OriginInfo,destinationsWithUrls [
 		destinationsWithUrls[i].BookingURL = bookingURL
 	}
 
-return destinationsWithUrls
+	return destinationsWithUrls
 }
-
-
 
 // Function to replace the placeholder in the URL with the actual IATA code
 func replacePlaceholder(url, iataCode string) string {
