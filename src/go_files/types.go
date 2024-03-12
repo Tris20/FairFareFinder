@@ -25,6 +25,7 @@ type DestinationInfo struct {
   SkyScannerURL string
   AirbnbURL string
   BookingURL string
+  WPI float64
 }
 
 // AirportInfo holds the details for an airport.
