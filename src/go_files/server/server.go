@@ -10,17 +10,9 @@ import (
 func SetupFFFWebServer() {
 	// Handle starting the web server
 	http.HandleFunc("/", fffwebpages.HomeHandler)
-<<<<<<< HEAD
-	http.HandleFunc("/forecast", fffwebpages.PresentBerlinFlightDestinations)
-	//fffwebpages.ForecastHandler)
-	//http.HandleFunc("/getforecast", fffwebpages.PresentBerlinFlightDestinations)
-	//fffwebpages.GetForecastHandler)
-=======
 	http.HandleFunc("/forecast", fffwebpages.ForecastHandler)
 	http.HandleFunc("/getforecast", fffwebpages.GetForecastHandler)
->>>>>>> origin/main
 	http.HandleFunc("/berlin-flight-destinations", fffwebpages.PresentBerlinFlightDestinations)
-
 	http.HandleFunc("/glasgow-flight-destinations", fffwebpages.PresentGlasgowFlightDestinations)
 	// Serve static files from the `images` directory
 	fs := http.FileServer(http.Dir("src/images"))
