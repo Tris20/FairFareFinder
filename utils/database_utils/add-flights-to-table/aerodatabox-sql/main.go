@@ -138,7 +138,7 @@ func main() {
 		log.Fatalf("Error reading API key: %v", err)
 	}
 
-  db, err := sql.Open("sqlite3", "../../../../data/flights.db")
+	db, err := sql.Open("sqlite3", "../../../../data/flights.db")
 	if err != nil {
 		log.Fatalf("Error opening database: %v", err)
 	}
