@@ -1,0 +1,29 @@
+flights:
+  - direction: "Departure"
+    airport: "BER"
+    startDate: "20-03-2024"
+    endDate: "22-03-2024"
+  - direction: "Arrival"
+    airport: "BER"
+    startDate: "24-03-2024"
+    endDate: "26-03-2024"
+  - direction: "Departure"
+    airport: "GLA"
+    startDate: "20-03-2024"
+    endDate: "22-03-2024"
+  - direction: "Arrival"
+    airport: "GLA"
+    startDate: "24-03-2024"
+    endDate: "26-03-2024"
+  - direction: "Departure"
+    airport: "EDI"
+    startDate: "20-03-2024"
+    endDate: "22-03-2024"
+  - direction: "Arrival"
+    airport: "EDI"
+    startDate: "24-03-2024"
+    endDate: "26-03-2024"
+
+
+      # You can add more entries with different airports, directions, and date ranges.
+
