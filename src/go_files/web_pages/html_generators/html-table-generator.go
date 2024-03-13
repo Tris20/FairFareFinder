@@ -62,9 +62,9 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 		dailyDetailsByDay[detail.Day] = append(dailyDetailsByDay[detail.Day], detail)
 	}
 
-  number_of_day_columns = 0
- daycolumn_min =0
- daycolumn_max =0
+	number_of_day_columns = 0
+	daycolumn_min = 0
+	daycolumn_max = 0
 	// Iterate over the daysOrder slice to maintain order
 	for _, dayOfWeek := range daysOrder {
 		if _, ok := dailyDetailsByDay[dayOfWeek]; ok {
@@ -73,11 +73,11 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 			//	for _, dayOfWeek := range daysOrder {
 			dayhtml := fmt.Sprintf(`<th style="width: 70px; ">%s</th>`, dayOfWeek)
 			_, err = writer.WriteString(dayhtml)
-      number_of_day_columns += 1
-      daycolumn_max += 1
-		}    else{
-daycolumn_min +=1
-    }
+			number_of_day_columns += 1
+			daycolumn_max += 1
+		} else {
+			daycolumn_min += 1
+		}
 	}
 	_, err = writer.WriteString(`<th>Flights</th>
     <th>Accommodation</th>
@@ -128,37 +128,37 @@ func generateTableRow(destination model.DestinationInfo) string {
 
 	// Compile the regular expression outside of the loop to optimize performance
 	iconFormat := regexp.MustCompile(`^\d{2}[a-z]$`)
-fmt.Println("Days Order:", daysOrder)
-for day, details := range dailyDetailsByDay {
-    fmt.Printf("Day: %v, Details: %+v\n", day, details)
-}
+	fmt.Println("Days Order:", daysOrder)
+	for day, details := range dailyDetailsByDay {
+		fmt.Printf("Day: %v, Details: %+v\n", day, details)
+	}
 	// Iterate over the daysOrder slice to maintain order
 	for day_number, dayOfWeek := range daysOrder {
 		if details, ok := dailyDetailsByDay[dayOfWeek]; ok {
 			for _, dayDetail := range details {
 				// Check if the icon format is valid
 				if iconFormat.MatchString(dayDetail.Icon) {
-      //convert temp to string because sprintf or writestring struggled with floats
-          avg_temp := fmt.Sprintf("%0.1f°C", dayDetail.AverageTemp)
+					//convert temp to string because sprintf or writestring struggled with floats
+					avg_temp := fmt.Sprintf("%0.1f°C", dayDetail.AverageTemp)
 					weatherHTML.WriteString(fmt.Sprintf(
 						`<td ><a href="https://www.google.com/search?q=weather+%s"><img src="http://openweathermap.org/img/wn/%s.png" alt="Weather Icon" style="max-width:100%%; height:auto;" ></a> <br><span>%s</span></td>`, destination.City, dayDetail.Icon, avg_temp))
 				} else {
 
 					// Invalid icon format - replace with a default icon or just a hyperlink
 					// Assuming "default.png" is your default icon. Adjust the src attribute as needed.
-if daycolumn_min <= day_number && day_number <= daycolumn_max{
+					if daycolumn_min <= day_number && day_number <= daycolumn_max {
 
-					weatherHTML.WriteString(fmt.Sprintf(
-						`<td><a href="https://www.google.com/search?q=weather+%s"><img src="src/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%%; height:auto;"></a></td> `, destination.City))
+						weatherHTML.WriteString(fmt.Sprintf(
+							`<td><a href="https://www.google.com/search?q=weather+%s"><img src="src/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%%; height:auto;"></a></td> `, destination.City))
+					}
 				}
-      }
 			}
-		} else{ 
-      if daycolumn_min <= day_number && day_number <= daycolumn_max{
-					weatherHTML.WriteString(fmt.Sprintf(
-						`<td><a href="https://www.google.com/search?q=weather+%s"><img src="/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%%; height:auto;"></a></td> `, destination.City))
-          }
-    }
+		} else {
+			if daycolumn_min <= day_number && day_number <= daycolumn_max {
+				weatherHTML.WriteString(fmt.Sprintf(
+					`<td><a href="https://www.google.com/search?q=weather+%s"><img src="/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%%; height:auto;"></a></td> `, destination.City))
+			}
+		}
 	}
 	return fmt.Sprintf(
 		`<tr>
