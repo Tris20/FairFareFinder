@@ -6,6 +6,7 @@ import (
 	"github.com/Tris20/FairFareFinder/src/go_files"
 	"os"
 	"strings"
+  "time"
 )
 
 // Define a struct for the weather information of a day.
@@ -40,6 +41,8 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>City Weather Forecast Table</title>
+    <link rel="stylesheet" href="../tableStyles.css">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
 <table>
@@ -84,12 +87,25 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 func generateTableRow(destination model.DestinationInfo) string {
 	var weatherHTML strings.Builder
 
-	for _, day := range destination.WeatherDetails {
-		weatherHTML.WriteString(fmt.Sprintf(
-			`<span style="display: inline-block; text-align: center; width: 100px;">%s<br><a href="https://www.google.com/search?q=weather+%s"><img src="http://openweathermap.org/img/wn/%s.png" alt="Image" style="max-width:100px;"></a></span> `,
-			day.Day, destination.City, day.Icon))
+	// Create a slice of time.Weekday to define the order
+  daysOrder := []time.Weekday{time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday, time.Wednesday} 
+
+	// Map to store slices of DailyWeatherDetails by Weekday for easy lookup
+	dailyDetailsByDay := make(map[time.Weekday][]model.DailyWeatherDetails)
+	for _, detail := range destination.WeatherDetails {
+		dailyDetailsByDay[detail.Day] = append(dailyDetailsByDay[detail.Day], detail)
 	}
 
+	// Iterate over the daysOrder slice to maintain order
+	for _, dayOfWeek := range daysOrder {
+		if details, ok := dailyDetailsByDay[dayOfWeek]; ok {
+			for _, dayDetail := range details {
+				weatherHTML.WriteString(fmt.Sprintf(
+					`<span style="display: inline-block; text-align: center; width: 100px;">%s<br><a href="https://www.google.com/search?q=weather+%s"><img src="http://openweathermap.org/img/wn/%s.png" alt="Weather Icon" style="max-width:100px;"></a></span> `,
+					dayOfWeek.String(), destination.City, dayDetail.Icon))
+			}
+		}
+	}
 	return fmt.Sprintf(
 		`<tr>
     <td><a href="https://www.google.com/maps/place/%[1]s">%[1]s</a></td>
