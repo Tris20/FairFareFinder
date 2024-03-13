@@ -42,7 +42,7 @@ func main() {
 		log.Fatal("Error: No argument provided. Please provide a location, 'web', or a json file.")
 	}
 
-	origin := model.OriginInfo{
+	berlin_config := model.OriginInfo{
 		IATA:               "BER",
 		City:               "Berlin",
 		Country:            "Germany",
@@ -52,51 +52,46 @@ func main() {
 		ArrivalEndDate:     "2024-03-26",
 	}
 
+	glasgow_config := model.OriginInfo{
+		IATA:               "GLA",
+		City:               "Glasgow",
+		Country:            "Scotland",
+		DepartureStartDate: "2024-03-20",
+		DepartureEndDate:   "2024-03-22",
+		ArrivalStartDate:   "2024-03-24",
+		ArrivalEndDate:     "2024-03-26",
+	}
+
 	switch os.Args[1] {
 	case "dev":
-		airportDetailsList := flightdb.DetermineFlightsFromConfig(origin)
-		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(origin, airportDetailsList)
-		GenerateCityRankings(origin, destinationsWithUrls)
+		airportDetailsList := flightdb.DetermineFlightsFromConfig(berlin_config)
+		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(berlin_config, airportDetailsList)
+		GenerateCityRankings(berlin_config, destinationsWithUrls)
 
 		fmt.Println("\nStarting Webserver")
 
 		fffwebserver.SetupFFFWebServer()
 
 	case "web":
+		//Update Berlin immediately
+		airportDetailsList := flightdb.DetermineFlightsFromConfig(berlin_config)
+		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(berlin_config, airportDetailsList)
+		GenerateCityRankings(berlin_config, destinationsWithUrls)
 
 		// Update WPI data every 6 hours
-		ticker := time.NewTicker(3 * time.Minute)
+		ticker := time.NewTicker(6 * time.Hour)
 		go func() {
 			for range ticker.C {
 
-				airportDetailsList := flightdb.DetermineFlightsFromConfig(origin)
-				destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(origin, airportDetailsList)
+				airportDetailsList := flightdb.DetermineFlightsFromConfig(berlin_config)
+				destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(berlin_config, airportDetailsList)
 
-				// Iterate through the slice and print details of each DestinationInfo
-				/*
-				     for _, dest := range destinationsWithUrls {
-				   		fmt.Printf("IATA: %s, City: %s, Country: %s\n", dest.IATA, dest.City, dest.Country)
-				   		fmt.Printf("SkyScannerURL: %s\n", dest.SkyScannerURL)
-				   		fmt.Printf("AirbnbURL: %s\n", dest.AirbnbURL)
-				   		fmt.Printf("BookingURL: %s\n\n", dest.BookingURL)
-				     }
-				*/
+				GenerateCityRankings(berlin_config, destinationsWithUrls)
 
-				GenerateCityRankings(origin, destinationsWithUrls)
-				/*
-					origin = model.OriginInfo{
-						IATA:               "GLA",
-						City:               "Glasgow",
-						Country:            "Scotland",
-						DepartureStartDate: "2024-03-20",
-						DepartureEndDate:   "2024-03-22",
-						ArrivalStartDate:   "2024-03-24",
-						ArrivalEndDate:     "2024-03-26",
-					}
-					airportDetailsList = flightdb.DetermineFlightsFromConfig(origin)
-					destinationsWithUrls = urlgenerators.GenerateFlightsAndHotelsURLs(origin, airportDetailsList)
-					GenerateCityRankings(origin, destinationsWithUrls)
-				*/
+				airportDetailsList = flightdb.DetermineFlightsFromConfig(glasgow_config)
+				destinationsWithUrls = urlgenerators.GenerateFlightsAndHotelsURLs(glasgow_config, airportDetailsList)
+				GenerateCityRankings(glasgow_config, destinationsWithUrls)
+
 			}
 		}()
 		fffwebserver.SetupFFFWebServer()

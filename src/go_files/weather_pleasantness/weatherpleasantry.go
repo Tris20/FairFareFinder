@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -167,6 +168,7 @@ func ProcessForecastData(weeklyData []model.WeatherData, config WeatherPleasantn
 		} else {
 			icon = data[0].Weather[0].Icon
 		}
+		icon = strings.Replace(icon, "n", "d", 1) //replace night icons with day equivalent
 
 		avgWind := sumWind / count // Calculate average wind here
 		avgTemp := sumTemp / count
