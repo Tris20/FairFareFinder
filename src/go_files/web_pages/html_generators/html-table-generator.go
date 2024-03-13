@@ -26,6 +26,8 @@ type CityData struct {
 }
 
 var number_of_day_columns int
+var daycolumn_min int
+var daycolumn_max int
 
 // GenerateHtmlTable creates an HTML table for multiple cities and saves it to the specified file path.
 func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) error {
@@ -61,6 +63,8 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 	}
 
   number_of_day_columns = 0
+ daycolumn_min =0
+ daycolumn_max =0
 	// Iterate over the daysOrder slice to maintain order
 	for _, dayOfWeek := range daysOrder {
 		if _, ok := dailyDetailsByDay[dayOfWeek]; ok {
@@ -70,7 +74,10 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 			dayhtml := fmt.Sprintf(`<th style="width: 70px; ">%s</th>`, dayOfWeek)
 			_, err = writer.WriteString(dayhtml)
       number_of_day_columns += 1
-		}
+      daycolumn_max += 1
+		}    else{
+daycolumn_min +=1
+    }
 	}
 	_, err = writer.WriteString(`<th>Flights</th>
     <th>Accommodation</th>
@@ -131,19 +138,25 @@ for day, details := range dailyDetailsByDay {
 			for _, dayDetail := range details {
 				// Check if the icon format is valid
 				if iconFormat.MatchString(dayDetail.Icon) {
+      //convert temp to string because sprintf or writestring struggled with floats
+          avg_temp := fmt.Sprintf("%0.1f°C", dayDetail.AverageTemp)
 					weatherHTML.WriteString(fmt.Sprintf(
-						`<td ><a href="https://www.google.com/search?q=weather+%s"><img src="http://openweathermap.org/img/wn/%s.png" alt="Weather Icon" style="max-width:100%; height:auto;" ></a></td> `, destination.City, dayDetail.Icon))
+						`<td ><a href="https://www.google.com/search?q=weather+%s"><img src="http://openweathermap.org/img/wn/%s.png" alt="Weather Icon" style="max-width:100%%; height:auto;" ></a> <br><span>%s</span></td>`, destination.City, dayDetail.Icon, avg_temp))
 				} else {
+
 					// Invalid icon format - replace with a default icon or just a hyperlink
 					// Assuming "default.png" is your default icon. Adjust the src attribute as needed.
+if daycolumn_min <= day_number && day_number <= daycolumn_max{
+
 					weatherHTML.WriteString(fmt.Sprintf(
-						`<td><a href="https://www.google.com/search?q=weather+%s"><img src="src/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%; height:auto;"></a></td> `, destination.City))
+						`<td><a href="https://www.google.com/search?q=weather+%s"><img src="src/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%%; height:auto;"></a></td> `, destination.City))
 				}
+      }
 			}
 		} else{ 
-      if day_number<number_of_day_columns{
+      if daycolumn_min <= day_number && day_number <= daycolumn_max{
 					weatherHTML.WriteString(fmt.Sprintf(
-						`<td><a href="https://www.google.com/search?q=weather+%s"><img src="/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%; height:auto;"></a></td> `, destination.City))
+						`<td><a href="https://www.google.com/search?q=weather+%s"><img src="/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%%; height:auto;"></a></td> `, destination.City))
           }
     }
 	}
