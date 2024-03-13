@@ -17,13 +17,6 @@ type WeatherPleasantnessConfig struct {
 	Conditions map[string]float64 `yaml:"conditions"`
 }
 
-type DailyWeatherDetails struct {
-	AverageTemp   float64
-	CommonWeather string
-	WPI           float64
-	AverageWind   float64
-}
-
 type ForecastResponse struct {
 	List []model.WeatherData `json:"list"`
 }
@@ -137,32 +130,13 @@ func calculateDailyAverageWPI(weatherData []model.WeatherData, config WeatherPle
 // It also calculates the overall average for these days.
 // Assuming each WeatherData entry is for a 3-hour segment
 
-//func ProcessForecastData(weeklyData []WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]DailyWeatherDetails, float64){
-
-func ProcessForecastData(weeklyData []model.WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]DailyWeatherDetails, float64) {
+func ProcessForecastData(weeklyData []model.WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]model.DailyWeatherDetails, float64) {
 	currentDay := time.Now().Weekday()
 	startDay, endDay := determineRangeBasedOnCurrentDay(currentDay)
 
 	dailyData := filterDataByDayRange(weeklyData, startDay, endDay)
-	//  dailyData := make(map[time.Weekday][]WeatherData)
-	//    for _, data := range weeklyData {
-	//        timestamp := time.Unix(data.Dt, 0)
-	//        day := timestamp.Weekday()
-	//        hour := timestamp.Hour()
-	//
-	//    //  fmt.Printf("Day info %s, Hour: %d\n", day.String(), hour)
-	//
-	//        if day >= time.Thursday && day <= time.Saturday {
-	//            // Only include data points between 9 am and 9 pm
-	//            if hour >= 9 && hour <= 21 {
-	//                dailyData[day] = append(dailyData[day], data)
-	//            }
-	//        }
-	//    }
-	//
-	dailyDetails := make(map[time.Weekday]DailyWeatherDetails)
+	dailyDetails := make(map[time.Weekday]model.DailyWeatherDetails)
 	var totalWPI float64
-
 	// Assuming this part needs correction
 	for day, data := range dailyData {
 		var sumTemp, sumWind, count float64
@@ -170,6 +144,7 @@ func ProcessForecastData(weeklyData []model.WeatherData, config WeatherPleasantn
 		var maxWeather string
 		var maxCount int
 
+		var icon string
 		for _, segment := range data {
 			sumTemp += segment.Main.Temp
 			sumWind += segment.Wind.Speed // Correctly access Wind.Speed here
@@ -185,14 +160,26 @@ func ProcessForecastData(weeklyData []model.WeatherData, config WeatherPleasantn
 			continue
 		}
 
+		//Get the condition code from roughly mid day
+		if len(data) >= 2 {
+			// Access the second segment directly
+			icon = data[1].Weather[0].Icon
+		} else {
+			icon = data[0].Weather[0].Icon
+		}
+
 		avgWind := sumWind / count // Calculate average wind here
 		avgTemp := sumTemp / count
 		wpi := calculateDailyAverageWPI(data, config)
-		dailyDetails[day] = DailyWeatherDetails{
+
+		// Create the weather entry for that day in dailyDetails
+		dailyDetails[day] = model.DailyWeatherDetails{
 			AverageTemp:   avgTemp,
 			CommonWeather: maxWeather,
 			WPI:           wpi,
 			AverageWind:   avgWind, // Use the calculated avgWind
+			Icon:          icon,
+			Day:           day,
 		}
 		totalWPI += wpi
 	}
@@ -252,7 +239,7 @@ func shouldIncludeDay(day, startDay, endDay time.Weekday) bool {
 	return day == endDay
 }
 
-func ProcessLocation(location string) float64 {
+func ProcessLocation(location string) (float64, map[time.Weekday]model.DailyWeatherDetails) {
 
 	// Load API key from secrets.yaml
 	apiKey, err := config_handlers.LoadApiKey("ignore/secrets.yaml", "openweathermap.org")
@@ -287,10 +274,10 @@ func ProcessLocation(location string) float64 {
 	dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
 	DisplayForecastData(location, dailyDetails)
 
-	return overallAverage
+	return overallAverage, dailyDetails
 }
 
-func DisplayForecastData(location string, dailyDetails map[time.Weekday]DailyWeatherDetails) {
+func DisplayForecastData(location string, dailyDetails map[time.Weekday]model.DailyWeatherDetails) {
 	orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
 
 	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
