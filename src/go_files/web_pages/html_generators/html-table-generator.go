@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"github.com/Tris20/FairFareFinder/src/go_files"
 	"os"
+	"regexp"
 	"strings"
-  "time"
+	"time"
 )
 
 // Define a struct for the weather information of a day.
@@ -23,6 +24,8 @@ type CityData struct {
 	AccommodationLink string
 	ThingsToDoLink    string
 }
+
+var number_of_day_columns int
 
 // GenerateHtmlTable creates an HTML table for multiple cities and saves it to the specified file path.
 func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) error {
@@ -48,15 +51,35 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 <table>
 <thead>
 <tr>
-    <th>City Name</th>
-    <th>WPI</th>
-    <th>Flights</th>
+    <th>City Name</th>`)
+	// Create a slice of time.Weekday to define the order
+	daysOrder := []time.Weekday{time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday, time.Wednesday}
+	// Map to store slices of DailyWeatherDetails by Weekday for easy lookup
+	dailyDetailsByDay := make(map[time.Weekday][]model.DailyWeatherDetails)
+	for _, detail := range citiesData[0].WeatherDetails {
+		dailyDetailsByDay[detail.Day] = append(dailyDetailsByDay[detail.Day], detail)
+	}
+
+  number_of_day_columns = 0
+	// Iterate over the daysOrder slice to maintain order
+	for _, dayOfWeek := range daysOrder {
+		if _, ok := dailyDetailsByDay[dayOfWeek]; ok {
+			//	for _, dayDetail := range details {
+
+			//	for _, dayOfWeek := range daysOrder {
+			dayhtml := fmt.Sprintf(`<th style="width: 70px; ">%s</th>`, dayOfWeek)
+			_, err = writer.WriteString(dayhtml)
+      number_of_day_columns += 1
+		}
+	}
+	_, err = writer.WriteString(`<th>Flights</th>
     <th>Accommodation</th>
     <th>Things to Do</th>
 </tr>
 </thead>
 <tbody>
 `)
+
 	if err != nil {
 		return fmt.Errorf("error writing header to output file: %w", err)
 	}
@@ -88,7 +111,7 @@ func generateTableRow(destination model.DestinationInfo) string {
 	var weatherHTML strings.Builder
 
 	// Create a slice of time.Weekday to define the order
-  daysOrder := []time.Weekday{time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday, time.Wednesday} 
+	daysOrder := []time.Weekday{time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday, time.Wednesday}
 
 	// Map to store slices of DailyWeatherDetails by Weekday for easy lookup
 	dailyDetailsByDay := make(map[time.Weekday][]model.DailyWeatherDetails)
@@ -96,23 +119,40 @@ func generateTableRow(destination model.DestinationInfo) string {
 		dailyDetailsByDay[detail.Day] = append(dailyDetailsByDay[detail.Day], detail)
 	}
 
+	// Compile the regular expression outside of the loop to optimize performance
+	iconFormat := regexp.MustCompile(`^\d{2}[a-z]$`)
+fmt.Println("Days Order:", daysOrder)
+for day, details := range dailyDetailsByDay {
+    fmt.Printf("Day: %v, Details: %+v\n", day, details)
+}
 	// Iterate over the daysOrder slice to maintain order
-	for _, dayOfWeek := range daysOrder {
+	for day_number, dayOfWeek := range daysOrder {
 		if details, ok := dailyDetailsByDay[dayOfWeek]; ok {
 			for _, dayDetail := range details {
-				weatherHTML.WriteString(fmt.Sprintf(
-					`<span style="display: inline-block; text-align: center; width: 100px;">%s<br><a href="https://www.google.com/search?q=weather+%s"><img src="http://openweathermap.org/img/wn/%s.png" alt="Weather Icon" style="max-width:100px;"></a></span> `,
-					dayOfWeek.String(), destination.City, dayDetail.Icon))
+				// Check if the icon format is valid
+				if iconFormat.MatchString(dayDetail.Icon) {
+					weatherHTML.WriteString(fmt.Sprintf(
+						`<td ><a href="https://www.google.com/search?q=weather+%s"><img src="http://openweathermap.org/img/wn/%s.png" alt="Weather Icon" style="max-width:100%; height:auto;" ></a></td> `, destination.City, dayDetail.Icon))
+				} else {
+					// Invalid icon format - replace with a default icon or just a hyperlink
+					// Assuming "default.png" is your default icon. Adjust the src attribute as needed.
+					weatherHTML.WriteString(fmt.Sprintf(
+						`<td><a href="https://www.google.com/search?q=weather+%s"><img src="src/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%; height:auto;"></a></td> `, destination.City))
+				}
 			}
-		}
+		} else{ 
+      if day_number<number_of_day_columns{
+					weatherHTML.WriteString(fmt.Sprintf(
+						`<td><a href="https://www.google.com/search?q=weather+%s"><img src="/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%; height:auto;"></a></td> `, destination.City))
+          }
+    }
 	}
 	return fmt.Sprintf(
 		`<tr>
     <td><a href="https://www.google.com/maps/place/%[1]s">%[1]s</a></td>
-    <td style="white-space: nowrap;">%s</td>
+    %s
     <td><a href="%s">SkyScanner</a></td>
     <td><a href="%s">Airbnb</a> <a href="%s">Booking.com</a></td>
     <td><a href="https://www.google.com/search?q=things+to+do+this+weekend+%s">Google Results</a></td>
-    <td></td>
 </tr>`, destination.City, weatherHTML.String(), destination.SkyScannerURL, destination.AirbnbURL, destination.BookingURL, destination.City)
 }
