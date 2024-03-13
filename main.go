@@ -1,9 +1,9 @@
 package main
 
 import (
-	"encoding/json"
+	//	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	//	"io/ioutil"
 	"log"
 	"math"
 	"os"
@@ -11,10 +11,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Tris20/FairFareFinder/src/go_files/db_functions"
+	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/flight_db_functions"
+	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/user_db_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/discourse"
-	"github.com/Tris20/FairFareFinder/src/go_files/json_functions"
+	//"github.com/Tris20/FairFareFinder/src/go_files/json_functions"
+	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/server"
+	"github.com/Tris20/FairFareFinder/src/go_files/url_generators"
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
 	"github.com/Tris20/FairFareFinder/src/go_files/web_pages/html_generators"
 )
@@ -39,20 +42,56 @@ func main() {
 	}
 
 	switch os.Args[1] {
+	case "dev":
+
+		fmt.Println("\nStarting Webserver")
+
+		fffwebserver.SetupFFFWebServer()
+
 	case "web":
 
 		// Update WPI data every 6 hours
 		ticker := time.NewTicker(6 * time.Hour)
 		go func() {
 			for range ticker.C {
-        //Berlin
-				generateflightsdotjson.GenerateLinks("input/berlin-destinations.json", "input/berlin-flights.json", "ber")
-				GenerateAndPostCityRankings("input/berlin-flights.json", "src/html/berlin-flight-destinations.html")
-        // Glasgow
-        generateflightsdotjson.GenerateLinks("input/glasgow-edi-destinations.json", "input/glasgow-edi-flights.json", "gla")
-				GenerateAndPostCityRankings("input/glasgow-edi-flights.json", "src/html/glasgow-flight-destinations.html")
+				origin := model.OriginInfo{
+					IATA:               "BER",
+					City:               "Berlin",
+					Country:            "Germany",
+					DepartureStartDate: "2024-03-20",
+					DepartureEndDate:   "2024-03-22",
+					ArrivalStartDate:   "2024-03-24",
+					ArrivalEndDate:     "2024-03-26",
+				}
 
-        fmt.Println("hello")
+				airportDetailsList := flightdb.DetermineFlightsFromConfig(origin)
+				destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(origin, airportDetailsList)
+
+				// Iterate through the slice and print details of each DestinationInfo
+				/*
+				     for _, dest := range destinationsWithUrls {
+				   		fmt.Printf("IATA: %s, City: %s, Country: %s\n", dest.IATA, dest.City, dest.Country)
+				   		fmt.Printf("SkyScannerURL: %s\n", dest.SkyScannerURL)
+				   		fmt.Printf("AirbnbURL: %s\n", dest.AirbnbURL)
+				   		fmt.Printf("BookingURL: %s\n\n", dest.BookingURL)
+				     }
+				*/
+
+				GenerateCityRankings(origin, destinationsWithUrls)
+
+				origin = model.OriginInfo{
+					IATA:               "GLA",
+					City:               "Glasgow",
+					Country:            "Scotland",
+					DepartureStartDate: "2024-03-20",
+					DepartureEndDate:   "2024-03-22",
+					ArrivalStartDate:   "2024-03-24",
+					ArrivalEndDate:     "2024-03-26",
+				}
+				airportDetailsList = flightdb.DetermineFlightsFromConfig(origin)
+				destinationsWithUrls = urlgenerators.GenerateFlightsAndHotelsURLs(origin, airportDetailsList)
+				GenerateCityRankings(origin, destinationsWithUrls)
+
 			}
 		}()
 		fffwebserver.SetupFFFWebServer()
@@ -63,8 +102,9 @@ func main() {
 	default:
 		// Check if the argument is a json file
 		if strings.HasSuffix(os.Args[1], ".json") {
-      out := fmt.Sprintf("input/%s-flights.json",os.Args[1:] )
-			GenerateAndPostCityRankings(os.Args[1], out)
+			out := fmt.Sprintf("input/%s-flights.json", os.Args[1:])
+			fmt.Sprintf(out)
+			//      GenerateAndPostCityRankings(os.Args[1], out)
 		} else {
 			// Assuming it's a city name
 			location := strings.Join(os.Args[1:], " ")
@@ -73,51 +113,32 @@ func main() {
 	}
 }
 
-func GenerateAndPostCityRankings(jsonFile string, target_url string) {
-	var flights []struct {
-		CityName      string `json:"City_name"`
-		SkyScannerURL string `json:"SkyScannerURL"`
-		AirbnbURL     string `json:"airbnbURL"`
-		BookingURL    string `json:"bookingURL"`
-	}
+func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.DestinationInfo) {
 
-	fileContents, err := ioutil.ReadFile(jsonFile)
-	if err != nil {
-		log.Fatalf("Error reading %s file: %v", jsonFile, err)
-	}
-
-	err = json.Unmarshal(fileContents, &flights)
-	if err != nil {
-		log.Fatalf("Error parsing JSON file: %v", err)
-	}
-
-	var cityWPIs []CityAverageWPI
-	for _, flight := range flights {
-		wpi := weather_pleasantry.ProcessLocation(flight.CityName)
+	for i := range destinationsWithUrls {
+		wpi := weather_pleasantry.ProcessLocation(destinationsWithUrls[i].City)
 		if !math.IsNaN(wpi) {
-			cityWPIs = append(cityWPIs, CityAverageWPI{
-				Name:          flight.CityName,
-				WPI:           wpi,
-				SkyScannerURL: replaceSpaceWithURLEncoding(flight.SkyScannerURL),
-				AirbnbURL:     replaceSpaceWithURLEncoding(flight.AirbnbURL),
-				BookingURL:    replaceSpaceWithURLEncoding(flight.BookingURL),
-			})
+			destinationsWithUrls[i].WPI = wpi // Directly write the WPI to the struct
+			// Update URLs or any other info as needed
+			destinationsWithUrls[i].SkyScannerURL = replaceSpaceWithURLEncoding(destinationsWithUrls[i].SkyScannerURL)
+			destinationsWithUrls[i].AirbnbURL = replaceSpaceWithURLEncoding(destinationsWithUrls[i].AirbnbURL)
+			destinationsWithUrls[i].BookingURL = replaceSpaceWithURLEncoding(destinationsWithUrls[i].BookingURL)
 		}
 	}
 
 	// Sort the cities by WPI in descending order
-	sort.Slice(cityWPIs, func(i, j int) bool {
-		return cityWPIs[i].WPI > cityWPIs[j].WPI
+	sort.Slice(destinationsWithUrls, func(i, j int) bool {
+		return destinationsWithUrls[i].WPI > destinationsWithUrls[j].WPI
 	})
 
-	content := buildContentString(cityWPIs)
+	content := buildContentString(destinationsWithUrls)
 	fmt.Println(content)
 
 	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
 	discourse.PostToDiscourse(content)
-
+	target_url := fmt.Sprintf("src/html/%s-flight-destinations.html", strings.ToLower(origin.City))
 	// Call the function to convert markdown to HTML and save it
-	err = mdtabletohtml.ConvertMarkdownToHTML(content, target_url)
+	err := mdtabletohtml.ConvertMarkdownToHTML(content, target_url)
 	if err != nil {
 		log.Fatalf("Failed to convert markdown to HTML: %v", err)
 	}
@@ -129,7 +150,7 @@ func replaceSpaceWithURLEncoding(urlString string) string {
 	return strings.ReplaceAll(urlString, " ", "%20")
 }
 
-func buildContentString(cityWPIs []CityAverageWPI) string {
+func buildContentString(destinations []model.DestinationInfo) string {
 	var contentBuilder strings.Builder
 	// Add image to topic
 	contentBuilder.WriteString("![image|690x394](upload://jGDO8BaFIvS1MVO53MDmqlS27vQ.jpeg)\n")
@@ -138,8 +159,8 @@ func buildContentString(cityWPIs []CityAverageWPI) string {
 	contentBuilder.WriteString("|--|--|--|--|--|\n") // Additional line after headers
 
 	// Loop through cityWPIs and append each to the contentBuilder
-	for _, cityWPI := range cityWPIs {
-		line := fmt.Sprintf("| [%s](https://www.google.com/maps/place/%s) | [%.2f](https://www.google.com/search?q=weather+%s) | [SkyScanner](%s) | [Airbnb](%s) [Booking.com](%s) | [Google Results](https://www.google.com/search?q=things+to+do+this+weekend+%s)| \n", cityWPI.Name, replaceSpaceWithURLEncoding(cityWPI.Name), cityWPI.WPI, replaceSpaceWithURLEncoding(cityWPI.Name), cityWPI.SkyScannerURL, cityWPI.AirbnbURL, cityWPI.BookingURL, cityWPI.Name)
+	for _, destination := range destinations {
+		line := fmt.Sprintf("| [%s](https://www.google.com/maps/place/%s) | [%.2f](https://www.google.com/search?q=weather+%s) | [SkyScanner](%s) | [Airbnb](%s) [Booking.com](%s) | [Google Results](https://www.google.com/search?q=things+to+do+this+weekend+%s)| \n", destination.City, replaceSpaceWithURLEncoding(destination.City), destination.WPI, replaceSpaceWithURLEncoding(destination.City), destination.SkyScannerURL, destination.AirbnbURL, destination.BookingURL, destination.City)
 		contentBuilder.WriteString(line)
 	}
 

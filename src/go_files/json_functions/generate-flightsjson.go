@@ -40,7 +40,7 @@ func GenerateLinks(inputJson string, outputJson string, iata_url string) {
 	}
 
 	// Prepare the base URLs with placeholders
-  baseSkyScannerURL := fmt.Sprintf("https://www.skyscanner.de/transport/fluge/%s/$$$/?adults=1&adultsv2=1&cabinclass=economy&children=0&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1",iata_url)
+	baseSkyScannerURL := fmt.Sprintf("https://www.skyscanner.de/transport/fluge/%s/$$$/?adults=1&adultsv2=1&cabinclass=economy&children=0&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1", iata_url)
 
 	// Create a new slice for the modified destinations
 	var destinationsWithUrls []DestinationWithURL
