@@ -28,7 +28,7 @@ func GetForecastHandler(w http.ResponseWriter, r *http.Request) {
 	// fmt.Println("City:", city)
 
 	// Call the processLocation function
-	wpi := weather_pleasantry.ProcessLocation(city)
+	wpi, _ := weather_pleasantry.ProcessLocation(city)
 
 	response := fmt.Sprintf("The Weather Pleasantness Index (WPI) for %s is %.2f", city, wpi)
 	w.Header().Set("Content-Type", "text/html")
