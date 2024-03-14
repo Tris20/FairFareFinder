@@ -73,11 +73,14 @@ func main() {
 		fffwebserver.SetupFFFWebServer()
 
 	case "web":
-		//Update Berlin immediately
+		//Update Berlin and Glasgow immediately
 		airportDetailsList := flightdb.DetermineFlightsFromConfig(berlin_config)
 		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(berlin_config, airportDetailsList)
 		GenerateCityRankings(berlin_config, destinationsWithUrls)
-
+  
+    airportDetailsList = flightdb.DetermineFlightsFromConfig(glasgow_config)
+		destinationsWithUrls = urlgenerators.GenerateFlightsAndHotelsURLs(glasgow_config, airportDetailsList)
+		GenerateCityRankings(glasgow_config, destinationsWithUrls)
 		// Update WPI data every 6 hours
 		ticker := time.NewTicker(6 * time.Hour)
 		go func() {
@@ -85,7 +88,6 @@ func main() {
 
 				airportDetailsList := flightdb.DetermineFlightsFromConfig(berlin_config)
 				destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(berlin_config, airportDetailsList)
-
 				GenerateCityRankings(berlin_config, destinationsWithUrls)
 
 				airportDetailsList = flightdb.DetermineFlightsFromConfig(glasgow_config)
