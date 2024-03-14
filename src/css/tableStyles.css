@@ -12,9 +12,11 @@ table {
   overflow: hidden;
 }
 
+
 th, td {
   padding: 12px 15px;
-  text-align: left;
+  text-align: center;
+  font-size: 16px;
 }
 
 th {
@@ -24,11 +26,12 @@ th {
 }
 
 tr {
+background-color: #edddd1;
   border-bottom: 1px solid #dddddd;
 }
 
 tr:nth-of-type(even) {
-  background-color: #f3f3f3;
+  background-color: #d2e1ae;
 }
 
 tr:last-of-type {
@@ -36,7 +39,7 @@ tr:last-of-type {
 }
 
 tr:hover {
-  background-color: #f1f1f1;
+  background-color: #b7d3d7;
 }
 
 td a {
@@ -47,3 +50,10 @@ td a {
 td a:hover {
   text-decoration: underline;
 }
+
+
+table th, table td img {
+    max-width: 70px; /* Adjust based on your column width */
+    height: auto;
+}
+

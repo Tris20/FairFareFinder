@@ -1,90 +1,171 @@
-package mdtabletohtml
+package htmltablegenerator
 
 import (
 	"bufio"
 	"fmt"
+	"github.com/Tris20/FairFareFinder/src/go_files"
 	"os"
 	"regexp"
 	"strings"
+	"time"
 )
 
-// ConvertMarkdownToHTML converts markdown content to HTML and saves it to the specified file path.
-func ConvertMarkdownToHTML(markdownContent, outputPath string) error {
-	// Ensure the output directory exists
+// Define a struct for the weather information of a day.
+type WeatherDay struct {
+	Day  string
+	Icon string
+}
 
-	//  if err := os.MkdirAll(strings.TrimSuffix(outputPath, outputPath[len("src/html"):]), os.ModePerm); err != nil {
-	//	return fmt.Errorf("error creating output directory: %w", err)
-	//}
+// Define a struct for each city's data, including weather forecast and links.
+type CityData struct {
+	Name              string
+	WeatherForecast   []WeatherDay
+	FlightLink        string
+	AccommodationLink string
+	ThingsToDoLink    string
+}
 
-	// Create or open the output file for writing
+var number_of_day_columns int
+var daycolumn_min int
+var daycolumn_max int
+
+// GenerateHtmlTable creates an HTML table for multiple cities and saves it to the specified file path.
+func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) error {
 	outputFile, err := os.Create(outputPath)
 	if err != nil {
 		return fmt.Errorf("error creating output file: %w", err)
 	}
 	defer outputFile.Close()
 
-	// Use bufio.NewWriter for efficient writing
 	writer := bufio.NewWriter(outputFile)
 
-	// Start writing the HTML content
-	writer.WriteString(`<!DOCTYPE html>
+	// Start of the HTML structure
+	_, err = writer.WriteString(`<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flights from Chosen City</title> 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <title>City Weather Forecast Table</title>
     <link rel="stylesheet" href="../tableStyles.css">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 </head>
-<body>`)
+<body>
+<table>
+<thead>
+<tr>
+    <th>City Name</th>`)
+	// Create a slice of time.Weekday to define the order
+	daysOrder := []time.Weekday{time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday, time.Wednesday}
+	// Map to store slices of DailyWeatherDetails by Weekday for easy lookup
+	dailyDetailsByDay := make(map[time.Weekday][]model.DailyWeatherDetails)
+	for _, detail := range citiesData[0].WeatherDetails {
+		dailyDetailsByDay[detail.Day] = append(dailyDetailsByDay[detail.Day], detail)
+	}
 
-	writer.WriteString("<table>\n")
-	scanner := bufio.NewScanner(strings.NewReader(markdownContent))
-	isHeader := true
-	for scanner.Scan() {
-		line := scanner.Text()
-		if strings.HasPrefix(line, "|") {
-			line = strings.Trim(line, "|")
-			columns := strings.Split(line, "|")
+	number_of_day_columns = 0
+	daycolumn_min = 0
+	daycolumn_max = 0
+	// Iterate over the daysOrder slice to maintain order
+	for _, dayOfWeek := range daysOrder {
+		if _, ok := dailyDetailsByDay[dayOfWeek]; ok {
+			//	for _, dayDetail := range details {
 
-			if isHeader {
-				writer.WriteString("  <tr>\n")
-				for _, col := range columns {
-					writer.WriteString(fmt.Sprintf("    <th>%s</th>\n", strings.TrimSpace(col)))
+			//	for _, dayOfWeek := range daysOrder {
+			dayhtml := fmt.Sprintf(`<th style="width: 70px; ">%s</th>`, dayOfWeek)
+			_, err = writer.WriteString(dayhtml)
+			number_of_day_columns += 1
+			daycolumn_max += 1
+		} else {
+			daycolumn_min += 1
+		}
+	}
+	_, err = writer.WriteString(`<th>Flights</th>
+    <th>Accommodation</th>
+    <th>Things to Do</th>
+</tr>
+</thead>
+<tbody>
+`)
+
+	if err != nil {
+		return fmt.Errorf("error writing header to output file: %w", err)
+	}
+
+	// Generate and write the HTML for each city's table row
+	for _, city := range citiesData {
+		tableRow := generateTableRow(city)
+		if _, err := writer.WriteString(tableRow); err != nil {
+			return fmt.Errorf("error writing table row to output file: %w", err)
+		}
+	}
+
+	// End of the HTML structure
+	_, err = writer.WriteString("</tbody>\n</table>\n</body>\n</html>")
+	if err != nil {
+		return fmt.Errorf("error writing footer to output file: %w", err)
+	}
+
+	// Flush the buffer to ensure all data is written to the file
+	if err := writer.Flush(); err != nil {
+		return fmt.Errorf("error flushing to output file: %w", err)
+	}
+
+	return nil // No error occurred
+}
+
+// generateTableRow generates an HTML table row for the given city data.
+func generateTableRow(destination model.DestinationInfo) string {
+	var weatherHTML strings.Builder
+
+	// Create a slice of time.Weekday to define the order
+	daysOrder := []time.Weekday{time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday, time.Wednesday}
+
+	// Map to store slices of DailyWeatherDetails by Weekday for easy lookup
+	dailyDetailsByDay := make(map[time.Weekday][]model.DailyWeatherDetails)
+	for _, detail := range destination.WeatherDetails {
+		dailyDetailsByDay[detail.Day] = append(dailyDetailsByDay[detail.Day], detail)
+	}
+
+	// Compile the regular expression outside of the loop to optimize performance
+	iconFormat := regexp.MustCompile(`^\d{2}[a-z]$`)
+	fmt.Println("Days Order:", daysOrder)
+	for day, details := range dailyDetailsByDay {
+		fmt.Printf("Day: %v, Details: %+v\n", day, details)
+	}
+	// Iterate over the daysOrder slice to maintain order
+	for day_number, dayOfWeek := range daysOrder {
+		if details, ok := dailyDetailsByDay[dayOfWeek]; ok {
+			for _, dayDetail := range details {
+				// Check if the icon format is valid
+				if iconFormat.MatchString(dayDetail.Icon) {
+					//convert temp to string because sprintf or writestring struggled with floats
+					avg_temp := fmt.Sprintf("%0.1f°C", dayDetail.AverageTemp)
+					weatherHTML.WriteString(fmt.Sprintf(
+						`<td ><a href="https://www.google.com/search?q=weather+%s"><img src="http://openweathermap.org/img/wn/%s.png" alt="Weather Icon" style="max-width:100%%; height:auto;" ></a> <br><span>%s</span></td>`, destination.City, dayDetail.Icon, avg_temp))
+				} else {
+
+					// Invalid icon format - replace with a default icon or just a hyperlink
+					// Assuming "default.png" is your default icon. Adjust the src attribute as needed.
+					if daycolumn_min <= day_number && day_number <= daycolumn_max {
+
+						weatherHTML.WriteString(fmt.Sprintf(
+							`<td><a href="https://www.google.com/search?q=weather+%s"><img src="src/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%%; height:auto;"></a></td> `, destination.City))
+					}
 				}
-				writer.WriteString("  </tr>\n")
-				isHeader = false
-			} else {
-				writer.WriteString("  <tr>\n")
-				for _, col := range columns {
-					col = strings.TrimSpace(col)
-					col = markdownLinkToHTML(col)
-					writer.WriteString(fmt.Sprintf("    <td>%s</td>\n", col))
-				}
-				writer.WriteString("  </tr>\n")
+			}
+		} else {
+			if daycolumn_min <= day_number && day_number <= daycolumn_max {
+				weatherHTML.WriteString(fmt.Sprintf(
+					`<td><a href="https://www.google.com/search?q=weather+%s"><img src="/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%%; height:auto;"></a></td> `, destination.City))
 			}
 		}
 	}
-	writer.WriteString("</table>\n")
-
-	writer.WriteString(`</body>
-</html>
-`)
-
-	if err := scanner.Err(); err != nil {
-		return fmt.Errorf("error reading markdown content: %w", err)
-	}
-
-	// Ensure all buffered content is written to the file
-	if err := writer.Flush(); err != nil {
-		return fmt.Errorf("error flushing writer: %w", err)
-	}
-
-	return nil
-}
-
-// markdownLinkToHTML converts markdown links to HTML links.
-func markdownLinkToHTML(text string) string {
-	re := regexp.MustCompile(`\[(.*?)\]\((.*?)\)`)
-	return re.ReplaceAllString(text, `<a href="$2">$1</a>`)
+	return fmt.Sprintf(
+		`<tr>
+    <td><a href="https://www.google.com/maps/place/%[1]s">%[1]s</a></td>
+    %s
+    <td><a href="%s">SkyScanner</a></td>
+    <td><a href="%s">Airbnb</a> <a href="%s">Booking.com</a></td>
+    <td><a href="https://www.google.com/search?q=things+to+do+this+weekend+%s">Google Results</a></td>
+</tr>`, destination.City, weatherHTML.String(), destination.SkyScannerURL, destination.AirbnbURL, destination.BookingURL, destination.City)
 }

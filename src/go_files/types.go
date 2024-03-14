@@ -1,6 +1,8 @@
 // model/types.go
 package model
 
+import "time"
+
 type WeatherData struct {
 	Dt   int64 `json:"dt"` // Unix timestamp of the forecasted data
 	Main struct {
@@ -10,19 +12,22 @@ type WeatherData struct {
 		Speed float64 `json:"speed"`
 	} `json:"wind"`
 	Weather []struct {
-		Main string `json:"main"`
+		Main        string `json:"main"`
+		Description string `json:"description"`
+		Icon        string `json:"icon"`
 	} `json:"weather"`
 }
 
 // AirportInfo holds the details for an airport.
 type DestinationInfo struct {
-	IATA          string
-	City          string
-	Country       string
-	SkyScannerURL string
-	AirbnbURL     string
-	BookingURL    string
-	WPI           float64
+	IATA           string
+	City           string
+	Country        string
+	SkyScannerURL  string
+	AirbnbURL      string
+	BookingURL     string
+	WPI            float64
+	WeatherDetails []DailyWeatherDetails
 }
 
 // AirportInfo holds the details for an airport.
@@ -34,4 +39,13 @@ type OriginInfo struct {
 	DepartureEndDate   string
 	ArrivalStartDate   string
 	ArrivalEndDate     string
+}
+
+type DailyWeatherDetails struct {
+	AverageTemp   float64
+	CommonWeather string
+	WPI           float64
+	AverageWind   float64
+	Icon          string
+	Day           time.Weekday
 }

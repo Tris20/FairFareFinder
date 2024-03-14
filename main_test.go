@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
+	"github.com/Tris20/FairFareFinder/src/go_files"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -11,7 +12,7 @@ import (
 // test for displayForecastData function
 func TestDisplayForecastData(t *testing.T) {
 	location := "New York"
-	dailyDetails := map[time.Weekday]weather_pleasantry.DailyWeatherDetails{
+	dailyDetails := map[time.Weekday]model.DailyWeatherDetails{
 		time.Wednesday: {
 			AverageTemp:   25.0,
 			CommonWeather: "Sunny",
