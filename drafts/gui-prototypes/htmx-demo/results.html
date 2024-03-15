@@ -1,0 +1,21 @@
+{{ define "results" }}
+<table>
+    <tr>
+        <th>Flight Number</th>
+        <th>Departure Airport</th>
+        <th>Arrival Airport</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+    </tr>
+    {{ range . }}
+    <tr>
+        <td>{{ .FlightNumber }}</td>
+        <td>{{ .DepartureAirport }}</td>
+        <td>{{ .ArrivalAirport }}</td>
+        <td>{{ .DepartureTime }}</td>
+        <td>{{ .ArrivalTime }}</td>
+    </tr>
+    {{ end }}
+</table>
+{{ end }}
+
