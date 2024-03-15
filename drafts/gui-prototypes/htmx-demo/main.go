@@ -37,8 +37,12 @@ func main() {
 
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/search", searchHandler)
+    
+  // Serve static files from the "css" directory
+    fs := http.FileServer(http.Dir("css"))
+    http.Handle("/css/", http.StripPrefix("/css/", fs))
 
-	log.Println("Starting server on :8080")
+    log.Println("Starting server on :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
