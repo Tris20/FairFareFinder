@@ -1,26 +1,21 @@
 package main
 
 import (
-	//	"encoding/json"
 	"fmt"
-	//	"io/ioutil"
+	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/flight_db_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/user_db_functions"
 	_ "github.com/Tris20/FairFareFinder/src/go_files/discourse"
-	"log"
-	"math"
-	"math/rand"
-	"os"
-	"regexp"
-	"sort"
-	"strings"
-	"time"
-	//"github.com/Tris20/FairFareFinder/src/go_files/json_functions"
-	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/server"
 	"github.com/Tris20/FairFareFinder/src/go_files/url_generators"
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
 	"github.com/Tris20/FairFareFinder/src/go_files/web_pages/html_generators"
+	"log"
+	"math"
+	"os"
+	"sort"
+	"strings"
+	"time"
 )
 
 type Favourites struct {
@@ -77,8 +72,8 @@ func main() {
 		airportDetailsList := flightdb.DetermineFlightsFromConfig(berlin_config)
 		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(berlin_config, airportDetailsList)
 		GenerateCityRankings(berlin_config, destinationsWithUrls)
-  
-    airportDetailsList = flightdb.DetermineFlightsFromConfig(glasgow_config)
+
+		airportDetailsList = flightdb.DetermineFlightsFromConfig(glasgow_config)
 		destinationsWithUrls = urlgenerators.GenerateFlightsAndHotelsURLs(glasgow_config, airportDetailsList)
 		GenerateCityRankings(glasgow_config, destinationsWithUrls)
 		// Update WPI data every 6 hours
@@ -141,14 +136,8 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 		return destinationsWithUrls[i].WPI > destinationsWithUrls[j].WPI
 	})
 
-	content := buildContentString(destinationsWithUrls)
-	fmt.Println(content)
-
 	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
-	//discourse.PostToDiscourse(content)
 	target_url := fmt.Sprintf("src/html/%s-flight-destinations.html", strings.ToLower(origin.City))
-	// Call the function to convert markdown to HTML and save it
-	//	err := htmltablegenerator.ConvertMarkdownToHTML(content, target_url)
 
 	err := htmltablegenerator.GenerateHtmlTable(target_url, destinationsWithUrls)
 	if err != nil {
@@ -160,86 +149,4 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 // replaceSpaceWithURLEncoding replaces space characters with %20 in the URL
 func replaceSpaceWithURLEncoding(urlString string) string {
 	return strings.ReplaceAll(urlString, " ", "%20")
-}
-
-func buildContentString(destinations []model.DestinationInfo) string {
-	var contentBuilder strings.Builder
-	// Add image to topic
-	contentBuilder.WriteString("![image|690x394](upload://jGDO8BaFIvS1MVO53MDmqlS27vQ.jpeg)\n")
-	// Header for the content
-	contentBuilder.WriteString("|City Name | WPI | Flights | Accommodation | Things to Do|\n")
-	contentBuilder.WriteString("|--|--|--|--|--|\n") // Additional line after headers
-
-	// Loop through cityWPIs and append each to the contentBuilder
-	//	iconCode := item.Weather[0].Icon                      // Original icon code, e.g., "10n"
-	//	iconCodeDay := strings.Replace(iconCode, "n", "d", 1) // Replace "n" with "d"
-	iconCodeDay := "01d"
-	iconURL := fmt.Sprintf("http://openweathermap.org/img/wn/%s.png", iconCodeDay)
-
-	for _, destination := range destinations {
-
-		weather_icons := fmt.Sprintf("[(%s)](https://www.google.com/search?q=weather+%s) [(%s)](https://www.google.com/search?q=weather+%s) [(%s)](https://www.google.com/search?q=weather+%s) [(%s)](https://www.google.com/search?q=weather+%s) [(%s)](https://www.google.com/search?q=weather+%s)", randomizeIconURL(iconURL), replaceSpaceWithURLEncoding(destination.City), randomizeIconURL(iconURL), replaceSpaceWithURLEncoding(destination.City), randomizeIconURL(iconURL), replaceSpaceWithURLEncoding(destination.City), randomizeIconURL(iconURL), replaceSpaceWithURLEncoding(destination.City), randomizeIconURL(iconURL), replaceSpaceWithURLEncoding(destination.City))
-
-		/*
-		   		weather_icons := fmt.Sprintf(`
-		   <td style="white-space: nowrap;">
-		     <span style="display: inline-block; text-align: center; width: 100px;">
-		       Mon<br>
-		       <a href="https://www.google.com/search?q=weather+Dubai">
-		         <img src="http://openweathermap.org/img/wn/02d.png" alt="Image" style="max-width:100px;">
-		       </a>
-		     </span>
-		     <span style="display: inline-block; text-align: center; width: 100px;">
-		       Tue<br>
-		       <a href="https://www.google.com/search?q=weather+Dubai">
-		         <img src="http://openweathermap.org/img/wn/03d.png" alt="Image" style="max-width:100px;">
-		       </a>
-		     </span>
-		     <span style="display: inline-block; text-align: center; width: 100px;">
-		       Wed<br>
-		       <a href="https://www.google.com/search?q=weather+Dubai">
-		         <img src="http://openweathermap.org/img/wn/02d.png" alt="Image" style="max-width:100px;">
-		       </a>
-		     </span>
-		     <span style="display: inline-block; text-align: center; width: 100px;">
-		       Thu<br>
-		       <a href="https://www.google.com/search?q=weather+Dubai">
-		         <img src="http://openweathermap.org/img/wn/04d.png" alt="Image" style="max-width:100px;">
-		       </a>
-		     </span>
-		     <span style="display: inline-block; text-align: center; width: 100px;">
-		       Fri<br>
-		       <a href="https://www.google.com/search?q=weather+Dubai">
-		         <img src="http://openweathermap.org/img/wn/01d.png" alt="Image" style="max-width:100px;">
-		       </a>
-		     </span>
-		   </td>
-		   `)
-
-		*/
-
-		line := fmt.Sprintf("| [%s](https://www.google.com/maps/place/%s) | %s | [SkyScanner](%s) | [Airbnb](%s) [Booking.com](%s) | [Google Results](https://www.google.com/search?q=things+to+do+this+weekend+%s)| \n", destination.City, replaceSpaceWithURLEncoding(destination.City), weather_icons, destination.SkyScannerURL, destination.AirbnbURL, destination.BookingURL, destination.City)
-		contentBuilder.WriteString(line)
-	}
-
-	// Convert the StringBuilder content to a string and return it
-	return contentBuilder.String()
-}
-
-// randomizeIconURL replaces the digit before "d.png" or "n.png" with a random number between 1 and 4.
-func randomizeIconURL(iconURL string) string {
-	// Seed the random number generator (consider doing this once at the start of your program instead)
-	rand.Seed(time.Now().UnixNano())
-
-	// Generate a random number between 1 and 4
-	randomNumber := rand.Intn(4) + 1 // rand.Intn(n) generates a number in [0, n), so +1 to shift to [1, 4]
-
-	// Find and replace the digit before "d.png" or "n.png"
-	re := regexp.MustCompile(`(\d)(d\.png|n\.png)`)
-	newIconURL := re.ReplaceAllStringFunc(iconURL, func(m string) string {
-		// m is the full match, so replace only the digit part
-		return strings.Replace(m, string(m[0]), fmt.Sprintf("%d", randomNumber), 1)
-	})
-
-	return newIconURL
 }
