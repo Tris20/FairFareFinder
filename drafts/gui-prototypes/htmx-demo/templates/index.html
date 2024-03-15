@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Comparison</title>
     <script src="https://unpkg.com/htmx.org"></script>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <div>
         <form hx-get="/search" hx-target="#results" hx-trigger="change">
             <label for="departureAirport">Departure Airport:</label>
             <input type="text" id="departureAirport" name="departureAirport">
+            <br>
             <label for="arrivalAirport">Arrival Airport:</label>
             <input type="text" id="arrivalAirport" name="arrivalAirport">
+            <br>
             <label for="departureDate">Departure Date:</label>
             <input type="date" id="departureDate" name="departureDate">
+            <br>
             <label for="arrivalDate">Arrival Date:</label>
             <input type="date" id="arrivalDate" name="arrivalDate">
         </form>
