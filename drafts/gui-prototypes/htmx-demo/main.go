@@ -37,12 +37,12 @@ func main() {
 
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/search", searchHandler)
-    
-  // Serve static files from the "css" directory
-    fs := http.FileServer(http.Dir("css"))
-    http.Handle("/css/", http.StripPrefix("/css/", fs))
 
-    log.Println("Starting server on :8080")
+	// Serve static files from the "css" directory
+	fs := http.FileServer(http.Dir("css"))
+	http.Handle("/css/", http.StripPrefix("/css/", fs))
+
+	log.Println("Starting server on :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
@@ -55,7 +55,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	tmpl.Execute(w, nil)
 }
-
 
 func searchHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse form inputs
@@ -82,17 +81,17 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 		query += " AND departureTime BETWEEN ? AND ?"
 		args = append(args, departureDate, arrivalDate)
 	}
-log.Println("Executing query:", query, args)
+	log.Println("Executing query:", query, args)
 
 	rows, err := db.Query(query, args...)
-  
-  if err != nil {
+
+	if err != nil {
 		http.Error(w, "Server Error", http.StatusInternalServerError)
 		log.Println("Failed to execute query:", err)
 		return
 	}
 	defer rows.Close()
-  w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html")
 	flights := make([]Flight, 0)
 	for rows.Next() {
 		var f Flight
@@ -103,25 +102,24 @@ log.Println("Executing query:", query, args)
 			return
 		}
 
-fmt.Printf("Flight: %s, Departure: %s, Arrival: %s\n", f.FlightNumber, f.DepartureAirport, f.ArrivalAirport)
+		fmt.Printf("Flight: %s, Departure: %s, Arrival: %s\n", f.FlightNumber, f.DepartureAirport, f.ArrivalAirport)
 		flights = append(flights, f)
 	}
-  //fmt.Println(flights)
+	//fmt.Println(flights)
 	// Render the results back to the client
-  path := filepath.Join(templatesPath, "results.html")
-  fmt.Println(path)
-  tmpl, err := template.ParseFiles(path)
+	path := filepath.Join(templatesPath, "results.html")
+	fmt.Println(path)
+	tmpl, err := template.ParseFiles(path)
 	if err != nil {
 		http.Error(w, "Internal Server Error", 500)
 		log.Println(err)
 		return
 	}
-    // Execute the template, writing the generated HTML directly to the response writer
-    err = tmpl.Execute(w, flights)
-    if err != nil {
-        log.Printf("Error executing template: %v", err)
-        http.Error(w, "Internal Server Error", 500)
-        return
-    }
+	// Execute the template, writing the generated HTML directly to the response writer
+	err = tmpl.Execute(w, flights)
+	if err != nil {
+		log.Printf("Error executing template: %v", err)
+		http.Error(w, "Internal Server Error", 500)
+		return
+	}
 }
-

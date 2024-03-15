@@ -5,7 +5,6 @@ import (
 	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/flight_db_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/user_db_functions"
-	_ "github.com/Tris20/FairFareFinder/src/go_files/discourse"
 	"github.com/Tris20/FairFareFinder/src/go_files/server"
 	"github.com/Tris20/FairFareFinder/src/go_files/url_generators"
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
