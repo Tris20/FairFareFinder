@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
 	"github.com/Tris20/FairFareFinder/src/go_files"
+	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
 	"io/ioutil"
 	"os"
 	"testing"
