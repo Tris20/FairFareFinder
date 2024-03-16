@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/Tris20/FairFareFinder/src/go_files"
+	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
 	"os"
 	"regexp"
 	"strings"
@@ -54,8 +55,24 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 <thead>
 <tr>
     <th>City Name</th>`)
-	// Create a slice of time.Weekday to define the order
-	daysOrder := []time.Weekday{time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday, time.Wednesday}
+
+
+// Determine day order based on current day
+
+var daysOrder []time.Weekday
+
+currentDay := time.Now().Weekday()
+	startDay, endDay := weather_pleasantry.DetermineRangeBasedOnCurrentDay(currentDay)
+    // Create a slice of time.Weekday to define the order
+	
+if currentDay == time.Saturday {
+  daysOrder = []time.Weekday{time.Saturday, time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday }
+}else {
+daysOrder = []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
+ }
+
+
+
 	// Map to store slices of DailyWeatherDetails by Weekday for easy lookup
 	dailyDetailsByDay := make(map[time.Weekday][]model.DailyWeatherDetails)
 	for _, detail := range citiesData[0].WeatherDetails {
@@ -67,9 +84,10 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 	daycolumn_max = 0
 	// Iterate over the daysOrder slice to maintain order
 	for _, dayOfWeek := range daysOrder {
+   if weather_pleasantry.ShouldIncludeDay(dayOfWeek,startDay, endDay ) {
 		if _, ok := dailyDetailsByDay[dayOfWeek]; ok {
 			//	for _, dayDetail := range details {
-
+      
 			//	for _, dayOfWeek := range daysOrder {
 			dayhtml := fmt.Sprintf(`<th style="width: 70px; ">%s</th>`, dayOfWeek)
 			_, err = writer.WriteString(dayhtml)
@@ -78,6 +96,7 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 		} else {
 			daycolumn_min += 1
 		}
+  }
 	}
 	_, err = writer.WriteString(`<th>Flights</th>
     <th>Accommodation</th>
@@ -117,8 +136,17 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 func generateTableRow(destination model.DestinationInfo) string {
 	var weatherHTML strings.Builder
 
-	// Create a slice of time.Weekday to define the order
-	daysOrder := []time.Weekday{time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday, time.Wednesday}
+var daysOrder []time.Weekday
+
+currentDay := time.Now().Weekday()
+	startDay, endDay := weather_pleasantry.DetermineRangeBasedOnCurrentDay(currentDay)
+    // Create a slice of time.Weekday to define the order
+	
+if currentDay == time.Saturday {
+  daysOrder = []time.Weekday{time.Saturday, time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday }
+}else {
+daysOrder = []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
+ }
 
 	// Map to store slices of DailyWeatherDetails by Weekday for easy lookup
 	dailyDetailsByDay := make(map[time.Weekday][]model.DailyWeatherDetails)
@@ -134,6 +162,8 @@ func generateTableRow(destination model.DestinationInfo) string {
 	}
 	// Iterate over the daysOrder slice to maintain order
 	for day_number, dayOfWeek := range daysOrder {
+   if weather_pleasantry.ShouldIncludeDay(dayOfWeek,startDay, endDay ) {
+
 		if details, ok := dailyDetailsByDay[dayOfWeek]; ok {
 			for _, dayDetail := range details {
 				// Check if the icon format is valid
@@ -160,6 +190,7 @@ func generateTableRow(destination model.DestinationInfo) string {
 			}
 		}
 	}
+}
 	return fmt.Sprintf(
 		`<tr>
     <td><a href="https://www.google.com/maps/place/%[1]s">%[1]s</a></td>
