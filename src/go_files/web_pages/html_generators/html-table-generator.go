@@ -3,12 +3,13 @@ package htmltablegenerator
 import (
 	"bufio"
 	"fmt"
-	"github.com/Tris20/FairFareFinder/src/go_files"
-	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
 	"os"
 	"regexp"
 	"strings"
 	"time"
+
+	"github.com/Tris20/FairFareFinder/src/go_files"
+	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
 )
 
 // Define a struct for the weather information of a day.
@@ -58,20 +59,7 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 
 
 // Determine day order based on current day
-
-var daysOrder []time.Weekday
-
-currentDay := time.Now().Weekday()
-	startDay, endDay := weather_pleasantry.DetermineRangeBasedOnCurrentDay(currentDay)
-    // Create a slice of time.Weekday to define the order
-	
-if currentDay == time.Saturday {
-  daysOrder = []time.Weekday{time.Saturday, time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday }
-}else {
-daysOrder = []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
- }
-
-
+ daysOrder, startDay, endDay := timeutils.GetDaysOrder()
 
 	// Map to store slices of DailyWeatherDetails by Weekday for easy lookup
 	dailyDetailsByDay := make(map[time.Weekday][]model.DailyWeatherDetails)
@@ -84,7 +72,7 @@ daysOrder = []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Satu
 	daycolumn_max = 0
 	// Iterate over the daysOrder slice to maintain order
 	for _, dayOfWeek := range daysOrder {
-   if weather_pleasantry.ShouldIncludeDay(dayOfWeek,startDay, endDay ) {
+   if timeutils.ShouldIncludeDay(dayOfWeek,startDay, endDay ) {
 		if _, ok := dailyDetailsByDay[dayOfWeek]; ok {
 			//	for _, dayDetail := range details {
       
@@ -136,17 +124,7 @@ daysOrder = []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Satu
 func generateTableRow(destination model.DestinationInfo) string {
 	var weatherHTML strings.Builder
 
-var daysOrder []time.Weekday
-
-currentDay := time.Now().Weekday()
-	startDay, endDay := weather_pleasantry.DetermineRangeBasedOnCurrentDay(currentDay)
-    // Create a slice of time.Weekday to define the order
-	
-if currentDay == time.Saturday {
-  daysOrder = []time.Weekday{time.Saturday, time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday }
-}else {
-daysOrder = []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
- }
+  daysOrder, startDay, endDay := timeutils.GetDaysOrder()
 
 	// Map to store slices of DailyWeatherDetails by Weekday for easy lookup
 	dailyDetailsByDay := make(map[time.Weekday][]model.DailyWeatherDetails)
@@ -162,7 +140,7 @@ daysOrder = []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Satu
 	}
 	// Iterate over the daysOrder slice to maintain order
 	for day_number, dayOfWeek := range daysOrder {
-   if weather_pleasantry.ShouldIncludeDay(dayOfWeek,startDay, endDay ) {
+   if timeutils.ShouldIncludeDay(dayOfWeek,startDay, endDay ) {
 
 		if details, ok := dailyDetailsByDay[dayOfWeek]; ok {
 			for _, dayDetail := range details {
