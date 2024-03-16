@@ -15,8 +15,12 @@ type Destination struct {
 
 func GenerateFlightsAndHotelsURLs(origin model.OriginInfo, destinationsWithUrls []model.DestinationInfo) []model.DestinationInfo {
 
+    // Format the date as "yymm"
+
+   now := time.Now()
+    formattedDate := now.Format("0601")
 	// Prepare the base URLs with placeholders
-	baseSkyScannerURL := fmt.Sprintf("https://www.skyscanner.de/transport/fluge/%s/$$$/?adults=1&adultsv2=1&cabinclass=economy&children=0&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1", origin.IATA)
+	baseSkyScannerURL := fmt.Sprintf("https://www.skyscanner.de/transport/fluge/%s/$$$/?adults=1&adultsv2=1&cabinclass=economy&children=0&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1&oym=%s", origin.IATA, formattedDate)
 
 	// Replace the placeholders in the URLs with actual values for each destination
 	for i := range destinationsWithUrls {
