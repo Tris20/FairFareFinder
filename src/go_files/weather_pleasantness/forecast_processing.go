@@ -1,6 +1,7 @@
 package weather_pleasantry
 
 import (
+	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
 	"github.com/Tris20/FairFareFinder/src/go_files"
 	"strings"
 	"time"
@@ -39,7 +40,7 @@ func calculateDailyAverageWPI(weatherData []model.WeatherData, config WeatherPle
 func ProcessForecastData(weeklyData []model.WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]model.DailyWeatherDetails, float64) {
 
   currentDay := time.Now().Weekday()
-	startDay, endDay := DetermineRangeBasedOnCurrentDay(currentDay)
+	startDay, endDay := timeutils.DetermineRangeBasedOnCurrentDay(currentDay)
 
 	dailyData := filterDataByDayRange(weeklyData, startDay, endDay)
 	dailyDetails := make(map[time.Weekday]model.DailyWeatherDetails)
