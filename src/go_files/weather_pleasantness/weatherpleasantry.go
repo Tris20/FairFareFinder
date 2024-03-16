@@ -3,12 +3,14 @@ package weather_pleasantry
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/Tris20/FairFareFinder/src/go_files"
-	"github.com/Tris20/FairFareFinder/src/go_files/config_handlers"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/Tris20/FairFareFinder/src/go_files"
+	"github.com/Tris20/FairFareFinder/src/go_files/config_handlers"
+	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
 )
 
 type ForecastResponse struct {
@@ -54,10 +56,10 @@ func ProcessLocation(location string) (float64, map[time.Weekday]model.DailyWeat
 }
 
 func DisplayForecastData(location string, dailyDetails map[time.Weekday]model.DailyWeatherDetails) {
-	orderedDays := []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
+  daysOrder, _, _ := timeutils.GetDaysOrder()
 
 	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
-	for _, day := range orderedDays {
+	for _, day := range daysOrder {
 		details, ok := dailyDetails[day]
 		wind_kmh := 3.6 * details.AverageWind
 		if ok {
