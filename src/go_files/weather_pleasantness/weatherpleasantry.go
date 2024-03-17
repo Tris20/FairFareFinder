@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 	"time"
-
+  "net/url"
 	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/config_handlers"
 	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
@@ -17,7 +17,7 @@ type ForecastResponse struct {
 	List []model.WeatherData `json:"list"`
 }
 
-func ProcessLocation(location string) (float64, map[time.Weekday]model.DailyWeatherDetails) {
+func ProcessLocation(location model.DestinationInfo) (float64, map[time.Weekday]model.DailyWeatherDetails) {
 
 	// Load API key from secrets.yaml
 	apiKey, err := config_handlers.LoadApiKey("ignore/secrets.yaml", "openweathermap.org")
@@ -25,9 +25,12 @@ func ProcessLocation(location string) (float64, map[time.Weekday]model.DailyWeat
 		log.Fatal("Error loading API key:", err)
 	}
 
+  location_string := url.QueryEscape(fmt.Sprintf("%s, %s", location.City, location.Country))
+  
 	// Build the forecast API URL with the provided city
-	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric", location, apiKey)
+	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric", location_string, apiKey)
 
+  fmt.Printf("%s",url)
 	// Make the HTTP request
 	resp, err := http.Get(url)
 	if err != nil {
@@ -50,10 +53,13 @@ func ProcessLocation(location string) (float64, map[time.Weekday]model.DailyWeat
 	}
 
 	dailyDetails, overallAverage := ProcessForecastData(forecast.List, config)
-	DisplayForecastData(location, dailyDetails)
+	DisplayForecastData(location.City, dailyDetails)
 
 	return overallAverage, dailyDetails
 }
+
+
+
 
 func DisplayForecastData(location string, dailyDetails map[time.Weekday]model.DailyWeatherDetails) {
   daysOrder, _, _ := timeutils.GetDaysOrder()
