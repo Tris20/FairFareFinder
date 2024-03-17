@@ -11,7 +11,11 @@ import (
 
 // test for displayForecastData function
 func TestDisplayForecastData(t *testing.T) {
-	location := "New York"
+
+var location model.DestinationInfo
+     	location.City = "New York"
+     location.Country = "US"
+
 	dailyDetails := map[time.Weekday]model.DailyWeatherDetails{
 		time.Wednesday: {
 			AverageTemp:   25.0,
@@ -44,7 +48,7 @@ Friday: Avg Temp: 20.00°C, Weather: Rainy, Wind: 45.00km/h, WPI: 6.00
 	r, w, _ := os.Pipe()
 	os.Stdout = w
 
-	weather_pleasantry.DisplayForecastData(location, dailyDetails)
+	weather_pleasantry.DisplayForecastData(location.City, dailyDetails)
 
 	// Reset stdout
 	w.Close()

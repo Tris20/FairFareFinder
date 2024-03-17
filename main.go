@@ -103,7 +103,10 @@ func main() {
 			//      GenerateAndPostCityRankings(os.Args[1], out)
 		} else {
 			// Assuming it's a city name
-			location := strings.Join(os.Args[1:], " ")
+
+    var location model.DestinationInfo
+     	location.City = strings.Join(os.Args[1:], " ")
+     location.Country = ("")
 			weather_pleasantry.ProcessLocation(location)
 		}
 	}
@@ -112,7 +115,7 @@ func main() {
 func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.DestinationInfo) {
 
 	for i := range destinationsWithUrls {
-		wpi, dailyDetails := weather_pleasantry.ProcessLocation(destinationsWithUrls[i].City)
+		wpi, dailyDetails := weather_pleasantry.ProcessLocation(destinationsWithUrls[i])
 		if !math.IsNaN(wpi) {
 			destinationsWithUrls[i].WPI = wpi // Directly write the WPI to the struct
 			// Update URLs or any other info as needed
