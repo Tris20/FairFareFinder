@@ -16,15 +16,15 @@ onePM := time.Date(now.Year(), now.Month(), now.Day(), 13, 0, 0, 0, now.Location
   switch currentDay {
 	case time.Sunday:
     if now.Before(onePM){
-    return time.Tuesday, time.Thursday
+    return time.Monday, time.Thursday
     } else{    
-		return time.Wednesday, time.Friday
+		return time.Monday, time.Friday
     }
 	case time.Monday:
     if now.Before(onePM){
-    return time.Wednesday, time.Friday
+    return time.Tuesday, time.Friday
     } else{    
-		return time.Wednesday, time.Saturday
+		return time.Tuesday, time.Saturday
     }
 	case time.Tuesday:
     if now.Before(onePM){
