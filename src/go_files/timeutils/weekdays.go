@@ -8,21 +8,54 @@ import (
 
 // determineRangeBasedOnCurrentDay calculates the range of days to consider based on the current day
 func DetermineRangeBasedOnCurrentDay(currentDay time.Weekday) (time.Weekday, time.Weekday) {
-	switch currentDay {
+
+//Final day data isn't available till 12pm on most days
+now := time.Now()
+onePM := time.Date(now.Year(), now.Month(), now.Day(), 13, 0, 0, 0, now.Location())
+
+  switch currentDay {
 	case time.Sunday:
+    if now.Before(onePM){
+    return time.Tuesday, time.Thursday
+    } else{    
 		return time.Wednesday, time.Friday
+    }
 	case time.Monday:
+    if now.Before(onePM){
+    return time.Wednesday, time.Friday
+    } else{    
 		return time.Wednesday, time.Saturday
+    }
 	case time.Tuesday:
-		return time.Thursday, time.Sunday
+    if now.Before(onePM){
+    return time.Wednesday, time.Saturday
+    } else{    
+		return time.Wednesday, time.Sunday
+    }
 	case time.Wednesday:
+    if now.Before(onePM){
+    return time.Thursday, time.Sunday
+    } else{    
 		return time.Thursday, time.Monday
+    }
 	case time.Thursday:
+    if now.Before(onePM){
+    return time.Friday, time.Monday
+    } else{    
 		return time.Friday, time.Tuesday
+    }
 	case time.Friday:
+    if now.Before(onePM){
+    return time.Saturday, time.Tuesday
+    } else{    
 		return time.Saturday, time.Wednesday
+    }
 	case time.Saturday:
+    if now.Before(onePM){
+    return time.Sunday, time.Wednesday
+    } else{    
 		return time.Sunday, time.Thursday
+    }
 	default:
 		return time.Thursday, time.Monday // Default range
 	}
@@ -53,7 +86,9 @@ func GetDaysOrder() ([]time.Weekday, time.Weekday, time.Weekday) {
 
     if currentDay == time.Saturday {
         daysOrder = []time.Weekday{time.Saturday, time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday}
-    } else {
+    } else   if currentDay == time.Sunday {
+        daysOrder = []time.Weekday{ time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday, time.Saturday}
+      } else {
         daysOrder = []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
     }
 
