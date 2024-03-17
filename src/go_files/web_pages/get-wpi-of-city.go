@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"github.com/Tris20/FairFareFinder/src/go_files"
 )
 
 func GetForecastHandler(w http.ResponseWriter, r *http.Request) {
@@ -24,13 +25,15 @@ func GetForecastHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error parsing form", http.StatusInternalServerError)
 		return
 	}
-	city := r.FormValue("city")
+var location model.DestinationInfo
+	location.City = r.FormValue("city")
+  location.Country = ("")
 	// fmt.Println("City:", city)
 
 	// Call the processLocation function
-	wpi, _ := weather_pleasantry.ProcessLocation(city)
+	wpi, _ := weather_pleasantry.ProcessLocation(location)
 
-	response := fmt.Sprintf("The Weather Pleasantness Index (WPI) for %s is %.2f", city, wpi)
+	response := fmt.Sprintf("The Weather Pleasantness Index (WPI) for %s is %.2f", location.City, wpi)
 	w.Header().Set("Content-Type", "text/html")
 	fmt.Fprint(w, response)
 }
