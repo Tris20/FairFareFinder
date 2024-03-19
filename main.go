@@ -5,6 +5,7 @@ import (
 	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/flight_db_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/user_db_functions"
+//"github.com/Tris20/FairFareFinder/src/go_files/flightutils"
 	"github.com/Tris20/FairFareFinder/src/go_files/server"
 	"github.com/Tris20/FairFareFinder/src/go_files/url_generators"
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
@@ -138,17 +139,31 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 		return destinationsWithUrls[i].WPI > destinationsWithUrls[j].WPI
 	})
 
-	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
-	target_url := fmt.Sprintf("src/html/%s-flight-destinations.html", strings.ToLower(origin.City))
+/*
+	for i := range destinationsWithUrls {
+    if destinationsWithUrls[i].WPI > 7 
+    {
+      flightutils.search()
+    }
 
-	err := htmltablegenerator.GenerateHtmlTable(target_url, destinationsWithUrls)
-	if err != nil {
-		log.Fatalf("Failed to convert markdown to HTML: %v", err)
-	}
+*/
+  generate_html_table(origin, destinationsWithUrls)
 
 }
 
 // replaceSpaceWithURLEncoding replaces space characters with %20 in the URL
 func replaceSpaceWithURLEncoding(urlString string) string {
 	return strings.ReplaceAll(urlString, " ", "%20")
+}
+
+
+func generate_html_table(origin model.OriginInfo, destinationsWithUrls []model.DestinationInfo ){
+
+	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
+	target_url := fmt.Sprintf("src/html/%s-flight-destinations.html", strings.ToLower(origin.City))
+
+	err := htmltablegenerator.GenerateHtmlTable(target_url, destinationsWithUrls )
+	if err != nil {
+		log.Fatalf("Failed to convert markdown to HTML: %v", err)
+	}
 }
