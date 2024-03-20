@@ -110,9 +110,45 @@ func ListDatesBetween(start string, end string) ([]string, error) {
 
 	var dates []string
 	for d := startDate; !d.After(endDate); d = d.AddDate(0, 0, 1) {
-    fmt.Printf("\n %s",d.Format(layout))
+		fmt.Printf("\n %s", d.Format(layout))
 		dates = append(dates, d.Format(layout))
 	}
 
 	return dates, nil
+}
+
+
+
+
+
+// formatDate formats a time.Time object into a string in the "YYYY-MM-DD" format.
+func formatDate(t time.Time) string {
+	return t.Format("2006-01-02")
+}
+
+// upcomingWedToSat calculates and returns the date range for the upcoming Wednesday to Saturday.
+func UpcomingWedToSat() (string, string) {
+	return calculateDateRange(time.Wednesday, 4)
+}
+
+// upcomingSunToWed calculates and returns the date range for the upcoming Sunday to Wednesday.
+func UpcomingSunToWed() (string, string) {
+	return calculateDateRange(time.Sunday, 4)
+}
+
+// calculateDateRange calculates the date range starting from the next occurrence of startDayOfWeek and lasting for a specified number of days.
+// It returns the start date and end date of the range.
+func calculateDateRange(startDayOfWeek time.Weekday, durationDays int) (string, string) {
+	now := time.Now()
+	// Calculate the number of days until the next occurrence of the start day of the week
+	daysUntilStart := (int(startDayOfWeek) - int(now.Weekday()) + 7) % 7
+	if daysUntilStart == 0 {
+		daysUntilStart = 7 // If today is the start day, begin from the next occurrence
+	}
+	// Calculate the start date by adding daysUntilStart to the current date
+	startDate := now.AddDate(0, 0, daysUntilStart)
+	// Calculate the end date by adding durationDays - 1 to the start date
+	endDate := startDate.AddDate(0, 0, durationDays-1)
+
+	return formatDate(startDate), formatDate(endDate)
 }

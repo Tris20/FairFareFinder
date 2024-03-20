@@ -35,15 +35,14 @@ func GetBestPrice(origin model.OriginInfo, destination model.DestinationInfo) (f
 	if err != nil {
 		return 0, fmt.Errorf("error loading API key: %v", err)
 	}
-fmt.Printf("\nDeparture")
+	fmt.Printf("\nDeparture")
 	departure_dates, err := timeutils.ListDatesBetween(origin.DepartureStartDate, origin.DepartureEndDate)
-fmt.Printf("\nReturn")
+	fmt.Printf("\nReturn")
 	return_dates, err := timeutils.ListDatesBetween(origin.ArrivalStartDate, origin.ArrivalEndDate)
 
-
-fmt.Printf("\nGetting Departure Price")
+	fmt.Printf("\nGetting Departure Price")
 	dep_price, err := GetBestPriceForGivenDates(origin.SkyScannerID, destination.SkyScannerID, departure_dates)
-fmt.Printf("\nGetting Return Price")
+	fmt.Printf("\nGetting Return Price")
 	return_price, err := GetBestPriceForGivenDates(destination.SkyScannerID, origin.SkyScannerID, return_dates)
 
 	return (dep_price + return_price), err
@@ -58,7 +57,7 @@ func GetBestPriceForGivenDates(departureSkyScannerID string, arrivalSkyScannerID
 	var err error
 
 	for _, date := range dates {
-    fmt.Printf("\n\nsearching %s",date)
+		fmt.Printf("\n\nsearching %s", date)
 		price, err := SearchOneWay(departureSkyScannerID, arrivalSkyScannerID, date)
 		if err != nil {
 			// Handle the error according to your error policy.
@@ -76,7 +75,7 @@ func GetBestPriceForGivenDates(departureSkyScannerID string, arrivalSkyScannerID
 	if lowestDayPrice == math.MaxFloat64 {
 		return 0, fmt.Errorf("no valid prices found")
 	}
-  fmt.Printf("\nLowest Price, %.2f", lowestDayPrice)
+	fmt.Printf("\nLowest Price, %.2f", lowestDayPrice)
 	return lowestDayPrice, err
 }
 
