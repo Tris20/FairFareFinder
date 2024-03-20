@@ -32,7 +32,7 @@ type CityAverageWPI struct {
 }
 
 var checkFlightPrices = false
-
+var checkprice_init = false
 func main() {
 	user_db.Setup_database()
 	dbPath := "user_database.db"
@@ -79,6 +79,7 @@ func main() {
 
 	case "web":
     fmt.Printf("INIT")
+    checkprice_init = true //get prices whenever we reset server 
 		checkFlightPrices = true
 
 		
@@ -90,6 +91,8 @@ func main() {
 		airportDetailsList = flightdb.DetermineFlightsFromConfig(glasgow_config)
 		destinationsWithUrls = urlgenerators.GenerateFlightsAndHotelsURLs(glasgow_config, airportDetailsList)
 		GenerateCityRankings(glasgow_config, destinationsWithUrls)
+     
+     checkprice_init = false
 
 		// Update WPI data every 6 hours
 		ticker := time.NewTicker(6 * time.Hour)
@@ -147,7 +150,7 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 			destinationsWithUrls[i].WPI = wpi // Directly write the WPI to the struct
 
 			if checkFlightPrices == true {
-				if time.Now().Weekday() == time.Wednesday {
+				if (time.Now().Weekday() == time.Wednesday) || (checkprice_init == true)  {
 
 					if destinationsWithUrls[i].WPI > 6.5 {
 						fmt.Printf("\n\nSkyscannerID: %s", destinationsWithUrls[i].SkyScannerID)
