@@ -131,28 +131,29 @@ func buildAirportDetails(db *sql.DB, iataCodes []string) []model.DestinationInfo
 		if iata == "" {
 			continue
 		}
-		city, country, err := fetchAirportDetails(db, iata)
+		city, country, skyscannerid, err := fetchAirportDetails(db, iata)
 		if err != nil {
 			log.Printf("Error fetching details for IATA %s: %v", iata, err)
 			continue
 		}
 		// Append the fetched details to the list
 		airportDetailsList = append(airportDetailsList, model.DestinationInfo{
-			IATA:    iata,
-			City:    city,
-			Country: country,
+			IATA:         iata,
+			City:         city,
+			Country:      country,
+			SkyScannerID: skyscannerid,
 		})
 	}
 	return airportDetailsList
 }
 
 // fetchAirportDetails executes a query to fetch city and country for a given IATA code.
-func fetchAirportDetails(db *sql.DB, iataCode string) (string, string, error) {
-	var city, country string
-	query := "SELECT city, country FROM airport_info WHERE iata = ?"
-	err := db.QueryRow(query, iataCode).Scan(&city, &country)
+func fetchAirportDetails(db *sql.DB, iataCode string) (string, string, string, error) {
+	var city, country, skyscannerid string
+	query := "SELECT city, country, skyscannerid FROM airport_info WHERE iata = ?"
+	err := db.QueryRow(query, iataCode).Scan(&city, &country, &skyscannerid)
 	if err != nil {
-		return "", "", err
+		return "", "", "", err
 	}
-	return city, country, nil
+	return city, country, skyscannerid, nil
 }

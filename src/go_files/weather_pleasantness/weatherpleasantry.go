@@ -3,14 +3,14 @@ package weather_pleasantry
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"log"
-	"net/http"
-	"time"
-  "net/url"
 	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/config_handlers"
 	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"net/url"
+	"time"
 )
 
 type ForecastResponse struct {
@@ -25,12 +25,12 @@ func ProcessLocation(location model.DestinationInfo) (float64, map[time.Weekday]
 		log.Fatal("Error loading API key:", err)
 	}
 
-  location_string := url.QueryEscape(fmt.Sprintf("%s, %s", location.City, location.Country))
-  
+	location_string := url.QueryEscape(fmt.Sprintf("%s, %s", location.City, location.Country))
+
 	// Build the forecast API URL with the provided city
 	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric", location_string, apiKey)
 
-  fmt.Printf("%s",url)
+	fmt.Printf("%s", url)
 	// Make the HTTP request
 	resp, err := http.Get(url)
 	if err != nil {
@@ -58,11 +58,8 @@ func ProcessLocation(location model.DestinationInfo) (float64, map[time.Weekday]
 	return overallAverage, dailyDetails
 }
 
-
-
-
 func DisplayForecastData(location string, dailyDetails map[time.Weekday]model.DailyWeatherDetails) {
-  daysOrder, _, _ := timeutils.GetDaysOrder()
+	daysOrder, _, _ := timeutils.GetDaysOrder()
 
 	fmt.Printf("Weather Pleasantness Index (WPI) for %s:\n", location)
 	for _, day := range daysOrder {

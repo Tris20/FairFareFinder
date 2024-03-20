@@ -57,9 +57,8 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 <tr>
     <th>City Name</th>`)
 
-
-// Determine day order based on current day
- daysOrder, startDay, endDay := timeutils.GetDaysOrder()
+	// Determine day order based on current day
+	daysOrder, startDay, endDay := timeutils.GetDaysOrder()
 
 	// Map to store slices of DailyWeatherDetails by Weekday for easy lookup
 	dailyDetailsByDay := make(map[time.Weekday][]model.DailyWeatherDetails)
@@ -72,19 +71,19 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 	daycolumn_max = 0
 	// Iterate over the daysOrder slice to maintain order
 	for _, dayOfWeek := range daysOrder {
-   if timeutils.ShouldIncludeDay(dayOfWeek,startDay, endDay ) {
-		if _, ok := dailyDetailsByDay[dayOfWeek]; ok {
-			//	for _, dayDetail := range details {
-      
-			//	for _, dayOfWeek := range daysOrder {
-			dayhtml := fmt.Sprintf(`<th style="width: 70px; ">%s</th>`, dayOfWeek)
-			_, err = writer.WriteString(dayhtml)
-			number_of_day_columns += 1
-			daycolumn_max += 1
-		} else {
-			daycolumn_min += 1
+		if timeutils.ShouldIncludeDay(dayOfWeek, startDay, endDay) {
+			if _, ok := dailyDetailsByDay[dayOfWeek]; ok {
+				//	for _, dayDetail := range details {
+
+				//	for _, dayOfWeek := range daysOrder {
+				dayhtml := fmt.Sprintf(`<th style="width: 70px; ">%s</th>`, dayOfWeek)
+				_, err = writer.WriteString(dayhtml)
+				number_of_day_columns += 1
+				daycolumn_max += 1
+			} else {
+				daycolumn_min += 1
+			}
 		}
-  }
 	}
 	_, err = writer.WriteString(`<th>Flights</th>
     <th>Accommodation</th>
@@ -124,7 +123,7 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 func generateTableRow(destination model.DestinationInfo) string {
 	var weatherHTML strings.Builder
 
-  daysOrder, startDay, endDay := timeutils.GetDaysOrder()
+	daysOrder, startDay, endDay := timeutils.GetDaysOrder()
 
 	// Map to store slices of DailyWeatherDetails by Weekday for easy lookup
 	dailyDetailsByDay := make(map[time.Weekday][]model.DailyWeatherDetails)
@@ -140,41 +139,46 @@ func generateTableRow(destination model.DestinationInfo) string {
 	}
 	// Iterate over the daysOrder slice to maintain order
 	for day_number, dayOfWeek := range daysOrder {
-   if timeutils.ShouldIncludeDay(dayOfWeek,startDay, endDay ) {
+		if timeutils.ShouldIncludeDay(dayOfWeek, startDay, endDay) {
 
-		if details, ok := dailyDetailsByDay[dayOfWeek]; ok {
-			for _, dayDetail := range details {
-				// Check if the icon format is valid
-				if iconFormat.MatchString(dayDetail.Icon) {
-					//convert temp to string because sprintf or writestring struggled with floats
-					avg_temp := fmt.Sprintf("%0.1f°C", dayDetail.AverageTemp)
-					weatherHTML.WriteString(fmt.Sprintf(
-						`<td ><a href="https://www.google.com/search?q=weather+%s"><img src="http://openweathermap.org/img/wn/%s.png" alt="Weather Icon" style="max-width:100%%; height:auto;" ></a> <br><span>%s</span></td>`, destination.City, dayDetail.Icon, avg_temp))
-				} else {
-
-					// Invalid icon format - replace with a default icon or just a hyperlink
-					// Assuming "default.png" is your default icon. Adjust the src attribute as needed.
-					if daycolumn_min <= day_number && day_number <= daycolumn_max {
-
+			if details, ok := dailyDetailsByDay[dayOfWeek]; ok {
+				for _, dayDetail := range details {
+					// Check if the icon format is valid
+					if iconFormat.MatchString(dayDetail.Icon) {
+						//convert temp to string because sprintf or writestring struggled with floats
+						avg_temp := fmt.Sprintf("%0.1f°C", dayDetail.AverageTemp)
 						weatherHTML.WriteString(fmt.Sprintf(
-							`<td><a href="https://www.google.com/search?q=weather+%s"><img src="src/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%%; height:auto;"></a></td> `, destination.City))
+							`<td ><a href="https://www.google.com/search?q=weather+%s"><img src="http://openweathermap.org/img/wn/%s.png" alt="Weather Icon" style="max-width:100%%; height:auto;" ></a> <br><span>%s</span></td>`, destination.City, dayDetail.Icon, avg_temp))
+					} else {
+
+						// Invalid icon format - replace with a default icon or just a hyperlink
+						// Assuming "default.png" is your default icon. Adjust the src attribute as needed.
+						if daycolumn_min <= day_number && day_number <= daycolumn_max {
+
+							weatherHTML.WriteString(fmt.Sprintf(
+								`<td><a href="https://www.google.com/search?q=weather+%s"><img src="src/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%%; height:auto;"></a></td> `, destination.City))
+						}
 					}
 				}
-			}
-		} else {
-			if daycolumn_min <= day_number && day_number <= daycolumn_max {
-				weatherHTML.WriteString(fmt.Sprintf(
-					`<td><a href="https://www.google.com/search?q=weather+%s"><img src="/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%%; height:auto;"></a></td> `, destination.City))
+			} else {
+				if daycolumn_min <= day_number && day_number <= daycolumn_max {
+					weatherHTML.WriteString(fmt.Sprintf(
+						`<td><a href="https://www.google.com/search?q=weather+%s"><img src="/images/unknownweather.png" alt="Default Weather Icon" style="max-width:100%%; height:auto;"></a></td> `, destination.City))
+				}
 			}
 		}
 	}
-}
+	skyscannertext := "SkyScanner"
+	if destination.SkyScannerPrice > 0.0 {
+		skyscannertext = fmt.Sprintf("From €%.2f", destination.SkyScannerPrice)
+	}
+
 	return fmt.Sprintf(
 		`<tr>
     <td><a href="https://www.google.com/maps/place/%[1]s">%[1]s</a></td>
     %s
-    <td><a href="%s">SkyScanner</a></td>
+    <td><a href="%s">%s</a></td>
     <td><a href="%s">Airbnb</a> <a href="%s">Booking.com</a></td>
     <td><a href="https://www.google.com/search?q=things+to+do+this+weekend+%s">Google Results</a></td>
-</tr>`, destination.City, weatherHTML.String(), destination.SkyScannerURL, destination.AirbnbURL, destination.BookingURL, destination.City)
+</tr>`, destination.City, weatherHTML.String(), destination.SkyScannerURL, skyscannertext, destination.AirbnbURL, destination.BookingURL, destination.City)
 }
