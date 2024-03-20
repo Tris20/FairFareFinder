@@ -63,9 +63,10 @@ func main() {
 	}
 
     berlin_config.DepartureStartDate, berlin_config.DepartureEndDate = timeutils.UpcomingWedToSat()
-    berlin_config.ArrivalStartDate, berlin_config.ArrivalEndDate = timeutils.UpcomingSunToWed()
+    berlin_config.ArrivalStartDate, berlin_config.ArrivalEndDate = timeutils.UpcomingSunToWedFromSat(berlin_config.DepartureEndDate)
     glasgow_config.DepartureStartDate, glasgow_config.DepartureEndDate = timeutils.UpcomingWedToSat()
-    glasgow_config.ArrivalStartDate, glasgow_config.ArrivalEndDate = timeutils.UpcomingSunToWed()
+    glasgow_config.ArrivalStartDate, glasgow_config.ArrivalEndDate = timeutils.UpcomingSunToWedFromSat(glasgow_config.DepartureEndDate)
+
 	switch os.Args[1] {
 	case "dev":
 		airportDetailsList := flightdb.DetermineFlightsFromConfig(berlin_config)
@@ -99,9 +100,10 @@ func main() {
 					checkFlightPrices = true
           //PERF can optimise. This runs 4 times on tuesday, but only needs to be ran once
     berlin_config.DepartureStartDate, berlin_config.DepartureEndDate = timeutils.UpcomingWedToSat()
-    berlin_config.ArrivalStartDate, berlin_config.ArrivalEndDate = timeutils.UpcomingSunToWed()
+    berlin_config.ArrivalStartDate, berlin_config.ArrivalEndDate = timeutils.UpcomingSunToWedFromSat(berlin_config.DepartureEndDate)
+
     glasgow_config.DepartureStartDate, glasgow_config.DepartureEndDate = timeutils.UpcomingWedToSat()
-    glasgow_config.ArrivalStartDate, glasgow_config.ArrivalEndDate = timeutils.UpcomingSunToWed()
+    glasgow_config.ArrivalStartDate, glasgow_config.ArrivalEndDate = timeutils.UpcomingSunToWedFromSat(glasgow_config.DepartureEndDate)
 				}
 
 				airportDetailsList := flightdb.DetermineFlightsFromConfig(berlin_config)
