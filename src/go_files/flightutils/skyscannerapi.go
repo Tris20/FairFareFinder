@@ -1,31 +1,101 @@
-/*
+
 package flightutils
 
 import (
 	"encoding/json"
 	"fmt"
-  "net/url"
+	"io/ioutil"
+	"net/http"
 	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/config_handlers"
 )
 
+var apiKey string
 
+type Response struct {
+	Status  bool `json:"status"`
+	Message string `json:"message"`
+	Data    struct {
+		Itineraries []Itinerary `json:"itineraries"`
+	} `json:"data"`
+}
 
-func SearchOneWay()
+type Itinerary struct {
+	Price struct {
+		Raw       float64 `json:"raw"`
+		Formatted string  `json:"formatted"`
+	} `json:"price"`
+}
 
+func GetBestPrice(origin model.OriginInfo, destination model.DestinationInfo) (float64, error) {
+	// Load API key from secrets.yaml
+	var err error
+	apiKey, err = config_handlers.LoadApiKey("ignore/secrets.yaml", "skyscanner")
+	if err != nil {
+		return 0, fmt.Errorf("error loading API key: %v", err)
+	}
 
+	return SearchOneWay(origin, destination)
+}
 
+func SearchOneWay(origin model.OriginInfo, destination model.DestinationInfo) (float64, error) {
+	url := fmt.Sprintf("https://skyscanner80.p.rapidapi.com/api/v1/flights/search-one-way?fromId=%s&toId=%s&departDate=2024-03-22&adults=1&currency=EUR&market=US&locale=en-US", origin.SkyScannerID, destination.SkyScannerID)
 
-func GetLowestPriceForLocation(origin, destination)
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return 0, err
+	}
 
+	req.Header.Add("X-RapidAPI-Key", apiKey)
+	req.Header.Add("X-RapidAPI-Host", "skyscanner80.p.rapidapi.com")
 
+	res, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return 0, err
+	}
+	defer res.Body.Close()
 
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return 0, err
+	}
 
+	// Parse the JSON response and determine the best price
+	return determineBestPriceFromResponse(body)
+}
+
+func determineBestPriceFromResponse(body []byte) (float64, error) {
+	var response Response
+
+	err := json.Unmarshal(body, &response)
+	if err != nil {
+		return 0, fmt.Errorf("error parsing JSON: %v", err)
+	}
+
+	if len(response.Data.Itineraries) == 0 {
+		return 0, fmt.Errorf("no itineraries found")
+	}
+
+	// Assume the first itinerary has the best (lowest) price to start
+	bestPrice := response.Data.Itineraries[0].Price.Raw
+	for _, itinerary := range response.Data.Itineraries {
+		if itinerary.Price.Raw < bestPrice {
+			bestPrice = itinerary.Price.Raw
+		}
+	}
+
+	return bestPrice, nil
+}
+
+/*
 
 func GetFlightDates(origin, destination)
 //Search flights.db for origin to destination W TH FR SA 
 
 //Search flights.db for origin to destination SU Mon Tue Wed 
+
+
+func sumcosts()
 
 */
 

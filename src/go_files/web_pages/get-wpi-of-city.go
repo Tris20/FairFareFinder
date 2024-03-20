@@ -2,11 +2,11 @@ package fffwebpages
 
 import (
 	"fmt"
+	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"github.com/Tris20/FairFareFinder/src/go_files"
 )
 
 func GetForecastHandler(w http.ResponseWriter, r *http.Request) {
@@ -25,9 +25,9 @@ func GetForecastHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error parsing form", http.StatusInternalServerError)
 		return
 	}
-var location model.DestinationInfo
+	var location model.DestinationInfo
 	location.City = r.FormValue("city")
-  location.Country = ("")
+	location.Country = ("")
 	// fmt.Println("City:", city)
 
 	// Call the processLocation function
