@@ -5,12 +5,12 @@ import (
 	"encoding/json"
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
-	"io"
-	"net/http"
 	"gopkg.in/yaml.v2"
+	"io"
 	"io/ioutil"
-  "log"
-//	"time"
+	"log"
+	"net/http"
+	//	"time"
 )
 
 // ApiResponse defines the structure to parse the JSON response
@@ -23,12 +23,9 @@ type ApiResponse struct {
 // Secrets struct to match the YAML structure
 type Secrets struct {
 	APIKeys struct {
-		 SkyScanner string `yaml:"skyscanner"`
+		SkyScanner string `yaml:"skyscanner"`
 	} `yaml:"api_keys"`
 }
-
-
-
 
 func readAPIKey(filepath string) (string, error) {
 	var secrets Secrets
@@ -43,19 +40,18 @@ func readAPIKey(filepath string) (string, error) {
 	return secrets.APIKeys.SkyScanner, nil
 }
 
-
 func updateSkyscannerID(db *sql.DB, skyscannerId, iata string) error {
-    tx, err := db.Begin()
-    if err != nil {
-        return err
-    }
-    _, err = tx.Exec("UPDATE airport_info SET skyscannerid = ? WHERE iata = ?", skyscannerId, iata)
-    if err != nil {
-        tx.Rollback() // Rollback in case of error
-        return err
-    }
-    err = tx.Commit() // Commit if all is good
-    return err
+	tx, err := db.Begin()
+	if err != nil {
+		return err
+	}
+	_, err = tx.Exec("UPDATE airport_info SET skyscannerid = ? WHERE iata = ?", skyscannerId, iata)
+	if err != nil {
+		tx.Rollback() // Rollback in case of error
+		return err
+	}
+	err = tx.Commit() // Commit if all is good
+	return err
 }
 func main() {
 
@@ -63,7 +59,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error reading API key: %v", err)
 	}
-fmt.Println(apiKey)
+	fmt.Println(apiKey)
 	// Connect to the SQLite database
 	db, err := sql.Open("sqlite3", "./flights.db")
 	if err != nil {
@@ -78,8 +74,8 @@ fmt.Println(apiKey)
 		fmt.Println("Failed to set PRAGMA journal_mode=WAL:", err)
 		return
 	}
-	
-rows, err := db.Query("SELECT iata FROM airport_info WHERE iata IS NOT NULL AND iata <> '' AND skyscannerid IS NULL")
+
+	rows, err := db.Query("SELECT iata FROM airport_info WHERE iata IS NOT NULL AND iata <> '' AND skyscannerid IS NULL")
 	if err != nil {
 		fmt.Println("Error querying database:", err)
 		return
@@ -101,14 +97,14 @@ rows, err := db.Query("SELECT iata FROM airport_info WHERE iata IS NOT NULL AND 
 			// Perform the API request with the current IATA code
 			url := fmt.Sprintf("https://skyscanner80.p.rapidapi.com/api/v1/flights/auto-complete?query=%s&market=US&locale=en-US", iata)
 			req, _ := http.NewRequest("GET", url, nil)
-			req.Header.Add("X-RapidAPI-Key", apiKey) 
+			req.Header.Add("X-RapidAPI-Key", apiKey)
 			req.Header.Add("X-RapidAPI-Host", "skyscanner80.p.rapidapi.com")
 
 			res, err := http.DefaultClient.Do(req)
 			if err != nil {
 				fmt.Println("Failed to make API request:", err)
 				continue
-		}
+			}
 			body, err := io.ReadAll(res.Body)
 			res.Body.Close() // Close immediately after reading
 			if err != nil {
@@ -125,21 +121,21 @@ rows, err := db.Query("SELECT iata FROM airport_info WHERE iata IS NOT NULL AND 
 			// Update the database with the Skyscanner ID
 			if len(response.Data) > 0 {
 				skyscannerId := fmt.Sprintf(response.Data[0].Id)
-        fmt.Println(skyscannerId)
+				fmt.Println(skyscannerId)
 
 				if err := updateSkyscannerID(db, skyscannerId, iata); err != nil {
 					fmt.Println("Failed to update database after retries:", err)
 					continue
 				}
-			}    else {
+			} else {
 
-        skyscannerId := "None"
+				skyscannerId := "None"
 
 				if err := updateSkyscannerID(db, skyscannerId, iata); err != nil {
 					fmt.Println("Failed to update database after retries:", err)
 					continue
 				}
-      }
+			}
 		}
 	}
 	if err := rows.Err(); err != nil {

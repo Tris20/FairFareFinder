@@ -2,8 +2,8 @@ package weather_pleasantry
 
 import (
 	"github.com/Tris20/FairFareFinder/src/go_files"
-	"time"
 	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
+	"time"
 )
 
 // filterDataByDayRange filters the weather data for a specific range of days
@@ -22,4 +22,3 @@ func filterDataByDayRange(weeklyData []model.WeatherData, startDay, endDay time.
 	}
 	return dailyData
 }
-

@@ -5,7 +5,7 @@ import (
 	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/flight_db_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/user_db_functions"
-//"github.com/Tris20/FairFareFinder/src/go_files/flightutils"
+	"github.com/Tris20/FairFareFinder/src/go_files/flightutils"
 	"github.com/Tris20/FairFareFinder/src/go_files/server"
 	"github.com/Tris20/FairFareFinder/src/go_files/url_generators"
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
@@ -45,6 +45,7 @@ func main() {
 		DepartureEndDate:   "2024-03-22",
 		ArrivalStartDate:   "2024-03-24",
 		ArrivalEndDate:     "2024-03-26",
+    SkyScannerID:       "eyJzIjoiQkVSIiwiZSI6Ijk1NjczMzgzIiwiaCI6IjI3NTQ3MDUzIn0=",
 	}
 
 	glasgow_config := model.OriginInfo{
@@ -55,6 +56,7 @@ func main() {
 		DepartureEndDate:   "2024-03-22",
 		ArrivalStartDate:   "2024-03-24",
 		ArrivalEndDate:     "2024-03-26",
+    SkyScannerID:       "eyJzIjoiR0xBUyIsImUiOiIyNzU0MTg1MiIsImgiOiIyNzU0MTg1MiJ9",
 	}
 
 	switch os.Args[1] {
@@ -105,9 +107,9 @@ func main() {
 		} else {
 			// Assuming it's a city name
 
-    var location model.DestinationInfo
-     	location.City = strings.Join(os.Args[1:], " ")
-     location.Country = ("")
+			var location model.DestinationInfo
+			location.City = strings.Join(os.Args[1:], " ")
+			location.Country = ("")
 			weather_pleasantry.ProcessLocation(location)
 		}
 	}
@@ -119,6 +121,17 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 		wpi, dailyDetails := weather_pleasantry.ProcessLocation(destinationsWithUrls[i])
 		if !math.IsNaN(wpi) {
 			destinationsWithUrls[i].WPI = wpi // Directly write the WPI to the struct
+if destinationsWithUrls[i].WPI > 7 {
+    fmt.Printf("\n\nSkyscannerID: %s", destinationsWithUrls[i].SkyScannerID)
+    price, err := flightutils.GetBestPrice(origin, destinationsWithUrls[i])
+    if err != nil {
+        log.Fatal("Error getting best price:", err)
+    }
+    //fmt.Printf("\n\n Best Price: €", price)
+    destinationsWithUrls[i].SkyScannerPrice = price
+    //time.Sleep(5 * time.Second)
+}
+
 			// Update URLs or any other info as needed
 			destinationsWithUrls[i].SkyScannerURL = replaceSpaceWithURLEncoding(destinationsWithUrls[i].SkyScannerURL)
 			destinationsWithUrls[i].AirbnbURL = replaceSpaceWithURLEncoding(destinationsWithUrls[i].AirbnbURL)
@@ -139,15 +152,7 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 		return destinationsWithUrls[i].WPI > destinationsWithUrls[j].WPI
 	})
 
-/*
-	for i := range destinationsWithUrls {
-    if destinationsWithUrls[i].WPI > 7 
-    {
-      flightutils.search()
-    }
-
-*/
-  generate_html_table(origin, destinationsWithUrls)
+	generate_html_table(origin, destinationsWithUrls)
 
 }
 
@@ -156,13 +161,12 @@ func replaceSpaceWithURLEncoding(urlString string) string {
 	return strings.ReplaceAll(urlString, " ", "%20")
 }
 
-
-func generate_html_table(origin model.OriginInfo, destinationsWithUrls []model.DestinationInfo ){
+func generate_html_table(origin model.OriginInfo, destinationsWithUrls []model.DestinationInfo) {
 
 	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
 	target_url := fmt.Sprintf("src/html/%s-flight-destinations.html", strings.ToLower(origin.City))
 
-	err := htmltablegenerator.GenerateHtmlTable(target_url, destinationsWithUrls )
+	err := htmltablegenerator.GenerateHtmlTable(target_url, destinationsWithUrls)
 	if err != nil {
 		log.Fatalf("Failed to convert markdown to HTML: %v", err)
 	}

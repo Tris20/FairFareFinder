@@ -12,9 +12,9 @@ import (
 // test for displayForecastData function
 func TestDisplayForecastData(t *testing.T) {
 
-var location model.DestinationInfo
-     	location.City = "New York"
-     location.Country = "US"
+	var location model.DestinationInfo
+	location.City = "New York"
+	location.Country = "US"
 
 	dailyDetails := map[time.Weekday]model.DailyWeatherDetails{
 		time.Wednesday: {

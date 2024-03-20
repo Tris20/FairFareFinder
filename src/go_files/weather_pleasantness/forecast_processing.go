@@ -1,12 +1,11 @@
 package weather_pleasantry
 
 import (
-	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
 	"github.com/Tris20/FairFareFinder/src/go_files"
+	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
 	"strings"
 	"time"
 )
-
 
 // calculateDailyAverageWPI and ProcessForecastData defined here.
 // calculateDailyAverageWPI calculates the average WPI for a single day
@@ -29,9 +28,6 @@ func calculateDailyAverageWPI(weatherData []model.WeatherData, config WeatherPle
 	return totalWPI / count
 }
 
-
-
-
 // ProcessForecastData takes a slice of WeatherData for an entire week
 // and returns a map of average WPI for Thursday to Monday.
 // It also calculates the overall average for these days.
@@ -39,7 +35,7 @@ func calculateDailyAverageWPI(weatherData []model.WeatherData, config WeatherPle
 
 func ProcessForecastData(weeklyData []model.WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]model.DailyWeatherDetails, float64) {
 
-  currentDay := time.Now().Weekday()
+	currentDay := time.Now().Weekday()
 	startDay, endDay := timeutils.DetermineRangeBasedOnCurrentDay(currentDay)
 
 	dailyData := filterDataByDayRange(weeklyData, startDay, endDay)
@@ -96,9 +92,6 @@ func ProcessForecastData(weeklyData []model.WeatherData, config WeatherPleasantn
 	return dailyDetails, averageWPI
 }
 
-
-
-
 // weatherPleasantness calculates the "weather pleasentness index" (WPI)
 func weatherPleasantness(temp float64, wind float64, cond string, config WeatherPleasantnessConfig) float64 {
 	weightTemp := 5.0
@@ -112,4 +105,3 @@ func weatherPleasantness(temp float64, wind float64, cond string, config Weather
 	index := (tempIndex + windIndex + weatherIndex) / (weightTemp + weightWind + weightCond)
 	return index
 }
-
