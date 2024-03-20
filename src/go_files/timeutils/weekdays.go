@@ -1,6 +1,7 @@
 package timeutils
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -92,4 +93,26 @@ func GetDaysOrder() ([]time.Weekday, time.Weekday, time.Weekday) {
 	}
 
 	return daysOrder, startDay, endDay
+}
+
+// ListDatesBetween generates a list of dates in the format "YYYY-MM-DD" between two given dates, inclusive.
+func ListDatesBetween(start string, end string) ([]string, error) {
+	const layout = "2006-01-02" // Go's reference time format
+	startDate, err := time.Parse(layout, start)
+	if err != nil {
+		return nil, fmt.Errorf("invalid start date: %v", err)
+	}
+
+	endDate, err := time.Parse(layout, end)
+	if err != nil {
+		return nil, fmt.Errorf("invalid end date: %v", err)
+	}
+
+	var dates []string
+	for d := startDate; !d.After(endDate); d = d.AddDate(0, 0, 1) {
+    fmt.Printf("\n %s",d.Format(layout))
+		dates = append(dates, d.Format(layout))
+	}
+
+	return dates, nil
 }

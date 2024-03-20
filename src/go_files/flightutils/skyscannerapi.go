@@ -1,19 +1,20 @@
-
 package flightutils
 
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"net/http"
 	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/config_handlers"
+	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
+	"io/ioutil"
+	"math"
+	"net/http"
 )
 
 var apiKey string
 
 type Response struct {
-	Status  bool `json:"status"`
+	Status  bool   `json:"status"`
 	Message string `json:"message"`
 	Data    struct {
 		Itineraries []Itinerary `json:"itineraries"`
@@ -34,12 +35,53 @@ func GetBestPrice(origin model.OriginInfo, destination model.DestinationInfo) (f
 	if err != nil {
 		return 0, fmt.Errorf("error loading API key: %v", err)
 	}
+fmt.Printf("\nDeparture")
+	departure_dates, err := timeutils.ListDatesBetween(origin.DepartureStartDate, origin.DepartureEndDate)
+fmt.Printf("\nReturn")
+	return_dates, err := timeutils.ListDatesBetween(origin.ArrivalStartDate, origin.ArrivalEndDate)
 
-	return SearchOneWay(origin, destination)
+
+fmt.Printf("\nGetting Departure Price")
+	dep_price, err := GetBestPriceForGivenDates(origin.SkyScannerID, destination.SkyScannerID, departure_dates)
+fmt.Printf("\nGetting Return Price")
+	return_price, err := GetBestPriceForGivenDates(destination.SkyScannerID, origin.SkyScannerID, return_dates)
+
+	return (dep_price + return_price), err
+
+	// price = (get_lowest_departure_price() + get_lowest_arrival_price())
+
+	//return SearchOneWay(origin.SkyScannerID, destination.SkyScannerID )
 }
 
-func SearchOneWay(origin model.OriginInfo, destination model.DestinationInfo) (float64, error) {
-	url := fmt.Sprintf("https://skyscanner80.p.rapidapi.com/api/v1/flights/search-one-way?fromId=%s&toId=%s&departDate=2024-03-22&adults=1&currency=EUR&market=US&locale=en-US", origin.SkyScannerID, destination.SkyScannerID)
+func GetBestPriceForGivenDates(departureSkyScannerID string, arrivalSkyScannerID string, dates []string) (float64, error) {
+	var lowestDayPrice float64 = math.MaxFloat64
+	var err error
+
+	for _, date := range dates {
+    fmt.Printf("\n\nsearching %s",date)
+		price, err := SearchOneWay(departureSkyScannerID, arrivalSkyScannerID, date)
+		if err != nil {
+			// Handle the error according to your error policy.
+			// For example, you can return the error or continue to try other dates.
+			fmt.Println("\nError fetching price for date:", date, "Error:", err)
+			continue
+		}
+
+		if price < lowestDayPrice {
+			lowestDayPrice = price
+		}
+	}
+
+	// Check if lowestDayPrice was updated, return an error if not
+	if lowestDayPrice == math.MaxFloat64 {
+		return 0, fmt.Errorf("no valid prices found")
+	}
+  fmt.Printf("\nLowest Price, %.2f", lowestDayPrice)
+	return lowestDayPrice, err
+}
+
+func SearchOneWay(Departure_SkyScannerID string, Arrival_SkyScannerID string, date string) (float64, error) {
+	url := fmt.Sprintf("https://skyscanner80.p.rapidapi.com/api/v1/flights/search-one-way?fromId=%s&toId=%s&departDate=%s&adults=1&currency=EUR&market=US&locale=en-US", Departure_SkyScannerID, Arrival_SkyScannerID, date)
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
@@ -90,13 +132,11 @@ func determineBestPriceFromResponse(body []byte) (float64, error) {
 /*
 
 func GetFlightDates(origin, destination)
-//Search flights.db for origin to destination W TH FR SA 
+//Search flights.db for origin to destination W TH FR SA
 
-//Search flights.db for origin to destination SU Mon Tue Wed 
+//Search flights.db for origin to destination SU Mon Tue Wed
 
 
 func sumcosts()
 
 */
-
-
