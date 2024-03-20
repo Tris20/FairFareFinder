@@ -168,10 +168,10 @@ func generateTableRow(destination model.DestinationInfo) string {
 			}
 		}
 	}
-  skyscannertext := "SkyScanner"
-  if destination.SkyScannerPrice > 0.0{
-    skyscannertext = fmt.Sprintf("From €%.2f",destination.SkyScannerPrice)
-}
+	skyscannertext := "SkyScanner"
+	if destination.SkyScannerPrice > 0.0 {
+		skyscannertext = fmt.Sprintf("From €%.2f", destination.SkyScannerPrice)
+	}
 
 	return fmt.Sprintf(
 		`<tr>

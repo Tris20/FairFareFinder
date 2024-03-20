@@ -121,13 +121,15 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 		wpi, dailyDetails := weather_pleasantry.ProcessLocation(destinationsWithUrls[i])
 		if !math.IsNaN(wpi) {
 			destinationsWithUrls[i].WPI = wpi // Directly write the WPI to the struct
-if destinationsWithUrls[i].WPI > 7 {
+
+
+if destinationsWithUrls[i].WPI > 6.5 {
     fmt.Printf("\n\nSkyscannerID: %s", destinationsWithUrls[i].SkyScannerID)
     price, err := flightutils.GetBestPrice(origin, destinationsWithUrls[i])
     if err != nil {
         log.Fatal("Error getting best price:", err)
     }
-    //fmt.Printf("\n\n Best Price: €", price)
+    fmt.Printf("\n\n Best Price: €%.2f", price)
     destinationsWithUrls[i].SkyScannerPrice = price
     //time.Sleep(5 * time.Second)
 }
