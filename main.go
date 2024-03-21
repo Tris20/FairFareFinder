@@ -17,6 +17,8 @@ import (
 	"sort"
 	"strings"
 	"time"
+ "encoding/json"
+  "io/ioutil"
 )
 
 type Favourites struct {
@@ -29,6 +31,13 @@ type CityAverageWPI struct {
 	SkyScannerURL string
 	AirbnbURL     string
 	BookingURL    string
+}
+type PriceData struct {
+	SkyScannerID string
+	Price        float64
+}
+type PersistentPrices struct {
+	Data map[string]PriceData
 }
 
 var checkFlightPrices = false
@@ -143,6 +152,13 @@ func main() {
 }
 
 func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.DestinationInfo) {
+	// Load existing prices
+	persistentPrices := &PersistentPrices{}
+	err := persistentPrices.Load("prices.json")
+	if err != nil {
+		log.Fatal("Error loading prices:", err)
+	}
+
 
 	for i := range destinationsWithUrls {
 		wpi, dailyDetails := weather_pleasantry.ProcessLocation(destinationsWithUrls[i])
@@ -164,7 +180,11 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 
 				}
 
-			}
+			} else {
+       priceData := persistentPrices.Data[destinationsWithUrls[i].SkyScannerID] 
+       destinationsWithUrls[i].SkyScannerPrice = priceData.Price
+       }
+
 
 			// Update URLs or any other info as needed
 			destinationsWithUrls[i].SkyScannerURL = replaceSpaceWithURLEncoding(destinationsWithUrls[i].SkyScannerURL)
@@ -206,4 +226,27 @@ func generate_html_table(origin model.OriginInfo, destinationsWithUrls []model.D
 	if err != nil {
 		log.Fatalf("Failed to convert markdown to HTML: %v", err)
 	}
+}
+
+
+
+
+func (p *PersistentPrices) Load(fileName string) error {
+	file, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		if os.IsNotExist(err) {
+			p.Data = make(map[string]PriceData)
+			return nil // No file means first run; proceed with an empty map.
+		}
+		return err
+	}
+	return json.Unmarshal(file, &p.Data)
+}
+
+func (p *PersistentPrices) Save(fileName string) error {
+	data, err := json.Marshal(p.Data)
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile(fileName, data, 0644)
 }
