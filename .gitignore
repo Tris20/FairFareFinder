@@ -20,7 +20,7 @@ ignore/
 
 # Go workspace file
 go.work
-
+*.json
 *.db
 *.db*
 user_database.db
