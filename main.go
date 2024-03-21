@@ -94,6 +94,7 @@ func main() {
 
 	case "web":
     fmt.Printf("INIT")
+    /*
     checkprice_init = true //get prices whenever we reset server 
 		checkFlightPrices = true
 
@@ -106,7 +107,7 @@ func main() {
 		airportDetailsList = flightdb.DetermineFlightsFromConfig(glasgow_config)
 		destinationsWithUrls = urlgenerators.GenerateFlightsAndHotelsURLs(glasgow_config, airportDetailsList)
 		GenerateCityRankings(glasgow_config, destinationsWithUrls)
-     
+     */
      checkprice_init = false
 
 		// Update WPI data every 6 hours
@@ -178,7 +179,7 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 
             if checkFlightPrices {
                 if (time.Now().Weekday() == time.Wednesday) || checkprice_init {
-                    if destinationsWithUrls[i].WPI > 6.5 {
+  //                  if destinationsWithUrls[i].WPI > 6.5 {
                         fmt.Printf("\n\nSkyscannerID: %s", destinationsWithUrls[i].SkyScannerID)
                         price, err := flightutils.GetBestPrice(origin, destinationsWithUrls[i])
                         if err != nil {
@@ -189,7 +190,7 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
                         // Update the destination with the new price and update the persistent data
                         destinationsWithUrls[i].SkyScannerPrice = price
                         persistentPrices.Data[priceKey] = PriceData{Price: price}
-                    }
+        //            }
                 }
             } else {
                 // Use the persisted price if available

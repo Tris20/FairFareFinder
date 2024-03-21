@@ -21,4 +21,6 @@ ignore/
 # Go workspace file
 go.work
 
+*.db
+*.db*
 user_database.db
