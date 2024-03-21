@@ -275,11 +275,6 @@ func (p *PersistentPrices) Save(fileName string) error {
 }
 
 
-func generateCompositeKey(originID, destinationID string) string {
-	return originID + "_" + destinationID
-}
-
-
 
 func (pp *PersistentPrices) MarshalJSON() ([]byte, error) {
     helper := make(map[string]PriceData)
