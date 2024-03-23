@@ -94,11 +94,11 @@ func main() {
 
 	case "web":
     fmt.Printf("INIT")
-    /*
+    
     checkprice_init = true //get prices whenever we reset server 
 		checkFlightPrices = true
 
-		
+		/*
     //Update Berlin and Glasgow immediately
 		airportDetailsList := flightdb.DetermineFlightsFromConfig(berlin_config)
 		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(berlin_config, airportDetailsList)
