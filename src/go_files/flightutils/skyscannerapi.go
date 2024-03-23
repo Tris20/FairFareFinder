@@ -1,12 +1,16 @@
 package flightutils
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/config_handlers"
+	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/flight_db_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
+	"github.com/Tris20/FairFareFinder/src/go_files/url_generators"
 	"io/ioutil"
+	"log"
 	"math"
 	"net/http"
 )
@@ -140,3 +144,44 @@ func GetFlightDates(origin, destination)
 func sumcosts()
 
 */
+
+func UpdateSkyscannerPrices(origins []model.OriginInfo) {
+	persistentPrices := &model.PersistentPrices{}
+
+	for _, origin := range origins {
+		// Build a list of airports from the given origin and dates
+		airportDetailsList := flightdb.DetermineFlightsFromConfig(origin)
+
+		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(origin, airportDetailsList)
+
+		for i, destination := range destinationsWithUrls {
+			fmt.Printf("\n\nSkyscannerID: %s", destination.SkyScannerID)
+			price, err := GetBestPrice(origin, destination)
+			if err != nil {
+				log.Fatalf("Error getting best price: %v", err) // Use Fatalf for formatted output
+			}
+			fmt.Printf("\n\nBest Price: €%.2f", price)
+
+			// Update the destination with the new price and update the persistent data
+			destinationsWithUrls[i].SkyScannerPrice = price
+			priceKey := model.PriceKey{
+				OriginID:      origin.SkyScannerID,
+				DestinationID: destination.SkyScannerID,
+			}
+			persistentPrices.Data[priceKey] = model.PriceData{Price: price}
+		}
+	}
+}
+
+// Function to get price for a given pair of skyscanner IDs
+func GetPriceForRoute(db *sql.DB, origin string, destination string) (float64, error) {
+	var price float64
+
+	query := "SELECT this_weekend FROM skyscannerprices WHERE origin = ? AND destination = ?"
+	err := db.QueryRow(query, origin, destination).Scan(&price)
+	if err != nil {
+		return 0, err // Return 0 and the error
+	}
+
+	return price, nil // Return the found price and no error
+}
