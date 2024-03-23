@@ -98,7 +98,7 @@ func main() {
     checkprice_init = true //get prices whenever we reset server 
 		checkFlightPrices = true
 
-		
+		/*
     //Update Berlin and Glasgow immediately
 		airportDetailsList := flightdb.DetermineFlightsFromConfig(berlin_config)
 		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(berlin_config, airportDetailsList)
@@ -107,7 +107,7 @@ func main() {
 		airportDetailsList = flightdb.DetermineFlightsFromConfig(glasgow_config)
 		destinationsWithUrls = urlgenerators.GenerateFlightsAndHotelsURLs(glasgow_config, airportDetailsList)
 		GenerateCityRankings(glasgow_config, destinationsWithUrls)
-     
+     */
      checkprice_init = false
 
 		// Update WPI data every 6 hours
