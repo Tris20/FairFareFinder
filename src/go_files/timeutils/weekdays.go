@@ -88,6 +88,10 @@ func GetDaysOrder() ([]time.Weekday, time.Weekday, time.Weekday) {
 		daysOrder = []time.Weekday{time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday}
 	} else if currentDay == time.Tuesday {
 		daysOrder = []time.Weekday{time.Tuesday, time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday}
+  } else if currentDay == time.Friday{
+		daysOrder = []time.Weekday{ time.Friday, time.Saturday, time.Sunday, time.Monday, 
+    time.Tuesday, time.Wednesday, time.Thursday, }
+
 	} else {
 		daysOrder = []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
 	}

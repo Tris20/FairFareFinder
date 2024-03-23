@@ -73,7 +73,8 @@ func GetBestPriceForGivenDates(departureSkyScannerID string, arrivalSkyScannerID
 
 	// Check if lowestDayPrice was updated, return an error if not
 	if lowestDayPrice == math.MaxFloat64 {
-		return 0, fmt.Errorf("no valid prices found")
+    lowestDayPrice = 0.0
+	//	return 0, fmt.Errorf("no valid prices found")
 	}
 	fmt.Printf("\nLowest Price, %.2f", lowestDayPrice)
 	return lowestDayPrice, err
