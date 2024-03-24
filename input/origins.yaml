@@ -17,12 +17,5 @@ origins:
     ArrivalEndDate: "2024-03-26"
     SkyScannerID: "eyJzIjoiR0xBUyIsImUiOiIyNzU0MTg1MiIsImgiOiIyNzU0MTg1MiJ9"
 
-  - IATA: "EDI"
-    City: "Edinburgh"
-    Country: "Scotland"
-    DepartureStartDate: "2024-03-20"
-    DepartureEndDate: "2024-03-22"
-    ArrivalStartDate: "2024-03-24"
-    ArrivalEndDate: "2024-03-26"
-    SkyScannerID: "eyJzIjoiRURJIiwiZSI6Ijk1NjczNjY4IiwiaCI6IjI3NTQwODUxIn0="
+
 

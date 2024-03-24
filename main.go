@@ -53,7 +53,6 @@ func main() {
 	switch os.Args[1] {
 	case "dev":
 
-		origins = update_origin_dates(origins)
 		ProcessOriginConfigurations(origins)
 		fmt.Println("\nStarting Webserver")
 		fffwebserver.SetupFFFWebServer()
@@ -63,7 +62,7 @@ func main() {
 
 	case "web":
 		fmt.Printf("WEB")
-
+		ProcessOriginConfigurations(origins)
 		// Update WPI data every 6 hours
 		ticker := time.NewTicker(6 * time.Hour)
 		go func() {
@@ -124,11 +123,11 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 		price, err := flightutils.GetPriceForRoute(db, origin.SkyScannerID, destination.SkyScannerID)
 		if err != nil {
 			log.Printf("Failed to get price for route from %v to %v: %v", origin.SkyScannerID, destination.SkyScannerID, err)
-			continue
+		//	continue
 		}
 		
 		destinationsWithUrls[i].SkyScannerPrice = price
-		log.Printf("Retrieved SkyScanner price for %v -> %v: %.2f", origin.SkyScannerID, destination.SkyScannerID, price)
+		fmt.Printf("Retrieved SkyScanner price for %v -> %v: %.2f", origin.SkyScannerID, destination.SkyScannerID, price)
 
 		// Update URLs with URL encoding
 		destinationsWithUrls[i].SkyScannerURL = replaceSpaceWithURLEncoding(destination.SkyScannerURL)
@@ -183,7 +182,9 @@ func update_origin_dates(origins []model.OriginInfo) []model.OriginInfo {
 
 // ProcessOriginConfigurations processes each origin configuration
 func ProcessOriginConfigurations(origins []model.OriginInfo) {
+  fmt.Printf("Procssing Flights")
 	for _, origin := range origins {
+    fmt.Printf("%s: %s - %s",origin.City, origin.DepartureStartDate, origin.DepartureEndDate)
 		// Build a list of airports from the given origin and dates
 		airportDetailsList := flightdb.DetermineFlightsFromConfig(origin)
 

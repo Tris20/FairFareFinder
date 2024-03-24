@@ -146,29 +146,40 @@ func sumcosts()
 */
 
 func UpdateSkyscannerPrices(origins []model.OriginInfo) {
-	persistentPrices := &model.PersistentPrices{}
+	// Open SQLite database
+	db, err := sql.Open("sqlite3", "./data/flights.db")
+	if err != nil {
+		log.Fatalf("Failed to open database: %v", err)
+	}
+	defer db.Close()
+
+	updateStmt, err := db.Prepare("UPDATE skyscannerprices SET this_weekend = ? WHERE origin = ? AND destination = ?")
+	if err != nil {
+		log.Fatalf("Failed to prepare update statement: %v", err)
+	}
+	defer updateStmt.Close()
 
 	for _, origin := range origins {
-		// Build a list of airports from the given origin and dates
+		// Assume DetermineFlightsFromConfig and GenerateFlightsAndHotelsURLs are functions that return valid results
 		airportDetailsList := flightdb.DetermineFlightsFromConfig(origin)
-
 		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(origin, airportDetailsList)
 
-		for i, destination := range destinationsWithUrls {
+		for _, destination := range destinationsWithUrls {
 			fmt.Printf("\n\nSkyscannerID: %s", destination.SkyScannerID)
 			price, err := GetBestPrice(origin, destination)
 			if err != nil {
-				log.Fatalf("Error getting best price: %v", err) // Use Fatalf for formatted output
+				log.Printf("Error getting best price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
+				continue // Continue with the next destination if there's an error
 			}
 			fmt.Printf("\n\nBest Price: €%.2f", price)
 
-			// Update the destination with the new price and update the persistent data
-			destinationsWithUrls[i].SkyScannerPrice = price
-			priceKey := model.PriceKey{
-				OriginID:      origin.SkyScannerID,
-				DestinationID: destination.SkyScannerID,
+			// Execute the update statement for each origin-destination pair with the new price
+			_, err = updateStmt.Exec(price, origin.SkyScannerID, destination.SkyScannerID)
+			if err != nil {
+				log.Printf("Failed to update price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
+			} else {
+				log.Printf("Successfully updated price for %s to %s: €%.2f", origin.SkyScannerID, destination.SkyScannerID, price)
 			}
-			persistentPrices.Data[priceKey] = model.PriceData{Price: price}
 		}
 	}
 }
