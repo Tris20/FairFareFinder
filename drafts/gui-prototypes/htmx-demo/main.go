@@ -37,6 +37,7 @@ func main() {
 
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/search", searchHandler)
+  http.HandleFunc("/airports", airportsHandler)
 
 	// Serve static files from the "css" directory
 	fs := http.FileServer(http.Dir("css"))
@@ -46,15 +47,49 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
+
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles(filepath.Join(templatesPath, "index.html"))
-	if err != nil {
-		http.Error(w, "Internal Server Error", 500)
-		log.Println(err)
-		return
-	}
-	tmpl.Execute(w, nil)
+    tmpl, err := template.ParseFiles(filepath.Join(templatesPath, "index.html"))
+    if err != nil {
+        http.Error(w, "Internal Server Error", 500)
+        log.Println(err)
+        return
+    }
+
+    query := `SELECT DISTINCT departureAirport FROM flights ORDER BY departureAirport`
+    rows, err := db.Query(query)
+    if err != nil {
+        // Handle error, maybe log and return a 500 error
+        log.Println("Failed to execute query:", err)
+        http.Error(w, "Internal Server Error", 500)
+        return
+    }
+    defer rows.Close()
+
+    var departureAirports []string
+    for rows.Next() {
+        var airport string
+        if err := rows.Scan(&airport); err != nil {
+            // Handle error, for example by logging and breaking out of the loop
+            log.Println("Failed to scan row:", err)
+            http.Error(w, "Internal Server Error", 500)
+            return
+        }
+        departureAirports = append(departureAirports, airport)
+    }
+
+    data := map[string]interface{}{
+        "DepartureAirports": departureAirports,
+    }
+    
+    // Execute the template, passing in the data map
+    err = tmpl.Execute(w, data)
+    if err != nil {
+        log.Printf("Error executing template: %v", err)
+        http.Error(w, "Internal Server Error", 500)
+    }
 }
+
 
 func searchHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse form inputs
@@ -122,4 +157,32 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Internal Server Error", 500)
 		return
 	}
+}
+
+
+func airportsHandler(w http.ResponseWriter, r *http.Request) {
+    departureAirport := r.URL.Query().Get("departureAirport")
+    
+    query := `SELECT DISTINCT arrivalAirport FROM flights WHERE departureAirport = ?`
+    rows, err := db.Query(query, departureAirport)
+    if err != nil {
+        http.Error(w, "Server Error", http.StatusInternalServerError)
+        log.Println("Failed to execute query:", err)
+        return
+    }
+    defer rows.Close()
+
+    var options string
+    for rows.Next() {
+        var arrivalAirport string
+        if err := rows.Scan(&arrivalAirport); err != nil {
+            http.Error(w, "Server Error", http.StatusInternalServerError)
+            log.Println("Failed to scan row:", err)
+            return
+        }
+        options += fmt.Sprintf(`<option value="%s">%s</option>`, arrivalAirport, arrivalAirport)
+    }
+
+    w.Header().Set("Content-Type", "text/html")
+    w.Write([]byte(options))
 }
