@@ -136,7 +136,7 @@ func UpcomingSunToWedFromSat(endSaturday string) (string, string) {
 func calculateDateRangeForWedToSat(startDayOfWeek time.Weekday, durationDays int) (string, string) {
 	now := time.Now()
 	// If today is between Wednesday and Saturday, include this week
-	if now.Weekday() >= time.Wednesday && now.Weekday() <= time.Saturday {
+	if now.Weekday() >= time.Wednesday && now.Weekday() <= time.Friday{
 		daysUntilStart := int(startDayOfWeek - now.Weekday())
 		if daysUntilStart > 0 {
 			daysUntilStart -= 7 // Move back to the current week's Wednesday
