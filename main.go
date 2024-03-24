@@ -57,6 +57,7 @@ func main() {
 		fffwebserver.SetupFFFWebServer()
 
 	case "updateSkyPrices":
+		fmt.Printf("\nUpdating Flight Prices\n")
 		flightutils.UpdateSkyscannerPrices(origins)
 
 	case "web":
@@ -114,23 +115,23 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 			log.Printf("WPI calculation returned NaN for destination %v", destination)
 			continue
 		}
-		
+
 		destinationsWithUrls[i].WPI = wpi // Update the WPI in the destination info
 		log.Printf("Updated WPI for destination %v: %f", destination, wpi)
 
 		// Read price data from the database table
-		price, err := flightutils.GetPriceForRoute(db,"this_weekend", origin.SkyScannerID, destination.SkyScannerID)
+		price, err := flightutils.GetPriceForRoute(db, "this_weekend", origin.SkyScannerID, destination.SkyScannerID)
 		// Read price data from the database table
-    var nextprice float64
-		nextprice, err = flightutils.GetPriceForRoute(db,"next_weekend", origin.SkyScannerID, destination.SkyScannerID)
+		var nextprice float64
+		nextprice, err = flightutils.GetPriceForRoute(db, "next_weekend", origin.SkyScannerID, destination.SkyScannerID)
 
 		if err != nil {
 			log.Printf("Failed to get price for route from %v to %v: %v", origin.SkyScannerID, destination.SkyScannerID, err)
-		//	continue
+			//	continue
 		}
-		
+
 		destinationsWithUrls[i].SkyScannerPrice = price
-	destinationsWithUrls[i].SkyScannerNextPrice = nextprice
+		destinationsWithUrls[i].SkyScannerNextPrice = nextprice
 		fmt.Printf("Retrieved SkyScanner price for %v -> %v: %.2f", origin.SkyScannerID, destination.SkyScannerID, price)
 
 		// Update URLs with URL encoding
@@ -155,6 +156,7 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 	generate_html_table(origin, destinationsWithUrls)
 	log.Println("Generated HTML table for city rankings.")
 }
+
 // replaceSpaceWithURLEncoding replaces space characters with %20 in the URL
 func replaceSpaceWithURLEncoding(urlString string) string {
 	return strings.ReplaceAll(urlString, " ", "%20")
@@ -186,8 +188,7 @@ func update_origin_dates(origins []model.OriginInfo) []model.OriginInfo {
 		fmt.Printf("  Next Departure: %s to %s\n", origins[i].NextDepartureStartDate, origins[i].NextDepartureEndDate)
 		fmt.Printf("  Next Arrival: %s to %s\n\n", origins[i].NextArrivalStartDate, origins[i].NextArrivalEndDate)
 
-
-//		fmt.Printf("Updated Origin: %+v\n", origins[i])
+		//		fmt.Printf("Updated Origin: %+v\n", origins[i])
 
 	}
 	return origins
@@ -195,9 +196,9 @@ func update_origin_dates(origins []model.OriginInfo) []model.OriginInfo {
 
 // ProcessOriginConfigurations processes each origin configuration
 func ProcessOriginConfigurations(origins []model.OriginInfo) {
-  fmt.Printf("Procssing Flights")
+	fmt.Printf("Procssing Flights")
 	for _, origin := range origins {
-    fmt.Printf("%s: %s - %s",origin.City, origin.DepartureStartDate, origin.DepartureEndDate)
+		fmt.Printf("%s: %s - %s", origin.City, origin.DepartureStartDate, origin.DepartureEndDate)
 		// Build a list of airports from the given origin and dates
 		airportDetailsList := flightdb.DetermineFlightsFromConfig(origin)
 

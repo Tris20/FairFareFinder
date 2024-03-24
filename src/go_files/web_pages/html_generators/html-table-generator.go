@@ -76,7 +76,7 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 				//	for _, dayDetail := range details {
 
 				//	for _, dayOfWeek := range daysOrder {
-        dayhtml := fmt.Sprintf(`<th style="width: 70px; ">%s</th>`, dayOfWeek.String()[:3])
+				dayhtml := fmt.Sprintf(`<th style="width: 70px; ">%s</th>`, dayOfWeek.String()[:3])
 				_, err = writer.WriteString(dayhtml)
 				number_of_day_columns += 1
 				daycolumn_max += 1
@@ -188,5 +188,5 @@ func generateTableRow(destination model.DestinationInfo) string {
 
     <td><a href="%s">Airbnb</a> <a href="%s">Booking.com</a></td>
     <td><a href="https://www.google.com/search?q=things+to+do+this+weekend+%s">Google Results</a></td>
-</tr>`, destination.City, weatherHTML.String(), destination.SkyScannerURL, skyscannertext,destination.SkyScannerURL, skyscannerNexttext, destination.AirbnbURL, destination.BookingURL, destination.City)
+</tr>`, destination.City, weatherHTML.String(), destination.SkyScannerURL, skyscannertext, destination.SkyScannerURL, skyscannerNexttext, destination.AirbnbURL, destination.BookingURL, destination.City)
 }
