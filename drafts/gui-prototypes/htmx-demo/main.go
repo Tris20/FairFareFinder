@@ -48,46 +48,27 @@ func main() {
 }
 
 
+
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-    tmpl, err := template.ParseFiles(filepath.Join(templatesPath, "index.html"))
-    if err != nil {
-        http.Error(w, "Internal Server Error", 500)
-        log.Println(err)
-        return
-    }
+	tmpl, err := template.ParseFiles(filepath.Join(templatesPath, "index.html"))
+	if err != nil {
+		http.Error(w, "Internal Server Error", 500)
+		log.Println(err)
+		return
+	}
 
-    query := `SELECT DISTINCT departureAirport FROM flights ORDER BY departureAirport`
-    rows, err := db.Query(query)
-    if err != nil {
-        // Handle error, maybe log and return a 500 error
-        log.Println("Failed to execute query:", err)
-        http.Error(w, "Internal Server Error", 500)
-        return
-    }
-    defer rows.Close()
+	// Execute template without default departure airport
+	data := map[string]interface{}{
+		"DepartureAirports": fetchDepartureAirports(),
+		"ArrivalAirports":   []string{}, // Empty initially
+		"Flights":           []Flight{}, // Empty initially
+	}
 
-    var departureAirports []string
-    for rows.Next() {
-        var airport string
-        if err := rows.Scan(&airport); err != nil {
-            // Handle error, for example by logging and breaking out of the loop
-            log.Println("Failed to scan row:", err)
-            http.Error(w, "Internal Server Error", 500)
-            return
-        }
-        departureAirports = append(departureAirports, airport)
-    }
-
-    data := map[string]interface{}{
-        "DepartureAirports": departureAirports,
-    }
-    
-    // Execute the template, passing in the data map
-    err = tmpl.Execute(w, data)
-    if err != nil {
-        log.Printf("Error executing template: %v", err)
-        http.Error(w, "Internal Server Error", 500)
-    }
+	err = tmpl.Execute(w, data)
+	if err != nil {
+		log.Printf("Error executing template: %v", err)
+		http.Error(w, "Internal Server Error", 500)
+	}
 }
 
 
@@ -185,4 +166,76 @@ func airportsHandler(w http.ResponseWriter, r *http.Request) {
 
     w.Header().Set("Content-Type", "text/html")
     w.Write([]byte(options))
+}
+
+
+// Helper function to fetch airports.
+func fetchAirports(query string, args ...interface{}) ([]string, error) {
+    rows, err := db.Query(query, args...)
+    if err != nil {
+        return nil, err
+    }
+    defer rows.Close()
+
+    var airports []string
+    for rows.Next() {
+        var airport string
+        if err := rows.Scan(&airport); err != nil {
+            return nil, err
+        }
+        airports = append(airports, airport)
+    }
+
+    return airports, nil
+}
+
+// Helper function to fetch flights based on departure and (optionally) arrival airport.
+func fetchFlights(departure, arrival string) ([]Flight, error) {
+    query := "SELECT ID, FlightNumber, DepartureAirport, ArrivalAirport, DepartureTime, ArrivalTime FROM flights WHERE departureAirport = ?"
+    args := []interface{}{departure}
+
+    if arrival != "" {
+        query += " AND arrivalAirport = ?"
+        args = append(args, arrival)
+    }
+
+    rows, err := db.Query(query, args...)
+    if err != nil {
+        return nil, err
+    }
+    defer rows.Close()
+
+    var flights []Flight
+    for rows.Next() {
+        var f Flight
+        if err := rows.Scan(&f.ID, &f.FlightNumber, &f.DepartureAirport, &f.ArrivalAirport, &f.DepartureTime, &f.ArrivalTime); err != nil {
+            return nil, err
+        }
+        flights = append(flights, f)
+    }
+
+    return flights, nil
+}
+
+
+
+func fetchDepartureAirports() []string {
+	query := `SELECT DISTINCT departureAirport FROM flights ORDER BY departureAirport`
+	rows, err := db.Query(query)
+	if err != nil {
+		log.Println("Failed to execute departure airport query:", err)
+		return nil
+	}
+	defer rows.Close()
+
+	var airports []string
+	for rows.Next() {
+		var airport string
+		if err := rows.Scan(&airport); err != nil {
+			log.Println("Failed to scan row for departure airport:", err)
+			return nil
+		}
+		airports = append(airports, airport)
+	}
+	return airports
 }
