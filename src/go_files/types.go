@@ -20,33 +20,33 @@ type WeatherData struct {
 
 // AirportInfo holds the details for an airport.
 type DestinationInfo struct {
-	IATA            string
-	City            string
-	Country         string
-	SkyScannerURL   string
-	SkyScannerID    string
-	SkyScannerPrice float64
-  SkyScannerNextPrice float64
-	AirbnbURL       string
-	BookingURL      string
-	WPI             float64
-	WeatherDetails  []DailyWeatherDetails
+	IATA                string
+	City                string
+	Country             string
+	SkyScannerURL       string
+	SkyScannerID        string
+	SkyScannerPrice     float64
+	SkyScannerNextPrice float64
+	AirbnbURL           string
+	BookingURL          string
+	WPI                 float64
+	WeatherDetails      []DailyWeatherDetails
 }
 
 // AirportInfo holds the details for an airport.
 type OriginInfo struct {
-	IATA               string
-	City               string
-	Country            string
-	DepartureStartDate string
-	DepartureEndDate   string
-	ArrivalStartDate   string
-	ArrivalEndDate     string
+	IATA                   string
+	City                   string
+	Country                string
+	DepartureStartDate     string
+	DepartureEndDate       string
+	ArrivalStartDate       string
+	ArrivalEndDate         string
 	NextDepartureStartDate string
 	NextDepartureEndDate   string
 	NextArrivalStartDate   string
 	NextArrivalEndDate     string
-	SkyScannerID       string
+	SkyScannerID           string
 }
 
 type DailyWeatherDetails struct {

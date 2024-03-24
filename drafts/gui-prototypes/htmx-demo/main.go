@@ -37,7 +37,7 @@ func main() {
 
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/search", searchHandler)
-  http.HandleFunc("/airports", airportsHandler)
+	http.HandleFunc("/airports", airportsHandler)
 
 	// Serve static files from the "css" directory
 	fs := http.FileServer(http.Dir("css"))
@@ -46,8 +46,6 @@ func main() {
 	log.Println("Starting server on :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
-
-
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles(filepath.Join(templatesPath, "index.html"))
@@ -70,7 +68,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Internal Server Error", 500)
 	}
 }
-
 
 func searchHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse form inputs
@@ -140,84 +137,80 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-
 func airportsHandler(w http.ResponseWriter, r *http.Request) {
-    departureAirport := r.URL.Query().Get("departureAirport")
-    
-    query := `SELECT DISTINCT arrivalAirport FROM flights WHERE departureAirport = ?`
-    rows, err := db.Query(query, departureAirport)
-    if err != nil {
-        http.Error(w, "Server Error", http.StatusInternalServerError)
-        log.Println("Failed to execute query:", err)
-        return
-    }
-    defer rows.Close()
+	departureAirport := r.URL.Query().Get("departureAirport")
 
-    var options string
-    for rows.Next() {
-        var arrivalAirport string
-        if err := rows.Scan(&arrivalAirport); err != nil {
-            http.Error(w, "Server Error", http.StatusInternalServerError)
-            log.Println("Failed to scan row:", err)
-            return
-        }
-        options += fmt.Sprintf(`<option value="%s">%s</option>`, arrivalAirport, arrivalAirport)
-    }
+	query := `SELECT DISTINCT arrivalAirport FROM flights WHERE departureAirport = ?`
+	rows, err := db.Query(query, departureAirport)
+	if err != nil {
+		http.Error(w, "Server Error", http.StatusInternalServerError)
+		log.Println("Failed to execute query:", err)
+		return
+	}
+	defer rows.Close()
 
-    w.Header().Set("Content-Type", "text/html")
-    w.Write([]byte(options))
+	var options string
+	for rows.Next() {
+		var arrivalAirport string
+		if err := rows.Scan(&arrivalAirport); err != nil {
+			http.Error(w, "Server Error", http.StatusInternalServerError)
+			log.Println("Failed to scan row:", err)
+			return
+		}
+		options += fmt.Sprintf(`<option value="%s">%s</option>`, arrivalAirport, arrivalAirport)
+	}
+
+	w.Header().Set("Content-Type", "text/html")
+	w.Write([]byte(options))
 }
-
 
 // Helper function to fetch airports.
 func fetchAirports(query string, args ...interface{}) ([]string, error) {
-    rows, err := db.Query(query, args...)
-    if err != nil {
-        return nil, err
-    }
-    defer rows.Close()
+	rows, err := db.Query(query, args...)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
 
-    var airports []string
-    for rows.Next() {
-        var airport string
-        if err := rows.Scan(&airport); err != nil {
-            return nil, err
-        }
-        airports = append(airports, airport)
-    }
+	var airports []string
+	for rows.Next() {
+		var airport string
+		if err := rows.Scan(&airport); err != nil {
+			return nil, err
+		}
+		airports = append(airports, airport)
+	}
 
-    return airports, nil
+	return airports, nil
 }
 
 // Helper function to fetch flights based on departure and (optionally) arrival airport.
 func fetchFlights(departure, arrival string) ([]Flight, error) {
-    query := "SELECT ID, FlightNumber, DepartureAirport, ArrivalAirport, DepartureTime, ArrivalTime FROM flights WHERE departureAirport = ?"
-    args := []interface{}{departure}
+	query := "SELECT ID, FlightNumber, DepartureAirport, ArrivalAirport, DepartureTime, ArrivalTime FROM flights WHERE departureAirport = ?"
+	args := []interface{}{departure}
 
-    if arrival != "" {
-        query += " AND arrivalAirport = ?"
-        args = append(args, arrival)
-    }
+	if arrival != "" {
+		query += " AND arrivalAirport = ?"
+		args = append(args, arrival)
+	}
 
-    rows, err := db.Query(query, args...)
-    if err != nil {
-        return nil, err
-    }
-    defer rows.Close()
+	rows, err := db.Query(query, args...)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
 
-    var flights []Flight
-    for rows.Next() {
-        var f Flight
-        if err := rows.Scan(&f.ID, &f.FlightNumber, &f.DepartureAirport, &f.ArrivalAirport, &f.DepartureTime, &f.ArrivalTime); err != nil {
-            return nil, err
-        }
-        flights = append(flights, f)
-    }
+	var flights []Flight
+	for rows.Next() {
+		var f Flight
+		if err := rows.Scan(&f.ID, &f.FlightNumber, &f.DepartureAirport, &f.ArrivalAirport, &f.DepartureTime, &f.ArrivalTime); err != nil {
+			return nil, err
+		}
+		flights = append(flights, f)
+	}
 
-    return flights, nil
+	return flights, nil
 }
-
-
 
 func fetchDepartureAirports() []string {
 	query := `SELECT DISTINCT departureAirport FROM flights ORDER BY departureAirport`

@@ -105,7 +105,9 @@ func DetermineFlightsFromConfig(origin model.OriginInfo) []model.DestinationInfo
 	// Execute all queries and collect their results in a slice of sets.
 	var sets []map[string]bool
 	for _, query := range queries {
+		//fmt.Printf(query)
 		airports, err := executeQueryForAirports(db, query)
+		// fmt.Printf("AIRPOTS %s", airports)
 		if err != nil {
 			log.Fatal("Error executing query:", err)
 		}
