@@ -169,11 +169,20 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 		log.Println("Table updated successfully.")
 
 	}
+
+	// Update if entry exists
 	updateStmt, err := db.Prepare("UPDATE skyscannerprices SET next_weekend = ? WHERE origin = ? AND destination = ?")
 	if err != nil {
 		log.Fatalf("Failed to prepare update statement: %v", err)
 	}
 	defer updateStmt.Close()
+
+	// Create if entry for dest AND origin does not exist
+	insertStmt, err := db.Prepare("INSERT INTO skyscannerprices (origin, destination, next_weekend) VALUES (?, ?, ?)")
+	if err != nil {
+		log.Fatalf("Failed to prepare insert statement: %v", err)
+	}
+	defer insertStmt.Close()
 
 	for _, origin := range origins {
 		// Assume DetermineFlightsFromConfig and GenerateFlightsAndHotelsURLs are functions that return valid results
@@ -181,18 +190,33 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(origin, airportDetailsList)
 
 		for _, destination := range destinationsWithUrls {
-			fmt.Printf("\n\nSkyscannerID: %s", destination.SkyScannerID)
 			price, err := GetBestPrice(origin, destination)
 			if err != nil {
 				log.Printf("Error getting best price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
 				continue // Continue with the next destination if there's an error
 			}
-			fmt.Printf("\n\nBest Price: €%.2f", price)
 
 			// Execute the update statement for each origin-destination pair with the new price
-			_, err = updateStmt.Exec(price, origin.SkyScannerID, destination.SkyScannerID)
+			result, err := updateStmt.Exec(price, origin.SkyScannerID, destination.SkyScannerID)
 			if err != nil {
 				log.Printf("Failed to update price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
+				continue
+			}
+
+			rowsAffected, err := result.RowsAffected()
+			if err != nil {
+				log.Printf("Error checking rows affected for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
+				continue
+			}
+
+			// If no rows were updated, insert a new row
+			if rowsAffected == 0 {
+				_, err = insertStmt.Exec(origin.SkyScannerID, destination.SkyScannerID, price)
+				if err != nil {
+					log.Printf("Failed to insert price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
+				} else {
+					log.Printf("Successfully inserted price for %s to %s: €%.2f", origin.SkyScannerID, destination.SkyScannerID, price)
+				}
 			} else {
 				log.Printf("Successfully updated price for %s to %s: €%.2f", origin.SkyScannerID, destination.SkyScannerID, price)
 			}
@@ -202,9 +226,8 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 }
 
 // Function to get price for a given pair of skyscanner IDs
-func GetPriceForRoute(db *sql.DB, weekend string, origin string, destination string, ) (float64, error) {
+func GetPriceForRoute(db *sql.DB, weekend string, origin string, destination string) (float64, error) {
 	var price float64
-
 
 	query := fmt.Sprintf("SELECT %s FROM skyscannerprices WHERE origin = ? AND destination = ?", weekend)
 	err := db.QueryRow(query, origin, destination).Scan(&price)
