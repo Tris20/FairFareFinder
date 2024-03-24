@@ -13,6 +13,7 @@ import (
 	"log"
 	"math"
 	"net/http"
+	"time"
 )
 
 var apiKey string
@@ -40,9 +41,9 @@ func GetBestPrice(origin model.OriginInfo, destination model.DestinationInfo) (f
 		return 0, fmt.Errorf("error loading API key: %v", err)
 	}
 	fmt.Printf("\nDeparture")
-	departure_dates, err := timeutils.ListDatesBetween(origin.DepartureStartDate, origin.DepartureEndDate)
+	departure_dates, err := timeutils.ListDatesBetween(origin.NextDepartureStartDate, origin.NextDepartureEndDate)
 	fmt.Printf("\nReturn")
-	return_dates, err := timeutils.ListDatesBetween(origin.ArrivalStartDate, origin.ArrivalEndDate)
+	return_dates, err := timeutils.ListDatesBetween(origin.NextArrivalStartDate, origin.NextArrivalEndDate)
 
 	fmt.Printf("\nGetting Departure Price")
 	dep_price, err := GetBestPriceForGivenDates(origin.SkyScannerID, destination.SkyScannerID, departure_dates)
@@ -153,7 +154,22 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 	}
 	defer db.Close()
 
-	updateStmt, err := db.Prepare("UPDATE skyscannerprices SET this_weekend = ? WHERE origin = ? AND destination = ?")
+	departureEndDate, err := time.Parse("2006-01-02", origins[0].DepartureEndDate)
+	if time.Now().After(departureEndDate) {
+		fmt.Printf("\n\n\n COPY WEEKEND")
+
+		// SQL statement to copy "next_weekend" to "this_weekend"
+		query := `UPDATE skyscannerprices SET this_weekend = next_weekend`
+
+		// Execute the update query
+		_, err = db.Exec(query)
+		if err != nil {
+			log.Fatal("Failed to update the table:", err)
+		}
+		log.Println("Table updated successfully.")
+
+	}
+	updateStmt, err := db.Prepare("UPDATE skyscannerprices SET next_weekend = ? WHERE origin = ? AND destination = ?")
 	if err != nil {
 		log.Fatalf("Failed to prepare update statement: %v", err)
 	}
@@ -182,13 +198,15 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 			}
 		}
 	}
+
 }
 
 // Function to get price for a given pair of skyscanner IDs
-func GetPriceForRoute(db *sql.DB, origin string, destination string) (float64, error) {
+func GetPriceForRoute(db *sql.DB, weekend string, origin string, destination string, ) (float64, error) {
 	var price float64
 
-	query := "SELECT this_weekend FROM skyscannerprices WHERE origin = ? AND destination = ?"
+
+	query := fmt.Sprintf("SELECT %s FROM skyscannerprices WHERE origin = ? AND destination = ?", weekend)
 	err := db.QueryRow(query, origin, destination).Scan(&price)
 	if err != nil {
 		return 0, err // Return 0 and the error

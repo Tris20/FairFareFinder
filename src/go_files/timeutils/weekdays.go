@@ -100,7 +100,7 @@ func GetDaysOrder() ([]time.Weekday, time.Weekday, time.Weekday) {
 }
 
 // ListDatesBetween generates a list of dates in the format "YYYY-MM-DD" between two given dates, inclusive.
-func ListDatesBetween(start string, end string) ([]string, error) {
+func ListDatesBetween(start, end string) ([]string, error) {
 	const layout = "2006-01-02" // Go's reference time format
 	startDate, err := time.Parse(layout, start)
 	if err != nil {
@@ -114,61 +114,54 @@ func ListDatesBetween(start string, end string) ([]string, error) {
 
 	var dates []string
 	for d := startDate; !d.After(endDate); d = d.AddDate(0, 0, 1) {
-		fmt.Printf("\n %s", d.Format(layout))
 		dates = append(dates, d.Format(layout))
 	}
 
 	return dates, nil
 }
 
-func UpcomingWedToSat() (string, string) {
-	return calculateDateRangeForWedToSat(time.Wednesday, 4)
-}
-
-func UpcomingSunToWedFromSat(endSaturday string) (string, string) {
-	// Parse the Saturday date
-	satDate, _ := time.Parse("2006-01-02", endSaturday)
-	// Calculate Sunday to Wednesday from that Saturday
-	return calculateDateRangeForSunToWed(satDate, 4)
-}
-
-// Adjusted for the requirement
-func calculateDateRangeForWedToSat(startDayOfWeek time.Weekday, durationDays int) (string, string) {
-	now := time.Now()
-	// If today is between Wednesday and Saturday, include this week
-	if now.Weekday() >= time.Wednesday && now.Weekday() <= time.Friday{
-		daysUntilStart := int(startDayOfWeek - now.Weekday())
-		if daysUntilStart > 0 {
-			daysUntilStart -= 7 // Move back to the current week's Wednesday
-		}
-		startDate := now.AddDate(0, 0, daysUntilStart)
-		endDate := startDate.AddDate(0, 0, durationDays-1)
-		return formatDate(startDate), formatDate(endDate)
-	}
-	// Else, find the next Wednesday to Saturday
-	return calculateDateRange(startDayOfWeek, durationDays)
-}
-
-// Calculate Sunday to Wednesday after a given Saturday
-func calculateDateRangeForSunToWed(afterDate time.Time, durationDays int) (string, string) {
-	startDate := afterDate.AddDate(0, 0, 1) // Next day after Saturday, which is Sunday
+// CalculateDateRange calculates a date range based on a starting date and a duration.
+// It returns the start and end dates of the range as strings in "YYYY-MM-DD" format.
+func CalculateDateRange(startDate time.Time, durationDays int) (string, string) {
 	endDate := startDate.AddDate(0, 0, durationDays-1)
 	return formatDate(startDate), formatDate(endDate)
 }
 
-// Generic calculateDateRange, assuming it might still be used elsewhere
-func calculateDateRange(startDayOfWeek time.Weekday, durationDays int) (string, string) {
+// CalculateWeekendRange calculates the date range for either the upcoming or next weekend
+// based on the current date and whether to skip the current weekend.
+func CalculateWeekendRange(skipCurrentWeekend bool) (departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate string) {
 	now := time.Now()
-	daysUntilStart := (int(startDayOfWeek) - int(now.Weekday()) + 7) % 7
-	if daysUntilStart == 0 {
-		daysUntilStart = 7
-	}
-	startDate := now.AddDate(0, 0, daysUntilStart)
-	endDate := startDate.AddDate(0, 0, durationDays-1)
-	return formatDate(startDate), formatDate(endDate)
+  baseDay := now
+	if skipCurrentWeekend {
+    baseDay = now.AddDate(0, 0, 7) // Move to the same day next week
+  } 
+// Find the upcoming Wednesday from baseDay
+	upcomingWednesday := GetNextWeekday(baseDay, time.Wednesday, false)
+	// Calculate Wednesday to Saturday for that week
+	departureStartDate, departureEndDate = CalculateDateRange(upcomingWednesday, 4)
+
+	// Calculate Sunday to Wednesday for the weekend after the upcoming Wednesday
+	nextSunday := upcomingWednesday.AddDate(0, 0, 4) // The Sunday after the upcoming Wednesday
+	arrivalStartDate, arrivalEndDate = CalculateDateRange(nextSunday, 4)
+
+
+	return
 }
 
-// Helper function to format time.Time objects into strings
+// GetNextWeekday finds the next occurrence of a specified weekday from a start date.
+// If skipCurrentWeekend is true, it skips to the next week's weekday.
+func GetNextWeekday(start time.Time, weekday time.Weekday, skipCurrentWeekend bool) time.Time {
+	offset := weekday - start.Weekday()
+	if offset < 0 || (offset == 0 && skipCurrentWeekend) {
+		offset += 7
+	}
+	if skipCurrentWeekend && offset == 0 {
+		offset = 7
+	}
+	return start.AddDate(0, 0, int(offset))
+}
+
+// Helper function to format time.Time objects into strings.
 func formatDate(t time.Time) string {
 	return t.Format("2006-01-02")
 }
