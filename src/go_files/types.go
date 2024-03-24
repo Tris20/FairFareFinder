@@ -26,6 +26,7 @@ type DestinationInfo struct {
 	SkyScannerURL   string
 	SkyScannerID    string
 	SkyScannerPrice float64
+  SkyScannerNextPrice float64
 	AirbnbURL       string
 	BookingURL      string
 	WPI             float64

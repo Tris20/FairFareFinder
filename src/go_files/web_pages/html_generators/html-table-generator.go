@@ -85,7 +85,9 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 			}
 		}
 	}
-	_, err = writer.WriteString(`<th>Flights</th>
+	_, err = writer.WriteString(`<th>Flights This Weekend</th>
+<th>Flights Next Weekend</th>
+
     <th>Accommodation</th>
     <th>Things to Do</th>
 </tr>
@@ -172,13 +174,19 @@ func generateTableRow(destination model.DestinationInfo) string {
 	if destination.SkyScannerPrice > 0.0 {
 		skyscannertext = fmt.Sprintf("€%.2f", destination.SkyScannerPrice)
 	}
+	skyscannerNexttext := "Search"
+	if destination.SkyScannerNextPrice > 0.0 {
+		skyscannerNexttext = fmt.Sprintf("€%.2f", destination.SkyScannerNextPrice)
+	}
 
 	return fmt.Sprintf(
 		`<tr>
     <td><a href="https://www.google.com/maps/place/%[1]s">%[1]s</a></td>
     %s
     <td><a href="%s">%s</a></td>
+    <td><a href="%s">%s</a></td>
+
     <td><a href="%s">Airbnb</a> <a href="%s">Booking.com</a></td>
     <td><a href="https://www.google.com/search?q=things+to+do+this+weekend+%s">Google Results</a></td>
-</tr>`, destination.City, weatherHTML.String(), destination.SkyScannerURL, skyscannertext, destination.AirbnbURL, destination.BookingURL, destination.City)
+</tr>`, destination.City, weatherHTML.String(), destination.SkyScannerURL, skyscannertext,destination.SkyScannerURL, skyscannerNexttext, destination.AirbnbURL, destination.BookingURL, destination.City)
 }

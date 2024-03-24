@@ -52,7 +52,7 @@ func main() {
 	switch os.Args[1] {
 	case "dev":
 
-		//ProcessOriginConfigurations(origins)
+		ProcessOriginConfigurations(origins)
 		fmt.Println("\nStarting Webserver")
 		fffwebserver.SetupFFFWebServer()
 
@@ -119,13 +119,18 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 		log.Printf("Updated WPI for destination %v: %f", destination, wpi)
 
 		// Read price data from the database table
-		price, err := flightutils.GetPriceForRoute(db, origin.SkyScannerID, destination.SkyScannerID)
+		price, err := flightutils.GetPriceForRoute(db,"this_weekend", origin.SkyScannerID, destination.SkyScannerID)
+		// Read price data from the database table
+    var nextprice float64
+		nextprice, err = flightutils.GetPriceForRoute(db,"next_weekend", origin.SkyScannerID, destination.SkyScannerID)
+
 		if err != nil {
 			log.Printf("Failed to get price for route from %v to %v: %v", origin.SkyScannerID, destination.SkyScannerID, err)
 		//	continue
 		}
 		
 		destinationsWithUrls[i].SkyScannerPrice = price
+	destinationsWithUrls[i].SkyScannerNextPrice = nextprice
 		fmt.Printf("Retrieved SkyScanner price for %v -> %v: %.2f", origin.SkyScannerID, destination.SkyScannerID, price)
 
 		// Update URLs with URL encoding
