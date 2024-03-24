@@ -76,7 +76,7 @@ func GenerateHtmlTable(outputPath string, citiesData []model.DestinationInfo) er
 				//	for _, dayDetail := range details {
 
 				//	for _, dayOfWeek := range daysOrder {
-				dayhtml := fmt.Sprintf(`<th style="width: 70px; ">%s</th>`, dayOfWeek)
+        dayhtml := fmt.Sprintf(`<th style="width: 70px; ">%s</th>`, dayOfWeek.String()[:3])
 				_, err = writer.WriteString(dayhtml)
 				number_of_day_columns += 1
 				daycolumn_max += 1
@@ -170,7 +170,7 @@ func generateTableRow(destination model.DestinationInfo) string {
 	}
 	skyscannertext := "SkyScanner"
 	if destination.SkyScannerPrice > 0.0 {
-		skyscannertext = fmt.Sprintf("From €%.2f", destination.SkyScannerPrice)
+		skyscannertext = fmt.Sprintf("€%.2f", destination.SkyScannerPrice)
 	}
 
 	return fmt.Sprintf(
