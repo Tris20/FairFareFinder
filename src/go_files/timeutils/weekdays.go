@@ -131,11 +131,11 @@ func CalculateDateRange(startDate time.Time, durationDays int) (string, string) 
 // based on the current date and whether to skip the current weekend.
 func CalculateWeekendRange(skipCurrentWeekend bool) (departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate string) {
 	now := time.Now()
-  baseDay := now
+	baseDay := now
 	if skipCurrentWeekend {
-    baseDay = now.AddDate(0, 0, 7) // Move to the same day next week
-  } 
-// Find the upcoming Wednesday from baseDay
+		baseDay = now.AddDate(0, 0, 7) // Move to the same day next week
+	}
+	// Find the upcoming Wednesday from baseDay
 	upcomingWednesday := GetNextWeekday(baseDay, time.Wednesday, false)
 	// Calculate Wednesday to Saturday for that week
 	departureStartDate, departureEndDate = CalculateDateRange(upcomingWednesday, 4)
@@ -143,7 +143,6 @@ func CalculateWeekendRange(skipCurrentWeekend bool) (departureStartDate, departu
 	// Calculate Sunday to Wednesday for the weekend after the upcoming Wednesday
 	nextSunday := upcomingWednesday.AddDate(0, 0, 4) // The Sunday after the upcoming Wednesday
 	arrivalStartDate, arrivalEndDate = CalculateDateRange(nextSunday, 4)
-
 
 	return
 }
