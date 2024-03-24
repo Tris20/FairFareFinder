@@ -153,6 +153,17 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 	}
 	defer db.Close()
 
+	// SQL statement to copy "next_weekend" to "this_weekend"
+	query := `UPDATE skyscannerprices SET this_weekend = next_weekend`
+	
+	// Execute the update query
+	_, err = db.Exec(query)
+	if err != nil {
+		log.Fatal("Failed to update the table:", err)
+	}
+
+	log.Println("Table updated successfully.")
+
 	updateStmt, err := db.Prepare("UPDATE skyscannerprices SET this_weekend = ? WHERE origin = ? AND destination = ?")
 	if err != nil {
 		log.Fatalf("Failed to prepare update statement: %v", err)

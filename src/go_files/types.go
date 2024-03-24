@@ -41,6 +41,10 @@ type OriginInfo struct {
 	DepartureEndDate   string
 	ArrivalStartDate   string
 	ArrivalEndDate     string
+	NextDepartureStartDate string
+	NextDepartureEndDate   string
+	NextArrivalStartDate   string
+	NextArrivalEndDate     string
 	SkyScannerID       string
 }
 

@@ -15,13 +15,17 @@
             <select id="departureAirport" name="departureAirport" hx-get="/airports" hx-target="#arrivalAirport" hx-trigger="change">
                 <!-- Dynamically insert options here -->
                 {{ range .DepartureAirports }}
-                <option value="{{ . }}">{{ . }}</option>
+                <option value="{{ . }}" {{ if eq . "" }}selected{{ end }}>{{ . }}</option>
                 {{ end }}
             </select>
             <br>
             <label for="arrivalAirport">Arrival Airport:</label>
             <select id="arrivalAirport" name="arrivalAirport">
                 <!-- Options will be dynamically inserted here based on departure airport selection -->
+
+                {{ range .DepartureAirports }}
+                <option value="{{ . }}" {{ if eq . "" }}selected{{ end }}>{{ . }}</option>
+                {{ end }}
             </select>
             <br>
             <label for="departureDate">Departure Date:</label>
@@ -35,6 +39,18 @@
     <div id="results">
         <!-- Results will be dynamically inserted here -->
     </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var departureAirportSelect = document.getElementById('departureAirport');
+    if (departureAirportSelect) {
+        // Programmatically set to "BER" and trigger change event
+        departureAirportSelect.value = "BER";
+        departureAirportSelect.dispatchEvent(new Event('change'));
+    }
+});
+</script>
+
 </body>
 </html>
 
