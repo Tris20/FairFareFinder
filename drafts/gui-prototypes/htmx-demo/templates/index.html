@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,16 +12,24 @@
     <div>
         <form hx-get="/search" hx-target="#results" hx-trigger="change">
             <label for="departureAirport">Departure Airport:</label>
-            <input type="text" id="departureAirport" name="departureAirport">
+            <select id="departureAirport" name="departureAirport" hx-get="/airports" hx-target="#arrivalAirport" hx-trigger="change">
+                <!-- Dynamically insert options here -->
+                {{ range .DepartureAirports }}
+                <option value="{{ . }}">{{ . }}</option>
+                {{ end }}
+            </select>
             <br>
             <label for="arrivalAirport">Arrival Airport:</label>
-            <input type="text" id="arrivalAirport" name="arrivalAirport">
+            <select id="arrivalAirport" name="arrivalAirport">
+                <!-- Options will be dynamically inserted here based on departure airport selection -->
+            </select>
             <br>
             <label for="departureDate">Departure Date:</label>
             <input type="date" id="departureDate" name="departureDate">
             <br>
             <label for="arrivalDate">Arrival Date:</label>
             <input type="date" id="arrivalDate" name="arrivalDate">
+            <input type="checkbox" hx-post="/path-to-server-endpoint" hx-trigger="change" name="checkboxName" value="1">
         </form>
     </div>
     <div id="results">
