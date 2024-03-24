@@ -88,9 +88,9 @@ func GetDaysOrder() ([]time.Weekday, time.Weekday, time.Weekday) {
 		daysOrder = []time.Weekday{time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday}
 	} else if currentDay == time.Tuesday {
 		daysOrder = []time.Weekday{time.Tuesday, time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday}
-  } else if currentDay == time.Friday{
-		daysOrder = []time.Weekday{ time.Friday, time.Saturday, time.Sunday, time.Monday, 
-    time.Tuesday, time.Wednesday, time.Thursday, }
+	} else if currentDay == time.Friday {
+		daysOrder = []time.Weekday{time.Friday, time.Saturday, time.Sunday, time.Monday,
+			time.Tuesday, time.Wednesday, time.Thursday}
 
 	} else {
 		daysOrder = []time.Weekday{time.Wednesday, time.Thursday, time.Friday, time.Saturday, time.Sunday, time.Monday, time.Tuesday}
@@ -121,10 +121,6 @@ func ListDatesBetween(start string, end string) ([]string, error) {
 	return dates, nil
 }
 
-
-
-
-
 func UpcomingWedToSat() (string, string) {
 	return calculateDateRangeForWedToSat(time.Wednesday, 4)
 }
@@ -140,7 +136,7 @@ func UpcomingSunToWedFromSat(endSaturday string) (string, string) {
 func calculateDateRangeForWedToSat(startDayOfWeek time.Weekday, durationDays int) (string, string) {
 	now := time.Now()
 	// If today is between Wednesday and Saturday, include this week
-	if now.Weekday() >= time.Wednesday && now.Weekday() <= time.Saturday {
+	if now.Weekday() >= time.Wednesday && now.Weekday() <= time.Friday{
 		daysUntilStart := int(startDayOfWeek - now.Weekday())
 		if daysUntilStart > 0 {
 			daysUntilStart -= 7 // Move back to the current week's Wednesday

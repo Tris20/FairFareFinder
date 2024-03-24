@@ -1,12 +1,16 @@
 package flightutils
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/config_handlers"
+	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/flight_db_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
+	"github.com/Tris20/FairFareFinder/src/go_files/url_generators"
 	"io/ioutil"
+	"log"
 	"math"
 	"net/http"
 )
@@ -73,8 +77,8 @@ func GetBestPriceForGivenDates(departureSkyScannerID string, arrivalSkyScannerID
 
 	// Check if lowestDayPrice was updated, return an error if not
 	if lowestDayPrice == math.MaxFloat64 {
-    lowestDayPrice = 0.0
-	//	return 0, fmt.Errorf("no valid prices found")
+		lowestDayPrice = 0.0
+		//	return 0, fmt.Errorf("no valid prices found")
 	}
 	fmt.Printf("\nLowest Price, %.2f", lowestDayPrice)
 	return lowestDayPrice, err
@@ -140,3 +144,55 @@ func GetFlightDates(origin, destination)
 func sumcosts()
 
 */
+
+func UpdateSkyscannerPrices(origins []model.OriginInfo) {
+	// Open SQLite database
+	db, err := sql.Open("sqlite3", "./data/flights.db")
+	if err != nil {
+		log.Fatalf("Failed to open database: %v", err)
+	}
+	defer db.Close()
+
+	updateStmt, err := db.Prepare("UPDATE skyscannerprices SET this_weekend = ? WHERE origin = ? AND destination = ?")
+	if err != nil {
+		log.Fatalf("Failed to prepare update statement: %v", err)
+	}
+	defer updateStmt.Close()
+
+	for _, origin := range origins {
+		// Assume DetermineFlightsFromConfig and GenerateFlightsAndHotelsURLs are functions that return valid results
+		airportDetailsList := flightdb.DetermineFlightsFromConfig(origin)
+		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(origin, airportDetailsList)
+
+		for _, destination := range destinationsWithUrls {
+			fmt.Printf("\n\nSkyscannerID: %s", destination.SkyScannerID)
+			price, err := GetBestPrice(origin, destination)
+			if err != nil {
+				log.Printf("Error getting best price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
+				continue // Continue with the next destination if there's an error
+			}
+			fmt.Printf("\n\nBest Price: €%.2f", price)
+
+			// Execute the update statement for each origin-destination pair with the new price
+			_, err = updateStmt.Exec(price, origin.SkyScannerID, destination.SkyScannerID)
+			if err != nil {
+				log.Printf("Failed to update price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
+			} else {
+				log.Printf("Successfully updated price for %s to %s: €%.2f", origin.SkyScannerID, destination.SkyScannerID, price)
+			}
+		}
+	}
+}
+
+// Function to get price for a given pair of skyscanner IDs
+func GetPriceForRoute(db *sql.DB, origin string, destination string) (float64, error) {
+	var price float64
+
+	query := "SELECT this_weekend FROM skyscannerprices WHERE origin = ? AND destination = ?"
+	err := db.QueryRow(query, origin, destination).Scan(&price)
+	if err != nil {
+		return 0, err // Return 0 and the error
+	}
+
+	return price, nil // Return the found price and no error
+}

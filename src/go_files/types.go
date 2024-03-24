@@ -52,3 +52,17 @@ type DailyWeatherDetails struct {
 	Icon          string
 	Day           time.Weekday
 }
+
+// PriceData now just holds the price, as the IDs are embedded in the key of the map.
+type PriceData struct {
+	Price float64
+}
+
+type PersistentPrices struct {
+	Data map[PriceKey]PriceData
+}
+
+type PriceKey struct {
+	OriginID      string
+	DestinationID string
+}
