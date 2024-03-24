@@ -47,7 +47,6 @@ func main() {
 	// Load IATA, skyscanenrID etc of origins(Berlin, Glasgow, Edi)
 	originsConfig, _ := config_handlers.LoadOrigins("input/origins.yaml")
 	origins := config_handlers.ConvertConfigToModel(originsConfig)
-	// Update dates
 	origins = update_origin_dates(origins)
 
 	switch os.Args[1] {
@@ -120,13 +119,18 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 		log.Printf("Updated WPI for destination %v: %f", destination, wpi)
 
 		// Read price data from the database table
-		price, err := flightutils.GetPriceForRoute(db, origin.SkyScannerID, destination.SkyScannerID)
+		price, err := flightutils.GetPriceForRoute(db,"this_weekend", origin.SkyScannerID, destination.SkyScannerID)
+		// Read price data from the database table
+    var nextprice float64
+		nextprice, err = flightutils.GetPriceForRoute(db,"next_weekend", origin.SkyScannerID, destination.SkyScannerID)
+
 		if err != nil {
 			log.Printf("Failed to get price for route from %v to %v: %v", origin.SkyScannerID, destination.SkyScannerID, err)
 		//	continue
 		}
 		
 		destinationsWithUrls[i].SkyScannerPrice = price
+	destinationsWithUrls[i].SkyScannerNextPrice = nextprice
 		fmt.Printf("Retrieved SkyScanner price for %v -> %v: %.2f", origin.SkyScannerID, destination.SkyScannerID, price)
 
 		// Update URLs with URL encoding
@@ -170,11 +174,20 @@ func generate_html_table(origin model.OriginInfo, destinationsWithUrls []model.D
 func update_origin_dates(origins []model.OriginInfo) []model.OriginInfo {
 
 	for i := range origins {
-		origins[i].DepartureStartDate, origins[i].DepartureEndDate = timeutils.UpcomingWedToSat()
-		origins[i].ArrivalStartDate, origins[i].ArrivalEndDate = timeutils.UpcomingSunToWedFromSat(origins[i].DepartureEndDate)
+		origins[i].DepartureStartDate, origins[i].DepartureEndDate, origins[i].ArrivalStartDate, origins[i].ArrivalEndDate = timeutils.CalculateWeekendRange(false)
+
+		origins[i].NextDepartureStartDate, origins[i].NextDepartureEndDate, origins[i].NextArrivalStartDate, origins[i].NextArrivalEndDate = timeutils.CalculateWeekendRange(true)
 
 		// Print updated origin info for verification
-		fmt.Printf("Updated Origin: %+v\n", origins[i])
+		// Print updated origin info for verification
+		fmt.Printf("Origin #%d: %s\n", i+1, origins[i].City)
+		fmt.Printf("  Upcoming Departure: %s to %s\n", origins[i].DepartureStartDate, origins[i].DepartureEndDate)
+		fmt.Printf("  Upcoming Arrival: %s to %s\n", origins[i].ArrivalStartDate, origins[i].ArrivalEndDate)
+		fmt.Printf("  Next Departure: %s to %s\n", origins[i].NextDepartureStartDate, origins[i].NextDepartureEndDate)
+		fmt.Printf("  Next Arrival: %s to %s\n\n", origins[i].NextArrivalStartDate, origins[i].NextArrivalEndDate)
+
+
+//		fmt.Printf("Updated Origin: %+v\n", origins[i])
 
 	}
 	return origins
