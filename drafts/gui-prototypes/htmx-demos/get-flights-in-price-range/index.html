@@ -5,25 +5,25 @@
     <meta charset="UTF-8">
     <title>Flight Prices</title>
     <script src="https://unpkg.com/htmx.org"></script>
-    <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <h1>Flight Prices</h1>
-    <!-- Removed the form tags since we are now using hx-get directly on the inputs -->
-    <label for="minPrice">Min Price:</label>
+    <label for="minPrice">Min Price: €<output for="minPrice" id="minPriceOutput">0</output></label>
     <input type="range" id="minPrice" name="minPrice" min="0" max="1000" value="0"
+           oninput="minPriceOutput.value = minPrice.value"
            hx-get="/"
            hx-target="#priceTable"
            hx-trigger="input"
            hx-include="[name='minPrice'], [name='maxPrice']">
-    <label for="maxPrice">Max Price:</label>
+    <label for="maxPrice">Max Price: €<output for="maxPrice" id="maxPriceOutput">1000</output></label>
     <input type="range" id="maxPrice" name="maxPrice" min="0" max="1000" value="1000"
+           oninput="maxPriceOutput.value = maxPrice.value"
            hx-get="/"
            hx-target="#priceTable"
            hx-trigger="input"
            hx-include="[name='minPrice'], [name='maxPrice']">
     <div id="priceTable">
-        <!-- This is where the table gets updated by HTMX -->
         <table>
             <thead>
                 <tr>
