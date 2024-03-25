@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +8,19 @@
 </head>
 <body>
     <h1>Flight Prices</h1>
-    <form method="GET">
-        <label for="minPrice">Min Price:</label>
-        <input type="range" id="minPrice" name="minPrice" min="0" max="1000" value="0" oninput="this.form.maxPrice.min=this.value">
-        <label for="maxPrice">Max Price:</label>
-        <input type="range" id="maxPrice" name="maxPrice" min="0" max="1000" value="1000" oninput="this.form.minPrice.max=this.value">
-        <button type="submit" hx-get="/" hx-target="#priceTable" hx-include="[name='minPrice'], [name='maxPrice']">Update Prices</button>
-    </form>
+    <!-- Removed the form tags since we are now using hx-get directly on the inputs -->
+    <label for="minPrice">Min Price:</label>
+    <input type="range" id="minPrice" name="minPrice" min="0" max="1000" value="0"
+           hx-get="/"
+           hx-target="#priceTable"
+           hx-trigger="input"
+           hx-include="[name='minPrice'], [name='maxPrice']">
+    <label for="maxPrice">Max Price:</label>
+    <input type="range" id="maxPrice" name="maxPrice" min="0" max="1000" value="1000"
+           hx-get="/"
+           hx-target="#priceTable"
+           hx-trigger="input"
+           hx-include="[name='minPrice'], [name='maxPrice']">
     <div id="priceTable">
         <!-- This is where the table gets updated by HTMX -->
         <table>
@@ -32,3 +39,4 @@
     </div>
 </body>
 </html>
+
