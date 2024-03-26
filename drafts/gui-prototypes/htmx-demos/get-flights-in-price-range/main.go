@@ -20,6 +20,7 @@ type SkyscannerPrice struct {
 
 func main() {
 	http.HandleFunc("/", servePage)
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
 	log.Println("Server started on :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
