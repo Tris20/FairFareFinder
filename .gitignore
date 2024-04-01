@@ -18,6 +18,7 @@
 # vendor/
 ignore/
 data/*.db
+data/**/*.db
 
 # Go workspace file
 go.work
