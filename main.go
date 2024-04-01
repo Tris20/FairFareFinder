@@ -62,11 +62,13 @@ func main() {
 
 	case "web":
 		fmt.Printf("WEB")
+    flightdb.UpdateDatabaseWithIncoming() 
 		ProcessOriginConfigurations(origins)
 		// Update WPI data every 6 hours
 		ticker := time.NewTicker(6 * time.Hour)
 		go func() {
 			for range ticker.C {
+        flightdb.UpdateDatabaseWithIncoming() 
 				origins = update_origin_dates(origins)
 				ProcessOriginConfigurations(origins)
 			}
