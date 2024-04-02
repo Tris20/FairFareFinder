@@ -56,7 +56,7 @@ func main() {
 		fmt.Println("\nStarting Webserver")
 		fffwebserver.SetupFFFWebServer()
 
-	case "updateSkyPrices":
+	case "updateFlightPrices":
 		fmt.Printf("\nUpdating Flight Prices\n")
 		flightutils.UpdateSkyscannerPrices(origins)
 
