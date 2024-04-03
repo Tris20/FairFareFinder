@@ -47,7 +47,6 @@ Table: scheduled_flights
         direction TEXT NOT NULL,
     )
   Fields to add:
-        distance REAL, (calculate from long and lat of airports)
         duration_mins INTEGER, (Included in skyscannerAPI result)
         price REAL (Included in SkyscannerAPI result, match itineraries:0:legs:0:departure&arrival with existing flights schedule)
 
