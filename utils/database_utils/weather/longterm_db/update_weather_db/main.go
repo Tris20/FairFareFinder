@@ -46,7 +46,7 @@ func main() {
 			startTime = time.Now()
 		}
 
-		weatherInfo, err := fetchWeatherForCity(airport.City)
+		weatherInfo, err := fetchWeatherForCity(airport.City, airport.Country)
 		if err != nil {
 			log.Printf("Error fetching weather for %s: %v", airport.City, err)
 			continue

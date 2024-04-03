@@ -37,11 +37,11 @@ type ApiResponse struct {
 }
 
 // fetchWeatherForCity fetches weather data for the specified city from OpenWeatherAPI
-func fetchWeatherForCity(cityName string) ([]WeatherData, error) {
+func fetchWeatherForCity(cityName string, countryCode string) ([]WeatherData, error) {
 	// Placeholder for OpenWeatherAPI request. Assume you replace the following URL with the actual API request
-
+	location_string := url.QueryEscape(fmt.Sprintf("%s, %s", cityName, countryCode))
   apiKey, err := config_handlers.LoadApiKey("../../../../../ignore/secrets.yaml", "openweathermap.org")
-	apiURL := fmt.Sprintf("https://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric", cityName, apiKey)
+	apiURL := fmt.Sprintf("https://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric", location_string, apiKey)
 
 	resp, err := http.Get(apiURL)
 	if err != nil {
@@ -70,8 +70,7 @@ func fetchWeatherForCity(cityName string) ([]WeatherData, error) {
 		}
 		iconURL := fmt.Sprintf("https://openweathermap.org/img/w/%s.png", item.Weather[0].Icon)
 
-		encodedCityName := url.QueryEscape(cityName)
-		googleWeatherURL := fmt.Sprintf("https://www.google.com/search?q=weather+%s", encodedCityName)
+		googleWeatherURL := fmt.Sprintf("https://www.google.com/search?q=weather+%s", location_string)
 		
     result = append(result, WeatherData{
 			Date:            date,
@@ -92,15 +91,31 @@ func storeWeatherData(dbPath string, airport AirportInfo, weatherData []WeatherD
 	}
 	defer db.Close()
 
-	for _, wd := range weatherData {
-		_, err := db.Exec(`INSERT OR REPLACE INTO Weather (CityName, CountryCode, Date, WeatherType, Temperature, WeatherIconURL, GoogleWeatherLink) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-			airport.City, airport.Country, wd.Date, wd.WeatherType, wd.Temperature, wd.WeatherIconURL, wd.GoogleWeatherLink)
-		if err != nil {
-			log.Printf("Failed to insert or replace weather data for %s: %v", airport.City, err)
-			// Consider whether to return error here or continue with next iteration
-		}
-	}
+	 for _, wd := range weatherData {
+        // First, check if an entry exists
+        var exists bool
+        err := db.QueryRow(`SELECT EXISTS(SELECT 1 FROM Weather WHERE CityName = ? AND CountryCode = ? AND Date = ?)`,
+            airport.City, airport.Country, wd.Date).Scan(&exists)
+        if err != nil {
+            log.Printf("Failed to check existence for %s on %s: %v", airport.City, wd.Date, err)
+            continue
+        }
 
+        if exists {
+            // If it exists, update the entry
+            _, err = db.Exec(`UPDATE Weather SET WeatherType = ?, Temperature = ?, WeatherIconURL = ?, GoogleWeatherLink = ? WHERE CityName = ? AND CountryCode = ? AND Date = ?`,
+                wd.WeatherType, wd.Temperature, wd.WeatherIconURL, wd.GoogleWeatherLink, airport.City, airport.Country, wd.Date)
+        } else {
+            // If it does not exist, insert a new entry
+            _, err = db.Exec(`INSERT INTO Weather (CityName, CountryCode, Date, WeatherType, Temperature, WeatherIconURL, GoogleWeatherLink) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+                airport.City, airport.Country, wd.Date, wd.WeatherType, wd.Temperature, wd.WeatherIconURL, wd.GoogleWeatherLink)
+        }
+
+        if err != nil {
+            log.Printf("Failed to insert/update weather data for %s: %v", airport.City, err)
+            // Decide how to handle the error; continue with the next iteration or return the error
+        }
+    }
 	return nil
 }
 
