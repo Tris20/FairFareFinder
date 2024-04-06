@@ -19,6 +19,7 @@
 ignore/
 data/*.db
 data/**/*.db
+data/*
 
 # Go workspace file
 go.work

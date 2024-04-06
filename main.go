@@ -56,7 +56,7 @@ func main() {
 		fmt.Println("\nStarting Webserver")
 		fffwebserver.SetupFFFWebServer()
 
-	case "updateSkyPrices":
+	case "updateFlightPrices":
 		fmt.Printf("\nUpdating Flight Prices\n")
 		flightutils.UpdateSkyscannerPrices(origins)
 
@@ -178,9 +178,9 @@ func generate_html_table(origin model.OriginInfo, destinationsWithUrls []model.D
 func update_origin_dates(origins []model.OriginInfo) []model.OriginInfo {
 
 	for i := range origins {
-		origins[i].DepartureStartDate, origins[i].DepartureEndDate, origins[i].ArrivalStartDate, origins[i].ArrivalEndDate = timeutils.CalculateWeekendRange(false)
+		origins[i].DepartureStartDate, origins[i].DepartureEndDate, origins[i].ArrivalStartDate, origins[i].ArrivalEndDate = timeutils.CalculateWeekendRange(0)
 
-		origins[i].NextDepartureStartDate, origins[i].NextDepartureEndDate, origins[i].NextArrivalStartDate, origins[i].NextArrivalEndDate = timeutils.CalculateWeekendRange(true)
+		origins[i].NextDepartureStartDate, origins[i].NextDepartureEndDate, origins[i].NextArrivalStartDate, origins[i].NextArrivalEndDate = timeutils.CalculateWeekendRange(1)
 
 		// Print updated origin info for verification
 		// Print updated origin info for verification
