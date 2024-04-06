@@ -1,6 +1,6 @@
-
 airports:
   - "BER"
   - "GLA"
-    #  - "EDI"
+  - "EDI"
+  - "MUC"
 

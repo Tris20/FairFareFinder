@@ -175,7 +175,7 @@ func main() {
 	)
 
 	// Generate dates using previously discussed CalculateWeekendRange function
-	departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate := timeutils.CalculateWeekendRange(4)
+	departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate := timeutils.CalculateWeekendRange(2)
     // Print the generated dates
     fmt.Println("Departure Start Date:", departureStartDate)
     fmt.Println("Departure End Date:", departureEndDate)
@@ -224,8 +224,16 @@ func processFlightData(db *sql.DB, airport, direction, startDate, endDate, apiKe
         {"T12:00", "T23:59"},
     }
 
+
+   // Set up a ticker for rate limiting: 30 calls/minute, one tick every 2 seconds
+    ticker := time.NewTicker(2 * time.Second)
+    defer ticker.Stop()
+
     for d := startDateTime; !d.After(endDateTime); d = d.AddDate(0, 0, 1) {
         for _, interval := range intervals {
+
+            // Wait on each ticker's tick before proceeding with the API call
+            <-ticker.C
             // Format start and end times for each interval
             startTime := fmt.Sprintf("%s%s", d.Format("2006-01-02"), interval.start)
             endTime := fmt.Sprintf("%s%s", d.Format("2006-01-02"), interval.end)
