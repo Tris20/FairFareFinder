@@ -175,7 +175,7 @@ func main() {
 	)
 
 	// Generate dates using previously discussed CalculateWeekendRange function
-	departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate := timeutils.CalculateWeekendRange(3)
+	departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate := timeutils.CalculateWeekendRange(4)
     // Print the generated dates
     fmt.Println("Departure Start Date:", departureStartDate)
     fmt.Println("Departure End Date:", departureEndDate)
@@ -236,45 +236,61 @@ func processFlightData(db *sql.DB, airport, direction, startDate, endDate, apiKe
 
             fmt.Println("Fetching URL:", url) // Print the API request URL
 
-            // Fetch the flight data
-            data, err := fetchFlightData(url, apiKey)
-            if err != nil {
-                log.Printf("Error fetching flight data for %s: %v", airport, err)
+          // Fetch the flight data
+        data, err := fetchFlightData(url, apiKey)
+        if err != nil {
+            log.Printf("Error fetching flight data for %s: %v", airport, err)
+            return err
+        }
+
+        if direction == "Arrival" {
+            var arrivals ArrivalData
+            if err := json.Unmarshal(data, &arrivals); err != nil {
+                log.Printf("Error unmarshaling arrivals data: %v", err)
                 return err
             }
 
-            // Debug print for raw API response data
-          //  fmt.Printf("DATA: %s\n", string(data))		// Depending on the direction, parse the data and insert into the database
-		if direction == "Arrival" {
-			var arrivals ArrivalData
-			if err := json.Unmarshal(data, &arrivals); err != nil {
-				log.Printf("Error unmarshaling arrivals data: %v", err)
-				return err
-			}
+            for _, arrival := range arrivals.Arrivals {
+                // Check if the entry already exists
+                var exists bool
+                err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM schedule WHERE flightNumber = ? AND departureTime = ? AND arrivalTime = ?)",
+                    arrival.Number, arrival.Departure.ScheduledTime.Local, arrival.Arrival.ScheduledTime.Local).Scan(&exists)
+                if err != nil {
+                    log.Printf("Error checking for existing record: %v", err)
+                }
+                if !exists {
+                    _, err := db.Exec("INSERT INTO schedule (flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
+                        arrival.Number, arrival.Departure.Airport.IATA, airport, arrival.Departure.ScheduledTime.Local, arrival.Arrival.ScheduledTime.Local, direction)
+                    if err != nil {
+                        log.Printf("Error inserting arrival into database: %v", err)
+                    }
+                }
+            }
+        } else { // Assume direction == "Departure"
+            var departures DepartureData
+            if err := json.Unmarshal(data, &departures); err != nil {
+                log.Printf("Error unmarshaling departures data: %v", err)
+                return err
+            }
 
-			for _, arrival := range arrivals.Arrivals {
-				_, err := db.Exec("INSERT INTO schedule (flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
-					arrival.Number, arrival.Departure.Airport.IATA, airport, arrival.Departure.ScheduledTime.Local, arrival.Arrival.ScheduledTime.Local, direction)
-				if err != nil {
-					log.Printf("Error inserting arrival into database: %v", err)
-				}
-			}
-		} else { // Assume direction == "Departure"
-			var departures DepartureData
-			if err := json.Unmarshal(data, &departures); err != nil {
-				log.Printf("Error unmarshaling departures data: %v", err)
-				return err
-			}
-
-			for _, departure := range departures.Departures {
-				_, err := db.Exec("INSERT INTO schedule (flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
-					departure.Number, airport, departure.Arrival.Airport.IATA, departure.Departure.ScheduledTime.Local, departure.Arrival.ScheduledTime.Local, direction)
-				if err != nil {
-					log.Printf("Error inserting departure into database: %v", err)
-				}
-			}
-		}
-	}
-}
-	return nil
+            for _, departure := range departures.Departures {
+                // Check if the entry already exists
+                var exists bool
+                err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM schedule WHERE flightNumber = ? AND departureTime = ? AND arrivalTime = ?)",
+                    departure.Number, departure.Departure.ScheduledTime.Local, departure.Arrival.ScheduledTime.Local).Scan(&exists)
+                if err != nil {
+                    log.Printf("Error checking for existing record: %v", err)
+                }
+                if !exists {
+                    _, err := db.Exec("INSERT INTO schedule (flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
+                        departure.Number, airport, departure.Arrival.Airport.IATA, departure.Departure.ScheduledTime.Local, departure.Arrival.ScheduledTime.Local, direction)
+                    if err != nil {
+                        log.Printf("Error inserting departure into database: %v", err)
+                    }
+                }
+            }
+        }
+    }
+  }
+    return nil
 }
