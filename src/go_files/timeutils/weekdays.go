@@ -120,23 +120,24 @@ func ListDatesBetween(start, end string) ([]string, error) {
 	return dates, nil
 }
 
-// CalculateDateRange calculates a date range based on a starting date and a duration.
-// It returns the start and end dates of the range as strings in "YYYY-MM-DD" format.
-func CalculateDateRange(startDate time.Time, durationDays int) (string, string) {
-	endDate := startDate.AddDate(0, 0, durationDays-1)
-	return formatDate(startDate), formatDate(endDate)
+// CalculateDateRange generates a string representation of the start and end dates,
+// starting from `baseDay` and lasting for `duration` days.
+func CalculateDateRange(baseDay time.Time, duration int) (startDate, endDate string) {
+	startDate = baseDay.Format("2006-01-02")
+	endDate = baseDay.AddDate(0, 0, duration-1).Format("2006-01-02")
+	return
 }
 
-// CalculateWeekendRange calculates the date range for either the upcoming or next weekend
-// based on the current date and whether to skip the current weekend.
-func CalculateWeekendRange(skipCurrentWeekend bool) (departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate string) {
+// CalculateWeekendRange calculates the date range for the specified weekend
+// based on the current date and the `weekOffset` indicating which weekend to calculate.
+// 0 = this weekend, 1 = next weekend, etc.
+func CalculateWeekendRange(weekOffset int) (departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate string) {
 	now := time.Now()
-	baseDay := now
-	if skipCurrentWeekend {
-		baseDay = now.AddDate(0, 0, 7) // Move to the same day next week
-	}
+	// Adjust the base day according to the weekOffset
+	baseDay := now.AddDate(0, 0, 7*weekOffset)
+	
 	// Find the upcoming Wednesday from baseDay
-	upcomingWednesday := GetNextWeekday(baseDay, time.Wednesday, false)
+	upcomingWednesday := GetNextWeekday(baseDay, time.Wednesday, weekOffset == 0)
 	// Calculate Wednesday to Saturday for that week
 	departureStartDate, departureEndDate = CalculateDateRange(upcomingWednesday, 4)
 
@@ -147,17 +148,14 @@ func CalculateWeekendRange(skipCurrentWeekend bool) (departureStartDate, departu
 	return
 }
 
-// GetNextWeekday finds the next occurrence of a specified weekday from a start date.
-// If skipCurrentWeekend is true, it skips to the next week's weekday.
-func GetNextWeekday(start time.Time, weekday time.Weekday, skipCurrentWeekend bool) time.Time {
-	offset := weekday - start.Weekday()
-	if offset < 0 || (offset == 0 && skipCurrentWeekend) {
-		offset += 7
+// GetNextWeekday finds the next occurrence of a specific weekday from a given day.
+// If `includeCurrent` is true and `baseDay` is the same as `weekday`, `baseDay` will be returned.
+func GetNextWeekday(baseDay time.Time, weekday time.Weekday, includeCurrent bool) time.Time {
+	daysAhead := int(weekday - baseDay.Weekday())
+	if daysAhead < 0 || (!includeCurrent && daysAhead == 0) {
+		daysAhead += 7
 	}
-	if skipCurrentWeekend && offset == 0 {
-		offset = 7
-	}
-	return start.AddDate(0, 0, int(offset))
+	return baseDay.AddDate(0, 0, daysAhead)
 }
 
 // Helper function to format time.Time objects into strings.
