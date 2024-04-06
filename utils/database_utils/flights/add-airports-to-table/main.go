@@ -1,33 +1,32 @@
+
 package main
 
 import (
 	"database/sql"
 	"encoding/csv"
 	"fmt"
+//	"github.com/schollz/progressbar/v3"
 	_ "github.com/mattn/go-sqlite3"
 	"log"
 	"os"
 )
 
-// CorrectCityMap provides a mapping for airports where the city information in the CSV might not be accurate.
-// For example, if Glasgow Airport's IATA code was in the CSV with the wrong city, it would be corrected here.
+// CorrectCityMap provides a mapping for airports where the city information might need correction.
 var CorrectCityMap = map[string]string{
-	// Assuming "GLA" is the IATA code for Glasgow Airport, and the CSV inaccurately lists Paisley as its city.
-	"GLA": "Glasgow",
-	// Add other corrections here as needed.
+	"GLA": "Glasgow", // Example correction
+	// Add other corrections as needed.
 }
 
 func main() {
-	// Open the database connection
+  
 	fmt.Println("Note: the default is to create a flights.db in this folder. If you are absolutely sure you want to update the data/flights.db then modify the main.go 'sql.open' lines and recompile")
 	db, err := sql.Open("sqlite3", "./flights.db")
-	//	db, err := sql.Open("sqlite3", "../../../../data/flights.db")
+//	db, err := sql.Open("sqlite3", "../../../../data/flights.db")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	// Create the airport_info table if it doesn't exist, updated to reflect new CSV structure
 	createTableSQL := `CREATE TABLE IF NOT EXISTS airport_info (
 		icao TEXT PRIMARY KEY,
 		iata TEXT,
@@ -39,29 +38,43 @@ func main() {
 		lat REAL,
 		lon REAL,
 		tz TEXT,
-		lid TEXT
+		lid TEXT,
+    skyscannerid TEXT
 	);`
+
 	_, err = db.Exec(createTableSQL)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Open and read the CSV file
-	csvFile, err := os.Open("airports.csv") // Update this path to your actual CSV file
+/*
+
+	csvFile, err := os.Open("airports.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer csvFile.Close()
 
+	// Count total records for progress bar, then reset file pointer
+	totalRecords, err := countRecords(csvFile)
+	if err != nil {
+		log.Fatal("Failed to count records:", err)
+	}
+	_, err = csvFile.Seek(0, 0) // Reset to beginning of file
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	reader := csv.NewReader(csvFile)
-	reader.Comma = ',' // default, but being explicit
+	reader.Comma = ',' // Default, being explicit
 	reader.TrimLeadingSpace = true
 	_, err = reader.Read() // Read and discard the header
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Prepare the insert statement outside the loop for efficiency
+	bar := progressbar.Default(int64(totalRecords - 1)) // -1 to exclude header
+
 	insertSQL := `INSERT OR REPLACE INTO airport_info (
 		icao, iata, name, city, subd, country, elevation, lat, lon, tz, lid
 	) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
@@ -71,28 +84,51 @@ func main() {
 	}
 	defer stmt.Close()
 
-	// Read through the remaining records
 	for {
 		record, err := reader.Read()
 		if err != nil {
 			break // End of file or an error occurred
 		}
 
-		// Check if the city needs to be corrected based on the IATA code
-		correctCity, exists := CorrectCityMap[record[1]]
-		if exists {
-			record[3] = correctCity // Update the city with the correct value
+		// Correct city if necessary
+		if correctCity, exists := CorrectCityMap[record[1]]; exists {
+			record[3] = correctCity
 		}
 
-		// Convert fields where necessary and insert
-		_, err = stmt.Exec(
-			record[0], record[1], record[2], record[3], record[4],
-			record[5], record[6], record[7], record[8], record[9], record[10],
-		)
+		// Insert the record
+		_, err = stmt.Exec(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8], record[9], record[10])
 		if err != nil {
 			log.Fatal(err)
 		}
+
+		bar.Add(1)
 	}
 
 	fmt.Println("Data successfully inserted into airport_info table.")
+*/
+  fmt.Println("\nAdding AddSkyScannerAirportIDs")
+  AddSkyScannerAirportIDs()
 }
+
+// countRecords returns the total number of records in the CSV file, including the header.
+func countRecords(file *os.File) (int, error) {
+	// Reset to beginning of file to ensure accurate count
+	_, err := file.Seek(0, 0)
+	if err != nil {
+		return 0, err
+	}
+
+	reader := csv.NewReader(file)
+	count := 0
+	for {
+		_, err := reader.Read()
+		if err != nil {
+			break
+		}
+		count++
+	}
+
+	// No need to reset file pointer here, it will be reset in the main function
+	return count, nil
+}
+
