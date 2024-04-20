@@ -141,8 +141,9 @@ func main() {
 		log.Fatalf("Error reading API key: %v", err)
 	}
 
-	//	db, err := sql.Open("sqlite3", "../../../../../data/longterm_db/flights.db")
-	db, err := sql.Open("sqlite3", "./flights.db")
+	//db, err := sql.Open("sqlite3", "../../../../../data/longterm_db/flights.db")
+	db, err := sql.Open("sqlite3", "../../../../../data/flights.db")
+  //db, err := sql.Open("sqlite3", "./flights.db")
 
 	if err != nil {
 		log.Fatalf("Error opening database: %v", err)
@@ -175,7 +176,7 @@ func main() {
 	)
 
 	// Generate dates using previously discussed CalculateWeekendRange function
-	departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate := timeutils.CalculateWeekendRange(2)
+	departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate := timeutils.CalculateWeekendRange(1)
     // Print the generated dates
     fmt.Println("Departure Start Date:", departureStartDate)
     fmt.Println("Departure End Date:", departureEndDate)
@@ -261,13 +262,13 @@ func processFlightData(db *sql.DB, airport, direction, startDate, endDate, apiKe
             for _, arrival := range arrivals.Arrivals {
                 // Check if the entry already exists
                 var exists bool
-                err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM schedule WHERE flightNumber = ? AND departureTime = ? AND arrivalTime = ?)",
+                err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM flights WHERE flightNumber = ? AND departureTime = ? AND arrivalTime = ?)",
                     arrival.Number, arrival.Departure.ScheduledTime.Local, arrival.Arrival.ScheduledTime.Local).Scan(&exists)
                 if err != nil {
                     log.Printf("Error checking for existing record: %v", err)
                 }
                 if !exists {
-                    _, err := db.Exec("INSERT INTO schedule (flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
+                    _, err := db.Exec("INSERT INTO flights(flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
                         arrival.Number, arrival.Departure.Airport.IATA, airport, arrival.Departure.ScheduledTime.Local, arrival.Arrival.ScheduledTime.Local, direction)
                     if err != nil {
                         log.Printf("Error inserting arrival into database: %v", err)
@@ -284,13 +285,13 @@ func processFlightData(db *sql.DB, airport, direction, startDate, endDate, apiKe
             for _, departure := range departures.Departures {
                 // Check if the entry already exists
                 var exists bool
-                err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM schedule WHERE flightNumber = ? AND departureTime = ? AND arrivalTime = ?)",
+                err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM flights WHERE flightNumber = ? AND departureTime = ? AND arrivalTime = ?)",
                     departure.Number, departure.Departure.ScheduledTime.Local, departure.Arrival.ScheduledTime.Local).Scan(&exists)
                 if err != nil {
                     log.Printf("Error checking for existing record: %v", err)
                 }
                 if !exists {
-                    _, err := db.Exec("INSERT INTO schedule (flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
+                    _, err := db.Exec("INSERT INTO flights (flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
                         departure.Number, airport, departure.Arrival.Airport.IATA, departure.Departure.ScheduledTime.Local, departure.Arrival.ScheduledTime.Local, direction)
                     if err != nil {
                         log.Printf("Error inserting departure into database: %v", err)
