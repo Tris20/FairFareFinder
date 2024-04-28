@@ -4,7 +4,9 @@ package main
 import (
 	"database/sql"
 	"log"
-  "time"
+	"time"
+
+	"github.com/schollz/progressbar/v3"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -26,7 +28,7 @@ func main() {
 		log.Fatalf("Error fetching airports: %v", err)
 	}
 
-// Start of the rate limiting period
+	// Start of the rate limiting period
 	startTime := time.Now()
 
 	// The maximum number of requests we can make per minute
@@ -34,7 +36,13 @@ func main() {
 	// Calculate the interval at which we can make requests to not exceed the limit
 	requestInterval := time.Minute / maxRequestsPerMinute
 
+	// Create a new progress bar
+	bar := progressbar.Default(int64(len(airports)))
+
 	for i, airport := range airports {
+		// Update the progress bar
+		bar.Add(1)
+
 		if i > 0 && i%maxRequestsPerMinute == 0 {
 			// Calculate how much time has passed since the start of the rate-limiting period
 			elapsed := time.Since(startTime)
@@ -60,3 +68,4 @@ func main() {
 		time.Sleep(requestInterval)
 	}
 }
+
