@@ -20,8 +20,8 @@ func FetchWeatherData(sourceDBPath string) ([]WeatherRecord, error) {
 //startDate := time.Now().Format("2006-01-02")
 //endDate := time.Now().AddDate(0, 0, 5).Format("2006-01-02")
 
-	startDate := time.Date(2024, 4, 3, 0, 0, 0, 0, time.UTC).Format("2006-01-02")
-	endDate := time.Date(2024, 4, 7, 0, 0, 0, 0, time.UTC).Format("2006-01-02")
+	startDate := time.Date(2024, 4, 8, 0, 0, 0, 0, time.UTC).Format("2006-01-02")
+	endDate := time.Date(2024, 4, 9, 0, 0, 0, 0, time.UTC).Format("2006-01-02")
 
 
   fmt.Printf("start: %s \n end: %s \n", startDate,endDate)

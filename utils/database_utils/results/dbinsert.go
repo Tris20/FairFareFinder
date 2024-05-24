@@ -4,6 +4,7 @@ package main
 import (
 	"database/sql"
 
+	"github.com/schollz/progressbar/v3"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -20,11 +21,16 @@ func InsertWeatherData(destinationDBPath string, records []WeatherRecord) error 
 		VALUES (?, ?, ?, ?, ?, ?, ?)
 	`
 
+	// Create a new progress bar
+	bar := progressbar.Default(int64(len(records)))
+
 	for _, record := range records {
 		_, err := db.Exec(insertQuery, record.CityName, record.CountryCode, record.Date, record.WeatherType, record.Temperature, record.WeatherIconURL, record.GoogleWeatherLink)
 		if err != nil {
 			return err
 		}
+		// Increment the progress bar
+		bar.Add(1)
 	}
 
 	return nil
