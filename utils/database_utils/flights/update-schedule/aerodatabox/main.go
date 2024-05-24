@@ -176,7 +176,7 @@ func main() {
 	)
 
 	// Generate dates using previously discussed CalculateWeekendRange function
-	departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate := timeutils.CalculateWeekendRange(1)
+	departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate := timeutils.CalculateWeekendRange(0)
     // Print the generated dates
     fmt.Println("Departure Start Date:", departureStartDate)
     fmt.Println("Departure End Date:", departureEndDate)
