@@ -24,8 +24,8 @@ func InsertWeatherData(destinationDBPath string, records []WeatherRecord) error 
 
 	// Prepare the insert statement
 	stmt, err := tx.Prepare(`
-		INSERT INTO weather (city_name, country_code, date, weather_type, temperature, weather_icon_url, google_weather_link)
-		VALUES (?, ?, ?, ?, ?, ?, ?)
+		INSERT INTO weather (city_name, country_code, date, weather_type, temperature, weather_icon_url, google_weather_link, wind_speed)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	`)
 	if err != nil {
 		return err
@@ -36,7 +36,7 @@ func InsertWeatherData(destinationDBPath string, records []WeatherRecord) error 
 	bar := progressbar.Default(int64(len(records)))
 
 	for _, record := range records {
-		_, err := stmt.Exec(record.CityName, record.CountryCode, record.Date, record.WeatherType, record.Temperature, record.WeatherIconURL, record.GoogleWeatherLink)
+		_, err := stmt.Exec(record.CityName, record.CountryCode, record.Date, record.WeatherType, record.Temperature, record.WeatherIconURL, record.GoogleWeatherLink, record.WindSpeed)
 		if err != nil {
 			// Rollback the transaction in case of an error
 			tx.Rollback()
