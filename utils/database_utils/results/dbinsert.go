@@ -8,6 +8,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+
 // InsertWeatherData inserts weather records into the weather table in results.db
 func InsertWeatherData(destinationDBPath string, records []WeatherRecord) error {
 	db, err := sql.Open("sqlite3", destinationDBPath)
@@ -24,8 +25,8 @@ func InsertWeatherData(destinationDBPath string, records []WeatherRecord) error 
 
 	// Prepare the insert statement
 	stmt, err := tx.Prepare(`
-		INSERT INTO weather (city_name, country_code, date, weather_type, temperature, weather_icon_url, google_weather_link)
-		VALUES (?, ?, ?, ?, ?, ?, ?)
+		INSERT INTO weather (city_name, country_code, date, weather_type, temperature, wind_speed, wpi, weather_icon_url, google_weather_link)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 	`)
 	if err != nil {
 		return err
@@ -36,7 +37,7 @@ func InsertWeatherData(destinationDBPath string, records []WeatherRecord) error 
 	bar := progressbar.Default(int64(len(records)))
 
 	for _, record := range records {
-		_, err := stmt.Exec(record.CityName, record.CountryCode, record.Date, record.WeatherType, record.Temperature, record.WeatherIconURL, record.GoogleWeatherLink)
+		_, err := stmt.Exec(record.CityName, record.CountryCode, record.Date, record.WeatherType, record.Temperature, record.WindSpeed, record.WPI, record.WeatherIconURL, record.GoogleWeatherLink)
 		if err != nil {
 			// Rollback the transaction in case of an error
 			tx.Rollback()
@@ -55,6 +56,7 @@ func InsertWeatherData(destinationDBPath string, records []WeatherRecord) error 
 	return nil
 }
 
+
 // InsertLocationData inserts unique location records into the location table in results.db
 func InsertLocationData(destinationDBPath string, records []WeatherRecord) error {
 	db, err := sql.Open("sqlite3", destinationDBPath)
@@ -66,6 +68,18 @@ func InsertLocationData(destinationDBPath string, records []WeatherRecord) error
 	// Extract unique locations
 	uniqueLocations := getUniqueLocations(records)
 
+	// Collect unique IATA codes
+	iataCodes := make([]string, len(uniqueLocations))
+	for i, loc := range uniqueLocations {
+		iataCodes[i] = loc.IATA
+	}
+
+	// Fetch all SkyScanner IDs at once
+	skyscannerIDs, err := FetchAllSkyScannerIDs(iataCodes)
+	if err != nil {
+		return err
+	}
+
 	// Start a transaction
 	tx, err := db.Begin()
 	if err != nil {
@@ -74,8 +88,8 @@ func InsertLocationData(destinationDBPath string, records []WeatherRecord) error
 
 	// Prepare the insert statement
 	stmt, err := tx.Prepare(`
-		INSERT INTO location (city_name, country_code, iata, airbnb_url, booking_url, things_to_do, five_day_wpi)
-		VALUES (?, ?, ?, ?, ?, ?, ?)
+		INSERT INTO location (city_name, country_code, iata, airbnb_url, booking_url, skyscanner_id, things_to_do, five_day_wpi)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	`)
 	if err != nil {
 		return err
@@ -87,15 +101,15 @@ func InsertLocationData(destinationDBPath string, records []WeatherRecord) error
 
 	for _, loc := range uniqueLocations {
 		// Generate URLs for flights and hotels
-		skyScannerURL := GenerateSkyScannerURL(loc.IATA)
 		airbnbURL := GenerateAirbnbURL(loc.CityName)
 		bookingURL := GenerateBookingURL(loc.CityName)
-
-		loc.SkyScannerURL = skyScannerURL
 		loc.AirbnbURL = airbnbURL
 		loc.BookingURL = bookingURL
 
-		_, err := stmt.Exec(loc.CityName, loc.CountryCode, loc.IATA, loc.AirbnbURL, loc.BookingURL, loc.ThingsToDo, loc.FiveDayWPI)
+		// Fetch skyscanner ID from the map
+		loc.SkyScannerID = skyscannerIDs[loc.IATA]
+
+		_, err = stmt.Exec(loc.CityName, loc.CountryCode, loc.IATA, loc.AirbnbURL, loc.BookingURL, loc.SkyScannerID, loc.ThingsToDo, loc.FiveDayWPI)
 		if err != nil {
 			// Rollback the transaction in case of an error
 			tx.Rollback()
@@ -127,6 +141,7 @@ func getUniqueLocations(records []WeatherRecord) []Location {
 				CityName:    record.CityName,
 				CountryCode: record.CountryCode,
 				IATA:        record.CityName, // Assuming IATA is same as city_name for simplicity
+				SkyScannerID: "placeholder_skyscanner_uuid",
 				AirbnbURL:   "placeholder_airbnb_url",
 				BookingURL:  "placeholder_booking_url",
 				ThingsToDo:  "placeholder_things_to_do",
@@ -143,10 +158,10 @@ type Location struct {
 	CityName      string
 	CountryCode   string
 	IATA          string
+	SkyScannerID  string
 	AirbnbURL     string
 	BookingURL    string
 	ThingsToDo    string
 	FiveDayWPI    float64
-	SkyScannerURL string // Added field for SkyScanner URL
 }
 
