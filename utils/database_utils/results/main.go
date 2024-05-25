@@ -1,10 +1,10 @@
-
 package main
 
 import (
+	"fmt"
 	"log"
+	"os"
 	"path/filepath"
-  "os"
 )
 
 func main() {
@@ -32,12 +32,20 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to fetch weather data: %v", err)
 	}
-
+  fmt.Println("Inserting Weather Table")
 	// Insert weather data into destination database
 	err = InsertWeatherData(dbPath, weatherData)
 	if err != nil {
 		log.Fatalf("Failed to insert weather data: %v", err)
 	}
+
+	// Insert location data into destination database
+  fmt.Println("Inserting Location Table")
+  err = InsertLocationData(dbPath, weatherData)
+	if err != nil {
+		log.Fatalf("Failed to insert location data: %v", err)
+	}
+
 
 	log.Println("Weather data successfully transferred.")
 }
