@@ -19,14 +19,14 @@ func FetchWeatherData(sourceDBPath string) ([]WeatherRecord, error) {
 
 	// Calculate date range
 startDate := time.Now().Format("2006-01-02")
-endDate := time.Now().AddDate(0, 0, 5).Format("2006-01-02")
+endDate := time.Now().AddDate(0, 0, 2).Format("2006-01-02")
 //	startDate := time.Date(2024, 4, 3, 0, 0, 0, 0, time.UTC).Format("2006-01-02")
 //	endDate := time.Date(2024, 4, 7, 0, 0, 0, 0, time.UTC).Format("2006-01-02")
 
 	fmt.Printf("start: %s \n end: %s \n", startDate, endDate)
 
 	query := `
-		SELECT weather_id, city_name, country_code, date, weather_type, temperature, weather_icon_url, google_weather_link, wind_speed
+		SELECT weather_id, city_name, country_code, iata, date, weather_type, temperature, weather_icon_url, google_weather_link, wind_speed
 		FROM weather
 		WHERE date >= ? AND date <= ?
 	`
@@ -40,7 +40,7 @@ endDate := time.Now().AddDate(0, 0, 5).Format("2006-01-02")
 	for rows.Next() {
 		var record WeatherRecord
 		var windSpeed sql.NullFloat64
-		err := rows.Scan(&record.WeatherID, &record.CityName, &record.CountryCode, &record.Date, &record.WeatherType, &record.Temperature, &record.WeatherIconURL, &record.GoogleWeatherLink, &windSpeed)
+		err := rows.Scan(&record.WeatherID, &record.CityName, &record.CountryCode, &record.IATA, &record.Date, &record.WeatherType, &record.Temperature, &record.WeatherIconURL, &record.GoogleWeatherLink, &windSpeed)
 		if err != nil {
 			return nil, err
 		}
@@ -60,11 +60,13 @@ type WeatherRecord struct {
 	WeatherID        int
 	CityName         string
 	CountryCode      string
+  IATA             string
 	Date             string
 	WeatherType      string
 	Temperature      float64
 	WeatherIconURL   string
 	GoogleWeatherLink string
-	WindSpeed        float64 // New field for wind speed
+	WindSpeed        float64
+  WPI              float64
 }
 
