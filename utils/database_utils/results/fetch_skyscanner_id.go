@@ -1,8 +1,8 @@
-
 package main
 
 import (
 	"database/sql"
+	"fmt"
 	"strings"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -30,7 +30,6 @@ func FetchAllSkyScannerIDs(iataCodes []string) (map[string]string, error) {
 		return nil, err
 	}
 	defer rows.Close()
-
 	// Process the results
 	skyscannerIDs := make(map[string]string)
 	for rows.Next() {
