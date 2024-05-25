@@ -1,13 +1,13 @@
-
 package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"time"
 
-	"github.com/schollz/progressbar/v3"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/schollz/progressbar/v3"
 )
 
 func main() {
@@ -53,7 +53,7 @@ func main() {
 			// Reset the start time for the next batch of requests
 			startTime = time.Now()
 		}
-
+    fmt.Printf("\ncity: %s  country: %s\n", airport.City, airport.Country)
 		weatherInfo, err := fetchWeatherForCity(airport.City, airport.Country)
 		if err != nil {
 			log.Printf("Error fetching weather for %s: %v", airport.City, err)

@@ -12,11 +12,12 @@ import (
 type AirportInfo struct {
 	City    string
 	Country string
+  IATA    string
 }
 
 // fetchAirports retrieves all airports with non-empty IATA codes from flights.db
 func fetchAirports(db *sql.DB) ([]AirportInfo, error) {
-	query := `SELECT city, country FROM airport_info WHERE iata IS NOT NULL AND iata != '';`
+	query := `SELECT city, country, iata FROM airport_info WHERE iata IS NOT NULL AND iata != '';`
 	rows, err := db.Query(query)
 	if err != nil {
 		return nil, err
@@ -26,7 +27,7 @@ func fetchAirports(db *sql.DB) ([]AirportInfo, error) {
 	var airports []AirportInfo
 	for rows.Next() {
 		var ai AirportInfo
-		if err := rows.Scan(&ai.City, &ai.Country); err != nil {
+		if err := rows.Scan(&ai.City, &ai.Country, &ai.IATA); err != nil {
 			return nil, err
 		}
 		airports = append(airports, ai)
@@ -51,11 +52,13 @@ func initWeatherDB(dbPath string) {
 		weather_id INTEGER PRIMARY KEY AUTOINCREMENT,
 		city_name TEXT NOT NULL,
 		country_code TEXT NOT NULL,
+    iata TEXT NOT NULL,
 		date TEXT NOT NULL,
 		weather_type TEXT NOT NULL,
 		temperature REAL NOT NULL,
 		weather_icon_url TEXT NOT NULL,
-		google_weather_link TEXT NOT NULL
+		google_weather_link TEXT NOT NULL,
+    wind_speed REAL NOT NULL
 	);`
 
 	if _, err := db.Exec(createTableSQL); err != nil {
