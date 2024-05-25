@@ -6,12 +6,15 @@ import (
 	"time"
 )
 
-func GenerateSkyScannerURL(iataCode string) string {
+// Will use this later when doing flightprice table
+/*
+func GenerateSkyScannerURL(originIataCode string, destIataCode string) string {
 	now := time.Now()
 	formattedDate := now.Format("0601")
-	baseSkyScannerURL := fmt.Sprintf("https://www.skyscanner.de/transport/fluge/ORI/%s/?adults=1&adultsv2=1&cabinclass=economy&children=0&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1&oym=%s", iataCode, formattedDate)
+	baseSkyScannerURL := fmt.Sprintf("https://www.skyscanner.de/transport/fluge/%s/%s/?adults=1&adultsv2=1&cabinclass=economy&children=0&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1&oym=%s", originIataCode, destIataCode, formattedDate)
 	return baseSkyScannerURL
 }
+*/
 
 // Function to generate the Airbnb URL with dynamic values
 func GenerateAirbnbURL(cityName string) string {
