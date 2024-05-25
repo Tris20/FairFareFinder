@@ -1,41 +1,46 @@
-package weather_pleasantry
+package main 
 
 import (
-	"github.com/Tris20/FairFareFinder/src/go_files"
 	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
 	"strings"
 	"time"
 )
 
-// calculateDailyAverageWPI and ProcessForecastData defined here.
-// calculateDailyAverageWPI calculates the average WPI for a single day
-// This function assumes it receives weather data for each 3-hour segment between 9 am and 9 pm
-func calculateDailyAverageWPI(weatherData []model.WeatherData, config WeatherPleasantnessConfig) float64 {
-	var totalWPI float64
-	var count float64
-
-	for _, data := range weatherData {
-		// Assuming WeatherData contains Temp, Wind.Speed, and Weather[0].Main
-		wpi := weatherPleasantness(data.Main.Temp, data.Wind.Speed, data.Weather[0].Main, config)
-		totalWPI += wpi
-		count++
-	}
-
-	if count == 0 {
-		return 0
-	}
-
-	return totalWPI / count
+type WeatherPleasantnessConfig struct {
+	Conditions map[string]float64 `yaml:"conditions"`
 }
+
+
+
+
+func ProcessLocation(location model.DestinationInfo) (float64, map[time.Weekday]model.DailyWeatherDetails) {
+
+   // get 5 day weather from weather.results.db of location.city_name&country
+
+   // the paylod: calculates daily average, and next_5_days_average_wpi
+	daily_average_wather, next_5_days_average_wpi := CalculateWPI(forecast.List )
+
+
+	return next_5_days_average_wpi, daily_average_wather
+}
+
+
+
 
 // ProcessForecastData takes a slice of WeatherData for an entire week
 // and returns a map of average WPI for Thursday to Monday.
 // It also calculates the overall average for these days.
 // Assuming each WeatherData entry is for a 3-hour segment
 
-func ProcessForecastData(weeklyData []model.WeatherData, config WeatherPleasantnessConfig) (map[time.Weekday]model.DailyWeatherDetails, float64) {
-
-	currentDay := time.Now().Weekday()
+func CalculateWPI(weeklyData []model.WeatherData) (map[time.Weekday]model.DailyWeatherDetails, float64) {
+ 
+  // Load weather pleasantness config
+	config, err := LoadWeatherPleasantnessConfig("input/weatherPleasantness.yaml")
+	if err != nil {
+	log.Fatal("Error loading weather pleasantness config:", err)
+	}
+	
+  currentDay := time.Now().Weekday()
 	startDay, endDay := timeutils.DetermineRangeBasedOnCurrentDay(currentDay)
 
 	dailyData := filterDataByDayRange(weeklyData, startDay, endDay)
@@ -51,7 +56,7 @@ func ProcessForecastData(weeklyData []model.WeatherData, config WeatherPleasantn
 		var icon string
 		for _, segment := range data {
 			sumTemp += segment.Main.Temp
-			sumWind += segment.Wind.Speed // Correctly access Wind.Speed here
+			sumWind += segment.Wind.Speed 
 			weatherCount[segment.Weather[0].Main]++
 			if weatherCount[segment.Weather[0].Main] > maxCount {
 				maxCount = weatherCount[segment.Weather[0].Main]
@@ -92,6 +97,27 @@ func ProcessForecastData(weeklyData []model.WeatherData, config WeatherPleasantn
 	return dailyDetails, averageWPI
 }
 
+
+// calculateDailyAverageWPI calculates the average WPI for a single day
+// This function assumes it receives weather data for each 3-hour segment between 9 am and 9 pm
+func calculateDailyAverageWPI(weatherData []model.WeatherData, config WeatherPleasantnessConfig) float64 {
+	var totalWPI float64
+	var count float64
+
+	for _, data := range weatherData {
+		// Assuming WeatherData contains Temp, Wind.Speed, and Weather[0].Main
+		wpi := weatherPleasantness(data.Main.Temp, data.Wind.Speed, data.Weather[0].Main, config)
+		totalWPI += wpi
+		count++
+	}
+
+	if count == 0 {
+		return 0
+	}
+
+	return totalWPI / count
+}
+
 // weatherPleasantness calculates the "weather pleasentness index" (WPI)
 func weatherPleasantness(temp float64, wind float64, cond string, config WeatherPleasantnessConfig) float64 {
 	weightTemp := 5.0
@@ -104,4 +130,18 @@ func weatherPleasantness(temp float64, wind float64, cond string, config Weather
 
 	index := (tempIndex + windIndex + weatherIndex) / (weightTemp + weightWind + weightCond)
 	return index
+}
+
+
+
+
+
+func LoadWeatherPleasantnessConfig(filePath string) (WeatherPleasantnessConfig, error) {
+	var config WeatherPleasantnessConfig
+	yamlFile, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		return config, err
+	}
+	err = yaml.Unmarshal(yamlFile, &config)
+	return config, err
 }
