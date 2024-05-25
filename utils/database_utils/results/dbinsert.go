@@ -24,8 +24,8 @@ func InsertWeatherData(destinationDBPath string, records []WeatherRecord) error 
 
 	// Prepare the insert statement
 	stmt, err := tx.Prepare(`
-		INSERT INTO weather (city_name, country_code, date, weather_type, temperature, weather_icon_url, google_weather_link, wind_speed, wpi)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+		INSERT INTO weather (city_name, country_code, date, weather_type, temperature, weather_icon_url, google_weather_link)
+		VALUES (?, ?, ?, ?, ?, ?, ?)
 	`)
 	if err != nil {
 		return err
@@ -36,7 +36,7 @@ func InsertWeatherData(destinationDBPath string, records []WeatherRecord) error 
 	bar := progressbar.Default(int64(len(records)))
 
 	for _, record := range records {
-		_, err := stmt.Exec(record.CityName, record.CountryCode, record.Date, record.WeatherType, record.Temperature, record.WeatherIconURL, record.GoogleWeatherLink, record.WindSpeed, record.WPI)
+		_, err := stmt.Exec(record.CityName, record.CountryCode, record.Date, record.WeatherType, record.Temperature, record.WeatherIconURL, record.GoogleWeatherLink)
 		if err != nil {
 			// Rollback the transaction in case of an error
 			tx.Rollback()
@@ -86,7 +86,16 @@ func InsertLocationData(destinationDBPath string, records []WeatherRecord) error
 	bar := progressbar.Default(int64(len(uniqueLocations)))
 
 	for _, loc := range uniqueLocations {
-		_, err := stmt.Exec(loc.CityName, loc.CountryCode, loc.IATA, "placeholder_airbnb_url", "placeholder_booking_url", "placeholder_things_to_do", 0.0)
+		// Generate URLs for flights and hotels
+		skyScannerURL := GenerateSkyScannerURL(loc.IATA)
+		airbnbURL := GenerateAirbnbURL(loc.CityName)
+		bookingURL := GenerateBookingURL(loc.CityName)
+
+		loc.SkyScannerURL = skyScannerURL
+		loc.AirbnbURL = airbnbURL
+		loc.BookingURL = bookingURL
+
+		_, err := stmt.Exec(loc.CityName, loc.CountryCode, loc.IATA, loc.AirbnbURL, loc.BookingURL, loc.ThingsToDo, loc.FiveDayWPI)
 		if err != nil {
 			// Rollback the transaction in case of an error
 			tx.Rollback()
@@ -105,10 +114,6 @@ func InsertLocationData(destinationDBPath string, records []WeatherRecord) error
 	return nil
 }
 
-
-
-
-
 // getUniqueLocations returns a list of unique locations from the given weather records, maintaining order
 func getUniqueLocations(records []WeatherRecord) []Location {
 	uniqueMap := make(map[string]struct{})
@@ -121,7 +126,7 @@ func getUniqueLocations(records []WeatherRecord) []Location {
 			uniqueLocations = append(uniqueLocations, Location{
 				CityName:    record.CityName,
 				CountryCode: record.CountryCode,
-				IATA:        record.IATA, // Assuming IATA is same as city_name for simplicity
+				IATA:        record.CityName, // Assuming IATA is same as city_name for simplicity
 				AirbnbURL:   "placeholder_airbnb_url",
 				BookingURL:  "placeholder_booking_url",
 				ThingsToDo:  "placeholder_things_to_do",
@@ -133,7 +138,7 @@ func getUniqueLocations(records []WeatherRecord) []Location {
 	return uniqueLocations
 }
 
-
+// Location struct to hold unique location data
 type Location struct {
 	CityName      string
 	CountryCode   string
@@ -142,4 +147,6 @@ type Location struct {
 	BookingURL    string
 	ThingsToDo    string
 	FiveDayWPI    float64
+	SkyScannerURL string // Added field for SkyScanner URL
 }
+
