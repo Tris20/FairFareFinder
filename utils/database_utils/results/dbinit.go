@@ -21,9 +21,12 @@ func initializeDatabase(dbPath string) {
 	CREATE TABLE IF NOT EXISTS location (
 		location_id INTEGER PRIMARY KEY AUTOINCREMENT,
 		city_name VARCHAR(255),
+    country_code CHAR(2),
+    iata TEXT,
 		airbnb_url VARCHAR(255),
 		booking_url VARCHAR(255),
-		things_to_do TEXT
+		things_to_do TEXT,
+    five_day_wpi DECIMAL(5,2)
 	);`
 	_, err = db.Exec(createLocationsTable)
 	if err != nil {
@@ -41,7 +44,8 @@ func initializeDatabase(dbPath string) {
 		temperature DECIMAL(5,2),
 		weather_icon_url VARCHAR(255),
 		google_weather_link VARCHAR(255),
-		wind_speed DECIMAL(5,2)  -- New column for wind speed
+		wind_speed DECIMAL(5,2),
+    wpi DECIMAL(5,2)
 	);`
 	_, err = db.Exec(createWeatherTable)
 	if err != nil {
