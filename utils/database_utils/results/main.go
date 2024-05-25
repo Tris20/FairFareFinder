@@ -32,21 +32,19 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to fetch weather data: %v", err)
 	}
-  fmt.Println("Inserting Weather Table")
+fmt.Println("Inserting Weather")
 	// Insert weather data into destination database
 	err = InsertWeatherData(dbPath, weatherData)
 	if err != nil {
 		log.Fatalf("Failed to insert weather data: %v", err)
 	}
-
+fmt.Println("Inserting Locations")
 	// Insert location data into destination database
-  fmt.Println("Inserting Location Table")
-  err = InsertLocationData(dbPath, weatherData)
+	err = InsertLocationData(dbPath, weatherData)
 	if err != nil {
 		log.Fatalf("Failed to insert location data: %v", err)
 	}
 
-
-	log.Println("Weather data successfully transferred.")
+	log.Println("Weather and location data successfully transferred.")
 }
 
