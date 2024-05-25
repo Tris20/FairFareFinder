@@ -140,7 +140,7 @@ func getUniqueLocations(records []WeatherRecord) []Location {
 			uniqueLocations = append(uniqueLocations, Location{
 				CityName:    record.CityName,
 				CountryCode: record.CountryCode,
-				IATA:        record.CityName, // Assuming IATA is same as city_name for simplicity
+				IATA:        record.IATA, // Assuming IATA is same as city_name for simplicity
 				SkyScannerID: "placeholder_skyscanner_uuid",
 				AirbnbURL:   "placeholder_airbnb_url",
 				BookingURL:  "placeholder_booking_url",
