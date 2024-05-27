@@ -3,14 +3,14 @@ package main
 
 import (
 	"database/sql"
-
+  "fmt"
 	"github.com/schollz/progressbar/v3"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 
 // InsertWeatherData inserts weather records into the weather table in results.db
-func InsertWeatherData(destinationDBPath string, records []WeatherRecord) error {
+func InsertWeatherData(tablename string, destinationDBPath string, records []WeatherRecord) error {
 	db, err := sql.Open("sqlite3", destinationDBPath)
 	if err != nil {
 		return err
@@ -23,11 +23,15 @@ func InsertWeatherData(destinationDBPath string, records []WeatherRecord) error 
 		return err
 	}
 
-	// Prepare the insert statement
-	stmt, err := tx.Prepare(`
-		INSERT INTO weather (city_name, country_code, date, weather_type, temperature, wind_speed, wpi, weather_icon_url, google_weather_link)
+// Construct the SQL query with the table name
+	query := fmt.Sprintf(`
+		INSERT INTO %s (city_name, country_code, date, weather_type, temperature, wind_speed, wpi, weather_icon_url, google_weather_link)
 		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-	`)
+	`, tablename)
+
+
+	// Prepare the insert statement
+	stmt, err := tx.Prepare(query)
 	if err != nil {
 		return err
 	}
@@ -103,6 +107,9 @@ func InsertLocationData(destinationDBPath string, records []WeatherRecord) error
 		// Generate URLs for flights and hotels
 		airbnbURL := GenerateAirbnbURL(loc.CityName)
 		bookingURL := GenerateBookingURL(loc.CityName)
+    //calcualte avg wpi here
+    temp_five_day_wpi, _ :=  ProcessLocation(loc, records)
+    loc.FiveDayWPI = temp_five_day_wpi 
 		loc.AirbnbURL = airbnbURL
 		loc.BookingURL = bookingURL
 
@@ -153,15 +160,4 @@ func getUniqueLocations(records []WeatherRecord) []Location {
 	return uniqueLocations
 }
 
-// Location struct to hold unique location data
-type Location struct {
-	CityName      string
-	CountryCode   string
-	IATA          string
-	SkyScannerID  string
-	AirbnbURL     string
-	BookingURL    string
-	ThingsToDo    string
-	FiveDayWPI    float64
-}
 

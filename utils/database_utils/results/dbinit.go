@@ -35,8 +35,8 @@ func initializeDatabase(dbPath string) {
 	}
 
 	// Create Weather table
-	createWeatherTable := `
-	CREATE TABLE IF NOT EXISTS weather (
+	createWeatherDetailedTable := `
+	CREATE TABLE IF NOT EXISTS weather_detailed (
 		weather_id INTEGER PRIMARY KEY AUTOINCREMENT,
 		city_name VARCHAR(255),
 		country_code CHAR(2),
@@ -48,7 +48,27 @@ func initializeDatabase(dbPath string) {
 		wind_speed DECIMAL(5,2),
     wpi DECIMAL(5,2)
 	);`
-	_, err = db.Exec(createWeatherTable)
+	_, err = db.Exec(createWeatherDetailedTable)
+	if err != nil {
+		log.Fatalf("Failed to create Weather table: %v", err)
+	}
+
+
+	// Create Weather table
+	createWeatherDailyAverageTable := `
+	CREATE TABLE IF NOT EXISTS weather_daily_average (
+		weather_id INTEGER PRIMARY KEY AUTOINCREMENT,
+		city_name VARCHAR(255),
+		country_code CHAR(2),
+		date DATE,
+		weather_type VARCHAR(50),
+		temperature DECIMAL(5,2),
+		weather_icon_url VARCHAR(255),
+		google_weather_link VARCHAR(255),
+		wind_speed DECIMAL(5,2),
+    wpi DECIMAL(5,2)
+	);`
+	_, err = db.Exec(createWeatherDailyAverageTable)
 	if err != nil {
 		log.Fatalf("Failed to create Weather table: %v", err)
 	}

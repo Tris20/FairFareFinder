@@ -32,12 +32,23 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to fetch weather data: %v", err)
 	}
-fmt.Println("Inserting Weather")
+
+
 	// Insert weather data into destination database
-	err = InsertWeatherData(dbPath, weatherData)
+fmt.Println("Populating weather_detailed table")
+	err = InsertWeatherData("weather_detailed", dbPath, weatherData)
 	if err != nil {
 		log.Fatalf("Failed to insert weather data: %v", err)
 	}
+
+// calculate daily average 
+// Create and Populate the Daily Average Table
+fmt.Println("Populating weather_daily_average table")
+	err = InsertWeatherData("weather_daily_average", dbPath, weatherData)
+	if err != nil {
+		log.Fatalf("Failed to insert weather data: %v", err)
+	}
+
 fmt.Println("Inserting Locations")
 	// Insert location data into destination database
 	err = InsertLocationData(dbPath, weatherData)
