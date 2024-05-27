@@ -1,52 +1,57 @@
-package main 
+
+package main
 
 import (
-	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
+	"FairFareFinder/src/go_files/timeutils"
 	"strings"
 	"time"
+	"log"
+    "fmt"
+	"io/ioutil"
+	"gopkg.in/yaml.v2"
 )
 
-type WeatherPleasantnessConfig struct {
-	Conditions map[string]float64 `yaml:"conditions"`
-}
-
-
-
-
-func ProcessLocation(location model.DestinationInfo) (float64, map[time.Weekday]model.DailyWeatherDetails) {
-
-   // get 5 day weather from weather.results.db of location.city_name&country
-
-   // the paylod: calculates daily average, and next_5_days_average_wpi
-	daily_average_wather, next_5_days_average_wpi := CalculateWPI(forecast.List )
-
-
-	return next_5_days_average_wpi, daily_average_wather
-}
-
-
-
-
-// ProcessForecastData takes a slice of WeatherData for an entire week
-// and returns a map of average WPI for Thursday to Monday.
-// It also calculates the overall average for these days.
-// Assuming each WeatherData entry is for a 3-hour segment
-
-func CalculateWPI(weeklyData []model.WeatherData) (map[time.Weekday]model.DailyWeatherDetails, float64) {
- 
-  // Load weather pleasantness config
-	config, err := LoadWeatherPleasantnessConfig("input/weatherPleasantness.yaml")
-	if err != nil {
-	log.Fatal("Error loading weather pleasantness config:", err)
+func ProcessLocation(location Location, records []WeatherRecord) (float64, map[time.Weekday]WeatherRecord) {
+	// Fetch weather data from source database
+/*
+	// Iterate over weatherData and print each element (for debugging)
+	for _, data := range weatherData {
+		fmt.Printf("CityName: %s, CountryCode: %s, Date: %s, WeatherType: %s, Temperature: %.1f, WindSpeed: %.1f, WPI: %.1f, WeatherIconURL: %s, GoogleWeatherLink: %s\n",
+			data.CityName, data.CountryCode, data.Date, data.WeatherType, data.Temperature, data.WindSpeed, data.WPI, data.WeatherIconURL, data.GoogleWeatherLink)
 	}
-	
-  currentDay := time.Now().Weekday()
+*/
+
+  weatherData := FilterWeatherRecords(location, records)
+	// Calculate daily average, and next 5 days average WPI
+	dailyAverageWeather, next5DaysAverageWPI := CalculateWPI(weatherData)
+
+	// Debug prints
+	fmt.Printf("Location: %s, %s (%s)\n", location.CityName, location.CountryCode, location.IATA)
+	fmt.Printf("Next 5 Days Average WPI: %.2f\n", next5DaysAverageWPI)
+	fmt.Println("Daily Average Weather Details:")
+	for day, details := range dailyAverageWeather {
+		fmt.Printf("Day: %s, Temp: %.2f, Weather: %s, Wind: %.2f, WPI: %.2f\n",
+			day, details.Temperature, details.WeatherType, details.WindSpeed, details.WPI)
+	}
+
+	return next5DaysAverageWPI, dailyAverageWeather
+
+
+}
+
+func CalculateWPI(weeklyData []WeatherRecord) (map[time.Weekday]WeatherRecord, float64) {
+	config, err := LoadWeatherPleasantnessConfig("config/weatherPleasantness.yaml")
+	if err != nil {
+		log.Fatal("Error loading weather pleasantness config:", err)
+	}
+
+	currentDay := time.Now().Weekday()
 	startDay, endDay := timeutils.DetermineRangeBasedOnCurrentDay(currentDay)
 
-	dailyData := filterDataByDayRange(weeklyData, startDay, endDay)
-	dailyDetails := make(map[time.Weekday]model.DailyWeatherDetails)
+	dailyData := FilterDataByDayRange(weeklyData, startDay, endDay)
+	dailyDetails := make(map[time.Weekday]WeatherRecord)
 	var totalWPI float64
-	// Assuming this part needs correction
+
 	for day, data := range dailyData {
 		var sumTemp, sumWind, count float64
 		weatherCount := make(map[string]int)
@@ -55,58 +60,69 @@ func CalculateWPI(weeklyData []model.WeatherData) (map[time.Weekday]model.DailyW
 
 		var icon string
 		for _, segment := range data {
-			sumTemp += segment.Main.Temp
-			sumWind += segment.Wind.Speed 
-			weatherCount[segment.Weather[0].Main]++
-			if weatherCount[segment.Weather[0].Main] > maxCount {
-				maxCount = weatherCount[segment.Weather[0].Main]
-				maxWeather = segment.Weather[0].Main
+			sumTemp += segment.Temperature
+			sumWind += segment.WindSpeed
+			weatherCount[segment.WeatherType]++
+			if weatherCount[segment.WeatherType] > maxCount {
+				maxCount = weatherCount[segment.WeatherType]
+				maxWeather = segment.WeatherType
 			}
 			count++
 		}
 
 		if count == 0 {
+			fmt.Printf("No data for day: %s\n", day)
 			continue
 		}
 
-		//Get the condition code from roughly mid day
 		if len(data) >= 2 {
-			// Access the second segment directly
-			icon = data[1].Weather[0].Icon
+			icon = data[1].WeatherIconURL
 		} else {
-			icon = data[0].Weather[0].Icon
+			icon = data[0].WeatherIconURL
 		}
-		icon = strings.Replace(icon, "n", "d", 1) //replace night icons with day equivalent
+		icon = strings.Replace(icon, "n", "d", 1)
 
-		avgWind := sumWind / count // Calculate average wind here
+		avgWind := sumWind / count
 		avgTemp := sumTemp / count
 		wpi := calculateDailyAverageWPI(data, config)
 
-		// Create the weather entry for that day in dailyDetails
-		dailyDetails[day] = model.DailyWeatherDetails{
-			AverageTemp:   avgTemp,
-			CommonWeather: maxWeather,
-			WPI:           wpi,
-			AverageWind:   avgWind, // Use the calculated avgWind
-			Icon:          icon,
-			Day:           day,
+		// Debug prints for daily calculations
+		fmt.Printf("Day: %s, Count: %.2f, SumTemp: %.2f, SumWind: %.2f, AvgTemp: %.2f, AvgWind: %.2f, WPI: %.2f\n",
+			day, count, sumTemp, sumWind, avgTemp, avgWind, wpi)
+
+
+		dailyDetails[day] = WeatherRecord{
+			CityName:         data[0].CityName,
+			CountryCode:      data[0].CountryCode,
+			IATA:             data[0].IATA,
+			Date:             data[0].Date,
+			WeatherType:      maxWeather,
+			Temperature:      avgTemp,
+			WeatherIconURL:   icon,
+			GoogleWeatherLink: data[0].GoogleWeatherLink,
+			WindSpeed:        avgWind,
+			WPI:              wpi,
 		}
 		totalWPI += wpi
 	}
+
+	if len(dailyDetails) == 0 {
+		fmt.Println("No daily details calculated.")
+		return dailyDetails, 0
+	}
+
 	averageWPI := totalWPI / float64(len(dailyDetails))
-	return dailyDetails, averageWPI
+
+fmt.Printf("TotalWPI: %.2f, Len(dailyDetails): %d, AverageWPI: %.2f\n", totalWPI, len(dailyDetails), averageWPI)
+  return dailyDetails, averageWPI
 }
 
-
-// calculateDailyAverageWPI calculates the average WPI for a single day
-// This function assumes it receives weather data for each 3-hour segment between 9 am and 9 pm
-func calculateDailyAverageWPI(weatherData []model.WeatherData, config WeatherPleasantnessConfig) float64 {
+func calculateDailyAverageWPI(weatherData []WeatherRecord, config WeatherPleasantnessConfig) float64 {
 	var totalWPI float64
 	var count float64
 
 	for _, data := range weatherData {
-		// Assuming WeatherData contains Temp, Wind.Speed, and Weather[0].Main
-		wpi := weatherPleasantness(data.Main.Temp, data.Wind.Speed, data.Weather[0].Main, config)
+		wpi := weatherPleasantness(data.Temperature, data.WindSpeed, data.WeatherType, config)
 		totalWPI += wpi
 		count++
 	}
@@ -118,7 +134,6 @@ func calculateDailyAverageWPI(weatherData []model.WeatherData, config WeatherPle
 	return totalWPI / count
 }
 
-// weatherPleasantness calculates the "weather pleasentness index" (WPI)
 func weatherPleasantness(temp float64, wind float64, cond string, config WeatherPleasantnessConfig) float64 {
 	weightTemp := 5.0
 	weightWind := 1.0
@@ -132,10 +147,6 @@ func weatherPleasantness(temp float64, wind float64, cond string, config Weather
 	return index
 }
 
-
-
-
-
 func LoadWeatherPleasantnessConfig(filePath string) (WeatherPleasantnessConfig, error) {
 	var config WeatherPleasantnessConfig
 	yamlFile, err := ioutil.ReadFile(filePath)
@@ -145,3 +156,4 @@ func LoadWeatherPleasantnessConfig(filePath string) (WeatherPleasantnessConfig, 
 	err = yaml.Unmarshal(yamlFile, &config)
 	return config, err
 }
+
