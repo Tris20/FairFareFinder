@@ -41,17 +41,30 @@ fmt.Println("Populating weather_detailed table")
 		log.Fatalf("Failed to insert weather data: %v", err)
 	}
 
-// calculate daily average 
-// Create and Populate the Daily Average Table
+	// Prepare unique locations
+	uniqueLocations, err := PrepareLocationData(weatherData)
+	if err != nil {
+		log.Fatalf("Failed to prepare unique locations: %v", err)
+	}
+
+  // Collect daily average weather records
+	dailyAverageWeatherRecords, err := CollectDailyAverageWeather(weatherData)
+	if err != nil {
+		log.Fatalf("Failed to collect daily average weather: %v", err)
+	}
+
+  // Create and Populate the Daily Average Table
 fmt.Println("Populating weather_daily_average table")
-	err = InsertWeatherData("weather_daily_average", dbPath, weatherData)
+	err = InsertWeatherData("weather_daily_average", dbPath, dailyAverageWeatherRecords)
 	if err != nil {
 		log.Fatalf("Failed to insert weather data: %v", err)
 	}
 
+
+
 fmt.Println("Inserting Locations")
 	// Insert location data into destination database
-	err = InsertLocationData(dbPath, weatherData)
+	err = InsertLocationData(dbPath, uniqueLocations)
 	if err != nil {
 		log.Fatalf("Failed to insert location data: %v", err)
 	}
