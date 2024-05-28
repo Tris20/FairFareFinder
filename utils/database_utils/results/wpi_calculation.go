@@ -8,18 +8,13 @@ import (
 	"log"
     "fmt"
 	"io/ioutil"
+  "sort"
 	"gopkg.in/yaml.v2"
 )
 
 func ProcessLocation(location Location, records []WeatherRecord) (float64, map[time.Weekday]WeatherRecord) {
-	// Fetch weather data from source database
-/*
-	// Iterate over weatherData and print each element (for debugging)
-	for _, data := range weatherData {
-		fmt.Printf("CityName: %s, CountryCode: %s, Date: %s, WeatherType: %s, Temperature: %.1f, WindSpeed: %.1f, WPI: %.1f, WeatherIconURL: %s, GoogleWeatherLink: %s\n",
-			data.CityName, data.CountryCode, data.Date, data.WeatherType, data.Temperature, data.WindSpeed, data.WPI, data.WeatherIconURL, data.GoogleWeatherLink)
-	}
-*/
+
+
 
   weatherData := FilterWeatherRecords(location, records)
 	// Calculate daily average, and next 5 days average WPI
@@ -28,8 +23,18 @@ func ProcessLocation(location Location, records []WeatherRecord) (float64, map[t
 	// Debug prints
 	fmt.Printf("Location: %s, %s (%s)\n", location.CityName, location.CountryCode, location.IATA)
 	fmt.Printf("Next 5 Days Average WPI: %.2f\n", next5DaysAverageWPI)
+// Sort the days
+	days := make([]time.Weekday, 0, len(dailyAverageWeather))
+	for day := range dailyAverageWeather {
+		days = append(days, day)
+	}
+	sort.Slice(days, func(i, j int) bool {
+		return days[i] < days[j]
+	})
+
 	fmt.Println("Daily Average Weather Details:")
-	for day, details := range dailyAverageWeather {
+	for _, day := range days {
+		details := dailyAverageWeather[day]
 		fmt.Printf("Day: %s, Temp: %.2f, Weather: %s, Wind: %.2f, WPI: %.2f\n",
 			day, details.Temperature, details.WeatherType, details.WindSpeed, details.WPI)
 	}
