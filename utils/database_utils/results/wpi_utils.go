@@ -87,3 +87,23 @@ func FilterWeatherRecords(location Location, records []WeatherRecord) []WeatherR
 	return filteredRecords
 }
 
+
+
+func CollectDailyAverageWeather(records []WeatherRecord) ([]WeatherRecord, error) {
+	// Extract unique locations
+	uniqueLocations := getUniqueLocations(records)
+
+	var dailyAverageWeatherRecords []WeatherRecord
+
+	for _, loc := range uniqueLocations {
+		// Process location to get daily average weather
+		_, dailyAverageWeather := ProcessLocation(loc, records)
+
+		// Collect all daily average weather records
+		for _, weatherRecord := range dailyAverageWeather {
+			dailyAverageWeatherRecords = append(dailyAverageWeatherRecords, weatherRecord)
+		}
+	}
+
+	return dailyAverageWeatherRecords, nil
+}

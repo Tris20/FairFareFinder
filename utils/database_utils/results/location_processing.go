@@ -37,3 +37,29 @@ func PrepareLocationData(records []WeatherRecord) ([]Location, error) {
 	return uniqueLocations, nil
 }
 
+
+
+// getUniqueLocations returns a list of unique locations from the given weather records, maintaining order
+func getUniqueLocations(records []WeatherRecord) []Location {
+	uniqueMap := make(map[string]struct{})
+	var uniqueLocations []Location
+
+	for _, record := range records {
+		key := record.CityName + record.CountryCode
+		if _, exists := uniqueMap[key]; !exists {
+			uniqueMap[key] = struct{}{}
+			uniqueLocations = append(uniqueLocations, Location{
+				CityName:    record.CityName,
+				CountryCode: record.CountryCode,
+				IATA:        record.IATA, // Assuming IATA is same as city_name for simplicity
+				SkyScannerID: "placeholder_skyscanner_uuid",
+				AirbnbURL:   "placeholder_airbnb_url",
+				BookingURL:  "placeholder_booking_url",
+				ThingsToDo:  "placeholder_things_to_do",
+				FiveDayWPI:  0.0,
+			})
+		}
+	}
+
+	return uniqueLocations
+}
