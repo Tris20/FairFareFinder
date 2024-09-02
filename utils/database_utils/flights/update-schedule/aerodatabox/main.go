@@ -101,9 +101,16 @@ func fetchFlightData(url, apiKey string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
+/*
 	req.Header.Add("X-RapidAPI-Key", apiKey)
 	req.Header.Add("X-RapidAPI-Host", "aerodatabox.p.rapidapi.com")
+*/
+
+	req.Header.Add("x-magicapi-key", apiKey)
+	req.Header.Add("accept", "application/json")
+	req.Header.Add("Content-Type", "application/json")
+
+//	req.Header.Add("X-RapidAPI-Host", "aerodatabox.p.rapidapi.com")
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -176,7 +183,7 @@ func main() {
 	)
 
 	// Generate dates using previously discussed CalculateWeekendRange function
-	departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate := timeutils.CalculateWeekendRange(0)
+	departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate := timeutils.CalculateWeekendRange(1)
     // Print the generated dates
     fmt.Println("Departure Start Date:", departureStartDate)
     fmt.Println("Departure End Date:", departureEndDate)
@@ -239,9 +246,16 @@ func processFlightData(db *sql.DB, airport, direction, startDate, endDate, apiKe
             startTime := fmt.Sprintf("%s%s", d.Format("2006-01-02"), interval.start)
             endTime := fmt.Sprintf("%s%s", d.Format("2006-01-02"), interval.end)
 
+
+
             // Construct the API URL
-            url := fmt.Sprintf("https://aerodatabox.p.rapidapi.com/flights/airports/iata/%s/%s/%s?withLeg=true&direction=%s&withCancelled=true&withCodeshared=true&withLocation=false", 
+/*            url := fmt.Sprintf("https://aerodatabox.p.rapidapi.com/flights/airports/iata/%s/%s/%s?withLeg=true&direction=%s&withCancelled=true&withCodeshared=true&withLocation=false", 
                 airport, startTime, endTime, direction)
+*/
+
+ url := fmt.Sprintf("https://api.magicapi.dev/api/v1/aedbx/aerodatabox/flights/airports/iata/%s/%s/%s?withLeg=true&direction=%s&withCancelled=true&withCodeshared=true&withLocation=false", 
+                airport, startTime, endTime, direction)
+
 
             fmt.Println("Fetching URL:", url) // Print the API request URL
 

@@ -75,17 +75,21 @@ func initializeDatabase(dbPath string) {
 
 	// Create flight_prices table
 	createFlightPricesTable := `
-	CREATE TABLE IF NOT EXISTS flight_price (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		origin TEXT,
-		destination TEXT,
+CREATE TABLE flight (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    origin_city_name TEXT,
     origin_iata TEXT,
+    origin_skyscanner_id TEXT,
+    destination_city_name TEXT,
     destination_iata TEXT,
+    destination_skyscanner_id TEXT,
     price_this_week DECIMAL,
     skyscanner_url_this_week VARCHAR(255),
     price_next_week DECIMAL,
-    skyscanner_url_next_week VARCHAR(255)
-	);`
+    skyscanner_url_next_week VARCHAR(255),
+    duration_in_minutes DECIMAL
+);
+`
 	_, err = db.Exec(createFlightPricesTable)
 	if err != nil {
 		log.Fatalf("Failed to create flight_prices table: %v", err)
