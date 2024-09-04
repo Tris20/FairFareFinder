@@ -47,7 +47,7 @@ func main() {
 	// Load IATA, skyscanenrID etc of origins(Berlin, Glasgow, Edi)
 	originsConfig, _ := config_handlers.LoadOrigins("input/origins.yaml")
 	origins := config_handlers.ConvertConfigToModel(originsConfig)
-	origins = timeutils.Update_origin_dates(origins)
+	origins = update_origin_dates(origins)
 
 	switch os.Args[1] {
 	case "dev":
@@ -175,7 +175,26 @@ func generate_html_table(origin model.OriginInfo, destinationsWithUrls []model.D
 	}
 }
 
+func update_origin_dates(origins []model.OriginInfo) []model.OriginInfo {
 
+	for i := range origins {
+		origins[i].DepartureStartDate, origins[i].DepartureEndDate, origins[i].ArrivalStartDate, origins[i].ArrivalEndDate = timeutils.CalculateWeekendRange(0)
+
+		origins[i].NextDepartureStartDate, origins[i].NextDepartureEndDate, origins[i].NextArrivalStartDate, origins[i].NextArrivalEndDate = timeutils.CalculateWeekendRange(1)
+
+		// Print updated origin info for verification
+		// Print updated origin info for verification
+		fmt.Printf("Origin #%d: %s\n", i+1, origins[i].City)
+		fmt.Printf("  Upcoming Departure: %s to %s\n", origins[i].DepartureStartDate, origins[i].DepartureEndDate)
+		fmt.Printf("  Upcoming Arrival: %s to %s\n", origins[i].ArrivalStartDate, origins[i].ArrivalEndDate)
+		fmt.Printf("  Next Departure: %s to %s\n", origins[i].NextDepartureStartDate, origins[i].NextDepartureEndDate)
+		fmt.Printf("  Next Arrival: %s to %s\n\n", origins[i].NextArrivalStartDate, origins[i].NextArrivalEndDate)
+
+		//		fmt.Printf("Updated Origin: %+v\n", origins[i])
+
+	}
+	return origins
+}
 
 // ProcessOriginConfigurations processes each origin configuration
 func ProcessOriginConfigurations(origins []model.OriginInfo) {
