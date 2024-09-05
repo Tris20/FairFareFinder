@@ -14,6 +14,7 @@ import (
 	"math"
 	"net/http"
 	"time"
+"github.com/schollz/progressbar/v3"
 )
 
 var apiKey string
@@ -67,7 +68,7 @@ func GetBestPriceForGivenDates(departureSkyScannerID string, arrivalSkyScannerID
 		if err != nil {
 			// Handle the error according to your error policy.
 			// For example, you can return the error or continue to try other dates.
-			fmt.Println("\nError fetching price for date:", date, "Error:", err)
+      fmt.Println("\nError fetching price for date:", date, "Error:", err)
 			continue
 		}
 
@@ -184,6 +185,12 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 	}
 	defer insertStmt.Close()
 
+
+	totalDestinations := calculateTotalDestinations(origins) // Function to sum up all destinations for all origins
+
+	// Create a new progress bar
+	bar := progressbar.Default(int64(totalDestinations))
+
 	for _, origin := range origins {
 		// Assume DetermineFlightsFromConfig and GenerateFlightsAndHotelsURLs are functions that return valid results
 		airportDetailsList := flightdb.DetermineFlightsFromConfig(origin)
@@ -193,6 +200,7 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 			price, err := GetBestPrice(origin, destination)
 			if err != nil {
 				log.Printf("Error getting best price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
+bar.Add(1) // Increment progress bar even on error
 				continue // Continue with the next destination if there's an error
 			}
 
@@ -200,12 +208,14 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 			result, err := updateStmt.Exec(price, origin.SkyScannerID, destination.SkyScannerID)
 			if err != nil {
 				log.Printf("Failed to update price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
+bar.Add(1) // Increment progress bar even on error
 				continue
 			}
 
 			rowsAffected, err := result.RowsAffected()
 			if err != nil {
 				log.Printf("Error checking rows affected for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
+bar.Add(1) // Increment progress bar even on error
 				continue
 			}
 
@@ -220,9 +230,9 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 			} else {
 				log.Printf("Successfully updated price for %s to %s: €%.2f", origin.SkyScannerID, destination.SkyScannerID, price)
 			}
+bar.Add(1) // Increment progress bar even on error
 		}
 	}
-
 }
 
 // Function to get price for a given pair of skyscanner IDs
@@ -236,4 +246,15 @@ func GetPriceForRoute(db *sql.DB, weekend string, origin string, destination str
 	}
 
 	return price, nil // Return the found price and no error
+}
+
+// this determines the length of the progress bar
+func calculateTotalDestinations(origins  []model.OriginInfo) int {
+	total := 0
+	for _, origin := range origins {
+		airportDetailsList := flightdb.DetermineFlightsFromConfig(origin)
+		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(origin, airportDetailsList)
+		total += len(destinationsWithUrls)
+	}
+	return total
 }
