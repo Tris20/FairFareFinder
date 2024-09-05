@@ -86,14 +86,8 @@ func GetBestPriceForGivenDates(departureSkyScannerID string, arrivalSkyScannerID
 	return lowestDayPrice, err
 }
 
-
-/*Original API Provider
 func SearchOneWay(Departure_SkyScannerID string, Arrival_SkyScannerID string, date string) (float64, error) {
 	url := fmt.Sprintf("https://skyscanner80.p.rapidapi.com/api/v1/flights/search-one-way?fromId=%s&toId=%s&departDate=%s&adults=1&currency=EUR&market=US&locale=en-US", Departure_SkyScannerID, Arrival_SkyScannerID, date)
-*/
-func SearchOneWay(Departure_SkyScannerID string, Arrival_SkyScannerID string, date string) (float64, error) {
-	url := fmt.Sprintf("https://sky-scanner3.p.rapidapi.com/api/v1/flights/search-one-way?fromId=%s&toId=%s&departDate=%s&adults=1&currency=EUR&market=US&locale=en-US", Departure_SkyScannerID, Arrival_SkyScannerID, date)
-
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
@@ -101,8 +95,7 @@ func SearchOneWay(Departure_SkyScannerID string, Arrival_SkyScannerID string, da
 	}
 
 	req.Header.Add("X-RapidAPI-Key", apiKey)
-//	req.Header.Add("X-RapidAPI-Host", "skyscanner80.p.rapidapi.com")
-  req.Header.Add("X-RapidAPI-Host", "sky-scanner3.p.rapidapi.com")
+	req.Header.Add("X-RapidAPI-Host", "skyscanner80.p.rapidapi.com")
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
