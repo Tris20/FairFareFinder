@@ -18,7 +18,7 @@ func SetupFFFWebServer() {
 http.HandleFunc("/range", fffwebpages.HtmxPriceRange2)
 
   // Demo and Debug pages
-  	http.HandleFunc("/htmx-price-range", fffwebpages.HtmxPriceRange)
+  	http.HandleFunc("/htmx", fffwebpages.HtmxPriceRange)
 	// Serve static files from the `images` directory
 	fs := http.FileServer(http.Dir("src/images"))
 	http.Handle("/images/", http.StripPrefix("/images/", fs))
