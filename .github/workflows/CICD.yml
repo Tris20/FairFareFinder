@@ -2,9 +2,9 @@ name: Continuous Integration and Deployment
 
 on:
   push:
-    branches: [ main ]
+    branches: [ stable ]
   pull_request:
-    branches: [ main ]
+    branches: [ stable ]
 
 jobs:
 
