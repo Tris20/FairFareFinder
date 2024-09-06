@@ -79,7 +79,7 @@ func updateTable(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	var prices []SkyscannerPrice
 //	query := `SELECT origin, destination, this_weekend, next_weekend FROM skyscannerprices WHERE (this_weekend BETWEEN ? AND ? OR next_weekend BETWEEN ? AND ?)`
   query:=  	
- `SELECT 
+`SELECT DISTINCT
     ai1.city AS origin_city, 
     ai2.city AS destination_city, 
     sp.this_weekend, 
@@ -91,7 +91,9 @@ JOIN
 JOIN 
     airport_info ai2 ON sp.destination = ai2.skyscannerid
 WHERE 
-    (sp.this_weekend BETWEEN ? AND ? OR sp.next_weekend BETWEEN ? AND ?)`
+    (sp.this_weekend BETWEEN ? AND ? OR sp.next_weekend BETWEEN ? AND ?)
+ORDER BY
+    ai1.city, ai2.city, sp.this_weekend, sp.next_weekend;`
   rows, err := db.Query(query, minPrice, maxPrice, minPrice, maxPrice)
 	if err != nil {
 		http.Error(w, "Failed to query database", http.StatusInternalServerError)
