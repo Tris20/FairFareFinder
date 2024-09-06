@@ -22,7 +22,7 @@ type SkyscannerPrice struct {
 
 func HtmxPriceRange(w http.ResponseWriter, r *http.Request) {
 	// serving a static file
-	pageContent, err := ioutil.ReadFile("src/html/htmx-price-range.html")
+	pageContent, err := ioutil.ReadFile("src/html/htmx.html")
 	if err != nil {
 		log.Printf("Error reading forecast page file: %v", err)
 		http.Error(w, "Internal server error", 500)
@@ -50,7 +50,7 @@ log.Println("Current working directory:", wd)
 	}
 
 	// Initial page load
-	tmpl, err := template.ParseFiles("src/html/htmx-price-range.html")
+	tmpl, err := template.ParseFiles("src/html/htmx.html")
 	if err != nil {
 		http.Error(w, "Failed to load template", http.StatusInternalServerError)
 		log.Printf("Failed to parse template: %v", err)
@@ -77,8 +77,22 @@ func updateTable(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	}
 
 	var prices []SkyscannerPrice
-	query := `SELECT origin, destination, this_weekend, next_weekend FROM skyscannerprices WHERE (this_weekend BETWEEN ? AND ? OR next_weekend BETWEEN ? AND ?)`
-	rows, err := db.Query(query, minPrice, maxPrice, minPrice, maxPrice)
+//	query := `SELECT origin, destination, this_weekend, next_weekend FROM skyscannerprices WHERE (this_weekend BETWEEN ? AND ? OR next_weekend BETWEEN ? AND ?)`
+  query:=  	
+ `SELECT 
+    ai1.city AS origin_city, 
+    ai2.city AS destination_city, 
+    sp.this_weekend, 
+    sp.next_weekend 
+FROM 
+    skyscannerprices sp
+JOIN 
+    airport_info ai1 ON sp.origin = ai1.skyscannerid
+JOIN 
+    airport_info ai2 ON sp.destination = ai2.skyscannerid
+WHERE 
+    (sp.this_weekend BETWEEN ? AND ? OR sp.next_weekend BETWEEN ? AND ?)`
+  rows, err := db.Query(query, minPrice, maxPrice, minPrice, maxPrice)
 	if err != nil {
 		http.Error(w, "Failed to query database", http.StatusInternalServerError)
 		log.Printf("Failed to query database: %v", err)
