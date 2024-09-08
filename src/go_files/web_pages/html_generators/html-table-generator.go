@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Tris20/FairFareFinder/src/go_files"
+	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
 )
 
