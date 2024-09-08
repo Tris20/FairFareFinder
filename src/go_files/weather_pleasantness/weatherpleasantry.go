@@ -3,7 +3,7 @@ package weather_pleasantry
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/Tris20/FairFareFinder/src/go_files"
+	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/Tris20/FairFareFinder/src/go_files/config_handlers"
 	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
 	"io/ioutil"
