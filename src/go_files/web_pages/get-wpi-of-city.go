@@ -41,7 +41,7 @@ func GetForecastHandler(w http.ResponseWriter, r *http.Request) {
 // handles requests to the forecast page
 func ForecastHandler(w http.ResponseWriter, r *http.Request) {
 	// serving a static file
-	pageContent, err := ioutil.ReadFile("src/html/forecast.html")
+	pageContent, err := ioutil.ReadFile("src/frontend/html/forecast.html")
 	if err != nil {
 		log.Printf("Error reading forecast page file: %v", err)
 		http.Error(w, "Internal server error", 500)

@@ -22,7 +22,7 @@ type SkyscannerPrice struct {
 
 func HtmxPriceRange(w http.ResponseWriter, r *http.Request) {
 	// serving a static file
-	pageContent, err := ioutil.ReadFile("src/html/htmx.html")
+	pageContent, err := ioutil.ReadFile("src/frontend/html/htmx.html")
 	if err != nil {
 		log.Printf("Error reading forecast page file: %v", err)
 		http.Error(w, "Internal server error", 500)
@@ -50,7 +50,7 @@ log.Println("Current working directory:", wd)
 	}
 
 	// Initial page load
-	tmpl, err := template.ParseFiles("src/html/htmx.html")
+	tmpl, err := template.ParseFiles("src/frontend/html/htmx.html")
 	if err != nil {
 		http.Error(w, "Failed to load template", http.StatusInternalServerError)
 		log.Printf("Failed to parse template: %v", err)
