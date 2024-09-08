@@ -16,4 +16,4 @@ require (
 	golang.org/x/term v0.17.0 // indirect
 )
 
-replace github.com/Tris20/FairFareFinder/src/go_files/timeutils => ./src/go_files/timeutils
+replace github.com/Tris20/FairFareFinder/utils/time-and-date => ./utils/time-and-date
