@@ -47,7 +47,7 @@ func ProcessLocation(location model.DestinationInfo) (float64, map[time.Weekday]
 	}
 
 	// Load weather pleasantness config
-	config, err := LoadWeatherPleasantnessConfig("input/weatherPleasantness.yaml")
+	config, err := LoadWeatherPleasantnessConfig("config/weatherPleasantness.yaml")
 	if err != nil {
 		log.Fatal("Error loading weather pleasantness config:", err)
 	}
