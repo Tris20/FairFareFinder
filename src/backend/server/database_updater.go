@@ -1,4 +1,4 @@
-package flightdb
+package fffwebserver 
 
 
 import (

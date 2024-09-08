@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/Tris20/FairFareFinder/config/handlers"
-	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/flight_db_functions"
+	"github.com/Tris20/FairFareFinder/utils/data/process/compile/flights"
 	"github.com/Tris20/FairFareFinder/utils/time-and-date"
 	"github.com/Tris20/FairFareFinder/src/go_files/url_generators"
 	"io/ioutil"
