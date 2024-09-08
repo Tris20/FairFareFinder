@@ -1,6 +1,6 @@
 # FairFareFinder
 **Out of date**
-
+- testing droplet deployment
 Updating readme (again)just to refresh the jobs
 `FairFareFinder` is a tool designed to help travelers find the best destinations for weekend getaways, prioritizing locations with ideal weather conditions and cost-effective travel options. It combines weather forecasts, event schedules, and price comparisons (including travel and accommodation costs) to suggest the most suitable locations for a short trip.
 
