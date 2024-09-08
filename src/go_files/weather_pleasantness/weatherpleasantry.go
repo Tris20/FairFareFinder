@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/Tris20/FairFareFinder/config/handlers"
-	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
+	"github.com/Tris20/FairFareFinder/utils/time-and-date"
 	"io/ioutil"
 	"log"
 	"net/http"

@@ -2,7 +2,7 @@ package weather_pleasantry
 
 import (
 	"github.com/Tris20/FairFareFinder/src/backend"
-	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
+	"github.com/Tris20/FairFareFinder/utils/time-and-date"
 	"time"
 )
 
@@ -18,7 +18,7 @@ func filterDataByDayRange(weeklyData []model.WeatherData, startDay, endDay time.
 			if hour >= 9 && hour <= 21 { // Include data points between 9 am and 9 pm
 				dailyData[day] = append(dailyData[day], data)
 			}
-		}
+    }
 	}
 	return dailyData
 }
