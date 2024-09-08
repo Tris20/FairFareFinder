@@ -8,7 +8,7 @@ import (
 	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/Tris20/FairFareFinder/config/handlers"
 	"github.com/Tris20/FairFareFinder/utils/data/process/compile/flights"
-	"github.com/Tris20/FairFareFinder/src/go_files/url_generators"
+	"github.com/Tris20/FairFareFinder/utils/data/process/generate/urls"
 	"io/ioutil"
 	"log"
 	"math"
