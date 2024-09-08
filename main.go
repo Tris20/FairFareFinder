@@ -167,7 +167,7 @@ func replaceSpaceWithURLEncoding(urlString string) string {
 func generate_html_table(origin model.OriginInfo, destinationsWithUrls []model.DestinationInfo) {
 
 	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
-	target_url := fmt.Sprintf("src/html/%s-flight-destinations.html", strings.ToLower(origin.City))
+	target_url := fmt.Sprintf("src/frontend/html/%s-flight-destinations.html", strings.ToLower(origin.City))
 
 	err := htmltablegenerator.GenerateHtmlTable(target_url, destinationsWithUrls)
 	if err != nil {
