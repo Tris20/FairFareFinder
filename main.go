@@ -12,7 +12,7 @@ import (
 	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
 	"github.com/Tris20/FairFareFinder/src/go_files/url_generators"
 	"github.com/Tris20/FairFareFinder/src/go_files/weather_pleasantness"
-	"github.com/Tris20/FairFareFinder/src/go_files/web_pages/html_generators"
+	"github.com/Tris20/FairFareFinder/src/backend/web_pages/html_generators"
 	"log"
 	"math"
 	"os"

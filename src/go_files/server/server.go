@@ -2,7 +2,7 @@ package fffwebserver
 
 import (
 	"fmt"
-	"github.com/Tris20/FairFareFinder/src/go_files/web_pages"
+	"github.com/Tris20/FairFareFinder/src/backend/web_pages"
 	"log"
 	"net/http"
 )
