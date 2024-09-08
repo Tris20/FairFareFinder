@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Tris20/FairFareFinder/src/backend"
-	"github.com/Tris20/FairFareFinder/src/go_files/config_handlers"
+	"github.com/Tris20/FairFareFinder/config/handlers"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/flight_db_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
 	"github.com/Tris20/FairFareFinder/src/go_files/url_generators"
