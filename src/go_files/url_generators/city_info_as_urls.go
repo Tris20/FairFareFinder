@@ -2,7 +2,7 @@ package urlgenerators
 
 import (
 	"fmt"
-	"github.com/Tris20/FairFareFinder/src/go_files" //import types
+	"github.com/Tris20/FairFareFinder/src/backend" //import types
 	"strings"
 	"time"
 )
