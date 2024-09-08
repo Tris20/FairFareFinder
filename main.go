@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/Tris20/FairFareFinder/config/handlers"
-	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/flight_db_functions"
+	"github.com/Tris20/FairFareFinder/utils/data/process/compile/flights"
 	"github.com/Tris20/FairFareFinder/src/go_files/flightutils"
 	"github.com/Tris20/FairFareFinder/src/backend/server"
 	"github.com/Tris20/FairFareFinder/utils/time-and-date"
@@ -60,13 +60,13 @@ func main() {
 
 	case "web":
 		fmt.Printf("WEB")
-    flightdb.UpdateDatabaseWithIncoming() 
+    fffwebserver.UpdateDatabaseWithIncoming() 
 		ProcessOriginConfigurations(origins)
 		// Update WPI data every 6 hours
 		ticker := time.NewTicker(6 * time.Hour)
 		go func() {
 			for range ticker.C {
-        flightdb.UpdateDatabaseWithIncoming() 
+        fffwebserver.UpdateDatabaseWithIncoming() 
 				origins = update_origin_dates(origins)
 				ProcessOriginConfigurations(origins)
 			}
