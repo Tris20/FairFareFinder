@@ -2,8 +2,8 @@ package weather_pleasantry
 
 import (
 	"github.com/Tris20/FairFareFinder/src/backend"
-	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
-	"strings"
+	"github.com/Tris20/FairFareFinder/utils/time-and-date"
+  "strings"
 	"time"
 )
 

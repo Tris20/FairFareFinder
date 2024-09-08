@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/Tris20/FairFareFinder/src/backend"
-	"github.com/Tris20/FairFareFinder/src/go_files/timeutils"
+	"github.com/Tris20/FairFareFinder/utils/time-and-date"
 )
 
 // Define a struct for the weather information of a day.
