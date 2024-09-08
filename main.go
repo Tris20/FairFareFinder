@@ -6,7 +6,6 @@ import (
 	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/Tris20/FairFareFinder/config/handlers"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/flight_db_functions"
-	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/user_db_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/flightutils"
 	"github.com/Tris20/FairFareFinder/src/backend/server"
 	"github.com/Tris20/FairFareFinder/utils/time-and-date"
@@ -39,8 +38,7 @@ var checkprice_init = false
 var origins []model.OriginInfo
 
 func main() {
-	user_db.Setup_database()
-	dbPath := "user_database.db"
+	fmt.Printf("Running FFF with argument '%s' \n\n", os.Args[1])
 	if len(os.Args) < 2 {
 		log.Fatal("Error: No argument provided. Please provide a location, 'web', or a json file.")
 	}
@@ -76,9 +74,6 @@ func main() {
 		fffwebserver.SetupFFFWebServer()
 		// Start a goroutine to check and execute a task every Monday
 
-	case "init-db":
-		user_db.Init_database(dbPath)
-		user_db.Insert_test_user(dbPath)
 
 	default:
 		// Check if the argument is a json file
