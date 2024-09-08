@@ -39,10 +39,11 @@ var origins []model.OriginInfo
 
 func main() {
 	// Load IATA, skyscanenrID etc of origins(Berlin, Glasgow, Edi)
-	originsConfig, _ := config_handlers.LoadOrigins("../../../../config/origins.yaml")
+/*
+  originsConfig, _ := config_handlers.LoadOrigins("../../../../config/origins.yaml")
 	origins := config_handlers.ConvertConfigToModel(originsConfig)
 	origins = update_origin_dates(origins)
-
+*/
 }
 
 
