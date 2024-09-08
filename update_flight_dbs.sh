@@ -2,7 +2,7 @@
 
 #### Update the Flight Schedule ###
 # Change to the aerodata directory
-cd ~/Documents/Workspace/SVN/SVN_BASE/Software/Shared_Projects/FairFareFinder/utils/database_utils/flights/update-schedule/aerodatabox/
+cd ~/home/tristan/Documents/Workspace/SVN/SVN_BASE/Software/Shared_Projects/FairFareFinder/utils/data/fetch/flights/schedule/
 
 # Run the aerodata script
 ./aerodatabox
