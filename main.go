@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"github.com/Tris20/FairFareFinder/src/go_files"
+	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/Tris20/FairFareFinder/src/go_files/config_handlers"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/flight_db_functions"
 	"github.com/Tris20/FairFareFinder/src/go_files/db_functions/user_db_functions"
@@ -45,7 +45,7 @@ func main() {
 		log.Fatal("Error: No argument provided. Please provide a location, 'web', or a json file.")
 	}
 	// Load IATA, skyscanenrID etc of origins(Berlin, Glasgow, Edi)
-	originsConfig, _ := config_handlers.LoadOrigins("input/origins.yaml")
+	originsConfig, _ := config_handlers.LoadOrigins("config/origins.yaml")
 	origins := config_handlers.ConvertConfigToModel(originsConfig)
 	origins = update_origin_dates(origins)
 
@@ -167,7 +167,7 @@ func replaceSpaceWithURLEncoding(urlString string) string {
 func generate_html_table(origin model.OriginInfo, destinationsWithUrls []model.DestinationInfo) {
 
 	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
-	target_url := fmt.Sprintf("src/html/%s-flight-destinations.html", strings.ToLower(origin.City))
+	target_url := fmt.Sprintf("src/frontend/html/%s-flight-destinations.html", strings.ToLower(origin.City))
 
 	err := htmltablegenerator.GenerateHtmlTable(target_url, destinationsWithUrls)
 	if err != nil {
