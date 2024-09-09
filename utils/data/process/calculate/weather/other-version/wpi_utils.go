@@ -6,7 +6,7 @@ package main
 import (
 	"time"
   "fmt"
-	"FairFareFinder/src/go_files/timeutils"
+	"github.com/Tris20/FairFareFinder/utils/time-and-date"
 )
 
 // Simple math functions and checks go here
