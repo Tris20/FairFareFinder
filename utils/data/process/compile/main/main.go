@@ -1,15 +1,16 @@
 package main
 
 import (
-	"fmt"
+//	"fmt"
 	"log"
 	"os"
 	"path/filepath"
+//  "github.com/Tris20/FairFareFinder/src/backend" //types.go
 )
 
 func main() {
 	// Create /out directory if it does not exist
-	outputDir := "./out"
+	outputDir := "../../../../../data/compiled/"
 	if _, err := os.Stat(outputDir); os.IsNotExist(err) {
 		err := os.Mkdir(outputDir, 0755)
 		if err != nil {
@@ -17,9 +18,9 @@ func main() {
 		}
 	}
 
+
 	// Database file paths
-	dbPath := filepath.Join(outputDir, "results.db")
-	sourceDBPath := "../../../data/longterm_db/weather.db"
+	dbPath := filepath.Join(outputDir, "new_main.db")
 
 	// Backup existing database if it exists
 	backupDatabase(dbPath, outputDir)
@@ -27,6 +28,30 @@ func main() {
 	// Initialize the new database and create tables
 	initializeDatabase(dbPath)
 
+
+
+  
+  // fetch flight schedule (every monday )
+  // fetch flight prices (every monday )
+  // fetch weather (every 6 hours)
+  
+
+  
+  // compile daily_weather table
+
+  // compile average_daily_weather table 
+
+  // compile location table
+
+  // compile flight table
+
+
+
+  /* NOTE:
+   Functions below probably belong in the weather fetcher script. that weather data should then be compiled, including wpi calculatation by a compiler in the compile/weather folder
+
+  */
+  /*
 	// Fetch weather data from source database
 	weatherData, err := FetchWeatherData(sourceDBPath)
 	if err != nil {
@@ -70,5 +95,6 @@ fmt.Println("Inserting Locations")
 	}
 
 	log.Println("Weather and location data successfully transferred.")
+  */
 }
 
