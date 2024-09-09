@@ -23,7 +23,7 @@ func backupDatabase(dbPath, outputDir string) {
 
 		// Move existing results.db to backups folder with a timestamp
 		timestamp := time.Now().Format("20060102_150405")
-		backupPath := filepath.Join(backupDir, fmt.Sprintf("results_%s.db", timestamp))
+		backupPath := filepath.Join(backupDir, fmt.Sprintf("main_backup_%s.db", timestamp))
 		err := os.Rename(dbPath, backupPath)
 		if err != nil {
 			log.Fatalf("Failed to move existing database to backup: %v", err)
