@@ -2,7 +2,7 @@
 package main
 
 import (
-	"FairFareFinder/src/go_files/timeutils"
+	"github.com/Tris20/FairFareFinder/utils/time-and-date"
 	"strings"
 	"time"
 	"log"
