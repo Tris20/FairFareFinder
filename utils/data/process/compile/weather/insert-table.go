@@ -14,7 +14,7 @@ import (
 
 
 // InsertWeatherData inserts weather records into the weather table in results.db
-func InsertWeatherData(tablename string, destinationDBPath string, records []WeatherRecord) error {
+func InsertWeatherData(tablename string, destinationDBPath string, records []model.WeatherRecord) error {
 	db, err := sql.Open("sqlite3", destinationDBPath)
 	if err != nil {
 		return err
