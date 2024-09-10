@@ -15,10 +15,9 @@ func SetupFFFWebServer() {
 	http.HandleFunc("/berlin-flight-destinations", fffwebpages.PresentBerlinFlightDestinations)
 	http.HandleFunc("/edinburgh-flight-destinations", fffwebpages.PresentEdinburghFlightDestinations)
 	http.HandleFunc("/glasgow-flight-destinations", fffwebpages.PresentGlasgowFlightDestinations)
-http.HandleFunc("/range", fffwebpages.HtmxPriceRange2)
-
-  // Demo and Debug pages
-  	http.HandleFunc("/htmx", fffwebpages.HtmxPriceRange)
+  http.HandleFunc("/range", fffwebpages.HtmxPriceRange2)
+  //main filter page
+  http.HandleFunc("/htmx", fffwebpages.HtmxPriceRange)
 	// Serve static files from the `images` directory
 	fs := http.FileServer(http.Dir("src/frontend/images"))
 	http.Handle("/images/", http.StripPrefix("/images/", fs))
