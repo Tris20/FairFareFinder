@@ -6,7 +6,6 @@ import (
 	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/Tris20/FairFareFinder/config/handlers"
 	"github.com/Tris20/FairFareFinder/utils/data/process/compile/flights"
-	"github.com/Tris20/FairFareFinder/utils/data/fetch/flights/prices/depreciated"
 	"github.com/Tris20/FairFareFinder/src/backend/server"
 	"github.com/Tris20/FairFareFinder/utils/time-and-date"
 	"github.com/Tris20/FairFareFinder/utils/data/process/generate/urls"
@@ -53,10 +52,6 @@ func main() {
 		ProcessOriginConfigurations(origins)
 		fmt.Println("\nStarting Webserver")
 		fffwebserver.SetupFFFWebServer()
-
-	case "updateFlightPrices":
-		fmt.Printf("\nUpdating Flight Prices\n")
-		flightutils.UpdateSkyscannerPrices(origins)
 
 	case "web":
 		fmt.Printf("WEB")
@@ -117,10 +112,10 @@ func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.
 		log.Printf("Updated WPI for destination %v: %f", destination, wpi)
 
 		// Read price data from the database table
-		price, err := flightutils.GetPriceForRoute(db, "this_weekend", origin.SkyScannerID, destination.SkyScannerID)
+		price, err := getPriceForRoute(db, "this_weekend", origin.SkyScannerID, destination.SkyScannerID)
 		// Read price data from the database table
 		var nextprice float64
-		nextprice, err = flightutils.GetPriceForRoute(db, "next_weekend", origin.SkyScannerID, destination.SkyScannerID)
+		nextprice, err = getPriceForRoute(db, "next_weekend", origin.SkyScannerID, destination.SkyScannerID)
 
 		if err != nil {
 			log.Printf("Failed to get price for route from %v to %v: %v", origin.SkyScannerID, destination.SkyScannerID, err)
@@ -203,4 +198,18 @@ func ProcessOriginConfigurations(origins []model.OriginInfo) {
 		//Generate WPI,  sort by WPI, update webpages
 		GenerateCityRankings(origin, destinationsWithUrls)
 	}
+}
+
+
+// Function to get price for a given pair of skyscanner IDs
+func getPriceForRoute(db *sql.DB, weekend string, origin string, destination string) (float64, error) {
+	var price float64
+
+	query := fmt.Sprintf("SELECT %s FROM skyscannerprices WHERE origin = ? AND destination = ?", weekend)
+	err := db.QueryRow(query, origin, destination).Scan(&price)
+	if err != nil {
+		return 0, err // Return 0 and the error
+	}
+
+	return price, nil // Return the found price and no error
 }
