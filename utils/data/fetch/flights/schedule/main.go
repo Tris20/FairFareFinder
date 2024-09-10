@@ -101,15 +101,15 @@ func fetchFlightData(url, apiKey string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-/*
+
 	req.Header.Add("X-RapidAPI-Key", apiKey)
 	req.Header.Add("X-RapidAPI-Host", "aerodatabox.p.rapidapi.com")
-*/
 
+/*
 	req.Header.Add("x-magicapi-key", apiKey)
 	req.Header.Add("accept", "application/json")
 	req.Header.Add("Content-Type", "application/json")
-
+*/
 //	req.Header.Add("X-RapidAPI-Host", "aerodatabox.p.rapidapi.com")
 
 	resp, err := client.Do(req)
@@ -134,7 +134,7 @@ func main() {
 
 	// Load configurations from YAML
 	var configs Configs
-	configFile, err := ioutil.ReadFile("fetch-these-flights.yaml")
+	configFile, err := ioutil.ReadFile("config.yaml")
 	if err != nil {
 		log.Fatalf("Error reading config file: %v", err)
 	}
@@ -149,8 +149,10 @@ func main() {
 	}
 
 	//db, err := sql.Open("sqlite3", "../../../../../data/longterm_db/flights.db")
-	db, err := sql.Open("sqlite3", "../../../../../data/flights.db")
-  //db, err := sql.Open("sqlite3", "./flights.db")
+	// Last used path for stable branch
+//  db, err := sql.Open("sqlite3", "../../../../../data/flights.db")
+	db, err := sql.Open("sqlite3", "../../../../../data/raw/flights/flights.db")
+//  db, err := sql.Open("sqlite3", "./flights.db")
 
 	if err != nil {
 		log.Fatalf("Error opening database: %v", err)
@@ -249,14 +251,14 @@ func processFlightData(db *sql.DB, airport, direction, startDate, endDate, apiKe
 
 
             // Construct the API URL
-/*            url := fmt.Sprintf("https://aerodatabox.p.rapidapi.com/flights/airports/iata/%s/%s/%s?withLeg=true&direction=%s&withCancelled=true&withCodeshared=true&withLocation=false", 
+            url := fmt.Sprintf("https://aerodatabox.p.rapidapi.com/flights/airports/iata/%s/%s/%s?withLeg=true&direction=%s&withCancelled=true&withCodeshared=true&withLocation=false", 
                 airport, startTime, endTime, direction)
-*/
 
+/*
  url := fmt.Sprintf("https://api.magicapi.dev/api/v1/aedbx/aerodatabox/flights/airports/iata/%s/%s/%s?withLeg=true&direction=%s&withCancelled=true&withCodeshared=true&withLocation=false", 
                 airport, startTime, endTime, direction)
 
-
+*/
             fmt.Println("Fetching URL:", url) // Print the API request URL
 
           // Fetch the flight data
@@ -265,7 +267,6 @@ func processFlightData(db *sql.DB, airport, direction, startDate, endDate, apiKe
             log.Printf("Error fetching flight data for %s: %v", airport, err)
             return err
         }
-
         if direction == "Arrival" {
             var arrivals ArrivalData
             if err := json.Unmarshal(data, &arrivals); err != nil {
@@ -276,13 +277,13 @@ func processFlightData(db *sql.DB, airport, direction, startDate, endDate, apiKe
             for _, arrival := range arrivals.Arrivals {
                 // Check if the entry already exists
                 var exists bool
-                err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM flights WHERE flightNumber = ? AND departureTime = ? AND arrivalTime = ?)",
+                err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM schedule WHERE flightNumber = ? AND departureTime = ? AND arrivalTime = ?)",
                     arrival.Number, arrival.Departure.ScheduledTime.Local, arrival.Arrival.ScheduledTime.Local).Scan(&exists)
                 if err != nil {
                     log.Printf("Error checking for existing record: %v", err)
                 }
                 if !exists {
-                    _, err := db.Exec("INSERT INTO flights(flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
+                    _, err := db.Exec("INSERT INTO schedule(flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
                         arrival.Number, arrival.Departure.Airport.IATA, airport, arrival.Departure.ScheduledTime.Local, arrival.Arrival.ScheduledTime.Local, direction)
                     if err != nil {
                         log.Printf("Error inserting arrival into database: %v", err)
@@ -299,13 +300,13 @@ func processFlightData(db *sql.DB, airport, direction, startDate, endDate, apiKe
             for _, departure := range departures.Departures {
                 // Check if the entry already exists
                 var exists bool
-                err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM flights WHERE flightNumber = ? AND departureTime = ? AND arrivalTime = ?)",
+                err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM schedule WHERE flightNumber = ? AND departureTime = ? AND arrivalTime = ?)",
                     departure.Number, departure.Departure.ScheduledTime.Local, departure.Arrival.ScheduledTime.Local).Scan(&exists)
                 if err != nil {
                     log.Printf("Error checking for existing record: %v", err)
                 }
                 if !exists {
-                    _, err := db.Exec("INSERT INTO flights (flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
+                    _, err := db.Exec("INSERT INTO schedule (flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
                         departure.Number, airport, departure.Arrival.Airport.IATA, departure.Departure.ScheduledTime.Local, departure.Arrival.ScheduledTime.Local, direction)
                     if err != nil {
                         log.Printf("Error inserting departure into database: %v", err)
