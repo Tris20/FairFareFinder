@@ -19,7 +19,7 @@ func main() {
 	defer flightsDB.Close()
 
 	// Initialize weather database
-	weatherDBPath := "../../../../data/longterm_db/weather.db"
+	weatherDBPath := "../../../../data/raw/weather/weather.db"
 	initWeatherDB(weatherDBPath)
 
 	// Fetch airport info with non-empty IATA codes
