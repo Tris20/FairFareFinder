@@ -6,7 +6,7 @@ import (
 	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/Tris20/FairFareFinder/config/handlers"
 	"github.com/Tris20/FairFareFinder/utils/data/process/compile/flights"
-	"github.com/Tris20/FairFareFinder/utils/data/fetch/flights/prices"
+	"github.com/Tris20/FairFareFinder/utils/data/fetch/flights/prices/depreciated"
 	"github.com/Tris20/FairFareFinder/src/backend/server"
 	"github.com/Tris20/FairFareFinder/utils/time-and-date"
 	"github.com/Tris20/FairFareFinder/utils/data/process/generate/urls"
