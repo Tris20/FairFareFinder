@@ -1,4 +1,8 @@
-package weather_pleasantry
+package main
+
+import (
+	"github.com/Tris20/FairFareFinder/config/handlers"
+)
 
 // Simple math functions and checks go here
 
@@ -48,7 +52,7 @@ func windPleasantness(windSpeed float64) float64 {
 }
 
 // weatherCondPleasantness returns a value between 0 and 10 for weather condition pleasantness
-func weatherCondPleasantness(cond string, config WeatherPleasantnessConfig) float64 {
+func weatherCondPleasantness(cond string, config config_handlers.WeatherPleasantnessConfig) float64 {
 	pleasantness, ok := config.Conditions[cond]
 	if !ok {
 		return 0

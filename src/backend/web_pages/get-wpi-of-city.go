@@ -3,7 +3,7 @@ package fffwebpages
 import (
 	"fmt"
 	"github.com/Tris20/FairFareFinder/src/backend"
-	"github.com/Tris20/FairFareFinder/utils/data/process/calculate/weather"
+	"github.com/Tris20/FairFareFinder/utils/data/process/calculate/weather/depreciated"
 	"io/ioutil"
 	"log"
 	"net/http"

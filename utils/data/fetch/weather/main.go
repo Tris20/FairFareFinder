@@ -13,7 +13,10 @@ import (
 func main() {
 	// Open connection to flights.db
 	flightsDB, err := sql.Open("sqlite3", "../../../../data/longterm_db/flights.db")
-	if err != nil {
+	
+//	flightsDB, err := sql.Open("sqlite3", "../../../../data/raw/locations/locations.db")
+  
+if err != nil {
 		log.Fatalf("Error opening flights.db: %v", err)
 	}
 	defer flightsDB.Close()

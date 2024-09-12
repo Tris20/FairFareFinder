@@ -58,7 +58,8 @@ func initWeatherDB(dbPath string) {
 		temperature REAL NOT NULL,
 		weather_icon_url TEXT NOT NULL,
 		google_weather_link TEXT NOT NULL,
-    wind_speed REAL NOT NULL
+    wind_speed REAL NOT NULL,
+    wpi FLOAT(10,1)
 	);`
 
 	if _, err := db.Exec(createTableSQL); err != nil {
