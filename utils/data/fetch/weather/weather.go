@@ -129,7 +129,7 @@ func storeWeatherData(dbPath string, airport AirportInfo, weatherData []WeatherD
 	for _, wd := range weatherData {
 		// First, check if an entry exists
 		var exists bool
-		err := db.QueryRow(`SELECT EXISTS(SELECT 1 FROM weather WHERE city_name = ? AND country_code = ? AND iata = ? AND date = ?)`,
+		err := db.QueryRow(`SELECT EXISTS(SELECT 1 FROM all_weather WHERE city_name = ? AND country_code = ? AND iata = ? AND date = ?)`,
 			airport.City, airport.Country, airport.IATA, wd.Date).Scan(&exists)
 		if err != nil {
 			log.Printf("Failed to check existence for %s on %s: %v", airport.City, wd.Date, err)
@@ -138,11 +138,11 @@ func storeWeatherData(dbPath string, airport AirportInfo, weatherData []WeatherD
 
 		if exists {
 			// If it exists, update the entry
-			_, err = db.Exec(`UPDATE weather SET weather_type = ?, temperature = ?, weather_icon_url = ?, google_weather_link = ?, wind_speed = ? WHERE city_name = ? AND country_code = ? AND iata = ? AND date = ?`,
+			_, err = db.Exec(`UPDATE all_weather SET weather_type = ?, temperature = ?, weather_icon_url = ?, google_weather_link = ?, wind_speed = ? WHERE city_name = ? AND country_code = ? AND iata = ? AND date = ?`,
 				wd.WeatherType, wd.Temperature, wd.WeatherIconURL, wd.GoogleWeatherLink, wd.WindSpeed, airport.City, airport.Country, airport.IATA, wd.Date)
 		} else {
 			// If it does not exist, insert a new entry
-			_, err = db.Exec(`INSERT INTO weather (city_name, country_code, iata, date, weather_type, temperature, weather_icon_url, google_weather_link, wind_speed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+			_, err = db.Exec(`INSERT INTO all_weather (city_name, country_code, iata, date, weather_type, temperature, weather_icon_url, google_weather_link, wind_speed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 				airport.City, airport.Country, airport.IATA, wd.Date, wd.WeatherType, wd.Temperature, wd.WeatherIconURL, wd.GoogleWeatherLink, wd.WindSpeed)
 		}
 
