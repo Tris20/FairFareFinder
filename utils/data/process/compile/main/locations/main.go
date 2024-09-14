@@ -105,7 +105,19 @@ if len(c.IATACodes) == 0 {
         bar.Add(1) // Increment the progress bar for each city processed
     }
     bar.Finish() // End the progress bar when loop is complete
-}
+
+    db, err = sql.Open("sqlite3", "../../../../../../data/compiled/new_main.db")
+    if err != nil {
+        fmt.Println("Error reopening database:", err)
+        return
+    }
+    defer db.Close()
+
+    // Update the avg_wpi based on weather data
+    UpdateAvgWPI(db)
+
+
+  }
 
 func fillIATAs(city, country string, codes []string) []interface{} {
     result := make([]interface{}, 10) // Total 10 placeholders: city, country, 7 iatas, avg_wpi
