@@ -35,8 +35,10 @@ func HtmxPriceRange2(w http.ResponseWriter, r *http.Request) {
   fmt.Printf("\nHTMX\n\n")
     wd, err := os.Getwd()
 log.Println("Current working directory:", wd)
-	db, err := sql.Open("sqlite3", "data/flights.db")
-	if err != nil {
+	//db, err := sql.Open("sqlite3", "data/flights.db")
+	db, err := sql.Open("sqlite3", "data/compiled/main.db")
+
+  if err != nil {
 		http.Error(w, "Failed to connect to database", http.StatusInternalServerError)
 		log.Printf("Failed to open database connection: %v", err)
 		return
@@ -85,7 +87,7 @@ func updateTable(db *sql.DB, w http.ResponseWriter, r *http.Request) {
     sp.this_weekend, 
     sp.next_weekend 
 FROM 
-    skyscannerprices sp
+    flight sp
 JOIN 
     airport_info ai1 ON sp.origin = ai1.skyscannerid
 JOIN 
