@@ -37,7 +37,7 @@ func main() {
 		`CREATE TABLE IF NOT EXISTS weather (
 			city VARCHAR(255) NOT NULL,
 			country CHAR(2) NOT NULL,
-			date TEXT NOT NULL,
+			date DATE NOT NULL,
 			avg_daytime_temp FLOAT(10,1),
 			weather_icon VARCHAR(255),
 			google_url VARCHAR(255),
@@ -53,7 +53,13 @@ func main() {
 		`CREATE TABLE IF NOT EXISTS location (
 			city VARCHAR(255) NOT NULL,
 			country CHAR(2) NOT NULL,
-			iata CHAR(3) NOT NULL,
+			iata_1 CHAR(3) NOT NULL,
+iata_2 CHAR(3) ,
+iata_3 CHAR(3) ,
+iata_4 CHAR(3) ,
+iata_5 CHAR(3) ,
+iata_6 CHAR(3) ,
+iata_7 CHAR(3) ,
 			avg_wpi FLOAT(10,1)
 		);`,
 	}
