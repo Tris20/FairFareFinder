@@ -48,7 +48,7 @@ func initWeatherDB(dbPath string) {
 	}
 	defer db.Close()
 
-	createTableSQL := `CREATE TABLE IF NOT EXISTS weather (
+	createTableSQL := `CREATE TABLE IF NOT EXISTS all_weather (
 		weather_id INTEGER PRIMARY KEY AUTOINCREMENT,
 		city_name TEXT NOT NULL,
 		country_code TEXT NOT NULL,
