@@ -5,28 +5,22 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"strconv"
 	"strings"
-	"time"
-
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/schollz/progressbar/v3"
 )
 
-// CurrentWeather represents the structure of the current_weather table
-type CurrentWeather struct {
+type WeatherData struct {
 	CityName          string
 	CountryCode       string
-	IATA              string
 	Date              string
-	WeatherType       string
 	Temperature       float64
+	WPI               float64
 	WeatherIconURL    string
 	GoogleWeatherLink string
-	WindSpeed         float64
-	WPI               float64
 }
 
-// CompiledWeather represents the structure of the weather table for later use
 type CompiledWeather struct {
 	City           string
 	Country        string
@@ -38,15 +32,19 @@ type CompiledWeather struct {
 }
 
 func main() {
-	// Open the current weather database
 	db, err := sql.Open("sqlite3", "../../../../../../data/raw/weather/weather.db")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	// Query the current_weather table
-	rows, err := db.Query("SELECT city_name, country_code, date, temperature, weather_icon_url, google_weather_link, wpi FROM current_weather")
+	query := `
+	SELECT city_name, country_code, date, AVG(temperature) AS avg_temp, AVG(wpi) AS avg_wpi, weather_icon_url, google_weather_link
+	FROM current_weather
+	WHERE strftime('%H:%M:%S', date) IN ('11:00:00', '14:00:00', '17:00:00')
+	GROUP BY city_name, country_code, strftime('%Y-%m-%d', date)
+	`
+	rows, err := db.Query(query)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -54,49 +52,37 @@ func main() {
 
 	var weathers []CompiledWeather
 	for rows.Next() {
-		var cw CurrentWeather
-		if err := rows.Scan(&cw.CityName, &cw.CountryCode, &cw.Date, &cw.Temperature, &cw.WeatherIconURL, &cw.GoogleWeatherLink, &cw.WPI); err != nil {
+		var wd WeatherData
+		err := rows.Scan(&wd.CityName, &wd.CountryCode, &wd.Date, &wd.Temperature, &wd.WPI, &wd.WeatherIconURL, &wd.GoogleWeatherLink)
+		if err != nil {
 			log.Fatal(err)
 		}
-		t, _ := time.Parse("2006-01-02 15:04:05", cw.Date)
-		hour := t.Hour()
-		if hour == 23 || hour == 2 || hour == 5 {
-			continue // skip these entries
-		}
-		if hour == 14 {
-			weathers = append(weathers, CompiledWeather{
-				City:           cw.CityName,
-				Country:        cw.CountryCode,
-				Date:           strings.Split(cw.Date, " ")[0],
-				AvgDaytimeTemp: cw.Temperature,
-				WeatherIcon:    cw.WeatherIconURL,
-				GoogleURL:      cw.GoogleWeatherLink,
-				AvgDaytimeWPI:  cw.WPI,
-			})
-		}
-	}
-	if err := rows.Err(); err != nil {
-		log.Fatal(err)
+		formattedTemp, _ := strconv.ParseFloat(fmt.Sprintf("%.1f", wd.Temperature), 64)
+		formattedWPI, _ := strconv.ParseFloat(fmt.Sprintf("%.1f", wd.WPI), 64)
+		weathers = append(weathers, CompiledWeather{
+			City:           wd.CityName,
+			Country:        wd.CountryCode,
+			Date:           strings.Split(wd.Date, " ")[0],
+			AvgDaytimeTemp: formattedTemp,
+			WeatherIcon:    wd.WeatherIconURL,
+			GoogleURL:      wd.GoogleWeatherLink,
+			AvgDaytimeWPI:  formattedWPI,
+		})
 	}
 
-	// Open the compiled weather database
 	compiledDB, err := sql.Open("sqlite3", "../../../../../../data/compiled/new_main.db")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer compiledDB.Close()
 
-	// Prepare the insert statement
 	stmt, err := compiledDB.Prepare("INSERT INTO weather (city, country, date, avg_daytime_temp, weather_icon, google_url, avg_daytime_wpi) VALUES (?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer stmt.Close()
 
-	// Create a new progress bar
 	bar := progressbar.Default(int64(len(weathers)))
-
-	// Insert compiled weather data into the new database and update progress bar
 	for _, w := range weathers {
 		_, err := stmt.Exec(w.City, w.Country, w.Date, w.AvgDaytimeTemp, w.WeatherIcon, w.GoogleURL, w.AvgDaytimeWPI)
 		if err != nil {
