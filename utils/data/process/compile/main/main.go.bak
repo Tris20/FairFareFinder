@@ -1,0 +1,88 @@
+
+package main
+
+import (
+    "fmt"
+    "log"
+    "os"
+    "os/exec"
+    "path/filepath"
+)
+
+// Helper function to run a command in a specific directory
+func runExecutableInDir(dir string, executable string) {
+    // Change to the specified directory
+    err := os.Chdir(dir)
+    if err != nil {
+        log.Fatalf("Failed to change directory to %s: %v", dir, err)
+    }
+    fmt.Printf("Changed to directory: %s\n", dir)
+
+    // Execute the executable
+    cmd := exec.Command("./" + executable)
+    cmd.Stdout = os.Stdout
+    cmd.Stderr = os.Stderr
+
+    fmt.Printf("Running executable: %s\n", executable)
+    err = cmd.Run()
+    if err != nil {
+        log.Fatalf("Failed to run executable %s in directory %s: %v", executable, dir, err)
+    }
+
+    fmt.Printf("Successfully executed: %s\n", executable)
+}
+
+func main() {
+
+
+// Create /out directory if it does not exist
+	outputDir := "../../../../../data/compiled/"
+	if _, err := os.Stat(outputDir); os.IsNotExist(err) {
+		err := os.Mkdir(outputDir, 0755)
+		if err != nil {
+			log.Fatalf("Failed to create directory %s: %v", outputDir, err)
+		}
+	}
+
+
+	// Database file paths
+	dbPath := filepath.Join(outputDir, "new_main.db")
+
+	// Backup existing database if it exists
+	backupDatabase(dbPath, outputDir)
+	// Initialize the new database and create tables
+	initializeDatabase(dbPath)
+
+    // Get the current directory of the script
+    // Get the current directory of the script
+    baseDir, err := os.Getwd()
+    if err != nil {
+        log.Fatalf("Failed to get current working directory: %v", err)
+    }
+
+    // Define the relative path to go up three directories
+    relativeBase := filepath.Join(baseDir, "../../../")
+
+    // List of relative directories and executables
+    tasks := []struct {
+        dir        string
+        executable string
+    }{
+      {filepath.Join(relativeBase, "fetch/flights/schedule"), "aerodatabox"}, // run every Monday at 9am
+        {filepath.Join(relativeBase, "fetch/flights/prices"), "prices"}, // Run every monday at 10am
+        {filepath.Join(relativeBase, "fetch/weather"), "update-weather-db"}, // Run every 6 hours
+        {filepath.Join(relativeBase, "process/calculate/weather"), "weather"}, // Run after update-weather-db completes
+        {filepath.Join(relativeBase, "process/compile/main/flights"), "flights"}, // run after prices completes
+        {filepath.Join(relativeBase, "process/compile/main/weather"), "weather"}, // run after calclualte/weather completes
+        {filepath.Join(relativeBase, "process/compile/main/locations"), "locations"}, // run after main/weather completes
+    }
+    green := "\033[32m"
+reset := "\033[0m" 
+    // Loop through each task and execute it
+    for _, task := range tasks {
+        runExecutableInDir(task.dir, task.executable)
+      fmt.Printf("%sCOMPLETED: %s%s\n", green,  task.executable, reset)
+    }
+
+    fmt.Println("All tasks executed successfully.")
+  }
