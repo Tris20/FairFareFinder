@@ -26,6 +26,7 @@ type SkyScannerPrice struct {
 
 
 func main() {
+  fmt.Printf("Starting to Compile Flights Table")
 	db, err := sql.Open("sqlite3", "../../../../../../data/raw/flights/flights.db")
 	if err != nil {
 		log.Fatal(err)
