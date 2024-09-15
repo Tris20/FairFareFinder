@@ -1,9 +1,10 @@
 package main
 
 import (
-//	"fmt"
+ // "fmt"
 	"log"
 	"os"
+ //"os/exec"
 	"path/filepath"
 //  "github.com/Tris20/FairFareFinder/src/backend" //types.go
 )
@@ -26,11 +27,23 @@ func main() {
 	backupDatabase(dbPath, outputDir)
 
 	// Initialize the new database and create tables
-	initializeDatabase(dbPath)
+//	initializeDatabase(dbPath)
 
 
 
-  
+
+  // Compile Flights Table
+/*
+  fmt.Printf("Here")
+   cmd := exec.Command("flights/flights", "new_main_db")
+   output, err := cmd.Output()
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Print the output from the flights command
+    fmt.Println(string(output))
+*/
   // fetch flight schedule (every monday )
   // fetch flight prices (every monday )
   // fetch weather (every 6 hours)

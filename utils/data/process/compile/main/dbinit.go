@@ -18,17 +18,18 @@ func initializeDatabase(dbPath string) {
 
 	// Create Locations table
 	createLocationsTable := `
-	CREATE TABLE IF NOT EXISTS location (
-		location_id INTEGER PRIMARY KEY AUTOINCREMENT,
-		city_name VARCHAR(255),
-    country_code CHAR(2),
-    iata TEXT,
-    skyscanner_id VARCHAR(255),
-		airbnb_url VARCHAR(255),
-		booking_url VARCHAR(255),
-		things_to_do TEXT,
-    five_day_wpi DECIMAL(5,2)
-	);`
+  CREATE TABLE IF NOT EXISTS location (
+			city VARCHAR(255) NOT NULL,
+			country CHAR(2) NOT NULL,
+			iata_1 CHAR(3) NOT NULL,
+iata_2 CHAR(3) ,
+iata_3 CHAR(3) ,
+iata_4 CHAR(3) ,
+iata_5 CHAR(3) ,
+iata_6 CHAR(3) ,
+iata_7 CHAR(3) ,
+			avg_wpi FLOAT(10,1)
+		);`
 	_, err = db.Exec(createLocationsTable)
 	if err != nil {
 		log.Fatalf("Failed to create Locations table: %v", err)
@@ -56,18 +57,14 @@ func initializeDatabase(dbPath string) {
 
 	// Create Weather table
 	createWeatherDailyAverageTable := `
-	CREATE TABLE IF NOT EXISTS weather_daily_average (
-		weather_id INTEGER PRIMARY KEY AUTOINCREMENT,
-		city_name VARCHAR(255),
-		country_code CHAR(2),
-		date DATE,
-		weather_type VARCHAR(50),
-		temperature DECIMAL(5,2),
-		weather_icon_url VARCHAR(255),
-		google_weather_link VARCHAR(255),
-		wind_speed DECIMAL(5,2),
-    wpi DECIMAL(5,2)
-	);`
+	CREATE TABLE IF NOT EXISTS weather (
+			city VARCHAR(255) NOT NULL,
+			country CHAR(2) NOT NULL,
+			date DATE NOT NULL,
+			avg_daytime_temp FLOAT(10,1),
+			weather_icon VARCHAR(255),
+			google_url VARCHAR(255),
+			avg_daytime_wpi FLOAT(10,1) 	);`
 	_, err = db.Exec(createWeatherDailyAverageTable)
 	if err != nil {
 		log.Fatalf("Failed to create Weather table: %v", err)
@@ -75,19 +72,22 @@ func initializeDatabase(dbPath string) {
 
 	// Create flight_prices table
 	createFlightPricesTable := `
-CREATE TABLE flight (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    origin_city_name TEXT,
-    origin_iata TEXT,
-    origin_skyscanner_id TEXT,
-    destination_city_name TEXT,
-    destination_iata TEXT,
-    destination_skyscanner_id TEXT,
-    price_this_week DECIMAL,
-    skyscanner_url_this_week VARCHAR(255),
-    price_next_week DECIMAL,
-    skyscanner_url_next_week VARCHAR(255),
-    duration_in_minutes DECIMAL
+CREATE TABLE IF NOT EXISTS "flight" (
+	"id"	INTEGER,
+	"origin_city_name"	TEXT,
+	"origin_country"	TEXT,
+	"origin_iata"	TEXT,
+	"origin_skyscanner_id"	TEXT,
+	"destination_city_name"	TEXT,
+	"destination_country"	TEXT,
+	"destination_iata"	TEXT,
+	"destination_skyscanner_id"	TEXT,
+	"price_this_week"	DECIMAL,
+	"skyscanner_url_this_week"	VARCHAR(255),
+	"price_next_week"	DECIMAL,
+	"skyscanner_url_next_week"	VARCHAR(255),
+	"duration_in_minutes"	DECIMAL,
+	PRIMARY KEY("id" AUTOINCREMENT)
 );
 `
 	_, err = db.Exec(createFlightPricesTable)
