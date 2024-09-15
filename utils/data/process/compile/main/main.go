@@ -1,16 +1,41 @@
+
 package main
 
 import (
- // "fmt"
-	"log"
-	"os"
- //"os/exec"
-	"path/filepath"
-//  "github.com/Tris20/FairFareFinder/src/backend" //types.go
+    "fmt"
+    "log"
+    "os"
+    "os/exec"
+    "path/filepath"
 )
 
+// Helper function to run a command in a specific directory
+func runExecutableInDir(dir string, executable string) {
+    // Change to the specified directory
+    err := os.Chdir(dir)
+    if err != nil {
+        log.Fatalf("Failed to change directory to %s: %v", dir, err)
+    }
+    fmt.Printf("Changed to directory: %s\n", dir)
+
+    // Execute the executable
+    cmd := exec.Command("./" + executable)
+    cmd.Stdout = os.Stdout
+    cmd.Stderr = os.Stderr
+
+    fmt.Printf("Running executable: %s\n", executable)
+    err = cmd.Run()
+    if err != nil {
+        log.Fatalf("Failed to run executable %s in directory %s: %v", executable, dir, err)
+    }
+
+    fmt.Printf("Successfully executed: %s\n", executable)
+}
+
 func main() {
-	// Create /out directory if it does not exist
+
+
+// Create /out directory if it does not exist
 	outputDir := "../../../../../data/compiled/"
 	if _, err := os.Stat(outputDir); os.IsNotExist(err) {
 		err := os.Mkdir(outputDir, 0755)
@@ -25,89 +50,37 @@ func main() {
 
 	// Backup existing database if it exists
 	backupDatabase(dbPath, outputDir)
-
 	// Initialize the new database and create tables
-//	initializeDatabase(dbPath)
+	initializeDatabase(dbPath)
 
-
-
-
-  // Compile Flights Table
-/*
-  fmt.Printf("Here")
-   cmd := exec.Command("flights/flights", "new_main_db")
-   output, err := cmd.Output()
+    // Get the current directory of the script
+    // Get the current directory of the script
+    baseDir, err := os.Getwd()
     if err != nil {
-        log.Fatal(err)
+        log.Fatalf("Failed to get current working directory: %v", err)
     }
 
-    // Print the output from the flights command
-    fmt.Println(string(output))
-*/
-  // fetch flight schedule (every monday )
-  // fetch flight prices (every monday )
-  // fetch weather (every 6 hours)
-  
+    // Define the relative path to go up three directories
+    relativeBase := filepath.Join(baseDir, "../../../")
 
-  
-  // compile daily_weather table
+    // List of relative directories and executables
+    tasks := []struct {
+        dir        string
+        executable string
+    }{
+       // {filepath.Join(relativeBase, "fetch/flights/schedule"), "aerodatabox"},
+      //  {filepath.Join(relativeBase, "fetch/flights/prices"), "prices"},
+        //{filepath.Join(relativeBase, "fetch/weather"), "update-weather-db"},
+        {filepath.Join(relativeBase, "process/calculate/weather"), "weather"},
+        {filepath.Join(relativeBase, "process/compile/main/flights"), "flights"},
+        {filepath.Join(relativeBase, "process/compile/main/weather"), "weather"},
+        {filepath.Join(relativeBase, "process/compile/main/locations"), "locations"},
+    }
 
-  // compile average_daily_weather table 
+    // Loop through each task and execute it
+    for _, task := range tasks {
+        runExecutableInDir(task.dir, task.executable)
+    }
 
-  // compile location table
-
-  // compile flight table
-
-
-
-  /* NOTE:
-   Functions below probably belong in the weather fetcher script. that weather data should then be compiled, including wpi calculatation by a compiler in the compile/weather folder
-
-  */
-  /*
-	// Fetch weather data from source database
-	weatherData, err := FetchWeatherData(sourceDBPath)
-	if err != nil {
-		log.Fatalf("Failed to fetch weather data: %v", err)
-	}
-
-
-	// Insert weather data into destination database
-fmt.Println("Populating weather_detailed table")
-	err = InsertWeatherData("weather_detailed", dbPath, weatherData)
-	if err != nil {
-		log.Fatalf("Failed to insert weather data: %v", err)
-	}
-
-	// Prepare unique locations
-	uniqueLocations, err := PrepareLocationData(weatherData)
-	if err != nil {
-		log.Fatalf("Failed to prepare unique locations: %v", err)
-	}
-
-  // Collect daily average weather records
-	dailyAverageWeatherRecords, err := CollectDailyAverageWeather(weatherData)
-	if err != nil {
-		log.Fatalf("Failed to collect daily average weather: %v", err)
-	}
-
-  // Create and Populate the Daily Average Table
-fmt.Println("Populating weather_daily_average table")
-	err = InsertWeatherData("weather_daily_average", dbPath, dailyAverageWeatherRecords)
-	if err != nil {
-		log.Fatalf("Failed to insert weather data: %v", err)
-	}
-
-
-
-fmt.Println("Inserting Locations")
-	// Insert location data into destination database
-	err = InsertLocationData(dbPath, uniqueLocations)
-	if err != nil {
-		log.Fatalf("Failed to insert location data: %v", err)
-	}
-
-	log.Println("Weather and location data successfully transferred.")
-  */
-}
-
+    fmt.Println("All tasks executed successfully.")
+  }
