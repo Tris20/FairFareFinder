@@ -1,0 +1,25 @@
+{{ if . }}
+<table border="1">
+    <thead>
+        <tr>
+            <th>Destination City</th>
+            <th>Country</th>
+            <th>Price This Week</th>
+            <th>Duration (Minutes)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{range .}}
+        <tr>
+            <td>{{.DestinationCityName}}</td>
+            <td>{{.DestinationCountry}}</td>
+            <td>{{.PriceThisWeek}}</td>
+            <td>{{.DurationInMinutes}}</td>
+        </tr>
+        {{end}}
+    </tbody>
+</table>
+{{ else }}
+<p>No flights found for the selected cities.</p>
+{{ end }}
+
