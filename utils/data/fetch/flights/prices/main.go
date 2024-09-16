@@ -186,13 +186,13 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 	}
 
 	// Update if entry exists
-	updateStmt, err := db.Prepare("UPDATE skyscannerprices SET next_weekend = ? WHERE origin = ? AND destination = ?")
+	updateStmt, err := db.Prepare("UPDATE skyscannerprices SET next_weekend = ? WHERE origin_skyscanner_id = ? AND destination_skyscanner_id = ?")
 	if err != nil {
 		log.Fatalf("Failed to prepare update statement: %v", err)
 	}
 	defer updateStmt.Close()
 	// Create if entry for dest AND origin does not exist
-	insertStmt, err := db.Prepare("INSERT INTO skyscannerprices (origin_iata, origin, destination_iata, destination, next_weekend) VALUES (?, ?, ?, ?, ?)")
+	insertStmt, err := db.Prepare("INSERT INTO skyscannerprices (origin_city, origin_country, origin_iata, origin_skyscanner_id, destination_city, destination_country, destination_iata, destination_skyscanner_id, next_weekend) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
 		log.Fatalf("Failed to prepare insert statement: %v", err)
 	}
@@ -236,8 +236,8 @@ bar.Add(1) // Increment progress bar even on error
 
 			// If no rows were updated, insert a new row
 			if rowsAffected == 0 {
-      _, err = insertStmt.Exec(
-        origin.IATA, origin.SkyScannerID, destination.IATA, destination.SkyScannerID, price)
+      _, err = insertStmt.Exec(origin.City, origin.Country,
+        origin.IATA, origin.SkyScannerID, destination.City, destination.Country, destination.IATA, destination.SkyScannerID, price)
       if err != nil {
 					log.Printf("Failed to insert price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
 				} else {
