@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Table</title>
+
+    <!-- Link to the CSS files located in the 'css' folder -->
+    <link rel="stylesheet" href="/css/htmxFilter.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/tableStyles.css">
+
     <script src="https://unpkg.com/htmx.org"></script>
 </head>
 <body>
@@ -40,12 +46,10 @@
         <br><br>
 
         <label for="combinedPrice-slider">Max Combined Price:</label>
-        <!-- Linear slider (0-100), value will be transformed on the backend -->
         <input type="range" id="combinedPrice-slider" name="maxPriceLinear" min="0" max="100" step="1" value="50" 
             hx-get="/update-slider-price" 
             hx-target="#priceOutput" 
             hx-trigger="input">
-        <!-- Display the exponential price here -->
         <output id="priceOutput">300.00</output>
 
         <br><br>
