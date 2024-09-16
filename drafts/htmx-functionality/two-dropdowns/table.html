@@ -6,14 +6,16 @@
             <th>Destination City</th>
             <th>Price This Week from {{.SelectedCity1}}</th>
             <th>Price This Week from {{.SelectedCity2}}</th>
+            <th>Combined Price</th>
         </tr>
     </thead>
     <tbody>
         {{range .Flights}}
         <tr>
             <td>{{.DestinationCityName}}</td>
-            <td>{{if .PriceCity1.Valid}}{{.PriceCity1.Float64}}{{else}}N/A{{end}}</td>
-            <td>{{if .PriceCity2.Valid}}{{.PriceCity2.Float64}}{{else}}N/A{{end}}</td>
+            <td>{{if .PriceCity1.Valid}}{{printf "%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}</td>
+            <td>{{if .PriceCity2.Valid}}{{printf "%.2f" .PriceCity2.Float64}}{{else}}N/A{{end}}</td>
+            <td>{{if .CombinedPrice.Valid}}{{printf "%.2f" .CombinedPrice.Float64}}{{else}}N/A{{end}}</td>
         </tr>
         {{end}}
     </tbody>

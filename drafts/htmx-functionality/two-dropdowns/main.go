@@ -11,11 +11,14 @@ import (
 	_ "github.com/mattn/go-sqlite3" // Import SQLite driver
 )
 
+
 type Flight struct {
 	DestinationCityName string
 	PriceCity1          sql.NullFloat64
 	PriceCity2          sql.NullFloat64
+	CombinedPrice       sql.NullFloat64
 }
+
 
 type FlightsData struct {
 	SelectedCity1 string
@@ -78,6 +81,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 
+
 func filterHandler(w http.ResponseWriter, r *http.Request) {
 	city1 := r.URL.Query().Get("city1")
 	city2 := r.URL.Query().Get("city2")
@@ -95,31 +99,35 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 	var err error
 
 	if selectedCity1 != "" && selectedCity2 != "" {
-		// Query to get destinations with the lowest price from both cities
+		// Query to get destinations with the lowest price from both cities and compute combined price
 		query = `
-			SELECT f1.destination_city_name, MIN(f1.price_this_week), MIN(f2.price_this_week)
+			SELECT f1.destination_city_name, MIN(f1.price_this_week), MIN(f2.price_this_week), 
+			(MIN(f1.price_this_week) + MIN(f2.price_this_week)) AS combined_price
 			FROM flight f1
 			INNER JOIN flight f2 ON f1.destination_city_name = f2.destination_city_name
 			WHERE f1.origin_city_name = ? AND f2.origin_city_name = ?
-			GROUP BY f1.destination_city_name`
+			GROUP BY f1.destination_city_name
+			ORDER BY combined_price ASC`
 		rows, err = db.Query(query, selectedCity1, selectedCity2)
 		fmt.Println("Query for both cities:", selectedCity1, selectedCity2)
 	} else if selectedCity1 != "" {
 		// If only city1 is selected, show the lowest price for flights from that city
 		query = `
-			SELECT destination_city_name, MIN(price_this_week), NULL
+			SELECT destination_city_name, MIN(price_this_week), NULL, MIN(price_this_week)
 			FROM flight
 			WHERE origin_city_name = ?
-			GROUP BY destination_city_name`
+			GROUP BY destination_city_name
+			ORDER BY MIN(price_this_week) ASC`
 		rows, err = db.Query(query, selectedCity1)
 		fmt.Println("Query for single city:", selectedCity1)
 	} else if selectedCity2 != "" {
 		// If only city2 is selected, show the lowest price for flights from that city
 		query = `
-			SELECT destination_city_name, NULL, MIN(price_this_week)
+			SELECT destination_city_name, NULL, MIN(price_this_week), MIN(price_this_week)
 			FROM flight
 			WHERE origin_city_name = ?
-			GROUP BY destination_city_name`
+			GROUP BY destination_city_name
+			ORDER BY MIN(price_this_week) ASC`
 		rows, err = db.Query(query, selectedCity2)
 		fmt.Println("Query for single city:", selectedCity2)
 	}
@@ -134,7 +142,7 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 	var flights []Flight
 	for rows.Next() {
 		var flight Flight
-		err := rows.Scan(&flight.DestinationCityName, &flight.PriceCity1, &flight.PriceCity2)
+		err := rows.Scan(&flight.DestinationCityName, &flight.PriceCity1, &flight.PriceCity2, &flight.CombinedPrice)
 		if err != nil {
 			fmt.Println("Error scanning row:", err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
