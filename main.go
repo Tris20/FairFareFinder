@@ -9,7 +9,7 @@ import (
 	"github.com/Tris20/FairFareFinder/src/backend/server"
 	"github.com/Tris20/FairFareFinder/utils/time-and-date"
 	"github.com/Tris20/FairFareFinder/utils/data/process/generate/urls"
-	"github.com/Tris20/FairFareFinder/utils/data/process/calculate/weather"
+	"github.com/Tris20/FairFareFinder/utils/data/process/calculate/weather/depreciated"
 	"github.com/Tris20/FairFareFinder/src/backend/web_pages/html_generators"
 	"log"
 	"math"
