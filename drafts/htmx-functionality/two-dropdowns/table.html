@@ -1,20 +1,19 @@
-{{ if . }}
+
+{{ if .Flights }}
 <table border="1">
     <thead>
         <tr>
             <th>Destination City</th>
-            <th>Country</th>
-            <th>Price This Week</th>
-            <th>Duration (Minutes)</th>
+            <th>Price This Week from {{.SelectedCity1}}</th>
+            <th>Price This Week from {{.SelectedCity2}}</th>
         </tr>
     </thead>
     <tbody>
-        {{range .}}
+        {{range .Flights}}
         <tr>
             <td>{{.DestinationCityName}}</td>
-            <td>{{.DestinationCountry}}</td>
-            <td>{{.PriceThisWeek}}</td>
-            <td>{{.DurationInMinutes}}</td>
+            <td>{{if .PriceCity1.Valid}}{{.PriceCity1.Float64}}{{else}}N/A{{end}}</td>
+            <td>{{if .PriceCity2.Valid}}{{.PriceCity2.Float64}}{{else}}N/A{{end}}</td>
         </tr>
         {{end}}
     </tbody>
