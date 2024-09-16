@@ -12,18 +12,21 @@ import (
 )
 
 type Flight struct {
-	OriginCityName      string
-	OriginCountry       string
 	DestinationCityName string
-	DestinationCountry  string
-	PriceThisWeek       float64
-	DurationInMinutes   sql.NullFloat64
+	PriceCity1          sql.NullFloat64
+	PriceCity2          sql.NullFloat64
+}
+
+type FlightsData struct {
+	SelectedCity1 string
+	SelectedCity2 string
+	Flights       []Flight
 }
 
 var tmpl *template.Template
 var db *sql.DB
 
-// Store the selected city values in memory (per session or globally)
+// Global variables to store selected cities
 var selectedCity1 string
 var selectedCity2 string
 
@@ -74,57 +77,55 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+
 func filterHandler(w http.ResponseWriter, r *http.Request) {
-	// Read the cities from the query parameters
-	newCity1 := r.URL.Query().Get("city1")
-	newCity2 := r.URL.Query().Get("city2")
+	city1 := r.URL.Query().Get("city1")
+	city2 := r.URL.Query().Get("city2")
 
-	// Update the selected cities in memory
-	if newCity1 != "" {
-		selectedCity1 = newCity1
+	// Update global variables based on what was selected
+	if city1 != "" {
+		selectedCity1 = city1
 	}
-	if newCity2 != "" {
-		selectedCity2 = newCity2
+	if city2 != "" {
+		selectedCity2 = city2
 	}
-
-	// Debugging: Log the current selected cities
-	fmt.Println("Selected cities:", selectedCity1, selectedCity2)
 
 	var query string
 	var rows *sql.Rows
 	var err error
 
-	// Handle different cases of selected cities
-	switch {
-	case selectedCity1 != "" && selectedCity2 != "":
-		// Query for flights from both cities where destination is common
+	if selectedCity1 != "" && selectedCity2 != "" {
+		// Query to get destinations with the lowest price from both cities
 		query = `
-			SELECT f1.destination_city_name, f1.destination_country, f1.price_this_week, f1.duration_in_minutes
+			SELECT f1.destination_city_name, MIN(f1.price_this_week), MIN(f2.price_this_week)
 			FROM flight f1
 			INNER JOIN flight f2 ON f1.destination_city_name = f2.destination_city_name
 			WHERE f1.origin_city_name = ? AND f2.origin_city_name = ?
 			GROUP BY f1.destination_city_name`
 		rows, err = db.Query(query, selectedCity1, selectedCity2)
-	case selectedCity1 != "":
-		// Query for flights from city1 only
+		fmt.Println("Query for both cities:", selectedCity1, selectedCity2)
+	} else if selectedCity1 != "" {
+		// If only city1 is selected, show the lowest price for flights from that city
 		query = `
-			SELECT destination_city_name, destination_country, price_this_week, duration_in_minutes
+			SELECT destination_city_name, MIN(price_this_week), NULL
 			FROM flight
-			WHERE origin_city_name = ?`
+			WHERE origin_city_name = ?
+			GROUP BY destination_city_name`
 		rows, err = db.Query(query, selectedCity1)
-	case selectedCity2 != "":
-		// Query for flights from city2 only
+		fmt.Println("Query for single city:", selectedCity1)
+	} else if selectedCity2 != "" {
+		// If only city2 is selected, show the lowest price for flights from that city
 		query = `
-			SELECT destination_city_name, destination_country, price_this_week, duration_in_minutes
+			SELECT destination_city_name, NULL, MIN(price_this_week)
 			FROM flight
-			WHERE origin_city_name = ?`
+			WHERE origin_city_name = ?
+			GROUP BY destination_city_name`
 		rows, err = db.Query(query, selectedCity2)
-	default:
-		http.Error(w, "No city selected", http.StatusBadRequest)
-		return
+		fmt.Println("Query for single city:", selectedCity2)
 	}
 
 	if err != nil {
+		fmt.Println("Error executing query:", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -133,17 +134,32 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 	var flights []Flight
 	for rows.Next() {
 		var flight Flight
-		err := rows.Scan(&flight.DestinationCityName, &flight.DestinationCountry, &flight.PriceThisWeek, &flight.DurationInMinutes)
+		err := rows.Scan(&flight.DestinationCityName, &flight.PriceCity1, &flight.PriceCity2)
 		if err != nil {
+			fmt.Println("Error scanning row:", err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		flights = append(flights, flight)
 	}
 
-	// Render the table with the filtered flight results
-	err = tmpl.ExecuteTemplate(w, "table.html", flights)
+	if len(flights) == 0 {
+		fmt.Println("No flights found for cities:", selectedCity1, selectedCity2)
+	} else {
+		fmt.Println("Flights found:", flights)
+	}
+
+	// Prepare the data to be sent to the template
+	data := FlightsData{
+		SelectedCity1: selectedCity1,
+		SelectedCity2: selectedCity2,
+		Flights:       flights,
+	}
+
+	// Render the partial table template with the filtered flight results
+	err = tmpl.ExecuteTemplate(w, "table.html", data)
 	if err != nil {
+		fmt.Println("Error rendering template:", err)
 		http.Error(w, "Error rendering results", http.StatusInternalServerError)
 	}
 }
