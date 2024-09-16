@@ -86,9 +86,11 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 
 
+
 func filterHandler(w http.ResponseWriter, r *http.Request) {
 	city1 := r.URL.Query().Get("city1")
 	city2 := r.URL.Query().Get("city2")
+	sortOption := r.URL.Query().Get("sort")
 
 	// Update global variables based on what was selected
 	if city1 != "" {
@@ -96,6 +98,21 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	if city2 != "" {
 		selectedCity2 = city2
+	}
+
+	// Default sorting: lowest to highest combined price
+	orderClause := "ORDER BY combined_price ASC"
+
+	// Adjust the SQL sorting based on the selected sort option
+	switch sortOption {
+	case "low_price":
+		orderClause = "ORDER BY combined_price ASC"
+	case "high_price":
+		orderClause = "ORDER BY combined_price DESC"
+	case "best_weather":
+		orderClause = "ORDER BY l.avg_wpi DESC"
+	case "worst_weather":
+		orderClause = "ORDER BY l.avg_wpi ASC"
 	}
 
 	var query string
@@ -112,7 +129,7 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 			INNER JOIN location l ON f1.destination_city_name = l.city
 			WHERE f1.origin_city_name = ? AND f2.origin_city_name = ?
 			GROUP BY f1.destination_city_name
-			ORDER BY l.avg_wpi DESC`
+			` + orderClause
 		rows, err = db.Query(query, selectedCity1, selectedCity2)
 		fmt.Println("Query for both cities:", selectedCity1, selectedCity2)
 	} else if selectedCity1 != "" {
@@ -123,7 +140,7 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 			INNER JOIN location l ON f.destination_city_name = l.city
 			WHERE f.origin_city_name = ?
 			GROUP BY f.destination_city_name
-			ORDER BY l.avg_wpi DESC`
+			` + orderClause
 		rows, err = db.Query(query, selectedCity1)
 		fmt.Println("Query for single city:", selectedCity1)
 	} else if selectedCity2 != "" {
@@ -134,7 +151,7 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 			INNER JOIN location l ON f.destination_city_name = l.city
 			WHERE f.origin_city_name = ?
 			GROUP BY f.destination_city_name
-			ORDER BY l.avg_wpi DESC`
+			` + orderClause
 		rows, err = db.Query(query, selectedCity2)
 		fmt.Println("Query for single city:", selectedCity2)
 	}

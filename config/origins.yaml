@@ -26,3 +26,13 @@ origins:
     ArrivalEndDate: "2024-03-26"
     SkyScannerID: "eyJzIjoiRURJIiwiZSI6Ijk1NjczNjY4IiwiaCI6IjI3NTQwODUxIn0="
 
+  - IATA: "MUC"
+    City: "Munich"
+    Country: "Germany"
+    DepartureStartDate: "2024-03-20"
+    DepartureEndDate: "2024-03-22"
+    ArrivalStartDate: "2024-03-24"
+    ArrivalEndDate: "2024-03-26"
+    SkyScannerID: "eyJzIjoiTVVDIiwiZSI6Ijk1NjczNDkxIiwiaCI6IjI3NTQ1MDM0In0="
+
+
