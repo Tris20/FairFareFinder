@@ -11,13 +11,17 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+
 type Flight struct {
-	DestinationCityName string
-	PriceCity1          sql.NullFloat64
-	PriceCity2          sql.NullFloat64
-	CombinedPrice       sql.NullFloat64
-	AvgWpi              sql.NullFloat64
+    DestinationCityName  string
+    PriceCity1           sql.NullFloat64
+    PriceCity2           sql.NullFloat64
+    CombinedPrice        sql.NullFloat64
+    UrlCity1             string
+    UrlCity2             string
+    AvgWpi               sql.NullFloat64
 }
+
 
 type FlightsData struct {
 	SelectedCity1 string
@@ -94,15 +98,28 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 		orderClause = "ORDER BY avg_wpi ASC"
 	}
 
-	query := `
-	SELECT f1.destination_city_name, MIN(f1.price_this_week), MIN(f2.price_this_week),
-	(MIN(f1.price_this_week) + MIN(f2.price_this_week)) AS combined_price, l.avg_wpi
-	FROM flight f1
-	INNER JOIN flight f2 ON f1.destination_city_name = f2.destination_city_name
-	INNER JOIN location l ON f1.destination_city_name = l.city
-	WHERE f1.origin_city_name = ? AND f2.origin_city_name = ?
-	GROUP BY f1.destination_city_name
-	` + orderClause
+
+query := `
+SELECT 
+    f1.destination_city_name, 
+    MIN(f1.price_this_week) AS price_city1, 
+    MIN(f2.price_this_week) AS price_city2,
+    (MIN(f1.price_this_week) + MIN(f2.price_this_week)) AS combined_price, 
+    MIN(f1.skyscanner_url_this_week) AS url_city1, 
+    MIN(f2.skyscanner_url_this_week) AS url_city2, 
+    l.avg_wpi
+FROM 
+    flight f1
+JOIN 
+    flight f2 ON f1.destination_city_name = f2.destination_city_name
+JOIN 
+    location l ON f1.destination_city_name = l.city
+WHERE 
+    f1.origin_city_name = ? AND f2.origin_city_name = ?
+GROUP BY 
+    f1.destination_city_name
+` + orderClause
+
 	rows, err := db.Query(query, city1, city2)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -111,14 +128,24 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 	defer rows.Close()
 
 	var flights []Flight
-	for rows.Next() {
-		var flight Flight
-		if err := rows.Scan(&flight.DestinationCityName, &flight.PriceCity1, &flight.PriceCity2, &flight.CombinedPrice, &flight.AvgWpi); err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		flights = append(flights, flight)
-	}
+	
+for rows.Next() {
+    var flight Flight
+    if err := rows.Scan(
+        &flight.DestinationCityName,
+        &flight.PriceCity1,
+        &flight.PriceCity2,
+        &flight.CombinedPrice,
+        &flight.UrlCity1,
+        &flight.UrlCity2,
+        &flight.AvgWpi,
+    ); err != nil {
+        log.Printf("Error scanning row: %v", err)
+        http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+        return
+    }
+    flights = append(flights, flight)
+}
 
 	data := FlightsData{
 		SelectedCity1: city1,

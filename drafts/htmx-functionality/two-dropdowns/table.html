@@ -1,3 +1,4 @@
+
 {{ if .Flights }}
 <table border="1">
     <thead>
@@ -13,8 +14,9 @@
         {{range .Flights}}
         <tr>
             <td>{{.DestinationCityName}}</td>
-            <td>{{if .PriceCity1.Valid}}{{printf "%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}</td>
-            <td>{{if .PriceCity2.Valid}}{{printf "%.2f" .PriceCity2.Float64}}{{else}}N/A{{end}}</td>
+          
+<td><a href="{{.UrlCity1}}" target="_blank">{{if .PriceCity1.Valid}}{{printf "%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}</a></td>
+<td><a href="{{.UrlCity2}}" target="_blank">{{if .PriceCity2.Valid}}{{printf "%.2f" .PriceCity2.Float64}}{{else}}N/A{{end}}</a></td>
             <td>{{if .CombinedPrice.Valid}}{{printf "%.2f" .CombinedPrice.Float64}}{{else}}N/A{{end}}</td>
             <td>{{if .AvgWpi.Valid}}{{printf "%.1f" .AvgWpi.Float64}}{{else}}N/A{{end}}</td>
         </tr>
