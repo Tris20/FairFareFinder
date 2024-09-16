@@ -48,9 +48,10 @@ func main() {
 
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/filter", filterHandler)
-
   http.HandleFunc("/update-slider-price", updateSliderPriceHandler)
-	
+  http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./css"))))
+
+
   log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
