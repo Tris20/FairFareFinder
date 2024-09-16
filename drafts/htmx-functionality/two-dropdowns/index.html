@@ -28,6 +28,17 @@
         {{end}}
     </select>
 
+    <br><br>
+
+    <!-- New Dropdown for Sorting Options -->
+    <label for="sort">Sort By:</label>
+    <select id="sort" name="sort" hx-get="/filter" hx-target="#flight-table" hx-trigger="change">
+        <option value="low_price">Lowest to Highest Price</option>
+        <option value="high_price">Highest to Lowest Price</option>
+        <option value="best_weather">Best to Worst Weather (Avg WPI)</option>
+        <option value="worst_weather">Worst to Best Weather (Avg WPI)</option>
+    </select>
+
     <div id="flight-table">
         <!-- The table will be dynamically updated here -->
     </div>
