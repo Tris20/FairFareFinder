@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,25 +9,22 @@
 </head>
 <body>
     <h1>Common Flight Destinations</h1>
-    <!-- Single form setup with HTMX listening to changes from any dropdown -->
-    <form id="flight-form" hx-get="/filter" hx-target="#flight-table" hx-trigger="change" hx-include="select[name='city1'], select[name='city2'], select[name='sort']">
+    <form id="flight-form" hx-get="/filter" hx-target="#flight-table" hx-trigger="change delay:50ms">
         <label for="city1">Select First Origin City:</label>
-        <select id="city1" name="city1">
-            <option value="">-- Select a city --</option>
-            {{range .}}
-            <option value="{{.}}">{{.}}</option>
-            {{end}}
-        </select>
+        
+<select id="city1" name="city1">
+    <option value="">-- Select a city --</option>
+    {{range .Cities}}
+    <option value="{{.}}">{{.}}</option>
+    {{end}}
+</select>
 
-        <br><br>
-
-        <label for="city2">Select Second Origin City:</label>
-        <select id="city2" name="city2">
-            <option value="">-- Select a city --</option>
-            {{range .}}
-            <option value="{{.}}">{{.}}</option>
-            {{end}}
-        </select>
+<select id="city2" name="city2">
+    <option value="">-- Select a city --</option>
+    {{range .Cities}}
+    <option value="{{.}}">{{.}}</option>
+    {{end}}
+</select>
 
         <br><br>
 
@@ -40,6 +36,15 @@
             <option value="best_weather">Best to Worst Weather (Avg WPI)</option>
             <option value="worst_weather">Worst to Best Weather (Avg WPI)</option>
         </select>
+
+        <br><br>
+
+        <label for="wpi-slider">Minimum WPI:</label>
+        <input type="range" id="wpi-slider" name="wpi" min="1.0" max="10.0" step="0.1" value="6.0" 
+            oninput="document.getElementById('wpiOutput').value = parseFloat(this.value).toFixed(1)">
+        <output id="wpiOutput">7.0</output>
+
+        <br><br>
     </form>
 
     <div id="flight-table">
