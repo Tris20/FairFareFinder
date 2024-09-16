@@ -1,48 +1,50 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Table</title>
-    <script src="https://unpkg.com/htmx.org@1.5.0"></script>
+    <script src="https://unpkg.com/htmx.org"></script>
 </head>
 <body>
     <h1>Common Flight Destinations</h1>
+    <!-- Single form setup with HTMX listening to changes from any dropdown -->
+    <form id="flight-form" hx-get="/filter" hx-target="#flight-table" hx-trigger="change" hx-include="select[name='city1'], select[name='city2'], select[name='sort']">
+        <label for="city1">Select First Origin City:</label>
+        <select id="city1" name="city1">
+            <option value="">-- Select a city --</option>
+            {{range .}}
+            <option value="{{.}}">{{.}}</option>
+            {{end}}
+        </select>
 
-    <label for="city1">Select First Origin City:</label>
-    <select id="city1" name="city1" hx-get="/filter" hx-target="#flight-table" hx-trigger="change">
-        <option value="">-- Select a city --</option>
-        {{range .}}
-        <option value="{{.}}">{{.}}</option>
-        {{end}}
-    </select>
+        <br><br>
 
-    <br><br>
+        <label for="city2">Select Second Origin City:</label>
+        <select id="city2" name="city2">
+            <option value="">-- Select a city --</option>
+            {{range .}}
+            <option value="{{.}}">{{.}}</option>
+            {{end}}
+        </select>
 
-    <label for="city2">Select Second Origin City:</label>
-    <select id="city2" name="city2" hx-get="/filter" hx-target="#flight-table" hx-trigger="change">
-        <option value="">-- Select a city --</option>
-        {{range .}}
-        <option value="{{.}}">{{.}}</option>
-        {{end}}
-    </select>
+        <br><br>
 
-    <br><br>
-
-    <!-- New Dropdown for Sorting Options -->
-    <label for="sort">Sort By:</label>
-    <select id="sort" name="sort" hx-get="/filter" hx-target="#flight-table" hx-trigger="change">
-        <option value="low_price">Lowest to Highest Price</option>
-        <option value="high_price">Highest to Lowest Price</option>
-        <option value="best_weather">Best to Worst Weather (Avg WPI)</option>
-        <option value="worst_weather">Worst to Best Weather (Avg WPI)</option>
-    </select>
+        <label for="sort">Sort By:</label>
+        <select id="sort" name="sort">
+            <option value="">-- Select sorting option --</option>
+            <option value="low_price">Lowest to Highest Price</option>
+            <option value="high_price">Highest to Lowest Price</option>
+            <option value="best_weather">Best to Worst Weather (Avg WPI)</option>
+            <option value="worst_weather">Worst to Best Weather (Avg WPI)</option>
+        </select>
+    </form>
 
     <div id="flight-table">
         <!-- The table will be dynamically updated here -->
     </div>
-
 </body>
 </html>
 
