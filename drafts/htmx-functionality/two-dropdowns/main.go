@@ -12,12 +12,15 @@ import (
 )
 
 
+
 type Flight struct {
 	DestinationCityName string
 	PriceCity1          sql.NullFloat64
 	PriceCity2          sql.NullFloat64
 	CombinedPrice       sql.NullFloat64
+	AvgWpi              sql.NullFloat64
 }
+
 
 
 type FlightsData struct {
@@ -82,6 +85,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 
 
+
 func filterHandler(w http.ResponseWriter, r *http.Request) {
 	city1 := r.URL.Query().Get("city1")
 	city2 := r.URL.Query().Get("city2")
@@ -99,35 +103,38 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 	var err error
 
 	if selectedCity1 != "" && selectedCity2 != "" {
-		// Query to get destinations with the lowest price from both cities and compute combined price
+		// Query to get destinations with the lowest price from both cities, avg_wpi from the location table, and combined price
 		query = `
-			SELECT f1.destination_city_name, MIN(f1.price_this_week), MIN(f2.price_this_week), 
-			(MIN(f1.price_this_week) + MIN(f2.price_this_week)) AS combined_price
+			SELECT f1.destination_city_name, MIN(f1.price_this_week), MIN(f2.price_this_week),
+			(MIN(f1.price_this_week) + MIN(f2.price_this_week)) AS combined_price, l.avg_wpi
 			FROM flight f1
 			INNER JOIN flight f2 ON f1.destination_city_name = f2.destination_city_name
+			INNER JOIN location l ON f1.destination_city_name = l.city
 			WHERE f1.origin_city_name = ? AND f2.origin_city_name = ?
 			GROUP BY f1.destination_city_name
-			ORDER BY combined_price ASC`
+			ORDER BY l.avg_wpi DESC`
 		rows, err = db.Query(query, selectedCity1, selectedCity2)
 		fmt.Println("Query for both cities:", selectedCity1, selectedCity2)
 	} else if selectedCity1 != "" {
-		// If only city1 is selected, show the lowest price for flights from that city
+		// If only city1 is selected, show the lowest price for flights from that city and avg_wpi from location
 		query = `
-			SELECT destination_city_name, MIN(price_this_week), NULL, MIN(price_this_week)
-			FROM flight
-			WHERE origin_city_name = ?
-			GROUP BY destination_city_name
-			ORDER BY MIN(price_this_week) ASC`
+			SELECT f.destination_city_name, MIN(f.price_this_week), NULL, MIN(f.price_this_week), l.avg_wpi
+			FROM flight f
+			INNER JOIN location l ON f.destination_city_name = l.city
+			WHERE f.origin_city_name = ?
+			GROUP BY f.destination_city_name
+			ORDER BY l.avg_wpi DESC`
 		rows, err = db.Query(query, selectedCity1)
 		fmt.Println("Query for single city:", selectedCity1)
 	} else if selectedCity2 != "" {
-		// If only city2 is selected, show the lowest price for flights from that city
+		// If only city2 is selected, show the lowest price for flights from that city and avg_wpi from location
 		query = `
-			SELECT destination_city_name, NULL, MIN(price_this_week), MIN(price_this_week)
-			FROM flight
-			WHERE origin_city_name = ?
-			GROUP BY destination_city_name
-			ORDER BY MIN(price_this_week) ASC`
+			SELECT f.destination_city_name, NULL, MIN(f.price_this_week), MIN(f.price_this_week), l.avg_wpi
+			FROM flight f
+			INNER JOIN location l ON f.destination_city_name = l.city
+			WHERE f.origin_city_name = ?
+			GROUP BY f.destination_city_name
+			ORDER BY l.avg_wpi DESC`
 		rows, err = db.Query(query, selectedCity2)
 		fmt.Println("Query for single city:", selectedCity2)
 	}
@@ -142,7 +149,7 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 	var flights []Flight
 	for rows.Next() {
 		var flight Flight
-		err := rows.Scan(&flight.DestinationCityName, &flight.PriceCity1, &flight.PriceCity2, &flight.CombinedPrice)
+		err := rows.Scan(&flight.DestinationCityName, &flight.PriceCity1, &flight.PriceCity2, &flight.CombinedPrice, &flight.AvgWpi)
 		if err != nil {
 			fmt.Println("Error scanning row:", err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
