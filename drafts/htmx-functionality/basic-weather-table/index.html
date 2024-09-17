@@ -31,7 +31,6 @@
         <form id="flight-form" hx-get="/filter" hx-target="#flight-table" hx-trigger="change, input delay:50ms">
             <label for="city1">Origin City:</label>
             <select id="city1" name="city1">
-                <option value="">-- Select a city --</option>
                 <option value="Berlin">Berlin</option>
                 <option value="Glasgow">Glasgow</option>
                 <option value="Edinburgh">Edinburgh</option>
@@ -39,12 +38,24 @@
 
             <label for="sort">Sort By:</label>
             <select id="sort" name="sort">
-                <option value="">-- Select sorting option --</option>
-                <option value="low_price">Most Affordable</option>
-                <option value="high_price">Most Expensive</option>
                 <option value="best_weather">Sunniest and Warmest</option>
                 <option value="worst_weather">Coldest and Wettest</option>
-            </select>
+              <option value="low_price">Most Affordable</option>
+                <option value="high_price">Most Expensive</option>
+           </select>
+
+                     
+            <label for="combinedPrice-slider">Budget</label>
+            <input type="range" id="combinedPrice-slider" name="maxPriceLinear" min="0" max="100" step="1" value="50" 
+                   hx-get="/update-slider-price" 
+                   hx-target="#priceOutput" 
+                   hx-trigger="input">
+            <output id="priceOutput">€300.00</output>
+            <!--
+
+   <label for="wpi-slider">Weather </label>
+            <input type="range" id="wpi-slider" name="wpi" min="1.0" max="10.0" step="0.1" value="6.0" 
+                   oninput="document.getElementById('wpiOutput').value = parseFloat(this.value).toFixed(1)">
 
             <br><br>
 
@@ -63,6 +74,7 @@
             <output id="wpiOutput">7.0</output>
 
             <br><br>
+            -->
         </form>
 
         <div id="flight-table">
@@ -76,13 +88,26 @@
         document.addEventListener('DOMContentLoaded', function() {
             // After the fade-out animation ends, hide the website-name and show the table
             setTimeout(function() {
-                // Hide the website name
-                document.getElementById('website-name').style.display = 'none';
+
+              document.getElementById('website-name').style.display = 'none';
 
                 // Show the table content with the fade-in animation and move it up
-                document.getElementById('table-container').classList.add('show');
+                const tableContainer = document.getElementById('table-container');
+                tableContainer.classList.add('show');
 
-                // Show the background image with a fade-in effect
+                // When the animation ends, load the table content with default values
+                tableContainer.addEventListener('transitionend', function(event) {
+                    if (event.propertyName === 'transform') {
+                        // Manually trigger an HTMX request with default values for the form inputs
+                        const city = document.querySelector('#city1').value || 'Berlin';  // Default value
+                        const sort = document.querySelector('#sort').value || 'best_weather';  // Default value
+                        const wpi = document.querySelector('#wpi-slider').value || '1.0';  // Default value
+                        const maxPriceLinear = document.querySelector('#combinedPrice-slider').value || '300';  // Default value
+
+                        // Trigger the HTMX request to load the table with default inputs
+                        htmx.ajax('GET', `/filter?city1=${city}&sort=${sort}&wpi=${wpi}&maxPriceLinear=${maxPriceLinear}`, '#flight-table');
+                    }
+                });                // Show the background image with a fade-in effect
                 document.getElementById('bg-image-dreams').style.opacity = '1';
             }, 2000); // Adjust timing for fade-in and fade-out
         });
