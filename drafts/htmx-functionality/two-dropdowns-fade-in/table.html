@@ -1,6 +1,6 @@
 
 {{ if .Flights }}
-<table border="1">
+<table>
     <thead>
         <tr>
             <th>Destination City</th>
@@ -22,8 +22,6 @@
         </tr>
         {{end}}
     </tbody>
-{{ else }}
-<p>No flights found for the selected cities.</p>
 </table>
 {{ end }}
 
