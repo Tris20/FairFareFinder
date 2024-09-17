@@ -53,14 +53,16 @@
             
         </form>
 
-        <div id="flight-table">
+   <div id="flight-table" >
          <div class="scroll-container">
             <!-- The table will be dynamically updated here -->
          </div>
         </div>
     </div>
 
-    <script>
+  <script>
+        let hasFadedIn = false;  // Flag to check if the table has already faded in
+
         document.addEventListener('DOMContentLoaded', function() {
             // After the fade-out animation ends, hide the website-name and show the table
             setTimeout(function() {
@@ -75,6 +77,16 @@
                     if (event.animationName === 'moveUp') {
                         // Manually trigger the form submission after the animation is complete
                         htmx.trigger('#flight-form', 'change');  // Simulate a form change event
+                    }
+                });
+
+                // Handle HTMX table swap event for the first time only
+                document.getElementById('flight-table').addEventListener('htmx:afterSwap', function() {
+                    // Only trigger fade-in effect if it hasn't already occurred
+                    if (!hasFadedIn) {
+                        const flightTable = document.getElementById('flight-table');
+                        flightTable.classList.add('fade-in');
+                        hasFadedIn = true;  // Set flag to true after the first fade-in
                     }
                 });
 
