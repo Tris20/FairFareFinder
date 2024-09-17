@@ -1,23 +1,25 @@
-body {
-    margin: 0;
-    padding: 0;
+
+ body {
+
     font-family: Arial, sans-serif;
-    background: #012553
-}
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Make the body take up the full height of the viewport */
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
+    background: #012553;
 
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    /*background-image: url('/images/dreams.png'); /* Ensure the correct path */
     background-size: cover;       /* Make sure the background image covers the entire page */
     background-position: center;  /* Center the image */
     background-attachment: fixed; /* Keep the background fixed while scrolling */
     background-repeat: no-repeat; /* Prevent the image from repeating */
     height: 100vh;                /* Ensure the body takes up the full height of the viewport */
-}
+
+            background-color: #f4f4f4;
+        }
+
 
 
 .title-container {
@@ -105,15 +107,7 @@ h1 {
 
 
 
- body {
-            margin: 0;
-            padding: 0;
-            height: 100vh; /* Make the body take up the full height of the viewport */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f4f4f4;
-        }
+
 
         /* Fullscreen background image */
         #bg-image-dreams {
