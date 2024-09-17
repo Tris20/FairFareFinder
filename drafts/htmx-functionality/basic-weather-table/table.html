@@ -6,7 +6,7 @@
             <th>Destination City</th>
             <th colspan="5">Weather Forecast (Next 5 Days)</th>
 
-            <th>Price This Week from {{.SelectedCity1}}</th>
+            <th>Lowest Price Return</th>
         </tr>
     </thead>
     <tbody>
@@ -23,7 +23,7 @@
               <div>{{if .AvgDaytimeTemp.Valid}}{{printf "%.1f°C" .AvgDaytimeTemp.Float64}}{{else}}N/A{{end}}</div>
             </td>
             {{end}}
-            <td><a href="{{.UrlCity1}}" target="_blank">{{if .PriceCity1.Valid}}{{printf "%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}</a></td>
+            <td><a href="{{.UrlCity1}}" target="_blank">{{if .PriceCity1.Valid}}{{printf "€%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}</a></td>
         </tr>
         {{end}}
     </tbody>
