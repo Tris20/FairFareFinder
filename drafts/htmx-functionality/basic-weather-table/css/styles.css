@@ -231,3 +231,14 @@ h1 {
   z-index: -1; /* Ensure the background stays behind other content */
   filter: blur(10px); /* Apply the blur effect, adjust the value to your preference */
 }
+
+
+
+     /* Initially hide the flight table */
+        #flight-table {
+            opacity: 0;  /* Start invisible */
+        }
+
+        .fade-in {
+            animation: fadeIn 1s forwards;  /* Apply fade-in animation */
+        }
