@@ -151,11 +151,22 @@ h1 {
   left: 50%;
   transform: translate(-50%, -10%); /* Center the element */
   transition: opacity 0.5s ease, transform 0.5s ease;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: flex-start; /* Align content to the top */
+  align-items: stretch; /* Stretch children width to fill the container */
+ 
+}
+
+#flight-table {
+  margin: 25px 0;
+  overflow-y: auto; /* Enables vertical scrolling when necessary */
+
 }
 
 /* Trigger animations when the 'show' class is added via JavaScript */
 #table-container.show {
-  display: block;
+ display: flex;
+
   animation: fadeIn 0.5s forwards, moveUp 0.5s 1s forwards; /* First fade in, then move up after a 2-second delay */
 }
 
@@ -178,5 +189,6 @@ h1 {
     transform: translate(-50%, -50%); /* End 15% away from the top */
   }
 }
+
 
 
