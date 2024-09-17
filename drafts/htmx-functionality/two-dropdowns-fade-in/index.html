@@ -17,35 +17,45 @@
 
      body {
             margin: 0;
+            padding: 0;
+            height: 100vh; /* Make the body take up the full height of the viewport */
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Make the body take up the full height of the viewport */
             background-color: #f4f4f4;
         }
+
+        /* Fullscreen background image */
+        #bg-image-dreams {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/images/dreams.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -1; /* Place the background behind other content */
+            opacity: 0;
+            transition: opacity 1s ease; /* Smooth opacity transition */
+        }
+
         /* Fade-in animation for the text */
         #website-name {
-            font-size: 5rem;
+            font-size: 6rem;
+            color: #111;
             opacity: 0;
             animation: fadeIn 1s forwards, fadeOut 1s 1s forwards; /* Fade in and fade out */
         }
 
         @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
+            0% { opacity: 1; }
+            100% { opacity: 0; }
         }
 
         /* Hide the table initially */
@@ -61,27 +71,25 @@
         }
 
         @keyframes fadeInTable {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
     </style>
 
 </head>
+
 <body>
+
+    <!-- Background image div -->
+    <div id="bg-image-dreams"></div>
 
     <!-- Initial website name that will fade in and out -->
     <div id="website-name" class="fade-in">
         Fair Fare Finder
- <p style="background-image: url('images/dreams.png');"> 
     </div>
 
     <!-- Table content container that will appear after the text fades out -->
     <div id="table-container">
-        <h1>Common Flight Destinations</h1>
         <form id="flight-form" hx-get="/filter" hx-target="#flight-table" hx-trigger="change, input delay:50ms">
             <label for="city1">Select First Origin City:</label>
             <select id="city1" name="city1">
@@ -136,14 +144,18 @@
         document.addEventListener('DOMContentLoaded', function() {
             // After the fade-out animation ends, hide the website-name and show the table
             setTimeout(function() {
-                // Hide the website name by setting display:none
+                // Hide the website name
                 document.getElementById('website-name').style.display = 'none';
 
                 // Show the table content with the fade-in animation
                 document.getElementById('table-container').classList.add('show');
-            }, 2000); // 3s fade-in + 3s fade-out
+
+                // Show the background image with a fade-in effect
+                document.getElementById('bg-image-dreams').style.opacity = '1';
+            }, 2000); // Adjust timing for fade-in and fade-out
         });
     </script>
+
 </body>
 </html>
 
