@@ -1,25 +1,22 @@
+
+
+
+/* Body styling */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: #012553
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #012553;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color: #f4f4f4; /* Ensure only one background-color is effective */
 }
-
-
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    /*background-image: url('/images/dreams.png'); /* Ensure the correct path */
-    background-size: cover;       /* Make sure the background image covers the entire page */
-    background-position: center;  /* Center the image */
-    background-attachment: fixed; /* Keep the background fixed while scrolling */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    height: 100vh;                /* Ensure the body takes up the full height of the viewport */
-}
-
-
 .title-container {
     text-align: center;
     /* Animation Name */
@@ -105,16 +102,6 @@ h1 {
 
 
 
- body {
-            margin: 0;
-            padding: 0;
-            height: 100vh; /* Make the body take up the full height of the viewport */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f4f4f4;
-        }
-
         /* Fullscreen background image */
         #bg-image-dreams {
             position: fixed;
@@ -138,27 +125,12 @@ h1 {
             animation: fadeIn 1s forwards, fadeOut 1s 1s forwards; /* Fade in and fade out */
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
 
         @keyframes fadeOut {
             0% { opacity: 1; }
             100% { opacity: 0; }
         }
 
-        /* Hide the table initially */
-        #table-container {
-            display: none;
-            opacity: 0;
-        }
-
-        /* Show and fade-in the table content after the text fades out */
-        #table-container.show {
-            display: block;
-            animation: fadeInTable 0.5s forwards;
-        }
 
         @keyframes fadeInTable {
             0% { opacity: 0; }
@@ -207,19 +179,4 @@ h1 {
   }
 }
 
-/* Body styling */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: #012553;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-color: #f4f4f4; /* Ensure only one background-color is effective */
-}
+
