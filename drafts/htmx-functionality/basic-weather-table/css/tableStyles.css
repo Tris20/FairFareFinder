@@ -1,19 +1,17 @@
-
 /* tableStyles.css */
 table {
   width: 100%;
   border-collapse: collapse;
-/*  margin: 25px 0;*/
+  /*  margin: 25px 0;*/
   font-size: 0.9em;
   font-family: sans-serif;
   min-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
-  overflow: hidden;
 }
 
-
-th, td {
+th,
+td {
   padding: 12px 15px;
   text-align: center;
   font-size: 16px;
@@ -26,7 +24,7 @@ th {
 }
 
 tr {
-background-color: #edddd1;
+  background-color: #edddd1;
   border-bottom: 1px solid #dddddd;
 }
 
@@ -51,9 +49,8 @@ td a:hover {
   text-decoration: underline;
 }
 
-
-table th, table td img {
-    max-width: 70px; /* Adjust based on your column width */
-    height: auto;
+table th,
+table td img {
+  max-width: 70px; /* Adjust based on your column width */
+  height: auto;
 }
-
