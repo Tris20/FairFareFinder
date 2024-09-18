@@ -319,3 +319,66 @@ width: 95%;
 
 }
 }
+
+
+
+/* For each label-select/input pair */
+.form-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 15px; /* Space between form groups */
+  width: 100%; /* Full width */
+}
+
+/* Labels and inputs aligned horizontally */
+.form-group label {
+  width: 30%; /* Adjust label width */
+  text-align: left;
+  margin-right: 10px; /* Space between label and input */
+}
+
+.form-group select, 
+.form-group input[type="range"], 
+.form-group output {
+  width: 70%; /* Adjust input width */
+}
+
+@media screen and (max-width: 800px) {
+  #flight-form {
+    width: 90%; /* Adjust form width on mobile */
+  }
+
+  /* On smaller screens, keep the label and input in a row */
+  .form-group {
+    flex-direction: row;
+  }
+
+  .form-group label[for="combinedPrice-slider"] {
+    display: none; /* Hide label for slider on mobile */
+  }
+
+  .form-group label {
+    width: 40%; /* Adjust label width on smaller screens */
+  }
+
+  /* Adjust combined price slider container */
+  .form-group input[type="range"] {
+    width: 100%; /* Make slider take full width */
+    margin-left: 10px; /* Add space between output and slider */
+  }
+
+  /* Ensure the output appears to the left of the slider */
+  .form-group.output-range {
+    display: flex;
+    flex-direction: row; /* Ensure output and slider are side by side */
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .form-group.output-range output {
+    width: 60%; /* Allow output to size based on its content */
+    min-width: 50px; /* Set a minimum width */
+  }
+}
