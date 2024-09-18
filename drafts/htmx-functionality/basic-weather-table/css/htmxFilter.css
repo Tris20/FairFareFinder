@@ -1,8 +1,5 @@
-
 body {
-  font-family: Arial, sans-serif;
   background-color: #f4f4f4;
-  color: #333;
   line-height: 1.6;
   padding: 20px;
   margin: 0;
@@ -17,14 +14,15 @@ table {
   margin-bottom: 20px;
 }
 
-th, td {
+th,
+td {
   text-align: left;
   padding: 12px;
   border-bottom: 1px solid #ddd;
 }
 
 th {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
 
@@ -44,7 +42,8 @@ form {
   margin-bottom: 20px;
 }
 
-input[type="text"], input[type="date"] {
+input[type="text"],
+input[type="date"] {
   width: 100%;
   padding: 10px;
   margin: 8px 0;
@@ -54,8 +53,9 @@ input[type="text"], input[type="date"] {
   box-sizing: border-box;
 }
 
-input[type="text"]:focus, input[type="date"]:focus {
-  border-color: #4CAF50;
+input[type="text"]:focus,
+input[type="date"]:focus {
+  border-color: #4caf50;
   outline: none;
 }
 
@@ -66,7 +66,7 @@ label {
 
 button[type="submit"] {
   width: 100%;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -85,11 +85,14 @@ button[type="submit"]:hover {
     padding: 10px;
   }
 
-  table, th, td {
+  table,
+  th,
+  td {
     font-size: 0.9rem; /* Adjust text size for smaller screens */
   }
 
-  input[type="text"], input[type="date"] {
+  input[type="text"],
+  input[type="date"] {
     width: 100%; /* Ensure form inputs take up full width on mobile */
   }
 
@@ -103,8 +106,5 @@ button[type="submit"]:hover {
     overflow-x: auto; /* Enable horizontal scrolling for large tables on mobile */
   }
 
-  th, td {
-    white-space: nowrap; /* Prevent table cells from wrapping on small screens */
-  }
-}
 
+}
