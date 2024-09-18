@@ -46,14 +46,14 @@
                 <option value="high_price">Most Expensive</option>
            </select>
  </div>
-  <div class="form-group">
-            <label for="combinedPrice-slider">Budget</label>
-            <input type="range" id="combinedPrice-slider" name="maxPriceLinear" min="0" max="100" step="1" value="50" 
-                   hx-get="/update-slider-price" 
-                   hx-target="#priceOutput" 
-                   hx-trigger="input">
-            <output id="priceOutput">€300.00</output>
-           </div>  
+ 
+<div class="form-group output-range">
+  <output id="priceOutput">€300.00</output>
+  <input type="range" id="combinedPrice-slider" name="maxPriceLinear" min="0" max="100" step="1" value="50" 
+         hx-get="/update-slider-price" 
+         hx-target="#priceOutput" 
+         hx-trigger="input">
+</div>
         </form>
 
    <div id="flight-table" >
