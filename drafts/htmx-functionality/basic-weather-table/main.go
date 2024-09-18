@@ -63,7 +63,9 @@ http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) 
     http.ServeFile(w, r, "privacy-policy.html")  // Make sure the path is correct
 })
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+//liston on all newtowrk interfaces including localhost
+log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
+
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {

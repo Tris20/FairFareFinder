@@ -29,13 +29,15 @@
     <!-- Table content container that will appear after the text fades out -->
     <div id="table-container">
         <form id="flight-form" hx-get="/filter" hx-target="#flight-table" hx-trigger="change, input delay:50ms">
+  <div class="form-group">
             <label for="city1">Origin City:</label>
             <select id="city1" name="city1">
                 <option value="Berlin" selected>Berlin</option>
                 <option value="Glasgow" >Glasgow</option> <!-- Default selection is Glasgow -->
                 <option value="Edinburgh">Edinburgh</option>
             </select>
-
+</div>
+  <div class="form-group">
             <label for="sort">Sort By:</label>
             <select id="sort" name="sort">
                 <option value="best_weather" selected>Sunniest and Warmest</option>
@@ -43,14 +45,15 @@
                 <option value="low_price">Most Affordable</option>
                 <option value="high_price">Most Expensive</option>
            </select>
-
+ </div>
+  <div class="form-group">
             <label for="combinedPrice-slider">Budget</label>
             <input type="range" id="combinedPrice-slider" name="maxPriceLinear" min="0" max="100" step="1" value="50" 
                    hx-get="/update-slider-price" 
                    hx-target="#priceOutput" 
                    hx-trigger="input">
             <output id="priceOutput">€300.00</output>
-            
+           </div>  
         </form>
 
    <div id="flight-table" >

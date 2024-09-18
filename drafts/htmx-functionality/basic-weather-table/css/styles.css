@@ -249,4 +249,73 @@ width: 95%;
   opacity: 0;  /* Initially hidden */
 }
 
-/* Fade-in animation for the footer *
+/* Fade-in animation for the footer */
+
+
+
+/* Form Group and Mobile*/
+
+
+
+
+
+
+
+/* For each label-select/input pair */
+.form-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 15px; /* Space between form groups */
+  width: 100%; /* Full width */
+}
+
+/* Labels and inputs aligned horizontally */
+.form-group label {
+  width: 30%; /* Adjust label width */
+  text-align: left;
+  margin-right: 10px; /* Space between label and input */
+}
+
+.form-group select, 
+.form-group input[type="range"], 
+.form-group output {
+  width: 70%; /* Adjust input width */
+}
+
+@media screen and (max-width: 800px) {
+  #flight-form {
+    width: 90%; /* Adjust form width on mobile */
+  }
+
+  /* On smaller screens, keep the label and input in a row */
+  .form-group {
+    flex-direction: row;
+  }
+
+  .form-group label[for="combinedPrice-slider"] {
+    display: none;
+  }
+  
+  .form-group label {
+    width: 40%; /* Adjust label width on smaller screens */
+  }
+
+.combinedPrice-slider{
+  display:none;
+}
+
+  .form-group select, 
+  .form-group input[type="range"], 
+  .form-group output {
+    width: 100%; /* Adjust input width */
+  }
+
+
+/* Center the form elements in a row */
+#flight-form {
+         /* Use flexbox for layout */
+  flex-direction: column;         /* Align items in a row */
+
+}
+}
