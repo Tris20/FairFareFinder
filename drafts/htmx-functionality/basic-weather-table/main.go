@@ -95,6 +95,8 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 	sortOption := r.URL.Query().Get("sort")
 //	minWpiStr := r.URL.Query().Get("wpi")
 	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
+
+//originCountry := r.URL.Query().Get("origin_country")
 /*
 	// Convert string values to appropriate types
 	minWpi, err := strconv.ParseFloat(minWpiStr, 64)
@@ -137,7 +139,8 @@ upperWpi := 10.0
 
 
 	// Updated query to join with the weather table for weather forecast
-	query := `
+
+query := `
 SELECT f1.destination_city_name, 
        MIN(f1.price_this_week) AS price_city1, 
        MIN(f1.skyscanner_url_this_week) AS url_city1,
@@ -147,21 +150,21 @@ SELECT f1.destination_city_name,
        w.google_url,
        w.avg_daytime_wpi
 FROM flight f1
-JOIN location l ON f1.destination_city_name = l.city
-JOIN weather w ON w.city = f1.destination_city_name
+JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
+JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
 WHERE f1.origin_city_name = ? 
 AND l.avg_wpi BETWEEN ? AND ? 
 AND w.date >= date('now')
-GROUP BY f1.destination_city_name, w.date
+GROUP BY f1.destination_city_name, w.date, f1.destination_country /* Add country to GROUP BY */
 HAVING price_city1 <= ?
     ` + orderClause
 
-	rows, err := db.Query(query, city1, lowerWpi, upperWpi, maxPrice)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	defer rows.Close()
+rows, err := db.Query(query, city1, lowerWpi, upperWpi, maxPrice)
+if err != nil {
+    http.Error(w, err.Error(), http.StatusInternalServerError)
+    return
+}
+defer rows.Close()
 
 	var flights []Flight
 

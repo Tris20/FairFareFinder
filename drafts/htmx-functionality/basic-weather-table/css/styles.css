@@ -142,8 +142,8 @@ h1 {
 
 /* Initial state of the table-container */
 #table-container {
-  width: 80%;
-  height: 80%;
+width: 95%;
+  height: 90%;
   display: none;
   opacity: 0;
   position: fixed;
@@ -202,7 +202,7 @@ h1 {
   align-items: center;         /* Center-align the items vertically */
   justify-content: center;     /* Center-align the entire row horizontally */
   margin: 0 auto;              /* Center the form horizontally on the page */
- width: 80%;
+ width: 60%;
 }
 
 /* Ensure the input elements, labels, and selects are not too wide */
