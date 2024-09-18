@@ -1,6 +1,4 @@
 
-
-
 /* Body styling */
 body {
   margin: 0;
@@ -17,6 +15,7 @@ body {
   background-repeat: no-repeat;
   background-color: #f4f4f4; /* Ensure only one background-color is effective */
 }
+
 .title-container {
     text-align: center;
     /* Animation Name */
@@ -88,34 +87,7 @@ h1 {
 }
 
 
-/* Optional: Add responsiveness to navigation buttons */
-@media screen and (max-width: 600px) {
-    .navbar-container nav {
-        flex-direction: column;
-    }
 
-    .nav-button {
-        width: 100%;
-        margin: 2px 0;
-    }
-}
-
-
-
-        /* Fullscreen background image */
-        #bg-image-dreams {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('/images/dreams.png');
-            background-size: cover;
-            background-position: center;
-            z-index: -1; /* Place the background behind other content */
-            opacity: 0;
-            transition: opacity 1s ease; /* Smooth opacity transition */
-        }
 
         /* Fade-in animation for the text */
         #website-name {
@@ -218,20 +190,22 @@ width: 95%;
   font-size: 1.2em;            /* Increase the font size for better visibility */
 }
 
+/* Fullscreen background image */
+  #bg-image-dreams {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/images/dreams.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -1; /* Place the background behind other content */
+            opacity: 0;
+            transition: opacity 1s ease; /* Smooth opacity transition */
 
-#bg-image-dreams {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-      background-image: url('/images/dreams.png');
-  background-size: cover; /* Make sure the image covers the entire background */
-  background-position: center;
-  z-index: -1; /* Ensure the background stays behind other content */
   filter: blur(10px); /* Apply the blur effect, adjust the value to your preference */
-}
-
+        }
 
 
      /* Initially hide the flight table */
@@ -284,9 +258,7 @@ width: 95%;
 }
 
 @media screen and (max-width: 800px) {
-  #flight-form {
-    width: 90%; /* Adjust form width on mobile */
-  }
+
 
   /* On smaller screens, keep the label and input in a row */
   .form-group {
@@ -305,19 +277,10 @@ width: 95%;
   display:none;
 }
 
-  .form-group select, 
-  .form-group input[type="range"], 
-  .form-group output {
-    width: 100%; /* Adjust input width */
-  }
 
 
-/* Center the form elements in a row */
-#flight-form {
-         /* Use flexbox for layout */
-  flex-direction: column;         /* Align items in a row */
 
-}
+
 }
 
 
@@ -344,9 +307,30 @@ width: 95%;
   width: 70%; /* Adjust input width */
 }
 
+
+
+
+
+/* Optional: Add responsiveness to navigation buttons */
+@media screen and (max-width: 600px) {
+    .navbar-container nav {
+        flex-direction: column;
+    }
+
+    .nav-button {
+        width: 100%;
+        margin: 2px 0;
+    }
+}
+
+
+
+
+
 @media screen and (max-width: 800px) {
   #flight-form {
     width: 90%; /* Adjust form width on mobile */
+ flex-direction: column;         /* Align items in a row */
   }
 
   /* On smaller screens, keep the label and input in a row */
@@ -381,4 +365,20 @@ width: 95%;
     width: 60%; /* Allow output to size based on its content */
     min-width: 50px; /* Set a minimum width */
   }
+
+.combinedPrice-slider{
+  display:none;
+}
+
+
+#table-container {
+width: 95%;
+  height: 98%;
+ top: 52%; 
+}
+
+#flight-table {
+margin-bottom: 0px;
+}
+
 }
