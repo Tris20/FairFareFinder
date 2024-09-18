@@ -96,14 +96,8 @@ h1 {
 
     .nav-button {
         width: 100%;
-padding: 12px; /* Adjust padding for better touch targets on mobile */
         margin: 2px 0;
     }
-
-
- h1 {
-    font-size: 2rem; /* Reduce font size for smaller screens */
-  }
 }
 
 
@@ -211,9 +205,59 @@ width: 95%;
  width: 60%;
 }
 
+/* Ensure the input elements, labels, and selects are not too wide */
+#flight-form label, 
+#flight-form select, 
+#flight-form input[type="range"],
+#flight-form output {
+  text-align: center;          /* Center text in the labels */
+}
+
+/* Center-align the output values for sliders */
+#flight-form output {
+  font-size: 1.2em;            /* Increase the font size for better visibility */
+}
 
 
-/* Adjust form for mobile screens */
+#bg-image-dreams {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+      background-image: url('/images/dreams.png');
+  background-size: cover; /* Make sure the image covers the entire background */
+  background-position: center;
+  z-index: -1; /* Ensure the background stays behind other content */
+  filter: blur(10px); /* Apply the blur effect, adjust the value to your preference */
+}
+
+
+
+     /* Initially hide the flight table */
+        #flight-table {
+            opacity: 0;  /* Start invisible */
+        }
+
+        .fade-in {
+            animation: fadeIn 1s forwards;  /* Apply fade-in animation */
+        }
+
+
+/* Initial state for footer */
+#footer-privacy {
+  opacity: 0;  /* Initially hidden */
+}
+
+/* Fade-in animation for the footer */
+
+
+
+/* Form Group and Mobile*/
+
+
+
+
 
 
 
@@ -278,50 +322,63 @@ width: 95%;
 
 
 
-
-/* Ensure the input elements, labels, and selects are not too wide */
-#flight-form label, 
-#flight-form select, 
-#flight-form input[type="range"],
-#flight-form output {
-  text-align: center;          /* Center text in the labels */
+/* For each label-select/input pair */
+.form-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 15px; /* Space between form groups */
+  width: 100%; /* Full width */
 }
 
-/* Center-align the output values for sliders */
-#flight-form output {
-  font-size: 1.2em;            /* Increase the font size for better visibility */
+/* Labels and inputs aligned horizontally */
+.form-group label {
+  width: 30%; /* Adjust label width */
+  text-align: left;
+  margin-right: 10px; /* Space between label and input */
 }
 
-
-#bg-image-dreams {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-      background-image: url('/images/dreams.png');
-  background-size: cover; /* Make sure the image covers the entire background */
-  background-position: center;
-  z-index: -1; /* Ensure the background stays behind other content */
-  filter: blur(10px); /* Apply the blur effect, adjust the value to your preference */
+.form-group select, 
+.form-group input[type="range"], 
+.form-group output {
+  width: 70%; /* Adjust input width */
 }
 
+@media screen and (max-width: 800px) {
+  #flight-form {
+    width: 90%; /* Adjust form width on mobile */
+  }
 
+  /* On smaller screens, keep the label and input in a row */
+  .form-group {
+    flex-direction: row;
+  }
 
-     /* Initially hide the flight table */
-        #flight-table {
-            opacity: 0;  /* Start invisible */
-        }
+  .form-group label[for="combinedPrice-slider"] {
+    display: none; /* Hide label for slider on mobile */
+  }
 
-        .fade-in {
-            animation: fadeIn 1s forwards;  /* Apply fade-in animation */
-        }
+  .form-group label {
+    width: 40%; /* Adjust label width on smaller screens */
+  }
 
+  /* Adjust combined price slider container */
+  .form-group input[type="range"] {
+    width: 100%; /* Make slider take full width */
+    margin-left: 10px; /* Add space between output and slider */
+  }
 
-/* Initial state for footer */
-#footer-privacy {
-  opacity: 0;  /* Initially hidden */
-  color: white;
+  /* Ensure the output appears to the left of the slider */
+  .form-group.output-range {
+    display: flex;
+    flex-direction: row; /* Ensure output and slider are side by side */
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .form-group.output-range output {
+    width: 60%; /* Allow output to size based on its content */
+    min-width: 50px; /* Set a minimum width */
+  }
 }
-
-/* Fade-in animation for the footer *
