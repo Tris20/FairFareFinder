@@ -58,6 +58,10 @@
             <!-- The table will be dynamically updated here -->
          </div>
         </div>
+
+<footer id="footer-privacy">
+    <p>&copy; 2024 Fair Fare Finder | <a href="/privacy-policy">Privacy Policy</a></p>
+</footer>
     </div>
 
   <script>
@@ -77,6 +81,7 @@
                     if (event.animationName === 'moveUp') {
                         // Manually trigger the form submission after the animation is complete
                         htmx.trigger('#flight-form', 'change');  // Simulate a form change event
+
                     }
                 });
 
@@ -87,6 +92,10 @@
                         const flightTable = document.getElementById('flight-table');
                         flightTable.classList.add('fade-in');
                         hasFadedIn = true;  // Set flag to true after the first fade-in
+
+                // Also show the footer after the table has been loaded
+const footer = document.querySelector('#footer-privacy');  // Use # to select by ID
+footer.classList.add('fade-in');
                     }
                 });
 
@@ -97,5 +106,8 @@
     </script>
 
 </body>
+
+
+
 </html>
 

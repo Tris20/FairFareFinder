@@ -242,3 +242,11 @@ width: 95%;
         .fade-in {
             animation: fadeIn 1s forwards;  /* Apply fade-in animation */
         }
+
+
+/* Initial state for footer */
+#footer-privacy {
+  opacity: 0;  /* Initially hidden */
+}
+
+/* Fade-in animation for the footer *

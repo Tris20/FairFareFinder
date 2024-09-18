@@ -48,13 +48,20 @@ func main() {
 	}
 	defer db.Close()
 
-	tmpl = template.Must(template.ParseFiles("index.html", "table.html"))
+    // Parse templates
+    tmpl = template.Must(template.ParseFiles("index.html", "table.html"))
 
-	http.HandleFunc("/", indexHandler)
-	http.HandleFunc("/filter", filterHandler)
-	http.HandleFunc("/update-slider-price", updateSliderPriceHandler)
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./css"))))
-	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images"))))
+    // Set up routes
+    http.HandleFunc("/", indexHandler)                     // Homepage route
+    http.HandleFunc("/filter", filterHandler)              // Route for filtering
+    http.HandleFunc("/update-slider-price", updateSliderPriceHandler) // Route for slider price update
+    http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./css")))) // Serving CSS
+    http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images")))) // Serving images
+
+    // Privacy policy route
+http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) {
+    http.ServeFile(w, r, "privacy-policy.html")  // Make sure the path is correct
+})
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
