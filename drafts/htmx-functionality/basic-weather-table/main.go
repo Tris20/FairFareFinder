@@ -21,12 +21,16 @@ type Weather struct {
 	AvgDaytimeWpi    sql.NullFloat64 // Weather Performance Index
 }
 
+
 type Flight struct {
 	DestinationCityName string
 	PriceCity1          sql.NullFloat64
 	UrlCity1            string
 	WeatherForecast     []Weather      // Slice of weather data for multiple days
+	BookingUrl          sql.NullString // URL for accommodation booking
+	BookingPppn         sql.NullFloat64 // Price per person per night for accommodation
 }
+
 
 type FlightsData struct {
 	SelectedCity1 string
@@ -149,6 +153,7 @@ upperWpi := 10.0
 
 	// Updated query to join with the weather table for weather forecast
 
+
 query := `
 SELECT f1.destination_city_name, 
        MIN(f1.price_this_week) AS price_city1, 
@@ -157,14 +162,17 @@ SELECT f1.destination_city_name,
        w.avg_daytime_temp,
        w.weather_icon,
        w.google_url,
-       w.avg_daytime_wpi
+       w.avg_daytime_wpi,
+       a.booking_url,
+       a.booking_pppn
 FROM flight f1
 JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
 JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
+LEFT JOIN accommodation a ON a.city = f1.destination_city_name AND a.country = f1.destination_country
 WHERE f1.origin_city_name = ? 
 AND l.avg_wpi BETWEEN ? AND ? 
 AND w.date >= date('now')
-GROUP BY f1.destination_city_name, w.date, f1.destination_country /* Add country to GROUP BY */
+GROUP BY f1.destination_city_name, w.date, f1.destination_country
 HAVING price_city1 <= ?
     ` + orderClause
 
@@ -182,16 +190,20 @@ defer rows.Close()
 		var flight Flight
 		var weather Weather
 
-		err := rows.Scan(
-			&flight.DestinationCityName,
-			&flight.PriceCity1,
-			&flight.UrlCity1,
-			&weather.Date,
-			&weather.AvgDaytimeTemp,
-			&weather.WeatherIcon,
-			&weather.GoogleUrl,
-			&weather.AvgDaytimeWpi,
-		)
+
+err := rows.Scan(
+	&flight.DestinationCityName,
+	&flight.PriceCity1,
+	&flight.UrlCity1,
+	&weather.Date,
+	&weather.AvgDaytimeTemp,
+	&weather.WeatherIcon,
+	&weather.GoogleUrl,
+	&weather.AvgDaytimeWpi,
+	&flight.BookingUrl,
+	&flight.BookingPppn,
+)
+
 		if err != nil {
 			log.Printf("Error scanning row: %v", err)
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
