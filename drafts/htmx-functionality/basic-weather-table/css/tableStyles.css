@@ -8,6 +8,8 @@ table {
   min-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
+  table-layout: auto;
+
 }
 
 th,
@@ -49,8 +51,12 @@ td a:hover {
   text-decoration: underline;
 }
 
-table th,
+
 table td img {
   max-width: 70px; /* Adjust based on your column width */
+  height: auto;
+}
+
+table th{
   height: auto;
 }
