@@ -138,6 +138,7 @@ h1 {
   opacity: 0; /* Start invisible */
   overflow-x: scroll; /* Enable horizontal scrolling for smaller screens */
 text-align: center;
+border-radius: 8px;
 }
 
 /* Trigger animations when the 'show' class is added via JavaScript */
