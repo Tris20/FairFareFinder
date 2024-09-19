@@ -1,0 +1,37 @@
+
+{{ if .Flights }}
+<table>
+    <thead>
+        <tr>
+            <th>Destination City</th>
+            <th colspan="5">Weather Forecast (Next 5 Days)</th>
+
+            <th>Return From</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{range .Flights}}
+        <tr>
+            <td>{{.DestinationCityName}}</td>
+
+            
+            <!-- Weather forecast for the next 5 days -->
+
+{{range .WeatherForecast}}
+<td>
+    <a href="{{.GoogleUrl}}" target="_blank">
+        <div>
+            <img src="{{.WeatherIcon}}" alt="Weather Icon" width="30">
+        </div>
+        <div>{{if .AvgDaytimeTemp.Valid}}{{printf "%.1f°C" .AvgDaytimeTemp.Float64}}{{else}}N/A{{end}}</div>
+    </a>
+</td>
+{{end}}
+
+            <td><a href="{{.UrlCity1}}" target="_blank">{{if .PriceCity1.Valid}}{{printf "€%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}</a></td>
+        </tr>
+        {{end}}
+    </tbody>
+</table>
+{{ end }}
+
