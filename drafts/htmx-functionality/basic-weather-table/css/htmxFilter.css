@@ -80,7 +80,7 @@ button[type="submit"]:hover {
 }
 
 /* Mobile responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   body {
     padding: 10px;
   }
@@ -102,7 +102,6 @@ button[type="submit"]:hover {
   }
 
   table {
-    display: block;
     overflow-x: auto; /* Enable horizontal scrolling for large tables on mobile */
   }
 
