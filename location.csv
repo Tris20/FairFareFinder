@@ -1,0 +1,4278 @@
+city,country,iata_1,iata_2,iata_3,iata_4,iata_5,iata_6,iata_7,avg_wpi
+Tokyo,JP,NRT,HND,,,,,,7.46666666666667
+Jakarta,ID,HLP,PCB,CGK,,,,,7.01666666666667
+Guangzhou,CN,CAN,,,,,,,6.21666666666667
+Mumbai,IN,BOM,,,,,,,7.95
+Manila,PH,MNL,,,,,,,7.7
+Shanghai,CN,PVG,SHA,,,,,,8.0
+Sao Paulo,BR,GRU,SAO,CGH,,,,,7.11666666666667
+Seoul,KR,ICN,GMP,,,,,,8.1
+Mexico City,MX,MEX,,,,,,,6.4
+Cairo,EG,CAI,,,,,,,5.93333333333333
+New York,US,ISP,JFK,LGA,SWF,,,,7.53333333333333
+Dhaka,BD,DAC,,,,,,,6.15
+Beijing,CN,PEK,PKX,NAY,,,,,8.53333333333333
+Kolkata,IN,CCU,,,,,,,6.71666666666667
+Bangkok,TH,DMK,BKK,,,,,,7.18333333333333
+Shenzhen,CN,SZX,,,,,,,6.86666666666667
+Moscow,RU,BKA,DME,SVO,OSF,CKL,VKO,,8.73333333333333
+Buenos Aires,AR,AEP,,,,,,,6.2
+Lagos,NG,LOS,,,,,,,7.7
+Istanbul,TR,ISL,SAW,IST,,,,,8.3
+Karachi,PK,KHI,,,,,,,7.4
+Bangalore,IN,BLR,,,,,,,8.01666666666667
+Ho Chi Minh City,VN,SGN,,,,,,,8.05
+Osaka,JP,KIX,ITM,,,,,,7.26666666666667
+Chengdu,CN,CTU,,,,,,,7.78333333333333
+Tehran,IR,IKA,THR,,,,,,8.05
+Kinshasa,CD,FIH,,,,,,,5.81666666666667
+Rio de Janeiro,BR,GIG,SDU,SNZ,,,,,8.6
+Chennai,IN,MAA,,,,,,,6.28333333333333
+Xi'an,CN,SIA,,,,,,,7.63333333333333
+Lahore,PK,LHE,,,,,,,5.76666666666667
+Chongqing,CN,CKG,JIQ,,,,,,5.43333333333333
+Los Angeles,US,LAX,WHP,,,,,,7.58333333333333
+London,GB,LTN,BQH,LGW,LCY,LHR,STN,NHT,8.13333333333333
+Paris,FR,LBG,CDG,ORY,,,,,8.21666666666667
+Linyi,CN,LYI,,,,,,,7.8
+Hyderabad,IN,HYD,BPM,,,,,,7.96666666666667
+Tianjin,CN,TSN,,,,,,,8.6
+Lima,PE,LIM,,,,,,,6.38333333333333
+Wuhan,CN,WUH,,,,,,,7.15
+Nanyang,CN,NNY,,,,,,,7.9
+Hangzhou,CN,HGH,,,,,,,7.96666666666667
+Foshan,CN,FUO,,,,,,,6.11666666666667
+Nagoya,JP,NKM,,,,,,,7.21666666666667
+Luanda,AO,LAD,,,,,,,8.55
+Ganzhou,CN,KOW,,,,,,,7.85
+Kuala Lumpur,MY,KUL,,,,,,,7.93333333333333
+Quanzhou,CN,JJN,,,,,,,7.68333333333333
+Johannesburg,ZA,QRA,HLA,JNB,,,,,8.03333333333333
+Chicago,US,MDW,ORD,,,,,,8.66666666666667
+Nanjing,CN,NKG,,,,,,,7.8
+Jining,CN,JNG,,,,,,,7.91666666666667
+Hanoi,VN,HAN,,,,,,,7.23333333333333
+Pune,IN,PNQ,,,,,,,8.33333333333333
+Fuyang,CN,FUG,,,,,,,8.11666666666667
+Ahmedabad,IN,AMD,,,,,,,6.48333333333333
+Bogota,CO,BOG,,,,,,,5.68333333333333
+Shenyang,CN,SHE,,,,,,,7.23333333333333
+Dar es Salaam,TZ,DAR,,,,,,,7.68333333333333
+Khartoum,SD,KRT,,,,,,,4.2
+Hong Kong,HK,HKG,,,,,,,6.95
+Riyadh,SA,RUH,XXN,,,,,,4.06666666666667
+Santiago,CL,SCL,,,,,,,6.03333333333333
+Surabaya,ID,SUB,,,,,,,7.13333333333333
+Zhanjiang,CN,ZHA,,,,,,,7.7
+Yancheng,CN,YNZ,,,,,,,7.88333333333333
+Hengyang,CN,HNY,,,,,,,7.68333333333333
+Zunyi,CN,ZYI,,,,,,,8.23333333333333
+Madrid,ES,MAD,TOJ,,,,,,8.36666666666667
+Baghdad,IQ,BGW,,,,,,,4.63333333333333
+Miami,US,MIA,MIO,OPF,TMB,TNT,,,7.81666666666667
+Singapore,SG,SIN,,,,,,,7.48333333333333
+Houston,US,CXO,DWH,EFD,HOU,IAH,IWS,SGR,9.35
+Dalian,CN,DLC,,,,,,,8.23333333333333
+Dallas,US,ADS,DAL,RBD,,,,,8.66666666666667
+Qingdao,CN,TAO,,,,,,,8.08333333333333
+Yulin,CN,UYN,,,,,,,7.4
+Douala,CM,DLA,,,,,,,7.75
+Philadelphia,US,BBX,PHL,PNE,,,,,7.2
+Toronto,CA,YKZ,YTZ,YYZ,,,,,8.08333333333333
+Zhengzhou,CN,CGO,,,,,,,8.35
+Nanchong,CN,NAO,,,,,,,6.11666666666667
+Jinan,CN,TNA,,,,,,,7.93333333333333
+Giza,EG,SPX,,,,,,,6.08333333333333
+Nairobi,KE,NBO,WIL,,,,,,8.56666666666667
+Guadalajara,MX,GDL,,,,,,,7.06666666666667
+Ankara,TR,ESB,ANK,,,,,,8.51666666666667
+Dazhou,CN,DAX,,,,,,,6.81666666666667
+Monterrey,MX,MTY,,,,,,,8.75
+Belo Horizonte,BR,PLU,CNF,,,,,,8.16666666666667
+Suzhou,CN,SZV,,,,,,,8.05
+Yongzhou,CN,LLF,,,,,,,7.88333333333333
+Changde,CN,CGD,,,,,,,7.21666666666667
+Atlanta,US,ATL,FTY,PDK,,,,,8.73333333333333
+Washington,US,WSG,DCA,MNZ,IAD,OCW,,,5.16666666666667
+Zhaotong,CN,ZAT,,,,,,,6.91666666666667
+Melbourne,AU,AVV,MBW,MEL,,,,,4.21666666666667
+Yichun,CN,LDS,,,,,,,4.68333333333333
+Abidjan,CI,ABJ,,,,,,,8.23333333333333
+Ji'an,CN,JGS,,,,,,,7.78333333333333
+Berlin,DE,BER,TXL,,,,,,8.48333333333333
+Alexandria,EG,ALY,HBE,,,,,,8.16666666666667
+Mianyang,CN,MIG,,,,,,,8.43333333333333
+Sydney,AU,BWU,SYD,,,,,,6.5
+Barcelona,ES,BCN,,,,,,,8.15
+Yuncheng,CN,YCU,,,,,,,8.66666666666667
+Cape Town,ZA,CPT,,,,,,,6.15
+Changsha,CN,CSX,,,,,,,7.3
+Jeddah,SA,JED,,,,,,,5.08333333333333
+Jiujiang,CN,JIU,,,,,,,7.56666666666667
+Yibin,CN,YBP,,,,,,,7.55
+Huaihua,CN,HJJ,,,,,,,7.66666666666667
+Kunming,CN,KMG,,,,,,,7.75
+Changchun,CN,CGQ,,,,,,,6.06666666666667
+Urumqi,CN,URC,,,,,,,8.63333333333333
+Suzhou,CN,SZV,,,,,,,8.05
+Boston,US,BOS,,,,,,,6.95
+Izmir,TR,ADB,IGL,,,,,,8.1
+Shantou,CN,SWA,,,,,,,7.5
+Kabul,AF,KBL,,,,,,,8.56666666666667
+Luzhou,CN,LZO,,,,,,,6.56666666666667
+Hefei,CN,HFE,,,,,,,7.91666666666667
+Fortaleza,BR,FOR,,,,,,,7.48333333333333
+Anqing,CN,AQG,,,,,,,7.35
+Liuzhou,CN,LZH,,,,,,,7.43333333333333
+Shijiazhuang,CN,SJW,,,,,,,8.53333333333333
+Ningbo,CN,NGB,,,,,,,8.46666666666667
+Qiqihar,CN,NDG,,,,,,,6.3
+Phoenix,US,DVT,AZA,PHX,,,,,9.38333333333333
+Fuzhou,CN,FOC,,,,,,,7.85
+Chifeng,CN,CIF,,,,,,,6.51666666666667
+Amman,JO,AMM,ADJ,,,,,,8.88333333333333
+Xianyang,CN,XIY,,,,,,,7.48333333333333
+Taiyuan,CN,TYN,,,,,,,8.33333333333333
+Nanning,CN,NNG,,,,,,,7.23333333333333
+Harbin,CN,HRB,,,,,,,6.75
+Abuja,NG,ABV,,,,,,,8.1
+Detroit,US,DET,DTW,YIP,,,,,8.35
+Xiamen,CN,XMN,,,,,,,7.45
+Montreal,CA,YHU,YMX,YUL,,,,,7.48333333333333
+Fuzhou,CN,FOC,,,,,,,7.85
+Wuhu,CN,WHU,,,,,,,7.53333333333333
+Medan,ID,MES,,,,,,,7.8
+Wenzhou,CN,WNZ,,,,,,,8.01666666666667
+Changzhou,CN,CZX,,,,,,,7.66666666666667
+Nanchang,CN,KHN,,,,,,,7.4
+Seattle,US,BFI,SEA,,,,,,5.21666666666667
+Ibadan,NG,IBA,,,,,,,8.05
+Casablanca,MA,CMN,,,,,,,9.01666666666667
+Kumasi,GH,KMS,,,,,,,8.0
+Busan,KR,PUS,,,,,,,7.93333333333333
+Hohhot,CN,HET,,,,,,,6.95
+Algiers,DZ,ALG,,,,,,,8.45
+Lucknow,IN,LKO,,,,,,,7.11666666666667
+Mashhad,IR,MHD,,,,,,,8.91666666666667
+San Francisco,US,SFO,,,,,,,5.3
+Dubai,AE,DXB,NHD,,,,,,6.06666666666667
+Anshan,CN,AOG,,,,,,,7.18333333333333
+Guiyang,CN,KWE,,,,,,,8.43333333333333
+Bengbu,CN,BFU,,,,,,,7.9
+Wuxi,CN,WUX,,,,,,,7.55
+Hanzhong,CN,HZG,,,,,,,8.48333333333333
+Faisalabad,PK,LYP,,,,,,,4.73333333333333
+Changzhi,CN,CIH,,,,,,,8.31666666666667
+Jaipur,IN,JAI,,,,,,,7.15
+Lanzhou,CN,LHW,,,,,,,7.51666666666667
+Wuzhou,CN,WUZ,,,,,,,7.4
+Athens,GR,HEW,ATH,,,,,,8.65
+San Diego,US,MYF,NKX,NZY,SAN,SDM,,,7.7
+Addis Ababa,ET,ADD,,,,,,,6.9
+Guatemala City,GT,GUA,,,,,,,6.91666666666667
+Kuwait City,KW,KWI,,,,,,,5.01666666666667
+Budapest,HU,BUD,,,,,,,7.75
+Tashkent,UZ,TAS,,,,,,,7.8
+Kyiv,UA,KBP,IEV,,,,,,8.55
+Birmingham,GB,BHX,,,,,,,7.08333333333333
+Weihai,CN,WEH,,,,,,,8.01666666666667
+Bursa,TR,BTZ,YEI,,,,,,8.48333333333333
+Minneapolis,US,FCM,MIC,MSP,,,,,8.16666666666667
+Haikou,CN,HAK,,,,,,,7.51666666666667
+Tongliao,CN,TGO,,,,,,,6.81666666666667
+Chaoyang,CN,CHG,,,,,,,7.4
+Pyongyang,KP,FNJ,,,,,,,8.11666666666667
+Tampa,US,MCF,TPA,TPF,KYO,,,,8.86666666666667
+Brasilia,BR,BSB,,,,,,,8.48333333333333
+Stuttgart,DE,STR,,,,,,,6.9
+Rome,IT,FCO,,,,,,,8.23333333333333
+Longyan,CN,LCX,,,,,,,8.28333333333333
+Baotou,CN,BAV,,,,,,,6.76666666666667
+Handan,CN,HDG,,,,,,,7.98333333333333
+Jinzhou,CN,JNZ,,,,,,,7.55
+Denver,US,APA,BJC,DEN,,,,,8.16666666666667
+Guayaquil,EC,GYE,,,,,,,8.35
+Weifang,CN,WEF,,,,,,,8.2
+Huai'an,CN,HIA,,,,,,,7.71666666666667
+Ankang,CN,AKA,,,,,,,8.35
+Mogadishu,SO,MGQ,,,,,,,7.91666666666667
+Munich,DE,MUC,,,,,,,6.01666666666667
+Taipei,TW,TPE,,,,,,,7.66666666666667
+Damascus,SY,DAM,,,,,,,8.11666666666667
+Sanming,CN,SQJ,,,,,,,8.38333333333333
+Jiamusi,CN,JMU,,,,,,,5.38333333333333
+Medellin,CO,EOH,,,,,,,7.31666666666667
+Yantai,CN,YNT,,,,,,,8.23333333333333
+Huizhou,CN,HUZ,,,,,,,7.66666666666667
+Hamburg,DE,HAM,XFW,,,,,,8.11666666666667
+Guangyuan,CN,GYS,,,,,,,8.23333333333333
+Cali,CO,CLO,,,,,,,8.05
+Xining,CN,XNN,,,,,,,6.55
+Lusaka,ZM,LUN,,,,,,,6.48333333333333
+Ouagadougou,BF,OUA,,,,,,,6.93333333333333
+Yaounde,CM,YAO,NSI,,,,,,8.35
+Zhuhai,CN,ZUH,,,,,,,6.91666666666667
+Vancouver,CA,YVR,,,,,,,5.43333333333333
+Beirut,LB,BEY,,,,,,,8.31666666666667
+Salvador,BR,SSA,,,,,,,8.91666666666667
+Bucharest,RO,BBU,OTP,,,,,,8.3
+Jilin,CN,JIL,,,,,,,5.51666666666667
+Accra,GH,ACC,,,,,,,8.13333333333333
+Daegu,KR,TAE,,,,,,,8.23333333333333
+Luoyang,CN,LYA,,,,,,,8.2
+Brisbane,AU,ACF,BNE,,,,,,7.6
+Anshun,CN,AVA,,,,,,,7.65
+Riverside,US,RAL,RIV,,,,,,8.21666666666667
+Colombo,LK,CMB,RML,,,,,,7.0
+Baku,AZ,GYD,ZXT,,,,,,8.68333333333333
+Antananarivo,MG,TNR,,,,,,,8.8
+Mudanjiang,CN,MDG,,,,,,,5.56666666666667
+Fukuoka,JP,FUK,,,,,,,7.93333333333333
+Yan'an,CN,ENY,,,,,,,7.91666666666667
+Nantong,CN,NTG,,,,,,,7.76666666666667
+Lincang,CN,LNJ,,,,,,,7.56666666666667
+Las Vegas,US,HSH,LAS,LSV,LVS,VGT,,,8.1
+Caracas,VE,CCS,,,,,,,7.9
+Konya,TR,KYA,,,,,,,8.28333333333333
+Vienna,AT,VIE,,,,,,,7.15
+Baltimore,US,BWI,MTN,,,,,,7.2
+Dandong,CN,DDG,,,,,,,7.63333333333333
+Harare,ZW,HRE,,,,,,,7.85
+Perth,AU,JAD,PER,,,,,,7.16666666666667
+Phnom Penh,KH,PNH,,,,,,,7.51666666666667
+Stockholm,SE,ARN,BMA,,,,,,7.71666666666667
+Cordoba,AR,COR,,,,,,,7.6
+Haiphong,VN,HPH,,,,,,,7.8
+Zamboanga City,PH,ZAM,,,,,,,8.41666666666667
+Portland,US,HIO,PDX,PWM,TTD,,,,5.46666666666667
+Kano,NG,KAN,,,,,,,6.81666666666667
+Havana,CU,HAV,UPB,,,,,,8.43333333333333
+Vadodara,IN,BDQ,,,,,,,6.68333333333333
+Manaus,BR,MAO,PLL,,,,,,6.46666666666667
+Qingyang,CN,IQN,,,,,,,8.25
+San Antonio,US,SAT,SKF,SSF,,,,,9.26666666666667
+Rajkot,IN,RAJ,,,,,,,6.73333333333333
+Aleppo,SY,ALP,,,,,,,7.35
+Tijuana,MX,TIJ,,,,,,,7.8
+Bamenda,CM,BPC,,,,,,,7.78333333333333
+Minsk,BY,MHP,MSQ,,,,,,9.01666666666667
+Indore,IN,IDR,,,,,,,8.18333333333333
+Kananga,CD,KGA,,,,,,,5.46666666666667
+Peshawar,PK,PEW,,,,,,,5.46666666666667
+Sapporo,JP,OKD,,,,,,,5.96666666666667
+Sacramento,US,MCC,MHR,SAC,SMF,,,,5.95
+Almaty,KZ,ALA,,,,,,,7.46666666666667
+Austin,US,AUM,AUS,ASQ,,,,,9.15
+Yinchuan,CN,INC,,,,,,,6.91666666666667
+Blantyre,MW,BLZ,,,,,,,7.36666666666667
+Orlando,US,ISM,MCO,ORL,SFB,,,,8.85
+Multan,PK,MUX,,,,,,,4.35
+Santa Cruz,BO,SRZ,VVI,,,,,,7.16666666666667
+Port Harcourt,NG,PHC,,,,,,,7.53333333333333
+Warsaw,PL,WMI,WAW,,,,,,8.91666666666667
+Beihai,CN,BHY,,,,,,,6.66666666666667
+Bhopal,IN,BHO,,,,,,,8.0
+Mosul,IQ,OSB,,,,,,,5.76666666666667
+Lubumbashi,CD,FBM,,,,,,,5.91666666666667
+Curitiba,BR,BFH,CWB,,,,,,5.63333333333333
+San Jose,US,RHV,SJC,,,,,,6.38333333333333
+Adana,TR,ADA,UAB,,,,,,6.86666666666667
+Quito,EC,UIO,,,,,,,5.2
+Pittsburgh,US,AGC,PIT,,,,,,7.25
+Brazzaville,CG,BZV,,,,,,,6.05
+Diyarbakir,TR,DIY,,,,,,,7.68333333333333
+Indianapolis,US,IND,,,,,,,8.16666666666667
+Montevideo,UY,MVD,,,,,,,6.3
+Manhattan,US,MHK,,,,,,,7.58333333333333
+Cincinnati,US,LUK,,,,,,,7.65
+Kansas City,US,MCI,MKC,,,,,,8.06666666666667
+Patna,IN,PAT,,,,,,,6.01666666666667
+Tegucigalpa,HN,TGU,,,,,,,8.1
+Kampala,UG,EBB,,,,,,,7.51666666666667
+Cleveland,US,BKL,CGF,CLE,,,,,8.16666666666667
+Heihe,CN,HEK,,,,,,,5.3
+Conakry,GN,CKY,,,,,,,8.1
+Masvingo,ZW,MVZ,,,,,,,5.93333333333333
+Novosibirsk,RU,OVB,,,,,,,4.75
+Jingdezhen,CN,JDZ,,,,,,,7.78333333333333
+Rajshahi,BD,RJH,,,,,,,6.63333333333333
+Valencia,ES,VLC,,,,,,,7.88333333333333
+Puebla,MX,PBC,,,,,,,6.76666666666667
+Columbus,US,CUS,CLU,CBM,CMH,CSG,LCK,OLU,7.81666666666667
+Shiraz,IR,SYZ,,,,,,,7.81666666666667
+Madurai,IN,IXM,,,,,,,5.16666666666667
+Tabriz,IR,TBZ,,,,,,,8.46666666666667
+Maracaibo,VE,MAR,,,,,,,7.28333333333333
+Sofia,BG,SOF,,,,,,,7.36666666666667
+San Jose,CR,SJO,SYQ,,,,,,7.63333333333333
+Kobe,JP,UKB,,,,,,,8.05
+Kigali,RW,KGL,,,,,,,7.36666666666667
+Panama City,PA,BLB,,,,,,,8.18333333333333
+Gwangju,KR,KWJ,,,,,,,8.11666666666667
+Recife,BR,REC,,,,,,,8.33333333333333
+Nasik,IN,ISK,,,,,,,8.13333333333333
+Valencia,VE,VLN,,,,,,,7.75
+Abu Dhabi,AE,AUH,AZI,,,,,,6.08333333333333
+Yekaterinburg,RU,SVX,,,,,,,6.23333333333333
+Amsterdam,NL,AMS,,,,,,,8.03333333333333
+Virginia Beach,US,NTU,,,,,,,7.98333333333333
+Dakar,SN,DKR,,,,,,,7.85
+Goiania,BR,GYN,,,,,,,7.2
+Charlotte,US,CLT,,,,,,,7.31666666666667
+Muscat,OM,MCT,,,,,,,6.0
+Kharkiv,UA,HRK,,,,,,,8.73333333333333
+Medina,SA,MED,,,,,,,3.45
+Ulaanbaatar,MN,UBN,,,,,,,4.6
+Kayseri,TR,ASR,,,,,,,8.4
+Samsun,TR,SSX,SZF,,,,,,8.41666666666667
+Copenhagen,DK,CPH,RKE,,,,,,7.71666666666667
+Helsinki,FI,HEM,HEL,,,,,,6.71666666666667
+Prague,CZ,PRG,,,,,,,8.03333333333333
+Milan,IT,MXP,LIN,,,,,,8.16666666666667
+Auckland,NZ,AKL,,,,,,,4.28333333333333
+Santiago,DO,STI,,,,,,,
+Porto Alegre,BR,QNS,POA,,,,,,7.43333333333333
+Huangshan,CN,TXN,,,,,,,7.85
+Barranquilla,CO,BAQ,,,,,,,7.48333333333333
+Mandalay,MM,VBC,MDL,,,,,,6.98333333333333
+Calgary,CA,YYC,,,,,,,4.31666666666667
+Yushu,CN,YUS,,,,,,,5.83333333333333
+Belem,BR,BEL,,,,,,,7.46666666666667
+Adelaide,AU,ADL,,,,,,,4.76666666666667
+Milwaukee,US,MKE,MWC,,,,,,7.95
+Providence,US,PVD,,,,,,,6.68333333333333
+Jacksonville,US,CRG,IJX,JAX,JKV,LRF,NEN,NIP,8.58333333333333
+Porto,PT,OPO,,,,,,,8.05
+Rosario,AR,ROS,,,,,,,7.41666666666667
+Dublin,IE,DUB,,,,,,,7.15
+Kazan,RU,KZN,,,,,,,8.08333333333333
+Balikesir,TR,BZI,,,,,,,8.41666666666667
+Sharjah,AE,SHJ,,,,,,,5.93333333333333
+Can Tho,VN,VCA,,,,,,,7.95
+Brussels,BE,BRU,CRL,,,,,,7.7
+Yiwu,CN,YIW,,,,,,,8.25
+Campinas,BR,VCP,CPQ,,,,,,7.68333333333333
+Mombasa,KE,MBA,,,,,,,6.96666666666667
+Baidoa,SO,BIB,,,,,,,6.16666666666667
+Varanasi,IN,VNS,,,,,,,6.93333333333333
+Hiroshima,JP,HIJ,,,,,,,8.66666666666667
+Chiang Mai,TH,CNX,,,,,,,7.51666666666667
+Maiduguri,NG,MIU,,,,,,,6.46666666666667
+Chelyabinsk,RU,CEK,,,,,,,6.48333333333333
+Mbandaka,CD,MDK,,,,,,,7.71666666666667
+Doha,QA,DIA,DOH,,,,,,5.01666666666667
+Shymkent,KZ,CIT,,,,,,,8.06666666666667
+Tripoli,LY,MJI,TIP,,,,,,7.35
+Srinagar,IN,SXR,,,,,,,8.51666666666667
+Nashville,US,BNA,,,,,,,8.71666666666667
+Aurangabad,IN,IXU,,,,,,,7.63333333333333
+Salt Lake City,US,SLC,,,,,,,5.95
+Omsk,RU,OMS,,,,,,,5.96666666666667
+Samara,RU,KUF,,,,,,,8.03333333333333
+Edmonton,CA,YEG,YXD,,,,,,4.28333333333333
+Ulsan,KR,USN,,,,,,,8.26666666666667
+Yichun,CN,LDS,,,,,,,4.68333333333333
+Bujumbura,BI,BJM,,,,,,,6.66666666666667
+Guyuan,CN,GYU,,,,,,,6.43333333333333
+Maputo,MZ,MPM,,,,,,,7.76666666666667
+Amritsar,IN,ATQ,,,,,,,6.53333333333333
+Santo Domingo,DO,SDQ,,,,,,,8.1
+Bishkek,KG,FRU,,,,,,,8.01666666666667
+Tbilisi,GE,TBS,,,,,,,7.8
+Guwahati,IN,GAU,,,,,,,6.45
+Ufa,RU,UFA,,,,,,,6.83333333333333
+Fes,MA,FEZ,,,,,,,8.05
+Mwanza,TZ,MWZ,,,,,,,7.48333333333333
+Mexicali,MX,MXL,,,,,,,9.16666666666667
+Sevilla,ES,SVQ,,,,,,,7.55
+Tamale,GH,TML,,,,,,,7.41666666666667
+N'Djamena,TD,NDJ,,,,,,,6.6
+Cologne,DE,CGN,,,,,,,8.43333333333333
+Krasnoyarsk,RU,KJA,,,,,,,3.58333333333333
+Ezhou,CN,EHU,,,,,,,7.83333333333333
+Astana,KZ,NQZ,,,,,,,5.73333333333333
+Nouakchott,MR,NKC,,,,,,,8.03333333333333
+Yerevan,AM,EVN,,,,,,,8.46666666666667
+Ranchi,IN,IXR,,,,,,,7.95
+Richmond,US,RIC,RID,,,,,,7.23333333333333
+Gwalior,IN,GWL,,,,,,,7.76666666666667
+Ottawa,CA,YOW,YRO,,,,,,6.96666666666667
+Zhongwei,CN,ZHY,,,,,,,8.51666666666667
+Oslo,NO,OSL,,,,,,,7.45
+Sendai,JP,SDJ,,,,,,,8.31666666666667
+Barquisimeto,VE,BRM,,,,,,,7.8
+Chandigarh,IN,IXC,,,,,,,8.0
+Voronezh,RU,VOZ,,,,,,,8.85
+Managua,NI,MGA,,,,,,,8.38333333333333
+Perm,RU,PEE,,,,,,,6.58333333333333
+Kisangani,CD,FKI,,,,,,,6.16666666666667
+Memphis,US,MEM,,,,,,,8.93333333333333
+Sao Luis,BR,SLZ,,,,,,,7.28333333333333
+Jodhpur,IN,JDH,,,,,,,6.03333333333333
+Sanya,CN,SYX,,,,,,,7.9
+Ashgabat,TM,ASB,,,,,,,7.91666666666667
+Denizli,TR,DNZ,,,,,,,8.46666666666667
+Niamey,NE,NIM,,,,,,,6.43333333333333
+Monrovia,LR,MLW,ROB,,,,,,8.01666666666667
+Islamabad,PK,ISB,,,,,,,7.55
+Morelia,MX,MLM,,,,,,,6.25
+Odesa,UA,ODS,,,,,,,8.6
+Raipur,IN,RPR,,,,,,,7.38333333333333
+Arequipa,PE,AQP,,,,,,,7.93333333333333
+Volgograd,RU,VOG,,,,,,,8.81666666666667
+Xingyi,CN,ACX,,,,,,,6.76666666666667
+Quetta,PK,UET,,,,,,,8.31666666666667
+Oklahoma City,US,OKC,PWA,TIK,,,,,8.25
+Bordeaux,FR,BOD,,,,,,,8.61666666666667
+Lilongwe,MW,LLW,,,,,,,7.81666666666667
+Port-au-Prince,HT,PAP,,,,,,,7.83333333333333
+Natal,BR,NAT,,,,,,,8.01666666666667
+Kirkuk,IQ,KIK,,,,,,,5.9
+Hartford,US,HFD,,,,,,,6.43333333333333
+Dnipro,UA,DNK,,,,,,,8.63333333333333
+Malaga,ES,AGP,,,,,,,8.45
+Marrakech,MA,RAK,,,,,,,8.28333333333333
+Louisville,US,LMS,LOU,SDF,,,,,8.25
+Asmara,ER,ASM,,,,,,,8.33333333333333
+Coimbatore,IN,CJB,,,,,,,7.03333333333333
+Maceio,BR,MCZ,,,,,,,8.06666666666667
+Teresina,BR,THE,,,,,,,6.95
+Solapur,IN,SSE,,,,,,,7.25
+Freetown,SL,HGS,FNA,,,,,,8.13333333333333
+Krasnodar,RU,KRR,,,,,,,8.1
+Vientiane,LA,VTE,,,,,,,7.93333333333333
+Tangier,MA,TNG,,,,,,,8.36666666666667
+Kermanshah,IR,KSH,,,,,,,7.88333333333333
+Buffalo,US,BUF,BYG,,,,,,7.91666666666667
+Hubli,IN,HBX,,,,,,,8.05
+Trujillo,PE,TRU,,,,,,,7.33333333333333
+Kitakyushu,JP,KKJ,,,,,,,8.11666666666667
+Aguascalientes,MX,AGU,,,,,,,7.15
+New Orleans,US,MSY,NBG,NEW,,,,,9.25
+Fort Worth,US,AFW,FTW,FWH,,,,,8.85
+Riga,LV,RIX,,,,,,,8.13333333333333
+Kashgar,CN,KHG,,,,,,,8.06666666666667
+Cartagena,CO,CTG,,,,,,,7.26666666666667
+Santiago del Estero,AR,SDE,,,,,,,8.35
+Bridgeport,US,BDR,,,,,,,6.65
+Owerri,NG,QOW,,,,,,,7.58333333333333
+Ad Dammam,SA,DMM,,,,,,,4.83333333333333
+Quzhou,CN,JUZ,,,,,,,8.15
+Donetsk,UA,DOK,,,,,,,8.98333333333333
+Campo Grande,BR,CGR,,,,,,,6.86666666666667
+Bucaramanga,CO,BGA,,,,,,,8.18333333333333
+Merida,MX,MID,,,,,,,8.51666666666667
+Bangui,CF,BGF,,,,,,,7.51666666666667
+Cancun,MX,CUN,,,,,,,8.05
+Zhoushan,CN,HSN,,,,,,,7.58333333333333
+Tucson,US,DMA,TUS,,,,,,9.23333333333333
+Chihuahua,MX,CUU,,,,,,,8.36666666666667
+Barinas,VE,BNS,,,,,,,8.21666666666667
+Marseille,FR,MRS,,,,,,,8.15
+Eskisehir,TR,ESK,AOE,,,,,,8.2
+Lhasa,CN,LXA,,,,,,,6.56666666666667
+Ipoh,MY,IPH,,,,,,,8.01666666666667
+El Paso,US,ELP,,,,,,,9.23333333333333
+Saltillo,MX,SLW,,,,,,,8.26666666666667
+Dushanbe,TJ,DYU,,,,,,,7.76666666666667
+Cochabamba,BO,CBB,,,,,,,7.3
+Tyumen,RU,TJM,,,,,,,6.23333333333333
+Southampton,GB,SOU,,,,,,,7.73333333333333
+Hermosillo,MX,HMO,,,,,,,9.08333333333333
+Wuxi,CN,WUX,,,,,,,7.55
+Cheongju,KR,CJJ,,,,,,,8.41666666666667
+Akure,NG,AKR,,,,,,,8.08333333333333
+Ilorin,NG,ILR,,,,,,,7.96666666666667
+Kathmandu,NP,KTM,,,,,,,8.31666666666667
+Saratov,RU,GSV,RTW,,,,,,7.85
+Pietermaritzburg,ZA,PZB,,,,,,,6.56666666666667
+Durban,ZA,DUR,VIR,,,,,,7.35
+Joao Pessoa,BR,JPA,,,,,,,7.86666666666667
+Omaha,US,MIQ,OFF,OMA,,,,,8.05
+Culiacan,MX,CUL,,,,,,,9.21666666666667
+Cucuta,CO,CUC,,,,,,,6.98333333333333
+Thessaloniki,GR,SKG,,,,,,,8.31666666666667
+Queretaro,MX,QRO,,,,,,,6.76666666666667
+Libreville,GA,LBV,,,,,,,7.91666666666667
+Niigata,JP,KIJ,,,,,,,8.41666666666667
+Leeds,GB,LBA,,,,,,,7.36666666666667
+Birmingham,US,BHM,,,,,,,9.05
+Lubango,AO,SDD,,,,,,,7.7
+Bilbao,ES,BIO,,,,,,,8.16666666666667
+San Luis Potosi,MX,SLP,,,,,,,7.16666666666667
+Fuyang,CN,FUG,,,,,,,8.11666666666667
+Korla,CN,KRL,,,,,,,8.68333333333333
+Albuquerque,US,ABQ,,,,,,,8.08333333333333
+Erzurum,TR,ERZ,,,,,,,6.48333333333333
+Zagreb,HR,ZAG,,,,,,,6.58333333333333
+Bahawalpur,PK,BHV,,,,,,,4.1
+Kaduna,NG,KAD,,,,,,,8.0
+Winnipeg,CA,YWG,,,,,,,6.98333333333333
+Trabzon,TR,TZX,,,,,,,7.96666666666667
+Natal,BR,NAT,,,,,,,8.01666666666667
+Nampula,MZ,APL,,,,,,,6.63333333333333
+Pretoria,ZA,PRY,WKF,,,,,,7.53333333333333
+Cabinda,AO,CAB,,,,,,,8.4
+Kumamoto,JP,KMJ,,,,,,,7.95
+Kerman,IR,KER,,,,,,,7.41666666666667
+Tshikapa,CD,TSH,,,,,,,5.05
+Tulsa,US,RVS,TUL,,,,,,8.41666666666667
+Comodoro Rivadavia,AR,CRD,,,,,,,4.06666666666667
+Nottingham,GB,NQT,EMA,,,,,,7.21666666666667
+Hamilton,CA,YHM,,,,,,,7.71666666666667
+Fresno,US,FAT,FCH,,,,,,7.41666666666667
+Sorocaba,BR,SOD,,,,,,,7.53333333333333
+Concepcion,CL,CCP,,,,,,,4.35
+Changsha,CN,CSX,,,,,,,7.3
+Lviv,UA,LWO,,,,,,,7.91666666666667
+Vilnius,LT,VNO,,,,,,,9.05
+Uberlandia,BR,UDI,GMS,,,,,,7.9
+Xichang,CN,XIC,,,,,,,7.55
+Zaporizhzhia,UA,OZH,,,,,,,8.5
+Bristol,GB,BRS,FZO,,,,,,7.28333333333333
+Charleston,US,CHS,CRW,,,,,,8.5
+Port Moresby,PG,POM,,,,,,,8.4
+Latakia,SY,LTK,,,,,,,8.03333333333333
+Rochester,US,RCR,ROC,RST,,,,,7.26666666666667
+Ribeirao Preto,BR,RAO,,,,,,,7.61666666666667
+Sao Jose dos Campos,BR,SJK,,,,,,,7.5
+Mar del Plata,AR,MDQ,,,,,,,5.65
+Zaragoza,ES,ZAZ,,,,,,,7.7
+Rasht,IR,RAS,,,,,,,8.21666666666667
+Cotonou,BJ,COO,,,,,,,8.05
+Gorakhpur,IN,GOP,,,,,,,6.4
+Dayton,US,DAY,FFO,MGY,,,,,7.55
+Bulawayo,ZW,BUQ,,,,,,,5.91666666666667
+Huambo,AO,NOV,,,,,,,6.66666666666667
+Aracaju,BR,AJU,,,,,,,8.55
+Rotterdam,NL,RTM,,,,,,,8.03333333333333
+Villavicencio,CO,VVC,,,,,,,8.11666666666667
+Makhachkala,RU,MCX,,,,,,,8.18333333333333
+Sargodha,PK,SGI,,,,,,,4.66666666666667
+Durango,MX,DGO,,,,,,,7.63333333333333
+Hue,VN,HUI,,,,,,,8.33333333333333
+Cuiaba,BR,CGB,,,,,,,5.86666666666667
+Izhevsk,RU,IJK,,,,,,,7.13333333333333
+Bhavnagar,IN,BHU,,,,,,,7.1
+Jinghong,CN,JHG,,,,,,,7.9
+Colorado Springs,US,AFF,COS,,,,,,6.96666666666667
+Baton Rouge,US,BTR,,,,,,,9.2
+Manama,BH,BAH,,,,,,,5.96666666666667
+Las Palmas,ES,LPA,,,,,,,8.88333333333333
+Benghazi,LY,BEN,,,,,,,7.2
+Barnaul,RU,BAX,,,,,,,5.56666666666667
+Palermo,IT,PMO,,,,,,,8.73333333333333
+Dusseldorf,DE,DUS,,,,,,,8.5
+Allentown,US,ABE,,,,,,,6.7
+Glasgow,GB,GLA,PIK,,,,,,7.15
+Namangan,UZ,NMA,,,,,,,7.65
+Ulyanovsk,RU,ULV,ULY,,,,,,7.86666666666667
+Mangalore,IN,IXE,,,,,,,7.96666666666667
+Irkutsk,RU,IKT,,,,,,,3.95
+Ogden,US,HIF,OGD,,,,,,5.6
+Jos,NG,JOS,,,,,,,8.18333333333333
+Provo,US,PVU,,,,,,,5.88333333333333
+Feira de Santana,BR,FEC,,,,,,,7.96666666666667
+Khabarovsk,RU,KHV,,,,,,,4.41666666666667
+Leipzig,DE,LEJ,,,,,,,8.0
+Knoxville,US,TYS,,,,,,,7.6
+Tallinn,EE,TLL,,,,,,,6.96666666666667
+Grand Rapids,US,GPZ,GRR,,,,,,7.28333333333333
+Gothenburg,SE,GOT,GSE,,,,,,8.01666666666667
+Kuantan,MY,KUA,,,,,,,7.7
+Gold Coast,AU,OOL,,,,,,,7.71666666666667
+San Miguel de Tucuman,AR,TUC,,,,,,,8.43333333333333
+Ar Rayyan,QA,IUD,,,,,,,4.63333333333333
+Malanje,AO,MEG,,,,,,,6.86666666666667
+Columbia,US,CAE,COU,CUB,COA,,,,7.93333333333333
+Kryvyi Rih,UA,KWG,,,,,,,8.6
+Tunis,TN,TUN,,,,,,,7.8
+Garoua,CM,GOU,,,,,,,7.58333333333333
+Bafoussam,CM,BFX,,,,,,,7.6
+Haifa,IL,HFA,,,,,,,8.15
+Vladivostok,RU,VVO,,,,,,,6.51666666666667
+Kagoshima,JP,KOJ,,,,,,,8.58333333333333
+Dortmund,DE,DTM,,,,,,,8.53333333333333
+Albany,US,ABY,ALB,,,,,,6.75
+Pereira,CO,PEI,,,,,,,7.06666666666667
+Reynosa,MX,REX,,,,,,,8.75
+Zahedan,IR,ZAH,,,,,,,6.55
+Kingston,JM,KIN,,,,,,,7.86666666666667
+Port Sudan,SD,PZU,,,,,,,5.26666666666667
+Tomsk,RU,TOF,,,,,,,4.33333333333333
+Rabat,MA,RBA,,,,,,,8.91666666666667
+Bakersfield,US,BFL,,,,,,,6.93333333333333
+Nakuru,KE,NUU,,,,,,,7.95
+Bremen,DE,BRE,,,,,,,8.35
+New Haven,US,HVN,,,,,,,6.26666666666667
+Orenburg,RU,REN,,,,,,,7.38333333333333
+Dresden,DE,DRS,,,,,,,8.05
+Kemerovo,RU,KEJ,,,,,,,4.36666666666667
+Londrina,BR,LDB,,,,,,,7.25
+Hamadan,IR,HDM,NUJ,,,,,,8.88333333333333
+Chiclayo,PE,CIX,,,,,,,7.46666666666667
+Novokuznetsk,RU,NOZ,,,,,,,4.63333333333333
+Nanded,IN,NDC,,,,,,,
+Des Moines,US,DSM,,,,,,,7.76666666666667
+Lisbon,PT,LIS,,,,,,,8.23333333333333
+Yanji,CN,YNJ,,,,,,,5.7
+Manchester,GB,MAN,WFD,,,,,,7.51666666666667
+Samarkand,UZ,SKD,,,,,,,8.06666666666667
+Hannover,DE,HAJ,,,,,,,8.16666666666667
+Valledupar,CO,VUP,,,,,,,7.96666666666667
+Akron,US,AKO,AKC,CAK,,,,,7.11666666666667
+Mbeya,TZ,MBI,,,,,,,7.98333333333333
+Ibague,CO,IBE,,,,,,,7.88333333333333
+Juiz de Fora,BR,JDF,IZA,,,,,,7.43333333333333
+Ryazan,RU,RZN,,,,,,,8.75
+Florianopolis,BR,FLN,,,,,,,7.05
+Antwerp,BE,ANR,,,,,,,7.93333333333333
+Kassala,SD,KSL,,,,,,,5.75
+Aksu,CN,AKU,,,,,,,8.21666666666667
+Salta,AR,SLA,,,,,,,8.05
+Concord,US,CCR,CON,USA,,,,,6.3
+Beira,MZ,BEW,,,,,,,7.61666666666667
+Yazd,IR,AZD,,,,,,,6.6
+Ardabil,IR,ADU,,,,,,,5.31666666666667
+Bikaner,IN,BKB,,,,,,,4.68333333333333
+Ndola,ZM,NLA,,,,,,,6.36666666666667
+Skopje,MK,SKP,,,,,,,8.01666666666667
+Port Said,EG,PSD,,,,,,,8.41666666666667
+Astrakhan,RU,ASF,,,,,,,8.8
+Monteria,CO,MTR,,,,,,,7.95
+Nuremberg,DE,NUE,,,,,,,7.18333333333333
+Kitchener,CA,YKF,,,,,,,7.11666666666667
+Agartala,IN,IXA,,,,,,,6.73333333333333
+Lyon,FR,LYS,QXB,,,,,,7.85
+Meknes,MA,MEK,,,,,,,8.2
+Penza,RU,PEZ,,,,,,,8.53333333333333
+Santa Marta,CO,SMR,,,,,,,7.31666666666667
+Liverpool,GB,LPL,,,,,,,7.43333333333333
+Macapa,BR,MCP,,,,,,,7.5
+Benguela,AO,BUG,,,,,,,8.31666666666667
+Wichita,US,BEC,CEA,IAB,ICT,,,,7.95
+Newcastle,ZA,NCS,,,,,,,7.01666666666667
+Aden,YE,ADE,,,,,,,6.73333333333333
+Matsuyama,JP,MYJ,,,,,,,8.33333333333333
+Kitwe,ZM,KIW,,,,,,,6.08333333333333
+Pohang,KR,KPO,,,,,,,8.28333333333333
+Mesa,US,MSC,,,,,,,9.5
+Lipetsk,RU,LPK,,,,,,,8.66666666666667
+Jammu,IN,IXJ,,,,,,,8.03333333333333
+Kirov,RU,KVX,,,,,,,6.66666666666667
+Mazatlan,MX,MZT,,,,,,,8.85
+El Fasher,SD,ELF,,,,,,,5.46666666666667
+Farah,AF,FAH,,,,,,,6.23333333333333
+Harrisburg,US,HAR,HSB,MDT,,,,,6.6
+Kaliningrad,RU,KGD,,,,,,,8.9
+Lapu-Lapu City,PH,CEB,,,,,,,7.7
+Toledo,US,TDO,TDZ,TOL,,,,,7.63333333333333
+Nyala,SD,UYL,,,,,,,6.41666666666667
+Bissau,GW,OXB,,,,,,,7.96666666666667
+Vinh,VN,VII,,,,,,,8.11666666666667
+Cheboksary,RU,CSY,,,,,,,7.7
+Edinburgh,GB,EDI,,,,,,,6.43333333333333
+Karamay,CN,KRY,,,,,,,
+Worcester,US,ORH,,,,,,,6.4
+Sevastopol,UA,UKS,,,,,,,8.73333333333333
+Sanliurfa,TR,SFQ,GNY,,,,,,8.05
+Sao Jose do Rio Preto,BR,SJP,,,,,,,7.1
+Jamnagar,IN,JGA,,,,,,,7.56666666666667
+Sylhet,BD,ZYL,,,,,,,6.76666666666667
+East London,ZA,ELS,,,,,,,6.93333333333333
+Berbera,SO,BBO,,,,,,,5.91666666666667
+Asuncion,PY,ASU,,,,,,,7.88333333333333
+Oita,JP,OIT,,,,,,,8.51666666666667
+Eldoret,KE,EDL,,,,,,,7.85
+Bratislava,SK,BTS,,,,,,,7.13333333333333
+Piura,PE,PIU,,,,,,,7.93333333333333
+San Juan,AR,UAQ,,,,,,,7.58333333333333
+Mykolaiv,UA,NLV,,,,,,,7.63333333333333
+Constantine,DZ,CZL,,,,,,,8.56666666666667
+Caxias do Sul,BR,CXJ,,,,,,,6.48333333333333
+Angeles City,PH,CRK,,,,,,,8.16666666666667
+Kuqa,CN,KCA,,,,,,,8.7
+Kanazawa,JP,KMQ,,,,,,,8.31666666666667
+Long Beach,US,LGB,,,,,,,7.68333333333333
+Porto Velho,BR,PVH,,,,,,,6.58333333333333
+Little Rock,US,LIT,,,,,,,8.71666666666667
+Juba,SS,JUB,,,,,,,6.06666666666667
+Reno,US,RNO,,,,,,,4.98333333333333
+Spokane,US,GEG,SFF,SKA,,,,,5.2
+Manizales,CO,MZL,,,,,,,6.91666666666667
+Kota Kinabalu,MY,BKI,,,,,,,7.75
+Madison,US,MDN,DXE,XMD,MSN,,,,8.4
+Udaipur,IN,UDR,,,,,,,7.96666666666667
+Kursk,RU,URS,,,,,,,8.98333333333333
+Stavropol,RU,STW,,,,,,,8.0
+Boise,US,BOI,,,,,,,6.1
+Mariupol,UA,MPW,,,,,,,8.46666666666667
+Barcelona,VE,BLA,,,,,,,7.96666666666667
+Zurich,CH,ZRH,,,,,,,6.25
+Batman,TR,BAL,,,,,,,7.48333333333333
+Kahramanmaras,TR,KCM,,,,,,,7.55
+Halifax,CA,YHZ,,,,,,,6.51666666666667
+Jinchang,CN,JIC,,,,,,,6.4
+Oakland,US,ODM,OAK,,,,,,7.88333333333333
+Springfield,US,SGF,SGH,SPI,VSF,,,,7.93333333333333
+Augusta,US,AGS,AUG,DNL,,,,,8.46666666666667
+Calicut,IN,CCJ,,,,,,,7.9
+Windhoek,NA,ERS,WDH,,,,,,8.6
+Cusco,PE,CUZ,,,,,,,4.55
+Veracruz,MX,VER,,,,,,,8.55
+Sokoto,NG,SKO,,,,,,,7.06666666666667
+Malatya,TR,MLX,,,,,,,8.21666666666667
+Aomori,JP,AOJ,,,,,,,7.26666666666667
+Tver,RU,KLD,,,,,,,8.15
+Xalapa,MX,JAL,,,,,,,7.03333333333333
+Buenaventura,CO,BUN,,,,,,,8.2
+London,CA,YXU,,,,,,,7.3
+Piracicaba,BR,QHB,,,,,,,7.26666666666667
+Agadir,MA,AGA,,,,,,,8.26666666666667
+Elazig,TR,EZS,,,,,,,8.2
+Sarajevo,BA,SJJ,,,,,,,5.86666666666667
+Campina Grande,BR,CPV,,,,,,,7.58333333333333
+Tirana,AL,TIA,,,,,,,8.63333333333333
+Magnitogorsk,RU,MQF,,,,,,,6.13333333333333
+Luhansk,UA,VSG,,,,,,,8.86666666666667
+Takamatsu,JP,TAK,,,,,,,7.93333333333333
+Arusha,TZ,ARK,JRO,,,,,,8.26666666666667
+Stockton,US,SCK,,,,,,,6.51666666666667
+Boa Vista,BR,BVB,,,,,,,7.41666666666667
+Banjul,GM,BJL,,,,,,,7.81666666666667
+Toyama,JP,TOY,,,,,,,8.4
+Khon Kaen,TH,KKC,,,,,,,8.2
+Sochi,RU,AER,,,,,,,8.33333333333333
+Pasto,CO,PSO,,,,,,,5.65
+Syracuse,US,SYR,,,,,,,7.36666666666667
+Bellary,IN,BEP,,,,,,,7.05
+Kisumu,KE,KIS,,,,,,,7.8
+Maringa,BR,MGF,,,,,,,7.18333333333333
+Mataram,ID,LOP,,,,,,,8.31666666666667
+Zaria,NG,ZAR,,,,,,,7.95
+Chattanooga,US,CHA,,,,,,,7.9
+Santa Fe,AR,SFN,,,,,,,7.53333333333333
+Nagasaki,JP,NGS,,,,,,,8.28333333333333
+Hat Yai,TH,HDY,,,,,,,8.08333333333333
+Qazvin,IR,GZW,,,,,,,8.75
+Lancaster,US,LNS,WJF,,,,,,6.33333333333333
+Ivanovo,RU,IWA,,,,,,,7.4
+Greenville,US,GLH,GMU,GRE,GVT,GDC,PGV,,7.71666666666667
+Gifu,JP,QGU,,,,,,,7.8
+Bryansk,RU,BZK,,,,,,,8.78333333333333
+Dera Ghazi Khan,PK,DEA,,,,,,,4.25
+Anapolis,BR,APS,,,,,,,7.53333333333333
+Pensacola,US,NPA,PNS,,,,,,8.53333333333333
+Miyazaki,JP,KMI,,,,,,,8.18333333333333
+Sandakan,MY,SDK,,,,,,,8.16666666666667
+Brno,CZ,BRQ,,,,,,,7.66666666666667
+Surgut,RU,SGC,,,,,,,5.2
+Fayetteville,US,FAY,FYM,FYV,POB,,,,7.88333333333333
+Kaunas,LT,KUN,,,,,,,8.9
+Lobito,AO,LLT,,,,,,,8.71666666666667
+Saurimo,AO,VHC,,,,,,,5.15
+Yola,NG,YOL,,,,,,,7.16666666666667
+Nha Trang,VN,CXR,NHA,,,,,,7.7
+Bologna,IT,BLQ,,,,,,,7.06666666666667
+Aurora,US,BFK,,,,,,,7.25
+Petrolina,BR,PNZ,,,,,,,8.11666666666667
+Nuevo Laredo,MX,NLD,,,,,,,8.23333333333333
+Christchurch,NZ,CHC,,,,,,,2.9
+Canberra,AU,CBR,,,,,,,3.75
+Neiva,CO,NVA,,,,,,,7.48333333333333
+Novi Sad,RS,QND,,,,,,,7.73333333333333
+Celaya,MX,CYW,,,,,,,6.86666666666667
+Caruaru,BR,CAU,,,,,,,8.2
+Hatay,TR,HTY,,,,,,,7.23333333333333
+Iquitos,PE,IQT,,,,,,,7.55
+Gaziantep,TR,GZT,,,,,,,8.56666666666667
+Oxnard,US,NTD,OXR,,,,,,7.48333333333333
+Bharatpur,NP,BHR,,,,,,,7.18333333333333
+Bauru,BR,JTC,BAU,,,,,,7.23333333333333
+Baguio City,PH,BAG,,,,,,,6.18333333333333
+Sivas,TR,VAS,,,,,,,7.66666666666667
+Rio Branco,BR,RBR,,,,,,,6.73333333333333
+Victorville,US,VCV,,,,,,,5.78333333333333
+Victoria,CA,YYJ,,,,,,,4.95
+Coventry,GB,CVT,,,,,,,7.43333333333333
+Trenton,US,TRX,TTN,,,,,,6.98333333333333
+Cuenca,EC,CUE,,,,,,,4.9
+Blumenau,BR,BNU,,,,,,,6.95
+Malmo,SE,MMX,,,,,,,8.1
+Hrodna,BY,GNA,,,,,,,9.08333333333333
+Ponta Grossa,BR,PGZ,,,,,,,5.83333333333333
+Taraz,KZ,DMB,,,,,,,7.96666666666667
+Luena,AO,LUO,,,,,,,5.21666666666667
+Minatitlan,MX,MTT,,,,,,,8.51666666666667
+Gedaref,SD,GSU,,,,,,,6.96666666666667
+Modesto,US,MOD,,,,,,,6.23333333333333
+Pokhara,NP,PKR,,,,,,,8.18333333333333
+Villahermosa,MX,VSA,,,,,,,8.4
+Van,TR,VAN,,,,,,,8.05
+Osh,KG,OSS,,,,,,,8.55
+Corrientes,AR,CNQ,,,,,,,8.01666666666667
+Franca,BR,FRC,,,,,,,7.76666666666667
+Oruro,BO,ORU,,,,,,,4.26666666666667
+Cabimas,VE,CBS,,,,,,,7.1
+Semey,KZ,PLX,,,,,,,6.5
+Holguin,CU,HOG,,,,,,,8.01666666666667
+Chita,RU,HTA,,,,,,,4.13333333333333
+Huntsville,US,HSV,HTV,,,,,,8.41666666666667
+Alicante,ES,ALC,,,,,,,8.5
+Varna,BG,VAR,,,,,,,8.28333333333333
+Honolulu,US,HNL,,,,,,,8.15
+Antofagasta,CL,ANF,,,,,,,6.76666666666667
+Ambon,ID,AMQ,,,,,,,7.93333333333333
+Nice,FR,NCE,,,,,,,4.76666666666667
+Cascavel,BR,CAC,,,,,,,7.06666666666667
+Greensboro,US,GSO,,,,,,,7.01666666666667
+Plovdiv,BG,PDV,,,,,,,8.86666666666667
+Belfast,GB,BFS,BHD,,,,,,7.03333333333333
+Maseru,LS,MSU,,,,,,,6.68333333333333
+Pavlodar,KZ,PWQ,,,,,,,6.4
+Brest,BY,BQT,,,,,,,8.95
+Rajahmundry,IN,RJA,,,,,,,7.26666666666667
+Vung Tau,VN,VTG,,,,,,,7.58333333333333
+Simferopol,UA,SIP,,,,,,,8.03333333333333
+Buon Ma Thuot,VN,BMV,,,,,,,8.35
+Bielefeld,DE,BFE,,,,,,,8.11666666666667
+Uberaba,BR,UBA,,,,,,,7.6
+Bydgoszcz,PL,BZG,,,,,,,8.93333333333333
+Corpus Christi,US,CUX,CRP,NGP,NGW,,,,8.66666666666667
+Fort Wayne,US,FWA,SMD,,,,,,7.35
+Matadi,CD,MAT,,,,,,,7.7
+Bonn,DE,BNJ,,,,,,,8.46666666666667
+Oshawa,CA,YOO,,,,,,,7.61666666666667
+Jackson,US,HKS,JAC,JAN,JXN,MJQ,MKL,,4.91666666666667
+Lublin,PL,LUZ,,,,,,,8.78333333333333
+Belgorod,RU,EGO,,,,,,,8.81666666666667
+Vina del Mar,CL,VAP,KNA,,,,,,5.41666666666667
+Tepic,MX,TPQ,,,,,,,7.48333333333333
+Myrtle Beach,US,MYR,,,,,,,8.43333333333333
+Salalah,OM,SLL,,,,,,,8.68333333333333
+Santarem,BR,STM,,,,,,,6.8
+Kaluga,RU,KLF,,,,,,,8.6
+Asahikawa,JP,AKJ,,,,,,,5.65
+Wonju,KR,WJU,,,,,,,8.25
+Nicosia,CY,ECN,,,,,,,7.56666666666667
+Ciudad Obregon,MX,CEN,,,,,,,9.45
+Fayetteville,US,FAY,FYM,FYV,POB,,,,7.88333333333333
+Debrecen,HU,DEB,,,,,,,7.78333333333333
+Ulanhot,CN,HLH,,,,,,,6.23333333333333
+Pucallpa,PE,PCL,,,,,,,8.11666666666667
+Pelotas,BR,PET,,,,,,,6.96666666666667
+Kuching,MY,KCH,,,,,,,8.2
+Cordoba,ES,ODB,,,,,,,8.06666666666667
+Nantes,FR,NTE,,,,,,,8.28333333333333
+Vitoria,BR,VIX,,,,,,,8.23333333333333
+Lansing,US,LAN,,,,,,,7.55
+Uige,AO,UGO,,,,,,,7.58333333333333
+Hotan,CN,HTN,,,,,,,8.0
+Camaguey,CU,CMW,,,,,,,8.08333333333333
+San Salvador de Jujuy,AR,JUJ,,,,,,,8.01666666666667
+Lexington,US,LEX,LXN,,,,,,7.55
+Munster,DE,FMO,,,,,,,8.31666666666667
+Menongue,AO,SPP,,,,,,,4.43333333333333
+Mobile,US,BFM,MOB,,,,,,8.83333333333333
+Gode,ET,GDE,,,,,,,4.5
+Smolensk,RU,LNX,,,,,,,8.58333333333333
+Nukus,UZ,NCU,,,,,,,8.88333333333333
+Saransk,RU,SKX,,,,,,,8.13333333333333
+Puerto Plata,DO,POP,,,,,,,7.9
+Cherepovets,RU,CEE,,,,,,,7.23333333333333
+Taubate,BR,QHP,,,,,,,7.5
+San Salvador,SV,ILS,,,,,,,8.16666666666667
+Savannah,US,SAV,SVN,,,,,,8.26666666666667
+Naha,JP,OKA,,,,,,,6.83333333333333
+Bari,IT,BRI,,,,,,,8.35
+Mannheim,DE,MHG,,,,,,,8.03333333333333
+Poughkeepsie,US,POU,,,,,,,6.56666666666667
+Jiayuguan,CN,JGN,,,,,,,7.13333333333333
+Vologda,RU,VGD,,,,,,,7.01666666666667
+Gorgan,IR,GBT,,,,,,,8.3
+Yakutsk,RU,YKS,,,,,,,2.71666666666667
+Santa Ana,US,SNA,,,,,,,7.36666666666667
+Guaruja,BR,SSZ,,,,,,,7.91666666666667
+Gwangju,KR,KWJ,,,,,,,8.11666666666667
+Kurgan,RU,KRO,,,,,,,6.25
+Ciudad del Este,PY,AGT,,,,,,,8.05
+Ann Arbor,US,ARB,,,,,,,7.13333333333333
+Newark,US,EWR,,,,,,,7.38333333333333
+Windsor,CA,YQG,,,,,,,8.28333333333333
+Ciudad Victoria,MX,CVM,,,,,,,9.13333333333333
+Minna,NG,MXJ,,,,,,,7.86666666666667
+Sumbawanga,TZ,SUT,,,,,,,8.8
+Orel,RU,OEL,,,,,,,8.56666666666667
+Akita,JP,AXT,,,,,,,7.95
+Palmas,BR,PMW,,,,,,,5.96666666666667
+Bahia Blanca,AR,BHI,,,,,,,6.23333333333333
+Armenia,CO,AXM,NAR,,,,,,7.35
+Augsburg,DE,AGB,,,,,,,5.95
+Popayan,CO,PPN,,,,,,,7.23333333333333
+Newcastle,GB,NCL,,,,,,,6.7
+Oaxaca,MX,OAX,,,,,,,7.31666666666667
+Afyonkarahisar,TR,AFY,,,,,,,8.73333333333333
+Catania,IT,CTA,,,,,,,8.58333333333333
+Los Mochis,MX,LMM,,,,,,,9.45
+Valladolid,ES,VLL,,,,,,,7.86666666666667
+Tampico,MX,TAM,,,,,,,8.11666666666667
+Malabo,GQ,SSG,,,,,,,8.08333333333333
+Santa Rosa,US,STS,,,,,,,5.55
+Comilla,BD,CLA,,,,,,,6.7
+Canton,US,CTK,,,,,,,7.6
+Asheville,US,AVL,,,,,,,6.58333333333333
+Flint,US,FNT,,,,,,,7.55
+Vigo,ES,VGO,,,,,,,8.06666666666667
+Aizawl,IN,AJL,,,,,,,8.26666666666667
+Winter Haven,US,GIF,,,,,,,8.65
+Graz,AT,GRZ,,,,,,,5.96666666666667
+Resistencia,AR,RES,,,,,,,8.11666666666667
+Chimbote,PE,CHM,,,,,,,6.65
+Strasbourg,FR,SXB,,,,,,,7.55
+Bergen,NO,BGO,,,,,,,6.33333333333333
+Gatineau,CA,YND,,,,,,,7.1
+Anchorage,US,EDF,MRI,ANC,,,,,3.33333333333333
+Batna,DZ,BLJ,,,,,,,7.46666666666667
+Aarhus,DK,AAR,,,,,,,7.7
+Lincoln,US,LNK,,,,,,,8.53333333333333
+Tambov,RU,TBW,,,,,,,8.81666666666667
+Magway,MM,MWQ,,,,,,,7.11666666666667
+Concord,US,CCR,CON,USA,,,,,6.3
+Setif,DZ,QSF,,,,,,,7.56666666666667
+Machala,EC,MCH,,,,,,,8.6
+Tirupati,IN,TIR,,,,,,,6.5
+Pathein,MM,BSX,,,,,,,8.15
+Cluj-Napoca,RO,CLJ,,,,,,,7.25
+Springfield,US,SGF,SGH,SPI,VSF,,,,7.93333333333333
+Tacna,PE,TCQ,,,,,,,7.18333333333333
+Juazeiro do Norte,BR,JDO,,,,,,,8.01666666666667
+Katowice,PL,KTW,,,,,,,8.48333333333333
+Foz do Iguacu,BR,IGU,,,,,,,8.03333333333333
+Ljubljana,SI,LJU,,,,,,,6.31666666666667
+Shreveport,US,DTN,SHV,,,,,,8.91666666666667
+Ostrava,CZ,OSR,,,,,,,7.75
+Poltava,UA,PLV,,,,,,,8.73333333333333
+Wiesbaden,DE,WIE,,,,,,,7.78333333333333
+Temuco,CL,ZCO,,,,,,,3.38333333333333
+Jining,CN,JNG,,,,,,,7.91666666666667
+Davenport,US,DVN,,,,,,,7.96666666666667
+Lubbock,US,REE,LBB,,,,,,8.91666666666667
+Lakeland,US,LAL,,,,,,,9.13333333333333
+Bukhara,UZ,BHK,,,,,,,7.78333333333333
+Sumbe,AO,NDD,,,,,,,8.7
+Corlu,TR,TEQ,,,,,,,8.31666666666667
+Kherson,UA,KHE,,,,,,,8.31666666666667
+Nizhnevartovsk,RU,NJC,,,,,,,4.88333333333333
+Petrozavodsk,RU,PES,,,,,,,6.8
+South Bend,US,SBN,,,,,,,7.41666666666667
+Maastricht,NL,MST,,,,,,,7.95
+Kostroma,RU,KMW,,,,,,,7.26666666666667
+Gagnoa,CI,GGN,,,,,,,7.98333333333333
+Dire Dawa,ET,DIR,,,,,,,7.15
+Juliaca,PE,JUL,,,,,,,4.41666666666667
+Posadas,AR,PSS,,,,,,,7.66666666666667
+Kunsan,KR,KUV,,,,,,,8.31666666666667
+Yeosu,KR,RSU,,,,,,,7.65
+Khmelnytskyi,UA,HMJ,,,,,,,8.45
+Nassau,BS,NAS,PID,,,,,,7.33333333333333
+Yeosu,KR,RSU,,,,,,,7.65
+Imperatriz,BR,IMP,,,,,,,6.76666666666667
+Reading,US,RDG,,,,,,,6.55
+Iasi,RO,IAS,,,,,,,7.38333333333333
+Santa Maria,BR,RIA,,,,,,,7.65
+Eugene,US,EUG,,,,,,,4.76666666666667
+Gombe,NG,GMO,,,,,,,7.6
+Cherkasy,UA,CKC,,,,,,,8.45
+Wilmington,US,ILG,ILM,ILN,,,,,8.18333333333333
+Monchengladbach,DE,MGL,,,,,,,8.13333333333333
+Tarija,BO,TJA,,,,,,,7.75
+Plymouth,GB,PLH,,,,,,,6.96666666666667
+Aswan,EG,ASW,,,,,,,3.68333333333333
+Murmansk,RU,MMK,,,,,,,3.38333333333333
+Maradi,NE,MFQ,,,,,,,6.46666666666667
+Adiyaman,TR,ADF,,,,,,,8.05
+Yoshkar-Ola,RU,JOK,,,,,,,7.2
+Maraba,BR,MAB,,,,,,,6.78333333333333
+Salem,US,SLE,SLO,,,,,,4.78333333333333
+Saskatoon,CA,YXE,,,,,,,5.06666666666667
+Killeen,US,ILE,,,,,,,9.33333333333333
+Sumy,UA,UMY,,,,,,,8.75
+Chernivtsi,UA,CWC,,,,,,,7.71666666666667
+Nalchik,RU,NAL,,,,,,,7.36666666666667
+Sfax,TN,SFA,,,,,,,8.2
+Antsirabe,MG,ATJ,,,,,,,8.81666666666667
+Imphal,IN,IMF,,,,,,,8.18333333333333
+Mossoro,BR,MVF,,,,,,,7.2
+Potosi,BO,POI,,,,,,,4.13333333333333
+Columbus,US,CUS,CLU,CBM,CMH,CSG,LCK,OLU,7.81666666666667
+Constanta,RO,CND,,,,,,,8.05
+Zhytomyr,UA,ZTR,,,,,,,8.55
+Aydin,TR,CII,,,,,,,8.23333333333333
+Manta,EC,MEC,,,,,,,8.55
+Tallahassee,US,TLH,,,,,,,8.8
+Isparta,TR,ISE,,,,,,,9.03333333333333
+Antalya,TR,AYT,,,,,,,8.2
+Governador Valadares,BR,GVR,,,,,,,8.46666666666667
+Turkmenabat,TM,CRZ,,,,,,,7.58333333333333
+Verona,IT,VRN,,,,,,,8.2
+Laredo,US,LRD,,,,,,,8.23333333333333
+Kuala Terengganu,MY,TGG,,,,,,,8.15
+Tokushima,JP,TKS,,,,,,,8.53333333333333
+Sao Carlos,BR,QSC,,,,,,,7.66666666666667
+Fort-de-France,MQ,FDF,,,,,,,7.56666666666667
+Mawlamyine,MM,MNU,,,,,,,8.11666666666667
+Peoria,US,PIA,,,,,,,8.15
+Turku,FI,TKU,,,,,,,6.45
+Aachen,DE,AAH,,,,,,,7.75
+Hakodate,JP,HKD,,,,,,,6.91666666666667
+Montgomery,US,MGJ,MGM,MXF,,,,,6.45
+Timisoara,RO,TSR,,,,,,,7.73333333333333
+Rach Gia,VN,VKG,,,,,,,7.11666666666667
+Venice,IT,VCE,,,,,,,7.7
+Taganrog,RU,TGK,,,,,,,8.85
+La Paz,MX,LAP,,,,,,,8.65
+Al Bayda',LY,LAQ,,,,,,,8.11666666666667
+Turkistan,KZ,HSA,,,,,,,8.21666666666667
+New Delhi,IN,DEL,,,,,,,6.31666666666667
+Goma,CD,GOM,,,,,,,7.76666666666667
+Campeche,MX,CPE,,,,,,,8.36666666666667
+Limeira,BR,QGB,,,,,,,7.71666666666667
+Merida,VE,MRD,,,,,,,7.93333333333333
+Glendale,US,LUF,,,,,,,9.58333333333333
+Sibu,MY,SBW,,,,,,,7.83333333333333
+Kiel,DE,KEL,,,,,,,7.83333333333333
+Sahiwal,PK,SWN,,,,,,,4.76666666666667
+Santa Clara,CU,SNU,,,,,,,8.28333333333333
+Yamagata,JP,GAJ,,,,,,,7.51666666666667
+York,US,THV,,,,,,,6.45
+Oruro,BO,ORU,,,,,,,4.26666666666667
+Macae,BR,MEA,,,,,,,8.11666666666667
+Gyor,HU,QGY,,,,,,,7.38333333333333
+Northampton,GB,ORM,,,,,,,7.51666666666667
+Syktyvkar,RU,SCW,,,,,,,5.81666666666667
+Rivne,UA,RWN,,,,,,,8.7
+Nashua,US,ASH,,,,,,,6.76666666666667
+Taiping,MY,TPG,,,,,,,8.36666666666667
+Rondonopolis,BR,ROO,,,,,,,6.38333333333333
+Merlo,AR,RLO,,,,,,,7.53333333333333
+Portoviejo,EC,PVO,,,,,,,8.68333333333333
+Kabinda,CD,KBN,,,,,,,5.68333333333333
+Tripoli,LB,KYE,,,,,,,7.75
+Eindhoven,NL,EIN,,,,,,,8.01666666666667
+Sabzevar,IR,AFZ,,,,,,,7.78333333333333
+Dourados,BR,DOU,,,,,,,7.71666666666667
+Bahir Dar,ET,BJR,,,,,,,8.06666666666667
+Myitkyina,MM,MYT,,,,,,,6.98333333333333
+Tuy Hoa,VN,TBB,,,,,,,7.73333333333333
+Biratnagar,NP,BIR,,,,,,,6.48333333333333
+Araraquara,BR,AQA,,,,,,,7.63333333333333
+Marilia,BR,MII,,,,,,,6.96666666666667
+Scottsdale,US,SCF,,,,,,,9.63333333333333
+Tarapoto,PE,TPP,,,,,,,8.1
+Magdeburg,DE,CSO,,,,,,,8.33333333333333
+Matsumoto,JP,MMJ,,,,,,,8.15
+Szeged,HU,QZD,,,,,,,7.8
+Chimoio,MZ,VPY,,,,,,,6.2
+Ivano-Frankivsk,UA,IFO,,,,,,,7.85
+Wuyishan,CN,WUS,,,,,,,8.6
+Lafayette,US,LAF,LFT,,,,,,8.86666666666667
+Amol,IR,BSM,,,,,,,8.63333333333333
+Stavanger,NO,SVG,,,,,,,6.58333333333333
+Nizhnekamsk,RU,NBC,,,,,,,7.4
+Djougou,BJ,DJA,,,,,,,7.96666666666667
+Norfolk,US,NGU,OFK,ORF,,,,,6.65
+Mirpur Khas,PK,SKZ,,,,,,,4.96666666666667
+Abha,SA,AHB,,,,,,,8.45
+Gaborone,BW,GBE,,,,,,,6.5
+Zinder,NE,ZND,,,,,,,6.21666666666667
+Bole,CN,BPL,,,,,,,
+Bayamo,CU,BYM,,,,,,,8.06666666666667
+Arapiraca,BR,APQ,,,,,,,8.23333333333333
+Miri,MY,MYY,,,,,,,7.56666666666667
+Craiova,RO,CRA,,,,,,,8.4
+Formosa,AR,FMA,,,,,,,7.9
+Appleton,US,ATW,,,,,,,7.58333333333333
+Bo,SL,KBS,,,,,,,8.16666666666667
+Groningen,NL,GRQ,,,,,,,7.9
+Saga,JP,HSG,,,,,,,7.73333333333333
+Saidpur,BD,SPD,,,,,,,6.3
+Beni,CD,BNC,,,,,,,7.75
+Bratsk,RU,BTK,,,,,,,3.06666666666667
+Rancagua,CL,QRC,,,,,,,5.1
+Neuquen,AR,NQN,,,,,,,5.51666666666667
+Divinopolis,BR,DIQ,,,,,,,7.93333333333333
+Granada,ES,GRX,,,,,,,8.06666666666667
+Orsk,RU,OSW,,,,,,,7.16666666666667
+Ordu,TR,OGU,,,,,,,5.93333333333333
+Kosice,SK,KSC,,,,,,,7.76666666666667
+Rock Hill,US,RKH,,,,,,,7.11666666666667
+Fremont,US,FET,,,,,,,6.53333333333333
+Coban,GT,CBV,,,,,,,7.06666666666667
+Guantanamo,CU,GAO,,,,,,,7.71666666666667
+Fargo,US,FAR,,,,,,,7.3
+Usak,TR,USQ,,,,,,,9.06666666666667
+Gulfport,US,GPT,,,,,,,8.73333333333333
+Novo Hamburgo,BR,QHV,,,,,,,7.51666666666667
+Ipatinga,BR,IPN,,,,,,,8.23333333333333
+Kropyvnytskyi,UA,KGO,,,,,,,8.65
+Bremerton,US,PWT,,,,,,,4.88333333333333
+Regina,CA,YQR,,,,,,,6.03333333333333
+Rio Verde,BR,RVD,,,,,,,7.3
+Presidente Prudente,BR,PPB,,,,,,,6.86666666666667
+Green Bay,US,GRB,,,,,,,7.38333333333333
+Enterprise,US,ETS,,,,,,,7.96666666666667
+Ternopil,UA,TNL,,,,,,,8.25
+Kimberley,ZA,KIM,,,,,,,8.3
+Puerto Vallarta,MX,PVR,,,,,,,8.7
+Chapeco,BR,XAP,,,,,,,6.61666666666667
+Toluca,MX,TLC,,,,,,,5.11666666666667
+Paramaribo,SR,ORG,,,,,,,8.36666666666667
+Cox's Bazar,BD,CXB,,,,,,,7.65
+Cork,IE,ORK,,,,,,,7.91666666666667
+Dili,TL,DIL,,,,,,,7.93333333333333
+Cabo Frio,BR,BZC,CFB,,,,,,8.45
+Tabora,TZ,TBO,,,,,,,5.46666666666667
+San Bernardino,US,SBD,,,,,,,7.23333333333333
+Gainesville,US,GLE,GNV,GVL,,,,,8.98333333333333
+San Felipe,VE,SNF,,,,,,,7.41666666666667
+Tacoma,US,TCM,TIW,,,,,,4.86666666666667
+Tulua,CO,ULQ,,,,,,,8.18333333333333
+Roanoke,US,ROA,,,,,,,6.98333333333333
+Lubeck,DE,LBC,,,,,,,
+Butembo,CD,RUE,,,,,,,7.86666666666667
+Tapachula,MX,TAP,,,,,,,8.58333333333333
+Porbandar,IN,PBD,,,,,,,7.96666666666667
+Ayacucho,PE,AYP,,,,,,,5.23333333333333
+Wellington,NZ,WLG,,,,,,,3.8
+Lutsk,UA,UCK,,,,,,,8.8
+La Ceiba,HN,LCE,,,,,,,7.95
+Brownsville,US,BRO,,,,,,,8.76666666666667
+Golmud,CN,GOQ,,,,,,,
+San Rafael,AR,AFA,,,,,,,6.73333333333333
+Chilas,PK,CHB,,,,,,,6.2
+Sikasso,ML,KSS,,,,,,,7.83333333333333
+Turbat,PK,TUK,,,,,,,5.05
+Bhuj,IN,BHJ,,,,,,,7.31666666666667
+College Station,US,CLL,,,,,,,9.25
+Norwich,GB,NWI,,,,,,,7.81666666666667
+Tumaco,CO,TCO,,,,,,,8.3
+Trondheim,NO,TRD,,,,,,,5.33333333333333
+Criciuma,BR,CCM,,,,,,,7.48333333333333
+Olympia,US,OLM,,,,,,,4.61666666666667
+Burgas,BG,BOJ,,,,,,,8.28333333333333
+Sobral,BR,QBX,,,,,,,7.23333333333333
+Clarksville,US,CKV,,,,,,,8.26666666666667
+Linz,AT,LNZ,,,,,,,6.63333333333333
+Rostock,DE,RLG,,,,,,,8.03333333333333
+Pskov,RU,PKV,,,,,,,8.08333333333333
+Legazpi City,PH,LGP,,,,,,,8.13333333333333
+Portland,US,HIO,PDX,PWM,TTD,,,,5.46666666666667
+Beersheba,IL,VTM,,,,,,,8.06666666666667
+Sunyani,GH,NYI,,,,,,,8.03333333333333
+Parakou,BJ,PKO,,,,,,,8.08333333333333
+Passo Fundo,BR,PFB,,,,,,,6.41666666666667
+Talca,CL,TLX,,,,,,,3.91666666666667
+Hickory,US,HKY,,,,,,,6.85
+Amarillo,US,AMA,TDW,,,,,,8.56666666666667
+Pamplona,ES,PNA,,,,,,,7.1
+Phan Thiet,VN,PHH,,,,,,,8.08333333333333
+Biskra,DZ,BSK,,,,,,,7.63333333333333
+Sioux Falls,US,FSD,,,,,,,7.78333333333333
+Kassel,DE,KSF,,,,,,,7.96666666666667
+Coquimbo,CL,COW,,,,,,,5.6
+Geneva,CH,GVA,,,,,,,7.16666666666667
+Huntington,US,HTS,,,,,,,7.26666666666667
+Evansville,US,EVV,,,,,,,8.23333333333333
+Birjand,IR,XBJ,,,,,,,7.15
+Barrancabermeja,CO,EJA,,,,,,,7.98333333333333
+Deoghar,IN,DGH,,,,,,,7.11666666666667
+Huntington,US,HTS,,,,,,,7.26666666666667
+Luxor,EG,LXR,,,,,,,3.93333333333333
+Arica,CL,ARI,,,,,,,7.18333333333333
+Las Tunas,CU,VTU,,,,,,,8.03333333333333
+Rio Claro,BR,QIQ,,,,,,,7.35
+Maroua,CM,MVR,,,,,,,6.96666666666667
+Cajamarca,PE,CJA,,,,,,,5.88333333333333
+Kalamazoo,US,AZO,,,,,,,7.51666666666667
+Jacobabad,PK,JAG,,,,,,,4.31666666666667
+Aberdeen,GB,ABZ,,,,,,,6.23333333333333
+Almeria,ES,LEI,,,,,,,7.85
+Georgetown,GY,GEO,,,,,,,7.25
+Galveston,US,GLS,,,,,,,9.68333333333333
+Aracatuba,BR,ARU,,,,,,,7.06666666666667
+Rio Cuarto,AR,RCU,,,,,,,7.1
+Spartanburg,US,SPA,,,,,,,7.23333333333333
+Lahad Datu,MY,LDU,,,,,,,8.1
+Santa Barbara,US,SBA,,,,,,,5.3
+Huangyan,CN,HYN,,,,,,,8.31666666666667
+Trieste,IT,TRS,,,,,,,7.58333333333333
+Kankan,GN,KNN,,,,,,,8.15
+Hobart,AU,HBA,,,,,,,2.83333333333333
+Parma,IT,PMF,,,,,,,7.76666666666667
+Huanuco,PE,HUU,,,,,,,7.31666666666667
+Brescia,IT,VBS,,,,,,,6.16666666666667
+Sinop,BR,OPS,,,,,,,
+Rzeszow,PL,RZE,,,,,,,8.3
+Waco,US,ACT,CNW,,,,,,9.2
+Acarigua,VE,AGV,,,,,,,8.18333333333333
+Parachinar,PK,PAJ,,,,,,,8.25
+Liege,BE,LGG,,,,,,,8.01666666666667
+Hagerstown,US,HGR,,,,,,,6.55
+Mbarara,UG,MBQ,,,,,,,7.28333333333333
+Yuzhno-Sakhalinsk,RU,UUS,,,,,,,4.33333333333333
+Glendale,US,LUF,,,,,,,9.58333333333333
+Pingtung,TW,PIF,,,,,,,6.65
+Mus,TR,MSR,,,,,,,8.05
+La Plata,AR,LPG,,,,,,,6.65
+Quelimane,MZ,UEL,,,,,,,6.93333333333333
+Guanare,VE,GUQ,,,,,,,8.2
+Rio Grande,BR,RIG,,,,,,,6.38333333333333
+Florencia,CO,FLA,,,,,,,7.8
+Peoria,US,PIA,,,,,,,8.15
+Ciudad del Carmen,MX,CME,,,,,,,8.2
+Valera,VE,VLV,,,,,,,7.76666666666667
+Ouargla,DZ,OGX,,,,,,,6.73333333333333
+Cedar Rapids,US,CID,,,,,,,7.7
+Manzanillo,MX,ZLO,,,,,,,8.45
+Rybinsk,RU,RYB,,,,,,,7.28333333333333
+Balakovo,RU,BWO,,,,,,,8.5
+Paradise,US,PYS,,,,,,,8.28333333333333
+Las Heras,AR,LHS,,,,,,,2.8
+Pinar del Rio,CU,LCL,QPD,SNJ,,,,,8.58333333333333
+Kenema,SL,KEN,,,,,,,7.78333333333333
+Iquique,CL,IQQ,,,,,,,7.23333333333333
+Bournemouth,GB,BOH,,,,,,,7.43333333333333
+Tottori,JP,TTJ,,,,,,,8.58333333333333
+Calbayog City,PH,CYP,,,,,,,7.88333333333333
+Ocala,US,OCF,,,,,,,9.1
+Klerksdorp,ZA,KXE,,,,,,,8.28333333333333
+St. John's,CA,YYT,,,,,,,5.25
+Erie,US,ERI,,,,,,,7.46666666666667
+Dunhuang,CN,DNH,,,,,,,8.25
+Semnan,IR,SNX,,,,,,,8.05
+Newport News,US,PHF,,,,,,,7.88333333333333
+Banja Luka,BA,BNX,,,,,,,6.26666666666667
+Frederick,US,FDK,FDR,,,,,,6.7
+Breda,NL,GLZ,,,,,,,7.83333333333333
+Siguiri,GN,GII,,,,,,,8.21666666666667
+Nis,RS,INI,,,,,,,7.75
+Oradea,RO,OMR,,,,,,,7.75
+Fort Lauderdale,US,FLL,FXE,,,,,,8.16666666666667
+Odense,DK,ODE,,,,,,,7.66666666666667
+Noumea,NC,GEA,NOU,,,,,,7.56666666666667
+Guarapuava,BR,GPB,,,,,,,5.83333333333333
+Saarbrucken,DE,SCN,,,,,,,7.51666666666667
+Abakan,RU,ABA,,,,,,,4.7
+Braga,PT,BGZ,,,,,,,7.95
+Aurora,US,BFK,,,,,,,7.25
+Kelowna,CA,YLW,,,,,,,5.35
+Turbo,CO,TRB,,,,,,,8.1
+La Rioja,AR,IRJ,,,,,,,8.48333333333333
+Danbury,US,DXR,,,,,,,6.28333333333333
+Mongu,ZM,MNR,,,,,,,3.88333333333333
+Norilsk,RU,NSK,,,,,,,2.31666666666667
+Calabar,NG,CBQ,,,,,,,8.08333333333333
+Roxas City,PH,RXS,,,,,,,8.13333333333333
+Tiaret,DZ,TID,,,,,,,8.45
+Ilheus,BR,IOS,,,,,,,8.35
+Kandi,BJ,KDC,,,,,,,7.73333333333333
+Salinas,US,SNS,,,,,,,5.48333333333333
+Ambato,EC,ATF,,,,,,,5.16666666666667
+Hamilton,NZ,HLZ,,,,,,,3.65
+Ontario,US,ONO,ONT,,,,,,7.08333333333333
+Bejaia,DZ,BJA,,,,,,,8.63333333333333
+Catumbela,AO,CBT,,,,,,,8.38333333333333
+Gainesville,US,GLE,GNV,GVL,,,,,8.98333333333333
+Maragheh,IR,ACP,,,,,,,8.63333333333333
+Bodrum,TR,BXN,BJV,,,,,,9.01666666666667
+Burgos,ES,RGS,,,,,,,7.13333333333333
+Carupano,VE,CUP,,,,,,,7.45
+Townsville,AU,TSV,,,,,,,8.66666666666667
+Oceanside,US,OCN,,,,,,,7.23333333333333
+Basel,CH,BSL,,,,,,,6.91666666666667
+Tlemcen,DZ,TLM,,,,,,,8.33333333333333
+Albacete,ES,ABC,,,,,,,7.7
+Keningau,MY,KGU,,,,,,,8.51666666666667
+Podgorica,ME,TGD,,,,,,,8.36666666666667
+Sherbrooke,CA,YSC,,,,,,,6.48333333333333
+Silchar,IN,IXS,,,,,,,7.21666666666667
+Santander,ES,SDR,,,,,,,7.51666666666667
+Kindu,CD,KND,,,,,,,4.91666666666667
+Kaolack,SN,KLC,,,,,,,7.61666666666667
+Izumo,JP,IZO,,,,,,,8.5
+Lancaster,US,LNS,WJF,,,,,,6.33333333333333
+Araguaina,BR,AUX,,,,,,,6.13333333333333
+Makurdi,NG,MDI,,,,,,,7.71666666666667
+Kohat,PK,OHT,,,,,,,6.1
+Hemet,US,HMT,,,,,,,6.01666666666667
+San Luis,AR,LUQ,,,,,,,7.73333333333333
+Panama City,US,ECP,PAM,,,,,,8.66666666666667
+Puerto Montt,CL,PMC,,,,,,,3.05
+Manchester,US,MHT,,,,,,,6.71666666666667
+Batumi,GE,BUS,,,,,,,8.06666666666667
+Chetumal,MX,CTM,,,,,,,7.35
+Medford,US,MDF,MFR,,,,,,5.08333333333333
+Kasama,ZM,KAA,,,,,,,6.25
+Porto Seguro,BR,BPS,,,,,,,8.78333333333333
+Riohacha,CO,RCH,,,,,,,7.3
+Palmdale,US,PMD,,,,,,,6.01666666666667
+Norwich,US,OIC,,,,,,,6.65
+Muskegon,US,MKG,,,,,,,7.38333333333333
+Siirt,TR,SXZ,,,,,,,8.11666666666667
+Leesburg,US,LEE,,,,,,,6.71666666666667
+Ipiales,CO,IPI,,,,,,,4.18333333333333
+Sudbury,CA,YSB,,,,,,,7.21666666666667
+Kushiro,JP,KUH,,,,,,,5.56666666666667
+Obihiro,JP,OBO,,,,,,,5.51666666666667
+Bechar,DZ,CBH,,,,,,,7.08333333333333
+Kokshetau,KZ,KOV,,,,,,,5.7
+Cienfuegos,CU,CFG,,,,,,,8.25
+Abengourou,CI,OGO,,,,,,,7.85
+Tuscaloosa,US,TCL,,,,,,,8.66666666666667
+Chillan,CL,YAI,,,,,,,3.9
+Pocos de Caldas,BR,POO,,,,,,,7.85
+Visalia,US,VIS,,,,,,,6.28333333333333
+Wau,SS,WUU,,,,,,,7.46666666666667
+Tokat,TR,TJK,,,,,,,6.43333333333333
+Garissa,KE,GAS,,,,,,,5.4
+San Fernando,AR,FDO,,,,,,,6.65
+Ube,JP,UBJ,,,,,,,8.01666666666667
+Simao,CN,SYM,,,,,,,7.9
+Anaco,VE,AAO,,,,,,,7.78333333333333
+Marysville,US,BAB,MYV,,,,,,4.78333333333333
+Boma,CD,BOA,,,,,,,
+Parnaiba,BR,PHB,,,,,,,7.43333333333333
+Perugia,IT,PEG,,,,,,,8.03333333333333
+Nador,MA,NDR,,,,,,,8.53333333333333
+Tacheng,CN,TCG,,,,,,,7.33333333333333
+General Roca,AR,GNR,,,,,,,5.98333333333333
+Zaranj,AF,ZAJ,,,,,,,5.08333333333333
+Braganca Paulista,BR,BJP,,,,,,,7.46666666666667
+Merced,US,MCE,MER,,,,,,6.3
+Hayward,US,HWD,HYR,,,,,,5.85
+Split,HR,SPU,,,,,,,8.0
+Lafayette,US,LAF,LFT,,,,,,8.86666666666667
+Dong Hoi,VN,VDH,,,,,,,8.2
+Ferkessedougou,CI,FEK,,,,,,,7.83333333333333
+Southend,GB,SEN,,,,,,,7.3
+Ciudad Acuna,MX,ACN,,,,,,,8.56666666666667
+Khost,AF,KHT,,,,,,,7.73333333333333
+Osorno,CL,ZOS,,,,,,,3.06666666666667
+Ekibastuz,KZ,EKB,,,,,,,6.2
+Barreiras,BR,BRA,,,,,,,7.43333333333333
+Enschede,NL,ENS,,,,,,,8.2
+Springfield,US,SGF,SGH,SPI,VSF,,,,7.93333333333333
+Jijiga,ET,JIJ,,,,,,,8.11666666666667
+Patos de Minas,BR,POJ,,,,,,,8.01666666666667
+Catamarca,AR,CTC,,,,,,,8.38333333333333
+Jequie,BR,JEQ,,,,,,,7.61666666666667
+Alexandria,US,AEX,AXN,ESF,,,,,7.4
+Calama,CL,CJC,,,,,,,7.31666666666667
+Erzincan,TR,ERC,,,,,,,7.65
+George,ZA,GRJ,,,,,,,5.95
+Guaymas,MX,GYM,,,,,,,8.86666666666667
+Kamina,CD,KMN,,,,,,,5.35
+Macon,US,MAC,MCN,,,,,,7.95
+Binghamton,US,BGM,,,,,,,6.55
+Ravenna,IT,RAN,,,,,,,7.31666666666667
+Kansas City,US,MCI,MKC,,,,,,8.06666666666667
+Chlef,DZ,CFK,,,,,,,7.55
+Salzburg,AT,SZG,,,,,,,7.23333333333333
+Kishangarh,IN,KQH,,,,,,,6.96666666666667
+Paderborn,DE,PAD,,,,,,,8.08333333333333
+Edremit,TR,EDO,,,,,,,8.56666666666667
+Bandirma,TR,BDM,,,,,,,8.33333333333333
+Lucapa,AO,LBZ,,,,,,,5.18333333333333
+Dibrugarh,IN,DIB,,,,,,,6.88333333333333
+New Bedford,US,EWB,,,,,,,6.56666666666667
+Abbotsford,CA,YXX,,,,,,,4.9
+Balurghat,IN,RGH,,,,,,,6.61666666666667
+San Jose,PH,SJI,EUQ,,,,,,7.58333333333333
+Jorhat,IN,JRH,,,,,,,7.11666666666667
+Nevsehir,TR,NAV,,,,,,,8.53333333333333
+Tete,MZ,TET,,,,,,,4.25
+Hollywood,US,HWO,,,,,,,7.88333333333333
+Pouso Alegre,BR,PPY,,,,,,,7.85
+Alagoinhas,BR,QGS,,,,,,,8.11666666666667
+Gulu,UG,ULU,,,,,,,7.93333333333333
+Matanzas,CU,VRO,,,,,,,8.2
+Tauranga,NZ,TRG,,,,,,,4.16666666666667
+Lake Charles,US,CWF,LCH,,,,,,9.2
+Manzanillo,CU,MZO,,,,,,,8.03333333333333
+San Jose,PH,SJI,EUQ,,,,,,7.58333333333333
+Copiapo,CL,CPO,,,,,,,7.51666666666667
+Logrono,ES,RJL,,,,,,,7.53333333333333
+Toledo,BR,TOW,,,,,,,7.4
+Joliet,US,JOT,,,,,,,7.85
+Badajoz,ES,BJZ,,,,,,,7.83333333333333
+Mzuzu,MW,ZZU,,,,,,,8.8
+Valdivia,CL,ZAL,,,,,,,3.15
+Sievierodonetsk,UA,SEV,,,,,,,8.83333333333333
+Willemstad,CW,CUR,,,,,,,6.76666666666667
+Fairfield,US,FFL,SUU,,,,,,6.56666666666667
+Asaba,NG,ABB,,,,,,,7.58333333333333
+Kerch,UA,KHC,,,,,,,8.33333333333333
+Concordia,AR,COC,,,,,,,7.03333333333333
+Mesquite,US,MFH,,,,,,,8.88333333333333
+Lashio,MM,LSH,,,,,,,8.4
+Elkhart,US,EKI,,,,,,,7.35
+Rimini,IT,RMI,,,,,,,6.86666666666667
+Port Louis,MU,MRU,,,,,,,8.45
+Agri,TR,AJI,,,,,,,7.63333333333333
+Kastamonu,TR,KFS,,,,,,,7.01666666666667
+Potchefstroom,ZA,PCF,,,,,,,8.0
+Abbottabad,PK,AAW,,,,,,,9.43333333333333
+Larisa,GR,LRA,,,,,,,8.45
+Coro,VE,CZE,,,,,,,6.93333333333333
+Dundee,GB,DND,,,,,,,7.2
+Topeka,US,FOE,TOP,,,,,,7.95
+Cagliari,IT,CAG,,,,,,,8.83333333333333
+Kutaisi,GE,KUT,,,,,,,7.61666666666667
+Siem Reap,KH,SAI,REP,,,,,,8.13333333333333
+Malakal,SS,MAK,,,,,,,6.93333333333333
+Burlington,US,BRL,BTV,,,,,,7.13333333333333
+Yonago,JP,YGJ,,,,,,,8.16666666666667
+Kramatorsk,UA,KRQ,,,,,,,8.63333333333333
+Colima,MX,CLQ,,,,,,,8.5
+Dawei,MM,TVY,,,,,,,8.16666666666667
+Warner Robins,US,WRB,,,,,,,8.51666666666667
+Cairns,AU,CNS,,,,,,,8.03333333333333
+Gandajika,CD,GDJ,,,,,,,5.46666666666667
+Dadu,PK,DDU,,,,,,,4.1
+Pleiku,VN,PXU,,,,,,,7.98333333333333
+Torrance,US,TOA,,,,,,,7.5
+Foggia,IT,FOG,,,,,,,8.33333333333333
+Miskolc,HU,MCQ,,,,,,,7.95
+Teixeira de Freitas,BR,TXF,,,,,,,
+Arad,RO,ARW,,,,,,,8.0
+Bukoba,TZ,BKZ,,,,,,,8.15
+Comayagua,HN,XPL,,,,,,,8.51666666666667
+Salamanca,ES,SLM,,,,,,,8.01666666666667
+Santa Maria,US,SMX,,,,,,,5.63333333333333
+Aalborg,DK,AAL,,,,,,,7.68333333333333
+Ciego de Avila,CU,AVI,,,,,,,8.08333333333333
+Touggourt,DZ,TGR,,,,,,,7.63333333333333
+Shillong,IN,SHL,,,,,,,7.93333333333333
+Athens,US,AHN,MMI,,,,,,7.76666666666667
+Houma,US,HUM,,,,,,,9.28333333333333
+Lleida,ES,ILD,,,,,,,7.91666666666667
+Los Angeles,CL,LSQ,,,,,,,3.81666666666667
+Cartago,CO,CRC,,,,,,,8.0
+Stara Zagora,BG,SZR,,,,,,,8.33333333333333
+Columbia,US,CAE,COU,CUB,COA,,,,7.93333333333333
+Garanhuns,BR,QGP,,,,,,,7.83333333333333
+Fullerton,US,FUL,,,,,,,7.61666666666667
+Lichinga,MZ,VXC,,,,,,,8.56666666666667
+Olathe,US,JCI,OJC,,,,,,8.05
+Altay,CN,AAT,,,,,,,6.01666666666667
+Bahawalnagar,PK,WGB,,,,,,,4.86666666666667
+Bondoukou,CI,BDK,,,,,,,7.73333333333333
+Lausanne,CH,QLS,,,,,,,6.55
+Khuzdar,PK,KDD,,,,,,,6.21666666666667
+Gweru,ZW,GWE,,,,,,,6.65
+Greeley,US,GXY,,,,,,,6.83333333333333
+Beaumont,US,BMT,,,,,,,9.7
+Las Cruces,US,LRU,,,,,,,8.88333333333333
+Paranagua,BR,PNG,,,,,,,6.9
+Ozamiz City,PH,OZC,,,,,,,8.21666666666667
+Midland,US,MAF,MDD,,,,,,9.01666666666667
+Darwin,AU,DRW,,,,,,,7.5
+Reykjavik,IS,KEF,RKV,,,,,,3.36666666666667
+Atbara,SD,ATB,,,,,,,3.31666666666667
+La Romana,DO,LRM,,,,,,,7.86666666666667
+Botucatu,BR,QCJ,,,,,,,6.9
+Blackpool,GB,BLK,,,,,,,6.65
+Trois-Rivieres,CA,YRQ,,,,,,,6.75
+Gemena,CD,GMA,,,,,,,7.1
+Sancti Spiritus,CU,USS,,,,,,,8.4
+Grand Junction,US,GJT,,,,,,,6.6
+Tyler,US,TYR,,,,,,,9.01666666666667
+Jacmel,HT,JAK,,,,,,,7.88333333333333
+Koutiala,ML,KTX,,,,,,,7.6
+Mthatha,ZA,UTT,,,,,,,6.46666666666667
+Igdir,TR,IGD,,,,,,,8.23333333333333
+Negage,AO,GXG,,,,,,,
+Teofilo Otoni,BR,TFL,,,,,,,7.9
+Norrkoping,SE,NRK,,,,,,,7.96666666666667
+Hampton,US,HPT,LFI,,,,,,7.98333333333333
+Huehuetenango,GT,HUG,,,,,,,6.46666666666667
+Bloomington,US,BMG,,,,,,,8.11666666666667
+Varginha,BR,VAG,,,,,,,7.86666666666667
+San Jose del Cabo,MX,SJD,,,,,,,9.43333333333333
+Bacau,RO,BCM,,,,,,,6.83333333333333
+Tobruk,LY,TOB,,,,,,,7.98333333333333
+Gitega,BI,GID,,,,,,,7.35
+Rionegro,CO,MDE,,,,,,,6.45
+Nkongsamba,CM,NKS,,,,,,,8.33333333333333
+Yuma,US,YUM,,,,,,,8.83333333333333
+Kigoma,TZ,TKQ,,,,,,,7.45
+Moron,MN,MXV,,,,,,,5.43333333333333
+Bern,CH,BRN,,,,,,,6.45
+Coeur d'Alene,US,COE,,,,,,,4.55
+Laghouat,DZ,LOO,,,,,,,7.6
+Sibiu,RO,SBZ,,,,,,,7.4
+Brighton,GB,ESH,,,,,,,7.36666666666667
+Dumaguete City,PH,DGT,,,,,,,8.13333333333333
+Thandwe,MM,SNW,,,,,,,
+Santa Cruz do Sul,BR,CSU,,,,,,,7.6
+Pitalito,CO,PTX,,,,,,,7.06666666666667
+Naga,PH,WNP,,,,,,,8.0
+Luxembourg,LU,LUX,,,,,,,7.2
+Sao Mateus,BR,SBJ,,,,,,,7.78333333333333
+Kingston,CA,YGK,,,,,,,7.45
+Yakima,US,YKM,,,,,,,5.91666666666667
+Racine,US,RAC,,,,,,,7.36666666666667
+Johnson City,US,JCY,,,,,,,6.73333333333333
+Papeete,PF,PPT,,,,,,,8.1
+Conselheiro Lafaiete,BR,QDF,,,,,,,7.71666666666667
+Ji-Parana,BR,JPR,,,,,,,
+Billings,US,BIL,,,,,,,5.78333333333333
+Jijel,DZ,GJL,,,,,,,8.43333333333333
+Atyrau,KZ,GUW,,,,,,,9.13333333333333
+Quibdo,CO,UIB,,,,,,,8.15
+Iowa City,US,IOW,,,,,,,8.0
+Surat Thani,TH,URT,,,,,,,8.01666666666667
+Trinidad,BO,TDD,,,,,,,6.38333333333333
+Innsbruck,AT,INN,,,,,,,6.5
+Udon Thani,TH,UTH,,,,,,,7.98333333333333
+Dover,US,DOV,,,,,,,7.16666666666667
+Apucarana,BR,APU,,,,,,,6.7
+Battambang,KH,BBM,,,,,,,7.93333333333333
+Bellingham,US,BLI,,,,,,,5.03333333333333
+Girardot,CO,GIR,,,,,,,7.38333333333333
+Charleston,US,CHS,CRW,,,,,,8.5
+Mansa,ZM,MNS,,,,,,,5.43333333333333
+Lynchburg,US,LYH,,,,,,,6.96666666666667
+Nefteyugansk,RU,NFG,,,,,,,4.63333333333333
+Edremit,TR,EDO,,,,,,,8.56666666666667
+Norman,US,OUN,,,,,,,8.41666666666667
+Greenville,US,GLH,GMU,GRE,GVT,GDC,PGV,,7.71666666666667
+Iwakuni,JP,IWK,,,,,,,8.86666666666667
+Salerno,IT,QSR,,,,,,,8.01666666666667
+Saidpur,BD,SPD,,,,,,,6.3
+Neftekamsk,RU,NEF,,,,,,,6.66666666666667
+Orebro,SE,ORB,,,,,,,7.85
+Fort Smith,US,FSM,,,,,,,8.48333333333333
+Abilene,US,ABI,DYS,,,,,,9.11666666666667
+Altamira,BR,ATM,,,,,,,7.55
+Mary,TM,MYP,,,,,,,7.81666666666667
+Barbacena,BR,QAK,,,,,,,7.3
+Resende,BR,QRZ,,,,,,,7.55
+Salto,UY,STY,,,,,,,7.03333333333333
+Guarapari,BR,GUZ,,,,,,,8.21666666666667
+Ouahigouya,BF,OUG,,,,,,,6.96666666666667
+Leeuwarden,NL,LWR,,,,,,,7.9
+Panevezys,LT,PNV,,,,,,,8.61666666666667
+Kenosha,US,ENW,,,,,,,7.55
+Exeter,GB,EXT,,,,,,,7.05
+Magangue,CO,MGN,,,,,,,7.86666666666667
+Cambridge,GB,CBG,,,,,,,7.93333333333333
+Punta Arenas,CL,PUQ,,,,,,,2.38333333333333
+Itaituba,BR,ITB,,,,,,,6.33333333333333
+Burlington,US,BRL,BTV,,,,,,7.13333333333333
+Tres Lagoas,BR,TJL,,,,,,,7.03333333333333
+Bento Goncalves,BR,BGV,,,,,,,6.73333333333333
+Kaya,BF,XKY,,,,,,,7.2
+Zacatecas,MX,ZCL,,,,,,,6.1
+Dimapur,IN,DMU,,,,,,,7.35
+Barretos,BR,BAT,,,,,,,7.6
+Independence,US,IDP,,,,,,,8.01666666666667
+Leon,ES,LEN,,,,,,,7.35
+Gyumri,AM,LWN,,,,,,,6.45
+Rochester,US,RCR,ROC,RST,,,,,7.26666666666667
+Logan,US,LGU,,,,,,,5.23333333333333
+Harlingen,US,HRL,,,,,,,9.06666666666667
+Port-de-Paix,HT,PAX,,,,,,,
+Upington,ZA,UTN,,,,,,,9.18333333333333
+Coatepeque,GT,CTF,,,,,,,8.53333333333333
+Clovis,US,CVN,CVS,,,,,,7.5
+Pueblo,US,PUB,,,,,,,7.65
+High Wycombe,GB,HYC,,,,,,,7.63333333333333
+Temple,US,TPL,,,,,,,9.23333333333333
+Ghardaia,DZ,GHA,,,,,,,7.26666666666667
+Meridian,US,MEI,,,,,,,5.93333333333333
+Malindi,KE,MYD,,,,,,,7.98333333333333
+Moncton,CA,YQM,,,,,,,6.6
+Bergamo,IT,BGY,,,,,,,7.58333333333333
+Debre Tabor,ET,DBT,,,,,,,6.5
+Arapongas,BR,APX,,,,,,,6.63333333333333
+Guaratingueta,BR,GUJ,,,,,,,7.65
+Pescara,IT,PSR,,,,,,,7.0
+Duluth,US,DLH,,,,,,,6.48333333333333
+Matamoros,MX,MAM,,,,,,,9.25
+Boulder,US,WBU,,,,,,,5.65
+Nouadhibou,MR,NDB,,,,,,,8.03333333333333
+Cambridge,US,CGE,,,,,,,6.95
+Bage,BR,BGX,,,,,,,6.61666666666667
+Tahoua,NE,THZ,,,,,,,6.16666666666667
+Agadez,NE,AJY,,,,,,,3.38333333333333
+West Palm Beach,US,LNA,PBI,,,,,,8.03333333333333
+Catacamas,HN,CAA,,,,,,,8.5
+Uruguaiana,BR,URG,,,,,,,7.26666666666667
+Banfora,BF,BNR,,,,,,,7.76666666666667
+Redding,US,BZF,RDD,,,,,,6.46666666666667
+Umuarama,BR,UMU,,,,,,,7.75
+Clearwater,US,CLW,,,,,,,8.43333333333333
+Monroe,US,MLU,,,,,,,7.16666666666667
+Forli,IT,FRL,,,,,,,6.83333333333333
+Xai-Xai,MZ,VJB,,,,,,,7.56666666666667
+Gabes,TN,GAE,,,,,,,8.01666666666667
+Boke,GN,BKJ,,,,,,,8.03333333333333
+Ocana,CO,OCV,,,,,,,8.06666666666667
+Sogamoso,CO,SOX,,,,,,,5.71666666666667
+Kyzyl,RU,KYZ,,,,,,,4.51666666666667
+Linkoping,SE,LPI,,,,,,,7.85
+Richmond,US,RIC,RID,,,,,,7.23333333333333
+Pedro Juan Caballero,PY,PJC,,,,,,,7.55
+Bremerhaven,DE,BRV,,,,,,,7.9
+Uzhhorod,UA,UDJ,,,,,,,8.41666666666667
+Saginaw,US,MBS,,,,,,,7.41666666666667
+Kasese,UG,KSE,,,,,,,6.91666666666667
+Puerto Madryn,AR,PMY,,,,,,,5.45
+Mendoza,AR,MDZ,,,,,,,7.21666666666667
+Amasya,TR,MZH,,,,,,,8.63333333333333
+Carlsbad,US,CNM,CLD,,,,,,7.1
+Catalao,BR,TLZ,,,,,,,7.93333333333333
+Bintulu,MY,BTU,,,,,,,7.71666666666667
+Tawau,MY,TWU,,,,,,,7.81666666666667
+Mostar,BA,OMO,,,,,,,7.06666666666667
+San Carlos de Bariloche,AR,BRC,,,,,,,2.68333333333333
+Paulo Afonso,BR,PAV,,,,,,,7.38333333333333
+Jonkoping,SE,JKG,,,,,,,7.55
+Carora,VE,VCR,,,,,,,7.71666666666667
+Badin,PK,BDN,,,,,,,5.75
+Waterloo,US,ALO,,,,,,,7.73333333333333
+Trier,DE,SPM,,,,,,,7.9
+Passos,BR,PSW,,,,,,,7.83333333333333
+Longview,US,GGG,,,,,,,8.78333333333333
+Jacksonville,US,CRG,IJX,JAX,JKV,LRF,NEN,NIP,8.58333333333333
+Pompano Beach,US,PPM,,,,,,,7.91666666666667
+Colatina,BR,QCH,,,,,,,8.13333333333333
+Daet,PH,DTE,,,,,,,8.16666666666667
+Araxa,BR,AAX,,,,,,,8.0
+Chiquimula,GT,CIQ,,,,,,,8.56666666666667
+Sioux City,US,SUX,,,,,,,7.76666666666667
+Gafsa,TN,GAF,,,,,,,8.18333333333333
+Ariquemes,BR,AQM,,,,,,,6.38333333333333
+Tuzla,BA,TZL,,,,,,,6.25
+Everett,US,PAE,,,,,,,4.86666666666667
+Puerto Barrios,GT,PBR,,,,,,,8.25
+Fasa,IR,FAZ,,,,,,,7.21666666666667
+Kiffa,MR,KFA,,,,,,,6.66666666666667
+Franceville,GA,MVB,,,,,,,7.21666666666667
+Manzini,SZ,MTS,,,,,,,6.93333333333333
+Masindi,UG,KCU,,,,,,,7.93333333333333
+Empangeni,ZA,EMG,,,,,,,7.68333333333333
+Chico,US,CIC,,,,,,,6.75
+Bridgetown,BB,BGI,,,,,,,7.35
+Pisco,PE,PIO,,,,,,,6.65
+Retalhuleu,GT,RER,,,,,,,8.61666666666667
+Vicenza,IT,VIC,,,,,,,7.98333333333333
+Doncaster,GB,DSA,,,,,,,7.41666666666667
+Aguachica,CO,HAY,,,,,,,8.03333333333333
+Eau Claire,US,EAU,,,,,,,7.26666666666667
+Gualeguaychu,AR,GHU,,,,,,,6.76666666666667
+Thunder Bay,CA,YQT,,,,,,,6.91666666666667
+Baia Mare,RO,BAY,,,,,,,7.9
+El Monte,US,EMT,,,,,,,7.75
+Idaho Falls,US,IDA,,,,,,,5.05
+Reus,ES,REU,,,,,,,7.73333333333333
+Bloomington,US,BMG,,,,,,,8.11666666666667
+Sarh,TD,SRH,,,,,,,8.05
+Zilina,SK,ILZ,,,,,,,5.71666666666667
+Rijeka,HR,RJK,,,,,,,7.21666666666667
+Balsas,BR,BSS,,,,,,,6.68333333333333
+Shinyanga,TZ,SHY,,,,,,,5.71666666666667
+Wa,GH,WZA,,,,,,,7.9
+Ilebo,CD,PFR,,,,,,,5.5
+Noyabrsk,RU,NOJ,,,,,,,4.53333333333333
+Chabahar,IR,ZBR,,,,,,,8.4
+Columbia,US,CAE,COU,CUB,COA,,,,7.93333333333333
+Burbank,US,BUR,,,,,,,7.7
+Nakhon Si Thammarat,TH,NST,,,,,,,8.05
+Berdiansk,UA,ERD,,,,,,,8.3
+Bolzano,IT,BZO,,,,,,,7.96666666666667
+Nanaimo,CA,YCD,,,,,,,5.16666666666667
+Khanty-Mansiysk,RU,HMA,,,,,,,5.35
+Jatai,BR,JTI,,,,,,,7.08333333333333
+Erechim,BR,ERM,,,,,,,5.85
+Auburn,US,AUN,AUO,,,,,,4.98333333333333
+Renton,US,RNT,,,,,,,5.16666666666667
+Achinsk,RU,ACS,,,,,,,3.68333333333333
+Kongolo,CD,KOO,,,,,,,4.68333333333333
+Tagbilaran City,PH,TAG,,,,,,,6.9
+Olanchito,HN,OAN,,,,,,,8.36666666666667
+Masbate,PH,MBT,,,,,,,8.11666666666667
+Girona,ES,GRO,,,,,,,7.9
+Siauliai,LT,SQQ,,,,,,,8.55
+Natitingou,BJ,NAE,,,,,,,7.98333333333333
+Ourinhos,BR,OUS,,,,,,,7.43333333333333
+Charlottesville,US,CHO,,,,,,,6.81666666666667
+Itacoatiara,BR,ITA,,,,,,,6.2
+Elista,RU,ESL,,,,,,,8.66666666666667
+Musoma,TZ,MUZ,,,,,,,8.6
+Breves,BR,BVS,,,,,,,7.4
+Francistown,BW,FRW,,,,,,,5.31666666666667
+Tanga,TZ,TGT,,,,,,,8.05
+Iguatu,BR,QIG,,,,,,,7.96666666666667
+Santa Rosa,AR,RSA,,,,,,,6.16666666666667
+Wichita Falls,US,KIP,SPS,,,,,,8.6
+Gutersloh,DE,GUT,,,,,,,8.13333333333333
+Aurangabad,IN,IXU,,,,,,,7.63333333333333
+Simanggang,MY,SGG,,,,,,,7.78333333333333
+Olomouc,CZ,OLO,,,,,,,7.78333333333333
+Zonguldak,TR,ONQ,,,,,,,7.81666666666667
+Assis,BR,AIF,,,,,,,7.16666666666667
+Jeypore,IN,PYB,,,,,,,8.01666666666667
+Itaperuna,BR,ITP,,,,,,,7.98333333333333
+Oran,DZ,ORN,,,,,,,8.43333333333333
+Quincy,US,GNF,UIN,,,,,,6.88333333333333
+Red Deer,CA,YQF,,,,,,,3.93333333333333
+Sittwe,MM,AKY,,,,,,,7.71666666666667
+Cavite City,PH,SGL,,,,,,,7.53333333333333
+Port Blair,IN,IXZ,,,,,,,7.03333333333333
+San Angelo,US,SJT,,,,,,,9.13333333333333
+Pyinmana,MM,NYT,,,,,,,7.85
+Songea,TZ,SGX,,,,,,,7.88333333333333
+Dunedin,NZ,DUD,,,,,,,3.0
+Bowling Green,US,BWG,,,,,,,7.98333333333333
+Cottbus,DE,CBU,,,,,,,8.45
+Santa Cruz del Quiche,GT,AQB,,,,,,,6.13333333333333
+Bismarck,US,BIS,,,,,,,7.23333333333333
+Campo Mourao,BR,CBW,,,,,,,7.3
+Trincomalee,LK,TRR,,,,,,,6.2
+Riberalta,BO,RIB,,,,,,,7.01666666666667
+Nyeri,KE,NYE,,,,,,,8.05
+Lafayette,US,LAF,LFT,,,,,,8.86666666666667
+Tobolsk,RU,TOX,,,,,,,5.35
+Santiago de Compostela,ES,SCQ,,,,,,,8.33333333333333
+Caldas Novas,BR,CLV,,,,,,,7.2
+Chipata,ZM,CIP,,,,,,,6.91666666666667
+Lethbridge,CA,YQL,,,,,,,5.03333333333333
+Ancona,IT,AOI,,,,,,,6.83333333333333
+Rio Grande,AR,RGA,,,,,,,2.2
+Boca Raton,US,BCT,,,,,,,8.1
+Kamloops,CA,YKA,,,,,,,4.98333333333333
+Montego Bay,JM,MBJ,,,,,,,7.76666666666667
+Catarman,PH,CRM,,,,,,,8.21666666666667
+Valenca,BR,VAL,,,,,,,8.18333333333333
+Udine,IT,UDN,,,,,,,7.68333333333333
+Janakpur,NP,JKR,,,,,,,6.38333333333333
+Gambela,ET,GMB,,,,,,,7.8
+Goodyear,US,GYR,,,,,,,9.55
+Tartu,EE,TAY,,,,,,,8.58333333333333
+Portsmouth,US,PMH,PSM,,,,,,7.93333333333333
+Yacuiba,BO,BYC,,,,,,,8.45
+Ukhta,RU,UCT,,,,,,,5.06666666666667
+Tumbes,PE,TBP,,,,,,,8.55
+Arauca,CO,AUC,,,,,,,8.1
+Tela,HN,TEA,,,,,,,7.96666666666667
+Francisco Beltrao,BR,FBE,,,,,,,7.18333333333333
+Votuporanga,BR,VOT,,,,,,,7.05
+Parintins,BR,PIN,,,,,,,5.71666666666667
+Osijek,HR,OSI,,,,,,,7.13333333333333
+Corumba,BR,CMG,,,,,,,6.68333333333333
+Portsmouth,US,PMH,PSM,,,,,,7.93333333333333
+Lawrence,US,LWC,LWM,,,,,,7.93333333333333
+Muzaffarabad,PK,MFG,,,,,,,8.7
+Toms River,US,MJX,,,,,,,7.46666666666667
+Vilhena,BR,BVH,,,,,,,6.6
+Rio Gallegos,AR,RGL,,,,,,,2.6
+Shire,ET,SHC,,,,,,,8.05
+Labuan,MY,LBU,,,,,,,7.13333333333333
+Buckeye,US,BXK,,,,,,,9.33333333333333
+Mianwali,PK,MWD,,,,,,,4.38333333333333
+Bouna,CI,BQO,,,,,,,7.83333333333333
+Compton,US,CPM,,,,,,,7.68333333333333
+La Crosse,US,LSE,,,,,,,7.28333333333333
+Ponta Pora,BR,PMG,,,,,,,7.56666666666667
+Middletown,US,MWO,,,,,,,7.41666666666667
+Jaen,PE,JAE,,,,,,,8.21666666666667
+Monastir,TN,MIR,,,,,,,8.6
+Chilliwack,CA,YCW,,,,,,,4.95
+Santa Fe,US,SAF,,,,,,,6.23333333333333
+Galle,LK,KCT,,,,,,,6.98333333333333
+Ubatuba,BR,UBT,,,,,,,7.61666666666667
+Rafaela,AR,RAF,,,,,,,7.28333333333333
+Boundiali,CI,BXI,,,,,,,8.06666666666667
+Magadan,RU,GDX,,,,,,,2.65
+Roswell,US,ROW,,,,,,,8.4
+Kadugli,SD,KDX,,,,,,,6.8
+Tamanrasset,DZ,TMR,,,,,,,6.85
+Mtwara,TZ,MYW,,,,,,,8.28333333333333
+Flensburg,DE,FLF,,,,,,,7.66666666666667
+Errachidia,MA,ERH,,,,,,,8.06666666666667
+Santa Monica,US,SMO,,,,,,,7.4
+Pardubice,CZ,PED,,,,,,,7.95
+Cruzeiro do Sul,BR,CZS,,,,,,,7.6
+Pato Branco,BR,PTO,,,,,,,6.53333333333333
+Hamilton,US,HAB,HAO,,,,,,7.95
+Kakamega,KE,GGM,,,,,,,8.13333333333333
+Maracay,VE,MYC,,,,,,,7.85
+Satu Mare,RO,SUJ,,,,,,,8.1
+Mizan Teferi,ET,MTF,,,,,,,7.48333333333333
+Tucurui,BR,TUR,,,,,,,7.33333333333333
+Avare,BR,QVP,,,,,,,6.86666666666667
+Lawton,US,LAW,,,,,,,8.48333333333333
+Chino,US,CNO,,,,,,,7.31666666666667
+Mount Pleasant,US,MOP,MPZ,MPS,,,,,8.76666666666667
+Velikiye Luki,RU,VLU,,,,,,,8.45
+Oudtshoorn,ZA,OUH,,,,,,,7.13333333333333
+Gwadar,PK,GWD,,,,,,,8.46666666666667
+Canakkale,TR,CKZ,,,,,,,8.23333333333333
+Fundacion,CO,FDA,,,,,,,7.71666666666667
+Florence,US,FMU,FLO,,,,,,7.73333333333333
+Joplin,US,JLN,,,,,,,8.16666666666667
+Avignon,FR,GAT,,,,,,,8.23333333333333
+Valjevo,RS,QWV,,,,,,,7.06666666666667
+Sao Joao del Rei,BR,JDR,,,,,,,7.83333333333333
+Caucasia,CO,CAQ,,,,,,,8.18333333333333
+Wajir,KE,WJR,,,,,,,5.85
+Marudi,MY,MUR,,,,,,,
+Luau,AO,UAL,,,,,,,5.2
+Necochea,AR,NEC,,,,,,,5.78333333333333
+Presidencia Roque Saenz Pena,AR,PRQ,,,,,,,7.95
+Olavarria,AR,OVR,,,,,,,5.68333333333333
+Caceres,BR,CCX,,,,,,,5.81666666666667
+Ipil,PH,IPE,,,,,,,8.33333333333333
+Surallah,PH,AAV,,,,,,,8.38333333333333
+Bloomington,US,BMG,,,,,,,8.11666666666667
+Kalibo,PH,KLO,,,,,,,
+Lucca,IT,LCV,,,,,,,6.46666666666667
+Missoula,US,MSO,,,,,,,3.06666666666667
+Pisa,IT,PSA,,,,,,,8.28333333333333
+Fort Myers,US,FMY,RSW,,,,,,8.81666666666667
+Montelibano,CO,MTB,,,,,,,8.26666666666667
+Barra do Corda,BR,BDC,,,,,,,6.85
+Bertoua,CM,BTA,,,,,,,8.03333333333333
+Newton,US,EWK,TNU,,,,,,6.85
+Grimsby,GB,HUY,,,,,,,6.71666666666667
+Jaffna,LK,JAF,,,,,,,7.13333333333333
+Lawrence,US,LWC,LWM,,,,,,7.93333333333333
+Muncie,US,MIE,,,,,,,7.36666666666667
+Sassandra,CI,ZSS,,,,,,,8.31666666666667
+Rapid City,US,RAP,RCA,,,,,,6.96666666666667
+Guanambi,BR,GNM,,,,,,,8.01666666666667
+Midrand,ZA,GCJ,,,,,,,7.78333333333333
+Troy,US,TOI,,,,,,,8.16666666666667
+Livermore,US,LVK,,,,,,,5.83333333333333
+Hawthorne,US,HHR,HTH,,,,,,7.68333333333333
+Mardin,TR,MQM,,,,,,,8.56666666666667
+Cacoal,BR,OAL,,,,,,,6.15
+Winchester,US,WGO,,,,,,,8.15
+Les Cayes,HT,CYA,,,,,,,7.61666666666667
+Springdale,US,SPZ,,,,,,,8.08333333333333
+Tucupita,VE,TUV,,,,,,,7.76666666666667
+Navegantes,BR,NVT,,,,,,,6.93333333333333
+Odienne,CI,KEO,,,,,,,8.16666666666667
+Decatur,US,DCU,DEC,,,,,,8.01666666666667
+Batticaloa,LK,BTC,,,,,,,6.4
+Bugulma,RU,UUA,,,,,,,6.56666666666667
+Auburn,US,AUN,AUO,,,,,,4.98333333333333
+Redencao,BR,RDC,,,,,,,7.25
+El Bayadh,DZ,EBH,,,,,,,7.78333333333333
+Junin,AR,JNI,,,,,,,6.38333333333333
+Pori,FI,POR,,,,,,,6.01666666666667
+Gurupi,BR,GRP,,,,,,,6.13333333333333
+Puerto Maldonado,PE,PEM,,,,,,,7.35
+Derry,GB,LDY,,,,,,,7.58333333333333
+Melbourne,US,MLB,,,,,,,8.75
+Larnaca,CY,LCA,,,,,,,7.8
+Presov,SK,POV,,,,,,,7.55
+Bryan,US,CFD,,,,,,,9.26666666666667
+Peterborough,CA,YPQ,,,,,,,6.8
+Ciudad Mante,MX,MMC,,,,,,,8.71666666666667
+Ijui,BR,IJU,,,,,,,7.31666666666667
+Napa,US,APC,,,,,,,5.25
+Pinheiro,BR,PHI,,,,,,,7.18333333333333
+Treviso,IT,TSF,,,,,,,8.0
+Rafha,SA,RAH,,,,,,,5.18333333333333
+Honiara,SB,HIR,,,,,,,8.4
+Baytown,US,HPY,,,,,,,9.51666666666667
+Santana do Livramento,BR,LVB,,,,,,,6.38333333333333
+Suceava,RO,SCV,,,,,,,6.81666666666667
+Chigorodo,CO,IGO,,,,,,,8.11666666666667
+Anderson,US,AID,AND,,,,,,7.4
+Lucas do Rio Verde,BR,LVR,,,,,,,6.7
+Dolisie,CG,DIS,,,,,,,8.18333333333333
+Haskovo,BG,HKV,,,,,,,8.7
+Yeysk,RU,EIK,,,,,,,8.46666666666667
+Franklin,US,FKL,FKN,,,,,,7.83333333333333
+Barahona,DO,BRX,,,,,,,8.0
+Foumban,CM,FOM,,,,,,,8.05
+Galway,IE,GWY,,,,,,,7.23333333333333
+Albany,US,ABY,ALB,,,,,,6.75
+State College,US,SCE,,,,,,,6.25
+Picos,BR,PCS,,,,,,,7.43333333333333
+Lelystad,NL,LEY,,,,,,,7.41666666666667
+David,PA,DAV,,,,,,,8.63333333333333
+Jackson,US,HKS,JAC,JAN,JXN,MJQ,MKL,,4.91666666666667
+Brindisi,IT,BDS,,,,,,,8.13333333333333
+Jacobina,BR,JCM,,,,,,,7.83333333333333
+Puerto Iguazu,AR,IGR,,,,,,,7.96666666666667
+Mountain View,US,NUQ,,,,,,,6.08333333333333
+Salisbury,US,SRW,SBY,,,,,,6.95
+Morgantown,US,MGW,,,,,,,7.1
+Concordia,BR,CCI,,,,,,,6.36666666666667
+Springfield,US,SGF,SGH,SPI,VSF,,,,7.93333333333333
+Paranavai,BR,PVI,,,,,,,7.11666666666667
+Anapa,RU,AAQ,,,,,,,8.35
+Florence,US,FMU,FLO,,,,,,7.73333333333333
+Port of Spain,TT,POS,,,,,,,7.81666666666667
+Launceston,AU,LST,,,,,,,3.06666666666667
+Madera,US,MAE,,,,,,,6.31666666666667
+Terre Haute,US,HUF,,,,,,,7.65
+Panjgur,PK,PJG,,,,,,,5.45
+Butterworth,MY,BWH,,,,,,,7.96666666666667
+Flagstaff,US,FLG,,,,,,,4.61666666666667
+Cachoeira do Sul,BR,QDB,,,,,,,7.21666666666667
+Andahuaylas,PE,ANS,,,,,,,3.96666666666667
+Homestead,US,HST,,,,,,,8.36666666666667
+Newark,US,EWR,,,,,,,7.38333333333333
+Plymouth,US,PLY,PYM,,,,,,6.75
+San Jose,PH,SJI,EUQ,,,,,,7.58333333333333
+Anniston,US,ANB,,,,,,,8.48333333333333
+Texarkana,US,TXK,,,,,,,8.71666666666667
+Cianorte,BR,GGH,,,,,,,7.35
+Neumunster,DE,EUM,,,,,,,7.91666666666667
+Port Huron,US,PHN,,,,,,,7.71666666666667
+Ubon Ratchathani,TH,UBP,,,,,,,7.95
+Cuamba,MZ,FXO,,,,,,,6.45
+Tiko,CM,TKC,,,,,,,7.96666666666667
+Daugavpils,LV,DGP,,,,,,,8.73333333333333
+Upland,US,CCB,,,,,,,7.11666666666667
+Tambacounda,SN,TUD,,,,,,,8.01666666666667
+Nakhon Pathom,TH,KDT,,,,,,,7.7
+Arlit,NE,RLT,,,,,,,4.08333333333333
+Jonesboro,US,JBR,,,,,,,8.76666666666667
+Battle Creek,US,BTL,,,,,,,7.46666666666667
+Cheyenne,US,CYS,,,,,,,6.23333333333333
+Lebanon,US,LEB,,,,,,,7.9
+Baracoa,CU,BCA,,,,,,,7.45
+Colon,PA,ONX,,,,,,,8.05
+Essaouira,MA,ESU,,,,,,,8.3
+Elizabethtown,US,EKX,,,,,,,7.55
+Ukunda,KE,UKA,,,,,,,7.83333333333333
+Phuket,TH,HKT,,,,,,,7.48333333333333
+Santa Rosa,BR,SRA,,,,,,,7.51666666666667
+Vorkuta,RU,VKT,,,,,,,3.78333333333333
+Pasco,US,PSC,,,,,,,9.15
+Latacunga,EC,LTX,,,,,,,4.65
+Cozumel,MX,CZM,,,,,,,7.75
+Gelendzhik,RU,GDZ,,,,,,,8.43333333333333
+Evanston,US,EVW,,,,,,,8.63333333333333
+Alexandria,US,AEX,AXN,ESF,,,,,7.4
+Berberati,CF,BBT,,,,,,,8.31666666666667
+Santo Angelo,BR,GEL,,,,,,,7.51666666666667
+Ebolowa,CM,EBW,,,,,,,8.36666666666667
+Valenca,BR,VAL,,,,,,,8.18333333333333
+Prince George,CA,YXS,,,,,,,3.8
+Dschang,CM,DSC,,,,,,,7.4
+Virac,PH,VRC,,,,,,,7.83333333333333
+Hattiesburg,US,HBG,,,,,,,8.96666666666667
+Trinidad,CU,TND,,,,,,,7.95
+Paysandu,UY,PDU,,,,,,,6.96666666666667
+Pittsburg,US,PTS,,,,,,,6.4
+Wenatchee,US,EAT,,,,,,,5.73333333333333
+Lins,BR,LIP,,,,,,,7.13333333333333
+Wilhelmshaven,DE,WVN,,,,,,,7.58333333333333
+Valdosta,US,VAD,VLD,,,,,,8.86666666666667
+Kengtung,MM,KET,,,,,,,
+Ovalle,CL,OVL,,,,,,,6.98333333333333
+Owensboro,US,OWB,,,,,,,8.26666666666667
+Umea,SE,UME,,,,,,,6.26666666666667
+Apple Valley,US,APV,,,,,,,5.81666666666667
+Tres Coracoes,BR,QID,,,,,,,8.0
+Carlisle,GB,CAX,,,,,,,7.05
+Pawtucket,US,SFZ,,,,,,,6.83333333333333
+Telemaco Borba,BR,TEC,,,,,,,7.03333333333333
+Tocumen,PA,PTY,,,,,,,8.08333333333333
+Dover,US,DOV,,,,,,,7.16666666666667
+Dayong,CN,DYG,,,,,,,8.01666666666667
+Bayreuth,DE,BYU,,,,,,,7.31666666666667
+Skelleftea,SE,SFT,,,,,,,6.4
+Pocatello,US,PIH,,,,,,,5.4
+Oshkosh,US,OKS,OSH,,,,,,7.4
+Silao,MX,BJX,,,,,,,6.83333333333333
+Sarnia,CA,YZR,,,,,,,7.7
+Ajaccio,FR,MFX,,,,,,,7.56666666666667
+Redmond,US,RDM,,,,,,,5.16666666666667
+Mansfield,US,MFD,,,,,,,9.15
+Tefe,BR,TFF,,,,,,,6.73333333333333
+Linares,CL,ZLR,,,,,,,3.96666666666667
+Sheboygan,US,SBM,,,,,,,7.35
+Irece,BR,IRE,,,,,,,8.16666666666667
+Mansfield,US,MFD,,,,,,,9.15
+Glens Falls,US,GFL,,,,,,,7.11666666666667
+Daytona Beach,US,DAB,,,,,,,8.56666666666667
+Reconquista,AR,RCQ,,,,,,,7.65
+Moa,CU,MOA,,,,,,,7.55
+Dothan,US,DHN,,,,,,,8.68333333333333
+San Vicente del Caguan,CO,SVI,AYG,,,,,,
+Jinja,UG,JIN,,,,,,,7.81666666666667
+La Dorada,CO,PQE,,,,,,,7.86666666666667
+Mackay,AU,MKY,,,,,,,8.13333333333333
+Cleveland,US,BKL,CGF,CLE,,,,,8.16666666666667
+Jackson,US,HKS,JAC,JAN,JXN,MJQ,MKL,,4.91666666666667
+Mount Vernon,US,MVN,,,,,,,7.35
+Lappeenranta,FI,LPP,,,,,,,6.5
+Cascavel,BR,CAC,,,,,,,7.06666666666667
+Alegrete,BR,ALQ,,,,,,,7.2
+Altoona,US,AOO,,,,,,,6.16666666666667
+Goya,AR,OYA,,,,,,,7.65
+El Banco,CO,ELB,,,,,,,7.83333333333333
+Colon,CU,QCO,,,,,,,8.23333333333333
+San Andres,CO,ADZ,,,,,,,6.83333333333333
+Esbjerg,DK,EBJ,,,,,,,7.6
+Castro,BR,QAC,,,,,,,5.95
+Camden,US,CDH,CDN,,,,,,7.31666666666667
+Georgetown,US,GED,GGE,,,,,,9.23333333333333
+Porterville,US,PTV,,,,,,,6.75
+Ostend,BE,OST,,,,,,,7.06666666666667
+Halmstad,SE,HAD,,,,,,,8.18333333333333
+Blacksburg,US,BCB,,,,,,,6.23333333333333
+Wausau,US,AUW,,,,,,,6.85
+Sumter,US,SUM,SSC,,,,,,9.03333333333333
+Janesville,US,JVL,,,,,,,7.48333333333333
+Brunswick,US,BQK,NHZ,,,,,,7.21666666666667
+Dublin,US,DBN,PSK,,,,,,5.41666666666667
+Nadi,FJ,NAN,,,,,,,8.36666666666667
+Wilmington,US,ILG,ILM,ILN,,,,,8.18333333333333
+Waukesha,US,UES,,,,,,,7.13333333333333
+Corozal,CO,CZU,,,,,,,8.01666666666667
+Fairbanks,US,MTX,EIL,FAI,,,,,2.48333333333333
+Zadar,HR,ZAD,,,,,,,7.68333333333333
+Chiang Rai,TH,CEI,,,,,,,7.76666666666667
+Yambol,BG,JAM,,,,,,,8.41666666666667
+Xangongo,AO,XGN,,,,,,,
+Bundaberg,AU,BDB,,,,,,,7.41666666666667
+Coari,BR,CIZ,,,,,,,6.75
+Grand Forks,US,GFK,RDR,,,,,,7.31666666666667
+Brumado,BR,BMS,,,,,,,8.08333333333333
+Dimbokro,CI,DIM,,,,,,,7.68333333333333
+Thakhek,LA,THK,,,,,,,8.35
+Castries,LC,SLU,,,,,,,7.28333333333333
+Dien Bien Phu,VN,DIN,,,,,,,8.23333333333333
+Rogers,US,ROG,,,,,,,8.48333333333333
+Eskilstuna,SE,EKT,,,,,,,7.53333333333333
+Saint John,CA,YSJ,,,,,,,6.76666666666667
+Encarnacion,PY,ENO,,,,,,,7.78333333333333
+Garzon,CO,GLJ,,,,,,,7.88333333333333
+Ziguinchor,SN,ZIG,,,,,,,7.68333333333333
+L'Aquila,IT,QAQ,,,,,,,6.03333333333333
+Union City,US,UCY,,,,,,,6.35
+Michigan City,US,MGC,,,,,,,7.8
+Thohoyandou,ZA,THY,,,,,,,5.7
+Poptun,GT,PON,,,,,,,8.28333333333333
+Alenquer,BR,ALT,,,,,,,7.08333333333333
+Kars,TR,KSY,,,,,,,5.85
+Tulare,US,TLR,,,,,,,5.0
+Barra do Garcas,BR,BPG,,,,,,,6.51666666666667
+Necocli,CO,NCI,,,,,,,7.96666666666667
+Gaithersburg,US,GAI,,,,,,,6.9
+Mococa,BR,QOA,,,,,,,7.58333333333333
+San Jose del Guaviare,CO,SJE,,,,,,,8.13333333333333
+Queenstown,ZA,UTW,,,,,,,5.93333333333333
+Ponta Delgada,PT,PDL,,,,,,,8.88333333333333
+Dalton,US,DNN,,,,,,,7.71666666666667
+Dubuque,US,DBQ,,,,,,,7.53333333333333
+Schenectady,US,SCH,,,,,,,6.71666666666667
+Puerto San Jose,GT,GSJ,,,,,,,8.38333333333333
+Oriximina,BR,TMT,ORX,,,,,,6.51666666666667
+Lodja,CD,LJA,,,,,,,5.53333333333333
+Franklin,US,FKL,FKN,,,,,,7.83333333333333
+Watsonville,US,WVI,,,,,,,5.16666666666667
+Fort McMurray,CA,NML,YMM,,,,,,4.6
+Palo Alto,US,PAO,,,,,,,5.98333333333333
+Odate,JP,ONJ,,,,,,,6.55
+Januaria,BR,JNA,,,,,,,8.06666666666667
+Shawnee,US,SNL,,,,,,,7.86666666666667
+Vaasa,FI,VAA,,,,,,,5.76666666666667
+Bergen op Zoom,NL,WOE,,,,,,,7.68333333333333
+Ayolas,PY,AYO,,,,,,,7.91666666666667
+Omidiyeh,IR,OMI,,,,,,,3.6
+Great Falls,US,GTF,,,,,,,4.85
+Tolanaro,MG,FTU,,,,,,,8.56666666666667
+Union City,US,UCY,,,,,,,6.35
+Seguela,CI,SEO,,,,,,,8.11666666666667
+Longview,US,GGG,,,,,,,8.78333333333333
+Corvallis,US,CVO,,,,,,,5.01666666666667
+Tabatinga,BR,TBT,,,,,,,7.3
+Zrenjanin,RS,ZRE,,,,,,,7.8
+Liepaja,LV,LPX,,,,,,,8.45
+Middletown,US,MWO,,,,,,,7.41666666666667
+Nueva Guinea,NI,NVG,,,,,,,8.3
+Mount Vernon,US,MVN,,,,,,,7.35
+Casper,US,CPR,,,,,,,5.93333333333333
+Kissidougou,GN,KSI,,,,,,,8.53333333333333
+Ames,US,AMW,,,,,,,7.51666666666667
+Hit,IQ,IQA,,,,,,,5.26666666666667
+Vaxjo,SE,VXO,,,,,,,8.48333333333333
+Morristown,US,MMU,MOR,,,,,,7.01666666666667
+Lencois Paulista,BR,QGC,,,,,,,7.43333333333333
+Ilo,PE,ILQ,,,,,,,6.85
+Kankakee,US,IKK,,,,,,,7.51666666666667
+Torreon,MX,TRC,,,,,,,9.4
+Itapetinga,BR,QIT,,,,,,,7.88333333333333
+Kavala,GR,KVA,,,,,,,8.73333333333333
+Karlstad,SE,KSD,,,,,,,7.1
+Coron,PH,USU,,,,,,,7.91666666666667
+Bay City,US,BBC,,,,,,,7.35
+Victoria,US,VCT,,,,,,,9.26666666666667
+Tulcea,RO,TCE,,,,,,,8.13333333333333
+Bom Jesus da Lapa,BR,LAZ,,,,,,,8.03333333333333
+Parkersburg,US,PKB,,,,,,,7.23333333333333
+Beloretsk,RU,BCX,,,,,,,5.2
+Sao Tome,ST,TMS,,,,,,,8.23333333333333
+Malden,US,MAW,,,,,,,6.9
+Sao Felix do Xingu,BR,SXX,,,,,,,6.81666666666667
+Bozeman,US,BZN,,,,,,,4.61666666666667
+San Jose,PH,SJI,EUQ,,,,,,7.58333333333333
+Mecheria,DZ,MZW,,,,,,,8.4
+Farnborough,GB,FAB,,,,,,,7.85
+Popondetta,PG,PNP,,,,,,,8.75
+Saidu Sharif,PK,SDT,,,,,,,8.91666666666667
+Ioannina,GR,IOA,,,,,,,8.26666666666667
+Ladysmith,ZA,LAY,,,,,,,7.1
+Faizabad,AF,FBD,,,,,,,6.98333333333333
+Fredericton,CA,YFC,,,,,,,6.95
+Faro,PT,FAO,,,,,,,8.61666666666667
+Arrecife,ES,ACE,,,,,,,9.18333333333333
+Rivera,UY,RVY,,,,,,,6.38333333333333
+Porto Nacional,BR,PNB,,,,,,,6.11666666666667
+Grande Prairie,CA,YQU,,,,,,,4.15
+Welkom,ZA,WEL,,,,,,,8.31666666666667
+San Felipe,CL,SSD,,,,,,,6.31666666666667
+Siuna,NI,SIU,,,,,,,8.53333333333333
+Camocim,BR,CMC,,,,,,,7.35
+Bourges,FR,BOU,,,,,,,8.0
+Guiglo,CI,GGO,,,,,,,8.05
+Dedougou,BF,DGU,,,,,,,7.9
+Paphos,CY,PFO,,,,,,,8.4
+Greenwood,US,GRD,GWO,,,,,,7.31666666666667
+Rundu,NA,NDU,,,,,,,4.01666666666667
+Medicine Hat,CA,YXH,,,,,,,5.16666666666667
+Mercedes,AR,MDX,,,,,,,6.46666666666667
+Kitale,KE,KTL,,,,,,,7.83333333333333
+Gorno-Altaysk,RU,RGK,,,,,,,5.13333333333333
+Anuradhapura,LK,ACJ,,,,,,,6.8
+Tartagal,AR,TTG,,,,,,,8.5
+Lugano,CH,LUG,,,,,,,7.35
+Rockhampton,AU,ROK,,,,,,,7.31666666666667
+Hamilton,US,HAB,HAO,,,,,,7.95
+Puerto Asis,CO,PUU,,,,,,,8.06666666666667
+Kasongo,CD,KGN,,,,,,,5.11666666666667
+Rochester,GB,RCS,,,,,,,7.31666666666667
+Bossier City,US,BAD,,,,,,,8.91666666666667
+Taylor,US,TWE,TYZ,,,,,,9.26666666666667
+Friedrichshafen,DE,FDH,,,,,,,5.93333333333333
+Yurimaguas,PE,YMS,,,,,,,8.03333333333333
+Council Bluffs,US,CBF,,,,,,,8.35
+Rovaniemi,FI,RVN,,,,,,,5.56666666666667
+Puerto Penasco,MX,PPE,,,,,,,9.15
+Kolda,SN,KDA,,,,,,,8.1
+Bannu,PK,BNP,,,,,,,4.86666666666667
+Pontiac,US,PTK,,,,,,,8.01666666666667
+Arua,UG,RUA,,,,,,,8.28333333333333
+Rayong,TH,UTP,,,,,,,7.78333333333333
+Plato,CO,PLT,,,,,,,7.73333333333333
+Kotlas,RU,KSZ,,,,,,,6.21666666666667
+Medford,US,MDF,MFR,,,,,,5.08333333333333
+Springfield,US,SGF,SGH,SPI,VSF,,,,7.93333333333333
+Praia,CV,RAI,,,,,,,8.1
+Plymouth,US,PLY,PYM,,,,,,6.75
+Karonga,MW,KGJ,,,,,,,8.16666666666667
+Djibo,BF,XDJ,,,,,,,6.5
+Marietta,US,MGE,,,,,,,8.46666666666667
+Sanford,US,SFM,,,,,,,8.9
+Caldwell,US,CDW,,,,,,,5.75
+Coyhaique,CL,GXQ,,,,,,,2.46666666666667
+Maues,BR,MBZ,,,,,,,5.88333333333333
+Santa Rosa de Copan,HN,SDH,,,,,,,7.26666666666667
+Idiofa,CD,IDF,,,,,,,
+Olbia,IT,OLB,,,,,,,8.6
+Tsushima,JP,TSJ,,,,,,,7.5
+Soroti,UG,SRT,,,,,,,6.75
+San Rafael,US,SRF,,,,,,,5.11666666666667
+Richland,US,RLD,,,,,,,7.16666666666667
+Puerto Limon,CR,LIO,,,,,,,8.0
+Oyem,GA,OYE,,,,,,,8.43333333333333
+Trujillo,HN,TJI,,,,,,,8.31666666666667
+Ambanja,MG,IVA,,,,,,,8.03333333333333
+Kangan,IR,KNR,,,,,,,
+Malay,PH,MPH,,,,,,,7.1
+Floriano,BR,FLB,,,,,,,6.88333333333333
+Sao Borja,BR,QOJ,,,,,,,7.85
+Monte Alegre,BR,MTE,,,,,,,7.73333333333333
+Kribi,CM,KBI,,,,,,,8.21666666666667
+Kratie,KH,KTI,,,,,,,8.13333333333333
+Union,US,USC,,,,,,,7.48333333333333
+Uzice,RS,UZC,,,,,,,6.46666666666667
+Kokomo,US,OKK,,,,,,,7.61666666666667
+White Plains,US,HPN,,,,,,,6.76666666666667
+Montenegro,BR,QGF,,,,,,,7.5
+Los Andes,CL,LOB,,,,,,,6.35
+Hua Hin,TH,HHQ,,,,,,,7.3
+Ruhengeri,RW,RHG,,,,,,,8.36666666666667
+Trollhattan,SE,THN,,,,,,,7.96666666666667
+Mossel Bay,ZA,MZY,,,,,,,6.13333333333333
+El Palomar,AR,EPA,,,,,,,6.81666666666667
+Kalamata,GR,KLX,,,,,,,8.58333333333333
+Jackson,US,HKS,JAC,JAN,JXN,MJQ,MKL,,4.91666666666667
+Kasungu,MW,KBQ,,,,,,,7.25
+Alta Floresta,BR,AFL,,,,,,,6.13333333333333
+Tenkodogo,BF,TEG,,,,,,,7.36666666666667
+Crotone,IT,CRV,,,,,,,8.16666666666667
+Nyagan,RU,NYA,,,,,,,5.48333333333333
+Antsalova,MG,WAQ,,,,,,,
+Carson City,US,CSN,,,,,,,4.63333333333333
+Samana,DO,AZS,,,,,,,8.28333333333333
+Kawthoung,MM,KAW,,,,,,,
+Nausori,FJ,SUV,,,,,,,8.3
+Hervey Bay,AU,HVB,,,,,,,8.01666666666667
+General Pico,AR,GPO,,,,,,,6.46666666666667
+New Plymouth,NZ,NPL,,,,,,,3.65
+Decatur,US,DCU,DEC,,,,,,8.01666666666667
+Tokoname,JP,NGO,,,,,,,7.65
+Humaita,BR,HUW,,,,,,,6.51666666666667
+Sinop,TR,NOP,,,,,,,6.7
+Richards Bay,ZA,RCB,,,,,,,7.7
+Lake Havasu City,US,HII,,,,,,,9.23333333333333
+Tres Arroyos,AR,OYO,,,,,,,5.8
+Belize City,BZ,BZE,,,,,,,6.91666666666667
+Moramanga,MG,OHB,,,,,,,8.9
+Maun,BW,MUB,,,,,,,4.18333333333333
+Mafeteng,LS,MFC,,,,,,,6.43333333333333
+Baden-Baden,DE,FKB,,,,,,,7.4
+Madison,US,MDN,DXE,XMD,MSN,,,,8.4
+Limbang,MY,LMN,,,,,,,8.13333333333333
+Santa Rosa,EC,ETR,,,,,,,8.31666666666667
+Fussa,JP,OKO,,,,,,,8.35
+Tulcan,EC,TUA,,,,,,,4.2
+Al Hoceima,MA,AHU,,,,,,,8.68333333333333
+Beauvais,FR,BVA,,,,,,,7.71666666666667
+Pirapora,BR,PIV,,,,,,,7.96666666666667
+Den Helder,NL,DHR,,,,,,,6.78333333333333
+Mafra,BR,QMF,,,,,,,5.61666666666667
+Moyobamba,PE,MBP,,,,,,,7.16666666666667
+Albany,US,ABY,ALB,,,,,,6.75
+Dongola,SD,DOG,,,,,,,3.15
+Smyrna,US,MQY,,,,,,,8.66666666666667
+Union,US,USC,,,,,,,7.48333333333333
+Cuneo,IT,CUF,,,,,,,6.31666666666667
+Apatity,RU,KVK,,,,,,,3.36666666666667
+Apple Valley,US,APV,,,,,,,5.81666666666667
+Trapani,IT,TPS,,,,,,,8.43333333333333
+Saravena,CO,RVE,,,,,,,7.93333333333333
+Videira,BR,VIA,,,,,,,6.06666666666667
+Biala Podlaska,PL,BXP,,,,,,,8.83333333333333
+Casa Grande,US,CGZ,,,,,,,9.5
+Santa Cruz,CR,TNO,,,,,,,8.43333333333333
+Uniao da Vitoria,BR,QVB,,,,,,,5.78333333333333
+Tacuarembo,UY,TAW,,,,,,,6.41666666666667
+Mikkeli,FI,MIK,,,,,,,6.33333333333333
+Jinchang,CN,JIC,,,,,,,6.4
+Ortaca,TR,DLM,,,,,,,8.08333333333333
+Manhattan,US,MHK,,,,,,,7.58333333333333
+Rocky Mount,US,RWI,,,,,,,7.56666666666667
+Rotorua,NZ,ROT,,,,,,,3.55
+Juanjui,PE,JJI,,,,,,,8.08333333333333
+Manicore,BR,MNX,,,,,,,6.06666666666667
+Smyrna,US,MQY,,,,,,,8.66666666666667
+Gazipasa,TR,GZP,,,,,,,8.1
+Gisenyi,RW,GYI,,,,,,,8.45
+Beaumont,US,BMT,,,,,,,9.7
+Liberia,CR,LIR,,,,,,,8.43333333333333
+Gorkha,NP,GKH,,,,,,,3.41666666666667
+Tame,CO,TME,,,,,,,8.31666666666667
+Novato,US,NOT,,,,,,,5.46666666666667
+Targovishte,BG,TGV,,,,,,,7.83333333333333
+Clorinda,AR,CLX,,,,,,,7.76666666666667
+Grand Island,US,GRI,,,,,,,7.76666666666667
+Siena,IT,SAY,,,,,,,7.8
+Harrismith,ZA,HRS,,,,,,,6.56666666666667
+North Bay,CA,YYB,,,,,,,7.38333333333333
+Marana,US,AVW,MZJ,,,,,,9.26666666666667
+Charlottetown,CA,YHG,YYG,,,,,,6.61666666666667
+Twin Falls,US,TWF,,,,,,,5.11666666666667
+Obidos,BR,OBI,,,,,,,6.6
+Pula,HR,PUY,,,,,,,7.1
+Diu,IN,DIU,,,,,,,8.26666666666667
+Ampanihy,MG,AMP,,,,,,,6.38333333333333
+Eilat,IL,ETH,VDA,,,,,,5.93333333333333
+Vernon,CA,YVE,,,,,,,4.86666666666667
+El Bagre,CO,EBG,,,,,,,8.13333333333333
+Melo,UY,MLZ,,,,,,,6.65
+Sao Gabriel da Cachoeira,BR,SJL,,,,,,,7.75
+Palmas,BR,PMW,,,,,,,5.96666666666667
+Xanxere,BR,AXE,,,,,,,6.65
+Mangochi,MW,MAI,,,,,,,6.4
+Brandon,CA,YBR,,,,,,,6.45
+Lankaran,AZ,LLK,,,,,,,8.61666666666667
+Troy,US,TOI,,,,,,,8.16666666666667
+Salekhard,RU,SLY,,,,,,,4.15
+Leopoldina,BR,LEP,,,,,,,7.95
+Barra,BR,BQQ,,,,,,,8.73333333333333
+Aurangabad,IN,IXU,,,,,,,7.63333333333333
+Enid,US,END,WDG,,,,,,8.03333333333333
+Columbus,US,CUS,CLU,CBM,CMH,CSG,LCK,OLU,7.81666666666667
+Nicoya,CR,RIK,NOB,TMU,,,,,8.48333333333333
+Mweka,CD,MEW,,,,,,,5.75
+Metema,ET,ETE,,,,,,,
+Emden,DE,EME,,,,,,,7.96666666666667
+El Nido,PH,ENI,,,,,,,7.36666666666667
+Lincoln,US,LNK,,,,,,,8.53333333333333
+Murray,US,CEY,,,,,,,6.08333333333333
+Al Wajh,SA,EJH,,,,,,,6.0
+Bandar Seri Begawan,BN,BWN,,,,,,,7.96666666666667
+Poprad,SK,TAT,,,,,,,6.16666666666667
+Ostersund,SE,OSD,,,,,,,5.68333333333333
+Yeovil,GB,YEO,,,,,,,7.3
+Wagga Wagga,AU,WGA,,,,,,,4.1
+Cimitarra,CO,CIM,,,,,,,7.93333333333333
+Bedford,US,BED,BFR,,,,,,8.65
+Goba,ET,GOB,,,,,,,5.53333333333333
+Lawrence,US,LWC,LWM,,,,,,7.93333333333333
+Straubing,DE,RBM,,,,,,,6.83333333333333
+Kaedi,MR,KED,,,,,,,6.86666666666667
+Biloxi,US,BIX,,,,,,,8.75
+Lulea,SE,LLA,,,,,,,5.61666666666667
+Malabang,PH,MLP,,,,,,,8.25
+Karlovy Vary,CZ,KLV,,,,,,,7.41666666666667
+Rimouski,CA,YXK,,,,,,,5.81666666666667
+Courtenay,CA,YCA,,,,,,,4.86666666666667
+Dublin,US,DBN,PSK,,,,,,5.41666666666667
+Washington,US,WSG,DCA,MNZ,IAD,OCW,,,5.16666666666667
+Jales,BR,JLS,,,,,,,7.01666666666667
+Everett,US,PAE,,,,,,,4.86666666666667
+Stillwater,US,SWO,,,,,,,8.05
+Batajnica,RS,BJY,,,,,,,7.9
+Titusville,US,TIX,,,,,,,8.63333333333333
+Namtu,MM,NMT,,,,,,,
+Omitama,JP,IBR,,,,,,,8.28333333333333
+Niagara Falls,US,IAG,,,,,,,7.9
+Leesburg,US,LEE,,,,,,,6.71666666666667
+Waterford,IE,WAT,,,,,,,7.6
+Kalima,CD,KLY,,,,,,,5.46666666666667
+Ishigaki,JP,ISG,,,,,,,6.51666666666667
+Middletown,US,MWO,,,,,,,7.41666666666667
+Durham,GB,MME,,,,,,,7.0
+Minot,US,MIB,MOT,,,,,,6.9
+Roswell,US,ROW,,,,,,,8.4
+Monroe,US,MLU,,,,,,,7.16666666666667
+Carepa,CO,APO,,,,,,,8.06666666666667
+Cornwall,CA,YCC,,,,,,,6.81666666666667
+Diamantina,BR,DTI,,,,,,,7.98333333333333
+Ambatondrazaka,MG,WAM,,,,,,,8.88333333333333
+Hilo,US,ITO,,,,,,,8.33333333333333
+Invercargill,NZ,IVC,,,,,,,2.48333333333333
+San Luis Obispo,US,SBP,,,,,,,5.68333333333333
+Puerto Lempira,HN,PEU,,,,,,,7.8
+Newark,US,EWR,,,,,,,7.38333333333333
+Perth,GB,PSL,,,,,,,7.53333333333333
+Chaparral,CO,CPL,,,,,,,7.86666666666667
+Vryheid,ZA,VYD,,,,,,,6.58333333333333
+Fort Pierce,US,FPR,,,,,,,8.58333333333333
+Urrao,CO,URR,,,,,,,6.86666666666667
+Dracena,BR,QDC,,,,,,,6.98333333333333
+Salina,US,SLN,,,,,,,8.08333333333333
+Hof,DE,HOQ,,,,,,,6.7
+Dori,BF,DOR,,,,,,,6.3
+Farmington,US,FAM,FMN,,,,,,6.46666666666667
+Nelson,NZ,NSN,,,,,,,3.61666666666667
+Cobija,BO,CIJ,,,,,,,7.36666666666667
+Huntsville,US,HSV,HTV,,,,,,8.41666666666667
+Lawas,MY,LWY,,,,,,,
+Chitre,PA,CTD,,,,,,,8.21666666666667
+Tingo Maria,PE,TGI,,,,,,,8.18333333333333
+Manono,CD,MNO,,,,,,,4.63333333333333
+Prescott,US,PRC,,,,,,,6.11666666666667
+Santiago,PA,SYP,,,,,,,8.36666666666667
+Olive Branch,US,OLV,,,,,,,8.65
+Middletown,US,MWO,,,,,,,7.41666666666667
+Juina,BR,JIA,,,,,,,
+Memmingen,DE,FMM,,,,,,,5.63333333333333
+Aribinda,BF,XAR,,,,,,,
+Dodoma,TZ,DOD,,,,,,,7.75
+Anshan,CN,AOG,,,,,,,7.18333333333333
+Tindouf,DZ,TIN,,,,,,,6.05
+Nueva Gerona,CU,GER,,,,,,,7.48333333333333
+Los Banos,US,LSN,,,,,,,6.33333333333333
+Canela,BR,QCN,,,,,,,6.55
+Labrea,BR,LBR,,,,,,,6.8
+Carnot,CF,CRF,,,,,,,7.91666666666667
+Jipijapa,EC,JIP,,,,,,,8.0
+Bountiful,US,BTF,,,,,,,5.91666666666667
+Vallenar,CL,VLR,,,,,,,8.11666666666667
+Gaoua,BF,XGA,,,,,,,7.98333333333333
+Cornelio Procopio,BR,CKO,,,,,,,7.26666666666667
+Manchester,US,MHT,,,,,,,6.71666666666667
+Gaoua,BF,XGA,,,,,,,7.98333333333333
+Inongo,CD,INO,,,,,,,8.26666666666667
+Hassi Messaoud,DZ,HME,,,,,,,6.53333333333333
+Concepcion,PY,CIO,,,,,,,7.51666666666667
+Nadym,RU,NYM,,,,,,,4.4
+Palm Springs,US,PSP,TRM,UDD,,,,,8.45
+Lancaster,US,LNS,WJF,,,,,,6.33333333333333
+Riverton,US,RIW,,,,,,,5.6
+Port Macquarie,AU,PQQ,,,,,,,6.58333333333333
+Sao Lourenco,BR,SSO,,,,,,,7.8
+Mount Pleasant,US,MOP,MPZ,MPS,,,,,8.76666666666667
+Zouerate,MR,OUZ,,,,,,,6.15
+Conceicao do Araguaia,BR,CDJ,,,,,,,5.88333333333333
+Fairfield,US,FFL,SUU,,,,,,6.56666666666667
+Salem,US,SLE,SLO,,,,,,4.78333333333333
+Fond du Lac,US,FLD,,,,,,,7.38333333333333
+Masuda,JP,IWJ,,,,,,,8.18333333333333
+Tsiroanomandidy,MG,WTS,,,,,,,7.0
+Mankato,US,MKT,,,,,,,7.48333333333333
+Freeport,US,FEP,,,,,,,7.25
+El Centro,US,NJK,,,,,,,8.83333333333333
+Wilkes-Barre,US,WBW,,,,,,,6.38333333333333
+Lompoc,US,LPC,VBG,,,,,,5.68333333333333
+Concord,US,CCR,CON,USA,,,,,6.3
+San Jose,PH,SJI,EUQ,,,,,,7.58333333333333
+Ciudad Constitucion,MX,CUA,,,,,,,8.55
+Baler,PH,BQA,,,,,,,8.35
+Pittsfield,US,PSF,,,,,,,6.53333333333333
+Linden,US,LDJ,,,,,,,7.41666666666667
+Tarauaca,BR,TRQ,,,,,,,7.45
+Danville,US,DAN,DNV,,,,,,6.78333333333333
+Loreto,MX,LTO,,,,,,,7.11666666666667
+Puerto del Rosario,ES,FUE,,,,,,,9.2
+Kozani,GR,KZI,,,,,,,7.16666666666667
+Andes,CO,ADN,,,,,,,7.83333333333333
+Silistra,BG,SLS,,,,,,,7.85
+Paso de los Libres,AR,AOL,,,,,,,7.35
+Shanshan,CN,SXJ,,,,,,,7.9
+Macenta,GN,MCA,,,,,,,8.26666666666667
+Musina,ZA,MEZ,,,,,,,5.41666666666667
+Jefferson City,US,JEF,,,,,,,8.15
+Hwange,ZW,HWN,WKI,,,,,,5.36666666666667
+Danville,US,DAN,DNV,,,,,,6.78333333333333
+Columbia,US,CAE,COU,CUB,COA,,,,7.93333333333333
+Moline,US,MLI,,,,,,,7.76666666666667
+Beverly,US,BVY,,,,,,,6.7
+Eisenach,DE,EIB,,,,,,,7.4
+Midland,US,MAF,MDD,,,,,,9.01666666666667
+Alghero,IT,AHO,,,,,,,8.83333333333333
+Rouyn-Noranda,CA,YUY,,,,,,,6.78333333333333
+Coronel Suarez,AR,CSZ,,,,,,,5.41666666666667
+Sarakhs,IR,CKT,,,,,,,8.28333333333333
+Belleville,US,BLV,,,,,,,8.3
+Angelholm,SE,AGH,,,,,,,
+Hollister,US,HLI,,,,,,,5.56666666666667
+Sao Lourenco do Sul,BR,SQY,,,,,,,6.9
+Yagoua,CM,GXX,,,,,,,7.08333333333333
+Tororo,UG,TRY,,,,,,,7.48333333333333
+Uden,NL,UDE,,,,,,,7.83333333333333
+Torres,BR,TSQ,,,,,,,7.11666666666667
+Naga,PH,WNP,,,,,,,8.0
+Prerov,CZ,PRV,,,,,,,7.73333333333333
+Bullhead City,US,IFP,,,,,,,9.2
+Dubrovnik,HR,DBV,,,,,,,7.96666666666667
+Lindi,TZ,LDI,,,,,,,7.5
+Strezhevoy,RU,SWT,,,,,,,4.48333333333333
+Puntarenas,CR,JAP,DRK,,,,,,8.21666666666667
+Lusambo,CD,LBO,,,,,,,4.78333333333333
+Marion,US,MNN,MWA,MZZ,,,,,8.31666666666667
+Bambari,CF,BBY,,,,,,,7.88333333333333
+Currais Novos,BR,QCP,,,,,,,7.56666666666667
+Tabarka,TN,TBJ,,,,,,,8.43333333333333
+Chaves,PT,CHV,,,,,,,8.18333333333333
+Shelton,US,SHN,,,,,,,6.9
+Pine Bluff,US,PBF,,,,,,,8.91666666666667
+Timmins,CA,YTS,,,,,,,6.68333333333333
+Amami,JP,ASJ,,,,,,,
+Milton,US,NSE,,,,,,,8.23333333333333
+Lancaster,US,LNS,WJF,,,,,,6.33333333333333
+Paranaiba,BR,PBB,,,,,,,7.03333333333333
+Covington,US,CVG,,,,,,,7.96666666666667
+Cuito Cuanavale,AO,CTI,,,,,,,
+Annapolis,US,ANP,,,,,,,7.43333333333333
+Ipiau,BR,IPU,,,,,,,7.71666666666667
+Nanuque,BR,NNU,,,,,,,7.96666666666667
+Artigas,UY,ATI,,,,,,,6.96666666666667
+Pechora,RU,PEX,,,,,,,4.48333333333333
+Lancaster,US,LNS,WJF,,,,,,6.33333333333333
+Njombe,TZ,JOM,,,,,,,8.88333333333333
+Porto de Moz,BR,PTQ,,,,,,,7.35
+Uray,RU,URJ,,,,,,,5.66666666666667
+Romblon,PH,TBH,,,,,,,6.96666666666667
+Findlay,US,FDY,,,,,,,7.23333333333333
+Almenara,BR,AMJ,,,,,,,7.81666666666667
+Bouar,CF,BOP,,,,,,,8.48333333333333
+Clinton,US,CLK,CTZ,CWI,,,,,8.0
+Secunda,ZA,ZEC,,,,,,,7.9
+Chiredzi,ZW,BFO,,,,,,,5.11666666666667
+Zagora,MA,OZG,,,,,,,6.65
+Curitibanos,BR,QCR,,,,,,,5.4
+Inverness,GB,INV,,,,,,,7.03333333333333
+Lidkoping,SE,LDK,,,,,,,7.71666666666667
+Hutchinson,US,HUT,,,,,,,7.95
+Winslow,US,INW,,,,,,,7.05
+Villamontes,BO,VLM,,,,,,,8.38333333333333
+Cape Girardeau,US,CGI,,,,,,,8.43333333333333
+Hobbs,US,HOB,HBB,,,,,,8.75
+Massawa,ER,MSW,,,,,,,4.88333333333333
+Tabas,IR,TCX,,,,,,,5.23333333333333
+Parnu,EE,EPU,,,,,,,7.6
+Skovde,SE,KVB,,,,,,,
+Lebanon,US,LEB,,,,,,,7.9
+Ihosy,MG,IHO,,,,,,,7.31666666666667
+Quincy,US,GNF,UIN,,,,,,6.88333333333333
+Guajara-Mirim,BR,GJM,,,,,,,
+Puerto Berrio,CO,PBE,,,,,,,8.11666666666667
+Moanda,GA,MFF,,,,,,,7.58333333333333
+Guaira,BR,QGA,,,,,,,7.75
+Guemar,DZ,ELU,,,,,,,7.73333333333333
+Baikonur,KZ,BXY,,,,,,,8.23333333333333
+Grants Pass,US,GTP,,,,,,,4.63333333333333
+Ancud,CL,ZUD,,,,,,,2.85
+Wheeling,US,HLG,,,,,,,8.5
+Ohrid,MK,OHD,,,,,,,6.85
+Rexburg,US,RXE,,,,,,,4.63333333333333
+Dubbo,AU,DBO,,,,,,,5.0
+Lambarene,GA,LBQ,,,,,,,7.36666666666667
+Calexico,US,CXL,,,,,,,9.05
+Leribe,LS,LRB,,,,,,,6.75
+Vangaindrano,MG,VND,,,,,,,8.83333333333333
+Atlantic City,US,ACY,,,,,,,7.65
+Coto Brus,CR,TOO,,,,,,,
+Clovis,US,CVN,CVS,,,,,,7.5
+Usinsk,RU,USK,,,,,,,4.03333333333333
+Misawa,JP,MSJ,,,,,,,7.0
+Stanton,US,SYN,,,,,,,7.56666666666667
+Antsohihy,MG,WAI,,,,,,,8.0
+Campbell River,CA,YBL,,,,,,,4.43333333333333
+Orange,AU,OAG,,,,,,,3.73333333333333
+Hot Springs,US,HOT,HSP,,,,,,8.41666666666667
+Mucuri,BR,MVS,,,,,,,8.5
+Princeton,US,PNN,,,,,,,8.23333333333333
+Tupelo,US,TUP,,,,,,,8.48333333333333
+Srinagar,IN,SXR,,,,,,,8.51666666666667
+Mahanoro,MG,VVB,,,,,,,8.93333333333333
+Belleville,US,BLV,,,,,,,8.3
+Prince Albert,CA,YPA,,,,,,,5.31666666666667
+Apia,WS,APW,FGI,,,,,,8.25
+Hilton Head Island,US,HHH,,,,,,,8.5
+Furstenfeldbruck,DE,FEL,,,,,,,
+Rome,US,REO,RME,RMG,,,,,7.7
+Lewiston,US,LWS,,,,,,,6.83333333333333
+Winchester,US,WGO,,,,,,,8.15
+Greenfield,US,GFD,,,,,,,7.65
+Georgetown,US,GED,GGE,,,,,,9.23333333333333
+Itaqui,BR,ITQ,,,,,,,7.51666666666667
+Bonito,BR,BYO,,,,,,,7.0
+San Carlos,NI,NCR,,,,,,,8.26666666666667
+Tozeur,TN,TOE,,,,,,,7.81666666666667
+Bartlesville,US,BVO,,,,,,,8.25
+Tibu,CO,TIB,,,,,,,7.76666666666667
+Yamoussoukro,CI,ASK,,,,,,,8.1
+Kalutara,LK,KTY,,,,,,,7.16666666666667
+Cloppenburg,DE,VAC,,,,,,,8.1
+Beslan,RU,OGZ,,,,,,,7.35
+Greer,US,GSP,,,,,,,7.1
+Muskogee,US,MKO,,,,,,,8.36666666666667
+Penticton,CA,YYF,,,,,,,5.46666666666667
+Claremont,US,CNH,,,,,,,7.08333333333333
+Richfield,US,RIF,,,,,,,8.0
+Salima,MW,LMB,,,,,,,6.91666666666667
+Vastervik,SE,VVK,,,,,,,
+Esquel,AR,EQS,,,,,,,2.7
+Franklin,US,FKL,FKN,,,,,,7.83333333333333
+Mamfe,CM,MMF,,,,,,,7.93333333333333
+Kaniama,CD,KNM,,,,,,,5.4
+Bossangoa,CF,BSN,,,,,,,8.05
+Kajaani,FI,KAJ,,,,,,,5.36666666666667
+Cumberland,US,CBE,,,,,,,7.93333333333333
+Teruel,ES,TEV,,,,,,,6.31666666666667
+Gasan,PH,MRQ,,,,,,,7.76666666666667
+Boende,CD,BNB,,,,,,,6.31666666666667
+Creil,FR,CSF,,,,,,,8.15
+Masasi,TZ,XMI,,,,,,,6.3
+Guayaramerin,BO,GYA,,,,,,,6.85
+Marion,US,MNN,MWA,MZZ,,,,,8.31666666666667
+Beja,PT,BYJ,,,,,,,7.58333333333333
+Pantnagar,IN,PGH,,,,,,,7.63333333333333
+Cedar City,US,CDC,,,,,,,4.85
+La Porte,US,LPO,,,,,,,9.4
+Camiri,BO,CAM,,,,,,,7.45
+Richmond,US,RIC,RID,,,,,,7.23333333333333
+Lima,US,AOH,,,,,,,7.3
+Yangambi,CD,YAN,,,,,,,6.63333333333333
+Belluno,IT,BLX,,,,,,,6.78333333333333
+Savonlinna,FI,SVL,,,,,,,6.08333333333333
+Olney,US,ONY,,,,,,,6.6
+Torrington,US,TOR,,,,,,,6.38333333333333
+Kaneohe,US,NGF,,,,,,,8.11666666666667
+Cutral-Co,AR,CUT,,,,,,,4.78333333333333
+San Juan,US,SIG,SJU,,,,,,8.78333333333333
+Boca do Acre,BR,BCR,,,,,,,6.93333333333333
+Salisbury,US,SRW,SBY,,,,,,6.95
+Socorro,US,ONM,,,,,,,9.03333333333333
+Timbuktu,ML,TOM,,,,,,,5.75
+Brunswick,US,BQK,NHZ,,,,,,7.21666666666667
+Wildwood,US,WWD,,,,,,,8.46666666666667
+San Javier,ES,MJV,,,,,,,8.46666666666667
+Bria,CF,BIV,,,,,,,8.05
+Puerto Lopez,CO,CCO,,,,,,,8.03333333333333
+Confresa,BR,CFO,,,,,,,
+Salinas,EC,SNC,,,,,,,8.15
+Prado,BR,PDF,,,,,,,8.71666666666667
+Pimenta Bueno,BR,PBQ,,,,,,,6.3
+Meridian,US,MEI,,,,,,,5.93333333333333
+Oranjestad,AW,AUA,,,,,,,6.8
+Niquelandia,BR,NQL,,,,,,,7.18333333333333
+Chipinge,ZW,CHJ,,,,,,,6.35
+Juara,BR,JUA,,,,,,,
+Monroe,US,MLU,,,,,,,7.16666666666667
+Victoria,CL,ZIC,,,,,,,3.21666666666667
+Richmond,US,RIC,RID,,,,,,7.23333333333333
+Long Beach,US,LGB,,,,,,,7.68333333333333
+Del Rio,US,DLF,DRT,,,,,,8.93333333333333
+Sion,CH,SIR,,,,,,,7.88333333333333
+Goshen,US,GSH,,,,,,,7.35
+Gladstone,AU,GLT,,,,,,,7.41666666666667
+Butte,US,BTM,,,,,,,6.75
+Mildura,AU,MQL,,,,,,,5.15
+Zweibrucken,DE,ZQW,,,,,,,7.18333333333333
+Gisborne,NZ,GIS,,,,,,,4.23333333333333
+Pasni,PK,PSI,,,,,,,8.76666666666667
+Manitowoc,US,MTW,,,,,,,7.26666666666667
+Curuzu Cuatia,AR,UZU,,,,,,,7.15
+Stow,US,MMN,,,,,,,7.16666666666667
+Ye,MM,XYE,,,,,,,
+Goto,JP,FUJ,,,,,,,
+College Park,US,CGS,,,,,,,7.3
+Durazno,UY,DZO,,,,,,,6.06666666666667
+Bathurst,AU,BHS,,,,,,,3.91666666666667
+Swakopmund,NA,SWP,,,,,,,5.58333333333333
+Merritt Island,US,COI,,,,,,,8.48333333333333
+Almeirim,BR,MEU,GGF,,,,,,7.55
+Buchanan,LR,UCN,,,,,,,7.93333333333333
+Lewiston,US,LWS,,,,,,,6.83333333333333
+Lexington,US,LEX,LXN,,,,,,7.55
+Redmond,US,RDM,,,,,,,5.16666666666667
+Lufkin,US,LFK,,,,,,,9.46666666666667
+Qingyang,CN,IQN,,,,,,,8.25
+Gibraltar,GI,GIB,,,,,,,8.15
+Valparaiso,US,VPZ,,,,,,,7.61666666666667
+Uttaradit,TH,UTR,,,,,,,8.21666666666667
+Impfondo,CG,ION,,,,,,,7.06666666666667
+Gadsden,US,GAD,,,,,,,8.48333333333333
+Walla Walla,US,ALW,,,,,,,6.23333333333333
+Camiri,BO,CAM,,,,,,,7.45
+Kearney,US,EAR,,,,,,,7.61666666666667
+Leo,BF,XLU,,,,,,,7.63333333333333
+Moose Jaw,CA,YMJ,,,,,,,5.86666666666667
+Batouri,CM,OUR,,,,,,,8.1
+Goldsboro,US,GSB,,,,,,,7.78333333333333
+Mercedes,AR,MDX,,,,,,,6.46666666666667
+Saint Helier,JE,JER,,,,,,,6.75
+Leticia,CO,LET,,,,,,,7.25
+Canton,US,CTK,,,,,,,7.6
+Castro,CL,WCA,,,,,,,3.2
+Tulum,MX,TQO,,,,,,,8.2
+Petersburg,US,PTB,PSG,,,,,,7.45
+Statesboro,US,TBR,,,,,,,8.35
+Eirunepe,BR,ERN,,,,,,,7.01666666666667
+Gillette,US,GCC,,,,,,,6.16666666666667
+Salina,US,SLN,,,,,,,8.08333333333333
+Aosta,IT,AOT,,,,,,,4.1
+Tynda,RU,TYD,,,,,,,2.7
+Victoria Falls,ZW,VFA,,,,,,,4.46666666666667
+Timimoun,DZ,TMX,,,,,,,4.9
+Borba,BR,RBB,,,,,,,6.03333333333333
+Kingman,US,IGM,,,,,,,7.5
+Livingstone,ZM,LVI,,,,,,,4.51666666666667
+Lome,TG,LFW,,,,,,,7.51666666666667
+Sao Paulo de Olivenca,BR,OLC,,,,,,,7.31666666666667
+Ornskoldsvik,SE,OER,,,,,,,6.16666666666667
+Ventspils,LV,VNT,,,,,,,7.71666666666667
+Pilar,PY,PIL,,,,,,,7.73333333333333
+Syracuse,US,SYR,,,,,,,7.36666666666667
+Franklin,US,FKL,FKN,,,,,,7.83333333333333
+Udaipur,IN,UDR,,,,,,,7.96666666666667
+Val-d'Or,CA,YVO,,,,,,,6.78333333333333
+Falmouth,US,FMH,,,,,,,6.98333333333333
+Des Moines,US,DSM,,,,,,,7.76666666666667
+Lawrence,US,LWC,LWM,,,,,,7.93333333333333
+Rochester,US,RCR,ROC,RST,,,,,7.26666666666667
+Helena,US,HLN,,,,,,,4.68333333333333
+Ourilandia do Norte,BR,OIA,,,,,,,
+Nouna,BF,XNU,,,,,,,7.81666666666667
+Sibiti,CG,SIB,,,,,,,7.85
+Cochrane,CA,YCN,,,,,,,3.81666666666667
+Kristianstad,SE,KID,,,,,,,7.86666666666667
+Weatherford,US,WEA,,,,,,,9.18333333333333
+Nacogdoches,US,OCH,,,,,,,9.36666666666667
+Juneau,US,UNU,JNU,,,,,,3.46666666666667
+Rumbek,SS,RBX,,,,,,,6.68333333333333
+Zapala,AR,APZ,,,,,,,3.85
+Guaira,BR,QGA,,,,,,,7.75
+Florence,US,FMU,FLO,,,,,,7.73333333333333
+Rome,US,REO,RME,RMG,,,,,7.7
+Chachapoyas,PE,CHH,,,,,,,5.93333333333333
+Aiken,US,AIK,,,,,,,7.76666666666667
+Jyvaskylan Maalaiskunta,FI,JYV,,,,,,,
+Paipa,CO,RON,,,,,,,4.35
+Velikiy Ustyug,RU,VUS,,,,,,,6.16666666666667
+Plettenberg Bay,ZA,PBZ,,,,,,,6.38333333333333
+Carlsbad,US,CNM,CLD,,,,,,7.1
+Duluth,US,DLH,,,,,,,6.48333333333333
+Laramie,US,LAR,,,,,,,4.71666666666667
+Bangor,US,BGR,,,,,,,6.45
+West Bend,US,ETB,,,,,,,7.36666666666667
+Lloydminster,CA,YLL,,,,,,,4.6
+Nanyuki,KE,NYK,,,,,,,8.23333333333333
+Cururupu,BR,CPU,,,,,,,7.76666666666667
+Pehuajo,AR,PEH,,,,,,,6.45
+Oceanside,US,OCN,,,,,,,7.23333333333333
+Bangassou,CF,BGU,,,,,,,7.25
+Save,BJ,SVF,,,,,,,7.95
+Wevelgem,BE,KJK,,,,,,,7.93333333333333
+Shawnee,US,SNL,,,,,,,7.86666666666667
+New Bern,US,EWN,,,,,,,8.03333333333333
+Ithaca,US,ITH,,,,,,,6.96666666666667
+Norwood,US,OWD,,,,,,,6.71666666666667
+Pontoise,FR,POX,,,,,,,8.03333333333333
+Altenburg,DE,AOC,,,,,,,7.75
+Zaqatala,AZ,ZTU,,,,,,,7.08333333333333
+La Verne,US,POC,,,,,,,6.96666666666667
+Changuinola,PA,CHX,,,,,,,8.06666666666667
+LaGrange,US,LGC,,,,,,,8.36666666666667
+Sovetskiy,RU,OVS,,,,,,,5.68333333333333
+Espinosa,BR,ESI,,,,,,,8.01666666666667
+Chitral,PK,CJL,,,,,,,8.53333333333333
+Livingston,US,LVM,,,,,,,7.03333333333333
+Sterling,US,STK,,,,,,,6.68333333333333
+Springfield,US,SGF,SGH,SPI,VSF,,,,7.93333333333333
+Alamogordo,US,ALM,HMN,,,,,,9.05
+Santa Vitoria do Palmar,BR,CTQ,,,,,,,6.38333333333333
+Mocimboa da Praia,MZ,MZB,,,,,,,
+Chichester,GB,QUG,,,,,,,7.56666666666667
+Jeremie,HT,JEE,,,,,,,7.7
+Canavieiras,BR,CNV,,,,,,,8.26666666666667
+Leh,IN,IXL,,,,,,,6.26666666666667
+Culleredo,ES,LCG,,,,,,,8.31666666666667
+Kalgoorlie,AU,KGI,,,,,,,7.75
+Santa Paula,US,SZP,,,,,,,7.11666666666667
+Saratoga,US,SAA,,,,,,,6.91666666666667
+Newark,US,EWR,,,,,,,7.38333333333333
+Niles,US,NLE,,,,,,,8.58333333333333
+Eagle,US,EGE,EAA,,,,,,5.93333333333333
+Kaele,CM,KLE,,,,,,,7.11666666666667
+Grottaglie,IT,TAR,,,,,,,8.23333333333333
+Krabi,TH,KBV,,,,,,,7.58333333333333
+San Carlos,US,SQL,,,,,,,5.58333333333333
+Lawrenceville,US,LVL,LWV,LZU,,,,,8.11666666666667
+Princeton,US,PNN,,,,,,,8.23333333333333
+Erie,US,ERI,,,,,,,7.46666666666667
+Mandera,KE,NDE,,,,,,,4.93333333333333
+Sanford,US,SFM,,,,,,,8.9
+Oristano,IT,FNU,,,,,,,9.0
+Salem,US,SLE,SLO,,,,,,4.78333333333333
+Alma,CA,YTF,,,,,,,6.43333333333333
+Milford,US,MLF,,,,,,,6.96666666666667
+Gorna Oryahovitsa,BG,GOZ,,,,,,,8.21666666666667
+Middletown,US,MWO,,,,,,,7.41666666666667
+Bowling Green,US,BWG,,,,,,,7.98333333333333
+Joacaba,BR,JCB,,,,,,,6.63333333333333
+Miramar,AR,MJR,,,,,,,7.4
+Kericho,KE,KEY,,,,,,,7.71666666666667
+Comiso,IT,CIY,,,,,,,8.6
+Monterey,US,MRY,,,,,,,5.46666666666667
+Banning,US,BNG,,,,,,,5.63333333333333
+Galesburg,US,GBG,,,,,,,8.06666666666667
+Villa Dolores,AR,VDR,,,,,,,8.01666666666667
+Kabalo,CD,KBO,,,,,,,4.68333333333333
+Mount Hagen,PG,HGU,,,,,,,5.71666666666667
+Morrisville,US,MVL,,,,,,,7.36666666666667
+Paragould,US,PGR,,,,,,,8.63333333333333
+Rota,ES,ROZ,,,,,,,8.2
+Hazleton,US,HZL,,,,,,,5.86666666666667
+Stung Treng,KH,TNX,,,,,,,8.25
+Villa Gesell,AR,VLG,,,,,,,5.48333333333333
+Laurel,US,LUL,,,,,,,6.93333333333333
+Hobart,US,HBR,,,,,,,8.0
+Central,US,CEM,,,,,,,8.73333333333333
+Greenville,US,GLH,GMU,GRE,GVT,GDC,PGV,,7.71666666666667
+Texarkana,US,TXK,,,,,,,8.71666666666667
+Funchal,PT,FNC,,,,,,,9.08333333333333
+Lamerd,IR,LFM,,,,,,,5.43333333333333
+Baglung,NP,BGL,,,,,,,8.03333333333333
+Anderson,US,AID,AND,,,,,,7.4
+Madang,PG,MAG,,,,,,,8.76666666666667
+Jacksonville,US,CRG,IJX,JAX,JKV,LRF,NEN,NIP,8.58333333333333
+Udaipur,IN,UDR,,,,,,,7.96666666666667
+Washington,US,WSG,DCA,MNZ,IAD,OCW,,,5.16666666666667
+Ulundi,ZA,ULD,,,,,,,7.15
+Burbank,US,BUR,,,,,,,7.7
+Danville,US,DAN,DNV,,,,,,6.78333333333333
+Riesa,DE,IES,,,,,,,7.88333333333333
+Kudat,MY,KUD,,,,,,,7.68333333333333
+La Dorada,CO,PQE,,,,,,,7.86666666666667
+Langley,CA,YLY,,,,,,,4.63333333333333
+Pucon,CL,ZPC,,,,,,,3.68333333333333
+Greenville,US,GLH,GMU,GRE,GVT,GDC,PGV,,7.71666666666667
+Easton,US,ESN,ESW,,,,,,6.66666666666667
+Tarawa,KI,TRW,,,,,,,7.35
+Carauari,BR,CAF,,,,,,,7.18333333333333
+Independence,US,IDP,,,,,,,8.01666666666667
+Harrison,US,HRO,,,,,,,8.73333333333333
+Lansing,US,LAN,,,,,,,7.55
+Jamestown,US,JHW,JMS,,,,,,6.91666666666667
+Mampikony,MG,WMP,,,,,,,
+Statesville,US,SVH,,,,,,,6.86666666666667
+Monroeville,US,MVC,,,,,,,6.95
+Enterprise,US,ETS,,,,,,,7.96666666666667
+Puerto Leguizamo,CO,LQM,,,,,,,8.13333333333333
+Frankfort,US,FFT,,,,,,,7.75
+Tsushima,JP,TSJ,,,,,,,7.5
+Milton,US,NSE,,,,,,,8.23333333333333
+Aberdeen,US,ABR,,,,,,,7.56666666666667
+Mitu,CO,MVP,,,,,,,8.13333333333333
+New Iberia,US,ARA,,,,,,,9.11666666666667
+Dieppe,FR,DPE,,,,,,,7.56666666666667
+Clarksburg,US,CKB,,,,,,,6.76666666666667
+Bermejo,BO,BJO,,,,,,,8.25
+Santo Antonio do Ica,BR,IPG,,,,,,,7.26666666666667
+Whitehorse,CA,YXY,,,,,,,2.66666666666667
+Eagle Pass,US,EGP,,,,,,,8.51666666666667
+Sonderborg,DK,SGD,,,,,,,7.63333333333333
+Kirov,RU,KVX,,,,,,,6.66666666666667
+Po,BF,PUP,,,,,,,7.5
+East Hampton,US,HTO,,,,,,,8.21666666666667
+Oakdale,US,ODC,,,,,,,7.46666666666667
+Twentynine Palms,US,TNP,,,,,,,8.36666666666667
+Hamar,NO,HMR,,,,,,,6.85
+Garden City,US,GCK,,,,,,,8.25
+Bitam,GA,BMM,,,,,,,8.31666666666667
+Williston,US,XWA,,,,,,,6.95
+Bongor,TD,OGR,,,,,,,7.43333333333333
+Mongo,TD,MVO,,,,,,,7.2
+Williamsport,US,IPT,,,,,,,6.53333333333333
+Immokalee,US,IMM,,,,,,,8.75
+Dodge City,US,DDC,,,,,,,8.26666666666667
+North Kingstown,US,NCO,,,,,,,6.81666666666667
+Clinton,US,CLK,CTZ,CWI,,,,,8.0
+Malargue,AR,LGS,,,,,,,
+Mount Pleasant,US,MOP,MPZ,MPS,,,,,8.76666666666667
+Madison,US,MDN,DXE,XMD,MSN,,,,8.4
+Jauja,PE,JAU,,,,,,,4.1
+Marion,US,MNN,MWA,MZZ,,,,,8.31666666666667
+Millville,US,MIV,,,,,,,7.11666666666667
+Marshalltown,US,MIW,,,,,,,7.65
+Oiapoque,BR,OYK,,,,,,,7.2
+Arar,SA,RAE,,,,,,,6.31666666666667
+Crestview,US,CEW,EGI,,,,,,8.88333333333333
+Mason City,US,MCW,,,,,,,7.58333333333333
+Zalingei,SD,ZLX,,,,,,,7.2
+Kahului,US,OGG,,,,,,,8.48333333333333
+Fremont,US,FET,,,,,,,6.53333333333333
+Holbrook,US,HBK,,,,,,,7.16666666666667
+Redencao,BR,RDC,,,,,,,7.25
+Garden City,US,GCK,,,,,,,8.25
+Tauramena,CO,TAU,,,,,,,8.16666666666667
+Thomasville,US,TVI,,,,,,,7.05
+Minacu,BR,MQH,,,,,,,
+Libenge,CD,LIE,,,,,,,6.83333333333333
+Thetford,GB,BEQ,,,,,,,7.8
+Wooster,US,BJJ,,,,,,,7.13333333333333
+Mandabe,MG,WMD,,,,,,,
+Lemoore,US,NLC,,,,,,,6.45
+Wheeling,US,HLG,,,,,,,8.5
+Union City,US,UCY,,,,,,,6.35
+Paducah,US,PAH,,,,,,,7.96666666666667
+Clayton,US,CAO,,,,,,,8.45
+Margate,ZA,MGH,,,,,,,7.53333333333333
+Palm Springs,US,PSP,TRM,UDD,,,,,8.45
+Auburn,US,AUN,AUO,,,,,,4.98333333333333
+Plainview,US,PVW,,,,,,,7.38333333333333
+Voinjama,LR,VOI,,,,,,,8.11666666666667
+Superior,US,SUW,,,,,,,7.15
+Eureka,US,EUE,EKA,NLN,,,,,5.41666666666667
+Brawley,US,BWC,,,,,,,8.96666666666667
+Shirley,US,WSH,,,,,,,6.91666666666667
+Troy,US,TOI,,,,,,,8.16666666666667
+Selibaby,MR,SEY,,,,,,,7.21666666666667
+Blenheim,NZ,BHE,,,,,,,3.06666666666667
+Owatonna,US,OWA,,,,,,,7.31666666666667
+San Jose,PH,SJI,EUQ,,,,,,7.58333333333333
+Tougan,BF,TUQ,,,,,,,7.7
+Paz de Ariporo,CO,PZA,,,,,,,
+Canas,CR,CSC,,,,,,,8.33333333333333
+Athens,US,AHN,MMI,,,,,,7.76666666666667
+Puerto Varas,CL,PUX,,,,,,,2.91666666666667
+Burlington,US,BRL,BTV,,,,,,7.13333333333333
+Imperial Beach,US,NRS,,,,,,,7.73333333333333
+Austin,US,AUM,AUS,ASQ,,,,,9.15
+Winona,US,ONA,,,,,,,7.06666666666667
+Key West,US,EYW,NQX,,,,,,7.18333333333333
+Franklin,US,FKL,FKN,,,,,,7.83333333333333
+Gamboma,CG,GMM,,,,,,,6.43333333333333
+Skardu,PK,KDU,,,,,,,9.01666666666667
+Malaimbandy,MG,WML,,,,,,,
+Giyani,ZA,GIY,,,,,,,5.56666666666667
+Big Spring,US,HCA,,,,,,,9.13333333333333
+Puerto Escondido,MX,PXM,,,,,,,8.3
+Lucenec,SK,LUE,,,,,,,7.76666666666667
+Jodhpur,IN,JDH,,,,,,,6.03333333333333
+Norfolk,US,NGU,OFK,ORF,,,,,6.65
+Fonte Boa,BR,FBA,,,,,,,7.26666666666667
+Santa Isabel do Rio Negro,BR,IRZ,,,,,,,7.06666666666667
+Montgomery,US,MGJ,MGM,MXF,,,,,6.45
+Port Alfred,ZA,AFD,,,,,,,6.68333333333333
+Aurillac,FR,AUR,,,,,,,7.75
+Marysville,US,BAB,MYV,,,,,,4.78333333333333
+Maintirano,MG,MXT,,,,,,,8.86666666666667
+Florence,US,FMU,FLO,,,,,,7.73333333333333
+Marshfield,US,MFI,,,,,,,6.51666666666667
+Arapoti,BR,AAG,,,,,,,6.93333333333333
+Coffs Harbour,AU,CFS,,,,,,,7.21666666666667
+Oxford,US,OXC,OXD,UOX,,,,,7.4
+Venice,US,VNC,,,,,,,8.63333333333333
+Diebougou,BF,XDE,,,,,,,7.75
+Stevens Point,US,STE,,,,,,,7.05
+Treinta y Tres,UY,TYT,,,,,,,6.21666666666667
+Kalispell,US,FCA,,,,,,,4.38333333333333
+Inta,RU,INA,,,,,,,4.05
+Reading,US,RDG,,,,,,,6.55
+Lamu,KE,LAU,,,,,,,8.03333333333333
+Hudson,US,HCC,,,,,,,7.46666666666667
+Salem,US,SLE,SLO,,,,,,4.78333333333333
+Louis Trichardt,ZA,LCD,,,,,,,5.8
+Ottumwa,US,OTM,,,,,,,7.95
+Busselton,AU,BQB,,,,,,,5.53333333333333
+Yamagata,JP,GAJ,,,,,,,7.51666666666667
+Requena,PE,REQ,,,,,,,
+Lafayette,US,LAF,LFT,,,,,,8.86666666666667
+Kingsville,US,NQI,,,,,,,8.85
+Albany,AU,ALH,,,,,,,5.1
+El Calafate,AR,ING,FTE,,,,,,2.61666666666667
+Moses Lake,US,MWH,,,,,,,5.58333333333333
+Wewak,PG,WWK,,,,,,,8.06666666666667
+Dickinson,US,DIK,,,,,,,9.41666666666667
+Corsicana,US,CRS,,,,,,,9.16666666666667
+Hastings,US,HSI,,,,,,,7.75
+Newport,US,NWH,EFK,ONP,NPT,,,,6.68333333333333
+Easton,US,ESN,ESW,,,,,,6.66666666666667
+Tsaratanana,MG,TTS,,,,,,,7.36666666666667
+Visby,SE,VBY,,,,,,,7.06666666666667
+Springfield,US,SGF,SGH,SPI,VSF,,,,7.93333333333333
+Iki,JP,IKI,,,,,,,
+Denison,US,DNS,,,,,,,8.61666666666667
+Watertown,US,ART,ATY,,,,,,6.86666666666667
+Fort Dodge,US,FOD,,,,,,,7.4
+Uherske Hradiste,CZ,UHE,,,,,,,7.86666666666667
+Ardmore,US,AHD,ADM,,,,,,8.55
+Zanesville,US,ZZV,,,,,,,7.16666666666667
+Pweto,CD,PWO,,,,,,,
+Medford,US,MDF,MFR,,,,,,5.08333333333333
+Owando,CG,FTX,,,,,,,6.93333333333333
+Pasighat,IN,IXT,,,,,,,7.31666666666667
+Rawson,AR,REL,,,,,,,5.3
+San Borja,BO,SRJ,,,,,,,7.08333333333333
+Selma,US,SEM,,,,,,,6.53333333333333
+Paris,US,PHT,PRX,,,,,,8.63333333333333
+Sept-Iles,CA,YZV,,,,,,,5.51666666666667
+Clinton,US,CLK,CTZ,CWI,,,,,8.0
+Centerville,US,GHM,,,,,,,7.5
+Riverside,US,RAL,RIV,,,,,,8.21666666666667
+Khajuraho,IN,HJR,,,,,,,7.65
+Farmington,US,FAM,FMN,,,,,,6.46666666666667
+Oak Harbor,US,NUW,ODW,,,,,,4.85
+Ponca City,US,PNC,,,,,,,8.15
+Decatur,US,DCU,DEC,,,,,,8.01666666666667
+Faribault,US,FBL,,,,,,,7.83333333333333
+Medford,US,MDF,MFR,,,,,,5.08333333333333
+Duncan,CA,DUQ,,,,,,,4.96666666666667
+West Memphis,US,AWM,,,,,,,8.73333333333333
+Nova Xavantina,BR,NOK,,,,,,,6.13333333333333
+Kerrville,US,ERV,,,,,,,9.38333333333333
+Canton,US,CTK,,,,,,,7.6
+Saint-Laurent-du-Maroni,GF,LDX,,,,,,,7.81666666666667
+Tocopilla,CL,TOQ,,,,,,,7.58333333333333
+Somerset,US,SME,,,,,,,7.05
+Carutapera,BR,CTP,,,,,,,7.35
+Kariba,ZW,KAB,,,,,,,6.13333333333333
+Canarana,BR,CQA,,,,,,,7.75
+Soure,BR,SFK,,,,,,,7.91666666666667
+Boulsa,BF,XBO,,,,,,,7.33333333333333
+Emporia,US,EMP,,,,,,,8.15
+Saginaw,US,MBS,,,,,,,7.41666666666667
+Auburn,US,AUN,AUO,,,,,,4.98333333333333
+Guapi,CO,GPI,,,,,,,8.4
+Columbus,US,CUS,CLU,CBM,CMH,CSG,LCK,OLU,7.81666666666667
+Atar,MR,ATR,,,,,,,5.26666666666667
+Sheghnan,AF,SGA,,,,,,,
+Tchibanga,GA,TCH,,,,,,,7.85
+Burlington,US,BRL,BTV,,,,,,7.13333333333333
+Columbus,US,CUS,CLU,CBM,CMH,CSG,LCK,OLU,7.81666666666667
+Freeport,US,FEP,,,,,,,7.25
+Burlington,US,BRL,BTV,,,,,,7.13333333333333
+Mansfield,US,MFD,,,,,,,9.15
+Willoughby,US,LNN,,,,,,,7.88333333333333
+Squamish,CA,YSE,,,,,,,5.28333333333333
+Novo Aripuana,BR,NVP,,,,,,,5.9
+Grootfontein,NA,GFY,,,,,,,6.38333333333333
+Basankusu,CD,BSU,,,,,,,7.41666666666667
+Husum,DE,QHU,,,,,,,8.0
+Alice Springs,AU,ASP,,,,,,,7.56666666666667
+Patterson,US,PTN,,,,,,,6.51666666666667
+Shelbyville,US,SYI,,,,,,,7.91666666666667
+Muscatine,US,MUT,,,,,,,7.73333333333333
+Greenfield,US,GFD,,,,,,,7.65
+Lexington,US,LEX,LXN,,,,,,7.55
+Bonito,BR,BYO,,,,,,,7.0
+Roseburg,US,RBG,,,,,,,4.68333333333333
+Taupo,NZ,TUO,,,,,,,3.25
+Fresno,US,FAT,FCH,,,,,,7.41666666666667
+Middletown,US,MWO,,,,,,,7.41666666666667
+San Ignacio de Velasco,BO,SNG,,,,,,,6.65
+Montgomery,US,MGJ,MGM,MXF,,,,,6.45
+Brookings,US,BKX,BOK,,,,,,7.43333333333333
+Marshall,US,ASL,MHL,MML,MLL,,,,8.08333333333333
+Cuyo,PH,CYU,,,,,,,6.88333333333333
+Gardner,US,GDM,,,,,,,6.38333333333333
+Farmington,US,FAM,FMN,,,,,,6.46666666666667
+Lensk,RU,ULK,,,,,,,2.48333333333333
+Monte Caseros,AR,MCS,,,,,,,7.08333333333333
+Clinton,US,CLK,CTZ,CWI,,,,,8.0
+Bedford,US,BED,BFR,,,,,,8.65
+Albenga,IT,ALL,,,,,,,8.0
+Rock Springs,US,RKS,,,,,,,5.3
+Pottstown,US,PTW,,,,,,,6.58333333333333
+Westerly,US,WST,,,,,,,6.68333333333333
+North Platte,US,LBF,,,,,,,7.6
+Camp Springs,US,ADW,,,,,,,7.11666666666667
+Tsaratanana,MG,TTS,,,,,,,7.36666666666667
+Montgomery,US,MGJ,MGM,MXF,,,,,6.45
+Wilmington,US,ILG,ILM,ILN,,,,,8.18333333333333
+Gitega,BI,GID,,,,,,,7.35
+Ashland,US,ASX,AHM,,,,,,7.21666666666667
+Oakdale,US,ODC,,,,,,,7.46666666666667
+Morris,US,MOX,,,,,,,6.26666666666667
+Bloomington,US,BMG,,,,,,,8.11666666666667
+Devonport,AU,DPO,,,,,,,3.11666666666667
+Monte Alegre,BR,MTE,,,,,,,7.73333333333333
+Hudson,US,HCC,,,,,,,7.46666666666667
+Niamtougou,TG,LRL,,,,,,,7.98333333333333
+Watertown,US,ART,ATY,,,,,,6.86666666666667
+Searcy,US,SRC,,,,,,,8.51666666666667
+Keene,US,EEN,,,,,,,6.83333333333333
+Kalat,PK,KBH,,,,,,,9.05
+Garden City,US,GCK,,,,,,,8.25
+Ondangwa,NA,OND,,,,,,,5.61666666666667
+Winchester,US,WGO,,,,,,,8.15
+Duncan,US,DUC,,,,,,,8.63333333333333
+Watertown,US,ART,ATY,,,,,,6.86666666666667
+Amalfi,CO,AFI,,,,,,,6.7
+Ambriz,AO,AZZ,,,,,,,
+Kapolei,US,JRF,,,,,,,8.45
+Athens,US,AHN,MMI,,,,,,7.76666666666667
+Dover,US,DOV,,,,,,,7.16666666666667
+Summit,US,UMM,,,,,,,7.51666666666667
+Letterkenny,IE,LTR,,,,,,,7.26666666666667
+Greenwood,US,GRD,GWO,,,,,,7.31666666666667
+Corinth,US,CRX,,,,,,,8.61666666666667
+Ouani,KM,AJN,,,,,,,8.41666666666667
+Lincoln,US,LNK,,,,,,,8.53333333333333
+Mouila,GA,MJL,,,,,,,7.16666666666667
+Vernon,US,WIB,,,,,,,8.53333333333333
+La Porte,US,LPO,,,,,,,9.4
+Macas,EC,XMS,,,,,,,7.58333333333333
+Owen Sound,CA,YOS,,,,,,,7.8
+Brockville,CA,XBR,,,,,,,7.1
+Ruston,US,RSN,,,,,,,8.66666666666667
+Palmer,US,PAQ,,,,,,,6.81666666666667
+Marina,US,OAR,,,,,,,5.53333333333333
+Sao Filipe,CV,SFL,,,,,,,8.18333333333333
+Bahia de Caraquez,EC,BHA,,,,,,,8.76666666666667
+Rioja,PE,RIJ,,,,,,,7.7
+Kilkenny,IE,KKY,,,,,,,7.75
+Goleniow,PL,SZZ,,,,,,,8.48333333333333
+Bellavista,PE,BLP,,,,,,,7.83333333333333
+Clarksville,US,CKV,,,,,,,8.26666666666667
+Sao Jose do Rio Preto,BR,SJP,,,,,,,7.1
+Newquay,GB,NQY,,,,,,,7.21666666666667
+Hastings,US,HSI,,,,,,,7.75
+Oxford,US,OXC,OXD,UOX,,,,,7.4
+Oxford,US,OXC,OXD,UOX,,,,,7.4
+Ghat,LY,GHT,,,,,,,4.43333333333333
+Sanford,US,SFM,,,,,,,8.9
+Nema,MR,EMN,,,,,,,6.45
+San Jose,PH,SJI,EUQ,,,,,,7.58333333333333
+Diamantino,BR,DMT,,,,,,,6.45
+Robertson,ZA,ROD,,,,,,,6.8
+Itubera,BR,ITE,,,,,,,8.13333333333333
+Pascagoula,US,PGL,,,,,,,8.85
+Sao Miguel do Araguaia,BR,SQM,,,,,,,5.73333333333333
+Mount Pleasant,US,MOP,MPZ,MPS,,,,,8.76666666666667
+Klamath Falls,US,LMT,,,,,,,4.06666666666667
+Sedalia,US,DMO,,,,,,,7.9
+Zoersel,BE,OBL,,,,,,,7.88333333333333
+Birmingham,US,BHM,,,,,,,9.05
+Zabre,BF,XZA,,,,,,,
+Caransebes,RO,CSB,,,,,,,8.13333333333333
+Shelby,US,SBX,,,,,,,8.8
+Port Alberni,CA,YPB,,,,,,,5.01666666666667
+Brunswick,US,BQK,NHZ,,,,,,7.21666666666667
+Gallup,US,GUP,,,,,,,5.85
+Sidi Ifni,MA,SII,,,,,,,8.65
+Alliance,US,AIA,,,,,,,6.93333333333333
+San Nicolas,CU,QSN,,,,,,,8.26666666666667
+Ashland,US,ASX,AHM,,,,,,7.21666666666667
+Payson,US,PJB,,,,,,,5.28333333333333
+Villagarzon,CO,VGZ,,,,,,,7.75
+Whyalla,AU,WYA,,,,,,,5.78333333333333
+Puerto Natales,CL,PNT,,,,,,,2.76666666666667
+Dickinson,US,DIK,,,,,,,9.41666666666667
+Tarko-Sale,RU,TQL,,,,,,,4.16666666666667
+Bogande,BF,XBG,,,,,,,6.93333333333333
+Ghanzi,BW,GNZ,,,,,,,5.9
+Grand Island,US,GRI,,,,,,,7.76666666666667
+Ashland,US,ASX,AHM,,,,,,7.21666666666667
+Khowai,IN,IXN,,,,,,,7.11666666666667
+Seymour,US,SER,,,,,,,7.51666666666667
+South Lake Tahoe,US,TVL,,,,,,,3.65
+Vicksburg,US,VKS,,,,,,,8.81666666666667
+Armidale,AU,ARM,,,,,,,3.86666666666667
+Perry,US,FPY,PRO,,,,,,7.23333333333333
+Monroe,US,MLU,,,,,,,7.16666666666667
+Obock,DJ,OBC,,,,,,,5.53333333333333
+Varadero,CU,VRA,,,,,,,7.96666666666667
+Foley,US,NHX,,,,,,,8.76666666666667
+Hays,US,HYS,,,,,,,9.18333333333333
+Tullahoma,US,THA,,,,,,,7.76666666666667
+Gardner,US,GDM,,,,,,,6.38333333333333
+Helena,US,HLN,,,,,,,4.68333333333333
+Stephenville,US,SEP,,,,,,,9.06666666666667
+Willmar,US,ILL,,,,,,,7.35
+Lebanon,US,LEB,,,,,,,7.9
+Cassilandia,BR,CSS,,,,,,,7.0
+Louisville,US,LMS,LOU,SDF,,,,,8.25
+Kyaukpyu,MM,KYP,,,,,,,
+Covington,US,CVG,,,,,,,7.96666666666667
+Springfield,US,SGF,SGH,SPI,VSF,,,,7.93333333333333
+Iriona,HN,IRN,,,,,,,
+Ati,TD,ATV,,,,,,,5.68333333333333
+Baie-Comeau,CA,YBC,,,,,,,5.8
+Marquette,US,MQT,,,,,,,7.35
+Bozoum,CF,BOZ,,,,,,,8.16666666666667
+Mesquite,US,MFH,,,,,,,8.88333333333333
+Montgomery,US,MGJ,MGM,MXF,,,,,6.45
+Pittsburg,US,PTS,,,,,,,6.4
+Adrian,US,ADG,,,,,,,7.41666666666667
+Aldan,RU,ADH,,,,,,,2.2
+Caravelas,BR,CRQ,,,,,,,8.28333333333333
+Mbala,ZM,MMQ,,,,,,,9.4
+Jefferson,US,EFW,,,,,,,8.11666666666667
+Sunchales,AR,NCJ,,,,,,,7.4
+Elko,US,EKO,,,,,,,4.53333333333333
+Cranbrook,CA,YXC,,,,,,,4.75
+Imperial,US,IML,IPL,,,,,,9.05
+Monroe,US,MLU,,,,,,,7.16666666666667
+Montrose,US,MTJ,,,,,,,3.6
+Okha,RU,OHH,,,,,,,3.06666666666667
+Sidney,US,SXY,SDY,SNY,,,,,7.1
+Lannion,FR,LAI,,,,,,,6.71666666666667
+Yellowknife,CA,YZF,,,,,,,3.5
+Oroville,US,OVE,,,,,,,6.83333333333333
+Ogden,US,HIF,OGD,,,,,,5.6
+Frankfort,US,FFT,,,,,,,7.75
+Asosa,ET,ASO,,,,,,,7.86666666666667
+Skive,DK,SQW,,,,,,,7.75
+Shafter,US,MIT,,,,,,,6.63333333333333
+Sesheke,ZM,SJQ,,,,,,,4.15
+Portland,US,HIO,PDX,PWM,TTD,,,,5.46666666666667
+Del Carmen,PH,IAO,,,,,,,7.65
+Morristown,US,MMU,MOR,,,,,,7.01666666666667
+Belmonte,BR,BVM,,,,,,,8.61666666666667
+Riviere-du-Loup,CA,YRI,,,,,,,5.78333333333333
+Plainview,US,PVW,,,,,,,7.38333333333333
+Makoua,CG,MKJ,,,,,,,7.06666666666667
+Albany,US,ABY,ALB,,,,,,6.75
+Altoona,US,AOO,,,,,,,6.16666666666667
+Port Angeles,US,CLM,,,,,,,5.48333333333333
+Bulolo,PG,BUL,,,,,,,8.21666666666667
+Zemio,CF,IMO,,,,,,,7.61666666666667
+Shonai,JP,SYO,,,,,,,
+Shirahama,JP,SHM,,,,,,,7.9
+Hudson,US,HCC,,,,,,,7.46666666666667
+Butare,RW,BTQ,,,,,,,7.56666666666667
+Burnie,AU,BWT,,,,,,,3.1
+Plattsburgh,US,PBG,,,,,,,7.56666666666667
+Akureyri,IS,AEY,,,,,,,3.48333333333333
+Vila Rica,BR,VLP,,,,,,,7.51666666666667
+Quepos,CR,XQP,,,,,,,8.15
+Kavieng,PG,KVG,,,,,,,7.53333333333333
+Stroud,US,SUD,,,,,,,8.15
+Masterton,NZ,MRO,,,,,,,3.45
+Universal City,US,RND,,,,,,,7.58333333333333
+Sparta,US,CMY,SAR,,,,,,7.16666666666667
+Nogales,US,OLS,,,,,,,7.23333333333333
+Lloydminster,CA,YLL,,,,,,,4.6
+Kinston,US,ISO,,,,,,,7.8
+Shelbyville,US,SYI,,,,,,,7.91666666666667
+Monroe,US,MLU,,,,,,,7.16666666666667
+Otjiwarongo,NA,OTJ,,,,,,,6.46666666666667
+Punta Gorda,US,PGD,,,,,,,8.91666666666667
+Brigham City,US,BMC,,,,,,,5.78333333333333
+Lexington,US,LEX,LXN,,,,,,7.55
+Hawthorne,US,HHR,HTH,,,,,,7.68333333333333
+Salmon Arm,CA,YSN,,,,,,,4.35
+Bartow,US,BOW,,,,,,,8.55
+Sweetwater,US,SWW,,,,,,,7.96666666666667
+Dalanzadgad,MN,DLZ,,,,,,,6.96666666666667
+Kushiro,JP,KUH,,,,,,,5.56666666666667
+Boone,US,BNW,,,,,,,8.1
+Stillwater,US,SWO,,,,,,,8.05
+Naples,US,APF,,,,,,,8.51666666666667
+Tsumeb,NA,TSB,,,,,,,5.55
+Ashland,US,ASX,AHM,,,,,,7.21666666666667
+Hermiston,US,HES,,,,,,,6.21666666666667
+Aberdeen,US,ABR,,,,,,,7.56666666666667
+Roosevelt,US,ROL,,,,,,,8.23333333333333
+Harrison,US,HRO,,,,,,,8.73333333333333
+Sligo,IE,SXL,,,,,,,7.35
+Durango,US,AMK,DRO,,,,,,5.1
+Gobabis,NA,GOG,,,,,,,7.4
+Lumberton,US,LBT,,,,,,,7.4
+Liberal,US,LBL,,,,,,,8.28333333333333
+Winchester,US,WGO,,,,,,,8.15
+Cumberland,US,CBE,,,,,,,7.93333333333333
+Norwood,US,OWD,,,,,,,6.71666666666667
+Fayetteville,US,FAY,FYM,FYV,POB,,,,7.88333333333333
+El Bolson,AR,EHL,,,,,,,2.78333333333333
+Mao,TD,AMO,,,,,,,5.21666666666667
+Ellensburg,US,ELN,,,,,,,4.78333333333333
+Greenfield,US,GFD,,,,,,,7.65
+Saint Peter Port,GG,GCI,,,,,,,6.2
+Augusta,US,AGS,AUG,DNL,,,,,8.46666666666667
+Harrisburg,US,HAR,HSB,MDT,,,,,6.6
+Mo i Rana,NO,MQN,,,,,,,4.03333333333333
+Horizontina,BR,HRZ,,,,,,,7.41666666666667
+North Myrtle Beach,US,CRE,,,,,,,8.4
+Barcelos,BR,BAZ,,,,,,,7.3
+Brownwood,US,BWD,,,,,,,9.35
+Milton,US,NSE,,,,,,,8.23333333333333
+Sheridan,US,SHR,,,,,,,6.53333333333333
+Marshfield,US,MFI,,,,,,,6.51666666666667
+Wisconsin Rapids,US,ISW,,,,,,,7.08333333333333
+Springfield,US,SGF,SGH,SPI,VSF,,,,7.93333333333333
+Kabala,SL,KBA,,,,,,,8.38333333333333
+Durant,US,DUA,,,,,,,8.3
+Thomasville,US,TVI,,,,,,,7.05
+Palestine,US,PSN,,,,,,,9.35
+Altus,US,AXS,LTS,,,,,,8.5
+Martinsburg,US,MRB,,,,,,,6.58333333333333
+Ashland,US,ASX,AHM,,,,,,7.21666666666667
+Bonanza,NI,BZA,,,,,,,8.55
+Mossendjo,CG,MSX,,,,,,,8.35
+Concord,US,CCR,CON,USA,,,,,6.3
+Lebanon,US,LEB,,,,,,,7.9
+Elizabeth City,US,ECG,,,,,,,8.01666666666667
+Newton,US,EWK,TNU,,,,,,6.85
+Laurel,US,LUL,,,,,,,6.93333333333333
+Nara,ML,NRM,,,,,,,6.71666666666667
+Princeton,US,PNN,,,,,,,8.23333333333333
+Albert Lea,US,AEL,,,,,,,7.5
+Johnstown,US,JST,,,,,,,6.58333333333333
+Dover,US,DOV,,,,,,,7.16666666666667
+Trenton,US,TRX,TTN,,,,,,6.98333333333333
+Winder,US,WDR,,,,,,,7.78333333333333
+Fairmont,US,FRM,,,,,,,6.85
+Aragarcas,BR,ARS,,,,,,,6.46666666666667
+Hampton,US,HPT,LFI,,,,,,7.98333333333333
+Nuuk,GL,GOH,,,,,,,2.73333333333333
+Calverton,US,CTO,,,,,,,7.15
+Somerset,US,SME,,,,,,,7.05
+Concord,US,CCR,CON,USA,,,,,6.3
+Burlington,US,BRL,BTV,,,,,,7.13333333333333
+Manchester,US,MHT,,,,,,,6.71666666666667
+Centralia,US,ENL,,,,,,,4.28333333333333
+Filadelfia,PY,FLM,,,,,,,7.15
+Griffith,AU,GFF,,,,,,,4.88333333333333
+Plymouth,US,PLY,PYM,,,,,,6.75
+Washington,US,WSG,DCA,MNZ,IAD,OCW,,,5.16666666666667
+Concord,US,CCR,CON,USA,,,,,6.3
+Vredendal,ZA,VRE,,,,,,,8.23333333333333
+Bhadrapur,NP,BDP,,,,,,,6.85
+Petawawa,CA,YWA,,,,,,,7.1
+Palanga,LT,PLQ,,,,,,,8.41666666666667
+Una,BR,UNA,,,,,,,8.15
+Portsmouth,US,PMH,PSM,,,,,,7.93333333333333
+Niles,US,NLE,,,,,,,8.58333333333333
+Fort Carson,US,FCS,,,,,,,7.21666666666667
+Luganville,VU,SON,,,,,,,8.45
+Ashtabula,US,JFN,,,,,,,7.1
+Terrell,US,TRL,,,,,,,9.01666666666667
+Sevierville,US,GKT,,,,,,,7.93333333333333
+Blythe,US,BLH,,,,,,,9.16666666666667
+Doylestown,US,DYL,,,,,,,6.95
+Alice,US,ALI,,,,,,,8.85
+Selma,US,SEM,,,,,,,6.53333333333333
+Bay City,US,BBC,,,,,,,7.35
+Farmington,US,FAM,FMN,,,,,,6.46666666666667
+Portsmouth,US,PMH,PSM,,,,,,7.93333333333333
+Harper,LR,CPA,,,,,,,8.18333333333333
+Las Heras,AR,LHS,,,,,,,2.8
+Brownsville,US,BRO,,,,,,,8.76666666666667
+Charleston,US,CHS,CRW,,,,,,8.5
+Khasab,OM,KHS,,,,,,,6.56666666666667
+Troy,US,TOI,,,,,,,8.16666666666667
+Dianopolis,BR,DNO,,,,,,,
+Rockland,US,RKD,,,,,,,6.56666666666667
+Broken Hill,AU,BHQ,,,,,,,5.6
+Miramichi,CA,YCH,,,,,,,6.98333333333333
+Anacortes,US,OTS,DTR,,,,,,4.91666666666667
+Mount Holly,US,LLY,,,,,,,7.06666666666667
+San Jose,PH,SJI,EUQ,,,,,,7.58333333333333
+Stuart,US,SUA,,,,,,,8.48333333333333
+Jacksonville,US,CRG,IJX,JAX,JKV,LRF,NEN,NIP,8.58333333333333
+Siloam Springs,US,SLG,,,,,,,8.33333333333333
+El Dorado,US,ELD,EDK,,,,,,4.81666666666667
+New Philadelphia,US,PHD,,,,,,,7.13333333333333
+Bakouma,CF,BMF,,,,,,,
+Zephyrhills,US,ZPH,,,,,,,9.13333333333333
+Cortland,US,CTX,,,,,,,6.43333333333333
+Catarman,PH,CRM,,,,,,,8.21666666666667
+Clemson,US,CEU,,,,,,,7.46666666666667
+Yeniseysk,RU,EIE,,,,,,,3.8
+Scarborough,TT,TAB,,,,,,,6.93333333333333
+Kirksville,US,IRK,,,,,,,7.7
+Sulaco,HN,SCD,,,,,,,8.56666666666667
+Coalinga,US,CLG,,,,,,,7.03333333333333
+Gainesville,US,GLE,GNV,GVL,,,,,8.98333333333333
+Morganton,US,MRN,,,,,,,7.15
+Puerto Aysen,CL,WPA,,,,,,,2.31666666666667
+Murray,US,CEY,,,,,,,6.08333333333333
+Rio Claro,BR,QIQ,,,,,,,7.35
+Wahiawa,US,HHI,,,,,,,8.5
+Lalibela,ET,LLI,,,,,,,8.25
+New Amsterdam,GY,QSX,,,,,,,7.3
+Johnstown,US,JST,,,,,,,6.58333333333333
+Matam,SN,MAX,,,,,,,7.03333333333333
+Lebanon,US,LEB,,,,,,,7.9
+Moroni,KM,HAH,YVA,,,,,,8.7
+Illizi,DZ,VVZ,,,,,,,4.43333333333333
+Laurel,US,LUL,,,,,,,6.93333333333333
+Shelbyville,US,SYI,,,,,,,7.91666666666667
+Aurora,US,BFK,,,,,,,7.25
+Clayton,US,CAO,,,,,,,8.45
+Danville,US,DAN,DNV,,,,,,6.78333333333333
+Bedford,US,BED,BFR,,,,,,8.65
+Bellaire,US,ACB,,,,,,,9.43333333333333
+Malta,US,MLK,,,,,,,6.31666666666667
+Beckley,US,BKW,,,,,,,6.16666666666667
+Marsabit,KE,RBT,,,,,,,8.41666666666667
+Easton,US,ESN,ESW,,,,,,6.66666666666667
+Canon City,US,CNE,,,,,,,6.71666666666667
+Tifton,US,TMA,,,,,,,8.55
+Bellingham,US,BLI,,,,,,,5.03333333333333
+Milledgeville,US,MLJ,,,,,,,8.26666666666667
+Huntington,US,HTS,,,,,,,7.26666666666667
+Karratha,AU,KTA,,,,,,,8.66666666666667
+Springfield,US,SGF,SGH,SPI,VSF,,,,7.93333333333333
+Middletown,US,MWO,,,,,,,7.41666666666667
+Pendleton,US,PDT,,,,,,,6.2
+Mandritsara,MG,WMA,,,,,,,
+Lodwar,KE,LOK,,,,,,,4.73333333333333
+Gainesville,US,GLE,GNV,GVL,,,,,8.98333333333333
+Aberdeen,US,ABR,,,,,,,7.56666666666667
+Dallas,US,ADS,DAL,RBD,,,,,8.66666666666667
+San Jose de Chiquitos,BO,SJS,,,,,,,7.05
+Laconia,US,LCI,,,,,,,6.68333333333333
+Marion,US,MNN,MWA,MZZ,,,,,8.31666666666667
+Pampa,US,PPA,,,,,,,8.73333333333333
+Mount Vernon,US,MVN,,,,,,,7.35
+Bitburg,DE,BBJ,,,,,,,7.23333333333333
+Defiance,US,DFI,,,,,,,7.5
+Auburn,US,AUN,AUO,,,,,,4.98333333333333
+Vallegrande,BO,VAH,,,,,,,7.13333333333333
+Long Beach,US,LGB,,,,,,,7.68333333333333
+Altintas,TR,KZR,,,,,,,
+Keetmanshoop,NA,KMP,,,,,,,9.35
+Maroochydore,AU,MCY,,,,,,,6.81666666666667
+Roxana,CR,TTQ,,,,,,,8.25
+Kauhava,FI,KAU,,,,,,,6.1
+Truckee,US,TKF,,,,,,,3.36666666666667
+Vila Bela da Santissima Trindade,BR,MTG,,,,,,,
+Puerto Carreno,CO,PCR,,,,,,,7.9
+Swift Current,CA,YYN,,,,,,,5.23333333333333
+Centerville,US,GHM,,,,,,,7.5
+Verdun,FR,MVV,,,,,,,7.83333333333333
+Ocho Rios,JM,OCJ,,,,,,,7.66666666666667
+Pembroke,CA,YTA,,,,,,,7.21666666666667
+Ada,US,ADT,,,,,,,5.61666666666667
+Vero Beach,US,VRB,,,,,,,8.5
+Madison,US,MDN,DXE,XMD,MSN,,,,8.4
+Ukiah,US,UKI,,,,,,,5.73333333333333
+Jasper,US,APT,JAS,,,,,,8.08333333333333
+Fillmore,US,FIL,,,,,,,7.46666666666667
+Taylor,US,TWE,TYZ,,,,,,9.26666666666667
+Greenville,LR,SNI,,,,,,,7.95
+Aberdeen,US,ABR,,,,,,,7.56666666666667
+Batangafo,CF,BTG,,,,,,,8.0
+Franklin,US,FKL,FKN,,,,,,7.83333333333333
+Belem,BR,BEL,,,,,,,7.46666666666667
+Kastoria,GR,KSO,,,,,,,7.2
+Middletown,US,MWO,,,,,,,7.41666666666667
+Barra de Santo Antonio,BR,QXC,,,,,,,7.91666666666667
+Payson,US,PJB,,,,,,,5.28333333333333
+Fullerton,US,FUL,,,,,,,7.61666666666667
+Muscle Shoals,US,MSL,,,,,,,8.21666666666667
+Poplar Bluff,US,POF,,,,,,,8.36666666666667
+Douglas,US,DGL,DGW,,,,,,8.2
+Hampton,US,HPT,LFI,,,,,,7.98333333333333
+Buffalo,US,BUF,BYG,,,,,,7.91666666666667
+Yorkton,CA,YQV,,,,,,,5.75
+San Antonio Oeste,AR,OES,,,,,,,6.25
+Goundam,ML,GUD,,,,,,,6.2
+Sparti,GR,SPJ,,,,,,,8.65
+Artesia,US,ATS,,,,,,,7.83333333333333
+Chickasha,US,CHK,,,,,,,8.18333333333333
+Taree,AU,TRO,,,,,,,5.56666666666667
+Hibbing,US,HIB,,,,,,,6.45
+Milford,US,MLF,,,,,,,6.96666666666667
+Sikeston,US,SIK,,,,,,,8.31666666666667
+Rygge,NO,RYG,,,,,,,6.73333333333333
+Upala,CR,UPL,,,,,,,8.33333333333333
+Seymour,US,SER,,,,,,,7.51666666666667
+Mount Pleasant,US,MOP,MPZ,MPS,,,,,8.76666666666667
+Sulphur Springs,US,SLR,,,,,,,8.63333333333333
+Mountain Home,US,WMH,MUO,,,,,,5.81666666666667
+Summerside,CA,YSU,,,,,,,6.45
+Koulamoutou,GA,KOU,,,,,,,7.7
+Usharal,KZ,USJ,,,,,,,7.78333333333333
+The Dalles,US,DLS,,,,,,,5.53333333333333
+Washington,US,WSG,DCA,MNZ,IAD,OCW,,,5.16666666666667
+Dublin,US,DBN,PSK,,,,,,5.41666666666667
+Bathurst,CA,ZBF,,,,,,,6.98333333333333
+Clarksburg,US,CKB,,,,,,,6.76666666666667
+Frankfort,US,FFT,,,,,,,7.75
+Marco Island,US,MRK,,,,,,,8.3
+Alpine,US,ALE,,,,,,,5.68333333333333
+Lewiston,US,LWS,,,,,,,6.83333333333333
+Fremont,US,FET,,,,,,,6.53333333333333
+Luzhou,CN,LZO,,,,,,,6.56666666666667
+Kulhudhuffushi,MV,HDK,,,,,,,7.13333333333333
+Jamestown,US,JHW,JMS,,,,,,6.91666666666667
+Bonito,BR,BYO,,,,,,,7.0
+Vatomandry,MG,VAT,,,,,,,
+Hugo,US,HUJ,,,,,,,7.7
+Rutland,US,RUT,,,,,,,6.95
+Santa Rosa,AR,RSA,,,,,,,6.16666666666667
+Opelousas,US,OPL,,,,,,,8.93333333333333
+Maliana,TL,MPT,,,,,,,
+Waterville,US,WVL,,,,,,,6.6
+Vieux Fort,LC,UVF,,,,,,,7.23333333333333
+Susanville,US,SVE,,,,,,,4.2
+Wildwood,US,WWD,,,,,,,8.46666666666667
+Hayden,US,HDN,,,,,,,4.45
+Newton,US,EWK,TNU,,,,,,6.85
+Mount Clemens,US,MTC,,,,,,,7.88333333333333
+Hartford,US,HFD,,,,,,,6.43333333333333
+Mitchell,US,MHE,,,,,,,7.48333333333333
+Fort Leonard Wood,US,TBN,,,,,,,7.58333333333333
+Anadyr,RU,DYR,,,,,,,2.66666666666667
+New Haven,US,HVN,,,,,,,6.26666666666667
+Tidjikja,MR,TIY,,,,,,,6.9
+Bokoro,TD,BKR,,,,,,,6.16666666666667
+Diapaga,BF,DIP,,,,,,,7.43333333333333
+Traverse City,US,TVC,,,,,,,7.53333333333333
+Greeneville,US,GCY,,,,,,,6.98333333333333
+Bemidji,US,BJI,,,,,,,6.55
+Yankton,US,YKN,,,,,,,7.7
+Dayton,US,DAY,FFO,MGY,,,,,7.55
+Tari,PG,TIZ,,,,,,,
+Glasgow,US,GGW,GLW,,,,,,7.08333333333333
+Jackson,US,HKS,JAC,JAN,JXN,MJQ,MKL,,4.91666666666667
+Clinton,US,CLK,CTZ,CWI,,,,,8.0
+Alta,NO,ALF,,,,,,,3.45
+Uvalde,US,UVA,,,,,,,8.96666666666667
+Springdale,US,SPZ,,,,,,,8.08333333333333
+Johnson City,US,JCY,,,,,,,6.73333333333333
+Macomb,US,MQB,,,,,,,7.96666666666667
+Monroe,US,MLU,,,,,,,7.16666666666667
+Gulf Shores,US,GUF,,,,,,,8.6
+Gaspe,CA,YGP,,,,,,,6.2
+Kuusamo,FI,KAO,,,,,,,4.51666666666667
+Roanoke Rapids,US,RZZ,,,,,,,7.4
+Vandalia,US,VLA,,,,,,,7.25
+Talladega,US,ASN,,,,,,,8.55
+Front Royal,US,FRR,,,,,,,6.61666666666667
+Mineral Wells,US,MWL,,,,,,,9.13333333333333
+Glasgow,US,GGW,GLW,,,,,,7.08333333333333
+Frederick,US,FDK,FDR,,,,,,6.7
+Monroe,US,MLU,,,,,,,7.16666666666667
+Fritzlar,DE,FRZ,,,,,,,7.68333333333333
+Lebanon,US,LEB,,,,,,,7.9
+Quthing,LS,UTG,,,,,,,6.5
+Soalala,MG,DWB,,,,,,,
+Ramechhap,NP,RHP,,,,,,,8.06666666666667
+Bakel,SN,BXE,,,,,,,7.2
+Worthington,US,OTG,,,,,,,7.75
+Djambala,CG,DJM,,,,,,,7.88333333333333
+Great Falls,US,GTF,,,,,,,4.85
+Kenora,CA,YQK,,,,,,,6.5
+Baucau,TL,BCH,,,,,,,8.4
+Cold Lake,CA,YOD,,,,,,,4.43333333333333
+Monkey Bay,MW,MYZ,,,,,,,8.8
+Washington,US,WSG,DCA,MNZ,IAD,OCW,,,5.16666666666667
+Mykolaiv,UA,NLV,,,,,,,7.63333333333333
+Boulder City,US,BLD,,,,,,,7.88333333333333
+Sterling,US,STK,,,,,,,6.68333333333333
+Forest City,US,FXY,,,,,,,8.63333333333333
+Salida,US,SLT,,,,,,,6.51666666666667
+Comox,CA,YQQ,,,,,,,4.93333333333333
+Sullivan,US,SIV,,,,,,,7.11666666666667
+Alexander City,US,ALX,,,,,,,8.28333333333333
+Tabatinga,BR,TBT,,,,,,,7.3
+Washington,US,WSG,DCA,MNZ,IAD,OCW,,,5.16666666666667
+Clarksdale,US,CKM,,,,,,,8.63333333333333
+Hudson,US,HCC,,,,,,,7.46666666666667
+Deming,US,DMN,,,,,,,8.45
+Mount Vernon,US,MVN,,,,,,,7.35
+Great Bend,US,GBD,,,,,,,7.73333333333333
+Loreto,MX,LTO,,,,,,,7.11666666666667
+Condoto,CO,COG,,,,,,,8.16666666666667
+Djanet,DZ,DJG,,,,,,,
+Terrace,CA,YXT,,,,,,,4.03333333333333
+Farnborough,GB,FAB,,,,,,,7.85
+Kiri,CD,KRZ,,,,,,,
+Hutchinson,US,HUT,,,,,,,7.95
+Red Bluff,US,RBL,,,,,,,6.73333333333333
+Tzaneen,ZA,LTA,,,,,,,5.7
+Munster,DE,FMO,,,,,,,8.31666666666667
+Les Sables-d'Olonne,FR,LSO,,,,,,,8.03333333333333
+Moultrie,US,MGR,MUL,,,,,,8.6
+Agua Boa,BR,GGB,,,,,,,
+Corinth,US,CRX,,,,,,,8.61666666666667
+Lebanon,US,LEB,,,,,,,7.9
+Ceres,AR,CRR,,,,,,,7.53333333333333
+Goshen,US,GSH,,,,,,,7.35
+Morris,US,MOX,,,,,,,6.26666666666667
+Srinagar,IN,SXR,,,,,,,8.51666666666667
+Scottsbluff,US,BFF,,,,,,,7.03333333333333
+Jasper,US,APT,JAS,,,,,,8.08333333333333
+Monticello,US,MSV,MXO,MXC,,,,,7.56666666666667
+Killarney,IE,KIR,,,,,,,8.05
+Brainerd,US,BRD,,,,,,,7.35
+Alexandria,US,AEX,AXN,ESF,,,,,7.4
+Natchez,US,HEZ,,,,,,,9.01666666666667
+Tezu,IN,TEI,,,,,,,7.38333333333333
+Livingston,US,LVM,,,,,,,7.03333333333333
+Horta,PT,HOR,,,,,,,8.51666666666667
+Bousso,TD,OUT,,,,,,,7.33333333333333
+Bedford,US,BED,BFR,,,,,,8.65
+Lai,TD,LTC,,,,,,,7.78333333333333
+Farmington,US,FAM,FMN,,,,,,6.46666666666667
+Prieska,ZA,PRK,,,,,,,8.13333333333333
+Kelafo,ET,LFO,,,,,,,
+Greenwood,US,GRD,GWO,,,,,,7.31666666666667
+Bainbridge,US,BGE,,,,,,,4.73333333333333
+Jacksonville,US,CRG,IJX,JAX,JKV,LRF,NEN,NIP,8.58333333333333
+Kaoma,ZM,KMZ,,,,,,,4.56666666666667
+Newport,US,NWH,EFK,ONP,NPT,,,,6.68333333333333
+Covington,US,CVG,,,,,,,7.96666666666667
+Puerto Deseado,AR,PUD,,,,,,,2.98333333333333
+Huron,US,HON,,,,,,,7.2
+Boutilimit,MR,OTL,,,,,,,6.65
+Leirvik,NO,SRP,,,,,,,6.18333333333333
+Dallas,US,ADS,DAL,RBD,,,,,8.66666666666667
+Port Lincoln,AU,PLO,,,,,,,5.03333333333333
+College Park,US,CGS,,,,,,,7.3
+Powell,US,POY,,,,,,,7.41666666666667
+Fergus Falls,US,FFM,,,,,,,7.1
+Pierre,US,PIR,,,,,,,7.96666666666667
+Jacksonville,US,CRG,IJX,JAX,JKV,LRF,NEN,NIP,8.58333333333333
+Oneonta,US,ONH,,,,,,,6.55
+Athens,US,AHN,MMI,,,,,,7.76666666666667
+Emerald,AU,EMD,,,,,,,7.91666666666667
+Indiana,US,IDI,,,,,,,7.95
+Ardmore,US,AHD,ADM,,,,,,8.55
+Nantucket,US,ACK,,,,,,,6.93333333333333
+New Ulm,US,ULM,,,,,,,7.35
+Taguatinga,BR,QHN,,,,,,,6.78333333333333
+Rafai,CF,RFA,,,,,,,7.53333333333333
+Powell,US,POY,,,,,,,7.41666666666667
+Koundara,GN,SBI,,,,,,,7.96666666666667
+Matane,CA,YME,,,,,,,5.75
+Powell River,CA,YPW,,,,,,,5.4
+Destin,US,DSI,,,,,,,8.65
+Huntington,US,HTS,,,,,,,7.26666666666667
+Olean,US,OLE,,,,,,,6.4
+Makokou,GA,MKU,,,,,,,8.08333333333333
+Aurora,US,BFK,,,,,,,7.25
+Richland,US,RLD,,,,,,,7.16666666666667
+Porto Alegre do Norte,BR,PBX,,,,,,,
+Kingstown,VC,SVD,,,,,,,7.85
+Waycross,US,AYS,,,,,,,8.61666666666667
+Luozi,CD,LZI,,,,,,,
+Worthington,US,OTG,,,,,,,7.75
+North Battleford,CA,YQW,,,,,,,5.03333333333333
+Enniskillen,GB,ENK,,,,,,,7.38333333333333
+Lakeland,US,LAL,,,,,,,9.13333333333333
+Bedford,US,BED,BFR,,,,,,8.65
+Ronne,DK,RNN,,,,,,,6.85
+Auburn,US,AUN,AUO,,,,,,4.98333333333333
+Marianske Lazne,CZ,MKA,,,,,,,6.6
+Ephrata,US,EPH,,,,,,,6.58333333333333
+York,US,THV,,,,,,,6.45
+Kidlington,GB,OXF,,,,,,,7.6
+Moberly,US,MBY,,,,,,,7.83333333333333
+Marshall,US,ASL,MHL,MML,MLL,,,,8.08333333333333
+Marshall,US,ASL,MHL,MML,MLL,,,,8.08333333333333
+Beeville,US,NIR,,,,,,,9.06666666666667
+Salisbury,US,SRW,SBY,,,,,,6.95
+Marion,US,MNN,MWA,MZZ,,,,,8.31666666666667
+Lumberton,US,LBT,,,,,,,7.4
+Sao Felix do Araguaia,BR,SXO,,,,,,,
+Guerrero Negro,MX,GUB,,,,,,,7.46666666666667
+Okinoshima,JP,OKI,,,,,,,
+Beaufort,US,BFT,,,,,,,8.5
+Pama,BF,XPA,,,,,,,7.4
+West End,BS,WTD,,,,,,,7.3
+Tokoroa,NZ,TKZ,,,,,,,3.18333333333333
+Bardstown,US,BRY,,,,,,,7.83333333333333
+Thisted,DK,TED,,,,,,,7.28333333333333
+Jefferson,US,EFW,,,,,,,8.11666666666667
+King City,US,KIC,,,,,,,6.18333333333333
+Sterling,US,STK,,,,,,,6.68333333333333
+Los Alamos,US,LAM,,,,,,,5.51666666666667
+Clinton,US,CLK,CTZ,CWI,,,,,8.0
+Zabreh,CZ,ZBE,,,,,,,7.7
+Connersville,US,CEV,,,,,,,7.46666666666667
+Butler,US,BTP,BUM,,,,,,7.58333333333333
+Canton,US,CTK,,,,,,,7.6
+Lincoln,US,LNK,,,,,,,8.53333333333333
+Oxford,US,OXC,OXD,UOX,,,,,7.4
+Marietta,US,MGE,,,,,,,8.46666666666667
+Yengema,SL,WYE,,,,,,,8.18333333333333
+Washington,US,WSG,DCA,MNZ,IAD,OCW,,,5.16666666666667
+Andrews,US,ADR,,,,,,,9.01666666666667
+Auburn,US,AUN,AUO,,,,,,4.98333333333333
+Coatesville,US,CTH,,,,,,,6.2
+Manching,DE,IGS,,,,,,,6.35
+Mount Vernon,US,MVN,,,,,,,7.35
+Clayton,US,CAO,,,,,,,8.45
+Rogers,US,ROG,,,,,,,8.48333333333333
+Blytheville,US,BYH,HKA,,,,,,8.35
+Los Chiles,CR,LSL,,,,,,,8.26666666666667
+Steamboat Springs,US,SBS,,,,,,,4.63333333333333
+Glendale,US,LUF,,,,,,,9.58333333333333
+Basseterre,KN,SKB,,,,,,,8.03333333333333
+Orangeburg,US,OGB,,,,,,,8.11666666666667
+Kuressaare,EE,URE,,,,,,,7.51666666666667
+Las Vegas,US,HSH,LAS,LSV,LVS,VGT,,,8.1
+Portland,US,HIO,PDX,PWM,TTD,,,,5.46666666666667
+Newton,US,EWK,TNU,,,,,,6.85
+Harrison,US,HRO,,,,,,,8.73333333333333
+Pell City,US,PLR,,,,,,,8.3
+Superior,US,SUW,,,,,,,7.15
+Chanaral,CL,CNR,,,,,,,5.46666666666667
+Trenton,US,TRX,TTN,,,,,,6.98333333333333
+Dover,US,DOV,,,,,,,7.16666666666667
+Phalaborwa,ZA,PHW,,,,,,,6.3
+La Grande,US,LGD,,,,,,,4.68333333333333
+Chos Malal,AR,HOS,,,,,,,4.41666666666667
+Harrison,US,HRO,,,,,,,8.73333333333333
+Gorakhpur,IN,GOP,,,,,,,6.4
+Makabana,CG,KMK,,,,,,,7.46666666666667
+Cambridge,US,CGE,,,,,,,6.95
+Kuruman,ZA,KMH,,,,,,,8.68333333333333
+Bedford,US,BED,BFR,,,,,,8.65
+Thompson,CA,YTH,,,,,,,5.61666666666667
+Claremont,US,CNH,,,,,,,7.08333333333333
+Forrest City,US,FCY,,,,,,,8.43333333333333
+Befandriana,MG,WBD,,,,,,,
+Mandritsara,MG,WMA,,,,,,,
+Miami,US,MIA,MIO,OPF,TMB,TNT,,,7.81666666666667
+Rochester,US,RCR,ROC,RST,,,,,7.26666666666667
+Troy,US,TOI,,,,,,,8.16666666666667
+Newcastle,US,ECS,,,,,,,5.13333333333333
+Meadville,US,MEJ,,,,,,,7.15
+Lahaina,US,JHM,,,,,,,8.68333333333333
+El Dorado,US,ELD,EDK,,,,,,4.81666666666667
+Daru,PG,DAU,,,,,,,8.05
+Athens,US,AHN,MMI,,,,,,7.76666666666667
+Frutillar,CL,FRT,,,,,,,2.98333333333333
+Mountain Home,US,WMH,MUO,,,,,,5.81666666666667
+Lontras,BR,LOI,,,,,,,6.25
+Harrison,US,HRO,,,,,,,8.73333333333333
+Smyrna,US,MQY,,,,,,,8.66666666666667
+Trail,CA,YZZ,,,,,,,5.23333333333333
+Salisbury,US,SRW,SBY,,,,,,6.95
+Tehachapi,US,TSP,,,,,,,4.41666666666667
+Puerto Jimenez,CR,PJM,,,,,,,8.2
+Nieuw Nickerie,SR,ICK,,,,,,,8.3
+Santa Fe,US,SAF,,,,,,,6.23333333333333
+Springbok,ZA,SBU,,,,,,,7.96666666666667
+Lumberton,US,LBT,,,,,,,7.4
+Greenville,US,GLH,GMU,GRE,GVT,GDC,PGV,,7.71666666666667
+Big Bear City,US,RBF,,,,,,,4.25
+Florence,US,FMU,FLO,,,,,,7.73333333333333
+Eufaula,US,EUF,,,,,,,8.58333333333333
+Guymon,US,GUY,,,,,,,8.48333333333333
+Oakland,US,ODM,OAK,,,,,,7.88333333333333
+Brus Laguna,HN,BHG,,,,,,,8.06666666666667
+Playa Grande,GT,PKJ,,,,,,,
+Marysville,US,BAB,MYV,,,,,,4.78333333333333
+Amos,CA,YEY,,,,,,,6.53333333333333
+Neosho,US,EOS,,,,,,,8.13333333333333
+Wilmington,US,ILG,ILM,ILN,,,,,8.18333333333333
+Dunkirk,US,DKK,,,,,,,7.81666666666667
+Kelso,US,KLS,,,,,,,4.43333333333333
+Branson,US,BKG,PLK,,,,,,8.13333333333333
+Artesia,US,ATS,,,,,,,7.83333333333333
+Costa Marques,BR,CQS,,,,,,,7.0
+Bonito,BR,BYO,,,,,,,7.0
+Road Town,VG,EIS,,,,,,,8.13333333333333
+Granville,FR,GFR,,,,,,,7.5
+Pago Pago,AS,PPG,,,,,,,8.43333333333333
+Brunswick,US,BQK,NHZ,,,,,,7.21666666666667
+Luderitz,NA,LUD,,,,,,,5.4
+Borger,US,BGD,,,,,,,8.78333333333333
+Falmouth,US,FMH,,,,,,,6.98333333333333
+Georgetown,US,GED,GGE,,,,,,9.23333333333333
+Boone,US,BNW,,,,,,,8.1
+Logan,US,LGU,,,,,,,5.23333333333333
+Macara,EC,MRR,,,,,,,8.55
+Palmer,US,PAQ,,,,,,,6.81666666666667
+Massena,US,MSS,,,,,,,7.05
+Escanaba,US,ESC,,,,,,,7.01666666666667
+Las Lomitas,AR,LLS,,,,,,,7.68333333333333
+Lewisburg,US,LWB,,,,,,,8.01666666666667
+Union,US,USC,,,,,,,7.48333333333333
+Manchester,US,MHT,,,,,,,6.71666666666667
+Bulgan,MN,UGA,,,,,,,4.53333333333333
+Dawson Creek,CA,YDQ,,,,,,,3.71666666666667
+Bodaybo,RU,ODO,,,,,,,2.5
+Mende,FR,SCP,,,,,,,5.68333333333333
+Cottonwood,US,CTW,,,,,,,7.36666666666667
+Lake City,US,LCQ,,,,,,,8.66666666666667
+Garden City,US,GCK,,,,,,,8.25
+Madison,US,MDN,DXE,XMD,MSN,,,,8.4
+Prince Rupert,CA,YPR,,,,,,,3.96666666666667
+Bouca,CF,BCF,,,,,,,8.23333333333333
+Spearfish,US,SPF,,,,,,,6.93333333333333
+Beatrice,US,BIE,,,,,,,8.26666666666667
+Sogndal,NO,SOG,,,,,,,6.98333333333333
+Richland,US,RLD,,,,,,,7.16666666666667
+Srinagar,IN,SXR,,,,,,,8.51666666666667
+Raipur,IN,RPR,,,,,,,7.38333333333333
+Quesnel,CA,YQZ,,,,,,,4.4
+Taltal,CL,TTC,,,,,,,6.71666666666667
+Crossville,US,CSV,,,,,,,7.55
+Centralia,US,ENL,,,,,,,4.28333333333333
+Acandi,CO,ACD,,,,,,,8.11666666666667
+Washington,US,WSG,DCA,MNZ,IAD,OCW,,,5.16666666666667
+Woodward,US,WWR,,,,,,,8.25
+Key Largo,US,OCA,,,,,,,7.45
+Eureka,US,EUE,EKA,NLN,,,,,5.41666666666667
+Weatherford,US,WEA,,,,,,,9.18333333333333
+Somerset,US,SME,,,,,,,7.05
+Spencer,US,SPW,,,,,,,7.63333333333333
+Richmond,US,RIC,RID,,,,,,7.23333333333333
+Manchester,US,MHT,,,,,,,6.71666666666667
+Williams Lake,CA,YWL,,,,,,,4.26666666666667
+Gander,CA,YQX,,,,,,,4.78333333333333
+Niles,US,NLE,,,,,,,8.58333333333333
+Salem,US,SLE,SLO,,,,,,4.78333333333333
+Laurel,US,LUL,,,,,,,6.93333333333333
+Big Lake,US,BGQ,,,,,,,7.43333333333333
+Richland,US,RLD,,,,,,,7.16666666666667
+Elizabethtown,US,EKX,,,,,,,7.55
+Evanston,US,EVW,,,,,,,8.63333333333333
+Gulfport,US,GPT,,,,,,,8.73333333333333
+Minden,US,MEV,,,,,,,8.6
+Green River,US,RVR,,,,,,,5.26666666666667
+Show Low,US,SOW,,,,,,,5.25
+Soderhamn,SE,SOO,,,,,,,7.08333333333333
+Richfield,US,RIF,,,,,,,8.0
+Magdagachi,RU,GDG,,,,,,,3.48333333333333
+Trinidad,CO,TDA,,,,,,,7.98333333333333
+Milford,US,MLF,,,,,,,6.96666666666667
+Lansing,US,LAN,,,,,,,7.55
+Bol,TD,OTC,,,,,,,8.15
+Douglas,US,DGL,DGW,,,,,,8.2
+Canton,US,CTK,,,,,,,7.6
+Franklin,US,FKL,FKN,,,,,,7.83333333333333
+Half Moon Bay,US,HAF,,,,,,,5.28333333333333
+La Esperanza,HN,LEZ,,,,,,,6.38333333333333
+Ontario,US,ONO,ONT,,,,,,7.08333333333333
+Cruzeiro do Sul,BR,CZS,,,,,,,7.6
+Hartsville,US,HVS,,,,,,,7.6
+Weeze,DE,NRN,,,,,,,7.96666666666667
+Patterson,US,PTN,,,,,,,6.51666666666667
+Puerto Suarez,BO,PSZ,,,,,,,6.35
+Kundiawa,PG,CMU,,,,,,,6.15
+Broome,AU,BME,,,,,,,7.98333333333333
+Holesov,CZ,GTW,,,,,,,7.63333333333333
+Norfolk,US,NGU,OFK,ORF,,,,,6.65
+Newcastle,US,ECS,,,,,,,5.13333333333333
+Burley,US,BYI,,,,,,,5.21666666666667
+Lencois,BR,LEC,,,,,,,8.06666666666667
+Elk City,US,ELK,,,,,,,8.3
+Oskaloosa,US,OOA,,,,,,,7.91666666666667
+Salisbury,US,SRW,SBY,,,,,,6.95
+Farmington,US,FAM,FMN,,,,,,6.46666666666667
+Pontiac,US,PTK,,,,,,,8.01666666666667
+Paro,BT,PBH,,,,,,,6.9
+Covington,US,CVG,,,,,,,7.96666666666667
+Hato Corozal,CO,HTZ,,,,,,,7.98333333333333
+Kincardine,CA,YKD,,,,,,,7.83333333333333
+Snyder,US,SNK,,,,,,,9.16666666666667
+Hamilton,US,HAB,HAO,,,,,,7.95
+Elliot Lake,CA,YEL,,,,,,,7.11666666666667
+Okmulgee,US,OKM,,,,,,,8.38333333333333
+Wells,US,LWL,,,,,,,6.88333333333333
+Bromont,CA,ZBM,,,,,,,6.9
+Spencer,US,SPW,,,,,,,7.63333333333333
+Holbrook,US,HBK,,,,,,,7.16666666666667
+Cocoa Beach,US,COF,,,,,,,8.51666666666667
+Sebba,BF,XSE,,,,,,,6.68333333333333
+Golfito,CR,GLF,,,,,,,8.5
+Covenas,CO,CVE,,,,,,,
+Anderson,US,AID,AND,,,,,,7.4
+Ocean City,US,OCE,,,,,,,7.6
+Lansing,US,LAN,,,,,,,7.55
+Akjoujt,MR,AJJ,,,,,,,5.15
+Kedougou,SN,KGG,,,,,,,7.86666666666667
+Hambantota,LK,HRI,,,,,,,6.53333333333333
+Storm Lake,US,SLB,,,,,,,7.4
+Batesville,US,BVX,HLB,,,,,,8.45
+Grand Rapids,US,GPZ,GRR,,,,,,7.28333333333333
+Kirensk,RU,KCK,,,,,,,2.68333333333333
+Nandayure,CR,PBP,,,,,,,8.25
+Alto Parnaiba,BR,APY,,,,,,,6.58333333333333
+Cleveland,US,BKL,CGF,CLE,,,,,8.16666666666667
+Berane,ME,IVG,,,,,,,6.55
+Clayton,US,CAO,,,,,,,8.45
+Union City,US,UCY,,,,,,,6.35
+Selma,US,SEM,,,,,,,6.53333333333333
+Sturgis,US,IRS,,,,,,,7.5
+Magnolia,US,AGO,,,,,,,8.88333333333333
+Columbia,US,CAE,COU,CUB,COA,,,,7.93333333333333
+Summit,US,UMM,,,,,,,7.51666666666667
+Waterloo,US,ALO,,,,,,,7.73333333333333
+Sebring,US,SEF,,,,,,,9.05
+La Tuque,CA,YLQ,,,,,,,7.0
+Ankavandra,MG,JVA,,,,,,,
+Loikaw,MM,LIW,,,,,,,8.01666666666667
+Burlington,US,BRL,BTV,,,,,,7.13333333333333
+Springdale,US,SPZ,,,,,,,8.08333333333333
+Canton,US,CTK,,,,,,,7.6
+Memphis,US,MEM,,,,,,,8.93333333333333
+Troy,US,TOI,,,,,,,8.16666666666667
+Prineville,US,PRZ,,,,,,,4.98333333333333
+Manville,US,JVI,,,,,,,7.18333333333333
+Garden City,US,GCK,,,,,,,8.25
+Guthrie,US,GOK,,,,,,,8.08333333333333
+Peru,US,GUS,VYS,,,,,,7.46666666666667
+Sarmiento,AR,OLN,,,,,,,3.55
+Estevan,CA,YEN,,,,,,,5.93333333333333
+Sucua,EC,SUQ,,,,,,,7.75
+Danville,US,DAN,DNV,,,,,,6.78333333333333
+Hudson,US,HCC,,,,,,,7.46666666666667
+Montgomery,US,MGJ,MGM,MXF,,,,,6.45
+Belle Chasse,US,BCS,,,,,,,9.31666666666667
+Jackson,US,HKS,JAC,JAN,JXN,MJQ,MKL,,4.91666666666667
+Placerville,US,PVF,,,,,,,5.48333333333333
+Freeport,US,FEP,,,,,,,7.25
+Riverton,US,RIW,,,,,,,5.6
+Vidalia,US,VDI,,,,,,,8.66666666666667
+Edwards,US,EDW,,,,,,,4.35
+Milton,US,NSE,,,,,,,8.23333333333333
+Bogalusa,US,BXA,,,,,,,9.08333333333333
+Hartford,US,HFD,,,,,,,6.43333333333333
+Lyons,US,LYO,,,,,,,8.73333333333333
+Victoria,US,VCT,,,,,,,9.26666666666667
+Lexington,US,LEX,LXN,,,,,,7.55
+Monroe,US,MLU,,,,,,,7.16666666666667
+Kralendijk,BQ,BON,,,,,,,6.53333333333333
+Camden,US,CDH,CDN,,,,,,7.31666666666667
+Millington,US,NQA,,,,,,,8.75
+Le Mars,US,LRJ,,,,,,,8.0
+Sweetwater,US,SWW,,,,,,,7.96666666666667
+Reading,US,RDG,,,,,,,6.55
+Marck,FR,CQF,,,,,,,7.41666666666667
+Kearney,US,EAR,,,,,,,7.61666666666667
+Shelton,US,SHN,,,,,,,6.9
+Ontario,US,ONO,ONT,,,,,,7.08333333333333
+Espanola,US,ESO,,,,,,,6.76666666666667
+Worcester,US,ORH,,,,,,,6.4
+Rifle,US,RIL,,,,,,,5.25
+Fairmont,US,FRM,,,,,,,6.85
+Cadillac,US,CAD,,,,,,,6.75
+Kennett,US,KNT,,,,,,,8.51666666666667
+Galion,US,GQQ,,,,,,,7.26666666666667
+Plymouth,US,PLY,PYM,,,,,,6.75
+Garden City,US,GCK,,,,,,,8.25
+Magas,RU,IGT,,,,,,,7.4
+Alexandria,US,AEX,AXN,ESF,,,,,7.4
+Newport,US,NWH,EFK,ONP,NPT,,,,6.68333333333333
+London,US,LOZ,,,,,,,7.21666666666667
+Mildenhall,GB,MHZ,,,,,,,7.3
+Paris,US,PHT,PRX,,,,,,8.63333333333333
+Versailles,US,VRS,,,,,,,7.71666666666667
+Fort Madison,US,FMS,,,,,,,8.15
+Arraias,BR,AAI,,,,,,,7.65
+Sao Carlos,BR,QSC,,,,,,,7.66666666666667
+Tabubil,PG,TBG,,,,,,,
+Guadalupe,BR,GDP,,,,,,,8.18333333333333
+Carroll,US,CIN,,,,,,,6.5
+Pine Ridge,US,XPR,,,,,,,9.05
+Rockport,US,RKP,,,,,,,8.55
+Alpine,US,ALE,,,,,,,5.68333333333333
+Jaipur,IN,JAI,,,,,,,7.15
+Milton,US,NSE,,,,,,,8.23333333333333
+North Bend,US,OTH,,,,,,,5.1
+Davenport,US,DVN,,,,,,,7.96666666666667
+Minatitlan,MX,MTT,,,,,,,8.51666666666667
+Roberval,CA,YRJ,,,,,,,6.86666666666667
+Milford,US,MLF,,,,,,,6.96666666666667
+Bonthe,SL,BTE,,,,,,,7.83333333333333
+Columbia,US,CAE,COU,CUB,COA,,,,7.93333333333333
+Alpena,US,APN,,,,,,,7.58333333333333
+Tokunoshima,JP,TKN,,,,,,,
+Astoria,US,AST,,,,,,,5.15
+Birao,CF,IRO,,,,,,,7.16666666666667
+Ware,US,UWA,,,,,,,6.51666666666667
+Port Townsend,US,TWD,,,,,,,4.98333333333333
+New Richmond,US,RNH,,,,,,,7.28333333333333
+Paris,US,PHT,PRX,,,,,,8.63333333333333
+Vernal,US,VEL,,,,,,,5.65
+Jefferson,US,EFW,,,,,,,8.11666666666667
+Franklin,US,FKL,FKN,,,,,,7.83333333333333
+Okondja,GA,OKN,,,,,,,7.43333333333333
+Hobart,US,HBR,,,,,,,8.0
+Greenville,US,GLH,GMU,GRE,GVT,GDC,PGV,,7.71666666666667
+Safford,US,SAD,,,,,,,9.05
+Baker City,US,BKE,,,,,,,4.75
+Harrison,US,HRO,,,,,,,8.73333333333333
+Glenwood Springs,US,GWS,,,,,,,5.11666666666667
+Robore,BO,RBO,,,,,,,6.43333333333333
+Cairo,US,CIR,,,,,,,8.73333333333333
+Cambridge,US,CGE,,,,,,,6.95
+Cody,US,COD,,,,,,,5.66666666666667
+Williston,US,XWA,,,,,,,6.95
+Clinton,US,CLK,CTZ,CWI,,,,,8.0
+Castlegar,CA,YCG,,,,,,,5.01666666666667
+Kirundo,BI,KRE,,,,,,,6.7
+Vernon,US,WIB,,,,,,,8.53333333333333
+Moba,CD,BDV,,,,,,,7.36666666666667
+Senanga,ZM,SXG,,,,,,,3.61666666666667
+Putao,MM,PBU,,,,,,,7.2
+Mboki,CF,MKI,,,,,,,
+Marshall,US,ASL,MHL,MML,MLL,,,,8.08333333333333
+Independence,US,IDP,,,,,,,8.01666666666667
+Fairfield,US,FFL,SUU,,,,,,6.56666666666667
+Marysville,US,BAB,MYV,,,,,,4.78333333333333
+Boundji,CG,BOE,,,,,,,
+Detroit Lakes,US,DTL,,,,,,,7.01666666666667
+Sparta,US,CMY,SAR,,,,,,7.16666666666667
+Mount Holly,US,LLY,,,,,,,7.06666666666667
+Santa Maria,BR,RIA,,,,,,,7.65
+Ogdensburg,US,OGS,,,,,,,7.2
+Hinton,CA,YJP,,,,,,,3.68333333333333
+Wapakoneta,US,AXV,,,,,,,7.26666666666667
+Keokuk,US,EOK,,,,,,,8.11666666666667
+Parkes,AU,PKE,,,,,,,4.5
+Peru,US,GUS,VYS,,,,,,7.46666666666667
+Mudgee,AU,DGE,,,,,,,4.38333333333333
+Suntar,RU,SUY,,,,,,,2.48333333333333
+Santa Barbara,VE,SBB,,,,,,,7.86666666666667
+Santa Rosa,BR,SRA,,,,,,,7.51666666666667
+Alamosa,US,ALS,,,,,,,4.5
+Avon Park,US,AVO,,,,,,,8.65
+Marathon,US,MTH,,,,,,,6.7
+Nyurba,RU,NYR,,,,,,,2.35
+Gokceada,TR,GKD,,,,,,,8.28333333333333
+Washington,US,WSG,DCA,MNZ,IAD,OCW,,,5.16666666666667
+Gorom-Gorom,BF,XGG,,,,,,,6.31666666666667
+Sedona,US,SDX,,,,,,,6.7
+Brownsville,US,BRO,,,,,,,8.76666666666667
+Cambridge,US,CGE,,,,,,,6.95
+Morrisville,US,MVL,,,,,,,7.36666666666667
+Decatur,US,DCU,DEC,,,,,,8.01666666666667
+Silver City,US,SVC,,,,,,,6.75
+Sturgeon Bay,US,SUE,,,,,,,7.73333333333333
+Bluefield,US,BLF,,,,,,,6.1
+Butler,US,BTP,BUM,,,,,,7.58333333333333
+Middletown,US,MWO,,,,,,,7.41666666666667
+Manhattan,US,MHK,,,,,,,7.58333333333333
+Greenville,US,GLH,GMU,GRE,GVT,GDC,PGV,,7.71666666666667
+Roanoke,US,ROA,,,,,,,6.98333333333333
+Parsons,US,PPF,,,,,,,7.73333333333333
+Greenwood,US,GRD,GWO,,,,,,7.31666666666667
+Bethel,US,BET,,,,,,,6.6
+Middletown,US,MWO,,,,,,,7.41666666666667
+Basco,PH,BSO,,,,,,,6.73333333333333
+Smiths Falls,CA,YSH,,,,,,,6.93333333333333
+Louisville,US,LMS,LOU,SDF,,,,,8.25
+Berlin,US,BML,,,,,,,6.21666666666667
+Fairfield,US,FFL,SUU,,,,,,6.56666666666667
+Salem,US,SLE,SLO,,,,,,4.78333333333333
+Clarksville,US,CKV,,,,,,,8.26666666666667
+Winchester,US,WGO,,,,,,,8.15
+Wau,PG,WUG,,,,,,,7.2
+Eunice,US,UCE,,,,,,,9.16666666666667
+Alma,US,AMN,,,,,,,7.28333333333333
+Manchester,US,MHT,,,,,,,6.71666666666667
+Florence,US,FMU,FLO,,,,,,7.73333333333333
+Ashland,US,ASX,AHM,,,,,,7.21666666666667
+Tivat,ME,TIV,,,,,,,8.43333333333333
+Burlington,US,BRL,BTV,,,,,,7.13333333333333
+Hastings,US,HSI,,,,,,,7.75
+Gore,ET,GOR,,,,,,,6.55
+Havre,US,HVR,,,,,,,5.48333333333333
+Angola,US,ANQ,,,,,,,7.46666666666667
+Quakertown,US,UKT,,,,,,,6.43333333333333
+Qualicum Beach,CA,XQU,,,,,,,5.2
+Plymouth,US,PLY,PYM,,,,,,6.75
+Jackson,US,HKS,JAC,JAN,JXN,MJQ,MKL,,4.91666666666667
+Punta del Este,UY,PDP,,,,,,,5.76666666666667
+Charlotte,US,CLT,,,,,,,7.31666666666667
+Washington,US,WSG,DCA,MNZ,IAD,OCW,,,5.16666666666667
+Wasilla,US,WWA,,,,,,,3.13333333333333
+Merrill,US,RRL,,,,,,,6.76666666666667
+Bridgeport,US,BDR,,,,,,,6.65
+Augusta,US,AGS,AUG,DNL,,,,,8.46666666666667
+Rensselaer,US,RNZ,,,,,,,6.13333333333333
+Fallon,US,FLX,NFL,,,,,,5.9
+Hailey,US,SUN,,,,,,,4.36666666666667
+Riverside,US,RAL,RIV,,,,,,8.21666666666667
+Shannon,IE,SNN,,,,,,,8.01666666666667
+Mount Pleasant,US,MOP,MPZ,MPS,,,,,8.76666666666667
+Blackstone,US,BKT,,,,,,,6.55
+Whitecourt,CA,YZU,,,,,,,3.9
+Landivisiau,FR,LDV,,,,,,,7.2
+Salisbury,US,SRW,SBY,,,,,,6.95
+Grants,US,GNT,,,,,,,5.96666666666667
+Oakland,US,ODM,OAK,,,,,,7.88333333333333
+Delta,US,DTA,,,,,,,5.71666666666667
+Raipur,IN,RPR,,,,,,,7.38333333333333
+Stillwater,US,SWO,,,,,,,8.05
+Dallas,US,ADS,DAL,RBD,,,,,8.66666666666667
+Rutland,US,RUT,,,,,,,6.95
+Benton Harbor,US,BEH,,,,,,,7.68333333333333
+Springfield,US,SGF,SGH,SPI,VSF,,,,7.93333333333333
+Riverside,US,RAL,RIV,,,,,,8.21666666666667
+Midland,US,MAF,MDD,,,,,,9.01666666666667
+Newark,US,EWR,,,,,,,7.38333333333333
+Jumla,NP,JUM,,,,,,,6.31666666666667
+Ewo,CG,EWO,,,,,,,7.11666666666667
+Toccoa,US,TOC,,,,,,,7.81666666666667
+Westerland,DE,GWT,,,,,,,6.8
+Douglas,US,DGL,DGW,,,,,,8.2
+Craig,US,CIG,,,,,,,4.75
+Kasane,BW,BBK,,,,,,,4.65
+Tsaratanana,MG,TTS,,,,,,,7.36666666666667
+Manja,MG,MJA,,,,,,,
+Olney,US,ONY,,,,,,,6.6
+Rice Lake,US,RIE,,,,,,,7.16666666666667
+Nuqui,CO,NQU,,,,,,,8.15
+Aviano,IT,AVB,,,,,,,7.61666666666667
+Winslow,US,INW,,,,,,,7.05
+Tshabong,BW,TBY,,,,,,,8.51666666666667
+Beaver Falls,US,BFP,,,,,,,6.81666666666667
+Clinton,US,CLK,CTZ,CWI,,,,,8.0
+Plymouth,US,PLY,PYM,,,,,,6.75
+Caldwell,US,CDW,,,,,,,5.75
+Mansfield,US,MFD,,,,,,,9.15
+Thief River Falls,US,TVF,,,,,,,6.96666666666667
+Greenville,US,GLH,GMU,GRE,GVT,GDC,PGV,,7.71666666666667
+Kelle,CG,KEE,,,,,,,
+Poteau,US,RKR,,,,,,,8.5
+Gilgit,PK,GIL,,,,,,,8.86666666666667
+Coffeyville,US,CFV,,,,,,,8.28333333333333
+Dayton,US,DAY,FFO,MGY,,,,,7.55
+Cortez,US,CEZ,,,,,,,5.65
+Reyes,BO,REY,,,,,,,7.21666666666667
+Summit,US,UMM,,,,,,,7.51666666666667
+Mokhotlong,LS,MKH,,,,,,,5.73333333333333
+Bainbridge,US,BGE,,,,,,,4.73333333333333
+Clayton,US,CAO,,,,,,,8.45
+Sodankyla,FI,SOT,,,,,,,4.75
+Greenville,US,GLH,GMU,GRE,GVT,GDC,PGV,,7.71666666666667
+Presque Isle,US,PQI,,,,,,,6.83333333333333
+Franklin,US,FKL,FKN,,,,,,7.83333333333333
+Hoquiam,US,HQM,,,,,,,4.73333333333333
+Jackson,US,HKS,JAC,JAN,JXN,MJQ,MKL,,4.91666666666667
+Moranbah,AU,MOV,,,,,,,7.53333333333333
+Chanute,US,CNU,,,,,,,8.06666666666667
+Anthony,US,ANY,,,,,,,9.35
+Lazaro Cardenas,MX,LZC,,,,,,,8.4
+Freeport,US,FEP,,,,,,,7.25
+Ogden,US,HIF,OGD,,,,,,5.6
+Oxford,US,OXC,OXD,UOX,,,,,7.4
+Aberdeen,US,ABR,,,,,,,7.56666666666667
+Bryan,US,CFD,,,,,,,9.26666666666667
+Wharton,US,WHT,,,,,,,9.3
+Ballina,AU,BNK,,,,,,,6.91666666666667
+Fort Knox,US,FTK,,,,,,,7.65
+Lihue,US,LIH,,,,,,,8.13333333333333
+Covington,US,CVG,,,,,,,7.96666666666667
+Cradock,ZA,CDO,,,,,,,6.08333333333333
+Hamilton,US,HAB,HAO,,,,,,7.95
+Socorro,US,ONM,,,,,,,9.03333333333333
+Kennett,US,KNT,,,,,,,8.51666666666667
+Lancaster,US,LNS,WJF,,,,,,6.33333333333333
+Independence,US,IDP,,,,,,,8.01666666666667
+Milton,US,NSE,,,,,,,8.23333333333333
+Perryville,US,KPV,,,,,,,8.06666666666667
+York,US,THV,,,,,,,6.45
+Bartica,GY,GFO,,,,,,,7.35
+Montague,US,ROF,SIY,,,,,,6.68333333333333
+Lewistown,US,LWT,,,,,,,6.5
+Altoona,US,AOO,,,,,,,6.16666666666667
+Namsos,NO,OSY,,,,,,,4.76666666666667
+Orocue,CO,ORC,,,,,,,7.68333333333333
+Moengo,SR,MOJ,,,,,,,7.45
+Kone,NC,KNQ,,,,,,,7.16666666666667
+Hammerfest,NO,HFT,,,,,,,2.91666666666667
+San Julian,AR,ULA,,,,,,,2.65
+Auki,SB,AKS,,,,,,,8.8
+Iqaluit,CA,YFB,,,,,,,2.11666666666667
+Kalabo,ZM,KLB,,,,,,,3.81666666666667
+Jacareacanga,BR,JCR,,,,,,,6.5
+Sen Monorom,KH,MWV,,,,,,,7.96666666666667
+Zambezi,ZM,BBZ,,,,,,,4.38333333333333
+Moree,AU,MRZ,,,,,,,5.98333333333333
+In Guezzam,DZ,INF,,,,,,,
+Wick,GB,WIC,,,,,,,6.05
+Kerikeri,NZ,KKE,,,,,,,4.56666666666667
+Kieta,PG,KIE,,,,,,,8.48333333333333
+Hola,KE,HOA,,,,,,,
+Lerwick,GB,LWK,LSI,,,,,,5.2
+Forbes,AU,FRB,,,,,,,4.55
+Kerema,PG,KMA,,,,,,,8.36666666666667
+Mae Hong Son,TH,PYY,,,,,,,7.6
+Roma,AU,RMA,,,,,,,7.06666666666667
+Newman,AU,ZNE,,,,,,,8.18333333333333
+Cooma,AU,OOM,,,,,,,3.15
+Ndende,GA,KDN,,,,,,,7.05
+Ingeniero Jacobacci,AR,IGB,,,,,,,3.46666666666667
+Espargos,CV,SID,,,,,,,
+Gizo,SB,GZO,,,,,,,7.81666666666667
+Viqueque,TL,VIQ,,,,,,,8.38333333333333
+San Javier,BO,SJV,,,,,,,6.9
+Funafuti,TV,FUN,,,,,,,7.28333333333333
+Luqa,MT,MLA,,,,,,,8.43333333333333
+Kaitaia,NZ,KAT,,,,,,,4.4
+Biloela,AU,ZBL,,,,,,,7.06666666666667
+Tiksi,RU,IKS,,,,,,,2.13333333333333
+Sisimiut,GL,JHS,,,,,,,2.93333333333333
+Okhotsk,RU,OHO,,,,,,,2.78333333333333
+Narrabri,AU,NAA,,,,,,,5.66666666666667
+Ouadda,CF,ODA,,,,,,,8.33333333333333
+Thaba-Tseka,LS,THB,,,,,,,5.11666666666667
+Richmond,AU,XRH,,,,,,,6.01666666666667
+Saint-Pierre,PM,FSP,,,,,,,5.41666666666667
+San Matias,BO,MQK,,,,,,,5.73333333333333
+Albina,SR,ABN,,,,,,,7.85
+Mayumba,GA,MYB,,,,,,,8.28333333333333
+Singleton,AU,SIX,,,,,,,5.68333333333333
+Igarka,RU,IAA,,,,,,,2.48333333333333
+Mitzic,GA,MZC,,,,,,,8.13333333333333
+Mekambo,GA,MKB,,,,,,,8.1
+Albury,AU,ABX,,,,,,,3.76666666666667
+Turukhansk,RU,THX,,,,,,,3.2
+Ponta do Sol,CV,NTO,,,,,,,8.3
+Ilulissat,GL,JAV,,,,,,,2.65
+Fderik,MR,FGD,,,,,,,
+Komatipoort,ZA,KOF,,,,,,,6.3
+Khatanga,RU,HTG,,,,,,,2.08333333333333
+Perito Moreno,AR,PMQ,,,,,,,2.75
+Kununurra,AU,KNX,,,,,,,6.78333333333333
+Fuerte Olimpo,PY,OLK,,,,,,,6.11666666666667
+Gobernador Gregores,AR,GGS,,,,,,,2.78333333333333
+Magdalena,BO,MGD,,,,,,,5.8
+Saint George's,GD,GND,,,,,,,6.88333333333333
+Bekily,MG,OVA,,,,,,,
+La Palma,PA,PLP,,,,,,,8.13333333333333
+Port Hedland,AU,PHE,,,,,,,8.4
+Pevek,RU,PWE,,,,,,,2.36666666666667
+El Maiten,AR,EMX,,,,,,,2.7
+Avarua,CK,RAR,,,,,,,8.41666666666667
+Oranjemund,NA,OMD,,,,,,,5.6
+Cherskiy,RU,CYX,,,,,,,2.53333333333333
+Zyryanka,RU,ZKP,,,,,,,2.35
+Lismore,AU,LSY,,,,,,,6.11666666666667
+Merimbula,AU,MIM,,,,,,,4.98333333333333
+Kirkenes,NO,KKN,,,,,,,3.65
+Kirakira,SB,IRA,,,,,,,8.36666666666667
+Proserpine,AU,PPP,,,,,,,7.85
+Zhigansk,RU,ZIX,,,,,,,2.36666666666667
+Lukulu,ZM,LXU,,,,,,,3.93333333333333
+Weipa,AU,WEI,,,,,,,8.23333333333333
+The Valley,AI,AXA,,,,,,,7.86666666666667
+Rorvik,NO,RVK,,,,,,,4.13333333333333
+Aasiaat,GL,JEG,,,,,,,2.51666666666667
+Kardla,EE,KDL,,,,,,,7.33333333333333
+Lethem,GY,LTM,,,,,,,7.16666666666667
+Tom Price,AU,TPR,,,,,,,8.35
+Rio Mayo,AR,ROY,,,,,,,2.78333333333333
+Cochrane,CL,LGR,,,,,,,2.56666666666667
+Longreach,AU,LRE,,,,,,,8.7
+Donegal,IE,CFN,,,,,,,7.55
+Mahdia,GY,MHA,,,,,,,
+Charleville,AU,CTL,,,,,,,7.01666666666667
+Cloncurry,AU,CNJ,,,,,,,8.36666666666667
+Exmouth,AU,LEA,,,,,,,9.13333333333333
+Jaque,PA,JQE,,,,,,,7.96666666666667
+Saskylakh,RU,SYS,,,,,,,2.26666666666667
+Gustavia,BL,SBH,,,,,,,8.26666666666667
+Stanley,FK,PSY,,,,,,,2.05
+Totness,SR,TOT,,,,,,,8.36666666666667
+Baures,BO,BVL,,,,,,,
+Apolo,BO,APB,,,,,,,7.33333333333333
+Omboue,GA,OMB,,,,,,,8.28333333333333
+Evensk,RU,SWV,,,,,,,2.5
+Waitangi,NZ,CHT,,,,,,,3.56666666666667
+Puerto Williams,CL,WPU,,,,,,,2.53333333333333
+Alexander Bay,ZA,ALJ,,,,,,,6.76666666666667
+Uummannaq,GL,JQA,,,,,,,3.05
+Paamiut,GL,JFR,,,,,,,2.85
+Mabaruma,GY,USI,,,,,,,7.73333333333333
+Barcaldine,AU,BCI,,,,,,,8.2
+Asau,WS,AAU,,,,,,,
+Dikson,RU,DKS,,,,,,,1.93333333333333
+Upernavik,GL,JUV,,,,,,,2.63333333333333
+Yelimane,ML,EYL,,,,,,,7.51666666666667
+Hoskins,PG,HKN,,,,,,,
+Hamilton,BM,BDA,,,,,,,8.06666666666667
+Roebourne,AU,RBU,,,,,,,8.6
+Leonora,AU,LNO,,,,,,,7.93333333333333
+Qaanaaq,GL,NAQ,,,,,,,2.38333333333333
+Alofi,NU,IUE,,,,,,,8.13333333333333
+Richmond,AU,XRH,,,,,,,6.01666666666667
+Woomera,AU,UMR,,,,,,,6.61666666666667
+Montes Claros,BR,MOC,,,,,,,8.15
+Tandil,AR,TDL,,,,,,,5.71666666666667
+Cazombo,AO,CAV,,,,,,,
+Ikela,CD,IKL,,,,,,,
+Amderma,RU,AMV,,,,,,,
+Kulusuk,GL,KUS,,,,,,,2.43333333333333
+Tamworth,AU,TMW,,,,,,,4.86666666666667
+Lusanga,CD,LUS,,,,,,,
+Narsarsuaq,GL,UAK,,,,,,,3.36666666666667
+Mount Isa,AU,ISA,,,,,,,8.58333333333333
+Andoas,PE,AOP,,,,,,,
+Sabha,LY,SEB,,,,,,,4.25
+Nelspruit,ZA,NLP,,,,,,,6.35
+Qacha's Nek,LS,UNE,,,,,,,5.6
+Sur,OM,SUH,,,,,,,6.56666666666667
+San Jose,PH,SJI,EUQ,,,,,,7.58333333333333
+Pala,TD,PLF,,,,,,,7.88333333333333
+Suai,TL,UAI,,,,,,,
+Da Nang,VN,DAD,,,,,,,7.75
+Sola,VU,SLH,,,,,,,7.83333333333333
+Erfurt,DE,ERF,,,,,,,7.58333333333333
+Hubli,IN,HBX,,,,,,,8.05
+Sari,IR,SRY,,,,,,,8.18333333333333
+Ilam,IR,IIL,,,,,,,8.51666666666667
