@@ -314,12 +314,18 @@ border-radius: 8px;
     width: auto; /* Make sure the table's columns resize accordingly */
   }
 
+    .scroll-container::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for WebKit browsers on mobile */
+    }
+
+    .scroll-container {
+        scrollbar-width: none; /* Hide scrollbar for Firefox on mobile */
+    }
 ::-webkit-scrollbar-thumb {
-    background-color: transparent;
+    background-color: #a0a0a000;
     border-radius: 10px;
+
 }
-
-
 
 }
 
@@ -383,4 +389,19 @@ border-radius: 8px;
 * {
     scrollbar-width: thin;
     scrollbar-color: #a0a0a0 transparent;
+}
+
+/* Hide scrollbar completely on mobile */
+@media screen and (max-width: 800px) {
+    ::-webkit-scrollbar {
+        display: none; /* Hide entire scrollbar on mobile */
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background-color: transparent; /* Ensure thumb is transparent (optional) */
+    }
+
+    .scroll-container {
+        scrollbar-width: none; /* Firefox: hide scrollbar on mobile */
+    }
 }
