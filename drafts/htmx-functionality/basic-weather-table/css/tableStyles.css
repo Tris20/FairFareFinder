@@ -60,3 +60,14 @@ table td img {
 table th{
   height: auto;
 }
+
+
+@media screen and (max-width: 800px) {
+
+th,
+td {
+  padding: 4px 4px;
+  text-align: center;
+  font-size: 12px;
+}
+}
