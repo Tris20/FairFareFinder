@@ -307,8 +307,14 @@ border-radius: 8px;
   #flight-table {
     width: 100%; /* Ensure table width is consistent on mobile */
     overflow-x: scroll; /* Enable horizontal scrolling if needed */
+    font-size: 9px;
   }
-
+th,
+td {
+  padding: 12px 15px;
+  text-align: center;
+  font-size: 8px;
+}
   #flight-table th,
   #flight-table td {
     width: auto; /* Make sure the table's columns resize accordingly */
