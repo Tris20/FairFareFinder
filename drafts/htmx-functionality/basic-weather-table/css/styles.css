@@ -222,6 +222,7 @@ border-radius: 8px;
 /* Initial state for footer */
 #footer-privacy {
   opacity: 0; /* Initially hidden */
+margin-top: 0px;
 }
 
 /* For each label-select/input pair */
@@ -246,6 +247,21 @@ border-radius: 8px;
   width: 70%; /* Adjust input width */
 }
 
+
+
+
+select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  color: #333;
+  width: 100%; /* Adjust to match form layout */
+}
+
+
+
 @media screen and (max-width: 800px) {
   .navbar-container nav {
     flex-direction: column;
@@ -259,6 +275,7 @@ border-radius: 8px;
   #flight-form {
     width: 90%; /* Adjust form width on mobile */
     flex-direction: column; /* Align items in a row */
+  padding-bottom: 0px;
   }
 
   /* On smaller screens, keep the label and input in a row */
@@ -298,6 +315,20 @@ border-radius: 8px;
     display: none;
   }
 
+
+select {
+
+  font-size: 12px;
+}
+
+#flight-form label{
+  font-size: 12px;
+}
+/* Center-align the output values for sliders */
+#flight-form output {
+  font-size: 12px; /* Increase the font size for better visibility */
+}
+
   #table-container {
     width: 95%;
     height: 98%;
@@ -308,13 +339,9 @@ border-radius: 8px;
     width: 100%; /* Ensure table width is consistent on mobile */
     overflow-x: scroll; /* Enable horizontal scrolling if needed */
     font-size: 9px;
+margin-bottom: 0px;
   }
-th,
-td {
-  padding: 12px 15px;
-  text-align: center;
-  font-size: 8px;
-}
+
   #flight-table th,
   #flight-table td {
     width: auto; /* Make sure the table's columns resize accordingly */
