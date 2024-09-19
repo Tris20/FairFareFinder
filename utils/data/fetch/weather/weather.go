@@ -100,7 +100,7 @@ if resp.StatusCode != 200 {
 		if len(item.Weather) > 0 {
 			weatherType = item.Weather[0].Main
 		}
-		iconURL := fmt.Sprintf("https://openweathermap.org/img/w/%s.png", item.Weather[0].Icon)
+		iconURL := fmt.Sprintf("https://openweathermap.org/img/wn/%s.png", item.Weather[0].Icon)
 		windSpeed := item.Wind.Speed // Extract wind speed
 
 		googleWeatherURL := fmt.Sprintf("https://www.google.com/search?q=weather+%s", location_string)
