@@ -180,7 +180,7 @@ border-radius: 8px;
   align-items: center; /* Center-align the items vertically */
   justify-content: center; /* Center-align the entire row horizontally */
   margin: 0 auto; /* Center the form horizontally on the page */
-  width: 60%;
+  width: 80%;
 }
 
 /* Ensure the input elements, labels, and selects are not too wide */
