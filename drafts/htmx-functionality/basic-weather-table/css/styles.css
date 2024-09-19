@@ -343,14 +343,18 @@ border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #a0a0a0;
-    border-radius: 10px;
+    /*background-color: #a0a0a0;*/
+ background-color: #d8d8d8;
+  border-radius: 10px;
 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #808080;
-}
+/*    background-color: #808080;*/
+ 
+
+  background-color: #dd6c20;  
+  }
 
 ::-webkit-scrollbar-corner {
     background-color: transparent; /* Match the background color of the content */
