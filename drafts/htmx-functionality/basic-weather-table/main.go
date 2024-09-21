@@ -116,18 +116,9 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 //	minWpiStr := r.URL.Query().Get("wpi")
 	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
 
-//originCountry := r.URL.Query().Get("origin_country")
-/*
-	// Convert string values to appropriate types
-	minWpi, err := strconv.ParseFloat(minWpiStr, 64)
-	if err != nil {
-		log.Printf("Error parsing minWpi: %v", err)
-		http.Error(w, "Invalid minWpi value", http.StatusBadRequest)
-		return
-	}
-*/
+
 	maxPriceLinear, err := strconv.ParseFloat(maxPriceLinearStr, 64)
-	if err != nil {
+  if err != nil {
 		log.Printf("Error parsing maxPriceLinear: %v", err)
 		http.Error(w, "Invalid maxPrice value", http.StatusBadRequest)
 		return
@@ -135,20 +126,22 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 
 	maxPrice := mapLinearToExponential(maxPriceLinear, 10, 2500)
 
-	session.Values["city1"] = city1
-	session.Save(r, w)
 
-	orderClause := "ORDER BY price_city1 ASC"
-	switch sortOption {
-	case "low_price":
-		orderClause = "ORDER BY price_city1 ASC"
-	case "high_price":
-		orderClause = "ORDER BY price_city1 DESC"
-	case "best_weather":
-		orderClause = "ORDER BY avg_wpi DESC"
-	case "worst_weather":
-		orderClause = "ORDER BY avg_wpi ASC"
-	}
+session.Values["city1"] = city1
+session.Save(r, w)
+
+orderClause := "ORDER BY fnf.price_fnaf ASC" // Default to sorting by FNAF price in ascending order
+switch sortOption {
+case "low_price":
+    orderClause = "ORDER BY fnf.price_fnaf ASC" // Sort by lowest FNAF price
+case "high_price":
+    orderClause = "ORDER BY fnf.price_fnaf DESC" // Sort by highest FNAF price
+case "best_weather":
+    orderClause = "ORDER BY avg_wpi DESC" // Sort by best weather (highest WPI)
+case "worst_weather":
+    orderClause = "ORDER BY avg_wpi ASC" // Sort by worst weather (lowest WPI)
+}
+
 
 	// Calculate the lower and upper bounds for WPI
 //	lowerWpi := math.Max(minWpi-2.5, 1.0)   // Lower bound constrained to 1.0
@@ -182,7 +175,8 @@ WHERE f1.origin_city_name = ?
 AND l.avg_wpi BETWEEN ? AND ? 
 AND w.date >= date('now')
 GROUP BY f1.destination_city_name, w.date, f1.destination_country
-HAVING price_city1 <= ?
+HAVING fnf.price_fnaf <= ?
+
 ` + orderClause
 
 
