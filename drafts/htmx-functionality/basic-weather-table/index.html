@@ -52,7 +52,12 @@
   <input type="range" id="combinedPrice-slider" name="maxPriceLinear" min="0" max="100" step="1" value="50" 
          hx-get="/update-slider-price" 
          hx-target="#priceOutput" 
-         hx-trigger="input">
+         hx-trigger="input"
+           hx-push-url="false"
+           hx-preserve="false"
+           autocomplete="off">  <!-- these prevent the browser from storing the value of the slider( which is good because if the value is set too low, the user will reload the page and see no entries in the table - a confusing experience for the user) -->
+  
+
 </div>
         </form>
 
