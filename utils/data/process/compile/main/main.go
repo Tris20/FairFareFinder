@@ -83,10 +83,36 @@ func runCompileTasks(relativeBase string) {
     fmt.Printf("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
 }
 
+
+
+// Function to run only weather-related tasks
+func runWeatherTasks(relativeBase string) {
+    green := "\033[32m"
+    reset := "\033[0m"
+
+    runExecutableInDir(filepath.Join(relativeBase, "fetch/weather"), "update-weather-db")
+    fmt.Printf("%sCOMPLETED: update-weather-db (weather update)%s\n", green, reset)
+
+    runExecutableInDir(filepath.Join(relativeBase, "process/calculate/weather"), "weather")
+    fmt.Printf("%sCOMPLETED: weather (weather calculation)%s\n", green, reset)
+//included beacuse we always create a new completely new main.db, so need to rebuild the flights table
+    runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/flights"), "flights")
+    fmt.Printf("%sCOMPLETED: flights (process compile)%s\n", green, reset)
+
+    runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/weather"), "weather")
+    fmt.Printf("%sCOMPLETED: process/compile/main/weather%s\n", green, reset)
+//included beacuse we always create a new completely new main.db, so need to rebuild the locations table
+    runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/locations"), "locations")
+    fmt.Printf("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
+}
+
+
 func main() {
     // Add flags for running all tasks or just compile tasks
     runAll := flag.Bool("all", false, "Run all tasks in sequence regardless of time")
     runCompile := flag.Bool("compile", false, "Run only compile tasks")
+ runWeather := flag.Bool("weather", false, "Run only weather-related tasks")
+
     flag.Parse()
 
     // Create /out directory if it does not exist
@@ -127,6 +153,12 @@ func main() {
     // If the --compile flag is set, run only compile tasks
     if *runCompile {
         runCompileTasks(relativeBase)
+        return
+    }
+
+   // If the --weather flag is set, run only weather-related tasks
+    if *runWeather {
+        runWeatherTasks(relativeBase)
         return
     }
 
