@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"strings"
 	"strconv"
+	"time"
 
 	"github.com/schollz/progressbar/v3"
 	_ "github.com/mattn/go-sqlite3"
@@ -23,23 +24,21 @@ type City struct {
 	DestinationID string
 }
 
-
-
 type Property struct {
-	HotelID           int     `json:"hotel_id"`
-	AccessibilityLabel string  `json:"accessibilityLabel"`
-	CountryCode       string  `json:"countryCode"`
-	PhotoUrls         []string `json:"photoUrls"`
-	IsPreferred       bool    `json:"isPreferred"`
-	Longitude         float64 `json:"longitude"`
-	Latitude          float64 `json:"latitude"`
-	Name              string  `json:"name"`
-	GrossPrice        float64 `json:"gross_price"`
-	Currency          string  `json:"currency"`
-	ReviewScore       float64 `json:"review_score"`
-	ReviewCount       int     `json:"review_count"`
-	CheckinDate       string  `json:"checkin_date"`
-	CheckoutDate      string  `json:"checkout_date"`
+	HotelID            int      `json:"hotel_id"`
+	AccessibilityLabel string   `json:"accessibilityLabel"`
+	CountryCode        string   `json:"countryCode"`
+	PhotoUrls          []string `json:"photoUrls"`
+	IsPreferred        bool     `json:"isPreferred"`
+	Longitude          float64  `json:"longitude"`
+	Latitude           float64  `json:"latitude"`
+	Name               string   `json:"name"`
+	GrossPrice         float64  `json:"gross_price"`
+	Currency           string   `json:"currency"`
+	ReviewScore        float64  `json:"review_score"`
+	ReviewCount        int      `json:"review_count"`
+	CheckinDate        string   `json:"checkin_date"`
+	CheckoutDate       string   `json:"checkout_date"`
 }
 
 type PriceBreakdown struct {
@@ -55,20 +54,20 @@ type PriceBreakdown struct {
 }
 
 type Hotel struct {
-	HotelID int `json:"hotel_id"`
+	HotelID  int `json:"hotel_id"`
 	Property struct {
-		CountryCode  string        `json:"countryCode"`
-		Longitude    float64       `json:"longitude"`
-		Latitude     float64       `json:"latitude"`
-		Name         string        `json:"name"`
+		CountryCode    string        `json:"countryCode"`
+		Longitude      float64       `json:"longitude"`
+		Latitude       float64       `json:"latitude"`
+		Name           string        `json:"name"`
 		PriceBreakdown PriceBreakdown `json:"priceBreakdown"`
-		ReviewScore  float64       `json:"reviewScore"`
-		ReviewCount  int           `json:"reviewCount"`
-		CheckinDate  string        `json:"checkinDate"`
-		CheckoutDate string        `json:"checkoutDate"`
-		PhotoUrls    []string      `json:"photoUrls"`
-		IsPreferred  bool          `json:"isPreferred"`
-		Currency     string        `json:"currency"`
+		ReviewScore    float64       `json:"reviewScore"`
+		ReviewCount    int           `json:"reviewCount"`
+		CheckinDate    string        `json:"checkinDate"`
+		CheckoutDate   string        `json:"checkoutDate"`
+		PhotoUrls      []string      `json:"photoUrls"`
+		IsPreferred    bool          `json:"isPreferred"`
+		Currency       string        `json:"currency"`
 	} `json:"property"`
 }
 
@@ -79,11 +78,10 @@ type Meta struct {
 type APIResponse struct {
 	Status  bool   `json:"status"`
 	Message string `json:"message"`
-	Data struct {
+	Data    struct {
 		Hotels []Hotel `json:"hotels"`
-Meta []Meta `json:"meta"`
+		Meta   []Meta  `json:"meta"`
 	} `json:"data"`
-	
 }
 
 type Secrets struct {
@@ -138,10 +136,11 @@ func main() {
 
 		fmt.Printf("Fetching property data for city: %s (%s)\n", city.CityName, city.CountryCode)
 
-			err = processCityProperties(city.DestinationID, db, apiKey, city)
-	if err != nil {
-		log.Fatalf("Error processing properties: %v", err)
-	}	}
+		err = processCityProperties(city.DestinationID, db, apiKey, city)
+		if err != nil {
+			log.Fatalf("Error processing properties: %v", err)
+		}
+	}
 }
 
 func getCityNamesAndDestinationIDs() ([]City, error) {
@@ -192,9 +191,15 @@ func createPropertyTable(db *sql.DB) error {
 	return err
 }
 
-
+// fetchPropertyData now takes the dynamic Wednesday-to-Wednesday date range into account
 func fetchPropertyData(destinationID, apiKey string) ([]Property, error) {
-	apiURL := fmt.Sprintf("https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels?dest_id=%s&search_type=CITY&arrival_date=2024-09-23&departure_date=2024-09-30&adults=1&children_age=0,17&room_qty=1&page_number=1&units=metric&temperature_unit=c&languagecode=en-us&currency_code=EUR", destinationID)
+	// Get the dynamic Wednesday-to-Wednesday date range
+	arrivalDate, departureDate := getWednesdayRange()
+
+	// Use the date range in the API URL
+	apiURL := fmt.Sprintf("https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels?dest_id=%s&search_type=CITY&arrival_date=%s&departure_date=%s&adults=1&children_age=0,17&room_qty=1&page_number=1&units=metric&temperature_unit=c&languagecode=en-us&currency_code=EUR", destinationID, arrivalDate, departureDate)
+
+	fmt.Println("API URL with dynamic date range:", apiURL)
 
 	req, err := http.NewRequest("GET", apiURL, nil)
 	if err != nil {
@@ -246,7 +251,7 @@ func fetchPropertyData(destinationID, apiKey string) ([]Property, error) {
 	return properties, nil
 }
 
-
+// insertProperties remains unchanged as it inserts data into the database
 func insertProperties(db *sql.DB, properties []Property, city City) error {
 	tx, err := db.Begin()
 	if err != nil {
@@ -285,10 +290,11 @@ func insertProperties(db *sql.DB, properties []Property, city City) error {
 	return nil
 }
 
-
-
+// fetchTotalProperties updated to use dynamic date range
 func fetchTotalProperties(destinationID, apiKey string) (int, error) {
-	apiURL := fmt.Sprintf("https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels?dest_id=%s&search_type=CITY&arrival_date=2024-09-23&departure_date=2024-09-30&adults=1&children_age=0,17&room_qty=1&page_number=1&units=metric&temperature_unit=c&languagecode=en-us&currency_code=EUR", destinationID)
+	arrivalDate, departureDate := getWednesdayRange()
+
+	apiURL := fmt.Sprintf("https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels?dest_id=%s&search_type=CITY&arrival_date=%s&departure_date=%s&adults=1&children_age=0,17&room_qty=1&page_number=1&units=metric&temperature_unit=c&languagecode=en-us&currency_code=EUR", destinationID, arrivalDate, departureDate)
 
 	req, err := http.NewRequest("GET", apiURL, nil)
 	if err != nil {
@@ -327,8 +333,11 @@ func fetchTotalProperties(destinationID, apiKey string) (int, error) {
 	return totalProperties, nil
 }
 
+// fetchPropertiesByPage updated to use dynamic date range
 func fetchPropertiesByPage(destinationID, apiKey string, pageNumber int) ([]Property, error) {
-	apiURL := fmt.Sprintf("https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels?dest_id=%s&search_type=CITY&arrival_date=2024-09-23&departure_date=2024-09-30&adults=1&children_age=0,17&room_qty=1&page_number=%d&units=metric&temperature_unit=c&languagecode=en-us&currency_code=EUR", destinationID, pageNumber)
+	arrivalDate, departureDate := getWednesdayRange()
+
+	apiURL := fmt.Sprintf("https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels?dest_id=%s&search_type=CITY&arrival_date=%s&departure_date=%s&adults=1&children_age=0,17&room_qty=1&page_number=%d&units=metric&temperature_unit=c&languagecode=en-us&currency_code=EUR", destinationID, arrivalDate, departureDate, pageNumber)
 
 	req, err := http.NewRequest("GET", apiURL, nil)
 	if err != nil {
@@ -380,7 +389,6 @@ func fetchPropertiesByPage(destinationID, apiKey string, pageNumber int) ([]Prop
 	return properties, nil
 }
 
-
 func processCityProperties(destinationID string, db *sql.DB, apiKey string, city City) error {
 	// Fetch the total number of properties for the destination
 	totalProperties, err := fetchTotalProperties(destinationID, apiKey)
@@ -415,5 +423,24 @@ func processCityProperties(destinationID string, db *sql.DB, apiKey string, city
 	}
 
 	return nil
+}
+
+// getWednesdayRange calculates "this Wednesday" and "next Wednesday" in YYYY-MM-DD format
+func getWednesdayRange() (string, string) {
+	// Get current date
+	now := time.Now()
+
+	// Calculate days until this week's Wednesday
+	thisWednesdayOffset := (3 - int(now.Weekday()) + 7) % 7 // 3 corresponds to Wednesday (0 = Sunday)
+	// Calculate this Wednesday date
+	thisWednesday := now.AddDate(0, 0, thisWednesdayOffset)
+	// Calculate next Wednesday (7 days after this Wednesday)
+	nextWednesday := thisWednesday.AddDate(0, 0, 7)
+
+	// Format dates to "YYYY-MM-DD"
+	thisWednesdayStr := thisWednesday.Format("2006-01-02")
+	nextWednesdayStr := nextWednesday.Format("2006-01-02")
+
+	return thisWednesdayStr, nextWednesdayStr
 }
 
