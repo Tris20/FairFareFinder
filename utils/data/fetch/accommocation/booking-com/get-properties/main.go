@@ -9,7 +9,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
-	"time"
+	"strconv"
 
 	"github.com/schollz/progressbar/v3"
 	_ "github.com/mattn/go-sqlite3"
@@ -22,6 +22,7 @@ type City struct {
 	CountryCode   string
 	DestinationID string
 }
+
 
 
 type Property struct {
@@ -71,12 +72,18 @@ type Hotel struct {
 	} `json:"property"`
 }
 
+type Meta struct {
+	Title string `json:"title"`
+}
+
 type APIResponse struct {
 	Status  bool   `json:"status"`
 	Message string `json:"message"`
 	Data struct {
 		Hotels []Hotel `json:"hotels"`
+Meta []Meta `json:"meta"`
 	} `json:"data"`
+	
 }
 
 type Secrets struct {
@@ -131,27 +138,10 @@ func main() {
 
 		fmt.Printf("Fetching property data for city: %s (%s)\n", city.CityName, city.CountryCode)
 
-		// Fetch property data
-		properties, err := fetchPropertyData(city.DestinationID, apiKey)
-		if err != nil {
-			log.Printf("Error fetching property data for %s: %v", city.CityName, err)
-			continue
-		}
-
-		// Print out the properties before inserting to verify response
-		for _, property := range properties {
-			fmt.Printf("Fetched Property: %+v\n", property)
-		}
-
-		// Insert properties into the property table
-		err = insertProperties(db, properties, city)
-		if err != nil {
-			log.Printf("Error inserting properties for %s: %v", city.CityName, err)
-		}
-
-		// Simulate a short delay between API requests to avoid overloading the server
-		time.Sleep(10 * time.Millisecond)
-	}
+			err = processCityProperties(city.DestinationID, db, apiKey, city)
+	if err != nil {
+		log.Fatalf("Error processing properties: %v", err)
+	}	}
 }
 
 func getCityNamesAndDestinationIDs() ([]City, error) {
@@ -292,6 +282,138 @@ func insertProperties(db *sql.DB, properties []Property, city City) error {
 	if err != nil {
 		return err
 	}
+	return nil
+}
+
+
+
+func fetchTotalProperties(destinationID, apiKey string) (int, error) {
+	apiURL := fmt.Sprintf("https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels?dest_id=%s&search_type=CITY&arrival_date=2024-09-23&departure_date=2024-09-30&adults=1&children_age=0,17&room_qty=1&page_number=1&units=metric&temperature_unit=c&languagecode=en-us&currency_code=EUR", destinationID)
+
+	req, err := http.NewRequest("GET", apiURL, nil)
+	if err != nil {
+		return 0, err
+	}
+
+	req.Header.Add("x-rapidapi-host", "booking-com15.p.rapidapi.com")
+	req.Header.Add("x-rapidapi-key", apiKey)
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return 0, err
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return 0, err
+	}
+
+	var apiResponse APIResponse
+	err = json.Unmarshal(body, &apiResponse)
+	if err != nil {
+		return 0, err
+	}
+
+	// Extract the total number of properties from the meta title
+	totalPropertiesStr := apiResponse.Data.Meta[0].Title
+	// Extract the first number from the string (e.g., "873 properties")
+	totalProperties, err := strconv.Atoi(strings.Fields(totalPropertiesStr)[0])
+	if err != nil {
+		return 0, fmt.Errorf("failed to parse total properties: %v", err)
+	}
+
+	return totalProperties, nil
+}
+
+func fetchPropertiesByPage(destinationID, apiKey string, pageNumber int) ([]Property, error) {
+	apiURL := fmt.Sprintf("https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels?dest_id=%s&search_type=CITY&arrival_date=2024-09-23&departure_date=2024-09-30&adults=1&children_age=0,17&room_qty=1&page_number=%d&units=metric&temperature_unit=c&languagecode=en-us&currency_code=EUR", destinationID, pageNumber)
+
+	req, err := http.NewRequest("GET", apiURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("x-rapidapi-host", "booking-com15.p.rapidapi.com")
+	req.Header.Add("x-rapidapi-key", apiKey)
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	var apiResponse APIResponse
+	err = json.Unmarshal(body, &apiResponse)
+	if err != nil {
+		return nil, err
+	}
+
+	var properties []Property
+	for _, hotel := range apiResponse.Data.Hotels {
+		property := Property{
+			HotelID:           hotel.HotelID,
+			AccessibilityLabel: hotel.Property.Name,
+			CountryCode:       hotel.Property.CountryCode,
+			PhotoUrls:         hotel.Property.PhotoUrls,
+			IsPreferred:       hotel.Property.IsPreferred,
+			Longitude:         hotel.Property.Longitude,
+			Latitude:          hotel.Property.Latitude,
+			Name:              hotel.Property.Name,
+			GrossPrice:        hotel.Property.PriceBreakdown.GrossPrice.Value,
+			Currency:          hotel.Property.PriceBreakdown.GrossPrice.Currency,
+			ReviewScore:       hotel.Property.ReviewScore,
+			ReviewCount:       hotel.Property.ReviewCount,
+			CheckinDate:       hotel.Property.CheckinDate,
+			CheckoutDate:      hotel.Property.CheckoutDate,
+		}
+		properties = append(properties, property)
+	}
+
+	return properties, nil
+}
+
+
+func processCityProperties(destinationID string, db *sql.DB, apiKey string, city City) error {
+	// Fetch the total number of properties for the destination
+	totalProperties, err := fetchTotalProperties(destinationID, apiKey)
+	if err != nil {
+		return fmt.Errorf("error fetching total properties: %v", err)
+	}
+
+	// Calculate the number of pages (each page has 20 properties)
+	totalPages := totalProperties / 20
+	if totalProperties%20 != 0 {
+		totalPages++ // Add an extra page if there's a remainder
+	}
+
+	fmt.Printf("Total Properties: %d, Total Pages: %d\n", totalProperties, totalPages)
+
+	// Loop through all the pages and fetch properties for each page
+	for page := 1; page <= totalPages; page++ {
+		fmt.Printf("Fetching page %d for city %s\n", page, city.CityName)
+
+		properties, err := fetchPropertiesByPage(destinationID, apiKey, page)
+		if err != nil {
+			fmt.Printf("Error fetching properties for page %d: %v\n", page, err)
+			continue
+		}
+
+		// Insert properties into the database
+		err = insertProperties(db, properties, city)
+		if err != nil {
+			fmt.Printf("Error inserting properties for page %d: %v\n", page, err)
+			continue
+		}
+	}
+
 	return nil
 }
 
