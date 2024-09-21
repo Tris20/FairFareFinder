@@ -133,7 +133,7 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	maxPrice := mapLinearToExponential(maxPriceLinear, 10, 2500)
+	maxPrice := mapLinearToExponential(maxPriceLinear, 100, 2500)
 
 
 session.Values["city1"] = city1
@@ -318,7 +318,7 @@ func updateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	maxPrice := mapLinearToExponential(maxPriceLinear, 10, 2500)
+	maxPrice := mapLinearToExponential(maxPriceLinear, 100, 2500)
 
 	fmt.Fprintf(w, "€%.2f", maxPrice)
 }

@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FairFareFinder</title>
@@ -49,7 +51,7 @@
  
 <div class="form-group output-range">
   <output id="priceOutput">€300.00</output>
-  <input type="range" id="combinedPrice-slider" name="maxPriceLinear" min="0" max="100" step="1" value="50" 
+  <input type="range" id="combinedPrice-slider" name="maxPriceLinear" min="0" max="100" step="1" value="33" 
          hx-get="/update-slider-price" 
          hx-target="#priceOutput" 
          hx-trigger="input"
@@ -73,6 +75,9 @@
     </div>
 
   <script>
+
+
+
         let hasFadedIn = false;  // Flag to check if the table has already faded in
 
         document.addEventListener('DOMContentLoaded', function() {
