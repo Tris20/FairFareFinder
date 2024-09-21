@@ -5,10 +5,24 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"sort"
 
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/schollz/progressbar/v3"
 )
+
+// Helper function to calculate the median from a list of floats
+func median(values []float64) float64 {
+	sort.Float64s(values)
+	n := len(values)
+	if n == 0 {
+		return 0
+	}
+	if n%2 == 0 {
+		return (values[n/2-1] + values[n/2]) / 2
+	}
+	return values[n/2]
+}
 
 func main() {
 	// Step 1: Open the database
@@ -100,9 +114,13 @@ func main() {
 		`, destCity, destCountry).Scan(&bookingPPPN)
 
 		if err != nil {
-			// If there's no matching entry in the accommodation table, handle it gracefully
+			// If there's no matching entry in the accommodation table, calculate the median for the country
 			if err == sql.ErrNoRows {
-				bookingPPPN = 0 // No accommodation price available, set to 0
+				bookingPPPN, err = getMedianBookingPPPNForCountry(db, destCountry)
+				if err != nil {
+					log.Fatal(err)
+				}
+				fmt.Printf("Using median booking_pppn for country: %s\n", destCountry)
 			} else {
 				log.Fatal(err)
 			}
@@ -128,5 +146,36 @@ func main() {
 	}
 
 	fmt.Println("\nData inserted into 'five_nights_and_flights' table successfully.")
+}
+
+// Step 9 helper function to calculate the median booking_pppn for a given country
+func getMedianBookingPPPNForCountry(db *sql.DB, country string) (float64, error) {
+	rows, err := db.Query(`
+		SELECT booking_pppn
+		FROM accommodation
+		WHERE country = ?
+	`, country)
+	if err != nil {
+		return 0, err
+	}
+	defer rows.Close()
+
+	var ppnns []float64
+	for rows.Next() {
+		var ppnn float64
+		if err := rows.Scan(&ppnn); err != nil {
+			return 0, err
+		}
+		ppnns = append(ppnns, ppnn)
+	}
+
+	// If no values are found, use the default value of 40
+	if len(ppnns) == 0 {
+		fmt.Printf("No booking_pppn values found for country %s, using default value of 40\n", country)
+		return 40, nil
+	}
+
+	// Calculate the median
+	return median(ppnns), nil
 }
 
