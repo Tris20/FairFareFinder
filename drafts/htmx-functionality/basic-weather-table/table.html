@@ -8,6 +8,7 @@
       <th>Flights From</th>
       
       <th class="accommodation-column">Avg. Hotel Price<br>(Per Person Per Night)</th>
+     <th class="fnaf-column">Five Nights and Flights<br>(Per Person)</th>
     </tr>
   </thead>
   <tbody>
@@ -43,6 +44,11 @@
   <a href="{{.BookingUrl.String}}" target="_blank">
     {{if .BookingPppn.Valid}}{{printf "€%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
   </a>
+</td>
+
+
+<td class="fnaf-column">
+    {{if .FiveNightsFlights.Valid}}{{printf "€%.2f" .FiveNightsFlights.Float64}}{{else}}N/A{{end}}
 </td>
 
     </tr>

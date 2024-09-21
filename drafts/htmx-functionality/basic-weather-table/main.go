@@ -22,14 +22,17 @@ type Weather struct {
 }
 
 
+
 type Flight struct {
 	DestinationCityName string
 	PriceCity1          sql.NullFloat64
 	UrlCity1            string
-	WeatherForecast     []Weather      // Slice of weather data for multiple days
-	BookingUrl          sql.NullString // URL for accommodation booking
-	BookingPppn         sql.NullFloat64 // Price per person per night for accommodation
+	WeatherForecast     []Weather
+	BookingUrl          sql.NullString
+	BookingPppn         sql.NullFloat64
+	FiveNightsFlights   sql.NullFloat64 // Add this field for price_fnaf
 }
+
 
 
 type FlightsData struct {
@@ -158,6 +161,7 @@ upperWpi := 10.0
 	// Updated query to join with the weather table for weather forecast
 
 
+
 query := `
 SELECT f1.destination_city_name, 
        MIN(f1.price_this_week) AS price_city1, 
@@ -168,19 +172,22 @@ SELECT f1.destination_city_name,
        w.google_url,
        w.avg_daytime_wpi,
        a.booking_url,
-       a.booking_pppn
-FROM flight f1
+       a.booking_pppn,
+       fnf.price_fnaf FROM flight f1
 JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
 JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
 LEFT JOIN accommodation a ON a.city = f1.destination_city_name AND a.country = f1.destination_country
+LEFT JOIN five_nights_and_flights fnf ON fnf.destination_city = f1.destination_city_name AND fnf.origin_city = ? 
 WHERE f1.origin_city_name = ? 
 AND l.avg_wpi BETWEEN ? AND ? 
 AND w.date >= date('now')
 GROUP BY f1.destination_city_name, w.date, f1.destination_country
 HAVING price_city1 <= ?
-    ` + orderClause
+` + orderClause
 
-rows, err := db.Query(query, city1, lowerWpi, upperWpi, maxPrice)
+
+rows, err := db.Query(query, city1, city1, lowerWpi, upperWpi, maxPrice)
+
 if err != nil {
     http.Error(w, err.Error(), http.StatusInternalServerError)
     return
@@ -195,6 +202,7 @@ defer rows.Close()
 		var weather Weather
 
 
+
 err := rows.Scan(
 	&flight.DestinationCityName,
 	&flight.PriceCity1,
@@ -206,7 +214,9 @@ err := rows.Scan(
 	&weather.AvgDaytimeWpi,
 	&flight.BookingUrl,
 	&flight.BookingPppn,
+	&flight.FiveNightsFlights, // Added to scan price_fnaf
 )
+
 
 		if err != nil {
 			log.Printf("Error scanning row: %v", err)
