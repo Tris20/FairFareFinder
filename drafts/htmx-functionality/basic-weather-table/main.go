@@ -23,22 +23,31 @@ type Weather struct {
 
 
 
+
 type Flight struct {
-	DestinationCityName string
-	PriceCity1          sql.NullFloat64
-	UrlCity1            string
-	WeatherForecast     []Weather
-	BookingUrl          sql.NullString
-	BookingPppn         sql.NullFloat64
-	FiveNightsFlights   sql.NullFloat64 // Add this field for price_fnaf
+    DestinationCityName string
+    PriceCity1          sql.NullFloat64
+    UrlCity1            string
+    WeatherForecast     []Weather
+    AvgWpi              sql.NullFloat64  // Add this field for avg_wpi from the location table
+    BookingUrl          sql.NullString
+    BookingPppn         sql.NullFloat64
+    FiveNightsFlights   sql.NullFloat64
 }
+
+
 
 
 
 type FlightsData struct {
-	SelectedCity1 string
-	Flights       []Flight
+    SelectedCity1 string
+    Flights       []Flight
+    MaxWpi        sql.NullFloat64
+    MinFlight     sql.NullFloat64
+    MinHotel      sql.NullFloat64
+    MinFnaf       sql.NullFloat64
 }
+
 
 var (
 	tmpl  *template.Template
@@ -155,6 +164,7 @@ upperWpi := 10.0
 
 
 
+
 query := `
 SELECT f1.destination_city_name, 
        MIN(f1.price_this_week) AS price_city1, 
@@ -163,10 +173,11 @@ SELECT f1.destination_city_name,
        w.avg_daytime_temp,
        w.weather_icon,
        w.google_url,
-       w.avg_daytime_wpi,
+       l.avg_wpi,  
        a.booking_url,
        a.booking_pppn,
-       fnf.price_fnaf FROM flight f1
+       fnf.price_fnaf 
+FROM flight f1
 JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
 JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
 LEFT JOIN accommodation a ON a.city = f1.destination_city_name AND a.country = f1.destination_country
@@ -174,10 +185,11 @@ LEFT JOIN five_nights_and_flights fnf ON fnf.destination_city = f1.destination_c
 WHERE f1.origin_city_name = ? 
 AND l.avg_wpi BETWEEN ? AND ? 
 AND w.date >= date('now')
-GROUP BY f1.destination_city_name, w.date, f1.destination_country
+GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi 
 HAVING fnf.price_fnaf <= ?
 
 ` + orderClause
+
 
 
 rows, err := db.Query(query, city1, city1, lowerWpi, upperWpi, maxPrice)
@@ -197,19 +209,21 @@ defer rows.Close()
 
 
 
+
 err := rows.Scan(
-	&flight.DestinationCityName,
-	&flight.PriceCity1,
-	&flight.UrlCity1,
-	&weather.Date,
-	&weather.AvgDaytimeTemp,
-	&weather.WeatherIcon,
-	&weather.GoogleUrl,
-	&weather.AvgDaytimeWpi,
-	&flight.BookingUrl,
-	&flight.BookingPppn,
-	&flight.FiveNightsFlights, // Added to scan price_fnaf
+    &flight.DestinationCityName,
+    &flight.PriceCity1,
+    &flight.UrlCity1,
+    &weather.Date,
+    &weather.AvgDaytimeTemp,
+    &weather.WeatherIcon,
+    &weather.GoogleUrl,
+    &flight.AvgWpi,            // Add this to scan avg_wpi from the location table
+    &flight.BookingUrl,
+    &flight.BookingPppn,
+    &flight.FiveNightsFlights,  // Scan price_fnaf
 )
+
 
 
 		if err != nil {
@@ -236,12 +250,45 @@ err := rows.Scan(
 		}
 	}
 
-	data := FlightsData{
-		SelectedCity1: city1,
-		Flights:       flights,
-	}
 
-	err = tmpl.ExecuteTemplate(w, "table.html", data)
+
+
+
+
+
+
+
+// Initialize variables to track the highest and lowest values
+var maxWpi sql.NullFloat64
+var minFlightPrice, minHotelPrice, minFnafPrice sql.NullFloat64
+
+for _, flight := range flights {
+    if !maxWpi.Valid || (flight.AvgWpi.Valid && flight.AvgWpi.Float64 > maxWpi.Float64) {
+        maxWpi = flight.AvgWpi  // Set the highest WPI found
+    }
+    if !minFlightPrice.Valid || (flight.PriceCity1.Valid && flight.PriceCity1.Float64 < minFlightPrice.Float64) {
+        minFlightPrice = flight.PriceCity1
+    }
+    if !minHotelPrice.Valid || (flight.BookingPppn.Valid && flight.BookingPppn.Float64 < minHotelPrice.Float64) {
+        minHotelPrice = flight.BookingPppn
+    }
+    if !minFnafPrice.Valid || (flight.FiveNightsFlights.Valid && flight.FiveNightsFlights.Float64 < minFnafPrice.Float64) {
+        minFnafPrice = flight.FiveNightsFlights
+    }
+}
+
+// Pass these values to the template
+data := FlightsData{
+    SelectedCity1: city1,
+    Flights:       flights,
+    MaxWpi:        maxWpi,          // Add highest WPI
+    MinFlight:     minFlightPrice,   // Add lowest flight price
+    MinHotel:      minHotelPrice,    // Add lowest avg hotel price
+    MinFnaf:       minFnafPrice,     // Add lowest FNAF price
+}
+
+err = tmpl.ExecuteTemplate(w, "table.html", data)
+
 	if err != nil {
 		http.Error(w, "Error rendering results", http.StatusInternalServerError)
 	}
