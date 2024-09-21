@@ -63,9 +63,27 @@ table th{
 
 
 
+
+
 .highlight {
-    background-color: yellow;
+    background-color: #f4d35e;
     font-weight: bold;
+}
+
+
+/* Default state */
+.price-hover {
+  border: 0px solid transparent; /* Define the border but make it transparent */
+  border-radius: 5px;            /* Ensure the shape remains consistent */
+  transition: all 0.3s ease;      /* Smooth transition for hover effect */
+box-sizing: border-box;  
+}
+.price-hover:hover {
+  border: 3px solid #a6c2c6; /* You can change the color to your preference */
+  border-radius: 5px;
+  transition: all 0.1s ease;
+  cursor: pointer; 
+padding: 5px;
 }
 
 @media screen and (max-width: 800px) {

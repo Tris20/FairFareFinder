@@ -40,23 +40,24 @@
       </td>
 
       <!-- Five Nights and Flights Price -->
-      <td class="fnaf-column {{if eq .FiveNightsFlights.Float64 $.MinFnaf.Float64}}highlight{{end}}">
+      <td class="fnaf-column {{if eq .FiveNightsFlights.Float64 $.MinFnaf.Float64}}highlight{{end}}" style="font-weight: bold;">
         {{if .FiveNightsFlights.Valid}}{{printf "€%.2f" .FiveNightsFlights.Float64}}{{else}}N/A{{end}}
       </td>
 
-      <!-- Price and URL for Skyscanner flights -->
-      <td class="{{if eq .PriceCity1.Float64 $.MinFlight.Float64}}highlight{{end}}">
-        <a href="{{.UrlCity1}}" target="_blank">
-          {{if .PriceCity1.Valid}}{{printf "€%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}
-        </a>
-      </td>
-      
-      <!-- Avg. Hotel Price -->
-      <td class="accommodation-column {{if eq .BookingPppn.Float64 $.MinHotel.Float64}}highlight{{end}}">
-        <a href="{{.BookingUrl.String}}" target="_blank">
-          {{if .BookingPppn.Valid}}{{printf "€%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
-        </a>
-      </td>
+
+
+<!-- Price and URL for Skyscanner flights -->
+<td class="price-hover {{if eq .PriceCity1.Float64 $.MinFlight.Float64}}highlight{{end}}" 
+    onclick="window.location.href='{{.UrlCity1}}';">
+    {{if .PriceCity1.Valid}}{{printf "€%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}
+</td>
+
+<!-- Avg. Hotel Price -->
+<td class="accommodation-column price-hover {{if eq .BookingPppn.Float64 $.MinHotel.Float64}}highlight{{end}}" 
+    onclick="window.location.href='{{.BookingUrl.String}}';">
+    {{if .BookingPppn.Valid}}{{printf "€%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
+</td>
+
 
     </tr>
     {{end}}
