@@ -46,8 +46,12 @@ var (
 func main() {
 	var err error
 
-	db, err = sql.Open("sqlite3", "./main.db")
-	if err != nil {
+//	db, err = sql.Open("sqlite3", "./main.db")
+	db, err = sql.Open("sqlite3", "../../../data/compiled/main.db")
+
+
+if err != nil {
+    
 		log.Fatal(err)
 	}
 	defer db.Close()
