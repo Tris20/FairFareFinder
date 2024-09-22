@@ -1,6 +1,6 @@
 module github.com/Tris20/FairFareFinder
 
-go 1.18
+go 1.23
 
 require (
 	github.com/Tris20/FairFareFinder/utils/time-and-date v0.0.1
