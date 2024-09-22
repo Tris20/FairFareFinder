@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"encoding/csv"
 	"fmt"
-//	"github.com/schollz/progressbar/v3"
+	"github.com/schollz/progressbar/v3"
 	_ "github.com/mattn/go-sqlite3"
 	"log"
 	"os"
@@ -19,15 +19,15 @@ var CorrectCityMap = map[string]string{
 
 func main() {
   
-	fmt.Println("Note: the default is to create a flights.db in this folder. If you are absolutely sure you want to update the data/flights.db then modify the main.go 'sql.open' lines and recompile")
-	db, err := sql.Open("sqlite3", "./flights.db")
-//	db, err := sql.Open("sqlite3", "../../../../data/flights.db")
+	fmt.Println("Note: the default is to create a airports.db in this folder. If you are absolutely sure you want to update the data/locations.db then modify the main.go 'sql.open' lines and recompile")
+	db, err := sql.Open("sqlite3", "./airports.db")
+//	db, err := sql.Open("sqlite3", "../../../../../data/raw/locations/locations.db")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	createTableSQL := `CREATE TABLE IF NOT EXISTS airport_info (
+	createTableSQL := `CREATE TABLE IF NOT EXISTS airport (
 		icao TEXT PRIMARY KEY,
 		iata TEXT,
 		name TEXT,
@@ -47,7 +47,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-/*
+
 
 	csvFile, err := os.Open("airports.csv")
 	if err != nil {
@@ -105,7 +105,7 @@ func main() {
 	}
 
 	fmt.Println("Data successfully inserted into airport_info table.")
-*/
+  
   fmt.Println("\nAdding AddSkyScannerAirportIDs")
   AddSkyScannerAirportIDs()
 }

@@ -48,7 +48,7 @@ func updateSkyscannerID(db *sql.DB, skyscannerId, iata string) error {
 	if err != nil {
 		return err
 	}
-	_, err = tx.Exec("UPDATE airport_info SET skyscannerid = ? WHERE iata = ?", skyscannerId, iata)
+	_, err = tx.Exec("UPDATE airport SET skyscannerid = ? WHERE iata = ?", skyscannerId, iata)
 	if err != nil {
 		tx.Rollback() // Rollback in case of error
 		return err
@@ -65,7 +65,7 @@ func AddSkyScannerAirportIDs() {
 	fmt.Println("Using API Key:", apiKey)
 
 	// Connect to the SQLite database
-	db, err := sql.Open("sqlite3", "./flights.db")
+	db, err := sql.Open("sqlite3", "./airports.db")
 	if err != nil {
 		log.Fatalf("Error connecting to database: %v", err)
 	}
@@ -81,7 +81,7 @@ func AddSkyScannerAirportIDs() {
 
   // Count the total number of records to update
 	var totalCount int
-	err = db.QueryRow("SELECT COUNT(*) FROM airport_info WHERE iata IS NOT NULL AND iata <> '' AND skyscannerid IS NULL").Scan(&totalCount)
+	err = db.QueryRow("SELECT COUNT(*) FROM airport WHERE iata IS NOT NULL AND iata <> '' AND skyscannerid IS NULL").Scan(&totalCount)
 	if err != nil {
 		log.Fatalf("Error counting records: %v", err)
 	}
@@ -90,7 +90,7 @@ func AddSkyScannerAirportIDs() {
 	bar := progressbar.Default(int64(totalCount))
 
 	// Query for IATA codes
-	rows, err := db.Query("SELECT iata FROM airport_info WHERE iata IS NOT NULL AND iata <> '' AND skyscannerid IS NULL")
+	rows, err := db.Query("SELECT iata FROM airport WHERE iata IS NOT NULL AND iata <> '' AND skyscannerid IS NULL")
 	if err != nil {
 		log.Fatalf("Error querying database: %v", err)
 	}
