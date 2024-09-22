@@ -76,5 +76,40 @@ CREATE TABLE IF NOT EXISTS "flight" (
 	}
 
 	log.Println("Database and tables created successfully.")
+
+
+
+
+// Create five_nights_and_flights table
+createFiveNightsAndFlightsTable := `
+CREATE TABLE IF NOT EXISTS five_nights_and_flights (
+    origin_city TEXT,
+    origin_country TEXT,
+    destination_city TEXT,
+    destination_country TEXT,
+    price_fnaf REAL
+);`
+_, err = db.Exec(createFiveNightsAndFlightsTable)
+if err != nil {
+    log.Fatalf("Failed to create five_nights_and_flights table: %v", err)
+}
+
+
+
+// Create accommodation table
+createAccommodationTable := `
+CREATE TABLE IF NOT EXISTS accommodation (
+    city TEXT NOT NULL,
+    country TEXT NOT NULL,
+    booking_url TEXT,
+    booking_pppn REAL NOT NULL
+);`
+_, err = db.Exec(createAccommodationTable)
+if err != nil {
+    log.Fatalf("Failed to create accommodation table: %v", err)
+}
+
+
+
 }
 
