@@ -1,0 +1,71 @@
+
+{{ if .Flights }}
+<table>
+  <thead>
+    <tr>
+      <th>Destination</th>
+      <th colspan="5" style="width: 100px;">Weather Forecast <br>(Next 5 Days)</th>
+
+      <th class="fnaf-column">Five Nights and Flights<br>(Per Person)</th>
+      <th>Flights From</th>
+      <th class="accommodation-column">Avg. Hotel Price<br>(Per Person Per Night)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{range .Flights}}
+    <tr>
+      <!-- Highlight the destination name if AvgWpi is the highest -->
+      <td class="{{if eq .AvgWpi.Float64 $.MaxWpi.Float64}}highlight{{end}}"> 
+        {{.DestinationCityName}} 
+      </td>
+
+      <!-- Wrap weather forecast columns with the highlight class if AvgWpi is the highest -->
+      <td colspan="5" class="{{if eq .AvgWpi.Float64 $.MaxWpi.Float64}}highlight{{end}}">
+        <table style="width: 100%;">
+          <tr>
+            {{range .WeatherForecast}}
+            <td class="weather-column" style="width: 7%; text-align: center; padding: 4px 8px;">
+              <a href="{{.GoogleUrl}}" target="_blank">
+                <div>
+                  <img src="{{.WeatherIcon}}" alt="Weather Icon" width="100%" />
+                </div>
+                <div>
+                  {{if .AvgDaytimeTemp.Valid}}{{printf "%.1f°C" .AvgDaytimeTemp.Float64}}{{else}}N/A{{end}}
+                </div>
+              </a>
+            </td>
+            {{end}}
+          </tr>
+        </table>
+      </td>
+
+
+<!-- Five Nights and Flights Price -->
+<td class="fnaf-column {{if eq .FiveNightsFlights.Float64 $.MinFnaf.Float64}}highlight{{end}}" 
+    style="font-weight: bold;">
+    {{if .FiveNightsFlights.Valid}}{{printf "€%.2f" .FiveNightsFlights.Float64}}{{else}}N/A{{end}}
+</td>
+
+
+
+
+
+<!-- Price and URL for Skyscanner flights -->
+<td class="price-hover {{if eq .PriceCity1.Float64 $.MinFlight.Float64}}highlight{{end}}" 
+    onclick="window.open('{{.UrlCity1}}', '_blank');">
+    {{if .PriceCity1.Valid}}{{printf "€%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}
+</td>
+
+<!-- Avg. Hotel Price -->
+<td class="accommodation-column price-hover {{if eq .BookingPppn.Float64 $.MinHotel.Float64}}highlight{{end}}" 
+    onclick="window.open('{{.BookingUrl.String}}', '_blank');">
+    {{if .BookingPppn.Valid}}{{printf "€%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
+</td>
+
+    </tr>
+    {{end}}
+  </tbody>
+</table>
+{{ end }}
+
+

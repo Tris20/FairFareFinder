@@ -1,215 +1,325 @@
+
 package main
 
 import (
 	"database/sql"
-	"fmt"
-	"github.com/Tris20/FairFareFinder/src/backend"
-	"github.com/Tris20/FairFareFinder/config/handlers"
-	"github.com/Tris20/FairFareFinder/utils/data/process/compile/flights"
-	"github.com/Tris20/FairFareFinder/src/backend/server"
-	"github.com/Tris20/FairFareFinder/utils/time-and-date"
-	"github.com/Tris20/FairFareFinder/utils/data/process/generate/urls"
-	"github.com/Tris20/FairFareFinder/utils/data/process/calculate/weather/depreciated"
-	"github.com/Tris20/FairFareFinder/src/backend/web_pages/html_generators"
+	"html/template"
 	"log"
 	"math"
-	"os"
-	"sort"
-	"strings"
-	"time"
+	"net/http"
+	"strconv"
+	"github.com/gorilla/sessions"
+	_ "github.com/mattn/go-sqlite3"
+	"fmt"
 )
 
-type Favourites struct {
-	Locations []string `yaml:"locations"`
+type Weather struct {
+	Date             string          // Date for the weather forecast
+	AvgDaytimeTemp   sql.NullFloat64 // Average daytime temperature
+	WeatherIcon      string          // Weather icon URL
+	GoogleUrl        string          // Google URL for the location
+	AvgDaytimeWpi    sql.NullFloat64 // Weather Performance Index
 }
 
-type CityAverageWPI struct {
-	Name          string
-	WPI           float64
-	SkyScannerURL string
-	AirbnbURL     string
-	BookingURL    string
+
+
+
+type Flight struct {
+    DestinationCityName string
+    PriceCity1          sql.NullFloat64
+    UrlCity1            string
+    WeatherForecast     []Weather
+    AvgWpi              sql.NullFloat64  // Add this field for avg_wpi from the location table
+    BookingUrl          sql.NullString
+    BookingPppn         sql.NullFloat64
+    FiveNightsFlights   sql.NullFloat64
 }
 
-var checkFlightPrices = false
-var checkprice_init = false
 
-var origins []model.OriginInfo
+
+
+
+type FlightsData struct {
+    SelectedCity1 string
+    Flights       []Flight
+    MaxWpi        sql.NullFloat64
+    MinFlight     sql.NullFloat64
+    MinHotel      sql.NullFloat64
+    MinFnaf       sql.NullFloat64
+}
+
+
+var (
+	tmpl  *template.Template
+	db    *sql.DB
+	store *sessions.CookieStore = sessions.NewCookieStore([]byte("your-secret-key"))
+)
 
 func main() {
-	fmt.Printf("Running FFF with argument '%s' \n\n", os.Args[1])
-	if len(os.Args) < 2 {
-		log.Fatal("Error: No argument provided. Please provide a location, 'web', or a json file.")
+	var err error
+
+//	db, err = sql.Open("sqlite3", "./main.db")
+	db, err = sql.Open("sqlite3", "./data/compiled/main.db")
+
+
+if err != nil {
+    
+		log.Fatal(err)
 	}
-	// Load IATA, skyscanenrID etc of origins(Berlin, Glasgow, Edi)
-	originsConfig, _ := config_handlers.LoadOrigins("config/origins.yaml")
-	origins := config_handlers.ConvertConfigToModel(originsConfig)
-	origins = update_origin_dates(origins)
+	defer db.Close()
 
-	switch os.Args[1] {
-	case "dev":
+    // Parse templates
+    tmpl = template.Must(template.ParseFiles("./src/frontend/html/index.html", "./src/frontend/html/table.html"))
 
-		ProcessOriginConfigurations(origins)
-		fmt.Println("\nStarting Webserver")
-		fffwebserver.SetupFFFWebServer()
+    // Set up routes
+    http.HandleFunc("/", indexHandler)                     // Homepage route
+    http.HandleFunc("/filter", filterHandler)              // Route for filtering
+    http.HandleFunc("/update-slider-price", updateSliderPriceHandler) // Route for slider price update
+    http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./src/frontend/css/")))) // Serving CSS
+    http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./src/frontend/images")))) // Serving images
 
-	case "web":
-		fmt.Printf("WEB")
-    fffwebserver.UpdateDatabaseWithIncoming() 
-		ProcessOriginConfigurations(origins)
-		// Update WPI data every 6 hours
-		ticker := time.NewTicker(6 * time.Hour)
-		go func() {
-			for range ticker.C {
-        fffwebserver.UpdateDatabaseWithIncoming() 
-				origins = update_origin_dates(origins)
-				ProcessOriginConfigurations(origins)
-			}
-		}()
-		fffwebserver.SetupFFFWebServer()
-		// Start a goroutine to check and execute a task every Monday
+    // Privacy policy route
+http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) {
+    http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html")  // Make sure the path is correct
+})
 
+//liston on all newtowrk interfaces including localhost
+log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
 
-	default:
-		// Check if the argument is a json file
-		if strings.HasSuffix(os.Args[1], ".json") {
-			out := fmt.Sprintf("input/%s-flights.json", os.Args[1:])
-			fmt.Sprintf(out)
-			//      GenerateAndPostCityRankings(os.Args[1], out)
-		} else {
-			// Assuming it's a city name
+}
 
-			var location model.DestinationInfo
-			location.City = strings.Join(os.Args[1:], " ")
-			location.Country = ("")
-			weather_pleasantry.ProcessLocation(location)
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	// Query to fetch distinct origin city names
+	rows, err := db.Query("SELECT DISTINCT origin_city_name FROM flight")
+	if err != nil {
+		log.Printf("Error querying cities: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	defer rows.Close()
+
+	var cities []string
+	for rows.Next() {
+		var city string
+		if err := rows.Scan(&city); err != nil {
+			log.Printf("Error scanning city: %v", err)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
 		}
+		cities = append(cities, city)
+	}
+
+	// Pass cities to template
+	if err := tmpl.ExecuteTemplate(w, "index.html", map[string]interface{}{
+		"Cities": cities,
+	}); err != nil {
+		log.Printf("Error executing template: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 }
 
-// GenerateCityRankings processes destinations and updates them with various info including weather and flight prices.
-func GenerateCityRankings(origin model.OriginInfo, destinationsWithUrls []model.DestinationInfo) {
-	// Open SQLite database
-	db, err := sql.Open("sqlite3", "./data/flights.db")
-	if err != nil {
-		log.Fatalf("Failed to open flights.db: %v", err)
+func filterHandler(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "session")
+	city1 := r.URL.Query().Get("city1")
+	sortOption := r.URL.Query().Get("sort")
+//	minWpiStr := r.URL.Query().Get("wpi")
+	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
+
+
+	maxPriceLinear, err := strconv.ParseFloat(maxPriceLinearStr, 64)
+  if err != nil {
+		log.Printf("Error parsing maxPriceLinear: %v", err)
+		http.Error(w, "Invalid maxPrice value", http.StatusBadRequest)
+		return
 	}
-	defer func() {
-		if err = db.Close(); err != nil {
-			log.Printf("Failed to close database connection: %v", err)
-		}
-	}()
 
-	for i, destination := range destinationsWithUrls {
-		// Process location for weather pleasantry index (WPI)
-		wpi, dailyDetails := weather_pleasantry.ProcessLocation(destination)
-		if math.IsNaN(wpi) {
-			log.Printf("WPI calculation returned NaN for destination %v", destination)
-			continue
-		}
+	maxPrice := mapLinearToExponential(maxPriceLinear, 100, 2500)
 
-		destinationsWithUrls[i].WPI = wpi // Update the WPI in the destination info
-		log.Printf("Updated WPI for destination %v: %f", destination, wpi)
 
-		// Read price data from the database table
-		price, err := getPriceForRoute(db, "this_weekend", origin.SkyScannerID, destination.SkyScannerID)
-		// Read price data from the database table
-		var nextprice float64
-		nextprice, err = getPriceForRoute(db, "next_weekend", origin.SkyScannerID, destination.SkyScannerID)
+session.Values["city1"] = city1
+session.Save(r, w)
+
+orderClause := "ORDER BY fnf.price_fnaf ASC" // Default to sorting by FNAF price in ascending order
+switch sortOption {
+case "low_price":
+    orderClause = "ORDER BY fnf.price_fnaf ASC" // Sort by lowest FNAF price
+case "high_price":
+    orderClause = "ORDER BY fnf.price_fnaf DESC" // Sort by highest FNAF price
+case "best_weather":
+    orderClause = "ORDER BY avg_wpi DESC" // Sort by best weather (highest WPI)
+case "worst_weather":
+    orderClause = "ORDER BY avg_wpi ASC" // Sort by worst weather (lowest WPI)
+}
+
+
+	// Calculate the lower and upper bounds for WPI
+//	lowerWpi := math.Max(minWpi-2.5, 1.0)   // Lower bound constrained to 1.0
+//	upperWpi := math.Min(minWpi+2.5, 10.0)  // Upper bound constrained to 10.0
+// Disabling slider for now
+lowerWpi := 1.0 
+upperWpi := 10.0
+
+
+	// Updated query to join with the weather table for weather forecast
+
+
+
+
+query := `
+SELECT f1.destination_city_name, 
+       MIN(f1.price_this_week) AS price_city1, 
+       MIN(f1.skyscanner_url_this_week) AS url_city1,
+       w.date,
+       w.avg_daytime_temp,
+       w.weather_icon,
+       w.google_url,
+       l.avg_wpi,  
+       a.booking_url,
+       a.booking_pppn,
+       fnf.price_fnaf 
+FROM flight f1
+JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
+JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
+LEFT JOIN accommodation a ON a.city = f1.destination_city_name AND a.country = f1.destination_country
+LEFT JOIN five_nights_and_flights fnf ON fnf.destination_city = f1.destination_city_name AND fnf.origin_city = ? 
+WHERE f1.origin_city_name = ? 
+AND l.avg_wpi BETWEEN ? AND ? 
+AND w.date >= date('now')
+GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi 
+HAVING fnf.price_fnaf <= ?
+
+` + orderClause
+
+
+
+rows, err := db.Query(query, city1, city1, lowerWpi, upperWpi, maxPrice)
+
+if err != nil {
+    http.Error(w, err.Error(), http.StatusInternalServerError)
+    return
+}
+defer rows.Close()
+
+	var flights []Flight
+
+	// Loop through the rows and construct flights and weather forecasts
+	for rows.Next() {
+		var flight Flight
+		var weather Weather
+
+
+
+
+err := rows.Scan(
+    &flight.DestinationCityName,
+    &flight.PriceCity1,
+    &flight.UrlCity1,
+    &weather.Date,
+    &weather.AvgDaytimeTemp,
+    &weather.WeatherIcon,
+    &weather.GoogleUrl,
+    &flight.AvgWpi,            // Add this to scan avg_wpi from the location table
+    &flight.BookingUrl,
+    &flight.BookingPppn,
+    &flight.FiveNightsFlights,  // Scan price_fnaf
+)
+
+
 
 		if err != nil {
-			log.Printf("Failed to get price for route from %v to %v: %v", origin.SkyScannerID, destination.SkyScannerID, err)
-			//	continue
+			log.Printf("Error scanning row: %v", err)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
 		}
 
-		destinationsWithUrls[i].SkyScannerPrice = price
-		destinationsWithUrls[i].SkyScannerNextPrice = nextprice
-		fmt.Printf("Retrieved SkyScanner price for %v -> %v: %.2f", origin.SkyScannerID, destination.SkyScannerID, price)
-
-		// Update URLs with URL encoding
-		destinationsWithUrls[i].SkyScannerURL = replaceSpaceWithURLEncoding(destination.SkyScannerURL)
-		destinationsWithUrls[i].AirbnbURL = replaceSpaceWithURLEncoding(destination.AirbnbURL)
-		destinationsWithUrls[i].BookingURL = replaceSpaceWithURLEncoding(destination.BookingURL)
-
-		// Transfer daily weather details
-		var weatherDetailsSlice []model.DailyWeatherDetails
-		for _, details := range dailyDetails {
-			weatherDetailsSlice = append(weatherDetailsSlice, details)
+		// Check if the destination already exists in flights
+		found := false
+		for i := range flights {
+			if flights[i].DestinationCityName == flight.DestinationCityName {
+				// Append the weather forecast to the existing flight entry
+				flights[i].WeatherForecast = append(flights[i].WeatherForecast, weather)
+				found = true
+				break
+			}
 		}
-		destinationsWithUrls[i].WeatherDetails = weatherDetailsSlice
+
+		if !found {
+			// Add a new flight entry if this destination wasn't found in the list
+			flight.WeatherForecast = []Weather{weather}
+			flights = append(flights, flight)
+		}
 	}
 
-	// Sort the cities by WPI in descending order
-	sort.Slice(destinationsWithUrls, func(i, j int) bool {
-		return destinationsWithUrls[i].WPI > destinationsWithUrls[j].WPI
-	})
-	log.Println("Sorted destinations by WPI in descending order.")
 
-	generate_html_table(origin, destinationsWithUrls)
-	log.Println("Generated HTML table for city rankings.")
+
+
+
+
+
+
+
+// Initialize variables to track the highest and lowest values
+var maxWpi sql.NullFloat64
+var minFlightPrice, minHotelPrice, minFnafPrice sql.NullFloat64
+
+for _, flight := range flights {
+    if !maxWpi.Valid || (flight.AvgWpi.Valid && flight.AvgWpi.Float64 > maxWpi.Float64) {
+        maxWpi = flight.AvgWpi  // Set the highest WPI found
+    }
+    if !minFlightPrice.Valid || (flight.PriceCity1.Valid && flight.PriceCity1.Float64 < minFlightPrice.Float64) {
+        minFlightPrice = flight.PriceCity1
+    }
+    if !minHotelPrice.Valid || (flight.BookingPppn.Valid && flight.BookingPppn.Float64 < minHotelPrice.Float64) {
+        minHotelPrice = flight.BookingPppn
+    }
+    if !minFnafPrice.Valid || (flight.FiveNightsFlights.Valid && flight.FiveNightsFlights.Float64 < minFnafPrice.Float64) {
+        minFnafPrice = flight.FiveNightsFlights
+    }
 }
 
-// replaceSpaceWithURLEncoding replaces space characters with %20 in the URL
-func replaceSpaceWithURLEncoding(urlString string) string {
-	return strings.ReplaceAll(urlString, " ", "%20")
+// Pass these values to the template
+data := FlightsData{
+    SelectedCity1: city1,
+    Flights:       flights,
+    MaxWpi:        maxWpi,          // Add highest WPI
+    MinFlight:     minFlightPrice,   // Add lowest flight price
+    MinHotel:      minHotelPrice,    // Add lowest avg hotel price
+    MinFnaf:       minFnafPrice,     // Add lowest FNAF price
 }
 
-func generate_html_table(origin model.OriginInfo, destinationsWithUrls []model.DestinationInfo) {
+err = tmpl.ExecuteTemplate(w, "table.html", data)
 
-	// Now content holds the full message to be posted, and you can pass it to the PostToDiscourse function
-	target_url := fmt.Sprintf("src/frontend/html/%s-flight-destinations.html", strings.ToLower(origin.City))
-
-	err := htmltablegenerator.GenerateHtmlTable(target_url, destinationsWithUrls)
 	if err != nil {
-		log.Fatalf("Failed to convert markdown to HTML: %v", err)
+		http.Error(w, "Error rendering results", http.StatusInternalServerError)
 	}
 }
 
-func update_origin_dates(origins []model.OriginInfo) []model.OriginInfo {
+// This function maps a linear slider (0-100) to an exponential range (10-2500)
+func mapLinearToExponential(linearValue float64, minVal float64, maxVal float64) float64 {
+	midVal := 1000.0
+	percentage := linearValue / 100
 
-	for i := range origins {
-		origins[i].DepartureStartDate, origins[i].DepartureEndDate, origins[i].ArrivalStartDate, origins[i].ArrivalEndDate = timeutils.CalculateWeekendRange(0)
-
-		origins[i].NextDepartureStartDate, origins[i].NextDepartureEndDate, origins[i].NextArrivalStartDate, origins[i].NextArrivalEndDate = timeutils.CalculateWeekendRange(1)
-
-		// Print updated origin info for verification
-		// Print updated origin info for verification
-		fmt.Printf("Origin #%d: %s\n", i+1, origins[i].City)
-		fmt.Printf("  Upcoming Departure: %s to %s\n", origins[i].DepartureStartDate, origins[i].DepartureEndDate)
-		fmt.Printf("  Upcoming Arrival: %s to %s\n", origins[i].ArrivalStartDate, origins[i].ArrivalEndDate)
-		fmt.Printf("  Next Departure: %s to %s\n", origins[i].NextDepartureStartDate, origins[i].NextDepartureEndDate)
-		fmt.Printf("  Next Arrival: %s to %s\n\n", origins[i].NextArrivalStartDate, origins[i].NextArrivalEndDate)
-
-		//		fmt.Printf("Updated Origin: %+v\n", origins[i])
-
-	}
-	return origins
-}
-
-// ProcessOriginConfigurations processes each origin configuration
-func ProcessOriginConfigurations(origins []model.OriginInfo) {
-	fmt.Printf("Procssing Flights")
-	for _, origin := range origins {
-		fmt.Printf("%s: %s - %s", origin.City, origin.DepartureStartDate, origin.DepartureEndDate)
-		// Build a list of airports from the given origin and dates
-		airportDetailsList := flightdb.DetermineFlightsFromConfig(origin)
-
-		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(origin, airportDetailsList)
-		//Generate WPI,  sort by WPI, update webpages
-		GenerateCityRankings(origin, destinationsWithUrls)
+	// First 70% of the slider covers 10 to 1000
+	if percentage <= 0.7 {
+		return minVal * math.Pow(midVal/minVal, percentage/0.7)
+	} else {
+		// Last 30% covers 1000 to 2500
+		newPercentage := (percentage - 0.7) / 0.3
+		return midVal + (maxVal-midVal)*newPercentage
 	}
 }
 
-
-// Function to get price for a given pair of skyscanner IDs
-func getPriceForRoute(db *sql.DB, weekend string, origin string, destination string) (float64, error) {
-	var price float64
-
-	query := fmt.Sprintf("SELECT %s FROM skyscannerprices WHERE origin = ? AND destination = ?", weekend)
-	err := db.QueryRow(query, origin, destination).Scan(&price)
+func updateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
+	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
+	maxPriceLinear, err := strconv.ParseFloat(maxPriceLinearStr, 64)
 	if err != nil {
-		return 0, err // Return 0 and the error
+		log.Printf("Error parsing maxPriceLinear: %v", err)
+		http.Error(w, "Invalid maxPrice value", http.StatusBadRequest)
+		return
 	}
 
-	return price, nil // Return the found price and no error
+	maxPrice := mapLinearToExponential(maxPriceLinear, 100, 2500)
+
+	fmt.Fprintf(w, "€%.2f", maxPrice)
 }
+
