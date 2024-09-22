@@ -219,7 +219,7 @@ func main() {
             }
 
             // Update weather every 6 hours
-            if currentHour%6 == 0 {
+           
                 runExecutableInDir(filepath.Join(relativeBase, "fetch/weather"), "update-weather-db")
                 fmt.Printf("%sCOMPLETED: update-weather-db (weather update)%s\n", green, reset)
 
@@ -234,10 +234,10 @@ func main() {
                 // Run process/compile/main/locations after weather compile
                 runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/locations"), "locations")
                 fmt.Printf("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
-            }
+            
 
             // Sleep for a specified time interval before checking again
-            time.Sleep(10 * time.Minute) // Check every 10 minutes in daemon mode
+            time.Sleep(600 * time.Minute) // Check every 10 minutes in daemon mode
         }
     }
 
