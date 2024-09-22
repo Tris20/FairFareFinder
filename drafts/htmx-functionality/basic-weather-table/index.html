@@ -2,9 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Table</title>
+    <title>FairFareFinder</title>
 
     <!-- Link to the CSS files located in the 'css' folder -->
     <link rel="stylesheet" href="/css/htmxFilter.css">
@@ -30,7 +32,7 @@
     <div id="table-container">
         <form id="flight-form" hx-get="/filter" hx-target="#flight-table" hx-trigger="change, input delay:50ms">
   <div class="form-group">
-            <label for="city1">Origin City:</label>
+            <label for="city1">From:</label>
             <select id="city1" name="city1">
                 <option value="Berlin" selected>Berlin</option>
                 <option value="Glasgow" >Glasgow</option> <!-- Default selection is Glasgow -->
@@ -49,10 +51,15 @@
  
 <div class="form-group output-range">
   <output id="priceOutput">€300.00</output>
-  <input type="range" id="combinedPrice-slider" name="maxPriceLinear" min="0" max="100" step="1" value="50" 
+  <input type="range" id="combinedPrice-slider" name="maxPriceLinear" min="0" max="100" step="1" value="33" 
          hx-get="/update-slider-price" 
          hx-target="#priceOutput" 
-         hx-trigger="input">
+         hx-trigger="input"
+           hx-push-url="false"
+           hx-preserve="false"
+           autocomplete="off">  <!-- these prevent the browser from storing the value of the slider( which is good because if the value is set too low, the user will reload the page and see no entries in the table - a confusing experience for the user) -->
+  
+
 </div>
         </form>
 
@@ -63,11 +70,14 @@
         </div>
 
 <footer id="footer-privacy">
-    <p>&copy; 2024 Fair Fare Finder | <a href="/privacy-policy">Privacy Policy</a></p>
+    <p>&copy; 2024 FairFareFinder | <a href="/privacy-policy">Privacy Policy</a></p>
 </footer>
     </div>
 
   <script>
+
+
+
         let hasFadedIn = false;  // Flag to check if the table has already faded in
 
         document.addEventListener('DOMContentLoaded', function() {
