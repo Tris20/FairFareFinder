@@ -11,6 +11,8 @@ import (
 	"github.com/gorilla/sessions"
 	_ "github.com/mattn/go-sqlite3"
 	"fmt"
+  "time"
+  "os"
 )
 
 type Weather struct {
@@ -82,6 +84,10 @@ if err != nil {
 http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) {
     http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html")  // Make sure the path is correct
 })
+
+
+	// Start the file checking routine
+	go startFileCheckRoutine()
 
 //liston on all newtowrk interfaces including localhost
 log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
@@ -321,5 +327,34 @@ func updateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
 	maxPrice := mapLinearToExponential(maxPriceLinear, 100, 2500)
 
 	fmt.Fprintf(w, "€%.2f", maxPrice)
+}
+
+
+
+
+// Function to check for new_main.db and swap it with main.db
+func startFileCheckRoutine() {
+	for {
+		// Check every 2 hours
+		time.Sleep(2 * time.Hour)
+
+		// File paths
+		newDBPath := "./data/compiled/new_main.db"
+		mainDBPath := "./data/compiled/main.db"
+
+		// Check if new_main.db exists
+		if _, err := os.Stat(newDBPath); err == nil {
+			// Perform atomic swap: rename new_main.db to main.db
+			err := os.Rename(newDBPath, mainDBPath)
+			if err != nil {
+				log.Printf("Failed to swap new_main.db with main.db: %v", err)
+			} else {
+				log.Println("Successfully swapped new_main.db with main.db")
+			}
+		} else if !os.IsNotExist(err) {
+			// Log other errors
+			log.Printf("Error checking for new_main.db: %v", err)
+		}
+	}
 }
 
