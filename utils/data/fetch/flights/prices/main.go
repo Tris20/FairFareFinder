@@ -7,13 +7,11 @@ import (
   "github.com/Tris20/FairFareFinder/utils/time-and-date"
 	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/Tris20/FairFareFinder/config/handlers"
-//	"github.com/Tris20/FairFareFinder/utils/data/process/compile/flights"
 	"github.com/Tris20/FairFareFinder/utils/data/process/generate/urls"
 	"io/ioutil"
 	"log"
 	"math"
 	"net/http"
-	"time"
 "github.com/schollz/progressbar/v3"
 )
 
@@ -169,8 +167,7 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 		log.Fatalf("Failed to open database: %v", err)
 	}
 	defer db.Close()
-  departureEndDate, err := time.Parse("2006-01-02", origins[0].DepartureEndDate)
-	if time.Now().After(departureEndDate) {
+
 		fmt.Printf("\n\n\n COPY WEEKEND")
 
 		// SQL statement to copy "next_weekend" to "this_weekend"
@@ -183,8 +180,7 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 		}
 		log.Println("Table updated successfully.")
 
-	}
-
+/*
 	// Update if entry exists
 	updateStmt, err := db.Prepare("UPDATE skyscannerprices SET next_weekend = ? WHERE origin_skyscanner_id = ? AND destination_skyscanner_id = ?")
 	if err != nil {
@@ -197,6 +193,29 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 		log.Fatalf("Failed to prepare insert statement: %v", err)
 	}
 	defer insertStmt.Close()
+*/
+
+
+// HOTFIX setting both this weekend and nextweekend to price value because we don't use both prices in the output table yet
+updateStmt, err := db.Prepare(`
+    UPDATE skyscannerprices 
+    SET next_weekend = ?, this_weekend = ? 
+    WHERE origin_skyscanner_id = ? 
+    AND destination_skyscanner_id = ?`)
+if err != nil {
+    log.Fatalf("Failed to prepare update statement: %v", err)
+}
+defer updateStmt.Close()
+
+insertStmt, err := db.Prepare(`
+    INSERT INTO skyscannerprices 
+    (origin_city, origin_country, origin_iata, origin_skyscanner_id, destination_city, destination_country, destination_iata, destination_skyscanner_id, next_weekend, this_weekend) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+if err != nil {
+    log.Fatalf("Failed to prepare insert statement: %v", err)
+}
+defer insertStmt.Close()
+
 
 
   println("HERE4\n")
@@ -220,7 +239,7 @@ bar.Add(1) // Increment progress bar even on error
 			}
 
 			// Execute the update statement for each origin-destination pair with the new price
-			result, err := updateStmt.Exec(price, origin.SkyScannerID, destination.SkyScannerID)
+			result, err := updateStmt.Exec(price, price, origin.SkyScannerID, destination.SkyScannerID)
 			if err != nil {
 				log.Printf("Failed to update price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
 bar.Add(1) // Increment progress bar even on error
@@ -237,7 +256,7 @@ bar.Add(1) // Increment progress bar even on error
 			// If no rows were updated, insert a new row
 			if rowsAffected == 0 {
       _, err = insertStmt.Exec(origin.City, origin.Country,
-        origin.IATA, origin.SkyScannerID, destination.City, destination.Country, destination.IATA, destination.SkyScannerID, price)
+        origin.IATA, origin.SkyScannerID, destination.City, destination.Country, destination.IATA, destination.SkyScannerID, price, price)
       if err != nil {
 					log.Printf("Failed to insert price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
 				} else {

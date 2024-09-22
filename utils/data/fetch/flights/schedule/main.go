@@ -134,7 +134,7 @@ func main() {
 
 	// Load configurations from YAML
 	var configs Configs
-	configFile, err := ioutil.ReadFile("config.yaml")
+	configFile, err := ioutil.ReadFile("../../../../../config/config.yaml")
 	if err != nil {
 		log.Fatalf("Error reading config file: %v", err)
 	}
@@ -148,11 +148,8 @@ func main() {
 		log.Fatalf("Error reading API key: %v", err)
 	}
 
-	//db, err := sql.Open("sqlite3", "../../../../../data/longterm_db/flights.db")
-	// Last used path for stable branch
-//  db, err := sql.Open("sqlite3", "../../../../../data/flights.db")
+
 	db, err := sql.Open("sqlite3", "../../../../../data/raw/flights/flights.db")
-//  db, err := sql.Open("sqlite3", "./flights.db")
 
 	if err != nil {
 		log.Fatalf("Error opening database: %v", err)

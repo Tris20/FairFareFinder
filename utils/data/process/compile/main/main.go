@@ -142,7 +142,8 @@ func main() {
     runAll := flag.Bool("all", false, "Run all tasks in sequence regardless of time")
     runCompile := flag.Bool("compile", false, "Run only compile tasks")
  runWeather := flag.Bool("weather", false, "Run only weather-related tasks")
-
+    daemonMode := flag.Bool("daemon", false, "Run the program indefinitely as a daemon")
+    
     flag.Parse()
 
     // Create /out directory if it does not exist
@@ -192,42 +193,54 @@ func main() {
         return
     }
 
-    // Get current day and time
-    currentDay, currentHour := getCurrentTime()
+    // If --daemon flag is set, run in an infinite loop
+    // Run like this on the mothership
+    if *daemonMode {
+        fmt.Println("Daemon mode is enabled. Running tasks in loop...")
 
-    // Task logic based on time and task completion
-    if currentDay == time.Monday && currentHour == 9 {
-        runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/schedule"), "aerodatabox")
-        fmt.Printf("%sCOMPLETED: aerodatabox (flight schedule)%s\n", green, reset)
+        // Infinite loop for daemon mode
+        for {
+            // Get current day and time
+            currentDay, currentHour := getCurrentTime()
+
+            // Task logic based on time and task completion
+            if currentDay == time.Monday && currentHour == 9 {
+                runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/schedule"), "aerodatabox")
+                fmt.Printf("%sCOMPLETED: aerodatabox (flight schedule)%s\n", green, reset)
+            }
+
+            if currentDay == time.Monday && currentHour == 10 {
+                runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/prices"), "prices")
+                fmt.Printf("%sCOMPLETED: prices (flight prices)%s\n", green, reset)
+
+                // Run next task after prices completes
+                runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/flights"), "flights")
+                fmt.Printf("%sCOMPLETED: flights (process compile)%s\n", green, reset)
+            }
+
+            // Update weather every 6 hours
+            if currentHour%6 == 0 {
+                runExecutableInDir(filepath.Join(relativeBase, "fetch/weather"), "update-weather-db")
+                fmt.Printf("%sCOMPLETED: update-weather-db (weather update)%s\n", green, reset)
+
+                // Run weather calculation after weather update completes
+                runExecutableInDir(filepath.Join(relativeBase, "process/calculate/weather"), "weather")
+                fmt.Printf("%sCOMPLETED: weather (weather calculation)%s\n", green, reset)
+
+                // Run process/compile/main/weather after calculation
+                runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/weather"), "weather")
+                fmt.Printf("%sCOMPLETED: process/compile/main/weather%s\n", green, reset)
+
+                // Run process/compile/main/locations after weather compile
+                runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/locations"), "locations")
+                fmt.Printf("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
+            }
+
+            // Sleep for a specified time interval before checking again
+            time.Sleep(10 * time.Minute) // Check every 10 minutes in daemon mode
+        }
     }
 
-    if currentDay == time.Monday && currentHour == 10 {
-        runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/prices"), "prices")
-        fmt.Printf("%sCOMPLETED: prices (flight prices)%s\n", green, reset)
-
-        // Run next task after prices completes
-        runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/flights"), "flights")
-        fmt.Printf("%sCOMPLETED: flights (process compile)%s\n", green, reset)
-    }
-
-    // Update weather every 6 hours
-    if currentHour%6 == 0 {
-        runExecutableInDir(filepath.Join(relativeBase, "fetch/weather"), "update-weather-db")
-        fmt.Printf("%sCOMPLETED: update-weather-db (weather update)%s\n", green, reset)
-
-        // Run weather calculation after weather update completes
-        runExecutableInDir(filepath.Join(relativeBase, "process/calculate/weather"), "weather")
-        fmt.Printf("%sCOMPLETED: weather (weather calculation)%s\n", green, reset)
-
-        // Run process/compile/main/weather after calculation
-        runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/weather"), "weather")
-        fmt.Printf("%sCOMPLETED: process/compile/main/weather%s\n", green, reset)
-
-        // Run process/compile/main/locations after weather compile
-        runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/locations"), "locations")
-        fmt.Printf("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
-    }
-
-    fmt.Println("All tasks executed successfully.")
+    // If no flags are set, print a message
+    fmt.Println("No flags set. Use --all, --compile, --weather, or --daemon.")
 }
-
