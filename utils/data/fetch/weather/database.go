@@ -17,7 +17,9 @@ type AirportInfo struct {
 
 // fetchAirports retrieves all airports with non-empty IATA codes from flights.db
 func fetchAirports(db *sql.DB) ([]AirportInfo, error) {
-	query := `SELECT city, country, iata FROM airport_info WHERE iata IS NOT NULL AND iata != '';`
+
+query := `SELECT city, country, iata FROM airport WHERE iata IS NOT NULL AND iata != '' AND city IS NOT NULL AND country IS NOT NULL;`
+
 	rows, err := db.Query(query)
 	if err != nil {
 		return nil, err
