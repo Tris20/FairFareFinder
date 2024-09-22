@@ -21,17 +21,33 @@ type Weather struct {
 	AvgDaytimeWpi    sql.NullFloat64 // Weather Performance Index
 }
 
+
+
+
 type Flight struct {
-	DestinationCityName string
-	PriceCity1          sql.NullFloat64
-	UrlCity1            string
-	WeatherForecast     []Weather      // Slice of weather data for multiple days
+    DestinationCityName string
+    PriceCity1          sql.NullFloat64
+    UrlCity1            string
+    WeatherForecast     []Weather
+    AvgWpi              sql.NullFloat64  // Add this field for avg_wpi from the location table
+    BookingUrl          sql.NullString
+    BookingPppn         sql.NullFloat64
+    FiveNightsFlights   sql.NullFloat64
 }
 
+
+
+
+
 type FlightsData struct {
-	SelectedCity1 string
-	Flights       []Flight
+    SelectedCity1 string
+    Flights       []Flight
+    MaxWpi        sql.NullFloat64
+    MinFlight     sql.NullFloat64
+    MinHotel      sql.NullFloat64
+    MinFnaf       sql.NullFloat64
 }
+
 
 var (
 	tmpl  *template.Template
@@ -42,8 +58,12 @@ var (
 func main() {
 	var err error
 
-	db, err = sql.Open("sqlite3", "./main.db")
-	if err != nil {
+//	db, err = sql.Open("sqlite3", "./main.db")
+	db, err = sql.Open("sqlite3", "../../../data/compiled/main.db")
+
+
+if err != nil {
+    
 		log.Fatal(err)
 	}
 	defer db.Close()
@@ -105,39 +125,32 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 //	minWpiStr := r.URL.Query().Get("wpi")
 	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
 
-//originCountry := r.URL.Query().Get("origin_country")
-/*
-	// Convert string values to appropriate types
-	minWpi, err := strconv.ParseFloat(minWpiStr, 64)
-	if err != nil {
-		log.Printf("Error parsing minWpi: %v", err)
-		http.Error(w, "Invalid minWpi value", http.StatusBadRequest)
-		return
-	}
-*/
+
 	maxPriceLinear, err := strconv.ParseFloat(maxPriceLinearStr, 64)
-	if err != nil {
+  if err != nil {
 		log.Printf("Error parsing maxPriceLinear: %v", err)
 		http.Error(w, "Invalid maxPrice value", http.StatusBadRequest)
 		return
 	}
 
-	maxPrice := mapLinearToExponential(maxPriceLinear, 10, 2500)
+	maxPrice := mapLinearToExponential(maxPriceLinear, 100, 2500)
 
-	session.Values["city1"] = city1
-	session.Save(r, w)
 
-	orderClause := "ORDER BY price_city1 ASC"
-	switch sortOption {
-	case "low_price":
-		orderClause = "ORDER BY price_city1 ASC"
-	case "high_price":
-		orderClause = "ORDER BY price_city1 DESC"
-	case "best_weather":
-		orderClause = "ORDER BY avg_wpi DESC"
-	case "worst_weather":
-		orderClause = "ORDER BY avg_wpi ASC"
-	}
+session.Values["city1"] = city1
+session.Save(r, w)
+
+orderClause := "ORDER BY fnf.price_fnaf ASC" // Default to sorting by FNAF price in ascending order
+switch sortOption {
+case "low_price":
+    orderClause = "ORDER BY fnf.price_fnaf ASC" // Sort by lowest FNAF price
+case "high_price":
+    orderClause = "ORDER BY fnf.price_fnaf DESC" // Sort by highest FNAF price
+case "best_weather":
+    orderClause = "ORDER BY avg_wpi DESC" // Sort by best weather (highest WPI)
+case "worst_weather":
+    orderClause = "ORDER BY avg_wpi ASC" // Sort by worst weather (lowest WPI)
+}
+
 
 	// Calculate the lower and upper bounds for WPI
 //	lowerWpi := math.Max(minWpi-2.5, 1.0)   // Lower bound constrained to 1.0
@@ -149,6 +162,9 @@ upperWpi := 10.0
 
 	// Updated query to join with the weather table for weather forecast
 
+
+
+
 query := `
 SELECT f1.destination_city_name, 
        MIN(f1.price_this_week) AS price_city1, 
@@ -157,18 +173,27 @@ SELECT f1.destination_city_name,
        w.avg_daytime_temp,
        w.weather_icon,
        w.google_url,
-       w.avg_daytime_wpi
+       l.avg_wpi,  
+       a.booking_url,
+       a.booking_pppn,
+       fnf.price_fnaf 
 FROM flight f1
 JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
 JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
+LEFT JOIN accommodation a ON a.city = f1.destination_city_name AND a.country = f1.destination_country
+LEFT JOIN five_nights_and_flights fnf ON fnf.destination_city = f1.destination_city_name AND fnf.origin_city = ? 
 WHERE f1.origin_city_name = ? 
 AND l.avg_wpi BETWEEN ? AND ? 
 AND w.date >= date('now')
-GROUP BY f1.destination_city_name, w.date, f1.destination_country /* Add country to GROUP BY */
-HAVING price_city1 <= ?
-    ` + orderClause
+GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi 
+HAVING fnf.price_fnaf <= ?
 
-rows, err := db.Query(query, city1, lowerWpi, upperWpi, maxPrice)
+` + orderClause
+
+
+
+rows, err := db.Query(query, city1, city1, lowerWpi, upperWpi, maxPrice)
+
 if err != nil {
     http.Error(w, err.Error(), http.StatusInternalServerError)
     return
@@ -182,16 +207,25 @@ defer rows.Close()
 		var flight Flight
 		var weather Weather
 
-		err := rows.Scan(
-			&flight.DestinationCityName,
-			&flight.PriceCity1,
-			&flight.UrlCity1,
-			&weather.Date,
-			&weather.AvgDaytimeTemp,
-			&weather.WeatherIcon,
-			&weather.GoogleUrl,
-			&weather.AvgDaytimeWpi,
-		)
+
+
+
+err := rows.Scan(
+    &flight.DestinationCityName,
+    &flight.PriceCity1,
+    &flight.UrlCity1,
+    &weather.Date,
+    &weather.AvgDaytimeTemp,
+    &weather.WeatherIcon,
+    &weather.GoogleUrl,
+    &flight.AvgWpi,            // Add this to scan avg_wpi from the location table
+    &flight.BookingUrl,
+    &flight.BookingPppn,
+    &flight.FiveNightsFlights,  // Scan price_fnaf
+)
+
+
+
 		if err != nil {
 			log.Printf("Error scanning row: %v", err)
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -216,12 +250,45 @@ defer rows.Close()
 		}
 	}
 
-	data := FlightsData{
-		SelectedCity1: city1,
-		Flights:       flights,
-	}
 
-	err = tmpl.ExecuteTemplate(w, "table.html", data)
+
+
+
+
+
+
+
+// Initialize variables to track the highest and lowest values
+var maxWpi sql.NullFloat64
+var minFlightPrice, minHotelPrice, minFnafPrice sql.NullFloat64
+
+for _, flight := range flights {
+    if !maxWpi.Valid || (flight.AvgWpi.Valid && flight.AvgWpi.Float64 > maxWpi.Float64) {
+        maxWpi = flight.AvgWpi  // Set the highest WPI found
+    }
+    if !minFlightPrice.Valid || (flight.PriceCity1.Valid && flight.PriceCity1.Float64 < minFlightPrice.Float64) {
+        minFlightPrice = flight.PriceCity1
+    }
+    if !minHotelPrice.Valid || (flight.BookingPppn.Valid && flight.BookingPppn.Float64 < minHotelPrice.Float64) {
+        minHotelPrice = flight.BookingPppn
+    }
+    if !minFnafPrice.Valid || (flight.FiveNightsFlights.Valid && flight.FiveNightsFlights.Float64 < minFnafPrice.Float64) {
+        minFnafPrice = flight.FiveNightsFlights
+    }
+}
+
+// Pass these values to the template
+data := FlightsData{
+    SelectedCity1: city1,
+    Flights:       flights,
+    MaxWpi:        maxWpi,          // Add highest WPI
+    MinFlight:     minFlightPrice,   // Add lowest flight price
+    MinHotel:      minHotelPrice,    // Add lowest avg hotel price
+    MinFnaf:       minFnafPrice,     // Add lowest FNAF price
+}
+
+err = tmpl.ExecuteTemplate(w, "table.html", data)
+
 	if err != nil {
 		http.Error(w, "Error rendering results", http.StatusInternalServerError)
 	}
@@ -251,7 +318,7 @@ func updateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	maxPrice := mapLinearToExponential(maxPriceLinear, 10, 2500)
+	maxPrice := mapLinearToExponential(maxPriceLinear, 100, 2500)
 
 	fmt.Fprintf(w, "€%.2f", maxPrice)
 }
