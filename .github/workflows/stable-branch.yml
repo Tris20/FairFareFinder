@@ -60,7 +60,7 @@ jobs:
             fi
             
             # Start a new screen session and run the application
-            screen -dmS FairFareFinder ./FairFareFinder web
+            screen -dmS FairFareFinder ./FairFareFinder --web
           EOF
 
   # deploy:
