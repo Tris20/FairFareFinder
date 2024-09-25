@@ -1,11 +1,9 @@
 package main
 
-
 import (
 	"fmt"
 	"path/filepath"
 )
-
 
 // Function to run all tasks in sequence
 func runAllTasks(relativeBase string) {

@@ -1,11 +1,12 @@
-
 package main
 
 import (
 	"database/sql"
-	"log"
-
+	"fmt"
 	_ "github.com/mattn/go-sqlite3" // Import SQLite driver
+	"io"
+	"log"
+	"os"
 )
 
 func initializeDatabase(dbPath string) {
@@ -77,11 +78,8 @@ CREATE TABLE IF NOT EXISTS "flight" (
 
 	log.Println("Database and tables created successfully.")
 
-
-
-
-// Create five_nights_and_flights table
-createFiveNightsAndFlightsTable := `
+	// Create five_nights_and_flights table
+	createFiveNightsAndFlightsTable := `
 CREATE TABLE IF NOT EXISTS five_nights_and_flights (
     origin_city TEXT,
     origin_country TEXT,
@@ -89,27 +87,66 @@ CREATE TABLE IF NOT EXISTS five_nights_and_flights (
     destination_country TEXT,
     price_fnaf REAL
 );`
-_, err = db.Exec(createFiveNightsAndFlightsTable)
-if err != nil {
-    log.Fatalf("Failed to create five_nights_and_flights table: %v", err)
-}
+	_, err = db.Exec(createFiveNightsAndFlightsTable)
+	if err != nil {
+		log.Fatalf("Failed to create five_nights_and_flights table: %v", err)
+	}
 
-
-
-// Create accommodation table
-createAccommodationTable := `
+	// Create accommodation table
+	createAccommodationTable := `
 CREATE TABLE IF NOT EXISTS accommodation (
     city TEXT NOT NULL,
     country TEXT NOT NULL,
     booking_url TEXT,
     booking_pppn REAL NOT NULL
 );`
-_, err = db.Exec(createAccommodationTable)
-if err != nil {
-    log.Fatalf("Failed to create accommodation table: %v", err)
-}
-
-
+	_, err = db.Exec(createAccommodationTable)
+	if err != nil {
+		log.Fatalf("Failed to create accommodation table: %v", err)
+	}
 
 }
 
+// Helper function to delete new_main.db if it exists
+func deleteNewMainDB(dbPath string) error {
+	// Check if new_main.db exists
+	if _, err := os.Stat(dbPath); err == nil {
+		// Delete new_main.db
+		err := os.Remove(dbPath)
+		if err != nil {
+			return fmt.Errorf("failed to delete new_main.db: %v", err)
+		}
+		fmt.Println("Deleted existing new_main.db")
+	} else if !os.IsNotExist(err) {
+		// Some other error occurred, but not a "file doesn't exist" error
+		return fmt.Errorf("failed to check new_main.db: %v", err)
+	}
+
+	return nil
+}
+
+// Helper function to copy main.db to new_main.db
+func copyMainDB(srcPath, destPath string) error {
+	// Open source main.db
+	srcFile, err := os.Open(srcPath)
+	if err != nil {
+		return fmt.Errorf("failed to open main.db: %v", err)
+	}
+	defer srcFile.Close()
+
+	// Create destination new_main.db
+	destFile, err := os.Create(destPath)
+	if err != nil {
+		return fmt.Errorf("failed to create new_main.db: %v", err)
+	}
+	defer destFile.Close()
+
+	// Copy the content from main.db to new_main.db
+	_, err = io.Copy(destFile, srcFile)
+	if err != nil {
+		return fmt.Errorf("failed to copy main.db to new_main.db: %v", err)
+	}
+
+	fmt.Println("Successfully copied main.db to new_main.db")
+	return nil
+}
