@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"net/url"
 	"time"
@@ -118,39 +117,62 @@ if resp.StatusCode != 200 {
 	return result, nil
 }
 
-// storeWeatherData stores the fetched weather data into the weather.db
-func storeWeatherData(dbPath string, airport AirportInfo, weatherData []WeatherData) error {
-	db, err := sql.Open("sqlite3", dbPath)
-	if err != nil {
-		return err
-	}
-	defer db.Close()
 
-	for _, wd := range weatherData {
-		// First, check if an entry exists
-		var exists bool
-		err := db.QueryRow(`SELECT EXISTS(SELECT 1 FROM all_weather WHERE city_name = ? AND country_code = ? AND iata = ? AND date = ?)`,
-			airport.City, airport.Country, airport.IATA, wd.Date).Scan(&exists)
-		if err != nil {
-			log.Printf("Failed to check existence for %s on %s: %v", airport.City, wd.Date, err)
-			continue
-		}
 
-		if exists {
-			// If it exists, update the entry
-			_, err = db.Exec(`UPDATE all_weather SET weather_type = ?, temperature = ?, weather_icon_url = ?, google_weather_link = ?, wind_speed = ? WHERE city_name = ? AND country_code = ? AND iata = ? AND date = ?`,
-				wd.WeatherType, wd.Temperature, wd.WeatherIconURL, wd.GoogleWeatherLink, wd.WindSpeed, airport.City, airport.Country, airport.IATA, wd.Date)
-		} else {
-			// If it does not exist, insert a new entry
-			_, err = db.Exec(`INSERT INTO all_weather (city_name, country_code, iata, date, weather_type, temperature, weather_icon_url, google_weather_link, wind_speed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-				airport.City, airport.Country, airport.IATA, wd.Date, wd.WeatherType, wd.Temperature, wd.WeatherIconURL, wd.GoogleWeatherLink, wd.WindSpeed)
-		}
 
-		if err != nil {
-			log.Printf("Failed to insert/update weather data for %s: %v", airport.City, err)
-			// Decide how to handle the error; continue with the next iteration or return the error
-		}
-	}
-	return nil
+func storeWeatherDataBatch(db *sql.DB, batch []WeatherDataBatch) error {
+    // Set PRAGMA options for performance
+    _, err := db.Exec("PRAGMA synchronous = OFF;")
+    if err != nil {
+        return fmt.Errorf("failed to set PRAGMA synchronous: %v", err)
+    }
+    _, err = db.Exec("PRAGMA journal_mode = MEMORY;")
+    if err != nil {
+        return fmt.Errorf("failed to set PRAGMA journal_mode: %v", err)
+    }
+
+    // Start transaction
+    tx, err := db.Begin()
+    if err != nil {
+        return fmt.Errorf("failed to begin transaction: %v", err)
+    }
+    defer tx.Rollback() // Rollback on error
+
+    // Bulk insert statement
+    query := `INSERT OR REPLACE INTO all_weather 
+              (city_name, country_code, iata, date, weather_type, temperature, weather_icon_url, google_weather_link, wind_speed)
+              VALUES `
+    args := []interface{}{}
+
+    for _, weatherDataBatch := range batch {
+        for _, wd := range weatherDataBatch.WeatherInfo {
+            query += "(?, ?, ?, ?, ?, ?, ?, ?, ?),"
+            args = append(args,
+                weatherDataBatch.Airport.City,
+                weatherDataBatch.Airport.Country,
+                weatherDataBatch.Airport.IATA,
+                wd.Date,
+                wd.WeatherType,
+                wd.Temperature,
+                wd.WeatherIconURL,
+                wd.GoogleWeatherLink,
+                wd.WindSpeed,
+            )
+        }
+    }
+
+    // Remove trailing comma and execute the bulk insert
+    query = query[:len(query)-1]
+    _, err = tx.Exec(query, args...)
+    if err != nil {
+        return fmt.Errorf("failed to execute bulk insert: %v", err)
+    }
+
+    // Commit transaction
+    if err := tx.Commit(); err != nil {
+        return fmt.Errorf("failed to commit transaction: %v", err)
+    }
+
+    return nil
 }
 

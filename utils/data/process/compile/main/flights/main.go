@@ -1,32 +1,29 @@
-
 package main
 
 import (
 	"database/sql"
 	"fmt"
-	"log"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/schollz/progressbar/v3"
+	"log"
 )
 
 type SkyScannerPrice struct {
-	OriginCity            string
-	OriginCountry         string
-	OriginIATA            string
-	OriginSkyScannerID    string
-	DestinationCity       string
-	DestinationCountry    string
-	DestinationIATA       string
+	OriginCity              string
+	OriginCountry           string
+	OriginIATA              string
+	OriginSkyScannerID      string
+	DestinationCity         string
+	DestinationCountry      string
+	DestinationIATA         string
 	DestinationSkyScannerID string
-	ThisWeekend           sql.NullFloat64
-	NextWeekend           sql.NullFloat64
-	SkyScannerURL         string
+	ThisWeekend             sql.NullFloat64
+	NextWeekend             sql.NullFloat64
+	SkyScannerURL           string
 }
 
-
-
 func main() {
-  fmt.Printf("Starting to Compile Flights Table")
+	fmt.Printf("Starting to Compile Flights Table")
 	db, err := sql.Open("sqlite3", "../../../../../../data/raw/flights/flights.db")
 	if err != nil {
 		log.Fatal(err)
@@ -83,4 +80,3 @@ func main() {
 	}
 	fmt.Println("\nData inserted successfully into new_main.db")
 }
-

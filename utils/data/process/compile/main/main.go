@@ -51,101 +51,19 @@ func getCurrentTime() (time.Weekday, int) {
 	return now.Weekday(), now.Hour()
 }
 
-// Function to run all tasks in sequence
-func runAllTasks(relativeBase string) {
-	green := "\033[32m"
-	reset := "\033[0m"
-
-	// FETCH
-	runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/schedule"), "aerodatabox")
-	fmt.Printf("%sCOMPLETED: aerodatabox (flight schedule)%s\n", green, reset)
-
-	runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/prices"), "prices")
-	fmt.Printf("%sCOMPLETED: prices (flight prices)%s\n", green, reset)
-	runExecutableInDir(filepath.Join(relativeBase, "fetch/weather"), "update-weather-db")
-	fmt.Printf("%sCOMPLETED: update-weather-db (weather update)%s\n", green, reset)
-	runExecutableInDir(filepath.Join(relativeBase, "fetch/accommocation/booking-com/get-properties"), "get-properties")
-	fmt.Printf("%sCOMPLETED: get-properties (properties update)%s\n", green, reset)
-
-	//Calculate
-	runExecutableInDir(filepath.Join(relativeBase, "process/calculate/weather"), "weather")
-	fmt.Printf("%sCOMPLETED: weather (weather calculation)%s\n", green, reset)
-
-	//Compile
-	runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/flights"), "flights")
-	fmt.Printf("%sCOMPLETED: flights (process compile)%s\n", green, reset)
-	runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/weather"), "weather")
-	fmt.Printf("%sCOMPLETED: process/compile/main/weather%s\n", green, reset)
-
-	runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/locations"), "locations")
-	fmt.Printf("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
-
-	runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/accommodation/booking-com"), "booking-com")
-	fmt.Printf("%sCOMPLETED:  process/compile/main/accommodation/booking-com%s\n", green, reset)
-
-	// 5 nights and flights
-	runExecutableInDir(filepath.Join(relativeBase, "process/calculate/main/five-nights-and-flights"), "five-nights-and-flights")
-	fmt.Printf("%sCOMPLETED:  process/calculate/main/five-nights-and-flights%s\n", green, reset)
-
-}
-
-// Function to run only compile tasks
-func runCompileTasks(relativeBase string) {
-	green := "\033[32m"
-	reset := "\033[0m"
-
-	runExecutableInDir(filepath.Join(relativeBase, "process/calculate/weather"), "weather")
-	fmt.Printf("%sCOMPLETED: weather (weather calculation)%s\n", green, reset)
-
-	runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/flights"), "flights")
-	fmt.Printf("%sCOMPLETED: flights (process compile)%s\n", green, reset)
-
-	runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/weather"), "weather")
-	fmt.Printf("%sCOMPLETED: process/compile/main/weather%s\n", green, reset)
-
-	runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/locations"), "locations")
-	fmt.Printf("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
-
-	runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/accommodation/booking-com"), "booking-com")
-	fmt.Printf("%sCOMPLETED:  process/compile/main/accommodation/booking-com%s\n", green, reset)
-
-	// 5 nights and flights
-	runExecutableInDir(filepath.Join(relativeBase, "process/calculate/main/five-nights-and-flights"), "five-nights-and-flights")
-	fmt.Printf("%sCOMPLETED:  process/calculate/main/five-nights-and-flights%s\n", green, reset)
-
-}
-
-// Function to run only weather-related tasks
-func runWeatherTasks(relativeBase string) {
-	green := "\033[32m"
-	reset := "\033[0m"
-
-	runExecutableInDir(filepath.Join(relativeBase, "fetch/weather"), "update-weather-db")
-	fmt.Printf("%sCOMPLETED: update-weather-db (weather update)%s\n", green, reset)
-
-	runExecutableInDir(filepath.Join(relativeBase, "process/calculate/weather"), "weather")
-	fmt.Printf("%sCOMPLETED: weather (weather calculation)%s\n", green, reset)
-	//included beacuse we always create a new completely new main.db, so need to rebuild the flights table
-	runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/flights"), "flights")
-	fmt.Printf("%sCOMPLETED: flights (process compile)%s\n", green, reset)
-
-	runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/weather"), "weather")
-	fmt.Printf("%sCOMPLETED: process/compile/main/weather%s\n", green, reset)
-	//included beacuse we always create a new completely new main.db, so need to rebuild the locations table
-	runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/locations"), "locations")
-	fmt.Printf("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
-}
-
 func main() {
+
+	//Colours for CLI comments
+	green := "\033[32m"
+	reset := "\033[0m"
+
 	// Add flags for running all tasks or just compile tasks
 	runAll := flag.Bool("all", false, "Run all tasks in sequence regardless of time")
 	runCompile := flag.Bool("compile", false, "Run only compile tasks")
 	runWeather := flag.Bool("weather", false, "Run only weather-related tasks")
 	daemonMode := flag.Bool("daemon", false, "Run the program indefinitely as a daemon")
 
-	flag.Parse()
-
-	// Create /out directory if it does not exist
+	//Create output directory if not exists
 	outputDir := "../../../../../data/compiled/"
 	if _, err := os.Stat(outputDir); os.IsNotExist(err) {
 		err := os.Mkdir(outputDir, 0755)
@@ -154,25 +72,23 @@ func main() {
 		}
 	}
 
-	// Database file paths
-	dbPath := filepath.Join(outputDir, "new_main.db")
-
-	// Backup existing database if it exists
-	backupDatabase(dbPath, outputDir)
-	// Initialize the new database and create tables
-	initializeDatabase(dbPath)
-
 	// Get the current directory of the script
 	baseDir, err := os.Getwd()
 	if err != nil {
 		log.Fatalf("Failed to get current working directory: %v", err)
 	}
 
+	// Set Database file paths
+	newMainDBPath := filepath.Join(outputDir, "new_main.db")
 	// Define the relative path to go up three directories
 	relativeBase := filepath.Join(baseDir, "../../../")
 
-	green := "\033[32m"
-	reset := "\033[0m"
+	flag.Parse()
+
+	// Backup existing database if it exists
+	backupDatabase(newMainDBPath, outputDir)
+	// Initialize the new database and create tables
+	initializeDatabase(newMainDBPath)
 
 	// If the --all flag is set, run all tasks sequentially
 	if *runAll {
@@ -195,99 +111,111 @@ func main() {
 	// If --daemon flag is set, run in an infinite loop
 	if *daemonMode {
 		fmt.Println("Daemon mode is enabled. Running tasks in loop...")
-
 		// Infinite loop for daemon mode
 		for {
 			// Get current day and time
 			currentDay, currentHour := getCurrentTime()
-      transfer:=false
-			// Monday, 9am, Start a completely new new_main.db
-			if currentDay == time.Monday && currentHour == 9 {
-				// Backup existing database if it exists
-				backupDatabase(dbPath, outputDir)
-				// Initialize the new database and create tables
-				initializeDatabase(dbPath)
+			transfer := false
 
-				//Fetch
-				runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/schedule"), "aerodatabox")
-				fmt.Printf("%sCOMPLETED: aerodatabox (flight schedule)%s\n", green, reset)
-				runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/prices"), "prices")
-				fmt.Printf("%sCOMPLETED: prices (flight prices)%s\n", green, reset)
-				runExecutableInDir(filepath.Join(relativeBase, "fetch/weather"), "update-weather-db")
-				fmt.Printf("%sCOMPLETED: update-weather-db (weather update)%s\n", green, reset)
-				runExecutableInDir(filepath.Join(relativeBase, "fetch/accommocation/booking-com/get-properties"), "get-properties")
-				fmt.Printf("%sCOMPLETED: get-properties (properties update)%s\n", green, reset)
+			// Generate new db every 6 hours: 3am; 9am; 3pm; 9pm.
+			if currentHour%6 == 3 {
 
-				//Calculate
-				runExecutableInDir(filepath.Join(relativeBase, "process/calculate/weather"), "weather")
-				fmt.Printf("%sCOMPLETED: weather (weather calculation)%s\n", green, reset)
+				// Monday, 9am, Start a completely new new_main.db
+				if currentDay == time.Monday && currentHour == 9 {
+					// Backup existing database if it exists
+					backupDatabase(newMainDBPath, outputDir)
+					// delete existin new_main if exists
+					deleteNewMainDB(newMainDBPath)
+					// Initialize the new database and create tables
+					initializeDatabase(newMainDBPath)
 
-				// Compile
-				runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/flights"), "flights")
-				fmt.Printf("%sCOMPLETED: flights (process compile)%s\n", green, reset)
-				runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/weather"), "weather")
-				fmt.Printf("%sCOMPLETED: process/compile/main/weather%s\n", green, reset)
+					//Fetch
+					runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/schedule"), "aerodatabox")
+					fmt.Printf("%sCOMPLETED: aerodatabox (flight schedule)%s\n", green, reset)
+					runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/prices"), "prices")
+					fmt.Printf("%sCOMPLETED: prices (flight prices)%s\n", green, reset)
+					runExecutableInDir(filepath.Join(relativeBase, "fetch/weather"), "update-weather-db")
+					fmt.Printf("%sCOMPLETED: update-weather-db (weather update)%s\n", green, reset)
+					runExecutableInDir(filepath.Join(relativeBase, "fetch/accommocation/booking-com/get-properties"), "get-properties")
+					fmt.Printf("%sCOMPLETED: get-properties (properties update)%s\n", green, reset)
 
-				runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/locations"), "locations")
-				fmt.Printf("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
+					//Calculate
+					runExecutableInDir(filepath.Join(relativeBase, "process/calculate/weather"), "weather")
+					fmt.Printf("%sCOMPLETED: weather (weather calculation)%s\n", green, reset)
 
-				runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/accommodation/booking-com"), "booking-com")
-				fmt.Printf("%sCOMPLETED:  process/compile/main/accommodation/booking-com%s\n", green, reset)
-				// 5 nights and flights
-				runExecutableInDir(filepath.Join(relativeBase, "process/calculate/main/five-nights-and-flights"), "five-nights-and-flights")
-				fmt.Printf("%sCOMPLETED:  process/calculate/main/five-nights-and-flights%s\n", green, reset)
-      transfer = true
+					// Compile
+					runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/flights"), "flights")
+					fmt.Printf("%sCOMPLETED: flights (process compile)%s\n", green, reset)
+					runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/weather"), "weather")
+					fmt.Printf("%sCOMPLETED: process/compile/main/weather%s\n", green, reset)
+
+					runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/locations"), "locations")
+					fmt.Printf("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
+
+					runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/accommodation/booking-com"), "booking-com")
+					fmt.Printf("%sCOMPLETED:  process/compile/main/accommodation/booking-com%s\n", green, reset)
+					// 5 nights and flights
+					runExecutableInDir(filepath.Join(relativeBase, "process/calculate/main/five-nights-and-flights"), "five-nights-and-flights")
+					fmt.Printf("%sCOMPLETED:  process/calculate/main/five-nights-and-flights%s\n", green, reset)
+					transfer = true
+				} else {
+					// Backup existing database if it exists
+					backupDatabase(newMainDBPath, outputDir)
+
+					runExecutableInDir(filepath.Join(relativeBase, "fetch/weather"), "update-weather-db")
+					fmt.Printf("%sCOMPLETED: update-weather-db (weather update)%s\n", green, reset)
+
+					// Run weather calculation after weather update completes
+					runExecutableInDir(filepath.Join(relativeBase, "process/calculate/weather"), "weather")
+					fmt.Printf("%sCOMPLETED: weather (weather calculation)%s\n", green, reset)
+
+					// Run process/compile/main/weather after calculation
+					runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/weather"), "weather")
+					fmt.Printf("%sCOMPLETED: process/compile/main/weather%s\n", green, reset)
+
+					// Calcualte and Compile WPI for Locations
+					runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/locations"), "locations")
+					fmt.Printf("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
+					transfer = true
+				}
+
+				if transfer {
+					err := transferFlightsDB()
+					if err != nil {
+						fmt.Println("Error occurred during transfer:", err)
+						// You may exit or handle the error as needed
+					}
+				}
+
+				// Sleep for a specified time interval before checking again
+				time.Sleep(50 * time.Minute) // Check every 10 minutes in daemon mode
 			}
-
-			// Update weather every 6 hours
-			if currentHour%6 == 0 {
-				runExecutableInDir(filepath.Join(relativeBase, "fetch/weather"), "update-weather-db")
-				fmt.Printf("%sCOMPLETED: update-weather-db (weather update)%s\n", green, reset)
-
-				// Run weather calculation after weather update completes
-				runExecutableInDir(filepath.Join(relativeBase, "process/calculate/weather"), "weather")
-				fmt.Printf("%sCOMPLETED: weather (weather calculation)%s\n", green, reset)
-
-				// Run process/compile/main/weather after calculation
-				runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/weather"), "weather")
-				fmt.Printf("%sCOMPLETED: process/compile/main/weather%s\n", green, reset)
-
-				// Calcualte and Compile WPI for Locations
-				runExecutableInDir(filepath.Join(relativeBase, "process/compile/main/locations"), "locations")
-				fmt.Printf("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
-        transfer = true
-			}
-
-if transfer {
-			err := transferFlightsDB()
-			if err != nil {
-				fmt.Println("Error occurred during transfer:", err)
-				// You may exit or handle the error as needed
-			}
-		}
-
-			// Sleep for a specified time interval before checking again
-			time.Sleep(50 * time.Minute) // Check every 10 minutes in daemon mode
 		}
 	}
-
-	// If no flags are set, print a message
+	//	 If no flags are set, print a message
 	fmt.Println("No flags set. Use --all, --compile, --weather, or --daemon.")
 }
 
 func transferFlightsDB() error {
-	// SCP command to copy the flights.db to the server
-	cmd := exec.Command("scp", "-i", "~/.ssh/fff_server", 
-		"../../../../../data/compiled/new_main.db", 
+
+	// Get the user's home directory
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		log.Fatalf("Failed to get home directory: %v", err)
+	}
+
+	// Build the full path to the SSH key
+	sshKeyPath := filepath.Join(homeDir, ".ssh", "fff_server")
+
+	// Run the scp command
+	cmd := exec.Command("scp", "-i", sshKeyPath,
+		"../../../../../data/compiled/new_main.db",
 		"root@fairfarefinder.com:~/FairFareFinder/data/compiled/new_main.db")
 
 	// Run the command and capture any error
-	err := cmd.Run()
-
-	// Check if there was an error during SCP transfer
+	err = cmd.Run()
 	if err != nil {
-		fmt.Println("Failed to copy flights.db to server")
-		return err
+		log.Fatalf("Failed to run scp command: %v", err)
 	}
 
 	fmt.Println("Operations completed successfully")
