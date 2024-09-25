@@ -10,9 +10,20 @@ import (
 	"github.com/schollz/progressbar/v3"
 )
 
+
+
+
+
+type WeatherDataBatch struct {
+    Airport     AirportInfo
+    WeatherInfo []WeatherData
+}
+
+
 func main() {
 
-	
+	 var batch []WeatherDataBatch
+    batchSize := 50
 	flightsDB, err := sql.Open("sqlite3", "../../../../data/raw/locations/locations.db")
   
 if err != nil {
@@ -24,50 +35,64 @@ if err != nil {
 	weatherDBPath := "../../../../data/raw/weather/weather.db"
 	initWeatherDB(weatherDBPath)
 
-	// Fetch airport info with non-empty IATA codes
+
+    // Open the database once
+    db, err := sql.Open("sqlite3", weatherDBPath)
+    if err != nil {
+        log.Fatalf("Failed to open the database: %v", err)
+    }
+    defer db.Close()
+
+    // Fetch airport info with non-empty IATA codes
+
 	airports, err := fetchAirports(flightsDB)
 	if err != nil {
 		log.Fatalf("Error fetching airports: %v", err)
 	}
 
 	// Start of the rate limiting period
-	startTime := time.Now()
+	//startTime := time.Now()
 
 	// The maximum number of requests we can make per minute
-	const maxRequestsPerMinute = 500
+	const maxRequestsPerMinute = 50
 	// Calculate the interval at which we can make requests to not exceed the limit
 	requestInterval := time.Minute / maxRequestsPerMinute
 
 	// Create a new progress bar
 	bar := progressbar.Default(int64(len(airports)))
 
-	for i, airport := range airports {
-		// Update the progress bar
-		bar.Add(1)
+   for _, airport := range airports {
+        bar.Add(1)
+        fmt.Printf("\ncity: %s  country: %s\n", airport.City, airport.Country)
+        weatherInfo, err := fetchWeatherForCity(airport.City, airport.Country)
+        if err != nil {
+            log.Printf("Error fetching weather for %s: %v", airport.City, err)
+            continue
+        }
 
-		if i > 0 && i%maxRequestsPerMinute == 0 {
-			// Calculate how much time has passed since the start of the rate-limiting period
-			elapsed := time.Since(startTime)
-			// If we've made 50 requests before a minute has passed, wait for the remainder of the minute
-			if elapsed < time.Minute {
-				time.Sleep(time.Minute - elapsed)
-			}
-			// Reset the start time for the next batch of requests
-			startTime = time.Now()
-		}
-    fmt.Printf("\ncity: %s  country: %s\n", airport.City, airport.Country)
-		weatherInfo, err := fetchWeatherForCity(airport.City, airport.Country)
-		if err != nil {
-			log.Printf("Error fetching weather for %s: %v", airport.City, err)
-			continue
-		}
+        // Add to batch
+        batch = append(batch, WeatherDataBatch{
+            Airport:     airport,
+            WeatherInfo: weatherInfo,
+        })
 
-		if err := storeWeatherData(weatherDBPath, airport, weatherInfo); err != nil {
-			log.Printf("Error storing weather data for %s: %v", airport.City, err)
-		}
+        if len(batch) >= batchSize {
+            fmt.Println("Storing results...")
+            if err := storeWeatherDataBatch(db, batch); err != nil {
+                log.Printf("Error storing weather data for batch: %v", err)
+            }
+            batch = batch[:0] // Reset the batch
+            fmt.Println("Batch stored")
+        }
 
-		// Wait for the calculated request interval before making the next request
-		time.Sleep(requestInterval)
-	}
+        // Rate-limiting logic (adjust as needed)
+        time.Sleep(requestInterval)
+    }
+
+    // Insert any remaining batch
+    if len(batch) > 0 {
+        if err := storeWeatherDataBatch(db, batch); err != nil {
+            log.Printf("Error storing weather data for final batch: %v", err)
+        }
+    }
 }
-

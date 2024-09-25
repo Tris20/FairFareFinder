@@ -1,14 +1,13 @@
-
 package main
 
 import (
 	"database/sql"
 	"fmt"
+	_ "github.com/mattn/go-sqlite3"
+	"github.com/schollz/progressbar/v3"
 	"log"
 	"strconv"
 	"strings"
-	_ "github.com/mattn/go-sqlite3"
-	"github.com/schollz/progressbar/v3"
 )
 
 type WeatherData struct {
@@ -92,4 +91,3 @@ func main() {
 	}
 	fmt.Println("Data successfully transferred to new_main.db")
 }
-

@@ -1,12 +1,12 @@
-
 package main
 
 import (
+	"fmt"
+	"io"
 	"log"
 	"os"
 	"path/filepath"
 	"time"
-  "fmt"
 )
 
 func backupDatabase(dbPath, outputDir string) {
@@ -21,12 +21,38 @@ func backupDatabase(dbPath, outputDir string) {
 			}
 		}
 
-		// Move existing results.db to backups folder with a timestamp
+		// Create a timestamped backup file path
 		timestamp := time.Now().Format("20060102_150405")
 		backupPath := filepath.Join(backupDir, fmt.Sprintf("main_backup_%s.db", timestamp))
-		err := os.Rename(dbPath, backupPath)
+
+		// Copy the database to the backup file
+		err := copyFile(dbPath, backupPath)
 		if err != nil {
-			log.Fatalf("Failed to move existing database to backup: %v", err)
+			log.Fatalf("Failed to copy database to backup: %v", err)
 		}
 	}
+}
+
+// Helper function to copy the file
+func copyFile(src, dst string) error {
+	sourceFile, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer sourceFile.Close()
+
+	destFile, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer destFile.Close()
+
+	_, err = io.Copy(destFile, sourceFile)
+	if err != nil {
+		return err
+	}
+
+	// Optionally, you can sync the destination file to ensure the content is written to disk
+	err = destFile.Sync()
+	return err
 }

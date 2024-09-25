@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -8,14 +7,14 @@ import (
 	"math"
 	"sort"
 
-	"github.com/schollz/progressbar/v3"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/schollz/progressbar/v3"
 )
 
 // Accommodation represents the filtered data we will extract
 type Accommodation struct {
-	City      string
-	Country   string
+	City       string
+	Country    string
 	GrossPrice float64
 	Checkin    string
 	Checkout   string
@@ -155,4 +154,3 @@ func calculateMedian(prices []float64) float64 {
 func roundToTwoDecimalPlaces(value float64) float64 {
 	return math.Round(value*100) / 100
 }
-

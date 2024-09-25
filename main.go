@@ -13,6 +13,7 @@ import (
 	"fmt"
   "time"
   "os"
+  "flag"
 )
 
 type Weather struct {
@@ -58,7 +59,12 @@ var (
 )
 
 func main() {
-	var err error
+
+    // Parse the "web" flag
+    webFlag := flag.Bool("web", false, "Pass this flag to enable the web server with file check routine")
+    flag.Parse() // Parse command-line flags
+
+  var err error
 
 //	db, err = sql.Open("sqlite3", "./main.db")
 	db, err = sql.Open("sqlite3", "./data/compiled/main.db")
@@ -85,9 +91,11 @@ http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) 
     http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html")  // Make sure the path is correct
 })
 
-
-	// Start the file checking routine
-	go startFileCheckRoutine()
+// On web server, every 2 hours, check for a new database deilvery, and swap dbs accordingly
+ if *webFlag {
+        // Start the file checking routine
+        go startFileCheckRoutine()
+    }
 
 //liston on all newtowrk interfaces including localhost
 log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
@@ -332,6 +340,7 @@ func updateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
 
 
 
+
 // Function to check for new_main.db and swap it with main.db
 func startFileCheckRoutine() {
 	for {
@@ -344,12 +353,27 @@ func startFileCheckRoutine() {
 
 		// Check if new_main.db exists
 		if _, err := os.Stat(newDBPath); err == nil {
+			// Close the current database connection before swapping
+			err := db.Close()
+			if err != nil {
+				log.Printf("Failed to close the database connection: %v", err)
+				continue
+			}
+
 			// Perform atomic swap: rename new_main.db to main.db
-			err := os.Rename(newDBPath, mainDBPath)
+			err = os.Rename(newDBPath, mainDBPath)
 			if err != nil {
 				log.Printf("Failed to swap new_main.db with main.db: %v", err)
 			} else {
 				log.Println("Successfully swapped new_main.db with main.db")
+
+				// Re-open the database connection after the swap
+				db, err = sql.Open("sqlite3", mainDBPath)
+				if err != nil {
+					log.Printf("Failed to re-open the database after swap: %v", err)
+				} else {
+					log.Println("Successfully reconnected to the new main.db")
+				}
 			}
 		} else if !os.IsNotExist(err) {
 			// Log other errors
