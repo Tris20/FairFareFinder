@@ -4,10 +4,13 @@
   <thead>
     <tr>
       <th>Destination</th>
+      
+<th class="fnaf-column">Five Nights and Flights<br>(Per Person)</th>
+
       <th colspan="5" style="width: 100px;">Weather Forecast <br>(Next 5 Days)</th>
 
-      <th class="fnaf-column">Five Nights and Flights<br>(Per Person)</th>
-      <th>Flights From</th>
+
+            <th>Flights From</th>
       <th class="accommodation-column">Avg. Hotel Price<br>(Per Person Per Night)</th>
     </tr>
   </thead>
@@ -15,9 +18,16 @@
     {{range .Flights}}
     <tr>
       <!-- Highlight the destination name if AvgWpi is the highest -->
-      <td class="{{if eq .AvgWpi.Float64 $.MaxWpi.Float64}}highlight{{end}}"> 
+      <td class="{{if eq .AvgWpi.Float64 $.MaxWpi.Float64}}{{end}}"> 
         {{.DestinationCityName}} 
       </td>
+
+
+<!-- Five Nights and Flights Price -->
+<td class="fnaf-column {{if eq .FiveNightsFlights.Float64 $.MinFnaf.Float64}}highlight{{end}}" 
+    style="font-weight: bold;">
+    {{if .FiveNightsFlights.Valid}}{{printf "€%.2f" .FiveNightsFlights.Float64}}{{else}}N/A{{end}}
+</td>
 
       <!-- Wrap weather forecast columns with the highlight class if AvgWpi is the highest -->
       <td colspan="5" class="{{if eq .AvgWpi.Float64 $.MaxWpi.Float64}}highlight{{end}}">
@@ -40,11 +50,7 @@
       </td>
 
 
-<!-- Five Nights and Flights Price -->
-<td class="fnaf-column {{if eq .FiveNightsFlights.Float64 $.MinFnaf.Float64}}highlight{{end}}" 
-    style="font-weight: bold;">
-    {{if .FiveNightsFlights.Valid}}{{printf "€%.2f" .FiveNightsFlights.Float64}}{{else}}N/A{{end}}
-</td>
+
 
 
 
