@@ -30,24 +30,28 @@
 </td>
 
       <!-- Wrap weather forecast columns with the highlight class if AvgWpi is the highest -->
-      <td colspan="5" class="{{if eq .AvgWpi.Float64 $.MaxWpi.Float64}}highlight{{end}}">
-        <table style="width: 100%;">
-          <tr>
-            {{range .WeatherForecast}}
-            <td class="weather-column" style="width: 7%; text-align: center; padding: 4px 8px;">
-              <a href="{{.GoogleUrl}}" target="_blank">
-                <div>
-                  <img src="{{.WeatherIcon}}" alt="Weather Icon" width="100%" />
-                </div>
-                <div>
-                  {{if .AvgDaytimeTemp.Valid}}{{printf "%.1f°C" .AvgDaytimeTemp.Float64}}{{else}}N/A{{end}}
-                </div>
-              </a>
-            </td>
-            {{end}}
-          </tr>
-        </table>
-      </td>
+      
+<!-- Wrap weather forecast columns with the highlight class if AvgWpi is the highest -->
+<td colspan="5" class="{{if eq .AvgWpi.Float64 $.MaxWpi.Float64}}highlight{{end}}">
+  <table style="width: 100%;">
+    <tr>
+      {{range $index, $element := .WeatherForecast}}
+        {{if lt $index 5}}
+          <td class="weather-column" style="width: 7%; text-align: center; padding: 4px 8px;">
+            <a href="{{$element.GoogleUrl}}" target="_blank">
+              <div>
+                <img src="{{$element.WeatherIcon}}" alt="Weather Icon" width="100%" />
+              </div>
+              <div>
+                {{if $element.AvgDaytimeTemp.Valid}}{{printf "%.1f°C" $element.AvgDaytimeTemp.Float64}}{{else}}N/A{{end}}
+              </div>
+            </a>
+          </td>
+        {{end}}
+      {{end}}
+    </tr>
+  </table>
+</td>
 
 
 
