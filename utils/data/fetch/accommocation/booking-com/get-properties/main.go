@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -322,13 +321,18 @@ func fetchTotalProperties(destinationID, apiKey string) (int, error) {
 		return 0, err
 	}
 
-	// Extract the total number of properties from the meta title
-	totalPropertiesStr := apiResponse.Data.Meta[0].Title
-	// Extract the first number from the string (e.g., "873 properties")
-	totalProperties, err := strconv.Atoi(strings.Fields(totalPropertiesStr)[0])
-	if err != nil {
-		return 0, fmt.Errorf("failed to parse total properties: %v", err)
-	}
+	
+var totalProperties int
+if len(apiResponse.Data.Meta) > 0 {
+    totalPropertiesStr := apiResponse.Data.Meta[0].Title
+    totalProperties, err = strconv.Atoi(strings.Fields(totalPropertiesStr)[0])
+    if err != nil {
+        return 0, fmt.Errorf("failed to parse total properties: %v", err)
+    }
+} else {
+    // Handle the case where no meta data is available
+    return 0, nil
+}
 
 	return totalProperties, nil
 }
@@ -443,4 +447,3 @@ func getWednesdayRange() (string, string) {
 
 	return thisWednesdayStr, nextWednesdayStr
 }
-

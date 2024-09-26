@@ -8,6 +8,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"time"
+  "bytes"
 )
 
 /*
@@ -85,13 +86,13 @@ func main() {
 
 	flag.Parse()
 
+
+	// If the --all flag is set, run all tasks sequentially
+	if *runAll {
 	// Backup existing database if it exists
 	backupDatabase(newMainDBPath, outputDir)
 	// Initialize the new database and create tables
 	initializeDatabase(newMainDBPath)
-
-	// If the --all flag is set, run all tasks sequentially
-	if *runAll {
 		runAllTasks(relativeBase)
 		return
 	}
@@ -206,17 +207,28 @@ func transferFlightsDB() error {
 
 	// Build the full path to the SSH key
 	sshKeyPath := filepath.Join(homeDir, ".ssh", "fff_server")
-
+filePath, err := filepath.Abs("../../../../../../data/compiled/new_main.db")
+if err != nil {
+    log.Fatalf("Failed to get absolute path for new_main.db: %v", err)
+}
 	// Run the scp command
 	cmd := exec.Command("scp", "-i", sshKeyPath,
-		"../../../../../data/compiled/new_main.db",
+		filePath,
 		"root@fairfarefinder.com:~/FairFareFinder/data/compiled/new_main.db")
 
-	// Run the command and capture any error
-	err = cmd.Run()
-	if err != nil {
-		log.Fatalf("Failed to run scp command: %v", err)
-	}
+// Capture the output (stdout and stderr)
+    var outBuf, errBuf bytes.Buffer
+    cmd.Stdout = &outBuf
+    cmd.Stderr = &errBuf
+
+    // Run the command and capture any error
+    err = cmd.Run()
+    if err != nil {
+        log.Printf("SCP failed with error: %v", err)
+        log.Printf("SCP stdout: %s", outBuf.String())
+        log.Printf("SCP stderr: %s", errBuf.String())
+        return fmt.Errorf("failed to run scp command: %w", err)
+    }
 
 	fmt.Println("Operations completed successfully")
 	return nil
