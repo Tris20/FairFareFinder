@@ -92,47 +92,76 @@ func main() {
 
 }
 
+
+
 func filterHandler(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session")
+	city1, sortOption, maxPriceLinear, err := parseFilterRequest(r)
+	if err != nil {
+		http.Error(w, "Invalid request parameters", http.StatusBadRequest)
+		return
+	}
+
+	maxPrice := backend.MapLinearToExponential(maxPriceLinear, 100, 2500)
+	session.Values["city1"] = city1
+	session.Save(r, w)
+
+	orderClause := determineOrderClause(sortOption)
+	query := buildFilterQuery(orderClause)
+
+	rows, err := db.Query(query, city1, city1, 1.0, 10.0, maxPrice)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer rows.Close()
+
+	flights, err := processFlightRows(rows)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+
+	data := buildFlightsData(city1, flights)
+	err = tmpl.ExecuteTemplate(w, "table.html", data)
+	if err != nil {
+		http.Error(w, "Error rendering results", http.StatusInternalServerError)
+	}
+}
+
+// Helper function to parse request parameters
+func parseFilterRequest(r *http.Request) (string, string, float64, error) {
 	city1 := r.URL.Query().Get("city1")
 	sortOption := r.URL.Query().Get("sort")
-	//	minWpiStr := r.URL.Query().Get("wpi")
 	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
 
 	maxPriceLinear, err := strconv.ParseFloat(maxPriceLinearStr, 64)
 	if err != nil {
 		log.Printf("Error parsing maxPriceLinear: %v", err)
-		http.Error(w, "Invalid maxPrice value", http.StatusBadRequest)
-		return
+		return "", "", 0, err
 	}
+	return city1, sortOption, maxPriceLinear, nil
+}
 
-	maxPrice := backend.MapLinearToExponential(maxPriceLinear, 100, 2500)
-
-	session.Values["city1"] = city1
-	session.Save(r, w)
-
-	orderClause := "ORDER BY fnf.price_fnaf ASC" // Default to sorting by FNAF price in ascending order
+// Helper function to determine the ORDER BY clause
+func determineOrderClause(sortOption string) string {
 	switch sortOption {
 	case "low_price":
-		orderClause = "ORDER BY fnf.price_fnaf ASC" // Sort by lowest FNAF price
+		return "ORDER BY fnf.price_fnaf ASC"
 	case "high_price":
-		orderClause = "ORDER BY fnf.price_fnaf DESC" // Sort by highest FNAF price
+		return "ORDER BY fnf.price_fnaf DESC"
 	case "best_weather":
-		orderClause = "ORDER BY avg_wpi DESC" // Sort by best weather (highest WPI)
+		return "ORDER BY avg_wpi DESC"
 	case "worst_weather":
-		orderClause = "ORDER BY avg_wpi ASC" // Sort by worst weather (lowest WPI)
+		return "ORDER BY avg_wpi ASC"
+	default:
+		return "ORDER BY fnf.price_fnaf ASC" // Default sorting by lowest FNAF price
 	}
+}
 
-	// Calculate the lower and upper bounds for WPI
-	//	lowerWpi := math.Max(minWpi-2.5, 1.0)   // Lower bound constrained to 1.0
-	//	upperWpi := math.Min(minWpi+2.5, 10.0)  // Upper bound constrained to 10.0
-	// Disabling slider for now
-	lowerWpi := 1.0
-	upperWpi := 10.0
-
-	// Updated query to join with the weather table for weather forecast
-
-	query := `
+// Helper function to build the query string
+func buildFilterQuery(orderClause string) string {
+	return `
 SELECT f1.destination_city_name, 
        MIN(f1.price_this_week) AS price_city1, 
        MIN(f1.skyscanner_url_this_week) AS url_city1,
@@ -153,21 +182,12 @@ WHERE f1.origin_city_name = ?
 AND l.avg_wpi BETWEEN ? AND ? 
 AND w.date >= date('now')
 GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi 
-HAVING fnf.price_fnaf <= ?
+HAVING fnf.price_fnaf <= ? ` + orderClause
+}
 
-` + orderClause
-
-	rows, err := db.Query(query, city1, city1, lowerWpi, upperWpi, maxPrice)
-
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	defer rows.Close()
-
+// Helper function to process rows into flight and weather data
+func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 	var flights []Flight
-
-	// Loop through the rows and construct flights and weather forecasts
 	for rows.Next() {
 		var flight Flight
 		var weather Weather
@@ -180,72 +200,68 @@ HAVING fnf.price_fnaf <= ?
 			&weather.AvgDaytimeTemp,
 			&weather.WeatherIcon,
 			&weather.GoogleUrl,
-			&flight.AvgWpi, // Add this to scan avg_wpi from the location table
+			&flight.AvgWpi,
 			&flight.BookingUrl,
 			&flight.BookingPppn,
-			&flight.FiveNightsFlights, // Scan price_fnaf
+			&flight.FiveNightsFlights,
 		)
-
 		if err != nil {
 			log.Printf("Error scanning row: %v", err)
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return nil, err
+		}
+
+		addOrUpdateFlight(&flights, flight, weather)
+	}
+	return flights, nil
+}
+
+// Helper function to add or update flight entries
+func addOrUpdateFlight(flights *[]Flight, flight Flight, weather Weather) {
+	for i := range *flights {
+		if (*flights)[i].DestinationCityName == flight.DestinationCityName {
+			(*flights)[i].WeatherForecast = append((*flights)[i].WeatherForecast, weather)
 			return
 		}
-
-		// Check if the destination already exists in flights
-		found := false
-		for i := range flights {
-			if flights[i].DestinationCityName == flight.DestinationCityName {
-				// Append the weather forecast to the existing flight entry
-				flights[i].WeatherForecast = append(flights[i].WeatherForecast, weather)
-				found = true
-				break
-			}
-		}
-
-		if !found {
-			// Add a new flight entry if this destination wasn't found in the list
-			flight.WeatherForecast = []Weather{weather}
-			flights = append(flights, flight)
-		}
 	}
 
-	// Initialize variables to track the highest and lowest values
-	var maxWpi sql.NullFloat64
-	var minFlightPrice, minHotelPrice, minFnafPrice sql.NullFloat64
+	flight.WeatherForecast = []Weather{weather}
+	*flights = append(*flights, flight)
+}
+
+// Helper function to build the data for the template
+func buildFlightsData(city1 string, flights []Flight) FlightsData {
+	var maxWpi, minFlightPrice, minHotelPrice, minFnafPrice sql.NullFloat64
 
 	for _, flight := range flights {
-		if !maxWpi.Valid || (flight.AvgWpi.Valid && flight.AvgWpi.Float64 > maxWpi.Float64) {
-			maxWpi = flight.AvgWpi // Set the highest WPI found
-		}
-		if !minFlightPrice.Valid || (flight.PriceCity1.Valid && flight.PriceCity1.Float64 < minFlightPrice.Float64) {
-			minFlightPrice = flight.PriceCity1
-		}
-		if !minHotelPrice.Valid || (flight.BookingPppn.Valid && flight.BookingPppn.Float64 < minHotelPrice.Float64) {
-			minHotelPrice = flight.BookingPppn
-		}
-		if !minFnafPrice.Valid || (flight.FiveNightsFlights.Valid && flight.FiveNightsFlights.Float64 < minFnafPrice.Float64) {
-			minFnafPrice = flight.FiveNightsFlights
-		}
+		maxWpi = updateMaxValue(maxWpi, flight.AvgWpi)
+		minFlightPrice = updateMinValue(minFlightPrice, flight.PriceCity1)
+		minHotelPrice = updateMinValue(minHotelPrice, flight.BookingPppn)
+		minFnafPrice = updateMinValue(minFnafPrice, flight.FiveNightsFlights)
 	}
 
-	// Pass these values to the template
-	data := FlightsData{
+	return FlightsData{
 		SelectedCity1: city1,
 		Flights:       flights,
-		MaxWpi:        maxWpi,         // Add highest WPI
-		MinFlight:     minFlightPrice, // Add lowest flight price
-		MinHotel:      minHotelPrice,  // Add lowest avg hotel price
-		MinFnaf:       minFnafPrice,   // Add lowest FNAF price
-	}
-
-	err = tmpl.ExecuteTemplate(w, "table.html", data)
-
-	if err != nil {
-		http.Error(w, "Error rendering results", http.StatusInternalServerError)
+		MaxWpi:        maxWpi,
+		MinFlight:     minFlightPrice,
+		MinHotel:      minHotelPrice,
+		MinFnaf:       minFnafPrice,
 	}
 }
 
+// Helper function to update max value
+func updateMaxValue(currentMax, newValue sql.NullFloat64) sql.NullFloat64 {
+	if !currentMax.Valid || (newValue.Valid && newValue.Float64 > currentMax.Float64) {
+		return newValue
+	}
+	return currentMax
+}
 
-
+// Helper function to update min value
+func updateMinValue(currentMin, newValue sql.NullFloat64) sql.NullFloat64 {
+	if !currentMin.Valid || (newValue.Valid && newValue.Float64 < currentMin.Float64) {
+		return newValue
+	}
+	return currentMin
+}
 
