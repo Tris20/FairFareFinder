@@ -3,12 +3,10 @@ package main
 import (
 	"database/sql"
 	"flag"
-	"fmt"
 	"github.com/gorilla/sessions"
 	_ "github.com/mattn/go-sqlite3"
 	"html/template"
 	"log"
-	"math"
 	"net/http"
 	"strconv"
 
@@ -74,7 +72,7 @@ func main() {
 	// Set up routes
 	http.HandleFunc("/", backend.IndexHandler)                                                                // Homepage route
 	http.HandleFunc("/filter", filterHandler)                                                                 // Route for filtering
-	http.HandleFunc("/update-slider-price", updateSliderPriceHandler)                                         // Route for slider price update
+	http.HandleFunc("/update-slider-price", backend.UpdateSliderPriceHandler)                                         // Route for slider price update
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./src/frontend/css/"))))         // Serving CSS
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./src/frontend/images")))) // Serving images
 
@@ -108,7 +106,7 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	maxPrice := mapLinearToExponential(maxPriceLinear, 100, 2500)
+	maxPrice := backend.MapLinearToExponential(maxPriceLinear, 100, 2500)
 
 	session.Values["city1"] = city1
 	session.Save(r, w)
@@ -248,31 +246,6 @@ HAVING fnf.price_fnaf <= ?
 	}
 }
 
-// This function maps a linear slider (0-100) to an exponential range (10-2500)
-func mapLinearToExponential(linearValue float64, minVal float64, maxVal float64) float64 {
-	midVal := 1000.0
-	percentage := linearValue / 100
 
-	// First 70% of the slider covers 10 to 1000
-	if percentage <= 0.7 {
-		return minVal * math.Pow(midVal/minVal, percentage/0.7)
-	} else {
-		// Last 30% covers 1000 to 2500
-		newPercentage := (percentage - 0.7) / 0.3
-		return midVal + (maxVal-midVal)*newPercentage
-	}
-}
 
-func updateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
-	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
-	maxPriceLinear, err := strconv.ParseFloat(maxPriceLinearStr, 64)
-	if err != nil {
-		log.Printf("Error parsing maxPriceLinear: %v", err)
-		http.Error(w, "Invalid maxPrice value", http.StatusBadRequest)
-		return
-	}
 
-	maxPrice := mapLinearToExponential(maxPriceLinear, 100, 2500)
-
-	fmt.Fprintf(w, "€%.2f", maxPrice)
-}
