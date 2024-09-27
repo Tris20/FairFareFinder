@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
   "github.com/Tris20/FairFareFinder/utils/time-and-date"
-	"github.com/Tris20/FairFareFinder/src/backend"
+	"github.com/Tris20/FairFareFinder/src/backend/model"
 	"github.com/Tris20/FairFareFinder/config/handlers"
 	"github.com/Tris20/FairFareFinder/utils/data/process/generate/urls"
 	"io/ioutil"
