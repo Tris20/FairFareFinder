@@ -14,6 +14,8 @@ import (
   "time"
   "os"
   "flag"
+
+  "github.com/Tris20/FairFareFinder/src/backend"
 )
 
 type Weather struct {
@@ -94,7 +96,7 @@ http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) 
 // On web server, every 2 hours, check for a new database deilvery, and swap dbs accordingly
  if *webFlag {
         // Start the file checking routine
-        go startFileCheckRoutine()
+        go backend.StartFileCheckRoutine(db)
     }
 
 //liston on all newtowrk interfaces including localhost
