@@ -371,6 +371,7 @@ func fetchTotalProperties(destinationID, apiKey string) (int, error) {
 		return 0, nil
 	}
 
+
 	return totalProperties, nil
 }
 

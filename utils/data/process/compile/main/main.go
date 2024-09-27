@@ -9,6 +9,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"time"
+  "bytes"
 )
 
 /*
@@ -223,6 +224,7 @@ func transferFlightsDB() error {
 	if err != nil {
 		log.Fatalf("Failed to get absolute path for new_main.db: %v", err)
 	}
+
 
 	// Define the maximum number of retries
 	maxRetries := 13

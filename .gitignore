@@ -10,7 +10,7 @@
 *FairFareFinder*
 # Test binary, built with `go test -c`
 *.test
-
+*.log
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
@@ -27,3 +27,8 @@ go.work
 *.db
 *.db*
 user_database.db
+
+
+# Ignore all files, then "unignore" any files with a .* -- this is how we ignore the executables that have no file extension
+*
+!*.*
