@@ -5,6 +5,7 @@ go 1.23.1
 require (
 	github.com/Tris20/FairFareFinder/src/backend v0.0.1
 	github.com/Tris20/FairFareFinder/utils/time-and-date v0.0.1
+github.com/Tris20/FairFareFinder/src/backend/model v0.0.1
 	github.com/gorilla/sessions v1.4.0
 	github.com/mattn/go-sqlite3 v1.14.23
 	github.com/schollz/progressbar/v3 v3.14.2
@@ -22,3 +23,4 @@ require (
 replace github.com/Tris20/FairFareFinder/utils/time-and-date => ./utils/time-and-date
 
 replace github.com/Tris20/FairFareFinder/src/backend => ./src/backend
+replace github.com/Tris20/FairFareFinder/src/backend/model => ./src/backend/model
