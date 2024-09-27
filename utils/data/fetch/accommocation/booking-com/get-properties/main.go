@@ -3,16 +3,17 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strings"
 	"strconv"
+	"strings"
 	"time"
 
-	"github.com/schollz/progressbar/v3"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/schollz/progressbar/v3"
 	"gopkg.in/yaml.v2"
 )
 
@@ -55,18 +56,18 @@ type PriceBreakdown struct {
 type Hotel struct {
 	HotelID  int `json:"hotel_id"`
 	Property struct {
-		CountryCode    string        `json:"countryCode"`
-		Longitude      float64       `json:"longitude"`
-		Latitude       float64       `json:"latitude"`
-		Name           string        `json:"name"`
+		CountryCode    string         `json:"countryCode"`
+		Longitude      float64        `json:"longitude"`
+		Latitude       float64        `json:"latitude"`
+		Name           string         `json:"name"`
 		PriceBreakdown PriceBreakdown `json:"priceBreakdown"`
-		ReviewScore    float64       `json:"reviewScore"`
-		ReviewCount    int           `json:"reviewCount"`
-		CheckinDate    string        `json:"checkinDate"`
-		CheckoutDate   string        `json:"checkoutDate"`
-		PhotoUrls      []string      `json:"photoUrls"`
-		IsPreferred    bool          `json:"isPreferred"`
-		Currency       string        `json:"currency"`
+		ReviewScore    float64        `json:"reviewScore"`
+		ReviewCount    int            `json:"reviewCount"`
+		CheckinDate    string         `json:"checkinDate"`
+		CheckoutDate   string         `json:"checkoutDate"`
+		PhotoUrls      []string       `json:"photoUrls"`
+		IsPreferred    bool           `json:"isPreferred"`
+		Currency       string         `json:"currency"`
 	} `json:"property"`
 }
 
@@ -103,6 +104,12 @@ func readAPIKey(filepath string) (string, error) {
 }
 
 func main() {
+
+	// Accept a destinationID as a command-line argument
+	var startDestID string
+	flag.StringVar(&startDestID, "ID", "", "Start fetching properties from this destination ID")
+	flag.Parse()
+
 	// Step 1: Look up city names from the 'locations' database
 	cities, err := getCityNamesAndDestinationIDs()
 	if err != nil {
@@ -128,16 +135,30 @@ func main() {
 		log.Fatalf("Error reading API key: %v", err)
 	}
 
+	start := false
+	if startDestID == "" {
+		start = true // Start from the beginning if no startDestID provided
+	}
+
 	// Step 3: Fetch data from the API and insert it into the database with a progress bar
 	bar := progressbar.Default(int64(len(cities)), "Fetching data for cities")
 	for _, city := range cities {
+
+		if strings.TrimSpace(city.DestinationID) == strings.TrimSpace(startDestID) {
+			start = true // Start processing from this city
+		}
+		if !start {
+			bar.Add(1)
+			continue // Skip until we reach the starting city
+		}
+
 		bar.Add(1)
 
 		fmt.Printf("Fetching property data for city: %s (%s)\n", city.CityName, city.CountryCode)
 
 		err = processCityProperties(city.DestinationID, db, apiKey, city)
 		if err != nil {
-			log.Fatalf("Error processing properties: %v", err)
+		log.Printf("Error processing properties for city %s: %v", city.CityName, err)
 		}
 	}
 }
@@ -190,6 +211,32 @@ func createPropertyTable(db *sql.DB) error {
 	return err
 }
 
+func fetchWithRetry(url string, apiKey string) (*http.Response, error) {
+	client := &http.Client{}
+	var resp *http.Response
+	var err error
+
+	for i := 0; i < 13; i++ { // Try a maximum of 3 times
+		req, _ := http.NewRequest("GET", url, nil)
+		req.Header.Add("x-rapidapi-host", "booking-com15.p.rapidapi.com")
+		req.Header.Add("x-rapidapi-key", apiKey)
+
+		resp, err = client.Do(req)
+		if err == nil && resp.StatusCode == http.StatusOK {
+			return resp, nil // Success
+		}
+
+		if resp != nil {
+			resp.Body.Close() // Close the previous response body
+		}
+
+		log.Printf("Request failed: %v. Retrying...", err)
+		time.Sleep(time.Duration(2^(i+1)) * time.Second) // Exponential backoff
+	}
+
+	return nil, err // Return the last error
+}
+
 // fetchPropertyData now takes the dynamic Wednesday-to-Wednesday date range into account
 func fetchPropertyData(destinationID, apiKey string) ([]Property, error) {
 	// Get the dynamic Wednesday-to-Wednesday date range
@@ -200,16 +247,7 @@ func fetchPropertyData(destinationID, apiKey string) ([]Property, error) {
 
 	fmt.Println("API URL with dynamic date range:", apiURL)
 
-	req, err := http.NewRequest("GET", apiURL, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("x-rapidapi-host", "booking-com15.p.rapidapi.com")
-	req.Header.Add("x-rapidapi-key", apiKey)
-
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	resp, err := fetchWithRetry(apiURL, apiKey)
 	if err != nil {
 		return nil, err
 	}
@@ -229,20 +267,20 @@ func fetchPropertyData(destinationID, apiKey string) ([]Property, error) {
 	var properties []Property
 	for _, hotel := range apiResponse.Data.Hotels {
 		property := Property{
-			HotelID:           hotel.HotelID,
+			HotelID:            hotel.HotelID,
 			AccessibilityLabel: hotel.Property.Name,
-			CountryCode:       hotel.Property.CountryCode,
-			PhotoUrls:         hotel.Property.PhotoUrls,
-			IsPreferred:       hotel.Property.IsPreferred,
-			Longitude:         hotel.Property.Longitude,
-			Latitude:          hotel.Property.Latitude,
-			Name:              hotel.Property.Name,
-			GrossPrice:        hotel.Property.PriceBreakdown.GrossPrice.Value,
-			Currency:          hotel.Property.PriceBreakdown.GrossPrice.Currency,
-			ReviewScore:       hotel.Property.ReviewScore,
-			ReviewCount:       hotel.Property.ReviewCount,
-			CheckinDate:       hotel.Property.CheckinDate,
-			CheckoutDate:      hotel.Property.CheckoutDate,
+			CountryCode:        hotel.Property.CountryCode,
+			PhotoUrls:          hotel.Property.PhotoUrls,
+			IsPreferred:        hotel.Property.IsPreferred,
+			Longitude:          hotel.Property.Longitude,
+			Latitude:           hotel.Property.Latitude,
+			Name:               hotel.Property.Name,
+			GrossPrice:         hotel.Property.PriceBreakdown.GrossPrice.Value,
+			Currency:           hotel.Property.PriceBreakdown.GrossPrice.Currency,
+			ReviewScore:        hotel.Property.ReviewScore,
+			ReviewCount:        hotel.Property.ReviewCount,
+			CheckinDate:        hotel.Property.CheckinDate,
+			CheckoutDate:       hotel.Property.CheckoutDate,
 		}
 		properties = append(properties, property)
 	}
@@ -321,18 +359,18 @@ func fetchTotalProperties(destinationID, apiKey string) (int, error) {
 		return 0, err
 	}
 
-	
-var totalProperties int
-if len(apiResponse.Data.Meta) > 0 {
-    totalPropertiesStr := apiResponse.Data.Meta[0].Title
-    totalProperties, err = strconv.Atoi(strings.Fields(totalPropertiesStr)[0])
-    if err != nil {
-        return 0, fmt.Errorf("failed to parse total properties: %v", err)
-    }
-} else {
-    // Handle the case where no meta data is available
-    return 0, nil
-}
+	var totalProperties int
+	if len(apiResponse.Data.Meta) > 0 {
+		totalPropertiesStr := apiResponse.Data.Meta[0].Title
+		totalProperties, err = strconv.Atoi(strings.Fields(totalPropertiesStr)[0])
+		if err != nil {
+			return 0, fmt.Errorf("failed to parse total properties: %v", err)
+		}
+	} else {
+		// Handle the case where no meta data is available
+		return 0, nil
+	}
+
 
 	return totalProperties, nil
 }
@@ -372,20 +410,20 @@ func fetchPropertiesByPage(destinationID, apiKey string, pageNumber int) ([]Prop
 	var properties []Property
 	for _, hotel := range apiResponse.Data.Hotels {
 		property := Property{
-			HotelID:           hotel.HotelID,
+			HotelID:            hotel.HotelID,
 			AccessibilityLabel: hotel.Property.Name,
-			CountryCode:       hotel.Property.CountryCode,
-			PhotoUrls:         hotel.Property.PhotoUrls,
-			IsPreferred:       hotel.Property.IsPreferred,
-			Longitude:         hotel.Property.Longitude,
-			Latitude:          hotel.Property.Latitude,
-			Name:              hotel.Property.Name,
-			GrossPrice:        hotel.Property.PriceBreakdown.GrossPrice.Value,
-			Currency:          hotel.Property.PriceBreakdown.GrossPrice.Currency,
-			ReviewScore:       hotel.Property.ReviewScore,
-			ReviewCount:       hotel.Property.ReviewCount,
-			CheckinDate:       hotel.Property.CheckinDate,
-			CheckoutDate:      hotel.Property.CheckoutDate,
+			CountryCode:        hotel.Property.CountryCode,
+			PhotoUrls:          hotel.Property.PhotoUrls,
+			IsPreferred:        hotel.Property.IsPreferred,
+			Longitude:          hotel.Property.Longitude,
+			Latitude:           hotel.Property.Latitude,
+			Name:               hotel.Property.Name,
+			GrossPrice:         hotel.Property.PriceBreakdown.GrossPrice.Value,
+			Currency:           hotel.Property.PriceBreakdown.GrossPrice.Currency,
+			ReviewScore:        hotel.Property.ReviewScore,
+			ReviewCount:        hotel.Property.ReviewCount,
+			CheckinDate:        hotel.Property.CheckinDate,
+			CheckoutDate:       hotel.Property.CheckoutDate,
 		}
 		properties = append(properties, property)
 	}
@@ -395,15 +433,19 @@ func fetchPropertiesByPage(destinationID, apiKey string, pageNumber int) ([]Prop
 
 func processCityProperties(destinationID string, db *sql.DB, apiKey string, city City) error {
 	// Fetch the total number of properties for the destination
-	totalProperties, err := fetchTotalProperties(destinationID, apiKey)
-	if err != nil {
-		return fmt.Errorf("error fetching total properties: %v", err)
-	}
+    totalProperties, err := fetchTotalProperties(destinationID, apiKey)
+    if err != nil {
+        log.Printf("Error fetching total properties for %s: %v", city.CityName, err)
+        return err
+    }	// Calculate the number of pages (each page has 20 properties)
 
-	// Calculate the number of pages (each page has 20 properties)
 	totalPages := totalProperties / 20
 	if totalProperties%20 != 0 {
 		totalPages++ // Add an extra page if there's a remainder
+	}
+
+	if totalPages >= 5 {
+		totalPages = 5
 	}
 
 	fmt.Printf("Total Properties: %d, Total Pages: %d\n", totalProperties, totalPages)
