@@ -1,0 +1,838 @@
+Daemon mode is enabled. Running tasks in loop...
+Changed to directory: /home/tristan/Documents/github/FairFareFinder/utils/data/fetch/weather
+Running executable: update-weather-db
+   0% |                                             | (0/5206, 0 it/hr) [0s:0s]
+city: Key Largo  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Key+Largo%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Key Largo UScollected successfully
+                                                                                  0% |                                        | (2/5206, 1 it/s) [1s:1h25m39s]
+city: Corpus Christi  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Corpus+Christi%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Corpus Christi UScollected successfully
+                                                                                  0% |                                      | (3/5206, 53 it/min) [3s:1h39m2s]
+city: Columbus  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Columbus%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Columbus UScollected successfully
+                                                                                  0% |                                      | (4/5206, 51 it/min) [4s:1h42m9s]
+city: Columbus  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Columbus%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Columbus UScollected successfully
+                                                                                  0% |                                     | (5/5206, 50 it/min) [5s:1h43m39s]
+city: Columbus  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Columbus%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Columbus UScollected successfully
+                                                                                  0% |                                     | (6/5206, 50 it/min) [7s:1h44m34s]
+city: Columbus  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Columbus%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Columbus UScollected successfully
+                                                                                  0% |                                     | (7/5206, 49 it/min) [8s:1h45m10s]
+city: Columbus  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Columbus%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Columbus UScollected successfully
+                                                                                  0% |                                     | (8/5206, 49 it/min) [9s:1h45m40s]
+city: Johnson City  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Johnson+City%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Johnson City UScollected successfully
+                                                                                  0% |                                    | (9/5206, 49 it/min) [10s:1h46m38s]
+city: Johnson City  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Johnson+City%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Johnson City UScollected successfully
+                                                                                  0% |                                   | (10/5206, 49 it/min) [12s:1h46m49s]
+city: Calverton  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Calverton%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Calverton UScollected successfully
+                                                                                  0% |                                    | (11/5206, 48 it/min) [13s:1h48m8s]
+city: Belle Chasse  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Belle+Chasse%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Belle Chasse UScollected successfully
+                                                                                  0% |                                   | (12/5206, 46 it/min) [14s:1h51m43s]
+city: Lubbock  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Lubbock%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Lubbock UScollected successfully
+                                                                                  0% |                                   | (13/5206, 47 it/min) [16s:1h51m34s]
+city: Auki  country: SB
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Auki%2C+SB&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Auki SBcollected successfully
+                                                                                  0% |                                   | (14/5206, 46 it/min) [17s:1h51m54s]
+city: Honiara  country: SB
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Honiara%2C+SB&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Honiara SBcollected successfully
+                                                                                  0% |                                   | (15/5206, 46 it/min) [18s:1h52m23s]
+city: Kirakira  country: SB
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Kirakira%2C+SB&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Kirakira SBcollected successfully
+                                                                                  0% |                                    | (16/5206, 46 it/min) [20s:1h53m4s]
+city: Gizo  country: SB
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Gizo%2C+SB&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Gizo SBcollected successfully
+                                                                                  0% |                                   | (17/5206, 46 it/min) [21s:1h53m45s]
+city: Taylor  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Taylor%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Taylor UScollected successfully
+                                                                                  0% |                                   | (18/5206, 44 it/min) [23s:1h57m59s]
+city: Taylor  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Taylor%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Taylor UScollected successfully
+                                                                                  0% |                                    | (19/5206, 44 it/min) [24s:1h58m9s]
+city: Bulolo  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Bulolo%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Bulolo PGcollected successfully
+                                                                                  0% |                                   | (20/5206, 43 it/min) [26s:1h59m26s]
+city: Kundiawa  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Kundiawa%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Kundiawa PGcollected successfully
+                                                                                  0% |                                   | (21/5206, 44 it/min) [27s:1h58m41s]
+city: Daru  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Daru%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Daru PGcollected successfully
+                                                                                  0% |                                   | (22/5206, 44 it/min) [28s:1h58m41s]
+city: Popondetta  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Popondetta%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Popondetta PGcollected successfully
+                                                                                  0% |                                   | (23/5206, 44 it/min) [30s:1h58m40s]
+city: Hoskins  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Hoskins%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+2024/09/27 15:00:37 Error fetching weather for Hoskins: received non-200 status code from weather API: 404, response: {"cod":"404","message":"city not found"}
+
+city: Kieta  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Kieta%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Kieta PGcollected successfully
+                                                                                  0% |                                   | (25/5206, 48 it/min) [31s:1h48m18s]
+city: Kerema  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Kerema%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Kerema PGcollected successfully
+                                                                                  0% |                                   | (26/5206, 48 it/min) [32s:1h48m31s]
+city: Kavieng  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Kavieng%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Kavieng PGcollected successfully
+                                                                                  0% |                                   | (27/5206, 48 it/min) [34s:1h48m23s]
+city: Madang  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Madang%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Madang PGcollected successfully
+                                                                                  0% |                                    | (28/5206, 48 it/min) [35s:1h48m8s]
+city: Mount Hagen  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Mount+Hagen%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Mount Hagen PGcollected successfully
+                                                                                  0% |                                   | (29/5206, 49 it/min) [36s:1h45m10s]
+city: Port Moresby  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Port+Moresby%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Port Moresby PGcollected successfully
+                                                                                  0% |                                   | (30/5206, 49 it/min) [38s:1h45m22s]
+city: Tari  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Tari%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+2024/09/27 15:00:45 Error fetching weather for Tari: received non-200 status code from weather API: 404, response: {"cod":"404","message":"city not found"}
+
+city: Tabubil  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Tabubil%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+2024/09/27 15:00:45 Error fetching weather for Tabubil: received non-200 status code from weather API: 404, response: {"cod":"404","message":"city not found"}
+                                                                                  0% |                                   | (32/5206, 49 it/min) [38s:1h45m19s]
+city: Wewak  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Wewak%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Wewak PGcollected successfully
+                                                                                  0% |                                   | (33/5206, 58 it/min) [39s:1h29m37s]
+city: Wau  country: PG
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Wau%2C+PG&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Wau PGcollected successfully
+                                                                                  0% |                                   | (34/5206, 58 it/min) [40s:1h29m41s]
+city: Aasiaat  country: GL
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Aasiaat%2C+GL&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Aasiaat GLcollected successfully
+                                                                                  0% |                                   | (35/5206, 58 it/min) [42s:1h29m41s]
+city: Narsarsuaq  country: GL
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Narsarsuaq%2C+GL&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Narsarsuaq GLcollected successfully
+                                                                                  0% |                                   | (36/5206, 58 it/min) [43s:1h29m33s]
+city: Nuuk  country: GL
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Nuuk%2C+GL&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Nuuk GLcollected successfully
+                                                                                  0% |                                   | (37/5206, 53 it/min) [44s:1h36m44s]
+city: Ilulissat  country: GL
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Ilulissat%2C+GL&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Ilulissat GLcollected successfully
+                                                                                  0% |                                   | (38/5206, 53 it/min) [46s:1h36m40s]
+city: Kulusuk  country: GL
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Kulusuk%2C+GL&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Kulusuk GLcollected successfully
+                                                                                  0% |                                   | (39/5206, 53 it/min) [47s:1h36m41s]
+city: Paamiut  country: GL
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Paamiut%2C+GL&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Paamiut GLcollected successfully
+                                                                                  0% |                                    | (40/5206, 53 it/min) [48s:1h37m8s]
+city: Qaanaaq  country: GL
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Qaanaaq%2C+GL&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Qaanaaq GLcollected successfully
+                                                                                  0% |                                   | (41/5206, 53 it/min) [50s:1h37m10s]
+city: Sisimiut  country: GL
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Sisimiut%2C+GL&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Sisimiut GLcollected successfully
+                                                                                  0% |                                    | (42/5206, 53 it/min) [51s:1h37m0s]
+city: Upernavik  country: GL
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Upernavik%2C+GL&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Upernavik GLcollected successfully
+                                                                                  0% |                                   | (43/5206, 45 it/min) [52s:1h54m58s]
+city: Uummannaq  country: GL
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Uummannaq%2C+GL&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Uummannaq GLcollected successfully
+                                                                                  0% |                                   | (44/5206, 45 it/min) [54s:1h54m41s]
+city: Akureyri  country: IS
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Akureyri%2C+IS&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Akureyri IScollected successfully
+                                                                                  0% |                                   | (45/5206, 45 it/min) [55s:1h55m45s]
+city: Reykjavik  country: IS
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Reykjavik%2C+IS&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Reykjavik IScollected successfully
+                                                                                  0% |                                    | (46/5206, 44 it/min) [57s:1h56m9s]
+city: Reykjavik  country: IS
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Reykjavik%2C+IS&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Reykjavik IScollected successfully
+                                                                                  0% |                                   | (47/5206, 45 it/min) [58s:1h55m29s]
+city: San Rafael  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=San+Rafael%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for San Rafael UScollected successfully
+                                                                                  0% |                                   | (48/5206, 45 it/min) [59s:1h55m24s]
+city: Paradise  country: US
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Paradise%2C+US&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Paradise UScollected successfully
+                                                                                  0% |                                  | (49/5206, 45 it/min) [1m1s:1h55m22s]
+city: Trail  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Trail%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Trail CAcollected successfully
+                                                                                  0% |                                  | (50/5206, 45 it/min) [1m2s:1h54m53s]
+city: Courtenay  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Courtenay%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Courtenay CAcollected successfully
+                                                                                  0% |                                  | (51/5206, 45 it/min) [1m3s:1h54m27s]
+city: Duncan  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Duncan%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Duncan CAcollected successfully
+                                                                                  0% |                                  | (52/5206, 45 it/min) [1m4s:1h54m17s]
+city: Qualicum Beach  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Qualicum+Beach%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Qualicum Beach CAcollected successfully
+                                                                                  1% |                                  | (53/5206, 45 it/min) [1m6s:1h54m26s]
+city: Port Alberni  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Port+Alberni%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Port Alberni CAcollected successfully
+Storing results...
+Batch stored
+                                                                                  1% |                                  | (54/5206, 45 it/min) [1m7s:1h54m51s]
+city: Charlottetown  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Charlottetown%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Charlottetown CAcollected successfully
+                                                                                  1% |                                  | (55/5206, 45 it/min) [1m8s:1h53m31s]
+city: Hinton  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Hinton%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Hinton CAcollected successfully
+                                                                                  1% |                                 | (56/5206, 45 it/min) [1m10s:1h53m25s]
+city: Fort McMurray  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Fort+McMurray%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Fort McMurray CAcollected successfully
+                                                                                  1% |                                 | (57/5206, 45 it/min) [1m11s:1h53m56s]
+city: Brockville  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Brockville%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Brockville CAcollected successfully
+                                                                                  1% |                                 | (58/5206, 45 it/min) [1m13s:1h54m46s]
+city: Kincardine  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Kincardine%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Kincardine CAcollected successfully
+                                                                                  1% |                                 | (59/5206, 45 it/min) [1m14s:1h54m47s]
+city: Baie-Comeau  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Baie-Comeau%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Baie-Comeau CAcollected successfully
+                                                                                  1% |                                 | (60/5206, 45 it/min) [1m15s:1h54m47s]
+city: Campbell River  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Campbell+River%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Campbell River CAcollected successfully
+                                                                                  1% |                                 | (61/5206, 45 it/min) [1m17s:1h54m57s]
+city: Brandon  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Brandon%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Brandon CAcollected successfully
+                                                                                  1% |                                 | (62/5206, 45 it/min) [1m18s:1h54m45s]
+city: Cornwall  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Cornwall%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Cornwall CAcollected successfully
+                                                                                  1% |                                 | (63/5206, 45 it/min) [1m19s:1h54m31s]
+city: Nanaimo  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Nanaimo%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Nanaimo CAcollected successfully
+                                                                                  1% |                                  | (64/5206, 45 it/min) [1m20s:1h54m1s]
+city: Castlegar  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Castlegar%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Castlegar CAcollected successfully
+                                                                                  1% |                                 | (65/5206, 45 it/min) [1m22s:1h54m11s]
+city: Miramichi  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Miramichi%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Miramichi CAcollected successfully
+                                                                                  1% |                                 | (66/5206, 45 it/min) [1m23s:1h53m45s]
+city: Cochrane  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Cochrane%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Cochrane CAcollected successfully
+                                                                                  1% |                                 | (67/5206, 45 it/min) [1m24s:1h54m11s]
+city: Chilliwack  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Chilliwack%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Chilliwack CAcollected successfully
+                                                                                  1% |                                 | (68/5206, 45 it/min) [1m26s:1h53m44s]
+city: Dawson Creek  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Dawson+Creek%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Dawson Creek CAcollected successfully
+                                                                                  1% |                                 | (69/5206, 45 it/min) [1m27s:1h53m40s]
+city: Edmonton  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Edmonton%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Edmonton CAcollected successfully
+                                                                                  1% |                                 | (70/5206, 45 it/min) [1m28s:1h53m30s]
+city: Elliot Lake  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Elliot+Lake%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Elliot Lake CAcollected successfully
+                                                                                  1% |                                 | (71/5206, 45 it/min) [1m30s:1h53m30s]
+city: Estevan  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Estevan%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Estevan CAcollected successfully
+                                                                                  1% |                                 | (72/5206, 45 it/min) [1m31s:1h54m10s]
+city: Amos  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Amos%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Amos CAcollected successfully
+                                                                                  1% |                                 | (73/5206, 45 it/min) [1m33s:1h54m48s]
+city: Iqaluit  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Iqaluit%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Iqaluit CAcollected successfully
+                                                                                  1% |                                  | (74/5206, 45 it/min) [1m34s:1h55m0s]
+city: Fredericton  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Fredericton%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Fredericton CAcollected successfully
+                                                                                  1% |                                  | (75/5206, 45 it/min) [1m35s:1h55m5s]
+city: Kingston  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Kingston%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Kingston CAcollected successfully
+                                                                                  1% |                                 | (76/5206, 44 it/min) [1m37s:1h55m21s]
+city: Gaspe  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Gaspe%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Gaspe CAcollected successfully
+                                                                                  1% |                                 | (77/5206, 45 it/min) [1m38s:1h54m40s]
+city: Hamilton  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Hamilton%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Hamilton CAcollected successfully
+                                                                                  1% |                                  | (78/5206, 45 it/min) [1m39s:1h54m8s]
+city: Montreal  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Montreal%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Montreal CAcollected successfully
+                                                                                  1% |                                 | (79/5206, 45 it/min) [1m40s:1h53m35s]
+city: Halifax  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Halifax%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Halifax CAcollected successfully
+                                                                                  1% |                                 | (80/5206, 45 it/min) [1m42s:1h53m45s]
+city: Kamloops  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Kamloops%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Kamloops CAcollected successfully
+                                                                                  1% |                                  | (81/5206, 45 it/min) [1m43s:1h54m1s]
+city: Kitchener  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Kitchener%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Kitchener CAcollected successfully
+                                                                                  1% |                                 | (82/5206, 45 it/min) [1m45s:1h53m40s]
+city: Toronto  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Toronto%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Toronto CAcollected successfully
+                                                                                  1% |                                 | (83/5206, 45 it/min) [1m46s:1h53m16s]
+city: Lloydminster  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Lloydminster%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Lloydminster CAcollected successfully
+                                                                                  1% |                                 | (84/5206, 45 it/min) [1m47s:1h53m20s]
+city: Lloydminster  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Lloydminster%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Lloydminster CAcollected successfully
+                                                                                  1% |                                 | (85/5206, 45 it/min) [1m48s:1h52m38s]
+city: La Tuque  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=La+Tuque%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for La Tuque CAcollected successfully
+                                                                                  1% |                                  | (86/5206, 45 it/min) [1m50s:1h53m1s]
+city: Kelowna  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Kelowna%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Kelowna CAcollected successfully
+                                                                                  1% |                                 | (87/5206, 45 it/min) [1m51s:1h53m10s]
+city: Matane  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Matane%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Matane CAcollected successfully
+                                                                                  1% |                                 | (88/5206, 45 it/min) [1m53s:1h53m22s]
+city: Moose Jaw  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Moose+Jaw%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Moose Jaw CAcollected successfully
+                                                                                  1% |                                 | (89/5206, 45 it/min) [1m54s:1h54m26s]
+city: Fort McMurray  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Fort+McMurray%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Fort McMurray CAcollected successfully
+                                                                                  1% |                                 | (90/5206, 45 it/min) [1m55s:1h53m49s]
+city: Montreal  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Montreal%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Montreal CAcollected successfully
+                                                                                  1% |                                 | (91/5206, 45 it/min) [1m56s:1h52m57s]
+city: Gatineau  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Gatineau%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Gatineau CAcollected successfully
+                                                                                  1% |                                 | (92/5206, 45 it/min) [1m58s:1h53m17s]
+city: Langley  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Langley%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Langley CAcollected successfully
+                                                                                  1% |                                 | (93/5206, 45 it/min) [1m59s:1h53m17s]
+city: Cold Lake  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Cold+Lake%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Cold Lake CAcollected successfully
+                                                                                  1% |                                  | (94/5206, 45 it/min) [2m1s:1h53m14s]
+city: Oshawa  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Oshawa%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Oshawa CAcollected successfully
+                                                                                  1% |                                  | (95/5206, 45 it/min) [2m2s:1h53m41s]
+city: Owen Sound  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Owen+Sound%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Owen Sound CAcollected successfully
+                                                                                  1% |                                   | (96/5206, 45 it/min) [2m3s:1h53m0s]
+city: Ottawa  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Ottawa%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Ottawa CAcollected successfully
+                                                                                  1% |                                  | (97/5206, 45 it/min) [2m4s:1h52m27s]
+city: Prince Albert  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Prince+Albert%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Prince Albert CAcollected successfully
+                                                                                  1% |                                   | (98/5206, 46 it/min) [2m6s:1h52m8s]
+city: Peterborough  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Peterborough%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Peterborough CAcollected successfully
+                                                                                  1% |                                  | (99/5206, 46 it/min) [2m7s:1h51m36s]
+city: Prince Rupert  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Prince+Rupert%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Prince Rupert CAcollected successfully
+                                                                                  1% |                                 | (100/5206, 45 it/min) [2m8s:1h52m21s]
+city: Powell River  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Powell+River%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Powell River CAcollected successfully
+                                                                                  1% |                                | (101/5206, 45 it/min) [2m10s:1h52m46s]
+city: Red Deer  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Red+Deer%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Red Deer CAcollected successfully
+                                                                                  1% |                                | (102/5206, 45 it/min) [2m11s:1h52m13s]
+city: Windsor  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Windsor%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Windsor CAcollected successfully
+                                                                                  1% |                                | (103/5206, 45 it/min) [2m12s:1h52m14s]
+city: Kenora  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Kenora%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Kenora CAcollected successfully
+Storing results...
+Batch stored
+                                                                                  1% |                                | (104/5206, 45 it/min) [2m14s:1h52m56s]
+city: Lethbridge  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Lethbridge%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Lethbridge CAcollected successfully
+                                                                                  2% |                                | (105/5206, 45 it/min) [2m15s:1h52m51s]
+city: Moncton  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Moncton%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Moncton CAcollected successfully
+                                                                                  2% |                                 | (106/5206, 45 it/min) [2m16s:1h53m1s]
+city: Comox  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Comox%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Comox CAcollected successfully
+                                                                                  2% |                                | (107/5206, 45 it/min) [2m18s:1h53m20s]
+city: Regina  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Regina%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Regina CAcollected successfully
+                                                                                  2% |                                | (108/5206, 45 it/min) [2m19s:1h53m30s]
+city: Thunder Bay  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Thunder+Bay%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Thunder Bay CAcollected successfully
+                                                                                  2% |                                | (109/5206, 45 it/min) [2m20s:1h53m28s]
+city: Grande Prairie  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Grande+Prairie%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Grande Prairie CAcollected successfully
+                                                                                  2% |                                | (110/5206, 45 it/min) [2m22s:1h53m13s]
+city: Yorkton  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Yorkton%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Yorkton CAcollected successfully
+                                                                                  2% |                                | (111/5206, 45 it/min) [2m23s:1h53m11s]
+city: North Battleford  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=North+Battleford%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for North Battleford CAcollected successfully
+                                                                                  2% |                                 | (112/5206, 45 it/min) [2m24s:1h53m4s]
+city: Gander  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Gander%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Gander CAcollected successfully
+                                                                                  2% |                                 | (113/5206, 45 it/min) [2m26s:1h54m0s]
+city: Quesnel  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Quesnel%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Quesnel CAcollected successfully
+                                                                                  2% |                                | (114/5206, 45 it/min) [2m27s:1h53m18s]
+city: Riviere-du-Loup  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Riviere-du-Loup%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Riviere-du-Loup CAcollected successfully
+                                                                                  2% |                                | (115/5206, 45 it/min) [2m29s:1h53m34s]
+city: Roberval  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Roberval%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Roberval CAcollected successfully
+                                                                                  2% |                                | (116/5206, 45 it/min) [2m30s:1h53m20s]
+city: Ottawa  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Ottawa%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Ottawa CAcollected successfully
+                                                                                  2% |                                | (117/5206, 45 it/min) [2m31s:1h52m55s]
+city: Trois-Rivieres  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Trois-Rivieres%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Trois-Rivieres CAcollected successfully
+                                                                                  2% |                                | (118/5206, 45 it/min) [2m32s:1h52m59s]
+city: Sudbury  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Sudbury%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Sudbury CAcollected successfully
+                                                                                  2% |                                | (119/5206, 45 it/min) [2m34s:1h52m59s]
+city: Sherbrooke  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Sherbrooke%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Sherbrooke CAcollected successfully
+                                                                                  2% |                                | (120/5206, 45 it/min) [2m35s:1h53m55s]
+city: Squamish  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Squamish%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Squamish CAcollected successfully
+                                                                                  2% |                                 | (121/5206, 45 it/min) [2m37s:1h54m0s]
+city: Smiths Falls  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Smiths+Falls%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Smiths Falls CAcollected successfully
+                                                                                  2% |                                | (122/5206, 45 it/min) [2m38s:1h53m58s]
+city: Saint John  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Saint+John%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Saint John CAcollected successfully
+                                                                                  2% |                                | (123/5206, 45 it/min) [2m39s:1h52m50s]
+city: Summerside  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Summerside%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Summerside CAcollected successfully
+                                                                                  2% |                                | (124/5206, 45 it/min) [2m40s:1h52m41s]
+city: Pembroke  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Pembroke%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Pembroke CAcollected successfully
+                                                                                  2% |                                | (125/5206, 45 it/min) [2m42s:1h52m40s]
+city: Alma  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Alma%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Alma CAcollected successfully
+                                                                                  2% |                                | (126/5206, 45 it/min) [2m43s:1h52m50s]
+city: Thompson  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Thompson%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Thompson CAcollected successfully
+                                                                                  2% |                                | (127/5206, 45 it/min) [2m44s:1h53m13s]
+city: Timmins  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Timmins%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Timmins CAcollected successfully
+                                                                                  2% |                                 | (128/5206, 45 it/min) [2m46s:1h53m1s]
+city: Toronto  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Toronto%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Toronto CAcollected successfully
+                                                                                  2% |                                 | (129/5206, 45 it/min) [2m47s:1h53m3s]
+city: Montreal  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Montreal%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Montreal CAcollected successfully
+                                                                                  2% |                                | (130/5206, 46 it/min) [2m48s:1h51m30s]
+city: Rouyn-Noranda  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Rouyn-Noranda%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Rouyn-Noranda CAcollected successfully
+                                                                                  2% |                                | (131/5206, 45 it/min) [2m50s:1h51m35s]
+city: Vernon  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Vernon%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Vernon CAcollected successfully
+                                                                                  2% |                                | (132/5206, 45 it/min) [2m51s:1h51m41s]
+city: Val-d'Or  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Val-d%27Or%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Val-d'Or CAcollected successfully
+                                                                                  2% |                                | (133/5206, 45 it/min) [2m52s:1h52m13s]
+city: Vancouver  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Vancouver%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Vancouver CAcollected successfully
+                                                                                  2% |                                | (134/5206, 45 it/min) [2m54s:1h51m42s]
+city: Petawawa  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Petawawa%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Petawawa CAcollected successfully
+                                                                                  2% |                                | (135/5206, 45 it/min) [2m55s:1h51m37s]
+city: Winnipeg  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Winnipeg%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Winnipeg CAcollected successfully
+                                                                                  2% |                                | (136/5206, 45 it/min) [2m56s:1h51m47s]
+city: Williams Lake  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Williams+Lake%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Williams Lake CAcollected successfully
+                                                                                  2% |                                | (137/5206, 45 it/min) [2m58s:1h52m52s]
+city: Cranbrook  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Cranbrook%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Cranbrook CAcollected successfully
+                                                                                  2% |                                | (138/5206, 45 it/min) [2m59s:1h52m55s]
+city: Edmonton  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Edmonton%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Edmonton CAcollected successfully
+                                                                                  2% |                                 | (139/5206, 45 it/min) [3m0s:1h52m15s]
+city: Saskatoon  country: CA
+
+api url: https://api.openweathermap.org/data/2.5/forecast?q=Saskatoon%2C+CA&appid=7de2cfbf6f65301ae0a3024e888ad47c&units=metric 
+
+Weather Data for Saskatoon CAcollected successfully
