@@ -1,7 +1,7 @@
 package config_handlers
 
 import (
-	"github.com/Tris20/FairFareFinder/src/backend"
+	"github.com/Tris20/FairFareFinder/src/backend/model"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 )
