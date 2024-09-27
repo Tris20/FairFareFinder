@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+  "bytes"
 	"log"
 	"os"
 	"os/exec"
@@ -11,6 +12,12 @@ import (
 )
 
 /*
+
+IF 3AM Monday Morning 
+  Create a brand new DB and send it to the website
+ELSE IF 6 hours since last data upadte
+  Fetch latest weather, compile weather data and calculate new WPI scores and send it to the website
+
 Scripts need to be run in specific orders. The order is typically is:
 Fetch
 Calculate/Generate
@@ -85,13 +92,14 @@ func main() {
 
 	flag.Parse()
 
+
+	// If the --all flag is set, run all tasks sequentially
+	if *runAll {
 	// Backup existing database if it exists
 	backupDatabase(newMainDBPath, outputDir)
 	// Initialize the new database and create tables
 	initializeDatabase(newMainDBPath)
 
-	// If the --all flag is set, run all tasks sequentially
-	if *runAll {
 		runAllTasks(relativeBase)
 		return
 	}
@@ -121,8 +129,9 @@ func main() {
 			if currentHour%6 == 3 {
 
 				// Monday, 9am, Start a completely new new_main.db
-				if currentDay == time.Monday && currentHour == 9 {
-					// Backup existing database if it exists
+				if currentDay == time.Monday && currentHour == 3 {
+
+          // Backup existing database if it exists
 					backupDatabase(newMainDBPath, outputDir)
 					// delete existin new_main if exists
 					deleteNewMainDB(newMainDBPath)
@@ -185,6 +194,7 @@ func main() {
 						fmt.Println("Error occurred during transfer:", err)
 						// You may exit or handle the error as needed
 					}
+          transfer = false
 				}
 
 				// Sleep for a specified time interval before checking again
@@ -197,27 +207,48 @@ func main() {
 }
 
 func transferFlightsDB() error {
-
 	// Get the user's home directory
-	homeDir, err := os.UserHomeDir()
-	if err != nil {
+	//homeDir, err := os.UserHomeDir()
+  homeDir := "/home/tristan"  // os.userhomedir returns root/ which is incorrect, so we hard code here
+/*	if err != nil {
 		log.Fatalf("Failed to get home directory: %v", err)
 	}
-
+*/
 	// Build the full path to the SSH key
 	sshKeyPath := filepath.Join(homeDir, ".ssh", "fff_server")
 
-	// Run the scp command
-	cmd := exec.Command("scp", "-i", sshKeyPath,
-		"../../../../../data/compiled/new_main.db",
-		"root@fairfarefinder.com:~/FairFareFinder/data/compiled/new_main.db")
-
-	// Run the command and capture any error
-	err = cmd.Run()
+	// Get the absolute path to the database file
+	filePath, err := filepath.Abs("../../../../../data/compiled/new_main.db")
+  
 	if err != nil {
-		log.Fatalf("Failed to run scp command: %v", err)
+		log.Fatalf("Failed to get absolute path for new_main.db: %v", err)
 	}
 
-	fmt.Println("Operations completed successfully")
-	return nil
+	// Define the maximum number of retries
+	maxRetries := 13
+
+	for i := 0; i <= maxRetries; i++ {
+		cmd := exec.Command("scp", "-i", sshKeyPath, filePath, "root@fairfarefinder.com:~/FairFareFinder/data/compiled/new_main.db")
+		var outBuf, errBuf bytes.Buffer
+		cmd.Stdout = &outBuf
+		cmd.Stderr = &errBuf
+
+		// Run the command and capture any error
+		err = cmd.Run()
+		if err == nil {
+			fmt.Println("Operations completed successfully")
+			return nil
+		}
+
+		log.Printf("Attempt %d: SCP failed with error: %v", i+1, err)
+		log.Printf("Attempt %d: SCP stdout: %s", i+1, outBuf.String())
+		log.Printf("Attempt %d: SCP stderr: %s", i+1, errBuf.String())
+
+		if i < maxRetries {
+		log.Printf("Request failed: %v. Retrying...", err)
+		time.Sleep(time.Duration(2^(i+1)) * time.Second) // Exponential backoff
+		}
+	}
+
+	return fmt.Errorf("failed to run scp command after %d attempts", maxRetries)
 }
