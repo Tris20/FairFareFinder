@@ -22,6 +22,7 @@ data/**/*.db
 data/*
 *.db
 tmp/*
+tmp
 # Go workspace file
 go.work
 *.json
