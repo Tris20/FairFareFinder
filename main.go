@@ -8,6 +8,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+  "fmt"
 	"strconv"
 
 	"github.com/Tris20/FairFareFinder/src/backend"
@@ -82,10 +83,11 @@ func main() {
 	})
 
 	// On web server, every 2 hours, check for a new database deilvery, and swap dbs accordingly
-	if *webFlag {
-		// Start the file checking routine
-		go backend.StartFileCheckRoutine(db)
-	}
+fmt.Printf("Flag? Value: %v\n", *webFlag)
+if *webFlag {
+    fmt.Println("Starting db monitor")
+    go backend.StartFileCheckRoutine(&db, &tmpl)
+}
 
 	// liston on all newtowrk interfaces including localhost
 	log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
