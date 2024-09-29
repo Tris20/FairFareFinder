@@ -2,8 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FairFareFinder</title>
@@ -11,15 +9,13 @@
     <!-- Link to the CSS files located in the 'css' folder -->
     <link rel="stylesheet" href="/css/htmxFilter.css">
     <link rel="stylesheet" href="/css/styles.css">
-   <link rel="stylesheet" href="/css/tableStyles.css">
+    <link rel="stylesheet" href="/css/tableStyles.css">
+    <link rel="stylesheet" href="/css/mobileStyles.css">
 
     <script src="https://unpkg.com/htmx.org"></script>
-
-
 </head>
 
 <body>
-
     <!-- Background image div -->
     <div id="bg-image-dreams"></div>
 
@@ -31,54 +27,50 @@
     <!-- Table content container that will appear after the text fades out -->
     <div id="table-container">
         <form id="flight-form" hx-get="/filter" hx-target="#flight-table" hx-trigger="change, input delay:50ms">
-  <div class="form-group">
-            <label for="city1">From:</label>
-            <select id="city1" name="city1">
-                <option value="Berlin" selected>Berlin</option>
-                <option value="Glasgow" >Glasgow</option> <!-- Default selection is Glasgow -->
-                <option value="Edinburgh">Edinburgh</option>
-                <option value="Munich">Munich</option>
-            </select>
-</div>
-  <div class="form-group">
-            <label for="sort">Sort By:</label>
-            <select id="sort" name="sort">
-                <option value="best_weather" selected>Sunniest and Warmest</option>
-                <option value="worst_weather">Coldest and Wettest</option>
-                <option value="low_price">Most Affordable</option>
-                <option value="high_price">Most Expensive</option>
-           </select>
- </div>
- 
-<div class="form-group output-range">
-  <output id="priceOutput">€300.00</output>
-  <input type="range" id="combinedPrice-slider" name="maxPriceLinear" min="0" max="100" step="1" value="33" 
-         hx-get="/update-slider-price" 
-         hx-target="#priceOutput" 
-         hx-trigger="input"
-           hx-push-url="false"
-           hx-preserve="false"
-           autocomplete="off">  <!-- these prevent the browser from storing the value of the slider( which is good because if the value is set too low, the user will reload the page and see no entries in the table - a confusing experience for the user) -->
-  
+            <div class="form-group">
+                <label for="city1">From:</label>
+                <select id="city1" name="city1">
+                    <option value="Berlin" selected>Berlin</option>
+                    <option value="Glasgow">Glasgow</option>
+                    <option value="Edinburgh">Edinburgh</option>
+                    <option value="Munich">Munich</option>
+                </select>
+            </div>
 
-</div>
+            <div class="form-group">
+                <label for="sort">Sort By:</label>
+                <select id="sort" name="sort">
+                    <option value="best_weather" selected>Sunniest and Warmest</option>
+                    <option value="worst_weather">Coldest and Wettest</option>
+                    <option value="low_price">Most Affordable</option>
+                    <option value="high_price">Most Expensive</option>
+                </select>
+            </div>
+
+            <div class="form-group output-range">
+                <output id="priceOutput">€300.00</output>
+                <input type="range" id="combinedPrice-slider" name="maxPriceLinear" min="0" max="100" step="1" value="33"
+                       hx-get="/update-slider-price"
+                       hx-target="#priceOutput"
+                       hx-trigger="input"
+                       hx-push-url="false"
+                       hx-preserve="false"
+                       autocomplete="off">
+            </div>
         </form>
 
-   <div id="flight-table" >
-         <div class="scroll-container">
-            <!-- The table will be dynamically updated here -->
-         </div>
+        <div id="flight-table">
+            <div class="scroll-container">
+                <!-- The cards will be dynamically updated here -->
+            </div>
         </div>
 
-<footer id="footer-privacy">
-    <p>&copy; 2024 FairFareFinder | <a href="/privacy-policy">Privacy Policy</a></p>
-</footer>
+        <footer id="footer-privacy">
+            <p>&copy; 2024 FairFareFinder | <a href="/privacy-policy">Privacy Policy</a></p>
+        </footer>
     </div>
 
-  <script>
-
-
-
+    <script>
         let hasFadedIn = false;  // Flag to check if the table has already faded in
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -94,34 +86,29 @@
                 tableContainer.addEventListener('animationend', function(event) {
                     if (event.animationName === 'moveUp') {
                         // Manually trigger the form submission after the animation is complete
-                        htmx.trigger('#flight-form', 'change');  // Simulate a form change event
-
+                        htmx.trigger('#flight-form', 'change');
                     }
                 });
 
                 // Handle HTMX table swap event for the first time only
                 document.getElementById('flight-table').addEventListener('htmx:afterSwap', function() {
-                    // Only trigger fade-in effect if it hasn't already occurred
                     if (!hasFadedIn) {
                         const flightTable = document.getElementById('flight-table');
                         flightTable.classList.add('fade-in');
-                        hasFadedIn = true;  // Set flag to true after the first fade-in
+                        hasFadedIn = true;
 
-                // Also show the footer after the table has been loaded
-const footer = document.querySelector('#footer-privacy');  // Use # to select by ID
-footer.classList.add('fade-in');
+                        // Show the footer after the table has been loaded
+                        const footer = document.querySelector('#footer-privacy');
+                        footer.classList.add('fade-in');
                     }
                 });
 
                 // Show the background image with a fade-in effect
                 document.getElementById('bg-image-dreams').style.opacity = '1';
-            }, 2000); // Adjust timing for fade-in and fade-out
+            }, 2000);
         });
     </script>
 
 </body>
-
-
-
 </html>
 
