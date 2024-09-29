@@ -16,7 +16,7 @@ flex-direction: column;
   flex: 0 0 100%; /* Each card takes up the full width of the container */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   background-color: #fff;
-  margin: 10px 10px;
+  margin: 10px 0px;
   scroll-snap-align: start; /* Snap each card to the start */
   border-radius: inherit;
 }
@@ -97,6 +97,8 @@ line-height: 0;
     box-sizing: border-box; /* Prevents padding from adding to the content's width */
     overflow: hidden; /* Ensures no content overflows */
 margin-bottom: 10px;
+background-color: #f4dfcf;
+opacity: 0.9;
 }
 
 h2 {

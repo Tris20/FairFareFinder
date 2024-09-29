@@ -279,7 +279,9 @@ select {
 padding: calc(10px + 2%);
 
   padding-bottom: 0px;
-  }
+background-color: #cfebf4;
+ opacity: 0.9;
+ }
 
   /* On smaller screens, keep the label and input in a row */
   .form-group {
@@ -320,8 +322,9 @@ padding: calc(10px + 2%);
 
 
 select {
-
+background-color: #d5d5d5;
   font-size: 12px;
+border: 0px;
 }
 
 #flight-form label{
