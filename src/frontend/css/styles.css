@@ -115,7 +115,7 @@ h1 {
 
 /* Initial state of the table-container */
 #table-container {
-  width: 95%;
+  width: 70%;
   height: 90%;
   display: none;
   opacity: 0;
@@ -129,6 +129,7 @@ h1 {
   flex-direction: column; /* Stack children vertically */
   justify-content: flex-start; /* Align content to the top */
   align-items: stretch; /* Stretch children width to fill the container */
+  line-height: 1;
 }
 
 #flight-table {
@@ -139,7 +140,8 @@ h1 {
   overflow-x: scroll; /* Enable horizontal scrolling for smaller screens */
 text-align: center;
 border-radius: 8px;
-height:70svh;
+height:80svh;
+margin-bottom: 0;
 }
 
 /* Trigger animations when the 'show' class is added via JavaScript */
@@ -182,6 +184,7 @@ height:70svh;
   justify-content: center; /* Center-align the entire row horizontally */
   margin: 0 auto; /* Center the form horizontally on the page */
   width: 80%;
+padding-bottom: 0px;
 }
 
 /* Ensure the input elements, labels, and selects are not too wide */
@@ -492,5 +495,17 @@ margin-bottom: 0px;
 
 
 
+  .weather-icons img {
+    width: 40px; /* Adjust the width as per your preference */
+    height: auto; /* Ensures the image keeps its aspect ratio */
+  }
 
-
+th,
+td {
+  padding: 7px;
+  text-align: center;
+  font-size: 15px;
+}
+#footer-privacy{
+  margin-bottom: 0px;
+}
