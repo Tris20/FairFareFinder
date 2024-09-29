@@ -6,7 +6,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100svh;
   background: #012553;
   background-size: cover;
   background-position: center;
@@ -338,8 +338,9 @@ select {
   #flight-table {
     width: 100%; /* Ensure table width is consistent on mobile */
     overflow-x: scroll; /* Enable horizontal scrolling if needed */
-    font-size: 9px;
 margin-bottom: 0px;
+    font-size: 1em;
+    height: 60svh;
   }
 
   #flight-table th,
