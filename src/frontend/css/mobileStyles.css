@@ -41,7 +41,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .weather-icon {
@@ -92,7 +92,6 @@ line-height: 0;
     background-color: white;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Ensures content is vertically spaced */
     box-sizing: border-box; /* Prevents padding from adding to the content's width */
     overflow: hidden; /* Ensures no content overflows */
 }
