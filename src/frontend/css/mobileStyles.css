@@ -23,3 +23,16 @@
   overflow: hidden; /* Hide scrollbars */
 }
 
+
+
+@media only screen and (min-width: 801px) {
+    .mobile-view {
+        display: none;
+    }
+  }
+
+@media only screen and (max-width: 800px) {
+    .desktop-view {
+        display: none;
+    }
+  }

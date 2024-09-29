@@ -139,6 +139,7 @@ h1 {
   overflow-x: scroll; /* Enable horizontal scrolling for smaller screens */
 text-align: center;
 border-radius: 8px;
+height:70svh;
 }
 
 /* Trigger animations when the 'show' class is added via JavaScript */
@@ -451,3 +452,42 @@ margin-bottom: 0px;
   white-space: normal;
   text-align: center;
 }
+
+
+
+/* mobileStyles.css */
+/* For mobile devices, hide the table and show the carousel */
+@media only screen and (max-width: 800px) {
+    .desktop-view {
+        display: none;
+    }
+
+
+
+    .card-carousel {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+    }
+
+    .card {
+        min-width: 100%;
+        scroll-snap-align: start;
+        padding: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .card-content {
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+    }
+
+    .weather-icons img {
+        margin-right: 5px;
+    }
+}
+
+
+
