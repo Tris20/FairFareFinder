@@ -2,8 +2,10 @@
 
 .card-carousel {
   display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory; /* Snap each card into view */
+
+  overflow-y: auto;
+  scroll-snap-type: y mandatory; /* Snap each card into view */
+flex-direction: column;
   width: 100%;
   scroll-behavior: smooth; /* Smooth scroll when using buttons */
   height: 100%;
@@ -14,7 +16,7 @@
   flex: 0 0 100%; /* Each card takes up the full width of the container */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   background-color: #fff;
-  margin: 0 10px;
+  margin: 10px 10px;
   scroll-snap-align: start; /* Snap each card to the start */
   border-radius: inherit;
 }
