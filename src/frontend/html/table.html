@@ -89,17 +89,27 @@
 <div class="mobile-view card-carousel" hx-get="/next-cards" hx-trigger="revealed" hx-swap="afterend" hx-indicator="#loading-indicator">
     {{ range .Flights }}
     <div class="card">
+
+        <div class="card-image" style="background-image: url('../images/location-placeholder-image.png');"></div>
         <div class="card-content">
+
+
             <h2>{{ .DestinationCityName }}</h2>
             <p>Five Nights and Flights: {{ if .FiveNightsFlights.Valid }}€{{ printf "%.2f" .FiveNightsFlights.Float64 }}{{ else }}N/A{{ end }}</p>
             <p>Flights From: {{ if .PriceCity1.Valid }}€{{ printf "%.2f" .PriceCity1.Float64 }}{{ else }}N/A{{ end }}</p>
             <p>Avg. Hotel Price: {{ if .BookingPppn.Valid }}€{{ printf "%.2f" .BookingPppn.Float64 }}{{ else }}N/A{{ end }}</p>
-            <div class="weather-icons">
-                {{ range .WeatherForecast }}
-                <img src="{{ .WeatherIcon }}" alt="Weather Icon" width="30px">
-              <div>
-                {{if $element.AvgDaytimeTemp.Valid}}{{printf "%.1f°C" $element.AvgDaytimeTemp.Float64}}{{else}}N/A{{end}}
-              </div>
+  <div class="weather-icons">
+                {{ range $index, $element := .WeatherForecast }}
+                {{ if lt $index 5 }}
+                <div class="weather-icon">
+                    <a href="{{ $element.GoogleUrl }}" target="_blank">
+                        <img src="{{ $element.WeatherIcon }}" alt="Weather Icon" width="30px">
+                        <div>
+                            {{ if $element.AvgDaytimeTemp.Valid }}{{ printf "%.1f°C" $element.AvgDaytimeTemp.Float64 }}{{ else }}N/A{{ end }}
+                        </div>
+                    </a>
+                </div>
+                {{ end }}
                 {{ end }}
             </div>
         </div>

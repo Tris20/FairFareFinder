@@ -276,6 +276,8 @@ select {
   #flight-form {
     width: 90%; /* Adjust form width on mobile */
     flex-direction: column; /* Align items in a row */
+padding: calc(10px + 2%);
+
   padding-bottom: 0px;
   }
 
@@ -473,9 +475,7 @@ margin-bottom: 0px;
     .card {
         min-width: 100%;
         scroll-snap-align: start;
-        padding: 10px;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
     }
 
     .card-content {
@@ -484,10 +484,14 @@ margin-bottom: 0px;
         border-radius: 8px;
     }
 
-    .weather-icons img {
-        margin-right: 5px;
-    }
+
+
+
+
 }
+
+
+
 
 
 

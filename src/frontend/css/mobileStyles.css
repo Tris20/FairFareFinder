@@ -35,4 +35,75 @@
     .desktop-view {
         display: none;
     }
-  }
+  
+/* mobileStyles.css */
+.weather-icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.weather-icon {
+    text-align: center;
+    flex: 1;  /* Allow icons to distribute evenly across the row */
+    margin-right: 5px;
+}
+
+.weather-icon img {
+    display: block;
+    margin: 0 auto;
+}
+
+.weather-icon div {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Ensure there is no right margin for the last weather icon */
+.weather-icon:last-child {
+    margin-right: 0;
+}
+
+    .card {
+        min-width: 100%;
+        scroll-snap-align: start;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+border-radius: 8px;
+line-height: 0;
+ overflow: hidden;
+    }
+
+/* 60% of the card for the image */
+.card-image {
+    flex: 0 0 50%; /* Takes up 60% of the card's width */
+    background-size: cover;
+    background-position: center;
+    height: 100%; /* Ensures the image fills the available height */
+}
+
+/* 40% of the card for the content */
+.card-content {
+    flex: 0 0 50%; /* Takes up 40% of the card's width */
+    padding: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensures content is vertically spaced */
+    box-sizing: border-box; /* Prevents padding from adding to the content's width */
+    overflow: hidden; /* Ensures no content overflows */
+}
+
+h2 {
+    margin-top: 10px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+
+
+}
+
