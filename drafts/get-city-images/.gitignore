@@ -1,0 +1,44 @@
+
+# Ignore all image file types
+
+# JPEG files
+*.jpg
+*.jpeg
+*.jpe
+*.jfif
+
+# PNG files
+*.png
+
+# GIF files
+*.gif
+
+# BMP files
+*.bmp
+*.dib
+
+# TIFF files
+*.tif
+*.tiff
+
+# ICO files
+*.ico
+
+# SVG files
+*.svg
+*.svgz
+
+# WebP files
+*.webp
+
+# HEIF files
+*.heif
+*.heic
+
+# RAW image files
+*.raw
+*.arw
+*.cr2
+*.nrw
+*.k25
+*.dng
