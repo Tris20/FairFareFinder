@@ -65,23 +65,18 @@
           </table>
         </td>
 
-        <!-- Price and URL for Skyscanner flights -->
-        <td
-          class="price-hover {{if eq .PriceCity1.Float64 $.MinFlight.Float64}}highlight{{end}}"
-          onclick="window.open('{{.UrlCity1}}', '_blank');"
-        >
-          {{if .PriceCity1.Valid}}{{printf "€%.2f"
-          .PriceCity1.Float64}}{{else}}N/A{{end}}
-        </td>
+<!-- Price and URL for Skyscanner flights -->
+<td class="price-hover {{if eq .PriceCity1.Float64 $.MinFlight.Float64}}highlight{{end}}" 
+    onclick="window.open('{{.UrlCity1}}', '_blank');">
+    {{if and .PriceCity1.Valid (ne .PriceCity1.Float64 0.00)}}{{printf "€%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}
+</td>
 
-        <!-- Avg. Hotel Price -->
-        <td
-          class="accommodation-column price-hover {{if eq .BookingPppn.Float64 $.MinHotel.Float64}}highlight{{end}}"
-          onclick="window.open('{{.BookingUrl.String}}', '_blank');"
-        >
-          {{if .BookingPppn.Valid}}{{printf "€%.2f"
-          .BookingPppn.Float64}}{{else}}N/A{{end}}
-        </td>
+<!-- Avg. Hotel Price -->
+<td class="accommodation-column price-hover {{if eq .BookingPppn.Float64 $.MinHotel.Float64}}highlight{{end}}" 
+    onclick="window.open('{{.BookingUrl.String}}', '_blank');">
+    {{if and .BookingPppn.Valid (ne .BookingPppn.Float64 0.00)}}{{printf "€%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
+</td>
+
       </tr>
       {{end}}
     </tbody>
