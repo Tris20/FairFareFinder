@@ -30,6 +30,7 @@ Some Scripts have dependencies on others. For example, the 5 day WPI of a locati
 NOTE: Fetch and Compile Properties, gest the prices of the nearest wednesday to wednesday, so should weally be run on a monday
 */
 
+
 // Helper function to run a command in a specific directory
 func runExecutableInDir(dir string, executable string) {
 	// Change to the specified directory
@@ -37,20 +38,20 @@ func runExecutableInDir(dir string, executable string) {
 	if err != nil {
 		log.Fatalf("Failed to change directory to %s: %v", dir, err)
 	}
-	log.Println("Changed to directory: %s\n", dir)
+	log.Printf("Changed to directory: %s\n", dir)
 
 	// Execute the executable
 	cmd := exec.Command("./" + executable)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
-	log.Println("Running executable: %s\n", executable)
+	log.Printf("Running executable: %s\n", executable)
 	err = cmd.Run()
 	if err != nil {
 		log.Fatalf("Failed to run executable %s in directory %s: %v", executable, dir, err)
 	}
 
-	log.Println("Successfully executed: %s\n", executable)
+	log.Printf("Successfully executed: %s\n", executable)
 }
 
 // Helper function to get the current weekday and hour
@@ -58,6 +59,11 @@ func getCurrentTime() (time.Weekday, int) {
 	now := time.Now()
 	return now.Weekday(), now.Hour()
 }
+
+/*logging*/
+// Global log file and date variables
+var currentLogFile *os.File
+var currentLogDate string
 
 // Generate the log file path based on the current date (year/month/output.log)
 func getDailyLogFilePath() string {
@@ -78,6 +84,33 @@ func ensureLogDirExists(logFilePath string) error {
 	}
 	return nil
 }
+
+// Function to update the log file if a new day has started
+func updateLogFile() error {
+    newLogDate := time.Now().Format("2006-01-02") // YYYY-MM-DD
+    if newLogDate != currentLogDate {
+        if currentLogFile != nil {
+            currentLogFile.Close()
+        }
+
+        logFilePath := getDailyLogFilePath()
+        if err := ensureLogDirExists(logFilePath); err != nil {
+            return err
+        }
+
+        var err error
+        currentLogFile, err = os.OpenFile(logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+        if err != nil {
+            return fmt.Errorf("failed to open log file %s: %v", logFilePath, err)
+        }
+
+        multiWriter := io.MultiWriter(os.Stdout, currentLogFile)
+        log.SetOutput(multiWriter)
+        currentLogDate = newLogDate
+    }
+    return nil
+}
+
 
 
 
@@ -143,22 +176,10 @@ func main() {
   flag.Parse()
 
 
-	// Prepare the daily log file path and create necessary directories
-	logFilePath := getDailyLogFilePath()
-	if err := ensureLogDirExists(logFilePath); err != nil {
-		log.Fatalf("Failed to create log directories: %v", err)
-	}
-
-	// Open log file and configure logging to both file and terminal
-	logFile, err := os.OpenFile(logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		log.Fatalf("Failed to open log file %s: %v", logFilePath, err)
-	}
-	defer logFile.Close()
-
-	// Use MultiWriter to log to both the terminal and the daily log file
-	multiWriter := io.MultiWriter(os.Stdout, logFile)
-	log.SetOutput(multiWriter)
+    // Initial log setup
+    if err := updateLogFile(); err != nil {
+        log.Fatalf("Failed to initialize log file: %v", err)
+    }
 
 
 	// If the --all flag is set, run all tasks sequentially
@@ -194,15 +215,18 @@ func main() {
 		log.Println("Daemon mode is enabled. Running tasks in loop...")
 		// Infinite loop for daemon mode
 		for {
+if err := updateLogFile(); err != nil {
+                log.Printf("Error updating log file: %v", err)
+            }
 			// Get current day and time
 			currentDay, currentHour := getCurrentTime()
 			transfer := false
 
 			// Generate new db every 6 hours: 3 = 3am; 9am; 3pm; 9pm.
-			if currentHour%6 == 3 {
+			if currentHour%6 == 0 {
 
-				// Monday, 3am, Start a completely new new_main.db
-				if currentDay == time.Monday && currentHour == 3 {
+				// Monday, 9am, Start a completely new new_main.db
+				if currentDay == time.Saturday && currentHour == 12 {
 
 // Backup existing database if it exists
 backupDatabase(absoluteNewMainDbPath, absoluteOutputDir)
@@ -269,7 +293,7 @@ log.Println("%sCOMPLETED: Initialization of new database%s\n", green, reset)
 				if transfer {
 					err := transferFlightsDB(  absoluteNewMainDbPath)
 					if err != nil {
-						fmt.Println("Error occurred during transfer:", err)
+						log.Println("Error occurred during transfer:", err)
 						// You may exit or handle the error as needed
 					}
           transfer = false
@@ -281,7 +305,12 @@ log.Println("%sCOMPLETED: Initialization of new database%s\n", green, reset)
 		}
 	}
 	//	 If no flags are set, print a message
-	fmt.Println("No flags set. Use --all, --compile, --weather, or --daemon.")
+	log.Println("No flags set. Use --all, --compile, --weather, or --daemon.")
+
+    // Clean up: close the log file on program exit
+    if currentLogFile != nil {
+        currentLogFile.Close()
+    }
 }
 
 func transferFlightsDB( absoluteNewMainDbPath string) error {
@@ -310,7 +339,7 @@ func transferFlightsDB( absoluteNewMainDbPath string) error {
     err := cmd.Run()
 
 		if err == nil {
-			fmt.Println("Operations completed successfully")
+			log.Printf("Operations completed successfully")
 			return nil
 		}
 
