@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"github.com/Tris20/FairFareFinder/config/handlers"
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/schollz/progressbar/v3"
 	"io"
@@ -17,21 +18,20 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// Structs to parse JSON response from Wikimedia Commons API
-type ImageInfo struct {
-	Title string `json:"title"`
-	URL   string `json:"url"`
-}
-
-type QueryResult struct {
-	Query struct {
-		Pages map[string]struct {
-			ImageInfo []ImageInfo `json:"imageinfo"`
-		} `json:"pages"`
-	} `json:"query"`
+// Structs to parse JSON response from Pixabay API
+type PixabayResponse struct {
+	Hits []struct {
+		LargeImageURL string `json:"largeImageURL"`
+	} `json:"hits"`
 }
 
 func main() {
+	// Load the Pixabay API key from secrets.yaml
+	apiKey, err := config_handlers.LoadApiKey("../../../ignore/secrets.yaml", "pixabay")
+	if err != nil {
+		log.Fatalf("Error loading API key: %v", err)
+	}
+
 	// Paths for database and directories
 	dbPath := "../../../data/raw/locations/locations.db"
 	imageDir := "images"
@@ -68,7 +68,7 @@ func main() {
 
 	// Download images for all cities
 	for _, city := range cities {
-		err := downloadCityImages(city, imageDir)
+		err := downloadCityImagesFromPixabay(city, imageDir, apiKey)
 		if err != nil {
 			fmt.Printf("Error downloading images for %s: %v\n", city, err)
 		}
@@ -106,12 +106,9 @@ func getCitiesToInclude(db *sql.DB) ([]string, error) {
 	return cities, nil
 }
 
-// Function to download images for a given city
-func downloadCityImages(city, imageDir string) error {
-	apiURL := fmt.Sprintf(
-		"https://commons.wikimedia.org/w/api.php?action=query&generator=images&prop=imageinfo&gimlimit=5&redirects=1&titles=%s&iiprop=url&format=json",
-		strings.ReplaceAll(city, " ", "_"),
-	)
+// Function to download images for a given city using Pixabay API
+func downloadCityImagesFromPixabay(city, imageDir, apiKey string) error {
+	apiURL := fmt.Sprintf("https://pixabay.com/api/?key=%s&q=%s&image_type=photo&per_page=50", apiKey, strings.ReplaceAll(city, " ", "+"))
 
 	resp, err := http.Get(apiURL)
 	if err != nil {
@@ -119,25 +116,23 @@ func downloadCityImages(city, imageDir string) error {
 	}
 	defer resp.Body.Close()
 
-	var result QueryResult
+	var result PixabayResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
 		return err
 	}
 
 	imageNumber := 1
-	for _, page := range result.Query.Pages {
-		for _, image := range page.ImageInfo {
-			fileName := fmt.Sprintf("%s_%d.jpg", strings.ReplaceAll(city, " ", "_"), imageNumber)
-			fullPath := filepath.Join(imageDir, fileName)
+	for _, hit := range result.Hits {
+		fileName := fmt.Sprintf("%s_%d.jpg", strings.ReplaceAll(city, " ", "_"), imageNumber)
+		fullPath := filepath.Join(imageDir, fileName)
 
-			err := downloadImage(image.URL, fullPath)
-			if err != nil {
-				fmt.Printf("Failed to download %s: %v\n", fileName, err)
-			} else {
-				fmt.Printf("Downloaded %s for %s\n", fileName, city)
-			}
-			imageNumber++
+		err := downloadImage(hit.LargeImageURL, fullPath)
+		if err != nil {
+			fmt.Printf("Failed to download %s: %v\n", fileName, err)
+		} else {
+			fmt.Printf("Downloaded %s for %s\n", fileName, city)
 		}
+		imageNumber++
 	}
 	return nil
 }
@@ -233,4 +228,3 @@ func copyFile(src, dst string) error {
 	_, err = io.Copy(dest, source)
 	return err
 }
-
