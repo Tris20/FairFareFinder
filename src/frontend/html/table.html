@@ -122,15 +122,23 @@
 
 
     
-<p>
-  Five Nights and Flights: {{if and .FiveNightsFlights.Valid (ne .FiveNightsFlights.Float64 0.00)}}€{{printf "%.2f" .FiveNightsFlights.Float64}}{{else}}N/A{{end}}
-</p>
-<p>
-  Flights From: {{if and .PriceCity1.Valid (ne .PriceCity1.Float64 0.00)}}€{{printf "%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}
-</p>
-<p>
-  Avg. Hotel Price: {{if and .BookingPppn.Valid (ne .BookingPppn.Float64 0.00)}}€{{printf "%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
-</p>
+
+  <p>
+    Five Nights and Flights: {{if and .FiveNightsFlights.Valid (ne .FiveNightsFlights.Float64 0.00)}}€{{printf "%.2f" .FiveNightsFlights.Float64}}{{else}}N/A{{end}}
+  </p>
+
+
+<div onclick="window.open('{{.UrlCity1}}', '_blank');" class="clickable">
+  <p>
+    Flights From: {{if and .PriceCity1.Valid (ne .PriceCity1.Float64 0.00)}}€{{printf "%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}
+  </p>
+</div>
+
+<div onclick="window.open('{{.BookingUrl}}', '_blank');" class="clickable">
+  <p>
+    Avg. Hotel Price: {{if and .BookingPppn.Valid (ne .BookingPppn.Float64 0.00)}}€{{printf "%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
+  </p>
+</div>
 
     </div>
   </div>
