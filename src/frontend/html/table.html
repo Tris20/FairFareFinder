@@ -136,7 +136,7 @@
 </a>
 
 <!-- Link for Avg. Hotel Price -->
-<a href="{{.BookingUrl.string}}" target="_blank" class="clickable">
+<a href="{{.BookingUrl.String}}" target="_blank" class="clickable">
   <p>
     Avg. Hotel Price: {{if and .BookingPppn.Valid (ne .BookingPppn.Float64 0.00)}}€{{printf "%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
   </p>
