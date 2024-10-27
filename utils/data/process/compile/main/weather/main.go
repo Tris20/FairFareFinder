@@ -40,7 +40,7 @@ func main() {
 	query := `
 	SELECT city_name, country_code, date, AVG(temperature) AS avg_temp, AVG(wpi) AS avg_wpi, weather_icon_url, google_weather_link
 	FROM current_weather
-	WHERE strftime('%H:%M:%S', date) IN ('11:00:00', '14:00:00', '17:00:00')
+        WHERE strftime('%H:%M:%S', date) BETWEEN '10:00:00' AND '18:00:00'
 	GROUP BY city_name, country_code, strftime('%Y-%m-%d', date)
 	`
 	rows, err := db.Query(query)
