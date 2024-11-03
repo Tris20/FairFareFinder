@@ -38,3 +38,63 @@ user_database.db
 
 
 
+
+# Compiled Binaries
+*.exe
+*.out
+*.dll
+*.so
+*.dylib
+
+# Build Artifacts
+/bin/
+/build/
+
+# Temporary Files
+*~
+*.swp
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+
+# Archives
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+
+# Dependency Caches
+/vendor/
+
+# IDE/Editor Configurations
+.vscode/
+.idea/
+*.iml
+
+# Environment Files
+.env
+
+# Log Files
+*.log
+/logs/
+
+# Go Build Cache
+/pkg/
+/cmd/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Node.js / npm (if applicable)
+node_modules/
+package-lock.json
+
+# Database Dumps
+*.sqlite
+*.db
+*.sql
+
+
