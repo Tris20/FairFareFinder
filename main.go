@@ -64,16 +64,20 @@ func main() {
 	}
 	defer db.Close()
 
-	// Parse templates
-	tmpl = template.Must(template.ParseFiles("./src/frontend/html/index.html", "./src/frontend/html/table.html"))
+  // Parse templates, now including table_view.html
+    tmpl = template.Must(template.ParseFiles(
+        "./src/frontend/html/index.html", 
+        "./src/frontend/html/table.html", 
+        "./src/frontend/html/table_view.html"))
 
 	backend.Init(db, tmpl)
 
 	// Set up routes
 	http.HandleFunc("/", backend.IndexHandler)
-	http.HandleFunc("/filter", filterHandler) // Route for filtering
-	http.HandleFunc("/next-cards", nextCardsHandler) // New route for loading more cards
-	http.HandleFunc("/update-slider-price", backend.UpdateSliderPriceHandler) // Route for slider price update
+	http.HandleFunc("/filter", filterHandler) 
+	http.HandleFunc("/table_view", tableViewHandler) 
+	http.HandleFunc("/next-cards", nextCardsHandler) 
+	http.HandleFunc("/update-slider-price", backend.UpdateSliderPriceHandler) 
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./src/frontend/css/"))))
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./src/frontend/images"))))
 
@@ -203,19 +207,33 @@ func nextCardsHandler(w http.ResponseWriter, r *http.Request) {
 // The rest of the code remains the same (helper functions, etc.)
 
 
+
 // Helper function to parse request parameters
 func parseFilterRequest(r *http.Request) (string, string, float64, error) {
-	city1 := r.URL.Query().Get("city1")
-	sortOption := r.URL.Query().Get("sort")
-	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
+    city1 := r.URL.Query().Get("city1")
+    sortOption := r.URL.Query().Get("sort")
 
-	maxPriceLinear, err := strconv.ParseFloat(maxPriceLinearStr, 64)
-	if err != nil {
-		log.Printf("Error parsing maxPriceLinear: %v", err)
-		return "", "", 0, err
-	}
-	return city1, sortOption, maxPriceLinear, nil
+    // Get the maxPriceLinear parameter
+    maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
+    
+    var maxPriceLinear float64
+    var err error
+
+    // Check if maxPriceLinear is provided and not empty
+    if maxPriceLinearStr != "" {
+        maxPriceLinear, err = strconv.ParseFloat(maxPriceLinearStr, 64)
+        if err != nil {
+            log.Printf("Error parsing maxPriceLinear: %v", err)
+            return "", "", 0, err
+        }
+    } else {
+        // Provide a default value if the parameter is missing or empty
+        maxPriceLinear = 100 // Example default value
+    }
+
+    return city1, sortOption, maxPriceLinear, nil
 }
+
 
 // Helper function to determine the ORDER BY clause
 func determineOrderClause(sortOption string) string {
@@ -345,3 +363,39 @@ func updateMinValue(currentMin, newValue sql.NullFloat64) sql.NullFloat64 {
 	return currentMin
 }
 
+
+func tableViewHandler(w http.ResponseWriter, r *http.Request) {
+    // Similar logic to index handler but for table_view
+    session, _ := store.Get(r, "session")
+    city1, sortOption, maxPriceLinear, err := parseFilterRequest(r)
+    if err != nil {
+        http.Error(w, "Invalid request parameters", http.StatusBadRequest)
+        return
+    }
+
+    maxPrice := backend.MapLinearToExponential(maxPriceLinear, 100, 2500)
+    session.Values["city1"] = city1
+    session.Save(r, w)
+
+    orderClause := determineOrderClause(sortOption)
+    query := buildFilterQuery(orderClause)
+
+    rows, err := db.Query(query, city1, city1, 1.0, 10.0, maxPrice)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+    defer rows.Close()
+
+    flights, err := processFlightRows(rows)
+    if err != nil {
+        http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+        return
+    }
+
+    data := buildFlightsData(city1, flights)
+    err = tmpl.ExecuteTemplate(w, "table_view.html", data) // Render the table_view.html page
+    if err != nil {
+        http.Error(w, "Error rendering results", http.StatusInternalServerError)
+    }
+}
