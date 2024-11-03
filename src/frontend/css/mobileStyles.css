@@ -40,6 +40,7 @@ flex-direction: column;
   
     #flight-table{
       height: 68svh;
+      font-size: 0.7em;
     }
 /* mobileStyles.css */
 .weather-icons {
@@ -58,12 +59,12 @@ flex-direction: column;
 .weather-icon img {
     display: block;
     margin: 0 auto;
-    width: 23px;
+    width: 2em;
 }
 
 .weather-icon div {
     margin-top: 5px;
-    font-size: 14px;
+    font-size: 1em;
     color: #333;
 
 }
@@ -123,7 +124,7 @@ opacity: 0.9;
 h2 {
 /*margin-top: 0.2em;*/
 /*  margin-bottom: 0.8em;*/
-    font-size: 1.2em;
+    font-size: 1.5em;
     color: #333;
 }
 
