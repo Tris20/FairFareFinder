@@ -1,0 +1,76 @@
+
+/* Base reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* Set default font size and smoothing */
+html {
+    font-size: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove default margins */
+body {
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+
+/* Normalize media elements */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* Remove list styles on ul, ol */
+ul, ol {
+    list-style: none;
+}
+
+/* Inherit font and fix input issues */
+input, button, textarea, select {
+    font: inherit;
+    margin: 0;
+    border: none;
+    outline: none;
+    appearance: none;
+    box-shadow: none;
+}
+
+/* Allow buttons to be clickable */
+button {
+    cursor: pointer;
+    background: none;
+    padding: 0;
+}
+
+/* Normalize anchor tags */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Normalize table borders */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Normalize form elements */
+form {
+    display: block;
+    margin: 0;
+}
