@@ -244,7 +244,6 @@ margin-top: 0px;
 .form-group label {
   width: 30%; /* Adjust label width */
   text-align: left;
-  margin-right: 10px; /* Space between label and input */
 }
 
 .form-group select,
