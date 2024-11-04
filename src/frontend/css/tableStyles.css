@@ -1,144 +1,154 @@
-/* tableStyles.css */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  /*  margin: 25px 0;*/
-  font-size: 0.9em;
-  font-family: sans-serif;
-  min-width: 400px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
-  table-layout: auto;
 
+
+/* Hide mobile and table view */
+@media only screen and (min-width: 801px) {
+      .mobile-view {
+        display: none;
+    }
+
+.desktop-view {
+  display: none; /* Ensures table view is hidden in card grid view */
 }
 
-th,
-td {
-  padding: 7px;
-  text-align: center;
-  font-size: 15px;
+
+.weather-icon a div {
+  text-decoration: none !important;
+  display: inline-block; /* Ensures it behaves like a normal text element */
+  color: black;
 }
 
-th {
-  background-color: #009879;
-  color: #ffffff;
-  text-transform: uppercase;
-  font-size: 15px;
+/* Desktop card grid */
+.desktop-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  grid-gap: 20px; /* Space between cards */
+/*  margin: 20px auto;*/
+  padding: 10px;
 }
 
-tr {
-  background-color: #edddd1;
-  border-bottom: 1px solid #dddddd;
+.card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
-tr:nth-of-type(even) {
-  background-color: #d2e1ae;
+.card:hover {
+  transform: translateY(-10px);
 }
 
-tr:last-of-type {
-  border-bottom: 2px solid #009879;
+.card-image {
+  height: 135px;
+  background-size: cover;
+  background-position: center;
 }
 
-tr:hover {
-  background-color: #b7d3d7;
+.card-content {
+  padding: 15px;
 }
 
-td a {
-  color: #009879;
+.card-content h2 {
+  font-size: 1.7vw;
+  margin: 0;
+}
+
+.card-content p {
+  margin: 5px 0;
+}
+
+.weather-icons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+margin-left: 1.5em;
+margin-right: 1.5em;
+}
+
+.clickable {
+  color: #007BFF;
   text-decoration: none;
 }
 
-td a:hover {
+.clickable:hover {
   text-decoration: underline;
 }
 
 
-table td img {
-  max-width: 70px; /* Adjust based on your column width */
-  height: auto;
-}
+/* mobile card styles copied into grid view*/
+  #flight-form {
+    width: 90%; /* Adjust form width on mobile */
+    flex-direction: column; /* Align items in a row */
+padding: calc(10px + 2%);
 
-table th{
-  height: auto;
-}
+  padding-bottom: 0px;
+background-color: #cfebf4;
+ opacity: 0.9;
+ }
+.card-content {
+  /*  flex: 0 0 60%;
+    padding: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;*/
+    overflow: hidden;
+    background-color: #f4dfcf;
+    opacity: 0.9;
+    justify-content: space-between;
+    padding: 10px;
+  }
 
-
-
-
-
-.highlight {
-    background-color: #f4d35e;
-    font-weight: bold;
-}
-
-
-/* 
-.price-hover {
-  border: 0px solid transparent; 
-  border-radius: 5px;            
-  transition: all 0.3s ease;      
-box-sizing: border-box;  
-}
-.price-hover:hover {
-  border: 3px solid #a6c2c6; 
-  border-radius: 5px;
-  transition: all 0.1s ease;
-  cursor: pointer; 
-padding: 0px;
-}
+.card {
+  /*
+    min-width: 100%;
+    scroll-snap-align: start;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    flex-direction: row;
+    line-height: 0;
+    overflow: hidden;
 */
 
-.price-hover {
+    border-radius: 10px;
+  }
 
-  box-shadow: inset 0 0 0 0 rgba(166, 194, 198, 0);
-  transition: box-shadow .1s ease;
-}
-.price-hover:hover {
-
-  transition: box-shadow .3s ease;
-  cursor: pointer; 
-  box-shadow: inset 0 0 0 3px rgb(166, 194, 198);
-/*border: 3px solid #a6c2c6;*/
-border-radius: 7px;
+#flight-form output {
+width: 30%;
 }
 
 
 
-@media screen and (max-width: 800px) {
 
-th,
-td {
-  padding: 4px 4px;
-  text-align: center;
-  font-size: 12px;
-}
-}
 
-@media screen and (min-width: 801px) {
+} /* end of desktop grid*/
 
 
 
 
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-thead th {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
 
 
+/* For mobile devices, hide the table and show the carousel */
+@media only screen and (max-width: 800px) {
+    .desktop-view {
+        display: none;
+    }
+    .desktop-card-grid {
+        display: none;
+    }
 
-tbody {
-  overflow-y: auto;
+
+  }
+
+/* for super wide screens reduce table width for readability*/
+@media only screen and (min-width: 1400px) {
+#table-container {
+  width: 80%;
+
+
 }
 
-thead, tbody tr {
-  width: 100%;
+#flight-table {
+font-size: 1.0vw;
 }
-
 }
