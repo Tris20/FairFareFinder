@@ -225,3 +225,98 @@ h1 {
     flex-direction: column;
     align-items: center; /* Horizontally center the content inside the container */
 }
+
+
+
+
+
+/* Banner styling */
+#page-banner {
+    display: none; /* Initially hidden */
+    width: 100%; /* Full-width banner */
+    background-color: #009879; /* Banner background color */
+    color: white; /* Text color */
+    padding: 20px 0; /* Padding to create space inside the banner */
+    text-align: center; /* Center content horizontally */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Show the banner with an animation */
+#page-banner.show {
+    display: block;
+    opacity: 1;
+    animation: fadeIn 1s ease forwards;
+}
+
+/* Flexbox to align the icon and text side by side */
+.banner-content {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Vertically align the icon and the text */
+}
+
+/* Icon styling */
+#fff-icon {
+    height: 50px; /* Adjust the icon size */
+    margin-right: 15px; /* Space between the icon and the text */
+}
+
+
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+
+
+/* Banner Styling */
+#page-banner {
+    display: none; /* Initially hidden */
+    width: 100%; /* Full-width banner */
+ /*   background-color: #7cdbdbc7; sky blue */
+/*    background-color: #2a8a8ac7;*/
+   /* background-color: #009879c7;*/
+
+
+ background-color: #156c6c;
+
+
+    color: white; /* Text color */
+
+
+
+    padding: 0px ; /* Padding for spacing */
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    position: fixed; /* Make the banner stick to the top */
+    top: 0; /* Ensure it's positioned at the top */
+    left: 0; /* Align to the left */
+    z-index: 1000; /* Make sure it's above other content */
+}
+
+/* When the banner is shown */
+#page-banner.show {
+    display: block;
+    opacity: 1;
+    animation: fadeIn 1s ease forwards;
+}
+
+/* Flexbox to align the icon and text side by side */
+.banner-content {
+    display: flex;
+    justify-content: left; /* Center horizontally */
+    align-items: center; /* Vertically align the icon and the text */
+}
+
+
+

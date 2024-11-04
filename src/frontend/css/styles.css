@@ -116,11 +116,11 @@ h1 {
 /* Initial state of the table-container */
 #table-container {
   width: 90%;
-  height: 94%;
+  height: 90%;
   display: none;
   opacity: 0;
   position: fixed;
-  top: 50%; /* Start at the vertical center */
+  top: 54%; /* Start at the vertical center */
   left: 50%;
   transform: translate(-50%, -10%); /* Center the element */
   transition:
@@ -346,8 +346,8 @@ border: 0px;
 
   #table-container {
     width: 95%;
-    height: 98%;
-    top: 52%;
+    height: 93%;
+    top: 54%;
   }
 
   #flight-table {
