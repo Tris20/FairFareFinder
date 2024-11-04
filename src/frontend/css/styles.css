@@ -115,7 +115,7 @@ h1 {
 
 /* Initial state of the table-container */
 #table-container {
-  width: 70%;
+  width: 90%;
   height: 90%;
   display: none;
   opacity: 0;
@@ -134,7 +134,7 @@ h1 {
 
 #flight-table {
   width: 100%; /* Ensure the table takes up full width */
-  margin: 25px 0;
+  margin: 35px 0;
   overflow-y: auto; /* Enables vertical scrolling when necessary */
   opacity: 0; /* Start invisible */
   overflow-x: scroll; /* Enable horizontal scrolling for smaller screens */
@@ -142,6 +142,7 @@ text-align: center;
 border-radius: 8px;
 height:80svh;
 margin-bottom: 0;
+font-size: 1.2vw;
 }
 
 /* Trigger animations when the 'show' class is added via JavaScript */
@@ -198,6 +199,7 @@ padding-bottom: 0px;
 /* Center-align the output values for sliders */
 #flight-form output {
   font-size: 1.2em; /* Increase the font size for better visibility */
+ /* width: 30%;*/
 }
 
 /* Fullscreen background image */
@@ -262,6 +264,11 @@ select {
   font-size: 16px;
   color: #333;
   width: 100%; /* Adjust to match form layout */
+
+
+background-color: #d5d5d5;
+    font-size: 12px;
+    border: 0px;
 }
 
 
@@ -469,7 +476,9 @@ margin-bottom: 0px;
     .desktop-view {
         display: none;
     }
-
+    .desktop-card-grid {
+        display: none;
+    }
 
 
 
@@ -508,4 +517,14 @@ td {
 }
 #footer-privacy{
   margin-bottom: 0px;
+}
+
+
+.clickable {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.clickable:hover {
+  text-decoration: underline;
 }

@@ -16,9 +16,8 @@ flex-direction: column;
   flex: 0 0 100%; /* Each card takes up the full width of the container */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   background-color: #fff;
-  margin: 10px 0px;
+ 
   scroll-snap-align: start; /* Snap each card to the start */
-  border-radius: inherit;
 }
 
 .scroll-container {
@@ -40,7 +39,7 @@ flex-direction: column;
   
     #flight-table{
       height: 68svh;
-      font-size: 0.7em;
+      font-size: 2.5vw;
     }
 /* mobileStyles.css */
 .weather-icons {
@@ -48,6 +47,8 @@ flex-direction: column;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    margin-left: 1em;
+    margin-right: 1em;
 }
 
 .weather-icon {
@@ -98,7 +99,18 @@ flex-direction: column;
 border-radius: 8px;
 line-height: 0;
  overflow: hidden;
+ margin: 0px 0px 20px 0px;
     }
+
+.clickable {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.clickable:hover {
+  text-decoration: underline;
+}
+
 
 /* 60% of the card for the image */
 .card-image {
@@ -119,12 +131,14 @@ line-height: 0;
     overflow: hidden; /* Ensures no content overflows */
 background-color: #f4dfcf;
 opacity: 0.9;
+justify-content: space-between;
+padding: 10px;
 }
 
 h2 {
 /*margin-top: 0.2em;*/
 /*  margin-bottom: 0.8em;*/
-    font-size: 1.5em;
+    font-size: 3vw;
     color: #333;
 }
 
