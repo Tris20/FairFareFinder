@@ -15,6 +15,8 @@
   text-decoration: none !important;
   display: inline-block; /* Ensures it behaves like a normal text element */
   color: black;
+font-family: 'Dosis', sans-serif;
+
 }
 
 /* Desktop card grid */
@@ -85,7 +87,9 @@ padding: calc(10px + 2%);
 padding-top: 20px;
 background-color: #cfebf4;
  opacity: 0.9;
+font-family: 'Dosis', sans-serif;
  }
+
 .card-content {
   /*  flex: 0 0 60%;
     padding: 20px;
@@ -152,30 +156,30 @@ font-size: 1.0vw;
 }
 
 /* for super wide screens reduce table width for readability*/
-@media only screen and (min-width: 1400px) {
+/*@media only screen and (min-width: 1400px) {
 #table-container {
   width: 80%;
 }
 #flight-table {
 font-size: 1.0vw;
 }
-}
+}*/
 /*For bigger monitors*/
 
-@media only screen and (min-width: 1500px) {
+@media only screen and (min-width: 1200px) {
 .desktop-card-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
 #table-container {
-  width: 1400px;
+  width: 1200px;
 }
 
 #flight-table {
-font-size: 0.8vw;
+font-size: 0.6vw;
 }
   .card-content h2 {
-    font-size: 1.2vw;
+    font-size: 0.8vw;
     margin: 0;
   }
 }
@@ -258,8 +262,8 @@ h1 {
 
 /* Icon styling */
 #fff-icon {
-    height: 50px; /* Adjust the icon size */
-    margin-right: 15px; /* Space between the icon and the text */
+    height: 42px; /* Adjust the icon size */
+    margin-right: 5px; /* Space between the icon and the text */
 }
 
 
@@ -287,7 +291,7 @@ h1 {
    /* background-color: #009879c7;*/
 
 
- background-color: #156c6c;
+ background-color: #0b5259;
 
 
     color: white; /* Text color */
@@ -319,4 +323,17 @@ h1 {
 }
 
 
+/* Apply Dosis specifically to headings */
+h1, h2, h3 {
+    font-family: 'Dosis', sans-serif;
+margin: 6px;
+font-size: 1.7em;
+}
 
+
+
+/*
+.first-letter {
+    color: #efa56d;
+}
+*/

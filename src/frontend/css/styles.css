@@ -194,6 +194,9 @@ padding-bottom: 0px;
 #flight-form input[type="range"],
 #flight-form output {
   text-align: center; /* Center text in the labels */
+font-family: 'Dosis', sans-serif;
+font-size: 1.1em;
+
 }
 
 /* Center-align the output values for sliders */
@@ -337,7 +340,7 @@ border: 0px;
 }
 
 #flight-form label{
-  font-size: 12px;
+  font-size: 1em;
 }
 /* Center-align the output values for sliders */
 #flight-form output {
