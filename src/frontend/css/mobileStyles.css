@@ -46,9 +46,15 @@ flex-direction: column;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    margin-left: 1em;
+    padding-bottom: 20px;
     margin-right: 1em;
+    display: flex;
+    justify-content: space-around;
+    margin-right: 1.5em;
+    background-color: #add8e6bf;
+    border-radius: 14px;
+    width: 100%;
+    margin-top: 1em;
 }
 
 .weather-icon {
@@ -105,6 +111,7 @@ line-height: 0;
 .clickable {
   color: #007BFF;
   text-decoration: none;
+text-align: right;
 }
 
 .clickable:hover {
