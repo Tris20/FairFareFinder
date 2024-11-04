@@ -4,14 +4,18 @@ package main
 import (
 	"database/sql"
 	"flag"
-	"github.com/gorilla/sessions"
-	_ "github.com/mattn/go-sqlite3"
+	"fmt"
 	"html/template"
 	"log"
+	"math/rand"
 	"net/http"
+	//"os"
+	"path/filepath"
 	"strconv"
-	"fmt"
+	"time"
 
+	"github.com/gorilla/sessions"
+	_ "github.com/mattn/go-sqlite3"
 	"github.com/Tris20/FairFareFinder/src/backend"
 )
 
@@ -25,6 +29,7 @@ type Weather struct {
 
 type Flight struct {
 	DestinationCityName string
+  RandomImageURL      string
 	PriceCity1          sql.NullFloat64
 	UrlCity1            string
 	WeatherForecast     []Weather
@@ -125,6 +130,11 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
+	}
+
+	// Fetch random image for each flight
+	for i := range flights {
+		flights[i].RandomImageURL, _ = getRandomImagePath("./src/frontend/images/Bucharest") // Add random image URL
 	}
 
 	data := buildFlightsData(city1, flights)
@@ -399,3 +409,26 @@ func tableViewHandler(w http.ResponseWriter, r *http.Request) {
         http.Error(w, "Error rendering results", http.StatusInternalServerError)
     }
 }
+
+
+
+
+
+// Helper function to get a random image from a folder
+func getRandomImagePath(folder string) (string, error) {
+	// Look for .jpg files in the Bucharest folder
+	files, err := filepath.Glob(filepath.Join(folder, "*.jpg"))
+	if err != nil || len(files) == 0 {
+		return "/images/location-placeholder-image.png", err // Return placeholder if no image found
+	}
+
+	// Seed the random number generator
+	rand.Seed(time.Now().UnixNano())
+
+	// Select a random image
+	randomImage := files[rand.Intn(len(files))]
+
+	// Return the relative path to the image
+	return "/images/Bucharest/" + filepath.Base(randomImage), nil
+}
+
