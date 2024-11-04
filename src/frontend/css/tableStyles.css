@@ -77,11 +77,12 @@ margin-right: 1.5em;
 
 /* mobile card styles copied into grid view*/
   #flight-form {
-    width: 90%; /* Adjust form width on mobile */
+    width: 75%; /* Adjust form width on mobile */
     flex-direction: column; /* Align items in a row */
 padding: calc(10px + 2%);
 
   padding-bottom: 0px;
+padding-top: 20px;
 background-color: #cfebf4;
  opacity: 0.9;
  }
@@ -141,6 +142,16 @@ width: 30%;
   }
 
 /* for super wide screens reduce table width for readability*/
+@media only screen and (min-width: 1000px) {
+#table-container {
+  width: 70%;
+}
+#flight-table {
+font-size: 1.0vw;
+}
+}
+
+/* for super wide screens reduce table width for readability*/
 @media only screen and (min-width: 1400px) {
 #table-container {
   width: 80%;
@@ -155,6 +166,11 @@ font-size: 1.0vw;
 .desktop-card-grid {
     grid-template-columns: repeat(4, 1fr);
   }
+
+#table-container {
+  width: 1400px;
+}
+
 #flight-table {
 font-size: 0.8vw;
 }
