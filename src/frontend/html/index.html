@@ -16,6 +16,12 @@
 <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <script src="https://unpkg.com/htmx.org"></script>
 </head>
+<div id="page-banner">
+    <div class="banner-content">
+        <img src="/images/FFF_BW_Trans.svg" alt="FFF Icon" id="fff-icon">
+        <h1>Fair Fare Finder</h1>
+    </div>
+</div>
 
 <body>
     <!-- Background image div -->
@@ -25,9 +31,14 @@
     <div id="website-name" class="fade-in">
         Fair Fare Finder
     </div>
-
+    <!-- Header that will appear above the form -->
+   
     <!-- Table content container that will appear after the text fades out -->
+<!-- Banner structure -->
     <div id="table-container">
+
+
+
         <form id="flight-form" hx-get="/filter" hx-target="#flight-table" hx-trigger="change, input delay:50ms">
             <div class="form-group">
                 <label for="city1">From:</label>
@@ -83,6 +94,10 @@
                 // Show the table content with the fade-in animation and move it up
                 const tableContainer = document.getElementById('table-container');
                 tableContainer.classList.add('show');
+
+     // Also show the header and move it with the form
+                const pageHeader = document.getElementById('page-banner');
+                pageHeader.classList.add('show');
 
                 // Wait for the 'moveUp' animation to finish (animationend event)
                 tableContainer.addEventListener('animationend', function(event) {

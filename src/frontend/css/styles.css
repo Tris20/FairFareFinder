@@ -120,7 +120,7 @@ h1 {
   display: none;
   opacity: 0;
   position: fixed;
-  top: 50%; /* Start at the vertical center */
+  top: 54%; /* Start at the vertical center */
   left: 50%;
   transform: translate(-50%, -10%); /* Center the element */
   transition:
@@ -128,7 +128,7 @@ h1 {
     transform 0.5s ease;
   flex-direction: column; /* Stack children vertically */
   justify-content: flex-start; /* Align content to the top */
-  align-items: stretch; /* Stretch children width to fill the container */
+  align-items: center; /* Stretch children width to fill the container */
   line-height: 1;
 }
 
@@ -346,8 +346,8 @@ border: 0px;
 
   #table-container {
     width: 95%;
-    height: 98%;
-    top: 52%;
+    height: 93%;
+    top: 54%;
   }
 
   #flight-table {
@@ -527,3 +527,48 @@ td {
 .clickable:hover {
   text-decoration: underline;
 }
+
+
+
+
+
+#page-header {
+    display: none; /* Initially hide the header */
+    text-align: center;
+    margin-bottom: 20px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+#page-header.show {
+    display: block; /* Show the header when the 'show' class is added */
+    opacity: 1;
+    animation: moveUp 1s ease forwards;
+}
+/* Move Up Animation */
+@keyframes moveUp {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Ensure the form and table move up with the animation */
+#table-container.show {
+    animation: moveUp 1s ease forwards;
+    opacity: 1;
+}
+
+/* Ensure the form and header move up together */
+#table-container,
+#page-header {
+    position: relative;
+}
+
+
+
+
