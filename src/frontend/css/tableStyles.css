@@ -144,11 +144,24 @@ width: 30%;
 @media only screen and (min-width: 1400px) {
 #table-container {
   width: 80%;
-
-
 }
-
 #flight-table {
 font-size: 1.0vw;
 }
 }
+/*For bigger monitors*/
+
+@media only screen and (min-width: 1500px) {
+.desktop-card-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+#flight-table {
+font-size: 0.8vw;
+}
+  .card-content h2 {
+    font-size: 1.2vw;
+    margin: 0;
+  }
+}
+
+
