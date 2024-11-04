@@ -138,7 +138,7 @@ h1 {
   overflow-y: auto; /* Enables vertical scrolling when necessary */
   opacity: 0; /* Start invisible */
   overflow-x: scroll; /* Enable horizontal scrolling for smaller screens */
-text-align: center;
+text-align: left;
 border-radius: 8px;
 height:80svh;
 margin-bottom: 0;
