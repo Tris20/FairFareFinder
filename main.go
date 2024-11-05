@@ -7,12 +7,13 @@ import (
 	"fmt"
 	"html/template"
 	"log"
-	"math/rand"
+
+  //"math/rand"
 	"net/http"
 	//"os"
-	"path/filepath"
+	//"path/filepath"
 	"strconv"
-	"time"
+	//"time"
 
 	"github.com/gorilla/sessions"
 	_ "github.com/mattn/go-sqlite3"
@@ -133,10 +134,10 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Fetch random image for each flight
-	for i := range flights {
+/*	for i := range flights {
 		flights[i].RandomImageURL, _ = getRandomImagePath("./src/frontend/images/Bucharest") // Add random image URL
 	}
-
+*/
 	data := buildFlightsData(city1, flights)
 	err = tmpl.ExecuteTemplate(w, "table.html", data)
 	if err != nil {
@@ -176,7 +177,8 @@ func nextCardsHandler(w http.ResponseWriter, r *http.Request) {
            w.avg_daytime_temp,
            w.weather_icon,
            w.google_url,
-           l.avg_wpi,  
+           l.avg_wpi, 
+           l.image_1,
            a.booking_url,
            a.booking_pppn,
            fnf.price_fnaf 
@@ -271,7 +273,8 @@ SELECT f1.destination_city_name,
        w.avg_daytime_temp,
        w.weather_icon,
        w.google_url,
-       l.avg_wpi,  
+       l.avg_wpi, 
+       l.image_1,
        a.booking_url,
        a.booking_pppn,
        fnf.price_fnaf 
@@ -293,6 +296,7 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 	for rows.Next() {
 		var flight Flight
 		var weather Weather
+    var imageUrl sql.NullString
 
 		err := rows.Scan(
 			&flight.DestinationCityName,
@@ -303,6 +307,7 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 			&weather.WeatherIcon,
 			&weather.GoogleUrl,
 			&flight.AvgWpi,
+      &imageUrl,
 			&flight.BookingUrl,
 			&flight.BookingPppn,
 			&flight.FiveNightsFlights,
@@ -310,6 +315,12 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 		if err != nil {
 			log.Printf("Error scanning row: %v", err)
 			return nil, err
+		}
+		// Use the image_1 URL from the database, or fallback to a placeholder if not available
+		if imageUrl.Valid {
+			flight.RandomImageURL = imageUrl.String
+		} else {
+			flight.RandomImageURL = "/images/location-placeholder-image.png"
 		}
 
 		addOrUpdateFlight(&flights, flight, weather)
@@ -413,7 +424,7 @@ func tableViewHandler(w http.ResponseWriter, r *http.Request) {
 
 
 
-
+/*
 // Helper function to get a random image from a folder
 func getRandomImagePath(folder string) (string, error) {
 	// Look for .jpg files in the Bucharest folder
@@ -431,4 +442,4 @@ func getRandomImagePath(folder string) (string, error) {
 	// Return the relative path to the image
 	return "/images/Bucharest/" + filepath.Base(randomImage), nil
 }
-
+*/
