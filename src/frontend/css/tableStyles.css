@@ -155,6 +155,9 @@ width: 30%;
   width: 70%;
 }
 #flight-table {
+
+font-size: 1em;
+height: 77svh;
 /*
 font-size: 1.0vw;
 */
@@ -183,6 +186,7 @@ font-size: 1.0vw;
 
 #flight-table {
 font-size: 1em;
+height: 77svh;
 }
   .card-content h2 {
     font-size: 1.4em;
