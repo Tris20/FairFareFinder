@@ -292,8 +292,7 @@ background-color: #338c84;
 padding: calc(10px + 2%);
 
   padding-bottom: 0px;
-background-color: #cfebf4;
- opacity: 0.9;
+background-color: #0b5259;
  }
 
   /* On smaller screens, keep the label and input in a row */
@@ -345,12 +344,12 @@ border: 0px;
 }
 /* Center-align the output values for sliders */
 #flight-form output {
-  font-size: 12px; /* Increase the font size for better visibility */
+  font-size: 1em; /* Increase the font size for better visibility */
 }
 
   #table-container {
     width: 95%;
-    height: 93%;
+    height: 101%;
     top: 54%;
   }
 
