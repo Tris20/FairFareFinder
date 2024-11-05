@@ -43,7 +43,7 @@ margin: 0px;
 }
 
 .card-image {
-  height: 135px;
+  height: 25svh;
   background-size: cover;
   background-position: center;
 }
@@ -69,6 +69,8 @@ background-color: #add8e6bf;
 border-radius: 14px;
 width: 100%;
 margin-top: 10px;
+text-align: center;
+    padding-top: 5px;
 }
 
 .clickable {
@@ -152,7 +154,7 @@ width: 30%;
 /* for super wide screens reduce table width for readability*/
 @media only screen and (min-width: 1000px) {
 #table-container {
-  width: 70%;
+  width: 90%;
 }
 #flight-table {
 
