@@ -32,26 +32,8 @@
         <span><span class="first-letter">f</span>inder</span>
     </h2>
 </div>
-</div>
 
-<body>
-    <!-- Background image div -->
-    <div id="bg-image-dreams"></div>
-
-    <!-- Initial website name that will fade in and out -->
-    <div id="website-name" class="fade-in" style="font-family: 'Dosis', sans-serif;">
-      
-        fair fare finder
-    </div>
-    <!-- Header that will appear above the form -->
-   
-    <!-- Table content container that will appear after the text fades out -->
-<!-- Banner structure -->
-    <div id="table-container">
-
-
-
-        <form id="flight-form" hx-get="/filter" hx-target="#flight-table" hx-trigger="change, input delay:50ms">
+        <form id="flight-form"  hx-get="/filter" hx-target="#flight-table" hx-trigger="change, input delay:50ms">
             <div class="form-group">
                 <label for="city1">From:</label>
                 <select id="city1" name="city1">
@@ -83,6 +65,26 @@
                        autocomplete="off">
             </div>
         </form>
+
+</div>
+
+<body>
+    <!-- Background image div -->
+    <div id="bg-image-dreams"></div>
+
+    <!-- Initial website name that will fade in and out -->
+    <div id="website-name" class="fade-in" style="font-family: 'Dosis', sans-serif;">
+      
+        fair fare finder
+    </div>
+    <!-- Header that will appear above the form -->
+   
+    <!-- Table content container that will appear after the text fades out -->
+<!-- Banner structure -->
+   
+
+
+ <div id="table-container">
 
         <div id="flight-table">
             <div class="scroll-container">

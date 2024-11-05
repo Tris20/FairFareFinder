@@ -84,10 +84,11 @@ margin-top: 10px;
 
 /* mobile card styles copied into grid view*/
   #flight-form {
-    width: 92%; /* Adjust form width on mobile */
+    width: 95%; /* Adjust form width on mobile */
     flex-direction: column; /* Align items in a row */
 padding: calc(10px + 2%);
-
+position: fixed;
+    top: 50px;
   padding-bottom: 0px;
 padding-top: 20px;
 background-color: #0b5259;
