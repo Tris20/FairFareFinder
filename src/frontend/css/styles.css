@@ -115,12 +115,12 @@ h1 {
 
 /* Initial state of the table-container */
 #table-container {
-  width: 95%;
+  width: 90%;
   height: 101%;
   display: none;
   opacity: 0;
   position: fixed;
-  top: calc(50% + 250px);
+  top: calc(50% + 50px);
   left: 50%;
   transform: translate(-50%, -10%); /* Center the element */
   transition:
@@ -286,7 +286,7 @@ background-color: #338c84;
   }
 
   #flight-form {
-    width: 95%; /* Adjust form width on mobile */
+    width: 90%; /* Adjust form width on mobile */
     flex-direction: column; /* Align items in a row */
 padding: calc(10px + 2%);
 
@@ -349,7 +349,7 @@ border: 0px;
   #table-container {
     width: 95%;
     height: 101%;
-    top: calc(50% + 250px);
+    top: calc(50% + 50px);
   }
 
   #flight-table {
