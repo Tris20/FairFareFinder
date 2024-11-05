@@ -140,7 +140,7 @@ h1 {
   overflow-x: scroll; /* Enable horizontal scrolling for smaller screens */
 text-align: left;
 border-radius: 8px;
-height:80svh;
+height:77svh;
 margin-bottom: 0;
 font-size: 1.2vw;
 }
@@ -220,9 +220,7 @@ color: white;
   opacity: 0;
   transition: opacity 1s ease; /* Smooth opacity transition */
 
-  filter: blur(
-    10px
-  ); /* Apply the blur effect, adjust the value to your preference */
+ filter: blur(69px) grayscale(35.8%);
 }
 
 .fade-in {
@@ -233,6 +231,7 @@ color: white;
 #footer-privacy {
   opacity: 0; /* Initially hidden */
 margin-top: 0px;
+width: 100%;
 }
 
 /* For each label-select/input pair */
@@ -350,7 +349,7 @@ border: 0px;
   #table-container {
     width: 95%;
     height: 101%;
-    top: 54%;
+    top: 53%;
   }
 
   #flight-table {
@@ -519,6 +518,7 @@ td {
 }
 #footer-privacy{
   margin-bottom: 0px;
+  width:100%;
 }
 
 
