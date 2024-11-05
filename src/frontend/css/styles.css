@@ -349,7 +349,7 @@ border: 0px;
   #table-container {
     width: 95%;
     height: 101%;
-    top: 53%;
+    top: calc(50% + 50px);
   }
 
   #flight-table {
