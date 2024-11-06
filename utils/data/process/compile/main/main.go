@@ -225,8 +225,8 @@ if err := updateLogFile(); err != nil {
 			// Generate new db every 6 hours: 3 = 3am; 9am; 3pm; 9pm.
 			if currentHour%6 == 0 {
 
-				// Monday, 9am, Start a completely new new_main.db
-				if currentDay == time.Saturday && currentHour == 12 {
+				// Monday, 3am, Start a completely new new_main.db
+				if currentDay == time.Monday && currentHour == 3 {
 
 // Backup existing database if it exists
 backupDatabase(absoluteNewMainDbPath, absoluteOutputDir)
