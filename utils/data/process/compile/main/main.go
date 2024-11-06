@@ -262,6 +262,9 @@ log.Println("%sCOMPLETED: Initialization of new database%s\n", green, reset)
 
 					runExecutableInDir(filepath.Join(absoluteBase, "process/compile/main/locations"), "locations")
 					log.Println("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
+           // add location image paths to table
+          runExecutableInDir(filepath.Join(absoluteBase, "process/compile/locations/location-images"), "location-images")
+					log.Println("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
 
 					runExecutableInDir(filepath.Join(absoluteBase, "process/compile/main/accommodation/booking-com"), "booking-com")
 					log.Println("%sCOMPLETED:  process/compile/main/accommodation/booking-com%s\n", green, reset)

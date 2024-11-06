@@ -60,7 +60,16 @@ iata_4 CHAR(3) ,
 iata_5 CHAR(3) ,
 iata_6 CHAR(3) ,
 iata_7 CHAR(3) ,
-			avg_wpi FLOAT(10,1)
+			avg_wpi FLOAT(10,1),
+      image_1 TEXT,
+      image_2 TEXT,
+      image_3 TEXT,
+      image_4 TEXT,
+      image_5 TEXT,
+      image_6 TEXT,
+      image_7 TEXT,
+      image_8 TEXT,
+      image_9 TEXT
 		);`,
 	}
 

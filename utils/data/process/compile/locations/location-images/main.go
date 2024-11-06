@@ -25,7 +25,7 @@ func main() {
 
 	// Step 1: Open the database and load cities from the 'location' table
 	log.Println("Opening the database...")
-	db, err := sql.Open("sqlite3", "../../../../../../data/compiled/main.db")
+	db, err := sql.Open("sqlite3", "../../../../../../data/compiled/new_main.db")
 	if err != nil {
 		log.Fatal("Failed to open database:", err)
 	}
