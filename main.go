@@ -328,6 +328,11 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 			return nil, err
 		}
 		// Use the image_1 URL from the database, or fallback to a placeholder if not available
+
+
+        // Log the imageUrl for debugging
+        log.Printf("Scanned image URL: '%s', Valid: %t", imageUrl.String, imageUrl.Valid)
+
 if imageUrl.Valid {
     flight.RandomImageURL = imageUrl.String
     log.Printf("Using image URL from database: %s", flight.RandomImageURL)
