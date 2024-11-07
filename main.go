@@ -18,6 +18,7 @@ import (
 	"github.com/gorilla/sessions"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/Tris20/FairFareFinder/src/backend"
+  "gopkg.in/natefinch/lumberjack.v2"
 )
 
 type Weather struct {
@@ -56,6 +57,16 @@ var (
 )
 
 func main() {
+	// Set up lumberjack log file rotation config
+	log.SetOutput(&lumberjack.Logger{
+		Filename:   "./app.log",    // File to log to
+		MaxSize:    69,             // Maximum size in megabytes before it gets rotated
+		MaxBackups: 5,              // Max number of old log files to keep
+		MaxAge:     28,             // Max number of days to retain log files
+		Compress:   true,           // Compress the rotated files using gzip
+	})
+
+
 
 	// Parse the "web" flag
 	webFlag := flag.Bool("web", false, "Pass this flag to enable the web server with file check routine")
@@ -317,11 +328,13 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 			return nil, err
 		}
 		// Use the image_1 URL from the database, or fallback to a placeholder if not available
-		if imageUrl.Valid {
-			flight.RandomImageURL = imageUrl.String
-		} else {
-			flight.RandomImageURL = "/images/location-placeholder-image.png"
-		}
+if imageUrl.Valid {
+    flight.RandomImageURL = imageUrl.String
+    log.Printf("Using image URL from database: %s", flight.RandomImageURL)
+} else {
+    flight.RandomImageURL = "/images/location-placeholder-image.png"
+    log.Printf("Using default placeholder image URL: %s", flight.RandomImageURL)
+}
 
 		addOrUpdateFlight(&flights, flight, weather)
 	}
