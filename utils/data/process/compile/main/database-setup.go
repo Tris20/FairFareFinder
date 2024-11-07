@@ -33,7 +33,7 @@ iata_7 CHAR(3) ,
 		);`
 	_, err = db.Exec(createLocationsTable)
 	if err != nil {
-		log.Fatalf("Failed to create Locations table: %v", err)
+		log.Fatalf("Failed to create location table: %v", err)
 	}
 
 	// Create Weather table
