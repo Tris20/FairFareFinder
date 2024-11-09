@@ -291,6 +291,9 @@ log.Println("%sCOMPLETED: Initialization of new database%s\n", green, reset)
 					runExecutableInDir(filepath.Join(absoluteBase, "process/compile/main/locations"), "locations")
 					log.Println("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
 					transfer = true
+           // add location image paths to table
+          runExecutableInDir(filepath.Join(absoluteBase, "process/compile/locations/location-images"), "location-images")
+					log.Println("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
 				}
 
 				if transfer {
