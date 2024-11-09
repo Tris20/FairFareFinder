@@ -1,3 +1,4 @@
+
 package main
 
 import (
@@ -40,7 +41,7 @@ func main() {
 	query := `
 	SELECT city_name, country_code, date, AVG(temperature) AS avg_temp, AVG(wpi) AS avg_wpi, weather_icon_url, google_weather_link
 	FROM current_weather
-        WHERE strftime('%H:%M:%S', date) BETWEEN '10:00:00' AND '18:00:00'
+	WHERE strftime('%H:%M:%S', date) BETWEEN '10:00:00' AND '18:00:00'
 	GROUP BY city_name, country_code, strftime('%Y-%m-%d', date)
 	`
 	rows, err := db.Query(query)
@@ -75,6 +76,12 @@ func main() {
 	}
 	defer compiledDB.Close()
 
+	// Clear the existing weather data
+	_, err = compiledDB.Exec("DELETE FROM weather")
+	if err != nil {
+		log.Fatal("Failed to clear existing weather data:", err)
+	}
+
 	stmt, err := compiledDB.Prepare("INSERT INTO weather (city, country, date, avg_daytime_temp, weather_icon, google_url, avg_daytime_wpi) VALUES (?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
 		log.Fatal(err)
@@ -91,3 +98,4 @@ func main() {
 	}
 	fmt.Println("Data successfully transferred to new_main.db")
 }
+
