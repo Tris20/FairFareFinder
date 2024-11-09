@@ -1,20 +1,20 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
-  "bytes"
+	"io"
 	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"time"
-  "io"
 )
 
 /*
 
-IF 3AM Monday Morning 
+IF 3AM Monday Morning
   Create a brand new DB and send it to the website
 ELSE IF 6 hours since last data upadte
   Fetch latest weather, compile weather data and calculate new WPI scores and send it to the website
@@ -29,7 +29,6 @@ Some Scripts have dependencies on others. For example, the 5 day WPI of a locati
 
 NOTE: Fetch and Compile Properties, gest the prices of the nearest wednesday to wednesday, so should weally be run on a monday
 */
-
 
 // Helper function to run a command in a specific directory
 func runExecutableInDir(dir string, executable string) {
@@ -68,9 +67,9 @@ var currentLogDate string
 // Generate the log file path based on the current date (year/month/output.log)
 func getDailyLogFilePath() string {
 	currentTime := time.Now()
-	year := currentTime.Format("2006")        // Year in YYYY format
-	month := currentTime.Format("01")         // Month in MM format
-	fileName := currentTime.Format("02.log")  // Log file name as DD.log
+	year := currentTime.Format("2006")       // Year in YYYY format
+	month := currentTime.Format("01")        // Month in MM format
+	fileName := currentTime.Format("02.log") // Log file name as DD.log
 	return filepath.Join("logs", year, month, fileName)
 }
 
@@ -87,32 +86,29 @@ func ensureLogDirExists(logFilePath string) error {
 
 // Function to update the log file if a new day has started
 func updateLogFile() error {
-    newLogDate := time.Now().Format("2006-01-02") // YYYY-MM-DD
-    if newLogDate != currentLogDate {
-        if currentLogFile != nil {
-            currentLogFile.Close()
-        }
+	newLogDate := time.Now().Format("2006-01-02") // YYYY-MM-DD
+	if newLogDate != currentLogDate {
+		if currentLogFile != nil {
+			currentLogFile.Close()
+		}
 
-        logFilePath := getDailyLogFilePath()
-        if err := ensureLogDirExists(logFilePath); err != nil {
-            return err
-        }
+		logFilePath := getDailyLogFilePath()
+		if err := ensureLogDirExists(logFilePath); err != nil {
+			return err
+		}
 
-        var err error
-        currentLogFile, err = os.OpenFile(logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-        if err != nil {
-            return fmt.Errorf("failed to open log file %s: %v", logFilePath, err)
-        }
+		var err error
+		currentLogFile, err = os.OpenFile(logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		if err != nil {
+			return fmt.Errorf("failed to open log file %s: %v", logFilePath, err)
+		}
 
-        multiWriter := io.MultiWriter(os.Stdout, currentLogFile)
-        log.SetOutput(multiWriter)
-        currentLogDate = newLogDate
-    }
-    return nil
+		multiWriter := io.MultiWriter(os.Stdout, currentLogFile)
+		log.SetOutput(multiWriter)
+		currentLogDate = newLogDate
+	}
+	return nil
 }
-
-
-
 
 func main() {
 
@@ -147,47 +143,43 @@ func main() {
 	// Define the relative path to go up three directories
 	relativeBase := filepath.Join(baseDir, "../../../")
 
-  
-  // Get the absolute path from the relative path
-  absoluteNewMainDbPath, err := filepath.Abs(newMainDBPath)
+	// Get the absolute path from the relative path
+	absoluteNewMainDbPath, err := filepath.Abs(newMainDBPath)
 	if err != nil {
 		log.Fatalf("Failed to get absolute path: %v", err)
 	}
 
 	log.Printf("Absolute path of new_main.db: %s", absoluteNewMainDbPath)
-	
-  // Get the absolute path from the relative path
-  absoluteOutputDir, err := filepath.Abs(outputDir)
+
+	// Get the absolute path from the relative path
+	absoluteOutputDir, err := filepath.Abs(outputDir)
 	if err != nil {
 		log.Fatalf("Failed to get absolute path: %v", err)
 	}
 
 	log.Printf("Absolute path of outputdir: %s", absoluteOutputDir)
 
-
-  // Get the absolute path from the relative path
-  absoluteBase, err := filepath.Abs(relativeBase)
+	// Get the absolute path from the relative path
+	absoluteBase, err := filepath.Abs(relativeBase)
 	if err != nil {
 		log.Fatalf("Failed to get absolute path: %v", err)
 	}
 
 	log.Printf("Absolute path of base directory utils/data: %s", absoluteBase)
 
-  flag.Parse()
+	flag.Parse()
 
-
-    // Initial log setup
-    if err := updateLogFile(); err != nil {
-        log.Fatalf("Failed to initialize log file: %v", err)
-    }
-
+	// Initial log setup
+	if err := updateLogFile(); err != nil {
+		log.Fatalf("Failed to initialize log file: %v", err)
+	}
 
 	// If the --all flag is set, run all tasks sequentially
 	if *runAll {
-	// Backup existing database if it exists
-	backupDatabase(absoluteNewMainDbPath, absoluteOutputDir)
-	// Initialize the new database and create tables
-	initializeDatabase(absoluteNewMainDbPath)
+		// Backup existing database if it exists
+		backupDatabase(absoluteNewMainDbPath, absoluteOutputDir)
+		// Initialize the new database and create tables
+		initializeDatabase(absoluteNewMainDbPath)
 
 		runAllTasks(relativeBase)
 		return
@@ -205,19 +197,18 @@ func main() {
 		return
 	}
 	if *transferDB {
-    transferFlightsDB(absoluteNewMainDbPath)
-  return
-  }
-
+		transferFlightsDB(absoluteNewMainDbPath)
+		return
+	}
 
 	// If --daemon flag is set, run in an infinite loop
 	if *daemonMode {
 		log.Println("Daemon mode is enabled. Running tasks in loop...")
 		// Infinite loop for daemon mode
 		for {
-if err := updateLogFile(); err != nil {
-                log.Printf("Error updating log file: %v", err)
-            }
+			if err := updateLogFile(); err != nil {
+				log.Printf("Error updating log file: %v", err)
+			}
 			// Get current day and time
 			currentDay, currentHour := getCurrentTime()
 			transfer := false
@@ -228,17 +219,17 @@ if err := updateLogFile(); err != nil {
 				// Monday, 3am, Start a completely new new_main.db
 				if currentDay == time.Monday && currentHour == 3 {
 
-// Backup existing database if it exists
-backupDatabase(absoluteNewMainDbPath, absoluteOutputDir)
-log.Println("%sCOMPLETED: Backup of existing database%s\n", green, reset)
+					// Backup existing database if it exists
+					backupDatabase(absoluteNewMainDbPath, absoluteOutputDir)
+					log.Println("%sCOMPLETED: Backup of existing database%s\n", green, reset)
 
-// Delete existing new_main.db if it exists
-deleteNewMainDB(absoluteNewMainDbPath)
-log.Println("%sCOMPLETED: Deletion of new_main.db%s\n", green, reset)
+					// Delete existing new_main.db if it exists
+					deleteNewMainDB(absoluteNewMainDbPath)
+					log.Println("%sCOMPLETED: Deletion of new_main.db%s\n", green, reset)
 
-// Initialize the new database and create tables
-initializeDatabase(absoluteNewMainDbPath)
-log.Println("%sCOMPLETED: Initialization of new database%s\n", green, reset)
+					// Initialize the new database and create tables
+					initializeDatabase(absoluteNewMainDbPath)
+					log.Println("%sCOMPLETED: Initialization of new database%s\n", green, reset)
 
 					//Fetch
 					runExecutableInDir(filepath.Join(absoluteBase, "fetch/flights/schedule"), "aerodatabox")
@@ -262,8 +253,8 @@ log.Println("%sCOMPLETED: Initialization of new database%s\n", green, reset)
 
 					runExecutableInDir(filepath.Join(absoluteBase, "process/compile/main/locations"), "locations")
 					log.Println("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
-           // add location image paths to table
-          runExecutableInDir(filepath.Join(absoluteBase, "process/compile/locations/location-images"), "location-images")
+					// add location image paths to table
+					runExecutableInDir(filepath.Join(absoluteBase, "process/compile/locations/location-images"), "location-images")
 					log.Println("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
 
 					runExecutableInDir(filepath.Join(absoluteBase, "process/compile/main/accommodation/booking-com"), "booking-com")
@@ -290,19 +281,20 @@ log.Println("%sCOMPLETED: Initialization of new database%s\n", green, reset)
 					// Calcualte and Compile WPI for Locations
 					runExecutableInDir(filepath.Join(absoluteBase, "process/compile/main/locations"), "locations")
 					log.Println("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
-					transfer = true
-           // add location image paths to table
-          runExecutableInDir(filepath.Join(absoluteBase, "process/compile/locations/location-images"), "location-images")
+			
+					// add location image paths to table
+					runExecutableInDir(filepath.Join(absoluteBase, "process/compile/locations/location-images"), "location-images")
 					log.Println("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
+		transfer = true
 				}
 
 				if transfer {
-					err := transferFlightsDB(  absoluteNewMainDbPath)
+					err := transferFlightsDB(absoluteNewMainDbPath)
 					if err != nil {
 						log.Println("Error occurred during transfer:", err)
 						// You may exit or handle the error as needed
 					}
-          transfer = false
+					transfer = false
 				}
 
 				// Sleep for a specified time interval before checking again
@@ -313,20 +305,20 @@ log.Println("%sCOMPLETED: Initialization of new database%s\n", green, reset)
 	//	 If no flags are set, print a message
 	log.Println("No flags set. Use --all, --compile, --weather, or --daemon.")
 
-    // Clean up: close the log file on program exit
-    if currentLogFile != nil {
-        currentLogFile.Close()
-    }
+	// Clean up: close the log file on program exit
+	if currentLogFile != nil {
+		currentLogFile.Close()
+	}
 }
 
-func transferFlightsDB( absoluteNewMainDbPath string) error {
+func transferFlightsDB(absoluteNewMainDbPath string) error {
 	// Get the user's home directory
 	//homeDir, err := os.UserHomeDir()
-  homeDir := "/home/tristan"  // os.userhomedir returns root/ which is incorrect, so we hard code here
-/*	if err != nil {
-		log.Fatalf("Failed to get home directory: %v", err)
-	}
-*/
+	homeDir := "/home/tristan" // os.userhomedir returns root/ which is incorrect, so we hard code here
+	/*	if err != nil {
+			log.Fatalf("Failed to get home directory: %v", err)
+		}
+	*/
 	// Build the full path to the SSH key
 	sshKeyPath := filepath.Join(homeDir, ".ssh", "fff_server")
 
@@ -342,7 +334,7 @@ func transferFlightsDB( absoluteNewMainDbPath string) error {
 
 		// Run the command and capture any error
 
-    err := cmd.Run()
+		err := cmd.Run()
 
 		if err == nil {
 			log.Printf("Operations completed successfully")
@@ -354,8 +346,8 @@ func transferFlightsDB( absoluteNewMainDbPath string) error {
 		log.Printf("Attempt %d: SCP stderr: %s", i+1, errBuf.String())
 
 		if i < maxRetries {
-		log.Printf("Request failed: %v. Retrying...", err)
-		time.Sleep(time.Duration(2^(i+1)) * time.Second) // Exponential backoff
+			log.Printf("Request failed: %v. Retrying...", err)
+			time.Sleep(time.Duration(2^(i+1)) * time.Second) // Exponential backoff
 		}
 	}
 
