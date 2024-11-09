@@ -69,7 +69,8 @@ iata_7 CHAR(3) ,
       image_6 TEXT,
       image_7 TEXT,
       image_8 TEXT,
-      image_9 TEXT
+      image_9 TEXT,
+      UNIQUE(city, country)
 		);`,
 	}
 

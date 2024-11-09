@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -98,4 +97,3 @@ func main() {
 	}
 	fmt.Println("Data successfully transferred to new_main.db")
 }
-

@@ -95,7 +95,7 @@ func main() {
 
 	// Insert into the new database
 	for _, c := range cities {
-		query := "INSERT INTO location (city, country, iata_1, iata_2, iata_3, iata_4, iata_5, iata_6, iata_7, avg_wpi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+		query := "INSERT OR REPLACE INTO location (city, country, iata_1, iata_2, iata_3, iata_4, iata_5, iata_6, iata_7, avg_wpi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 		args := fillIATAs(c.CityAscii, c.Iso2, c.IATACodes)
 		if _, err := db.Exec(query, args...); err != nil {
 			fmt.Println(err)
