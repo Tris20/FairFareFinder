@@ -20,6 +20,55 @@ type CityImages struct {
 
 var cities []CityImages
 
+
+// Function to ensure image columns exist in the 'location' table
+func ensureImageColumnsExist(db *sql.DB) error {
+	requiredColumns := []string{"image_1", "image_2", "image_3", "image_4", "image_5"}
+
+	// Query to get the column names of the location table
+	query := `PRAGMA table_info(location);`
+	rows, err := db.Query(query)
+	if err != nil {
+		return fmt.Errorf("failed to query table schema: %v", err)
+	}
+	defer rows.Close()
+
+	// Collect existing column names
+	existingColumns := make(map[string]bool)
+	for rows.Next() {
+		var (
+			cid       int
+			name      string
+			typeText  string
+			notNull   int
+			defaultVal sql.NullString
+			isPK      int
+		)
+		err := rows.Scan(&cid, &name, &typeText, &notNull, &defaultVal, &isPK)
+		if err != nil {
+			return fmt.Errorf("failed to scan table schema: %v", err)
+		}
+		existingColumns[name] = true
+	}
+
+	// Check and add missing columns
+	for _, column := range requiredColumns {
+		if !existingColumns[column] {
+			log.Printf("Column '%s' is missing. Adding it to the table...", column)
+			alterQuery := fmt.Sprintf("ALTER TABLE location ADD COLUMN %s TEXT;", column)
+			_, err := db.Exec(alterQuery)
+			if err != nil {
+				return fmt.Errorf("failed to add column '%s': %v", column, err)
+			}
+			log.Printf("Successfully added column '%s'.", column)
+		}
+	}
+
+	log.Println("All required columns are present.")
+	return nil
+}
+
+
 func main() {
 	log.Println("Starting the process...")
 
@@ -31,6 +80,13 @@ func main() {
 	}
 	defer db.Close()
 	log.Println("Database opened successfully.")
+
+	// Step 1.1: Ensure all required image columns exist
+	err = ensureImageColumnsExist(db)
+	if err != nil {
+		log.Fatalf("Failed to ensure image columns exist: %v", err)
+	}
+
 
 	// Step 2: Load cities from the 'location' table
 	err = loadCitiesFromDatabase(db)
