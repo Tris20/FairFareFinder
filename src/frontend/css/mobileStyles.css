@@ -15,7 +15,7 @@ flex-direction: column;
 .card {
   flex: 0 0 100%; /* Each card takes up the full width of the container */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  background-color: #fff;
+  background-color: #f4dfcf;
  
   scroll-snap-align: start; /* Snap each card to the start */
 }
