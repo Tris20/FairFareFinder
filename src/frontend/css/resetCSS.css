@@ -1,76 +1,116 @@
 
-/* Base reset */
+/* Base Reset */
 *,
 *::before,
 *::after {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
-    vertical-align: baseline;
 }
 
-/* Set default font size and smoothing */
+/* General Elements */
 html {
-    font-size: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: sans-serif;
+    line-height: 1.15; /* Firefox default */
+    text-size-adjust: 100%; /* Prevent iOS zoom issues */
 }
 
-/* Remove default margins */
 body {
-    line-height: 1;
-    margin: 0;
-    padding: 0;
+    margin: 8px; /* Firefox body margin */
+    color: black;
+    background-color: white;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.45;
+    text-align: left;
 }
 
-/* Normalize media elements */
-img,
-picture,
-video,
-canvas,
-svg {
-    display: block;
-    max-width: 100%;
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: bold;
+    margin: 0.67em 0;
 }
 
-/* Remove list styles on ul, ol */
+/* Lists */
 ul, ol {
-    list-style: none;
+    padding-left: 40px;
+    list-style-type: disc;
 }
 
-/* Inherit font and fix input issues */
-input, button, textarea, select {
-    font: inherit;
+li {
     margin: 0;
-    border: none;
-    outline: none;
-    appearance: none;
-    box-shadow: none;
 }
 
-/* Allow buttons to be clickable */
-button {
-    cursor: pointer;
-    background: none;
-    padding: 0;
-}
-
-/* Normalize anchor tags */
+/* Links */
 a {
+    background-color: transparent;
     text-decoration: none;
-    color: inherit;
+    color: blue;
 }
 
-/* Normalize table borders */
+a:hover {
+    text-decoration: underline;
+}
+
+/* Tables */
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
 
-/* Normalize form elements */
-form {
-    display: block;
+td, th {
+    padding: 0;
+    text-align: left;
+}
+
+/* Forms */
+button, input, select, textarea {
+    font: inherit;
     margin: 0;
 }
+
+button {
+    background-color: ButtonFace;
+    color: ButtonText;
+    border: none;
+}
+
+input {
+    background-color: white;
+    color: initial;
+    border: 1px solid #a9a9a9; /* Match Firefox default border */
+    padding: 1px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Fieldsets */
+fieldset {
+    border: 1px solid #a9a9a9;
+    margin: 0 2px;
+    padding: 0.35em 0.75em 0.625em;
+}
+
+legend {
+    color: inherit;
+    display: block;
+    font-size: 1.15em;
+    font-weight: bold;
+    padding: 0;
+}
+
+/* Buttons */
+button, [type="button"], [type="reset"], [type="submit"] {
+    -webkit-appearance: button;
+}
+
+/* Remove extra padding in Safari */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
