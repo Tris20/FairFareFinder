@@ -333,13 +333,15 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
         // Log the imageUrl for debugging
         log.Printf("Scanned image URL: '%s', Valid: %t", imageUrl.String, imageUrl.Valid)
 
-if imageUrl.Valid {
+
+if imageUrl.Valid && len(imageUrl.String) > 5 {
     flight.RandomImageURL = imageUrl.String
     log.Printf("Using image URL from database: %s", flight.RandomImageURL)
 } else {
     flight.RandomImageURL = "/images/location-placeholder-image.png"
     log.Printf("Using default placeholder image URL: %s", flight.RandomImageURL)
 }
+
 
 		addOrUpdateFlight(&flights, flight, weather)
 	}
