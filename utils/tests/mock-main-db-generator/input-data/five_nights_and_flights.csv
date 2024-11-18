@@ -1,0 +1,500 @@
+origin_city,origin_country,destination_city,destination_country,price_fnaf
+Berlin,DE,Paris,FR,1061.59
+Berlin,DE,Riga,LV,243.25
+Berlin,DE,Puerto Del Rosario,ES,412.69
+Berlin,DE,Kaunas,LT,184.63
+Berlin,DE,Warsaw,PL,327.81
+Berlin,DE,Vilnius,LT,245.63
+Berlin,DE,Bristol,GB,554.41
+Berlin,DE,Varna,BG,155.45
+Berlin,DE,Zurich,CH,626.14
+Berlin,DE,Dublin,IE,726.64
+Berlin,DE,Izmir,TR,406.57
+Berlin,DE,Split,HR,285.45
+Berlin,DE,Tel Aviv,IL,610.97
+Berlin,DE,Heraklion,GR,437.59
+Berlin,DE,Oslo,NO,577.75
+Berlin,DE,Hurghada,EG,292.78
+Berlin,DE,Salzburg,AT,653.68
+Berlin,DE,London,GB,873.46
+Berlin,DE,Barcelona,ES,737.23
+Berlin,DE,Marrakech,MA,457.47
+Berlin,DE,Toulouse/Blagnac,FR,440.825
+Berlin,DE,Graz,AT,531.98
+Berlin,DE,Birmingham,GB,520.03
+Berlin,DE,Kos Island,GR,486.89
+Berlin,DE,Ortaca,TR,464.74
+Berlin,DE,Tallinn,EE,282.94
+Berlin,DE,Glasgow,GB,574.81
+Berlin,DE,Porto,PT,450.07
+Berlin,DE,Belgrad,RS,209.67
+Berlin,DE,Arbil,IQ,733.79
+Berlin,DE,Paris,FR,1057.05
+Berlin,DE,Saarbrucken,DE,682.885
+Berlin,DE,Alicante,ES,388.76
+Berlin,DE,Corfu,GR,573.85
+Berlin,DE,Doha,QA,708.94
+Berlin,DE,Skopje,MK,236.29
+Berlin,DE,Basel,CH,570.02
+Berlin,DE,Palma De Mallorca,ES,342.68
+Berlin,DE,Palermo,IT,357.81
+Berlin,DE,Athens,GR,434.24
+Berlin,DE,Nottingham,GB,346.1
+Berlin,DE,Lisbon,PT,697.37
+Berlin,DE,Brussels,BE,517.5
+Berlin,DE,Copenhagen,DK,647.76
+Berlin,DE,Manchester,GB,567.49
+Berlin,DE,Newark,US,1278.47
+Berlin,DE,Cairo,EG,419.02
+Berlin,DE,Helsinki,FI,451.14
+Berlin,DE,Beirut,LB,611.79
+Berlin,DE,Venice,IT,774.8
+Berlin,DE,London,GB,986.41
+Berlin,DE,Edinburgh,GB,762.63
+Berlin,DE,Pisa,IT,314.83
+Berlin,DE,Bucharest,RO,299.68
+Berlin,DE,Marsa Alam,EG,295.13
+Berlin,DE,Paphos,CY,349.63
+Berlin,DE,Thessaloniki,GR,333.58
+Berlin,DE,Cologne,DE,573.18
+Berlin,DE,Monastir,TN,180.0
+Berlin,DE,Dusseldorf,DE,446.185
+Berlin,DE,London,GB,964.3
+Berlin,DE,Antalya,TR,332.25
+Berlin,DE,Bergamo,IT,357.34
+Berlin,DE,Reggio Calabria,IT,309.78
+Berlin,DE,Munich,DE,739.59
+Berlin,DE,Valencia,ES,451.74
+Berlin,DE,Las Palmas,ES,357.8
+Berlin,DE,Gothenburg,SE,464.77
+Berlin,DE,Vienna,AT,569.85
+Berlin,DE,Funchal,PT,536.35
+Berlin,DE,Gaziantep,TR,636.85
+Berlin,DE,Verona,IT,372.9
+Berlin,DE,Stockholm,SE,434.95
+Berlin,DE,Reykjavik,IS,740.865
+Berlin,DE,Ibiza Town,ES,410.82
+Berlin,DE,Prishtina,XK,355.22
+Berlin,DE,Bergen,NO,492.6
+Berlin,DE,Sofia,BG,302.81
+Berlin,DE,Amsterdam,NL,739.76
+Berlin,DE,Rome,IT,684.85
+Berlin,DE,Frankfurt am Main,DE,428.055
+Berlin,DE,Rhodes,GR,450.14
+Berlin,DE,Catania,IT,331.45
+Berlin,DE,Tivat,ME,154.4
+Berlin,DE,Tunis,TN,396.31
+Berlin,DE,Zagreb,HR,453.97
+Berlin,DE,Trondheim,NO,538.48
+Berlin,DE,Souda,GR,201.25
+Berlin,DE,Dubrovnik,HR,322.0
+Berlin,DE,Budapest,HU,304.34
+Berlin,DE,Milan,IT,635.21
+Berlin,DE,Geneva,CH,740.87
+Berlin,DE,Larnaca,CY,390.59
+Berlin,DE,Ankara,TR,384.88
+Berlin,DE,Madrid,ES,789.35
+Berlin,DE,Napoli,IT,412.31
+Berlin,DE,London,GB,853.2
+Berlin,DE,Istanbul,TR,349.3
+Berlin,DE,Tirana,AL,232.38
+Berlin,DE,New York,US,1645.74
+Berlin,DE,Baku,AZ,496.78
+Berlin,DE,Marseille,FR,361.82
+Berlin,DE,Zadar,HR,422.28
+Berlin,DE,Strasbourg,FR,467.07
+Berlin,DE,Luqa,MT,359.76
+Berlin,DE,Bordeaux,FR,433.94
+Berlin,DE,Kutaisi,GE,246.95
+Berlin,DE,Beijing,CN,1160.96
+Berlin,DE,Faro,PT,378.86
+Berlin,DE,Luxembourg,LU,709.18
+Berlin,DE,Milan,IT,624.64
+Berlin,DE,Lyon,FR,447.96
+Berlin,DE,Nantes,FR,445.12
+Berlin,DE,Istanbul,TR,349.3
+Berlin,DE,Kraków,PL,228.64
+Berlin,DE,London,GB,877.96
+Berlin,DE,Olbia,IT,404.38
+Berlin,DE,Podgorica,ME,295.92
+Berlin,DE,Malaga,ES,380.12
+Berlin,DE,Nice,FR,519.86
+Berlin,DE,Stuttgart,DE,494.92
+Glasgow,GB,Lerwick,GB,989.05
+Glasgow,GB,Berlin,DE,587.72
+Glasgow,GB,Dubai,AE,750.22
+Glasgow,GB,Luqa,MT,244.4
+Glasgow,GB,London,GB,948.26
+Glasgow,GB,Saint Helier,JE,478.0
+Glasgow,GB,Larnaca,CY,227.7
+Glasgow,GB,Kraków,PL,336.53
+Glasgow,GB,Brussels,BE,655.72
+Glasgow,GB,London,GB,869.48
+Glasgow,GB,Birmingham,GB,442.12
+Glasgow,GB,Barcelona,ES,729.1
+Glasgow,GB,Santa Cruz de Tenerife,ES,283.7
+Glasgow,GB,Corfu,GR,502.73
+Glasgow,GB,Palma De Mallorca,ES,410.99
+Glasgow,GB,Southampton,GB,1286.01
+Glasgow,GB,Heraklion,GR,201.25
+Glasgow,GB,Las Palmas,ES,410.88
+Glasgow,GB,London,GB,822.52
+Glasgow,GB,Burgas,BG,351.52
+Glasgow,GB,Derry,GB,541.55
+Glasgow,GB,Hurghada,EG,320.8
+Glasgow,GB,London,GB,931.1
+Glasgow,GB,Daliburgh,GB,597.97
+Glasgow,GB,Split,HR,385.7
+Glasgow,GB,Ortaca,TR,489.22
+Glasgow,GB,Paphos,CY,518.21
+Glasgow,GB,Amsterdam,NL,713.16
+Glasgow,GB,Ibiza Town,ES,283.7
+Glasgow,GB,Belfast,GB,495.58
+Glasgow,GB,Paris,FR,1057.7
+Glasgow,GB,Donegal,IE,664.71
+Glasgow,GB,Rhodes,GR,201.25
+Glasgow,GB,Arrecife,ES,397.37
+Glasgow,GB,Belfast,GB,470.92
+Glasgow,GB,Campbeltown,GB,1692.81
+Glasgow,GB,Porto,PT,421.05
+Glasgow,GB,Gramisdale,GB,779.49
+Glasgow,GB,Bristol,GB,494.92
+Glasgow,GB,Alicante,ES,367.29
+Glasgow,GB,Toronto,CA,683.7
+Glasgow,GB,Enfidha,TN,136.225
+Glasgow,GB,Antalya,TR,338.43
+Glasgow,GB,Stornoway,GB,727.95
+Glasgow,GB,Dublin,IE,658.48
+Glasgow,GB,Reykjavik,IS,646.835
+Glasgow,GB,Bodrum,TR,277.1
+Glasgow,GB,Faro,PT,362.63
+Glasgow,GB,Malaga,ES,350.18
+Glasgow,GB,Puerto Del Rosario,ES,390.97
+Glasgow,GB,Budapest,HU,253.3
+Glasgow,GB,Izmir,TR,235.2
+Glasgow,GB,Kintra,GB,685.32
+Glasgow,GB,Baugh,GB,1747.39
+Glasgow,GB,Rome,IT,728.51
+Glasgow,GB,Frankfurt am Main,DE,459.625
+Glasgow,GB,London,GB,828.44
+Edinburgh,GB,Nice,FR,365.7
+Edinburgh,GB,Barcelona,ES,759.77
+Edinburgh,GB,Madrid,ES,791.22
+Edinburgh,GB,Corfu,GR,201.25
+Edinburgh,GB,Bournemouth,GB,378.54
+Edinburgh,GB,Frankfurt am Main,DE,447.175
+Edinburgh,GB,Doha,QA,837.0
+Edinburgh,GB,Copenhagen,DK,698.25
+Edinburgh,GB,Bodrum,TR,277.1
+Edinburgh,GB,Prague,CZ,417.63
+Edinburgh,GB,Beziers/Vias,FR,319.775
+Edinburgh,GB,Orkney Islands,GB,390.45
+Edinburgh,GB,Istanbul,TR,361.02
+Edinburgh,GB,Calgary,CA,1390.53
+Edinburgh,GB,London,GB,856.6
+Edinburgh,GB,Sevilla,ES,564.58
+Edinburgh,GB,Paris,FR,1017.02
+Edinburgh,GB,Venice,IT,785.16
+Edinburgh,GB,Zadar,HR,311.87
+Edinburgh,GB,Gdańsk,PL,279.15
+Edinburgh,GB,Castletown,IM,397.28
+Edinburgh,GB,Vienna,AT,542.68
+Edinburgh,GB,Newquay,GB,422.87
+Edinburgh,GB,Puerto Del Rosario,ES,363.06
+Edinburgh,GB,Las Palmas,ES,323.53
+Edinburgh,GB,Belfast,GB,438.64
+Edinburgh,GB,Berlin,DE,560.17
+Edinburgh,GB,Pisa,IT,428.11
+Edinburgh,GB,Menorca Island,ES,465.29
+Edinburgh,GB,London,GB,929.5
+Edinburgh,GB,Stornoway,GB,843.35
+Edinburgh,GB,Lisbon,PT,674.56
+Edinburgh,GB,Gothenburg,SE,314.85
+Edinburgh,GB,Roma,IT,334.89
+Edinburgh,GB,Paris,FR,1045.16
+Edinburgh,GB,Catania,IT,223.55
+Edinburgh,GB,Faro,PT,405.63
+Edinburgh,GB,New York,US,1661.87
+Edinburgh,GB,Stockholm,SE,507.23
+Edinburgh,GB,Porto,PT,451.15
+Edinburgh,GB,Marrakech,MA,404.96
+Edinburgh,GB,Beijing,CN,1007.16
+Edinburgh,GB,Cardiff,GB,585.87
+Edinburgh,GB,Bucharest,RO,407.01
+Edinburgh,GB,Athens,GR,464.41
+Edinburgh,GB,Istanbul,TR,360.99
+Edinburgh,GB,Rome,IT,743.37
+Edinburgh,GB,Bari,IT,359.83
+Edinburgh,GB,Dublin,IE,668.79
+Edinburgh,GB,Newark,US,1414.64
+Edinburgh,GB,Antalya,TR,328.9
+Edinburgh,GB,Kraków,PL,275.44
+Edinburgh,GB,Sofia,BG,265.43
+Edinburgh,GB,Malaga,ES,352.2
+Edinburgh,GB,Zurich,CH,744.04
+Edinburgh,GB,Toulouse/Blagnac,FR,237.775
+Edinburgh,GB,Brussels,BE,618.59
+Edinburgh,GB,Riga,LV,185.4
+Edinburgh,GB,Biarritz/Anglet/Bayonne,FR,389.765
+Edinburgh,GB,Vágar,FO,611.92
+Edinburgh,GB,Milan,IT,691.87
+Edinburgh,GB,Rhodes,GR,528.06
+Edinburgh,GB,Luqa,MT,364.87
+Edinburgh,GB,Munich,DE,782.54
+Edinburgh,GB,Saint Helier,JE,606.49
+Edinburgh,GB,Bergamo,IT,415.19
+Edinburgh,GB,Boston,US,1360.15
+Edinburgh,GB,Washington,US,1416.75
+Edinburgh,GB,Ibiza Town,ES,283.7
+Edinburgh,GB,Tirana,AL,308.56
+Edinburgh,GB,Izmir,TR,447.46
+Edinburgh,GB,Birmingham,GB,438.52
+Edinburgh,GB,Basel,CH,647.63
+Edinburgh,GB,Cologne,DE,596.45
+Edinburgh,GB,Heraklion,GR,201.25
+Edinburgh,GB,Wrocław,PL,228.87
+Edinburgh,GB,Alicante,ES,369.69
+Edinburgh,GB,London,GB,820.25
+Edinburgh,GB,Poznań,PL,232.61
+Edinburgh,GB,Hamburg,DE,582.57
+Edinburgh,GB,Chicago,US,1408.92
+Edinburgh,GB,Arrecife,ES,392.18
+Edinburgh,GB,Zakynthos Island,GR,549.73
+Edinburgh,GB,London,GB,794.89
+Edinburgh,GB,Palma De Mallorca,ES,421.89
+Edinburgh,GB,Belfast,GB,475.59
+Edinburgh,GB,Lerwick,GB,945.58
+Edinburgh,GB,Billund,DK,424.19
+Edinburgh,GB,Eindhoven,NL,335.85
+Edinburgh,GB,Amsterdam,NL,747.91
+Edinburgh,GB,Reykjavik,IS,610.075
+Edinburgh,GB,Toronto,CA,1774.61
+Edinburgh,GB,Paphos,CY,361.36
+Edinburgh,GB,Ortaca,TR,282.5
+Edinburgh,GB,Bergen,NO,610.25
+Edinburgh,GB,Rotterdam,NL,733.79
+Edinburgh,GB,Dusseldorf,DE,386.245
+Edinburgh,GB,Santander,ES,327.77
+Edinburgh,GB,Beauvais,FR,295.28
+Edinburgh,GB,Exeter,GB,629.14
+Edinburgh,GB,Weeze,DE,396.02
+Edinburgh,GB,Atlanta,US,275.85
+Edinburgh,GB,Napoli,IT,391.59
+Edinburgh,GB,Dubrovnik,HR,322.0
+Edinburgh,GB,Budapest,HU,354.93
+Edinburgh,GB,London,GB,936.03
+Edinburgh,GB,Geneva,CH,806.09
+Edinburgh,GB,Stuttgart,DE,535.28
+Edinburgh,GB,Helsinki,FI,545.24
+Edinburgh,GB,Split,HR,399.06
+Edinburgh,GB,Southampton,GB,995.23
+Edinburgh,GB,Cork,IE,556.39
+Edinburgh,GB,Halifax,CA,1301.79
+Edinburgh,GB,Nantes,FR,337.19
+Edinburgh,GB,Lyon,FR,504.66
+Edinburgh,GB,Oslo,NO,595.79
+Edinburgh,GB,Warsaw,PL,292.52
+Edinburgh,GB,Shannon,IE,548.3
+Munich,DE,Dusseldorf,DE,490.205
+Munich,DE,London,GB,986.33
+Munich,DE,Dublin,IE,789.96
+Munich,DE,Tbilisi,GE,336.91
+Munich,DE,Manchester,GB,603.71
+Munich,DE,Olbia,IT,493.16
+Munich,DE,Menorca Island,ES,567.64
+Munich,DE,Osaka,JP,1310.56
+Munich,DE,Vienna,AT,631.5
+Munich,DE,Dortmund,DE,572.13
+Munich,DE,Denver,US,1584.03
+Munich,DE,Funchal,PT,677.62
+Munich,DE,Split,HR,576.44
+Munich,DE,Washington,US,1342.32
+Munich,DE,Trondheim,NO,620.27
+Munich,DE,Madrid,ES,860.29
+Munich,DE,Santa Cruz de Tenerife,ES,283.7
+Munich,DE,Dubai,AE,709.12
+Munich,DE,Hamburg,DE,636.7
+Munich,DE,San Francisco,US,1495.38
+Munich,DE,Toronto,CA,1618.68
+Munich,DE,Barcelona,ES,779.25
+Munich,DE,Izmir,TR,405.19
+Munich,DE,Riga,LV,367.01
+Munich,DE,Rzeszow,PL,418.58
+Munich,DE,Ancona,IT,561.3
+Munich,DE,London,GB,899.95
+Munich,DE,Valencia,ES,589.58
+Munich,DE,Catania,IT,412.74
+Munich,DE,Gdańsk,PL,349.79
+Munich,DE,Singapore,SG,1532.47
+Munich,DE,Boston,US,1267.95
+Munich,DE,Graz,AT,763.13
+Munich,DE,Bordeaux,FR,629.2
+Munich,DE,Seoul,KR,1304.01
+Munich,DE,Antalya,TR,359.86
+Munich,DE,Rhodes,GR,411.63
+Munich,DE,Basel,CH,837.92
+Munich,DE,Sevilla,ES,618.44
+Munich,DE,Bari,IT,472.87
+Munich,DE,Timisoara,RO,434.67
+Munich,DE,Verona,IT,825.19
+Munich,DE,Arrecife,ES,550.32
+Munich,DE,Tunis,TN,341.88
+Munich,DE,Lyon,FR,580.14
+Munich,DE,Gothenburg,SE,560.85
+Munich,DE,Bodrum,TR,277.1
+Munich,DE,Mumbai,IN,577.24
+Munich,DE,Muscat,OM,466.41
+Munich,DE,Puerto Del Rosario,ES,415.68
+Munich,DE,Hannover,DE,636.43
+Munich,DE,Stuttgart,DE,547.87
+Munich,DE,Luqa,MT,404.58
+Munich,DE,Reykjavik,IS,787.975
+Munich,DE,Milan,IT,691.71
+Munich,DE,Montreal,CA,1363.255
+Munich,DE,Warsaw,PL,465.63
+Munich,DE,Bucharest,RO,439.37
+Munich,DE,Sibiu,RO,426.99
+Munich,DE,Hurghada,EG,293.39
+Munich,DE,Ortaca,TR,468.5
+Munich,DE,Toulouse/Blagnac,FR,471.605
+Munich,DE,Edinburgh,GB,855.39
+Munich,DE,Atlanta,US,1797.88
+Munich,DE,Wrocław,PL,422.14
+Munich,DE,Cairo,EG,418.44
+Munich,DE,Bangalore,IN,583.85
+Munich,DE,Beijing,CN,1089.54
+Munich,DE,Berlin,DE,637.36
+Munich,DE,Istanbul,TR,373.32
+Munich,DE,Milan,IT,804.17
+Munich,DE,Porto,PT,526.25
+Munich,DE,Palermo,IT,513.74
+Munich,DE,Belgrad,RS,392.26
+Munich,DE,Kos Island,GR,452.63
+Munich,DE,Rome,IT,779.94
+Munich,DE,Doha,QA,704.83
+Munich,DE,Taipei,TW,1252.11
+Munich,DE,New York,US,1789.52
+Munich,DE,Palma De Mallorca,ES,423.68
+Munich,DE,Budapest,HU,459.26
+Munich,DE,Paderborn,DE,571.28
+Munich,DE,Tel Aviv,IL,899.22
+Munich,DE,Genova,IT,1586.14
+Munich,DE,Las Palmas,ES,426.23
+Munich,DE,Houston,US,2741.11
+Munich,DE,Los Angeles,US,1511.23
+Munich,DE,Alicante,ES,414.65
+Munich,DE,Patras,GR,452.28
+Munich,DE,Tashkent,UZ,982.82
+Munich,DE,Bilbao,ES,535.09
+Munich,DE,Copenhagen,DK,742.04
+Munich,DE,Zadar,HR,425.15
+Munich,DE,San Diego,US,1854.02
+Munich,DE,Stockholm,SE,592.42
+Munich,DE,Zurich,CH,782.36
+Munich,DE,Torino,IT,487.08
+Munich,DE,Tallinn,EE,420.2
+Munich,DE,Cluj-Napoca,RO,434.14
+Munich,DE,Detroit,US,1758.46
+Munich,DE,Manama,BH,325.9
+Munich,DE,Prishtina,XK,338.52
+Munich,DE,Vilnius,LT,368.14
+Munich,DE,Kraków,PL,389.54
+Munich,DE,Dresden,DE,584.06
+Munich,DE,Calgary,CA,230.7
+Munich,DE,Corfu,GR,396.6
+Munich,DE,Luxembourg,LU,738.68
+Munich,DE,Marseille,FR,543.31
+Munich,DE,Pula,HR,547.2
+Munich,DE,Kuwait City,KW,572.97
+Munich,DE,Newark,US,1287.41
+Munich,DE,Faro,PT,531.04
+Munich,DE,Monastir,TN,180.0
+Munich,DE,Lamezia Terme,IT,544.3
+Munich,DE,Frankfurt am Main,DE,525.065
+Munich,DE,Venice,IT,856.83
+Munich,DE,Malaga,ES,447.58
+Munich,DE,Prague,CZ,583.59
+Munich,DE,Bangkok,TH,947.64
+Munich,DE,Dubrovnik,HR,629.97
+Munich,DE,Lisbon,PT,744.59
+Munich,DE,Helsinki,FI,544.57
+Munich,DE,Bergen,NO,561.51
+Munich,DE,Billund,DK,491.91
+Munich,DE,Debrecen,HU,448.79
+Munich,DE,Mykonos Island,GR,622.53
+Munich,DE,Heraklion,GR,412.52
+Munich,DE,Paris,FR,1129.05
+Munich,DE,Chicago,US,1374.51
+Munich,DE,Rijeka,HR,546.11
+Munich,DE,Kavala,GR,486.99
+Munich,DE,Bremen,DE,604.72
+Munich,DE,Ibiza Town,ES,445.72
+Munich,DE,Poznań,PL,404.75
+Munich,DE,Cagliari,IT,505.73
+Munich,DE,Shanghai,CN,1063.9
+Munich,DE,Seattle,US,1483.91
+Munich,DE,Athens,GR,460.79
+Munich,DE,Birmingham,GB,598.97
+Munich,DE,Amsterdam,NL,858.37
+Munich,DE,Cologne,DE,602.76
+Munich,DE,Marsa Alam,EG,356.9
+Munich,DE,Vancouver,CA,1599.1
+Munich,DE,Osijek,HR,479.31
+Munich,DE,Nice,FR,604.48
+Munich,DE,Souda,GR,431.77
+Munich,DE,Geneva,CH,852.65
+Munich,DE,Oslo,NO,638.11
+Munich,DE,Thessaloniki,GR,370.74
+Munich,DE,Nantes,FR,473.14
+Munich,DE,Kalamata,GR,400.73
+Munich,DE,Preveza/Lefkada,GR,428.99
+Munich,DE,Munster,DE,581.325
+Munich,DE,Zagreb,HR,537.63
+Munich,DE,Sofia,BG,406.48
+Munich,DE,Abu Dhabi,AE,782.37
+Munich,DE,Riyadh,SA,739.12
+Munich,DE,Mexico City,MX,1359.0
+Munich,DE,Westerland,DE,877.64
+Munich,DE,Zakynthos Island,GR,549.45
+Munich,DE,Varna,BG,371.01
+Munich,DE,Skiathos,GR,352.59
+Munich,DE,Santorini Island,GR,450.69
+Munich,DE,Firenze,IT,497.3
+Munich,DE,Charlotte,US,2212.1
+Munich,DE,Napoli,IT,495.76
+Munich,DE,Tokyo,JP,1333.13
+Munich,DE,New Delhi,IN,560.31
+Munich,DE,Johannesburg,ZA,1102.4
+Munich,DE,Tirana,AL,425.89
+Munich,DE,Larnaca,CY,473.66
+Munich,DE,Ankara,TR,414.05
+Munich,DE,Istanbul,TR,382.8
+Berlin,DE,Tbilisi,GE,362.29
+Glasgow,GB,Prague,CZ,495.04
+Edinburgh,GB,Kaunas,LT,220.51
+Edinburgh,GB,Valencia,ES,423.91
+Edinburgh,GB,Larnaca,CY,518.52
+Edinburgh,GB,Kos Island,GR,201.25
+Edinburgh,GB,Saint Peter Port,GG,861.75
+Edinburgh,GB,Marseille,FR,282.25
+Munich,DE,Agadir,MA,302.78
+Berlin,DE,Dubai,AE,621.13
+Berlin,DE,Treviso,IT,368.38
+Berlin,DE,Tromsø,NO,546.15
+Berlin,DE,Trieste,IT,417.0
+Berlin,DE,Arrecife,ES,423.07
+Berlin,DE,Iasi,RO,242.41
+Berlin,DE,Sharm el-Sheikh,EG,310.01
+Glasgow,GB,Cork,IE,601.86
+Edinburgh,GB,Swinford,IE,491.155
+Edinburgh,GB,Bratislava,SK,325.84
+Edinburgh,GB,Funchal,PT,595.32
+Munich,DE,Jebel Ali,AE,844.36
+Munich,DE,Miami,US,1139.54
+Munich,DE,Leipzig,DE,450.44
+Munich,DE,Marrakech,MA,521.02
+Munich,DE,Cape Town,ZA,1102.4
+Glasgow,GB,Marrakech,MA,421.49
+Edinburgh,GB,Agadir,MA,189.73
+Edinburgh,GB,Dubai,AE,743.17
+Edinburgh,GB,Derry,GB,494.55
