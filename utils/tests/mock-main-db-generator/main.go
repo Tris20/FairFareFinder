@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -11,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/schollz/progressbar/v3"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/schollz/progressbar/v3"
 )
 
 // Define the schema for each table
@@ -78,7 +77,7 @@ var tableSchemas = map[string]string{
 func main() {
 	// Paths
 	inputFolder := "input-data"
-	outputDB := "main.db"
+	outputDB := "../../../data/test.db"
 
 	// Open SQLite database
 	db, err := sql.Open("sqlite3", outputDB)
@@ -228,6 +227,7 @@ func loadCSVToTable(db *sql.DB, csvFile, tableName string) error {
 
 	return nil
 }
+
 // findColumnIndex finds the index of a column in the CSV headers
 func findColumnIndex(headers []string, column string) int {
 	for i, header := range headers {
@@ -256,4 +256,3 @@ func buildInsertQuery(tableName string, columns []string) string {
 	placeholders = strings.TrimSuffix(placeholders, ", ")
 	return fmt.Sprintf("INSERT INTO %s (%s) VALUES (%s)", tableName, columnsList, placeholders)
 }
-
