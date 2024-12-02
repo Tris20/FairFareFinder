@@ -90,7 +90,7 @@ func main() {
 	http.HandleFunc("/", backend.IndexHandler)
 	http.HandleFunc("/filter", filterHandler)
 	http.HandleFunc("/table_view", tableViewHandler)
-	http.HandleFunc("/next-cards", nextCardsHandler)
+	http.HandleFunc("/next-cards", nextCardsHandler) //
 	http.HandleFunc("/update-slider-price", backend.UpdateSliderPriceHandler)
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./src/frontend/css/"))))
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./src/frontend/images"))))
