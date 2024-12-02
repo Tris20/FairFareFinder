@@ -158,7 +158,7 @@ func main() {
 
 		err = processCityProperties(city.DestinationID, db, apiKey, city)
 		if err != nil {
-		log.Printf("Error processing properties for city %s: %v", city.CityName, err)
+			log.Printf("Error processing properties for city %s: %v", city.CityName, err)
 		}
 	}
 }
@@ -371,7 +371,6 @@ func fetchTotalProperties(destinationID, apiKey string) (int, error) {
 		return 0, nil
 	}
 
-
 	return totalProperties, nil
 }
 
@@ -433,11 +432,11 @@ func fetchPropertiesByPage(destinationID, apiKey string, pageNumber int) ([]Prop
 
 func processCityProperties(destinationID string, db *sql.DB, apiKey string, city City) error {
 	// Fetch the total number of properties for the destination
-    totalProperties, err := fetchTotalProperties(destinationID, apiKey)
-    if err != nil {
-        log.Printf("Error fetching total properties for %s: %v", city.CityName, err)
-        return err
-    }	// Calculate the number of pages (each page has 20 properties)
+	totalProperties, err := fetchTotalProperties(destinationID, apiKey)
+	if err != nil {
+		log.Printf("Error fetching total properties for %s: %v", city.CityName, err)
+		return err
+	} // Calculate the number of pages (each page has 20 properties)
 
 	totalPages := totalProperties / 20
 	if totalProperties%20 != 0 {

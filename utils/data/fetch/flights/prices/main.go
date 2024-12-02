@@ -1,18 +1,18 @@
-package main 
+package main
 
 import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-  "github.com/Tris20/FairFareFinder/utils/time-and-date"
-	"github.com/Tris20/FairFareFinder/src/backend/model"
 	"github.com/Tris20/FairFareFinder/config/handlers"
+	"github.com/Tris20/FairFareFinder/src/backend/model"
 	"github.com/Tris20/FairFareFinder/utils/data/process/generate/urls"
+	"github.com/Tris20/FairFareFinder/utils/time-and-date"
+	"github.com/schollz/progressbar/v3"
 	"io/ioutil"
 	"log"
 	"math"
 	"net/http"
-"github.com/schollz/progressbar/v3"
 )
 
 var apiKey string
@@ -34,16 +34,13 @@ type Itinerary struct {
 
 var origins []model.OriginInfo
 
-
 func main() {
 	// Load IATA, skyscanenrID etc of origins(Berlin, Glasgow, Edi)
-  originsConfig, _ := config_handlers.LoadOrigins("../../../../../config/origins.yaml")
+	originsConfig, _ := config_handlers.LoadOrigins("../../../../../config/origins.yaml")
 	origins := config_handlers.ConvertConfigToModel(originsConfig)
 	origins = update_origin_dates(origins)
-  UpdateSkyscannerPrices(origins)
+	UpdateSkyscannerPrices(origins)
 }
-
-
 
 func GetBestPrice(origin model.OriginInfo, destination model.DestinationInfo) (float64, error) {
 	// Load API key from secrets.yaml
@@ -53,7 +50,7 @@ func GetBestPrice(origin model.OriginInfo, destination model.DestinationInfo) (f
 		return 0, fmt.Errorf("error loading API key: %v", err)
 	}
 
-  println("HERE6\n")
+	println("HERE6\n")
 	fmt.Printf("\nDeparture")
 	departure_dates, err := timeutils.ListDatesBetween(origin.NextDepartureStartDate, origin.NextDepartureEndDate)
 	fmt.Printf("\nReturn")
@@ -81,7 +78,7 @@ func GetBestPriceForGivenDates(departureSkyScannerID string, arrivalSkyScannerID
 		if err != nil {
 			// Handle the error according to your error policy.
 			// For example, you can return the error or continue to try other dates.
-      fmt.Println("\nError fetching price for date:", date, "Error:", err)
+			fmt.Println("\nError fetching price for date:", date, "Error:", err)
 			continue
 		}
 
@@ -168,57 +165,54 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 	}
 	defer db.Close()
 
-		fmt.Printf("\n\n\n COPY WEEKEND")
+	fmt.Printf("\n\n\n COPY WEEKEND")
 
-		// SQL statement to copy "next_weekend" to "this_weekend"
-		query := `UPDATE skyscannerprices SET this_weekend = next_weekend`
+	// SQL statement to copy "next_weekend" to "this_weekend"
+	query := `UPDATE skyscannerprices SET this_weekend = next_weekend`
 
-		// Execute the update query
-		_, err = db.Exec(query)
+	// Execute the update query
+	_, err = db.Exec(query)
+	if err != nil {
+		log.Fatal("Failed to update the table:", err)
+	}
+	log.Println("Table updated successfully.")
+
+	/*
+		// Update if entry exists
+		updateStmt, err := db.Prepare("UPDATE skyscannerprices SET next_weekend = ? WHERE origin_skyscanner_id = ? AND destination_skyscanner_id = ?")
 		if err != nil {
-			log.Fatal("Failed to update the table:", err)
+			log.Fatalf("Failed to prepare update statement: %v", err)
 		}
-		log.Println("Table updated successfully.")
+		defer updateStmt.Close()
+		// Create if entry for dest AND origin does not exist
+		insertStmt, err := db.Prepare("INSERT INTO skyscannerprices (origin_city, origin_country, origin_iata, origin_skyscanner_id, destination_city, destination_country, destination_iata, destination_skyscanner_id, next_weekend) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
+		if err != nil {
+			log.Fatalf("Failed to prepare insert statement: %v", err)
+		}
+		defer insertStmt.Close()
+	*/
 
-/*
-	// Update if entry exists
-	updateStmt, err := db.Prepare("UPDATE skyscannerprices SET next_weekend = ? WHERE origin_skyscanner_id = ? AND destination_skyscanner_id = ?")
-	if err != nil {
-		log.Fatalf("Failed to prepare update statement: %v", err)
-	}
-	defer updateStmt.Close()
-	// Create if entry for dest AND origin does not exist
-	insertStmt, err := db.Prepare("INSERT INTO skyscannerprices (origin_city, origin_country, origin_iata, origin_skyscanner_id, destination_city, destination_country, destination_iata, destination_skyscanner_id, next_weekend) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
-	if err != nil {
-		log.Fatalf("Failed to prepare insert statement: %v", err)
-	}
-	defer insertStmt.Close()
-*/
-
-
-// HOTFIX setting both this weekend and nextweekend to price value because we don't use both prices in the output table yet
-updateStmt, err := db.Prepare(`
+	// HOTFIX setting both this weekend and nextweekend to price value because we don't use both prices in the output table yet
+	updateStmt, err := db.Prepare(`
     UPDATE skyscannerprices 
     SET next_weekend = ?, this_weekend = ? 
     WHERE origin_skyscanner_id = ? 
     AND destination_skyscanner_id = ?`)
-if err != nil {
-    log.Fatalf("Failed to prepare update statement: %v", err)
-}
-defer updateStmt.Close()
+	if err != nil {
+		log.Fatalf("Failed to prepare update statement: %v", err)
+	}
+	defer updateStmt.Close()
 
-insertStmt, err := db.Prepare(`
+	insertStmt, err := db.Prepare(`
     INSERT INTO skyscannerprices 
     (origin_city, origin_country, origin_iata, origin_skyscanner_id, destination_city, destination_country, destination_iata, destination_skyscanner_id, next_weekend, this_weekend) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
-if err != nil {
-    log.Fatalf("Failed to prepare insert statement: %v", err)
-}
-defer insertStmt.Close()
+	if err != nil {
+		log.Fatalf("Failed to prepare insert statement: %v", err)
+	}
+	defer insertStmt.Close()
 
-
-
-  println("HERE4\n")
+	println("HERE4\n")
 	totalDestinations := calculateTotalDestinations(origins) // Function to sum up all destinations for all origins
 
 	// Create a new progress bar
@@ -229,35 +223,35 @@ defer insertStmt.Close()
 		airportDetailsList := DetermineFlightsFromConfig(origin)
 		destinationsWithUrls := urlgenerators.GenerateFlightsAndHotelsURLs(origin, airportDetailsList)
 
-  println("HERE5\n")
+		println("HERE5\n")
 		for _, destination := range destinationsWithUrls {
 			price, err := GetBestPrice(origin, destination)
 			if err != nil {
 				log.Printf("Error getting best price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
-bar.Add(1) // Increment progress bar even on error
-				continue // Continue with the next destination if there's an error
+				bar.Add(1) // Increment progress bar even on error
+				continue   // Continue with the next destination if there's an error
 			}
 
 			// Execute the update statement for each origin-destination pair with the new price
 			result, err := updateStmt.Exec(price, price, origin.SkyScannerID, destination.SkyScannerID)
 			if err != nil {
 				log.Printf("Failed to update price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
-bar.Add(1) // Increment progress bar even on error
+				bar.Add(1) // Increment progress bar even on error
 				continue
 			}
 
 			rowsAffected, err := result.RowsAffected()
 			if err != nil {
 				log.Printf("Error checking rows affected for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
-bar.Add(1) // Increment progress bar even on error
+				bar.Add(1) // Increment progress bar even on error
 				continue
 			}
 
 			// If no rows were updated, insert a new row
 			if rowsAffected == 0 {
-      _, err = insertStmt.Exec(origin.City, origin.Country,
-        origin.IATA, origin.SkyScannerID, destination.City, destination.Country, destination.IATA, destination.SkyScannerID, price, price)
-      if err != nil {
+				_, err = insertStmt.Exec(origin.City, origin.Country,
+					origin.IATA, origin.SkyScannerID, destination.City, destination.Country, destination.IATA, destination.SkyScannerID, price, price)
+				if err != nil {
 					log.Printf("Failed to insert price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
 				} else {
 					log.Printf("Successfully inserted price for %s(%s) to %s(%s): €%.2f", origin.IATA, origin.SkyScannerID, destination.IATA, destination.SkyScannerID, price)
@@ -266,7 +260,7 @@ bar.Add(1) // Increment progress bar even on error
 				log.Printf("Successfully updated price for %s(%s) to %s(%s): €%.2f", origin.IATA, origin.SkyScannerID, destination.IATA, destination.SkyScannerID, price)
 
 			}
-bar.Add(1) // Increment progress bar even on error
+			bar.Add(1) // Increment progress bar even on error
 		}
 	}
 }
@@ -285,7 +279,7 @@ func GetPriceForRoute(db *sql.DB, weekend string, origin string, destination str
 }
 
 // this determines the length of the progress bar
-func calculateTotalDestinations(origins  []model.OriginInfo) int {
+func calculateTotalDestinations(origins []model.OriginInfo) int {
 	total := 0
 	for _, origin := range origins {
 		airportDetailsList := DetermineFlightsFromConfig(origin)
@@ -294,8 +288,6 @@ func calculateTotalDestinations(origins  []model.OriginInfo) int {
 	}
 	return total
 }
-
-
 
 func update_origin_dates(origins []model.OriginInfo) []model.OriginInfo {
 
@@ -317,6 +309,3 @@ func update_origin_dates(origins []model.OriginInfo) []model.OriginInfo {
 	}
 	return origins
 }
-
-
-

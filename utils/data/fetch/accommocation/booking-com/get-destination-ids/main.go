@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -11,8 +10,8 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/schollz/progressbar/v3"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/schollz/progressbar/v3"
 	"gopkg.in/yaml.v2"
 )
 
@@ -217,4 +216,3 @@ func createTables(db *sql.DB) error {
 	_, err := db.Exec(createCityTable)
 	return err
 }
-

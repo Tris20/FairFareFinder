@@ -98,8 +98,6 @@ func DetermineFlightsFromConfig(origin model.OriginInfo) []model.DestinationInfo
 	}
 	defer db.Close()
 
-
-
 	// Define your queries here.
 	queries := []string{
 		fmt.Sprintf("SELECT arrivalAirport FROM schedule WHERE departureAirport = '%s' AND departureTime BETWEEN '%s' AND '%s'", origin.IATA, origin.DepartureStartDate, origin.DepartureEndDate),

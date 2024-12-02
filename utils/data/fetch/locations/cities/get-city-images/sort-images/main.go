@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -80,7 +79,7 @@ func main() {
 					newPath := filepath.Join(targetDirectory, fileName)
 					err := os.Rename(oldPath, newPath)
 					if err != nil {
-				fmt.Println("Error moving file:", err)
+						fmt.Println("Error moving file:", err)
 					}
 
 					// Update the progress bar

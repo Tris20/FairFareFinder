@@ -1,4 +1,4 @@
-package config_handlers 
+package config_handlers
 
 // Configs and input handlers go here
 

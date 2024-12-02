@@ -84,4 +84,3 @@ iata_7 CHAR(3) ,
 
 	log.Println("Database initialized and tables created successfully.")
 }
-

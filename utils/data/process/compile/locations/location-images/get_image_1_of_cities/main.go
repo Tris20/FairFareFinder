@@ -1,10 +1,9 @@
-
 package main
 
 import (
 	"fmt"
 	"io"
-  "io/ioutil"
+	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -132,4 +131,3 @@ func copyFile(source, dest string) error {
 
 	return err
 }
-
