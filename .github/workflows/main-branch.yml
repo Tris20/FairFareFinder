@@ -14,16 +14,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Set up Go environment
       - name: Set up Go 1.x
         uses: actions/setup-go@v2
         with:
           go-version: ^1.13.8
 
+      # Step 2: Check out the code
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Get dependencies
+      # Step 3: Install dependencies
+      - name: Install Dependencies
         run: go get -v -t -d ./...
 
+      # Step 4: Build the mock-main-db-generator tool
+      - name: Build Mock DB Generator
+        working-directory: utils/tests/mock-main-db-generator
+        run: go build -o mock-main-db-generator
+
+      # Step 5: Generate the test database
+      - name: Generate Test Database
+        working-directory: utils/tests/mock-main-db-generator
+        run: ./mock-main-db-generator
+
+      # Step 6: Start the main application with the --web flag
+      - name: Start Main Application
+        run: |
+          go run main.go --web &
+          sleep 5 # Allow the server time to start
+
+      # Step 7: Run the tests
       - name: Run Tests
         run: go test -v ./...
