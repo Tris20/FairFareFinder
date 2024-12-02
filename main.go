@@ -90,7 +90,6 @@ func main() {
 	http.HandleFunc("/", backend.IndexHandler)
 	http.HandleFunc("/filter", filterHandler)
 	http.HandleFunc("/table_view", tableViewHandler)
-	http.HandleFunc("/next-cards", nextCardsHandler)
 	http.HandleFunc("/update-slider-price", backend.UpdateSliderPriceHandler)
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./src/frontend/css/"))))
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./src/frontend/images"))))
@@ -148,76 +147,6 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 	*/
 	data := buildFlightsData(city1, flights)
 	err = tmpl.ExecuteTemplate(w, "table.html", data)
-	if err != nil {
-		http.Error(w, "Error rendering results", http.StatusInternalServerError)
-	}
-}
-
-func nextCardsHandler(w http.ResponseWriter, r *http.Request) {
-	// Get pagination parameters (like offset, limit) from the query params
-	pageStr := r.URL.Query().Get("page")
-	page, err := strconv.Atoi(pageStr)
-	if err != nil || page < 1 {
-		page = 1 // Default to first page if invalid
-	}
-
-	offset := (page - 1) * 10 // Assuming 10 results per page
-	limit := 10
-
-	// Fetch the city and maximum price parameters from the query string
-	city1 := r.URL.Query().Get("city1")
-	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
-	maxPriceLinear, err := strconv.ParseFloat(maxPriceLinearStr, 64)
-	if err != nil {
-		http.Error(w, "Invalid price parameter", http.StatusBadRequest)
-		return
-	}
-
-	maxPrice := backend.MapLinearToExponential(maxPriceLinear, 100, 2500)
-
-	// Updated query to ensure origin city matches properly
-	query := `
-    SELECT f1.destination_city_name, 
-           MIN(f1.price_this_week) AS price_city1, 
-           MIN(f1.skyscanner_url_this_week) AS url_city1,
-           w.date,
-           w.avg_daytime_temp,
-           w.weather_icon,
-           w.google_url,
-           l.avg_wpi, 
-           l.image_1,
-           a.booking_url,
-           a.booking_pppn,
-           fnf.price_fnaf 
-    FROM flight f1
-    JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
-    JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
-    LEFT JOIN accommodation a ON a.city = f1.destination_city_name AND a.country = f1.destination_country
-    LEFT JOIN five_nights_and_flights fnf ON fnf.destination_city = f1.destination_city_name AND fnf.origin_city = ?
-    WHERE f1.origin_city_name = ? 
-    AND l.avg_wpi BETWEEN ? AND ? 
-    AND w.date >= date('now')
-    GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi 
-    HAVING fnf.price_fnaf <= ?
-    ORDER BY fnf.price_fnaf ASC
-    LIMIT ? OFFSET ?`
-
-	// Execute the query with the appropriate parameters
-	rows, err := db.Query(query, city1, city1, 1.0, 10.0, maxPrice, limit, offset)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-	defer rows.Close()
-
-	flights, err := processFlightRows(rows)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-
-	// Append more flights as new cards to the carousel
-	err = tmpl.ExecuteTemplate(w, "table.html", flights)
 	if err != nil {
 		http.Error(w, "Error rendering results", http.StatusInternalServerError)
 	}
