@@ -36,4 +36,3 @@ func main() {
 
 	log.Println("Weather table created successfully.")
 }
-

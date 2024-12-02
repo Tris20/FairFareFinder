@@ -1,26 +1,25 @@
-
 package main
 
 import (
-    "bufio"
-    "database/sql"
-    "fmt"
-    "log"
-    "os"
+	"bufio"
+	"database/sql"
+	"fmt"
+	"log"
+	"os"
 
-    _ "github.com/mattn/go-sqlite3"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-    // Open the SQLite database.
-    db, err := sql.Open("sqlite3", "../../../../../../data/raw/flights/flights.db")
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer db.Close()
+	// Open the SQLite database.
+	db, err := sql.Open("sqlite3", "../../../../../../data/raw/flights/flights.db")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
 
-    // Create the "schedule" table if it does not already exist.
-    _, err = db.Exec(`CREATE TABLE IF NOT EXISTS "schedule" (
+	// Create the "schedule" table if it does not already exist.
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS "schedule" (
         "id"   INTEGER,
         "flightNumber" TEXT NOT NULL,
         "departureAirport" TEXT,
@@ -30,18 +29,18 @@ func main() {
         "direction" TEXT NOT NULL,
         PRIMARY KEY("id" AUTOINCREMENT)
     );`)
-    if err != nil {
-        log.Fatal(err)
-    } else {
-        log.Println("Checked/created 'schedule' table successfully.")
-    }
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		log.Println("Checked/created 'schedule' table successfully.")
+	}
 
-    // Prompt to continue
-    fmt.Println("Press 'Enter' to continue with the next table...")
-    bufio.NewReader(os.Stdin).ReadBytes('\n')
+	// Prompt to continue
+	fmt.Println("Press 'Enter' to continue with the next table...")
+	bufio.NewReader(os.Stdin).ReadBytes('\n')
 
-    // Create the "skyscannerprices" table if it does not already exist.
-    _, err = db.Exec(`
+	// Create the "skyscannerprices" table if it does not already exist.
+	_, err = db.Exec(`
     CREATE TABLE IF NOT EXISTS "skyscannerprices" (
         "origin_city" TEXT,
         "origin_country" TEXT,
@@ -55,10 +54,9 @@ func main() {
         "next_weekend" REAL
     );
     `)
-    if err != nil {
-        log.Fatal(err)
-    } else {
-        log.Println("Checked/created 'skyscannerprices' table successfully.")
-    }
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		log.Println("Checked/created 'skyscannerprices' table successfully.")
+	}
 }
-

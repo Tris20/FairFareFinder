@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -178,4 +177,3 @@ func getMedianBookingPPPNForCountry(db *sql.DB, country string) (float64, error)
 	// Calculate the median
 	return median(ppnns), nil
 }
-

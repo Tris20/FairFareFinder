@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -139,4 +138,3 @@ func main() {
 		log.Fatalf("Error detecting CSS conflicts: %v", err)
 	}
 }
-

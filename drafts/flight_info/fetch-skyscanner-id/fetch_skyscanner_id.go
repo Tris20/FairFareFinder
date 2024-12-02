@@ -49,4 +49,3 @@ func FetchAllSkyScannerIDs(iataCodes []string) (map[string]string, error) {
 
 	return skyscannerIDs, nil
 }
-

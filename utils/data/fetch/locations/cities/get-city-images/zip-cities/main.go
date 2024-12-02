@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -12,7 +11,7 @@ import (
 
 func main() {
 	rootDir := "../pixabay/images/" // Set the source directory
-	outputDir := "output" // Set the output directory for zip files
+	outputDir := "output"           // Set the output directory for zip files
 
 	// Ensure the output directory exists
 	if _, err := os.Stat(outputDir); os.IsNotExist(err) {
@@ -37,7 +36,7 @@ func main() {
 				return err
 			}
 			zipFileName := filepath.Join(outputDir, relativePath+".zip")
-			
+
 			// Create zip file
 			err = zipFolder(path, zipFileName)
 			if err != nil {
@@ -102,4 +101,3 @@ func zipFolder(folder, zipFileName string) error {
 
 	return nil
 }
-

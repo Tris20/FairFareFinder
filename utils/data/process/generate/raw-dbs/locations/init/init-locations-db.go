@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -14,7 +13,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-  defer db.Close()
+	defer db.Close()
 
 	// Create the 'city' table.
 	_, err = db.Exec(`CREATE TABLE city (

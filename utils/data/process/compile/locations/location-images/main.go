@@ -1,15 +1,14 @@
-
 package main
 
 import (
 	"database/sql"
 	"fmt"
+	_ "github.com/mattn/go-sqlite3"
+	"io/ioutil"
 	"log"
 	"path/filepath"
 	"sort"
 	"strings"
-	"io/ioutil"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 type CityImages struct {
@@ -19,7 +18,6 @@ type CityImages struct {
 }
 
 var cities []CityImages
-
 
 // Function to ensure image columns exist in the 'location' table
 func ensureImageColumnsExist(db *sql.DB) error {
@@ -37,12 +35,12 @@ func ensureImageColumnsExist(db *sql.DB) error {
 	existingColumns := make(map[string]bool)
 	for rows.Next() {
 		var (
-			cid       int
-			name      string
-			typeText  string
-			notNull   int
+			cid        int
+			name       string
+			typeText   string
+			notNull    int
 			defaultVal sql.NullString
-			isPK      int
+			isPK       int
 		)
 		err := rows.Scan(&cid, &name, &typeText, &notNull, &defaultVal, &isPK)
 		if err != nil {
@@ -68,7 +66,6 @@ func ensureImageColumnsExist(db *sql.DB) error {
 	return nil
 }
 
-
 func main() {
 	log.Println("Starting the process...")
 
@@ -86,7 +83,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to ensure image columns exist: %v", err)
 	}
-
 
 	// Step 2: Load cities from the 'location' table
 	err = loadCitiesFromDatabase(db)
@@ -224,4 +220,3 @@ func updateCityImages(db *sql.DB, city CityImages) {
 		log.Printf("Successfully updated %d row(s) for city: %s", rowsAffected, city.CityName)
 	}
 }
-

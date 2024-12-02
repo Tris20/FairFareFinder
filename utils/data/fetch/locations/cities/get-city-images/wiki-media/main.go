@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -233,4 +232,3 @@ func copyFile(src, dst string) error {
 	_, err = io.Copy(dest, source)
 	return err
 }
-
