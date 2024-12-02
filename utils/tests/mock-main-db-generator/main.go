@@ -77,7 +77,7 @@ var tableSchemas = map[string]string{
 func main() {
 	// Paths
 	inputFolder := "input-data"
-	outputDB := "../../../data/test.db"
+	outputDB := "../../../data/compiled/main.db"
 
 	// Open SQLite database
 	db, err := sql.Open("sqlite3", outputDB)
