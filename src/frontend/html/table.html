@@ -65,18 +65,23 @@
           </table>
         </td>
 
-<!-- Price and URL for Skyscanner flights -->
-<td class="price-hover {{if eq .PriceCity1.Float64 $.MinFlight.Float64}}highlight{{end}}" 
-    onclick="window.open('{{.UrlCity1}}', '_blank');">
-    {{if and .PriceCity1.Valid (ne .PriceCity1.Float64 0.00)}}{{printf "€%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}
-</td>
+        <!-- Price and URL for Skyscanner flights -->
+        <td
+          class="price-hover {{if eq .PriceCity1.Float64 $.MinFlight.Float64}}highlight{{end}}"
+          onclick="window.open('{{.UrlCity1}}', '_blank');"
+        >
+          {{if and .PriceCity1.Valid (ne .PriceCity1.Float64 0.00)}}{{printf
+          "€%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}
+        </td>
 
-<!-- Avg. Hotel Price -->
-<td class="accommodation-column price-hover {{if eq .BookingPppn.Float64 $.MinHotel.Float64}}highlight{{end}}" 
-    onclick="window.open('{{.BookingUrl.String}}', '_blank');">
-    {{if and .BookingPppn.Valid (ne .BookingPppn.Float64 0.00)}}{{printf "€%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
-</td>
-
+        <!-- Avg. Hotel Price -->
+        <td
+          class="accommodation-column price-hover {{if eq .BookingPppn.Float64 $.MinHotel.Float64}}highlight{{end}}"
+          onclick="window.open('{{.BookingUrl.String}}', '_blank');"
+        >
+          {{if and .BookingPppn.Valid (ne .BookingPppn.Float64 0.00)}}{{printf
+          "€%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
+        </td>
       </tr>
       {{end}}
     </tbody>
@@ -101,7 +106,7 @@
     ></div>
 
     <div class="card-content">
-  <h2>{{ .DestinationCityName }}</h2>
+      <h2>{{ .DestinationCityName }}</h2>
       <div class="weather-icons">
         {{ range $index, $element := .WeatherForecast }} {{ if lt $index 5 }}
         <div class="weather-icon">
@@ -120,29 +125,25 @@
         {{ end }} {{ end }}
       </div>
 
-
-    
-
       <!--p>
     Five Nights and Flights: {{if and .FiveNightsFlights.Valid (ne .FiveNightsFlights.Float64 0.00)}}€{{printf "%.2f" .FiveNightsFlights.Float64}}{{else}}N/A{{end}}
   </p-->
 
+      <!-- Link for Flights From -->
+      <a href="{{.UrlCity1}}" target="_blank" class="clickable">
+        <p>
+          Flights From: {{if and .PriceCity1.Valid (ne .PriceCity1.Float64
+          0.00)}}€{{printf "%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}
+        </p>
+      </a>
 
-<!-- Link for Flights From -->
-<a href="{{.UrlCity1}}" target="_blank" class="clickable">
-  <p>
-    Flights From: {{if and .PriceCity1.Valid (ne .PriceCity1.Float64 0.00)}}€{{printf "%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}
-  </p>
-</a>
-
-<!-- Link for Avg. Hotel Price -->
-<a href="{{.BookingUrl.String}}" target="_blank" class="clickable">
-  <p>
-    Avg. Hotel Price: {{if and .BookingPppn.Valid (ne .BookingPppn.Float64 0.00)}}€{{printf "%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
-  </p>
-</a>
-
-
+      <!-- Link for Avg. Hotel Price -->
+      <a href="{{.BookingUrl.String}}" target="_blank" class="clickable">
+        <p>
+          Avg. Hotel Price: {{if and .BookingPppn.Valid (ne .BookingPppn.Float64
+          0.00)}}€{{printf "%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
+        </p>
+      </a>
     </div>
   </div>
   {{ end }}
@@ -150,9 +151,6 @@
 
 <!-- Indicator for loading new cards -->
 <div id="loading-indicator" style="display: none">Loading more cards...</div>
-
-
-
 
 <!-- New desktop grid view -->
 <div class="desktop-card-grid">
@@ -191,20 +189,21 @@
 
       <a href="{{.UrlCity1}}" target="_blank" class="clickable">
         <p>
-          Flights From: {{if and .PriceCity1.Valid (ne .PriceCity1.Float64 0.00)}}€{{printf "%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}
+          Flights From: {{if and .PriceCity1.Valid (ne .PriceCity1.Float64
+          0.00)}}€{{printf "%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}
         </p>
       </a>
 
       <a href="{{.BookingUrl.String}}" target="_blank" class="clickable">
         <p>
-          Avg. Hotel Price: {{if and .BookingPppn.Valid (ne .BookingPppn.Float64 0.00)}}€{{printf "%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
+          Avg. Hotel Price: {{if and .BookingPppn.Valid (ne .BookingPppn.Float64
+          0.00)}}€{{printf "%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
         </p>
       </a>
     </div>
   </div>
   {{ end }}
 </div>
-
 
 <div id="loading-indicator" style="display: none">Loading more cards...</div>
 
