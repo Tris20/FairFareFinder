@@ -26,7 +26,7 @@ margin: 0px;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
   grid-gap: 20px; /* Space between cards */
-/*  margin: 20px auto;*/
+ margin: 0px 5%;*/
   padding: 10px;
 }
 
@@ -194,6 +194,17 @@ height: 77svh;
     font-size: 1.4em;
     margin: 0;
   }
+
+
+  .desktop-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+    grid-gap: 20px; /* Space between cards */
+    width: calc(100% - 10%); /* Full width minus 10% padding */
+    max-width: 1200px; /* Restrict maximum width to 1200px */
+    margin: 0 auto; /* Center the grid horizontally */
+    padding: 10px; /* Internal padding for aesthetics */
+  }
 }
 
 
@@ -351,4 +362,39 @@ font-size: 1.7em;
 }
 */
 
+.scroll-container {
+    position: relative;
+    height: 80vh; /* Set the height for scrolling, e.g., 80% of the viewport */
+    width: 100vw; /* Ensure the container spans the full width of the viewport */
+    overflow-y: scroll; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Disable horizontal scrolling */
+    box-sizing: border-box; /* Ensure padding is included in width/height */
+    padding: 10px; /* Optional padding for aesthetics */
+}
 
+/* Customize the scrollbar for better UX */
+.scroll-container::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #888; /* Scrollbar thumb color */
+    border-radius: 4px; /* Rounded scrollbar corners */
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Darker color on hover */
+}
+
+/* Table styles inside the scroll container */
+.scroll-container table {
+    width: 100%; /* Table stretches to fill the container width */
+    border-collapse: collapse; /* Collapse table borders */
+}
+
+.scroll-container th,
+.scroll-container td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd; /* Light gray border */
+}
