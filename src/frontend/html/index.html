@@ -84,8 +84,8 @@
             </div>
         </form>
 
+      <div class="scroll-container">
         <div id="flight-table">
-            <div class="scroll-container">
                 <!-- The cards will be dynamically updated here -->
             </div>
         </div>
@@ -124,7 +124,7 @@
                     if (!hasFadedIn) {
                         const flightTable = document.getElementById('flight-table');
                         flightTable.classList.add('fade-in');
-                        hasFadedIn = true;
+                       hasFadedIn = true;
 
                         // Show the footer after the table has been loaded
                         const footer = document.querySelector('#footer-privacy');
