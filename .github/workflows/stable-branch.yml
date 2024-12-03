@@ -25,7 +25,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/stable' 
+    if: github.ref == 'refs/heads/stable' || github.event_name == 'pull_request' && github.base_ref == 'stable'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
