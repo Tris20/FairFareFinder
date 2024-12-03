@@ -1,143 +1,159 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>fairfarefinder</title>
 
     <!-- Link to the CSS files located in the 'css' folder -->
-    <link rel="stylesheet" href="/css/resetCSS.css">
-    <link rel="stylesheet" href="/css/htmxFilter.css">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/tableStyles.css">
-    <link rel="stylesheet" href="/css/mobileStyles.css">
+    <link rel="stylesheet" href="/css/resetCSS.css" />
+    <link rel="stylesheet" href="/css/htmxFilter.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/tableStyles.css" />
+    <link rel="stylesheet" href="/css/mobileStyles.css" />
     <!-- Add Google Fonts for Dosis -->
-    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/styles.css?v=$(date +%s)" />
+
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
     <script src="https://unpkg.com/htmx.org"></script>
-</head>
+  </head>
 
-
-
-
-
-<div id="page-banner">
-<div class="banner-content">
-    <img src="/images/FFF_BW_Trans.svg" alt="FFF Icon" id="fff-icon">
-   <h2>
-        <span><span class="first-letter">f</span>air</span> 
-        <span><span class="first-letter">f</span>are</span> 
+  <div id="page-banner">
+    <div class="banner-content">
+      <img src="/images/FFF_BW_Trans.svg" alt="FFF Icon" id="fff-icon" />
+      <h2>
+        <span><span class="first-letter">f</span>air</span>
+        <span><span class="first-letter">f</span>are</span>
         <span><span class="first-letter">f</span>inder</span>
-    </h2>
-</div>
-</div>
+      </h2>
+    </div>
+  </div>
 
-<body>
+  <body>
     <!-- Background image div -->
     <div id="bg-image-dreams"></div>
 
     <!-- Initial website name that will fade in and out -->
-    <div id="website-name" class="fade-in" style="font-family: 'Dosis', sans-serif;">
-      
-        fair fare finder
+    <div
+      id="website-name"
+      class="fade-in"
+      style="font-family: &quot;Dosis&quot;, sans-serif"
+    >
+      fair fare finder
     </div>
     <!-- Header that will appear above the form -->
-   
+
     <!-- Table content container that will appear after the text fades out -->
-<!-- Banner structure -->
+    <!-- Banner structure -->
     <div id="table-container">
+      <form
+        id="flight-form"
+        hx-get="/filter"
+        hx-target="#flight-table"
+        hx-trigger="change, input delay:50ms"
+      >
+        <div class="form-group">
+          <label for="city1">From:</label>
+          <select id="city1" name="city1">
+            <option value="Berlin" selected>Berlin</option>
+            <option value="Glasgow">Glasgow</option>
+            <option value="Edinburgh">Edinburgh</option>
+            <option value="Munich">Munich</option>
+          </select>
+        </div>
 
+        <div class="form-group">
+          <label for="sort">Sort By:</label>
+          <select id="sort" name="sort">
+            <option value="best_weather" selected>Sunniest and Warmest</option>
+            <option value="worst_weather">Coldest and Wettest</option>
+            <option value="low_price">Most Affordable</option>
+            <option value="high_price">Most Expensive</option>
+          </select>
+        </div>
 
-
-        <form id="flight-form" hx-get="/filter" hx-target="#flight-table" hx-trigger="change, input delay:50ms">
-            <div class="form-group">
-                <label for="city1">From:</label>
-                <select id="city1" name="city1">
-                    <option value="Berlin" selected>Berlin</option>
-                    <option value="Glasgow">Glasgow</option>
-                    <option value="Edinburgh">Edinburgh</option>
-                    <option value="Munich">Munich</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="sort">Sort By:</label>
-                <select id="sort" name="sort">
-                    <option value="best_weather" selected>Sunniest and Warmest</option>
-                    <option value="worst_weather">Coldest and Wettest</option>
-                    <option value="low_price">Most Affordable</option>
-                    <option value="high_price">Most Expensive</option>
-                </select>
-            </div>
-
-            <div class="form-group output-range">
-                <output id="priceOutput">€500.00</output>
-                <input type="range" id="combinedPrice-slider" name="maxPriceLinear" min="0" max="100" step="1" value="49"
-                       hx-get="/update-slider-price"
-                       hx-target="#priceOutput"
-                       hx-trigger="input"
-                       hx-push-url="false"
-                       hx-preserve="false"
-                       autocomplete="off">
-            </div>
-        </form>
+        <div class="form-group output-range">
+          <output id="priceOutput">€500.00</output>
+          <input
+            type="range"
+            id="combinedPrice-slider"
+            name="maxPriceLinear"
+            min="0"
+            max="100"
+            step="1"
+            value="49"
+            hx-get="/update-slider-price"
+            hx-target="#priceOutput"
+            hx-trigger="input"
+            hx-push-url="false"
+            hx-preserve="false"
+            autocomplete="off"
+          />
+        </div>
+      </form>
 
       <div class="scroll-container">
         <div id="flight-table">
-                <!-- The cards will be dynamically updated here -->
-            </div>
+          <!-- The cards will be dynamically updated here -->
         </div>
+      </div>
 
-        <footer id="footer-privacy">
-            <p>&copy; 2024 FairFareFinder | <a href="/privacy-policy">Privacy Policy</a></p>
-        </footer>
+      <footer id="footer-privacy">
+        <p>
+          &copy; 2024 FairFareFinder |
+          <a href="/privacy-policy">Privacy Policy</a>
+        </p>
+      </footer>
     </div>
 
     <script>
-        let hasFadedIn = false;  // Flag to check if the table has already faded in
+      let hasFadedIn = false; // Flag to check if the table has already faded in
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // After the fade-out animation ends, hide the website-name and show the table
-            setTimeout(function() {
-                document.getElementById('website-name').style.display = 'none';
+      document.addEventListener("DOMContentLoaded", function () {
+        // After the fade-out animation ends, hide the website-name and show the table
+        setTimeout(function () {
+          document.getElementById("website-name").style.display = "none";
 
-                // Show the table content with the fade-in animation and move it up
-                const tableContainer = document.getElementById('table-container');
-                tableContainer.classList.add('show');
+          // Show the table content with the fade-in animation and move it up
+          const tableContainer = document.getElementById("table-container");
+          tableContainer.classList.add("show");
 
-     // Also show the header and move it with the form
-                const pageHeader = document.getElementById('page-banner');
-                pageHeader.classList.add('show');
+          // Also show the header and move it with the form
+          const pageHeader = document.getElementById("page-banner");
+          pageHeader.classList.add("show");
 
-                // Wait for the 'moveUp' animation to finish (animationend event)
-                tableContainer.addEventListener('animationend', function(event) {
-                    if (event.animationName === 'moveUp') {
-                        // Manually trigger the form submission after the animation is complete
-                        htmx.trigger('#flight-form', 'change');
-                    }
-                });
+          // Wait for the 'moveUp' animation to finish (animationend event)
+          tableContainer.addEventListener("animationend", function (event) {
+            if (event.animationName === "moveUp") {
+              // Manually trigger the form submission after the animation is complete
+              htmx.trigger("#flight-form", "change");
+            }
+          });
 
-                // Handle HTMX table swap event for the first time only
-                document.getElementById('flight-table').addEventListener('htmx:afterSwap', function() {
-                    if (!hasFadedIn) {
-                        const flightTable = document.getElementById('flight-table');
-                        flightTable.classList.add('fade-in');
-                       hasFadedIn = true;
+          // Handle HTMX table swap event for the first time only
+          document
+            .getElementById("flight-table")
+            .addEventListener("htmx:afterSwap", function () {
+              if (!hasFadedIn) {
+                const flightTable = document.getElementById("flight-table");
+                flightTable.classList.add("fade-in");
+                hasFadedIn = true;
 
-                        // Show the footer after the table has been loaded
-                        const footer = document.querySelector('#footer-privacy');
-                        footer.classList.add('fade-in');
-                    }
-                });
+                // Show the footer after the table has been loaded
+                const footer = document.querySelector("#footer-privacy");
+                footer.classList.add("fade-in");
+              }
+            });
 
-                // Show the background image with a fade-in effect
-                document.getElementById('bg-image-dreams').style.opacity = '1';
-            }, 2000);
-        });
+          // Show the background image with a fade-in effect
+          document.getElementById("bg-image-dreams").style.opacity = "1";
+        }, 2000);
+      });
     </script>
-
-</body>
+  </body>
 </html>
-
