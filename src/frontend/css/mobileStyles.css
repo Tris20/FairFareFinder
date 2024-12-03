@@ -21,6 +21,7 @@ flex-direction: column;
 }
 
 .scroll-container {
+  width:100vw;
   overflow: hidden; /* Hide scrollbars */
 }
 
