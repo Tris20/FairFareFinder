@@ -126,7 +126,7 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 	session.Save(r, w)
 
 	orderClause := determineOrderClause(sortOption)
-	query := buildFilterQuery(orderClause)
+	query := buildDynamicQuery(orderClause)
 
 	rows, err := db.Query(query, city1, city1, 1.0, 10.0, maxPrice)
 	if err != nil {
@@ -154,15 +154,6 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func nextCardsHandler(w http.ResponseWriter, r *http.Request) {
-	// Get pagination parameters (like offset, limit) from the query params
-	pageStr := r.URL.Query().Get("page")
-	page, err := strconv.Atoi(pageStr)
-	if err != nil || page < 1 {
-		page = 1 // Default to first page if invalid
-	}
-
-	offset := (page - 1) * 10 // Assuming 10 results per page
-	limit := 10
 
 	// Fetch the city and maximum price parameters from the query string
 	city1 := r.URL.Query().Get("city1")
@@ -175,35 +166,12 @@ func nextCardsHandler(w http.ResponseWriter, r *http.Request) {
 
 	maxPrice := backend.MapLinearToExponential(maxPriceLinear, 100, 2500)
 
-	// Updated query to ensure origin city matches properly
-	query := `
-    SELECT f1.destination_city_name, 
-           MIN(f1.price_this_week) AS price_city1, 
-           MIN(f1.skyscanner_url_this_week) AS url_city1,
-           w.date,
-           w.avg_daytime_temp,
-           w.weather_icon,
-           w.google_url,
-           l.avg_wpi, 
-           l.image_1,
-           a.booking_url,
-           a.booking_pppn,
-           fnf.price_fnaf 
-    FROM flight f1
-    JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
-    JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
-    LEFT JOIN accommodation a ON a.city = f1.destination_city_name AND a.country = f1.destination_country
-    LEFT JOIN five_nights_and_flights fnf ON fnf.destination_city = f1.destination_city_name AND fnf.origin_city = ?
-    WHERE f1.origin_city_name = ? 
-    AND l.avg_wpi BETWEEN ? AND ? 
-    AND w.date >= date('now')
-    GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi 
-    HAVING fnf.price_fnaf <= ?
-    ORDER BY fnf.price_fnaf ASC
-    LIMIT ? OFFSET ?`
+	// Setup Query
+	orderClause := determineOrderClause("low_price") // Default order for next cards
+	query := buildDynamicQuery(orderClause)
 
 	// Execute the query with the appropriate parameters
-	rows, err := db.Query(query, city1, city1, 1.0, 10.0, maxPrice, limit, offset)
+	rows, err := db.Query(query, city1, city1, 1.0, 10.0, maxPrice)
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
@@ -265,33 +233,6 @@ func determineOrderClause(sortOption string) string {
 	default:
 		return "ORDER BY fnf.price_fnaf ASC" // Default sorting by lowest FNAF price
 	}
-}
-
-// Helper function to build the query string
-func buildFilterQuery(orderClause string) string {
-	return `
-SELECT f1.destination_city_name, 
-       MIN(f1.price_this_week) AS price_city1, 
-       MIN(f1.skyscanner_url_this_week) AS url_city1,
-       w.date,
-       w.avg_daytime_temp,
-       w.weather_icon,
-       w.google_url,
-       l.avg_wpi, 
-       l.image_1,
-       a.booking_url,
-       a.booking_pppn,
-       fnf.price_fnaf 
-FROM flight f1
-JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
-JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
-LEFT JOIN accommodation a ON a.city = f1.destination_city_name AND a.country = f1.destination_country
-LEFT JOIN five_nights_and_flights fnf ON fnf.destination_city = f1.destination_city_name AND fnf.origin_city = ? 
-WHERE f1.origin_city_name = ? 
-AND l.avg_wpi BETWEEN ? AND ? 
-AND w.date >= date('now')
-GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi 
-HAVING fnf.price_fnaf <= ? ` + orderClause
 }
 
 // Helper function to process rows into flight and weather data
@@ -408,7 +349,7 @@ func tableViewHandler(w http.ResponseWriter, r *http.Request) {
 	session.Save(r, w)
 
 	orderClause := determineOrderClause(sortOption)
-	query := buildFilterQuery(orderClause)
+	query := buildDynamicQuery(orderClause)
 
 	rows, err := db.Query(query, city1, city1, 1.0, 10.0, maxPrice)
 	if err != nil {
@@ -430,22 +371,67 @@ func tableViewHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-/*
-// Helper function to get a random image from a folder
-func getRandomImagePath(folder string) (string, error) {
-	// Look for .jpg files in the Bucharest folder
-	files, err := filepath.Glob(filepath.Join(folder, "*.jpg"))
-	if err != nil || len(files) == 0 {
-		return "/images/location-placeholder-image.png", err // Return placeholder if no image found
-	}
-
-	// Seed the random number generator
-	rand.Seed(time.Now().UnixNano())
-
-	// Select a random image
-	randomImage := files[rand.Intn(len(files))]
-
-	// Return the relative path to the image
-	return "/images/Bucharest/" + filepath.Base(randomImage), nil
+// / Helper to construct SELECT clause
+func selectClause() string {
+	return `
+        SELECT f1.destination_city_name, 
+               MIN(f1.price_this_week) AS price_city1, 
+               MIN(f1.skyscanner_url_this_week) AS url_city1,
+               w.date,
+               w.avg_daytime_temp,
+               w.weather_icon,
+               w.google_url,
+               l.avg_wpi, 
+               l.image_1,
+               a.booking_url,
+               a.booking_pppn,
+               fnf.price_fnaf 
+    `
 }
-*/
+
+// Helper to construct JOIN clause
+func joinClause() string {
+	return `
+        FROM flight f1
+        JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
+        JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
+        LEFT JOIN accommodation a ON a.city = f1.destination_city_name AND a.country = f1.destination_country
+        LEFT JOIN five_nights_and_flights fnf ON fnf.destination_city = f1.destination_city_name AND fnf.origin_city = ?
+    `
+}
+
+// Helper to construct WHERE clause
+func whereClause() string {
+	return `
+        WHERE f1.origin_city_name = ? 
+        AND l.avg_wpi BETWEEN ? AND ? 
+        AND w.date >= date('now')
+    `
+}
+
+// Helper to construct GROUP BY clause
+func groupByClause() string {
+	return `
+        GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi 
+    `
+}
+
+// Helper to construct HAVING clause
+func havingClause() string {
+	return `
+        HAVING fnf.price_fnaf <= ?
+    `
+}
+
+// Unified Query Builder
+func buildDynamicQuery(orderClause string) string {
+	query := selectClause() +
+		joinClause() +
+		whereClause() +
+		groupByClause() +
+		havingClause() +
+		orderClause
+	// Print the query for debugging
+	log.Printf("Generated Query: %s", query)
+	return query
+}
