@@ -40,25 +40,26 @@ type LogicalExpression struct {
 func main() {
 	// Example logical expression: (Berlin AND Munich) OR Edinburgh
 	expr := &LogicalExpression{
-		Operator: AndOperator,
+		Operator: OrOperator,
 		Left: &LogicalExpression{
 			Operator: AndOperator,
-			Left:     &CityCondition{City: CityInput{Name: "Berlin", PriceLimit: 200}},
-			Right:    &CityCondition{City: CityInput{Name: "Munich", PriceLimit: 200}},
+			Left:     &CityCondition{City: CityInput{Name: "Berlin", PriceLimit: 1500}},
+			Right:    &CityCondition{City: CityInput{Name: "Munich", PriceLimit: 2000}},
 		},
-		Right: &CityCondition{City: CityInput{Name: "Edinburgh", PriceLimit: 200}},
+		Right: &CityCondition{City: CityInput{Name: "Edinburgh", PriceLimit: 180}},
 	}
 
+	// Define the maximum accommodation price per person per night
+	maxAccommodationPrice := 35.0 // Or get this value from user input
+
 	// Build the query
-	query, args := buildQuery(expr)
+	query, args := buildQuery(expr, maxAccommodationPrice)
 
 	// Output the query for debugging
 	fmt.Println("Generated SQL Query:")
 	fmt.Println(query)
 	fmt.Println("Arguments:")
-	fmt.Println(args)
-
-	// Connect to the SQLite database (replace "your_database.db" with your actual database file)
+	fmt.Println(args) // Connect to the SQLite database (replace "your_database.db" with your actual database file)
 	db, err := sql.Open("sqlite3", "../../../data/compiled/main.db")
 	if err != nil {
 		panic(err)
@@ -91,11 +92,11 @@ func main() {
 	}
 }
 
-func buildQuery(expr Expression) (string, []interface{}) {
+func buildQuery(expr Expression, maxAccommodationPrice float64) (string, []interface{}) {
 	var queryBuilder strings.Builder
 	var args []interface{}
 
-	// Begin the query with the Flights CTE
+	// Begin the query with the DestinationSet CTE
 	queryBuilder.WriteString("WITH DestinationSet AS (\n")
 
 	// Build the subquery based on the logical expression
@@ -124,7 +125,19 @@ func buildQuery(expr Expression) (string, []interface{}) {
     WHERE l.avg_wpi BETWEEN 1.0 AND 10.0 
       AND w.date >= date('now')
       AND f.price_next_week < ?
-      AND f.origin_city_name IN (?, ?, ?)
+      AND f.origin_city_name IN `)
+
+	// Build the IN clause dynamically based on the number of origin cities
+	originCities := []string{"Berlin", "Munich", "Edinburgh"}
+	placeholders := make([]string, len(originCities))
+	for i := range originCities {
+		placeholders[i] = "?"
+	}
+	inClause := fmt.Sprintf("(%s)", strings.Join(placeholders, ", "))
+	queryBuilder.WriteString(inClause)
+	queryBuilder.WriteString(`
+      AND a.booking_pppn IS NOT NULL
+      AND a.booking_pppn <= ?
     GROUP BY ds.destination_city_name, ds.destination_country
     ORDER BY l.avg_wpi DESC;
     `)
@@ -132,7 +145,13 @@ func buildQuery(expr Expression) (string, []interface{}) {
 	// Add price limits and origin city names to args
 	maxPrice := 2000.0 // Set a max price or calculate based on inputs
 	args = append(args, maxPrice)
-	args = append(args, "Berlin", "Munich", "Edinburgh")
+
+	// Correctly append originCities to args
+	for _, city := range originCities {
+		args = append(args, city)
+	}
+
+	args = append(args, maxAccommodationPrice)
 
 	return queryBuilder.String(), args
 }
