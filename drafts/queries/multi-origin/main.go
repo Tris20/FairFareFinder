@@ -14,16 +14,43 @@ type CityInput struct {
 	PriceLimit float64
 }
 
+// LogicalOperator represents a logical operator (AND, OR)
+type LogicalOperator string
+
+const (
+	AndOperator LogicalOperator = "AND"
+	OrOperator  LogicalOperator = "OR"
+)
+
+// Expression represents a logical expression
+type Expression interface{}
+
+// CityCondition represents a condition for a single city
+type CityCondition struct {
+	City CityInput
+}
+
+// LogicalExpression represents a logical combination of expressions
+type LogicalExpression struct {
+	Operator LogicalOperator
+	Left     Expression
+	Right    Expression
+}
+
 func main() {
-	// Example inputs
-	cities := []CityInput{
-		{Name: "Berlin", PriceLimit: 150},
-		{Name: "Munich", PriceLimit: 200},
+	// Example logical expression: (Berlin AND Munich) OR Edinburgh
+	expr := &LogicalExpression{
+		Operator: AndOperator,
+		Left: &LogicalExpression{
+			Operator: AndOperator,
+			Left:     &CityCondition{City: CityInput{Name: "Berlin", PriceLimit: 200}},
+			Right:    &CityCondition{City: CityInput{Name: "Munich", PriceLimit: 200}},
+		},
+		Right: &CityCondition{City: CityInput{Name: "Edinburgh", PriceLimit: 200}},
 	}
-	logicalOperator := "AND" // Change to "OR" for OR logic
 
 	// Build the query
-	query, args := buildQuery(cities, logicalOperator)
+	query, args := buildQuery(expr)
 
 	// Output the query for debugging
 	fmt.Println("Generated SQL Query:")
@@ -64,92 +91,83 @@ func main() {
 	}
 }
 
-func buildQuery(cities []CityInput, logicalOperator string) (string, []interface{}) {
+func buildQuery(expr Expression) (string, []interface{}) {
 	var queryBuilder strings.Builder
 	var args []interface{}
 
-	// Begin the query
-	queryBuilder.WriteString(`
-WITH Flights AS (
-`)
+	// Begin the query with the Flights CTE
+	queryBuilder.WriteString("WITH DestinationSet AS (\n")
 
-	// Build individual city queries
-	cityQueries := make([]string, len(cities))
-	for i, city := range cities {
-		cityQuery := fmt.Sprintf(`
+	// Build the subquery based on the logical expression
+	subquery, subqueryArgs := buildSubquery(expr)
+	queryBuilder.WriteString(subquery)
+	queryBuilder.WriteString("\n)")
+	args = append(args, subqueryArgs...)
+
+	// Build the rest of the query
+	queryBuilder.WriteString(`
     SELECT 
-        f.origin_city_name,
-        f.destination_city_name,
-        f.destination_country,
-        MIN(f.price_next_week) AS price,
-        MIN(f.skyscanner_url_next_week) AS url
-    FROM flight f
-    WHERE f.origin_city_name = ?
-          AND f.price_next_week < ?
-    GROUP BY f.origin_city_name, f.destination_city_name, f.destination_country
-`)
+        ds.destination_city_name,
+        ds.destination_country,
+        GROUP_CONCAT(DISTINCT f.origin_city_name) AS origin_cities,
+        MIN(f.price_next_week) AS price
+        -- Add other columns as needed
+    FROM DestinationSet ds
+    JOIN flight f ON ds.destination_city_name = f.destination_city_name 
+                   AND ds.destination_country = f.destination_country
+    JOIN location l ON ds.destination_city_name = l.city 
+                     AND ds.destination_country = l.country
+    JOIN weather w ON w.city = ds.destination_city_name 
+                    AND w.country = ds.destination_country
+    LEFT JOIN accommodation a ON a.city = ds.destination_city_name 
+                               AND a.country = ds.destination_country
+    WHERE l.avg_wpi BETWEEN 1.0 AND 10.0 
+      AND w.date >= date('now')
+      AND f.price_next_week < ?
+      AND f.origin_city_name IN (?, ?, ?)
+    GROUP BY ds.destination_city_name, ds.destination_country
+    ORDER BY l.avg_wpi DESC;
+    `)
 
-		// Add to args
-		args = append(args, city.Name, city.PriceLimit)
-
-		// If not the first city, prepend UNION ALL
-		if i > 0 {
-			cityQuery = "UNION ALL" + cityQuery
-		}
-
-		cityQueries[i] = cityQuery
-	}
-
-	// Join all city queries
-	queryBuilder.WriteString(strings.Join(cityQueries, "\n"))
-
-	// Close the Flights CTE
-	queryBuilder.WriteString(`
-),
-DestinationCounts AS (
-    SELECT 
-        destination_city_name,
-        destination_country,
-        COUNT(DISTINCT origin_city_name) AS num_origins
-    FROM Flights
-    GROUP BY destination_city_name, destination_country
-),
-TotalOrigins AS (
-    SELECT COUNT(DISTINCT origin_city_name) AS total_origins
-    FROM Flights
-)
-SELECT 
-    f.destination_city_name,
-    f.destination_country,
-    GROUP_CONCAT(DISTINCT f.origin_city_name) AS origin_cities,
-    MIN(f.price) AS price
-    -- Add other columns as needed
-FROM Flights f
-JOIN DestinationCounts d ON f.destination_city_name = d.destination_city_name 
-                          AND f.destination_country = d.destination_country
-JOIN TotalOrigins t
-JOIN location l ON f.destination_city_name = l.city 
-                 AND f.destination_country = l.country
-JOIN weather w ON w.city = f.destination_city_name 
-                AND w.country = f.destination_country
-LEFT JOIN accommodation a ON a.city = f.destination_city_name 
-                           AND a.country = f.destination_country
-WHERE l.avg_wpi BETWEEN 1.0 AND 10.0 
-  AND w.date >= date('now')
-`)
-
-	// Add logical operator condition
-	if logicalOperator == "AND" {
-		queryBuilder.WriteString(`
-  AND d.num_origins = t.total_origins
-`)
-	}
-
-	// Close the query
-	queryBuilder.WriteString(`
-GROUP BY f.destination_city_name, f.destination_country
-ORDER BY l.avg_wpi DESC;
-`)
+	// Add price limits and origin city names to args
+	maxPrice := 2000.0 // Set a max price or calculate based on inputs
+	args = append(args, maxPrice)
+	args = append(args, "Berlin", "Munich", "Edinburgh")
 
 	return queryBuilder.String(), args
+}
+
+func buildSubquery(expr Expression) (string, []interface{}) {
+	switch e := expr.(type) {
+	case *CityCondition:
+		// Return the subquery for a city condition
+		subquery := fmt.Sprintf(`
+            SELECT 
+                f.destination_city_name,
+                f.destination_country
+            FROM flight f
+            WHERE f.origin_city_name = ? AND f.price_next_week < ?
+            GROUP BY f.destination_city_name, f.destination_country
+        `)
+		args := []interface{}{e.City.Name, e.City.PriceLimit}
+		return subquery, args
+	case *LogicalExpression:
+		// Build the left and right subqueries
+		leftSubquery, leftArgs := buildSubquery(e.Left)
+		rightSubquery, rightArgs := buildSubquery(e.Right)
+		var operator string
+		if e.Operator == AndOperator {
+			operator = "INTERSECT"
+		} else if e.Operator == OrOperator {
+			operator = "UNION"
+		} else {
+			panic("Unknown operator")
+		}
+		// Combine subqueries without unnecessary parentheses
+		combinedSubquery := fmt.Sprintf("%s\n%s\n%s", leftSubquery, operator, rightSubquery)
+		args := append(leftArgs, rightArgs...)
+		return combinedSubquery, args
+	default:
+		panic("Unknown expression type")
+	}
 }
