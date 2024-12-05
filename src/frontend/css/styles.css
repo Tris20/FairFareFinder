@@ -134,7 +134,7 @@ h1 {
 
 #flight-table {
   width: 100%; /* Ensure the table takes up full width */
-  margin: 35px 0;
+  margin: 25px 0;
   overflow-y: auto; /* Enables vertical scrolling when necessary */
   opacity: 0; /* Start invisible */
   overflow-x: scroll; /* Enable horizontal scrolling for smaller screens */
@@ -574,4 +574,17 @@ td {
 
 
 
+#additional-cities {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
 
+
+.form-group.additional-city {
+    width: 100%;  /* Ensures that the div takes up the full width of its parent */
+    display: flex; /* Uses flexbox to allow child elements to be more flexibly styled */
+    flex-direction: column; /* Stacks child elements vertically */
+    align-items: center; /* Centers child elements horizontally */
+}

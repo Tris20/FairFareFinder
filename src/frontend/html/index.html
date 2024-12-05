@@ -55,14 +55,62 @@
         hx-target="#flight-table"
         hx-trigger="change, input delay:50ms"
       >
+        <div
+          class="origin-city"
+          style="
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
+          "
+        >
+          <div class="form-group">
+            <label for="city1">From:</label>
+            <select id="city1" name="city1">
+              <option value="Berlin" selected="">Berlin</option>
+              <option value="Glasgow">Glasgow</option>
+              <option value="Edinburgh">Edinburgh</option>
+              <option value="Munich">Munich</option>
+            </select>
+          </div>
+
+          <div class="form-group origin-city output-range">
+            <output id="priceOutput" class="">€399.00</output>
+            <input
+              type="range"
+              id="combinedPrice-slider"
+              name="maxPriceLinear"
+              min="0"
+              max="100"
+              step="1"
+              value="49"
+              hx-get="/update-slider-price"
+              hx-target="#priceOutput"
+              hx-trigger="input"
+              hx-push-url="false"
+              hx-preserve="false"
+              autocomplete="off"
+              class=""
+            />
+          </div>
+        </div>
+        <!-- Dynamic origin cities container -->
+        <div
+          id="additional-cities"
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+          "
+        >
+          <!-- Additional cities will be dynamically added here -->
+        </div>
+        <!-- Button to add more origin cities -->
         <div class="form-group">
-          <label for="city1">From:</label>
-          <select id="city1" name="city1">
-            <option value="Berlin" selected>Berlin</option>
-            <option value="Glasgow">Glasgow</option>
-            <option value="Edinburgh">Edinburgh</option>
-            <option value="Munich">Munich</option>
-          </select>
+          <button type="button" id="add-city-button" class="btn btn-secondary">
+            Add Another Origin City
+          </button>
         </div>
 
         <div class="form-group">
@@ -73,25 +121,6 @@
             <option value="low_price">Most Affordable</option>
             <option value="high_price">Most Expensive</option>
           </select>
-        </div>
-
-        <div class="form-group output-range">
-          <output id="priceOutput">€500.00</output>
-          <input
-            type="range"
-            id="combinedPrice-slider"
-            name="maxPriceLinear"
-            min="0"
-            max="100"
-            step="1"
-            value="49"
-            hx-get="/update-slider-price"
-            hx-target="#priceOutput"
-            hx-trigger="input"
-            hx-push-url="false"
-            hx-preserve="false"
-            autocomplete="off"
-          />
         </div>
       </form>
 
@@ -152,6 +181,52 @@
           document.getElementById("bg-image-dreams").style.opacity = "1";
         }, 2000);
       });
+
+      // Add event listener for adding additional cities dynamically
+
+      document
+        .getElementById("add-city-button")
+        .addEventListener("click", function () {
+          const index = document.querySelectorAll(".additional-city").length; // Get current index of additional cities
+
+          // Create container for additional city inputs
+          const div = document.createElement("div");
+          div.className = "form-group additional-city";
+          div.innerHTML = `
+      <label>Logical Operator:</label>
+      <select name="logical_operator[]">
+        <option value="AND">AND</option>
+        <option value="OR">OR</option>
+      </select>
+      <label for="city${index}">Additional City:</label>
+      <select id="city${index}" name="city[]">
+        <option value="Berlin">Berlin</option>
+        <option value="Glasgow">Glasgow</option>
+        <option value="Edinburgh">Edinburgh</option>
+        <option value="Munich">Munich</option>
+      </select>
+      <label for="priceOutput${index}"></label>
+      <output id="priceOutput${index}" class="output-range">€399.00</output>
+      <input
+        type="range"
+        id="combinedPrice-slider${index}"
+        name="maxPriceLinear${index}"
+        min="0"
+        max="100"
+        step="1"
+        value="49"
+        class="price-slider"
+        hx-get="/update-slider-price"
+        hx-target="#priceOutput${index}"
+        hx-trigger="input"
+        hx-push-url="false"
+        hx-preserve="false"
+        autocomplete="off"
+      />
+    `;
+
+          document.getElementById("additional-cities").appendChild(div);
+        });
     </script>
   </body>
 </html>

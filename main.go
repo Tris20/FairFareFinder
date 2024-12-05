@@ -13,11 +13,11 @@ import (
 	//"path/filepath"
 	"strconv"
 	//"time"
-
 	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/gorilla/sessions"
 	_ "github.com/mattn/go-sqlite3"
 	"gopkg.in/natefinch/lumberjack.v2"
+	"strings"
 )
 
 type Weather struct {
@@ -78,19 +78,15 @@ func main() {
 	}
 	defer db.Close()
 
-	// Parse templates, now including table_view.html
 	tmpl = template.Must(template.ParseFiles(
 		"./src/frontend/html/index.html",
-		"./src/frontend/html/table.html",
-		"./src/frontend/html/table_view.html"))
+		"./src/frontend/html/table.html"))
 
 	backend.Init(db, tmpl)
 
 	// Set up routes
 	http.HandleFunc("/", backend.IndexHandler)
-	http.HandleFunc("/filter", filterHandler)
-	http.HandleFunc("/table_view", tableViewHandler)
-	http.HandleFunc("/next-cards", nextCardsHandler) //
+	http.HandleFunc("/filter", combinedCardsHandler)
 	http.HandleFunc("/update-slider-price", backend.UpdateSliderPriceHandler)
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./src/frontend/css/"))))
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./src/frontend/images"))))
@@ -112,23 +108,33 @@ func main() {
 
 }
 
-func filterHandler(w http.ResponseWriter, r *http.Request) {
-	// Same as existing filterHandler logic
+func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session")
-	city1, sortOption, maxPriceLinear, err := parseFilterRequest(r)
+	city1 := r.URL.Query().Get("city1")
+	additionalCities := r.URL.Query()["city[]"]
+	logicalOperators := r.URL.Query()["logical_operator[]"]
+	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
+	maxPriceLinear, err := strconv.ParseFloat(maxPriceLinearStr, 64)
 	if err != nil {
-		http.Error(w, "Invalid request parameters", http.StatusBadRequest)
+		http.Error(w, "Invalid price parameter", http.StatusBadRequest)
 		return
 	}
+	maxPrice := backend.MapLinearToExponential(maxPriceLinear, 50, 2500)
 
-	maxPrice := backend.MapLinearToExponential(maxPriceLinear, 100, 2500)
-	session.Values["city1"] = city1
-	session.Save(r, w)
+	// Determine sort option: 'nextCardsHandler' has a default, 'filterHandler' might vary
+	sortOption := r.URL.Query().Get("sort")
+	if sortOption == "" {
+		sortOption = "low_price" // default for 'nextCardsHandler'
+	}
 
 	orderClause := determineOrderClause(sortOption)
-	query := buildDynamicQuery(orderClause)
+	query := buildDynamicQuery(orderClause, city1, additionalCities, logicalOperators)
+	params := append([]interface{}{city1, city1}, 1.0, 10.0, maxPrice) // Prepare parameters
+	for _, city := range additionalCities {
+		params = append(params, city)
+	}
 
-	rows, err := db.Query(query, city1, city1, 1.0, 10.0, maxPrice)
+	rows, err := db.Query(query, params...)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -141,97 +147,13 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Fetch random image for each flight
-	/*	for i := range flights {
-			flights[i].RandomImageURL, _ = getRandomImagePath("./src/frontend/images/Bucharest") // Add random image URL
-		}
-	*/
+	session.Values["city1"] = city1
+	session.Save(r, w)
+
 	data := buildFlightsData(city1, flights)
 	err = tmpl.ExecuteTemplate(w, "table.html", data)
 	if err != nil {
 		http.Error(w, "Error rendering results", http.StatusInternalServerError)
-	}
-}
-
-func nextCardsHandler(w http.ResponseWriter, r *http.Request) {
-
-	// Fetch the city and maximum price parameters from the query string
-	city1 := r.URL.Query().Get("city1")
-	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
-	maxPriceLinear, err := strconv.ParseFloat(maxPriceLinearStr, 64)
-	if err != nil {
-		http.Error(w, "Invalid price parameter", http.StatusBadRequest)
-		return
-	}
-
-	maxPrice := backend.MapLinearToExponential(maxPriceLinear, 100, 2500)
-
-	// Setup Query
-	orderClause := determineOrderClause("low_price") // Default order for next cards
-	query := buildDynamicQuery(orderClause)
-
-	// Execute the query with the appropriate parameters
-	rows, err := db.Query(query, city1, city1, 1.0, 10.0, maxPrice)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-	defer rows.Close()
-
-	flights, err := processFlightRows(rows)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-
-	// Append more flights as new cards to the carousel
-	err = tmpl.ExecuteTemplate(w, "table.html", flights)
-	if err != nil {
-		http.Error(w, "Error rendering results", http.StatusInternalServerError)
-	}
-}
-
-// The rest of the code remains the same (helper functions, etc.)
-
-// Helper function to parse request parameters
-func parseFilterRequest(r *http.Request) (string, string, float64, error) {
-	city1 := r.URL.Query().Get("city1")
-	sortOption := r.URL.Query().Get("sort")
-
-	// Get the maxPriceLinear parameter
-	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
-
-	var maxPriceLinear float64
-	var err error
-
-	// Check if maxPriceLinear is provided and not empty
-	if maxPriceLinearStr != "" {
-		maxPriceLinear, err = strconv.ParseFloat(maxPriceLinearStr, 64)
-		if err != nil {
-			log.Printf("Error parsing maxPriceLinear: %v", err)
-			return "", "", 0, err
-		}
-	} else {
-		// Provide a default value if the parameter is missing or empty
-		maxPriceLinear = 100 // Example default value
-	}
-
-	return city1, sortOption, maxPriceLinear, nil
-}
-
-// Helper function to determine the ORDER BY clause
-func determineOrderClause(sortOption string) string {
-	switch sortOption {
-	case "low_price":
-		return "ORDER BY fnf.price_fnaf ASC"
-	case "high_price":
-		return "ORDER BY fnf.price_fnaf DESC"
-	case "best_weather":
-		return "ORDER BY avg_wpi DESC"
-	case "worst_weather":
-		return "ORDER BY avg_wpi ASC"
-	default:
-		return "ORDER BY fnf.price_fnaf ASC" // Default sorting by lowest FNAF price
 	}
 }
 
@@ -297,10 +219,10 @@ func buildFlightsData(city1 string, flights []Flight) FlightsData {
 	var maxWpi, minFlightPrice, minHotelPrice, minFnafPrice sql.NullFloat64
 
 	for _, flight := range flights {
-		maxWpi = updateMaxValue(maxWpi, flight.AvgWpi)
-		minFlightPrice = updateMinValue(minFlightPrice, flight.PriceCity1)
-		minHotelPrice = updateMinValue(minHotelPrice, flight.BookingPppn)
-		minFnafPrice = updateMinValue(minFnafPrice, flight.FiveNightsFlights)
+		maxWpi = backend.UpdateMaxValue(maxWpi, flight.AvgWpi)
+		minFlightPrice = backend.UpdateMinValue(minFlightPrice, flight.PriceCity1)
+		minHotelPrice = backend.UpdateMinValue(minHotelPrice, flight.BookingPppn)
+		minFnafPrice = backend.UpdateMinValue(minFnafPrice, flight.FiveNightsFlights)
 	}
 
 	return FlightsData{
@@ -313,61 +235,33 @@ func buildFlightsData(city1 string, flights []Flight) FlightsData {
 	}
 }
 
-// Helper function to update max value
-func updateMaxValue(currentMax, newValue sql.NullFloat64) sql.NullFloat64 {
-	if !currentMax.Valid || (newValue.Valid && newValue.Float64 > currentMax.Float64) {
-		return newValue
-	}
-	return currentMax
+// Unified Query Builder
+func buildDynamicQuery(orderClause string, city1 string, additionalCities []string, logicalOperators []string) string {
+	query := selectClause() +
+		joinClause() +
+		whereClause(city1, additionalCities, logicalOperators) +
+		groupByClause() +
+		havingClause() +
+		orderClause
+
+	// Print the query for debugging
+	log.Printf("Generated Query: %s", query)
+	return query
 }
 
-// Helper function to update min value
-func updateMinValue(currentMin, newValue sql.NullFloat64) sql.NullFloat64 {
-	// HOTFIX Check if newValue is valid and greater than or equal to 0.1
-	// This ensures we don't include flight prices which are zero because no price was found
-	if newValue.Valid && newValue.Float64 >= 0.1 {
-		// Update currentMin if it's not valid or if newValue is smaller
-		if !currentMin.Valid || newValue.Float64 < currentMin.Float64 {
-			return newValue
-		}
-	}
-	// Return currentMin if none of the above conditions are met
-	return currentMin
-}
-
-func tableViewHandler(w http.ResponseWriter, r *http.Request) {
-	// Similar logic to index handler but for table_view
-	session, _ := store.Get(r, "session")
-	city1, sortOption, maxPriceLinear, err := parseFilterRequest(r)
-	if err != nil {
-		http.Error(w, "Invalid request parameters", http.StatusBadRequest)
-		return
-	}
-
-	maxPrice := backend.MapLinearToExponential(maxPriceLinear, 100, 2500)
-	session.Values["city1"] = city1
-	session.Save(r, w)
-
-	orderClause := determineOrderClause(sortOption)
-	query := buildDynamicQuery(orderClause)
-
-	rows, err := db.Query(query, city1, city1, 1.0, 10.0, maxPrice)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	defer rows.Close()
-
-	flights, err := processFlightRows(rows)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-
-	data := buildFlightsData(city1, flights)
-	err = tmpl.ExecuteTemplate(w, "table_view.html", data) // Render the table_view.html page
-	if err != nil {
-		http.Error(w, "Error rendering results", http.StatusInternalServerError)
+// Helper function to determine the ORDER BY clause
+func determineOrderClause(sortOption string) string {
+	switch sortOption {
+	case "low_price":
+		return "ORDER BY fnf.price_fnaf ASC"
+	case "high_price":
+		return "ORDER BY fnf.price_fnaf DESC"
+	case "best_weather":
+		return "ORDER BY avg_wpi DESC"
+	case "worst_weather":
+		return "ORDER BY avg_wpi ASC"
+	default:
+		return "ORDER BY fnf.price_fnaf ASC" // Default sorting by lowest FNAF price
 	}
 }
 
@@ -401,12 +295,53 @@ func joinClause() string {
 }
 
 // Helper to construct WHERE clause
-func whereClause() string {
-	return `
-        WHERE f1.origin_city_name = ? 
+
+func whereClause(city1 string, additionalCities []string, logicalOperators []string) string {
+	// Start with the primary condition for city1
+	whereClause := "WHERE f1.origin_city_name = ?"
+
+	if len(additionalCities) > 0 {
+		// Use INTERSECT for AND logic, or UNION for OR logic
+		subqueries := []string{}
+		for i := range additionalCities {
+			if i < len(logicalOperators) && logicalOperators[i] == "AND" {
+				// Create an INTERSECT query for the additional city
+				subqueries = append(subqueries, fmt.Sprintf(`
+					SELECT f.destination_city_name 
+					FROM flight f 
+					WHERE f.origin_city_name = ?
+				`))
+			} else if i < len(logicalOperators) && logicalOperators[i] == "OR" {
+				// Create a UNION query for the additional city
+				subqueries = append(subqueries, fmt.Sprintf(`
+					SELECT f.destination_city_name 
+					FROM flight f 
+					WHERE f.origin_city_name = ?
+				`))
+			} else {
+				log.Printf("Warning: Mismatch between additionalCities and logicalOperators at index %d", i)
+			}
+		}
+
+		// Combine subqueries into the WHERE clause
+		if len(subqueries) > 0 {
+			whereClause += " AND f1.destination_city_name IN ("
+			if logicalOperators[0] == "AND" {
+				whereClause += strings.Join(subqueries, " INTERSECT ")
+			} else {
+				whereClause += strings.Join(subqueries, " UNION ")
+			}
+			whereClause += ")"
+		}
+	}
+
+	// Add static conditions
+	whereClause += `
         AND l.avg_wpi BETWEEN ? AND ? 
         AND w.date >= date('now')
     `
+	log.Printf("Generated WHERE Clause: %s", whereClause)
+	return whereClause
 }
 
 // Helper to construct GROUP BY clause
@@ -419,19 +354,6 @@ func groupByClause() string {
 // Helper to construct HAVING clause
 func havingClause() string {
 	return `
-        HAVING fnf.price_fnaf <= ?
+        HAVING MIN(f1.price_this_week) <= ?
     `
-}
-
-// Unified Query Builder
-func buildDynamicQuery(orderClause string) string {
-	query := selectClause() +
-		joinClause() +
-		whereClause() +
-		groupByClause() +
-		havingClause() +
-		orderClause
-	// Print the query for debugging
-	log.Printf("Generated Query: %s", query)
-	return query
 }

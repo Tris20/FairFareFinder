@@ -89,13 +89,7 @@
 </div>
 
 <!-- Mobile view (card carousel) -->
-<div
-  class="mobile-view card-carousel"
-  hx-get="/next-cards"
-  hx-trigger="revealed"
-  hx-swap="afterend"
-  hx-indicator="#loading-indicator"
->
+<div class="mobile-view card-carousel">
   {{ range .Flights }}
   <div class="card">
     <div

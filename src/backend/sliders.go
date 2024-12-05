@@ -1,5 +1,4 @@
-
-package backend 
+package backend
 
 import (
 	"fmt"
@@ -19,8 +18,7 @@ func UpdateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Use the function from the mappings file
-	maxPrice := MapLinearToExponential(maxPriceLinear, 100, 2500)
+	maxPrice := MapLinearToExponential(maxPriceLinear, 50, 2500)
 
 	fmt.Fprintf(w, "€%.2f", maxPrice)
 }
-
