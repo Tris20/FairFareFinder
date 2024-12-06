@@ -92,8 +92,9 @@ func main() {
 
 	// Step 3: Populate the city struct with image paths
 	for i := range cities {
+
 		cityNameForPath := strings.ReplaceAll(cities[i].CityName, " ", "_")
-                cityFolder := fmt.Sprintf("../../../../../../ignore/location-images/%s", cityNameForPath)
+		cityFolder := fmt.Sprintf("../../../../../../ignore/location-images/%s", cityNameForPath)
 		log.Printf("Looking for images in folder: %s", cityFolder)
 
 		images, err := getCityImages(cityFolder)

@@ -13,11 +13,11 @@ import (
 	//"path/filepath"
 	"strconv"
 	//"time"
-
 	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/gorilla/sessions"
 	_ "github.com/mattn/go-sqlite3"
 	"gopkg.in/natefinch/lumberjack.v2"
+	"strings"
 )
 
 type Weather struct {
@@ -78,19 +78,15 @@ func main() {
 	}
 	defer db.Close()
 
-	// Parse templates, now including table_view.html
 	tmpl = template.Must(template.ParseFiles(
 		"./src/frontend/html/index.html",
-		"./src/frontend/html/table.html",
-		"./src/frontend/html/table_view.html"))
+		"./src/frontend/html/table.html"))
 
 	backend.Init(db, tmpl)
 
 	// Set up routes
 	http.HandleFunc("/", backend.IndexHandler)
-	http.HandleFunc("/filter", filterHandler)
-	http.HandleFunc("/table_view", tableViewHandler)
-	http.HandleFunc("/next-cards", nextCardsHandler) //
+	http.HandleFunc("/filter", combinedCardsHandler)
 	http.HandleFunc("/update-slider-price", backend.UpdateSliderPriceHandler)
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./src/frontend/css/"))))
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./src/frontend/images"))))
@@ -112,186 +108,82 @@ func main() {
 
 }
 
-func filterHandler(w http.ResponseWriter, r *http.Request) {
-	// Same as existing filterHandler logic
+func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session")
-	city1, sortOption, maxPriceLinear, err := parseFilterRequest(r)
-	if err != nil {
-		http.Error(w, "Invalid request parameters", http.StatusBadRequest)
+	cities := r.URL.Query()["city[]"]
+	logicalOperators := r.URL.Query()["logical_operator[]"]
+	maxPriceLinearStrs := r.URL.Query()["maxPriceLinear[]"]
+
+	// Validate input lengths
+	if len(cities) == 0 || len(cities) != len(logicalOperators)+1 || len(cities) != len(maxPriceLinearStrs) {
+		http.Error(w, "Mismatched input lengths", http.StatusBadRequest)
 		return
 	}
 
-	maxPrice := backend.MapLinearToExponential(maxPriceLinear, 100, 2500)
-	session.Values["city1"] = city1
-	session.Save(r, w)
+	// Parse price limits
+	var maxPrices []float64
+	for _, linearStr := range maxPriceLinearStrs {
+		linearValue, err := strconv.ParseFloat(linearStr, 64)
+		if err != nil {
+			http.Error(w, "Invalid price parameter", http.StatusBadRequest)
+			return
+		}
+		maxPrices = append(maxPrices, backend.MapLinearToExponential(linearValue, 50, 2500))
+	}
 
+	// Parse logical expression
+	expr, err := parseLogicalExpression(cities, logicalOperators, maxPrices)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Retrieve and process sort option
+	sortOption := r.URL.Query().Get("sort")
+	if sortOption == "" {
+		sortOption = "low_price" // default
+	}
 	orderClause := determineOrderClause(sortOption)
-	query := buildFilterQuery(orderClause)
 
-	rows, err := db.Query(query, city1, city1, 1.0, 10.0, maxPrice)
+	// Define max accommodation price (can be dynamic or a user input)
+	maxAccommodationPrice := 70.0
+
+	// Build the query
+
+	query, args := buildQuery(expr, maxAccommodationPrice, cities, orderClause)
+
+	// Output the query for debugging
+	fmt.Println("Generated SQL Query:")
+	fmt.Println(query)
+	fmt.Println("Arguments:")
+	fmt.Println(args)
+	// Log the interpolated query for debugging
+	fullQuery := interpolateQuery(query, args)
+	log.Printf("Full Query:\n%s\n", fullQuery)
+
+	rows, err := db.Query(query, args...)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	defer rows.Close()
 
+	// Process results
 	flights, err := processFlightRows(rows)
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
 
-	// Fetch random image for each flight
-	/*	for i := range flights {
-			flights[i].RandomImageURL, _ = getRandomImagePath("./src/frontend/images/Bucharest") // Add random image URL
-		}
-	*/
-	data := buildFlightsData(city1, flights)
+	// Save the session and render the response
+	//session.Values["city1"] = cities[0] // Save the first city
+	session.Save(r, w)
+
+	data := buildFlightsData(cities, flights)
 	err = tmpl.ExecuteTemplate(w, "table.html", data)
 	if err != nil {
 		http.Error(w, "Error rendering results", http.StatusInternalServerError)
 	}
-}
-
-func nextCardsHandler(w http.ResponseWriter, r *http.Request) {
-	// Get pagination parameters (like offset, limit) from the query params
-	pageStr := r.URL.Query().Get("page")
-	page, err := strconv.Atoi(pageStr)
-	if err != nil || page < 1 {
-		page = 1 // Default to first page if invalid
-	}
-
-	offset := (page - 1) * 10 // Assuming 10 results per page
-	limit := 10
-
-	// Fetch the city and maximum price parameters from the query string
-	city1 := r.URL.Query().Get("city1")
-	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
-	maxPriceLinear, err := strconv.ParseFloat(maxPriceLinearStr, 64)
-	if err != nil {
-		http.Error(w, "Invalid price parameter", http.StatusBadRequest)
-		return
-	}
-
-	maxPrice := backend.MapLinearToExponential(maxPriceLinear, 100, 2500)
-
-	// Updated query to ensure origin city matches properly
-	query := `
-    SELECT f1.destination_city_name, 
-           MIN(f1.price_this_week) AS price_city1, 
-           MIN(f1.skyscanner_url_this_week) AS url_city1,
-           w.date,
-           w.avg_daytime_temp,
-           w.weather_icon,
-           w.google_url,
-           l.avg_wpi, 
-           l.image_1,
-           a.booking_url,
-           a.booking_pppn,
-           fnf.price_fnaf 
-    FROM flight f1
-    JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
-    JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
-    LEFT JOIN accommodation a ON a.city = f1.destination_city_name AND a.country = f1.destination_country
-    LEFT JOIN five_nights_and_flights fnf ON fnf.destination_city = f1.destination_city_name AND fnf.origin_city = ?
-    WHERE f1.origin_city_name = ? 
-    AND l.avg_wpi BETWEEN ? AND ? 
-    AND w.date >= date('now')
-    GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi 
-    HAVING fnf.price_fnaf <= ?
-    ORDER BY fnf.price_fnaf ASC
-    LIMIT ? OFFSET ?`
-
-	// Execute the query with the appropriate parameters
-	rows, err := db.Query(query, city1, city1, 1.0, 10.0, maxPrice, limit, offset)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-	defer rows.Close()
-
-	flights, err := processFlightRows(rows)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-
-	// Append more flights as new cards to the carousel
-	err = tmpl.ExecuteTemplate(w, "table.html", flights)
-	if err != nil {
-		http.Error(w, "Error rendering results", http.StatusInternalServerError)
-	}
-}
-
-// The rest of the code remains the same (helper functions, etc.)
-
-// Helper function to parse request parameters
-func parseFilterRequest(r *http.Request) (string, string, float64, error) {
-	city1 := r.URL.Query().Get("city1")
-	sortOption := r.URL.Query().Get("sort")
-
-	// Get the maxPriceLinear parameter
-	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
-
-	var maxPriceLinear float64
-	var err error
-
-	// Check if maxPriceLinear is provided and not empty
-	if maxPriceLinearStr != "" {
-		maxPriceLinear, err = strconv.ParseFloat(maxPriceLinearStr, 64)
-		if err != nil {
-			log.Printf("Error parsing maxPriceLinear: %v", err)
-			return "", "", 0, err
-		}
-	} else {
-		// Provide a default value if the parameter is missing or empty
-		maxPriceLinear = 100 // Example default value
-	}
-
-	return city1, sortOption, maxPriceLinear, nil
-}
-
-// Helper function to determine the ORDER BY clause
-func determineOrderClause(sortOption string) string {
-	switch sortOption {
-	case "low_price":
-		return "ORDER BY fnf.price_fnaf ASC"
-	case "high_price":
-		return "ORDER BY fnf.price_fnaf DESC"
-	case "best_weather":
-		return "ORDER BY avg_wpi DESC"
-	case "worst_weather":
-		return "ORDER BY avg_wpi ASC"
-	default:
-		return "ORDER BY fnf.price_fnaf ASC" // Default sorting by lowest FNAF price
-	}
-}
-
-// Helper function to build the query string
-func buildFilterQuery(orderClause string) string {
-	return `
-SELECT f1.destination_city_name, 
-       MIN(f1.price_this_week) AS price_city1, 
-       MIN(f1.skyscanner_url_this_week) AS url_city1,
-       w.date,
-       w.avg_daytime_temp,
-       w.weather_icon,
-       w.google_url,
-       l.avg_wpi, 
-       l.image_1,
-       a.booking_url,
-       a.booking_pppn,
-       fnf.price_fnaf 
-FROM flight f1
-JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
-JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
-LEFT JOIN accommodation a ON a.city = f1.destination_city_name AND a.country = f1.destination_country
-LEFT JOIN five_nights_and_flights fnf ON fnf.destination_city = f1.destination_city_name AND fnf.origin_city = ? 
-WHERE f1.origin_city_name = ? 
-AND l.avg_wpi BETWEEN ? AND ? 
-AND w.date >= date('now')
-GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi 
-HAVING fnf.price_fnaf <= ? ` + orderClause
 }
 
 // Helper function to process rows into flight and weather data
@@ -301,6 +193,8 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 		var flight Flight
 		var weather Weather
 		var imageUrl sql.NullString
+		var bookingUrl sql.NullString
+		var priceFnaf sql.NullFloat64
 
 		err := rows.Scan(
 			&flight.DestinationCityName,
@@ -312,15 +206,23 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 			&weather.GoogleUrl,
 			&flight.AvgWpi,
 			&imageUrl,
-			&flight.BookingUrl,
+			&bookingUrl,
 			&flight.BookingPppn,
-			&flight.FiveNightsFlights,
+			&priceFnaf,
 		)
 		if err != nil {
 			log.Printf("Error scanning row: %v", err)
 			return nil, err
 		}
 		// Use the image_1 URL from the database, or fallback to a placeholder if not available
+
+		// Log the weather data for debugging
+		log.Printf("Row Data - Destination: %s, Date: %s, Temp: %.2f, Icon: %s",
+			flight.DestinationCityName,
+			weather.Date,
+			weather.AvgDaytimeTemp.Float64,
+			weather.WeatherIcon,
+		)
 
 		// Log the imageUrl for debugging
 		log.Printf("Scanned image URL: '%s', Valid: %t", imageUrl.String, imageUrl.Valid)
@@ -332,7 +234,8 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 			flight.RandomImageURL = "/images/location-placeholder-image.png"
 			log.Printf("Using default placeholder image URL: %s", flight.RandomImageURL)
 		}
-
+		flight.BookingUrl = bookingUrl
+		flight.FiveNightsFlights = priceFnaf
 		addOrUpdateFlight(&flights, flight, weather)
 	}
 	return flights, nil
@@ -352,18 +255,29 @@ func addOrUpdateFlight(flights *[]Flight, flight Flight, weather Weather) {
 }
 
 // Helper function to build the data for the template
-func buildFlightsData(city1 string, flights []Flight) FlightsData {
-	var maxWpi, minFlightPrice, minHotelPrice, minFnafPrice sql.NullFloat64
-
-	for _, flight := range flights {
-		maxWpi = updateMaxValue(maxWpi, flight.AvgWpi)
-		minFlightPrice = updateMinValue(minFlightPrice, flight.PriceCity1)
-		minHotelPrice = updateMinValue(minHotelPrice, flight.BookingPppn)
-		minFnafPrice = updateMinValue(minFnafPrice, flight.FiveNightsFlights)
+func buildFlightsData(cities []string, flights []Flight) FlightsData {
+	// Ensure there is at least one city in the list
+	var selectedCity1 string
+	if len(cities) > 0 {
+		selectedCity1 = cities[0]
+	} else {
+		selectedCity1 = "" // Default to an empty string if no cities are provided
 	}
 
+	// Initialize variables for max/min values
+	var maxWpi, minFlightPrice, minHotelPrice, minFnafPrice sql.NullFloat64
+
+	// Process each flight to find max/min values
+	for _, flight := range flights {
+		maxWpi = backend.UpdateMaxValue(maxWpi, flight.AvgWpi)
+		minFlightPrice = backend.UpdateMinValue(minFlightPrice, flight.PriceCity1)
+		minHotelPrice = backend.UpdateMinValue(minHotelPrice, flight.BookingPppn)
+		minFnafPrice = backend.UpdateMinValue(minFnafPrice, flight.FiveNightsFlights)
+	}
+
+	// Build and return the FlightsData
 	return FlightsData{
-		SelectedCity1: city1,
+		SelectedCity1: selectedCity1,
 		Flights:       flights,
 		MaxWpi:        maxWpi,
 		MinFlight:     minFlightPrice,
@@ -372,80 +286,333 @@ func buildFlightsData(city1 string, flights []Flight) FlightsData {
 	}
 }
 
-// Helper function to update max value
-func updateMaxValue(currentMax, newValue sql.NullFloat64) sql.NullFloat64 {
-	if !currentMax.Valid || (newValue.Valid && newValue.Float64 > currentMax.Float64) {
-		return newValue
+// Unified Query Builder
+
+func buildQuery(expr Expression, maxAccommodationPrice float64, originCities []string, orderClause string) (string, []interface{}) {
+	var queryBuilder strings.Builder
+	var args []interface{}
+	// Begin the query with the DestinationSet CTE
+	queryBuilder.WriteString("WITH DestinationSet AS (\n")
+
+	// Build the subquery based on the logical expression
+	subquery, subqueryArgs := buildSubquery(expr)
+	queryBuilder.WriteString(subquery)
+	queryBuilder.WriteString("\n)")
+	args = append(args, subqueryArgs...)
+
+	// Build the rest of the query
+	queryBuilder.WriteString(`
+    SELECT 
+        ds.destination_city_name,
+        MIN(f.price_next_week) AS price_city1,
+        MIN(f.skyscanner_url_next_week) AS url_city1,
+        w.date,
+        w.avg_daytime_temp,
+        w.weather_icon,
+        w.google_url,
+        l.avg_wpi,
+        l.image_1,
+        a.booking_url,
+        a.booking_pppn,
+        fnf.price_fnaf
+    FROM DestinationSet ds
+    JOIN flight f ON ds.destination_city_name = f.destination_city_name 
+                   AND ds.destination_country = f.destination_country
+    JOIN location l ON ds.destination_city_name = l.city 
+                     AND ds.destination_country = l.country
+    JOIN weather w ON w.city = ds.destination_city_name 
+                    AND w.country = ds.destination_country
+    LEFT JOIN accommodation a ON a.city = ds.destination_city_name 
+                               AND a.country = ds.destination_country
+    LEFT JOIN (
+        SELECT 
+            fnf.origin_city,
+            fnf.origin_country,
+            fnf.destination_city,
+            fnf.destination_country,
+            MIN(fnf.price_fnaf) AS price_fnaf
+        FROM five_nights_and_flights fnf
+        GROUP BY fnf.origin_city, fnf.origin_country, fnf.destination_city, fnf.destination_country
+    ) fnf ON fnf.destination_city = ds.destination_city_name
+           AND fnf.destination_country = ds.destination_country
+           AND fnf.origin_city = f.origin_city_name
+           AND fnf.origin_country = f.origin_country
+    WHERE l.avg_wpi BETWEEN 1.0 AND 10.0 
+      AND w.date >= date('now')
+      AND f.price_next_week < ?
+      AND f.origin_city_name IN `)
+
+	// Build the IN clause dynamically based on the number of origin cities
+	if len(originCities) == 0 {
+		return "", nil // If no origin cities, return an empty query
 	}
-	return currentMax
+
+	placeholders := make([]string, len(originCities))
+	for i := range originCities {
+		placeholders[i] = "?"
+	}
+	inClause := fmt.Sprintf("(%s)", strings.Join(placeholders, ", "))
+	queryBuilder.WriteString(inClause)
+	queryBuilder.WriteString(`
+      AND a.booking_pppn IS NOT NULL
+      AND a.booking_pppn <= ?
+   GROUP BY f.destination_city_name, w.date, f.destination_country, l.avg_wpi
+    `)
+
+	// Add the dynamic order clause
+	queryBuilder.WriteString(orderClause)
+	queryBuilder.WriteString(";")
+
+	// Add price limits and origin city names to args
+	maxPrice := 2000.0 // Set a max price or calculate based on inputs
+	args = append(args, maxPrice)
+
+	// Correctly append originCities to args
+	for _, city := range originCities {
+		args = append(args, city)
+	}
+
+	args = append(args, maxAccommodationPrice)
+
+	return queryBuilder.String(), args
 }
 
-// Helper function to update min value
-func updateMinValue(currentMin, newValue sql.NullFloat64) sql.NullFloat64 {
-	// HOTFIX Check if newValue is valid and greater than or equal to 0.1
-	// This ensures we don't include flight prices which are zero because no price was found
-	if newValue.Valid && newValue.Float64 >= 0.1 {
-		// Update currentMin if it's not valid or if newValue is smaller
-		if !currentMin.Valid || newValue.Float64 < currentMin.Float64 {
-			return newValue
+func buildSubquery(expr Expression) (string, []interface{}) {
+	switch e := expr.(type) {
+	case *CityCondition:
+		// Return the subquery for a city condition
+		subquery := `
+            SELECT 
+                f.destination_city_name,
+                f.destination_country
+            FROM flight f
+            WHERE f.origin_city_name = ? AND f.price_next_week < ?
+            GROUP BY f.destination_city_name, f.destination_country
+        `
+		args := []interface{}{e.City.Name, e.City.PriceLimit}
+		return subquery, args
+	case *LogicalExpression:
+		// Build the left and right subqueries
+		leftSubquery, leftArgs := buildSubquery(e.Left)
+		rightSubquery, rightArgs := buildSubquery(e.Right)
+		var operator string
+		if e.Operator == AndOperator {
+			operator = "INTERSECT"
+		} else if e.Operator == OrOperator {
+			operator = "UNION"
+		} else {
+			panic("Unknown operator")
 		}
+		// Combine subqueries without unnecessary parentheses
+		combinedSubquery := fmt.Sprintf("%s\n%s\n%s", leftSubquery, operator, rightSubquery)
+		args := append(leftArgs, rightArgs...)
+		return combinedSubquery, args
+	default:
+		panic("Unknown expression type")
 	}
-	// Return currentMin if none of the above conditions are met
-	return currentMin
 }
 
-func tableViewHandler(w http.ResponseWriter, r *http.Request) {
-	// Similar logic to index handler but for table_view
-	session, _ := store.Get(r, "session")
-	city1, sortOption, maxPriceLinear, err := parseFilterRequest(r)
-	if err != nil {
-		http.Error(w, "Invalid request parameters", http.StatusBadRequest)
-		return
-	}
-
-	maxPrice := backend.MapLinearToExponential(maxPriceLinear, 100, 2500)
-	session.Values["city1"] = city1
-	session.Save(r, w)
-
-	orderClause := determineOrderClause(sortOption)
-	query := buildFilterQuery(orderClause)
-
-	rows, err := db.Query(query, city1, city1, 1.0, 10.0, maxPrice)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	defer rows.Close()
-
-	flights, err := processFlightRows(rows)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-
-	data := buildFlightsData(city1, flights)
-	err = tmpl.ExecuteTemplate(w, "table_view.html", data) // Render the table_view.html page
-	if err != nil {
-		http.Error(w, "Error rendering results", http.StatusInternalServerError)
+// Helper function to determine the ORDER BY clause
+func determineOrderClause(sortOption string) string {
+	switch sortOption {
+	case "low_price":
+		return "ORDER BY fnf.price_fnaf ASC"
+	case "high_price":
+		return "ORDER BY fnf.price_fnaf DESC"
+	case "best_weather":
+		return "ORDER BY avg_wpi DESC"
+	case "worst_weather":
+		return "ORDER BY avg_wpi ASC"
+	default:
+		return "ORDER BY fnf.price_fnaf ASC" // Default sorting by lowest FNAF price
 	}
 }
 
 /*
-// Helper function to get a random image from a folder
-func getRandomImagePath(folder string) (string, error) {
-	// Look for .jpg files in the Bucharest folder
-	files, err := filepath.Glob(filepath.Join(folder, "*.jpg"))
-	if err != nil || len(files) == 0 {
-		return "/images/location-placeholder-image.png", err // Return placeholder if no image found
+// / Helper to construct SELECT clause
+func selectClause() string {
+	return `
+        SELECT f1.destination_city_name,
+               MIN(f1.price_this_week) AS price_city1,
+               MIN(f1.skyscanner_url_this_week) AS url_city1,
+               w.date,
+               w.avg_daytime_temp,
+               w.weather_icon,
+               w.google_url,
+               l.avg_wpi,
+               l.image_1,
+               a.booking_url,
+               a.booking_pppn,
+               fnf.price_fnaf
+    `
+}
+
+// Helper to construct JOIN clause
+func joinClause() string {
+	return `
+        FROM flight f1
+        JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
+        JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
+        LEFT JOIN accommodation a ON a.city = f1.destination_city_name AND a.country = f1.destination_country
+        LEFT JOIN five_nights_and_flights fnf ON fnf.destination_city = f1.destination_city_name AND fnf.origin_city = ?
+    `
+}
+
+// Helper to construct WHERE clause
+
+func whereClause(city1 string, additionalCities []string, logicalOperators []string) string {
+	// Start with the primary condition for city1
+	whereClause := "WHERE f1.origin_city_name = ?"
+
+	if len(additionalCities) > 0 {
+		// Use INTERSECT for AND logic, or UNION for OR logic
+		subqueries := []string{}
+		for i := range additionalCities {
+			if i < len(logicalOperators) && logicalOperators[i] == "AND" {
+				// Create an INTERSECT query for the additional city
+				subqueries = append(subqueries, fmt.Sprintf(`
+					SELECT f.destination_city_name
+					FROM flight f
+					WHERE f.origin_city_name = ?
+				`))
+			} else if i < len(logicalOperators) && logicalOperators[i] == "OR" {
+				// Create a UNION query for the additional city
+				subqueries = append(subqueries, fmt.Sprintf(`
+					SELECT f.destination_city_name
+					FROM flight f
+					WHERE f.origin_city_name = ?
+				`))
+			} else {
+				log.Printf("Warning: Mismatch between additionalCities and logicalOperators at index %d", i)
+			}
+		}
+
+		// Combine subqueries into the WHERE clause
+		if len(subqueries) > 0 {
+			whereClause += " AND f1.destination_city_name IN ("
+			if logicalOperators[0] == "AND" {
+				whereClause += strings.Join(subqueries, " INTERSECT ")
+			} else {
+				whereClause += strings.Join(subqueries, " UNION ")
+			}
+			whereClause += ")"
+		}
 	}
 
-	// Seed the random number generator
-	rand.Seed(time.Now().UnixNano())
+	// Add static conditions
+	whereClause += `
+        AND l.avg_wpi BETWEEN ? AND ?
+        AND w.date >= date('now')
+    `
+	log.Printf("Generated WHERE Clause: %s", whereClause)
+	return whereClause
+}
 
-	// Select a random image
-	randomImage := files[rand.Intn(len(files))]
+// Helper to construct GROUP BY clause
+func groupByClause() string {
+	return `
+        GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi
+    `
+}
 
-	// Return the relative path to the image
-	return "/images/Bucharest/" + filepath.Base(randomImage), nil
+// Helper to construct HAVING clause
+func havingClause() string {
+	return `
+        HAVING MIN(f1.price_this_week) <= ?
+    `
 }
 */
+/*---------------Logical Expressions-----------------------*/
+
+// CityInput represents the input for each city
+type CityInput struct {
+	Name       string
+	PriceLimit float64
+}
+
+// LogicalOperator represents a logical operator (AND, OR)
+type LogicalOperator string
+
+const (
+	AndOperator LogicalOperator = "AND"
+	OrOperator  LogicalOperator = "OR"
+)
+
+// Expression represents a logical expression
+type Expression interface{}
+
+// CityCondition represents a condition for a single city
+type CityCondition struct {
+	City CityInput
+}
+
+// LogicalExpression represents a logical combination of expressions
+type LogicalExpression struct {
+	Operator LogicalOperator
+	Left     Expression
+	Right    Expression
+}
+
+func parseLogicalExpression(cities []string, logicalOperators []string, maxPrices []float64) (Expression, error) {
+	// Validate input lengths
+	if len(cities) == 0 || len(cities) != len(maxPrices) || len(cities) != len(logicalOperators)+1 {
+		return nil, fmt.Errorf("mismatched input lengths")
+	}
+
+	// Base case: Only one city
+	if len(cities) == 1 {
+		log.Printf("parseLogicalExpression: Single city: %s, PriceLimit: %.2f", cities[0], maxPrices[0])
+		return &CityCondition{
+			City: CityInput{Name: cities[0], PriceLimit: maxPrices[0]},
+		}, nil
+	}
+
+	// Start with the first city as the base expression
+	log.Printf("parseLogicalExpression: Starting with city: %s, PriceLimit: %.2f", cities[0], maxPrices[0])
+	var expr Expression = &CityCondition{
+		City: CityInput{Name: cities[0], PriceLimit: maxPrices[0]},
+	}
+
+	// Process subsequent cities with their logical operators
+	for i := 1; i < len(cities); i++ {
+		log.Printf("parseLogicalExpression: Adding city: %s, PriceLimit: %.2f with Operator: %s", cities[i], maxPrices[i], logicalOperators[i-1])
+		expr = &LogicalExpression{
+			Operator: LogicalOperator(logicalOperators[i-1]),
+			Left:     expr,
+			Right: &CityCondition{
+				City: CityInput{Name: cities[i], PriceLimit: maxPrices[i]},
+			},
+		}
+	}
+
+	return expr, nil
+}
+
+func interpolateQuery(query string, args []interface{}) string {
+	var result strings.Builder
+	argIndex := 0
+
+	for _, char := range query {
+		if char == '?' && argIndex < len(args) {
+			// Append the argument in place of the '?'
+			arg := args[argIndex]
+			argIndex++
+
+			// Format the argument based on its type
+			switch v := arg.(type) {
+			case string:
+				result.WriteString(fmt.Sprintf("'%s'", v)) // Quote strings
+			case float64:
+				result.WriteString(fmt.Sprintf("%.2f", v))
+			case int:
+				result.WriteString(fmt.Sprintf("%d", v))
+			default:
+				result.WriteString(fmt.Sprintf("%v", v)) // Fallback for other types
+			}
+		} else {
+			result.WriteRune(char)
+		}
+	}
+
+	return result.String()
+}
