@@ -110,47 +110,77 @@ func main() {
 
 func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session")
-	city1 := r.URL.Query().Get("city1")
-	additionalCities := r.URL.Query()["city[]"]
+	cities := r.URL.Query()["city[]"]
 	logicalOperators := r.URL.Query()["logical_operator[]"]
-	maxPriceLinearStr := r.URL.Query().Get("maxPriceLinear")
-	maxPriceLinear, err := strconv.ParseFloat(maxPriceLinearStr, 64)
-	if err != nil {
-		http.Error(w, "Invalid price parameter", http.StatusBadRequest)
+	maxPriceLinearStrs := r.URL.Query()["maxPriceLinear[]"]
+
+	// Validate input lengths
+	if len(cities) == 0 || len(cities) != len(logicalOperators)+1 || len(cities) != len(maxPriceLinearStrs) {
+		http.Error(w, "Mismatched input lengths", http.StatusBadRequest)
 		return
 	}
-	maxPrice := backend.MapLinearToExponential(maxPriceLinear, 50, 2500)
 
-	// Determine sort option: 'nextCardsHandler' has a default, 'filterHandler' might vary
-	sortOption := r.URL.Query().Get("sort")
-	if sortOption == "" {
-		sortOption = "low_price" // default for 'nextCardsHandler'
+	// Parse price limits
+	var maxPrices []float64
+	for _, linearStr := range maxPriceLinearStrs {
+		linearValue, err := strconv.ParseFloat(linearStr, 64)
+		if err != nil {
+			http.Error(w, "Invalid price parameter", http.StatusBadRequest)
+			return
+		}
+		maxPrices = append(maxPrices, backend.MapLinearToExponential(linearValue, 50, 2500))
 	}
 
-	orderClause := determineOrderClause(sortOption)
-	query := buildDynamicQuery(orderClause, city1, additionalCities, logicalOperators)
-	params := append([]interface{}{city1, city1}, 1.0, 10.0, maxPrice) // Prepare parameters
-	for _, city := range additionalCities {
-		params = append(params, city)
+	// Parse logical expression
+	logicalExpr, err := parseLogicalExpression(cities, logicalOperators, maxPrices)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
 	}
+	/*
+		// Retrieve and process sort option
+		sortOption := r.URL.Query().Get("sort")
+		if sortOption == "" {
+			sortOption = "low_price" // default
+		}
+		orderClause := determineOrderClause(sortOption)
+	*/
+	// Define max accommodation price (can be dynamic or a user input)
+	maxAccommodationPrice := 70.0
 
-	rows, err := db.Query(query, params...)
+	// Build the query
+	query, args := buildQuery(logicalExpr, maxAccommodationPrice)
+	/*
+		params := append([]interface{}{city1, city1}, 1.0, 10.0, maxPrice) // Prepare parameters
+		for _, city := range additionalCities {
+			params = append(params, city)
+		}
+	*/
+	// Output the query for debugging
+	fmt.Println("Generated SQL Query:")
+	fmt.Println(query)
+	fmt.Println("Arguments:")
+	fmt.Println(args)
+	// Execute the query
+	rows, err := db.Query(query, args...)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	defer rows.Close()
 
+	// Process results
 	flights, err := processFlightRows(rows)
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
 
-	session.Values["city1"] = city1
+	// Save the session and render the response
+	//session.Values["city1"] = cities[0] // Save the first city
 	session.Save(r, w)
 
-	data := buildFlightsData(city1, flights)
+	data := buildFlightsData(cities, flights)
 	err = tmpl.ExecuteTemplate(w, "table.html", data)
 	if err != nil {
 		http.Error(w, "Error rendering results", http.StatusInternalServerError)
@@ -164,6 +194,8 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 		var flight Flight
 		var weather Weather
 		var imageUrl sql.NullString
+		var bookingUrl sql.NullString
+		var priceFnaf sql.NullFloat64
 
 		err := rows.Scan(
 			&flight.DestinationCityName,
@@ -175,9 +207,9 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 			&weather.GoogleUrl,
 			&flight.AvgWpi,
 			&imageUrl,
-			&flight.BookingUrl,
+			&bookingUrl,
 			&flight.BookingPppn,
-			&flight.FiveNightsFlights,
+			&priceFnaf,
 		)
 		if err != nil {
 			log.Printf("Error scanning row: %v", err)
@@ -195,7 +227,8 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 			flight.RandomImageURL = "/images/location-placeholder-image.png"
 			log.Printf("Using default placeholder image URL: %s", flight.RandomImageURL)
 		}
-
+		flight.BookingUrl = bookingUrl
+		flight.FiveNightsFlights = priceFnaf
 		addOrUpdateFlight(&flights, flight, weather)
 	}
 	return flights, nil
@@ -215,9 +248,19 @@ func addOrUpdateFlight(flights *[]Flight, flight Flight, weather Weather) {
 }
 
 // Helper function to build the data for the template
-func buildFlightsData(city1 string, flights []Flight) FlightsData {
+func buildFlightsData(cities []string, flights []Flight) FlightsData {
+	// Ensure there is at least one city in the list
+	var selectedCity1 string
+	if len(cities) > 0 {
+		selectedCity1 = cities[0]
+	} else {
+		selectedCity1 = "" // Default to an empty string if no cities are provided
+	}
+
+	// Initialize variables for max/min values
 	var maxWpi, minFlightPrice, minHotelPrice, minFnafPrice sql.NullFloat64
 
+	// Process each flight to find max/min values
 	for _, flight := range flights {
 		maxWpi = backend.UpdateMaxValue(maxWpi, flight.AvgWpi)
 		minFlightPrice = backend.UpdateMinValue(minFlightPrice, flight.PriceCity1)
@@ -225,8 +268,9 @@ func buildFlightsData(city1 string, flights []Flight) FlightsData {
 		minFnafPrice = backend.UpdateMinValue(minFnafPrice, flight.FiveNightsFlights)
 	}
 
+	// Build and return the FlightsData
 	return FlightsData{
-		SelectedCity1: city1,
+		SelectedCity1: selectedCity1,
 		Flights:       flights,
 		MaxWpi:        maxWpi,
 		MinFlight:     minFlightPrice,
@@ -236,19 +280,127 @@ func buildFlightsData(city1 string, flights []Flight) FlightsData {
 }
 
 // Unified Query Builder
-func buildDynamicQuery(orderClause string, city1 string, additionalCities []string, logicalOperators []string) string {
-	query := selectClause() +
-		joinClause() +
-		whereClause(city1, additionalCities, logicalOperators) +
-		groupByClause() +
-		havingClause() +
-		orderClause
 
-	// Print the query for debugging
-	log.Printf("Generated Query: %s", query)
-	return query
+func buildQuery(expr Expression, maxAccommodationPrice float64) (string, []interface{}) {
+	var queryBuilder strings.Builder
+	var args []interface{}
+
+	// Begin the query with the DestinationSet CTE
+	queryBuilder.WriteString("WITH DestinationSet AS (\n")
+
+	// Build the subquery based on the logical expression
+	subquery, subqueryArgs := buildSubquery(expr)
+	queryBuilder.WriteString(subquery)
+	queryBuilder.WriteString("\n)")
+	args = append(args, subqueryArgs...)
+
+	// Build the rest of the query
+	queryBuilder.WriteString(`
+    SELECT 
+        ds.destination_city_name,
+        MIN(f.price_next_week) AS price_city1,
+        MIN(f.skyscanner_url_next_week) AS url_city1,
+        w.date,
+        w.avg_daytime_temp,
+        w.weather_icon,
+        w.google_url,
+        l.avg_wpi,
+        l.image_1,
+        a.booking_url,
+        a.booking_pppn,
+        fnf.price_fnaf
+    FROM DestinationSet ds
+    JOIN flight f ON ds.destination_city_name = f.destination_city_name 
+                   AND ds.destination_country = f.destination_country
+    JOIN location l ON ds.destination_city_name = l.city 
+                     AND ds.destination_country = l.country
+    JOIN weather w ON w.city = ds.destination_city_name 
+                    AND w.country = ds.destination_country
+    LEFT JOIN accommodation a ON a.city = ds.destination_city_name 
+                               AND a.country = ds.destination_country
+    LEFT JOIN (
+        SELECT 
+            fnf.origin_city,
+            fnf.origin_country,
+            fnf.destination_city,
+            fnf.destination_country,
+            MIN(fnf.price_fnaf) AS price_fnaf
+        FROM five_nights_and_flights fnf
+        GROUP BY fnf.origin_city, fnf.origin_country, fnf.destination_city, fnf.destination_country
+    ) fnf ON fnf.destination_city = ds.destination_city_name
+           AND fnf.destination_country = ds.destination_country
+           AND fnf.origin_city = f.origin_city_name
+           AND fnf.origin_country = f.origin_country
+    WHERE l.avg_wpi BETWEEN 1.0 AND 10.0 
+      AND w.date >= date('now')
+      AND f.price_next_week < ?
+      AND f.origin_city_name IN `)
+
+	// Build the IN clause dynamically based on the number of origin cities
+	originCities := []string{"Berlin", "Munich", "Edinburgh"}
+	placeholders := make([]string, len(originCities))
+	for i := range originCities {
+		placeholders[i] = "?"
+	}
+	inClause := fmt.Sprintf("(%s)", strings.Join(placeholders, ", "))
+	queryBuilder.WriteString(inClause)
+	queryBuilder.WriteString(`
+      AND a.booking_pppn IS NOT NULL
+      AND a.booking_pppn <= ?
+    GROUP BY ds.destination_city_name, ds.destination_country
+    ORDER BY l.avg_wpi DESC;
+    `)
+
+	// Add price limits and origin city names to args
+	maxPrice := 2000.0 // Set a max price or calculate based on inputs
+	args = append(args, maxPrice)
+
+	// Correctly append originCities to args
+	for _, city := range originCities {
+		args = append(args, city)
+	}
+
+	args = append(args, maxAccommodationPrice)
+
+	return queryBuilder.String(), args
 }
 
+func buildSubquery(expr Expression) (string, []interface{}) {
+	switch e := expr.(type) {
+	case *CityCondition:
+		// Return the subquery for a city condition
+		subquery := `
+            SELECT 
+                f.destination_city_name,
+                f.destination_country
+            FROM flight f
+            WHERE f.origin_city_name = ? AND f.price_next_week < ?
+            GROUP BY f.destination_city_name, f.destination_country
+        `
+		args := []interface{}{e.City.Name, e.City.PriceLimit}
+		return subquery, args
+	case *LogicalExpression:
+		// Build the left and right subqueries
+		leftSubquery, leftArgs := buildSubquery(e.Left)
+		rightSubquery, rightArgs := buildSubquery(e.Right)
+		var operator string
+		if e.Operator == AndOperator {
+			operator = "INTERSECT"
+		} else if e.Operator == OrOperator {
+			operator = "UNION"
+		} else {
+			panic("Unknown operator")
+		}
+		// Combine subqueries without unnecessary parentheses
+		combinedSubquery := fmt.Sprintf("%s\n%s\n%s", leftSubquery, operator, rightSubquery)
+		args := append(leftArgs, rightArgs...)
+		return combinedSubquery, args
+	default:
+		panic("Unknown expression type")
+	}
+}
+
+/*
 // Helper function to determine the ORDER BY clause
 func determineOrderClause(sortOption string) string {
 	switch sortOption {
@@ -268,18 +420,18 @@ func determineOrderClause(sortOption string) string {
 // / Helper to construct SELECT clause
 func selectClause() string {
 	return `
-        SELECT f1.destination_city_name, 
-               MIN(f1.price_this_week) AS price_city1, 
+        SELECT f1.destination_city_name,
+               MIN(f1.price_this_week) AS price_city1,
                MIN(f1.skyscanner_url_this_week) AS url_city1,
                w.date,
                w.avg_daytime_temp,
                w.weather_icon,
                w.google_url,
-               l.avg_wpi, 
+               l.avg_wpi,
                l.image_1,
                a.booking_url,
                a.booking_pppn,
-               fnf.price_fnaf 
+               fnf.price_fnaf
     `
 }
 
@@ -307,15 +459,15 @@ func whereClause(city1 string, additionalCities []string, logicalOperators []str
 			if i < len(logicalOperators) && logicalOperators[i] == "AND" {
 				// Create an INTERSECT query for the additional city
 				subqueries = append(subqueries, fmt.Sprintf(`
-					SELECT f.destination_city_name 
-					FROM flight f 
+					SELECT f.destination_city_name
+					FROM flight f
 					WHERE f.origin_city_name = ?
 				`))
 			} else if i < len(logicalOperators) && logicalOperators[i] == "OR" {
 				// Create a UNION query for the additional city
 				subqueries = append(subqueries, fmt.Sprintf(`
-					SELECT f.destination_city_name 
-					FROM flight f 
+					SELECT f.destination_city_name
+					FROM flight f
 					WHERE f.origin_city_name = ?
 				`))
 			} else {
@@ -337,7 +489,7 @@ func whereClause(city1 string, additionalCities []string, logicalOperators []str
 
 	// Add static conditions
 	whereClause += `
-        AND l.avg_wpi BETWEEN ? AND ? 
+        AND l.avg_wpi BETWEEN ? AND ?
         AND w.date >= date('now')
     `
 	log.Printf("Generated WHERE Clause: %s", whereClause)
@@ -347,7 +499,7 @@ func whereClause(city1 string, additionalCities []string, logicalOperators []str
 // Helper to construct GROUP BY clause
 func groupByClause() string {
 	return `
-        GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi 
+        GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi
     `
 }
 
@@ -356,4 +508,73 @@ func havingClause() string {
 	return `
         HAVING MIN(f1.price_this_week) <= ?
     `
+}
+*/
+/*---------------Logical Expressions-----------------------*/
+
+// CityInput represents the input for each city
+type CityInput struct {
+	Name       string
+	PriceLimit float64
+}
+
+// LogicalOperator represents a logical operator (AND, OR)
+type LogicalOperator string
+
+const (
+	AndOperator LogicalOperator = "AND"
+	OrOperator  LogicalOperator = "OR"
+)
+
+// Expression represents a logical expression
+type Expression interface{}
+
+// CityCondition represents a condition for a single city
+type CityCondition struct {
+	City CityInput
+}
+
+// LogicalExpression represents a logical combination of expressions
+type LogicalExpression struct {
+	Operator LogicalOperator
+	Left     Expression
+	Right    Expression
+}
+
+func parseLogicalExpression(cities []string, logicalOperators []string, maxPrices []float64) (*LogicalExpression, error) {
+	// Validate input lengths
+	if len(cities) == 0 || len(cities) != len(maxPrices) || len(cities) != len(logicalOperators)+1 {
+		return nil, fmt.Errorf("mismatched input lengths")
+	}
+
+	// Helper function to create a CityCondition
+	createCityCondition := func(city string, price float64) *CityCondition {
+		return &CityCondition{City: CityInput{Name: city, PriceLimit: price}}
+	}
+
+	// Base case: Single city
+	if len(cities) == 1 {
+		return &LogicalExpression{
+			Operator: AndOperator,
+			Left:     createCityCondition(cities[0], maxPrices[0]),
+			Right:    nil, // Leaf node
+		}, nil
+	}
+
+	// Build the logical expression tree
+	var expr Expression = createCityCondition(cities[0], maxPrices[0])
+	for i := 0; i < len(logicalOperators); i++ {
+		expr = &LogicalExpression{
+			Operator: LogicalOperator(logicalOperators[i]),
+			Left:     expr,
+			Right:    createCityCondition(cities[i+1], maxPrices[i+1]),
+		}
+	}
+
+	// Ensure final result is a *LogicalExpression
+	if result, ok := expr.(*LogicalExpression); ok {
+		return result, nil
+	}
+
+	return nil, fmt.Errorf("failed to build logical expression")
 }
