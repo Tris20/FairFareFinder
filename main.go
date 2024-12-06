@@ -132,24 +132,28 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Parse logical expression
-	logicalExpr, err := parseLogicalExpression(cities, logicalOperators, maxPrices)
+	expr, err := parseLogicalExpression(cities, logicalOperators, maxPrices)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	/*
-		// Retrieve and process sort option
-		sortOption := r.URL.Query().Get("sort")
-		if sortOption == "" {
-			sortOption = "low_price" // default
-		}
-		orderClause := determineOrderClause(sortOption)
-	*/
+
+	// Retrieve and process sort option
+	sortOption := r.URL.Query().Get("sort")
+	if sortOption == "" {
+		sortOption = "low_price" // default
+	}
+	orderClause := determineOrderClause(sortOption)
+
 	// Define max accommodation price (can be dynamic or a user input)
 	maxAccommodationPrice := 70.0
 
 	// Build the query
-	query, args := buildQuery(logicalExpr, maxAccommodationPrice)
+
+	// Build query
+
+	query, args := buildQuery(expr, maxAccommodationPrice, cities, orderClause)
+
 	/*
 		params := append([]interface{}{city1, city1}, 1.0, 10.0, maxPrice) // Prepare parameters
 		for _, city := range additionalCities {
@@ -161,7 +165,8 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(query)
 	fmt.Println("Arguments:")
 	fmt.Println(args)
-	// Execute the query
+	// Execute the queryfunc buildQuery(expr Expression, maxAccommodationPrice float64, originCities []string, orderClause string) (string, []interface{}) {
+
 	rows, err := db.Query(query, args...)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -281,10 +286,9 @@ func buildFlightsData(cities []string, flights []Flight) FlightsData {
 
 // Unified Query Builder
 
-func buildQuery(expr Expression, maxAccommodationPrice float64) (string, []interface{}) {
+func buildQuery(expr Expression, maxAccommodationPrice float64, originCities []string, orderClause string) (string, []interface{}) {
 	var queryBuilder strings.Builder
 	var args []interface{}
-
 	// Begin the query with the DestinationSet CTE
 	queryBuilder.WriteString("WITH DestinationSet AS (\n")
 
@@ -337,7 +341,10 @@ func buildQuery(expr Expression, maxAccommodationPrice float64) (string, []inter
       AND f.origin_city_name IN `)
 
 	// Build the IN clause dynamically based on the number of origin cities
-	originCities := []string{"Berlin", "Munich", "Edinburgh"}
+	if len(originCities) == 0 {
+		return "", nil // If no origin cities, return an empty query
+	}
+
 	placeholders := make([]string, len(originCities))
 	for i := range originCities {
 		placeholders[i] = "?"
@@ -348,8 +355,11 @@ func buildQuery(expr Expression, maxAccommodationPrice float64) (string, []inter
       AND a.booking_pppn IS NOT NULL
       AND a.booking_pppn <= ?
     GROUP BY ds.destination_city_name, ds.destination_country
-    ORDER BY l.avg_wpi DESC;
     `)
+
+	// Add the dynamic order clause
+	queryBuilder.WriteString(orderClause)
+	queryBuilder.WriteString(";")
 
 	// Add price limits and origin city names to args
 	maxPrice := 2000.0 // Set a max price or calculate based on inputs
@@ -400,7 +410,6 @@ func buildSubquery(expr Expression) (string, []interface{}) {
 	}
 }
 
-/*
 // Helper function to determine the ORDER BY clause
 func determineOrderClause(sortOption string) string {
 	switch sortOption {
@@ -417,6 +426,7 @@ func determineOrderClause(sortOption string) string {
 	}
 }
 
+/*
 // / Helper to construct SELECT clause
 func selectClause() string {
 	return `
@@ -541,40 +551,37 @@ type LogicalExpression struct {
 	Right    Expression
 }
 
-func parseLogicalExpression(cities []string, logicalOperators []string, maxPrices []float64) (*LogicalExpression, error) {
+func parseLogicalExpression(cities []string, logicalOperators []string, maxPrices []float64) (Expression, error) {
 	// Validate input lengths
 	if len(cities) == 0 || len(cities) != len(maxPrices) || len(cities) != len(logicalOperators)+1 {
 		return nil, fmt.Errorf("mismatched input lengths")
 	}
 
-	// Helper function to create a CityCondition
-	createCityCondition := func(city string, price float64) *CityCondition {
-		return &CityCondition{City: CityInput{Name: city, PriceLimit: price}}
-	}
-
-	// Base case: Single city
+	// Base case: Only one city
 	if len(cities) == 1 {
-		return &LogicalExpression{
-			Operator: AndOperator,
-			Left:     createCityCondition(cities[0], maxPrices[0]),
-			Right:    nil, // Leaf node
+		log.Printf("parseLogicalExpression: Single city: %s, PriceLimit: %.2f", cities[0], maxPrices[0])
+		return &CityCondition{
+			City: CityInput{Name: cities[0], PriceLimit: maxPrices[0]},
 		}, nil
 	}
 
-	// Build the logical expression tree
-	var expr Expression = createCityCondition(cities[0], maxPrices[0])
-	for i := 0; i < len(logicalOperators); i++ {
+	// Start with the first city as the base expression
+	log.Printf("parseLogicalExpression: Starting with city: %s, PriceLimit: %.2f", cities[0], maxPrices[0])
+	var expr Expression = &CityCondition{
+		City: CityInput{Name: cities[0], PriceLimit: maxPrices[0]},
+	}
+
+	// Process subsequent cities with their logical operators
+	for i := 1; i < len(cities); i++ {
+		log.Printf("parseLogicalExpression: Adding city: %s, PriceLimit: %.2f with Operator: %s", cities[i], maxPrices[i], logicalOperators[i-1])
 		expr = &LogicalExpression{
-			Operator: LogicalOperator(logicalOperators[i]),
+			Operator: LogicalOperator(logicalOperators[i-1]),
 			Left:     expr,
-			Right:    createCityCondition(cities[i+1], maxPrices[i+1]),
+			Right: &CityCondition{
+				City: CityInput{Name: cities[i], PriceLimit: maxPrices[i]},
+			},
 		}
 	}
 
-	// Ensure final result is a *LogicalExpression
-	if result, ok := expr.(*LogicalExpression); ok {
-		return result, nil
-	}
-
-	return nil, fmt.Errorf("failed to build logical expression")
+	return expr, nil
 }
