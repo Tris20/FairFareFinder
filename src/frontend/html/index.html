@@ -81,6 +81,7 @@
               hx-trigger="input"
               hx-push-url="false"
               hx-preserve="false"
+              hx-include="#combinedPrice-slider0"
               autocomplete="off"
             />
           </div>
@@ -201,10 +202,12 @@
           hx-trigger="input"
           hx-push-url="false"
           hx-preserve="false"
+          hx-include="#combinedPrice-slider${rowCount}"
           autocomplete="off"
         />
       `;
           cityRows.appendChild(div);
+          htmx.process(div);
           rowCount++;
         });
     </script>
