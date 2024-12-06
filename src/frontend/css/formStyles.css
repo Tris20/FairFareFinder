@@ -1,0 +1,27 @@
+/* Additional styling for the add city button */
+#add-city-button {
+  background-color: #db8363f2; /* A coral-like color */
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: "Dosis", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.1s ease;
+}
+
+/* Hover and focus states for a nice interactive feel */
+#add-city-button:hover {
+  background-color: #f07a5f;
+  outline: darkorange;
+  outline-style: groove;
+}
+
+/* Active state provides feedback on click */
+#add-city-button:active {
+  transform: scale(0.98);
+}

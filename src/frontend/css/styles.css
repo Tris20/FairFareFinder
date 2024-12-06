@@ -588,3 +588,32 @@ td {
     flex-direction: column; /* Stacks child elements vertically */
     align-items: center; /* Centers child elements horizontally */
 }
+
+
+
+
+/* Additional styling for the add city button */
+#add-city-button {
+  background-color: #ff7f50; /* A coral-like color */
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: "Dosis", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+/* Hover and focus states for a nice interactive feel */
+#add-city-button:hover,
+#add-city-button:focus {
+  background-color: #ff6347; /* A slightly darker coral */
+  outline: none; /* Remove default focus outline, if desired */
+}
+
+/* Active state provides feedback on click */
+#add-city-button:active {
+  transform: scale(0.98);
+}

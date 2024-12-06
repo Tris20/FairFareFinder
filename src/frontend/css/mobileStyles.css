@@ -1,11 +1,9 @@
-
-
 .card-carousel {
   display: flex;
 
- /* overflow-y: auto;*/
+  /* overflow-y: auto;*/
   scroll-snap-type: y mandatory; /* Snap each card into view */
-flex-direction: column;
+  flex-direction: column;
   width: 100%;
   scroll-behavior: smooth; /* Smooth scroll when using buttons */
   height: 30%;
@@ -14,36 +12,34 @@ flex-direction: column;
 
 .card {
   flex: 0 0 100%; /* Each card takes up the full width of the container */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   background-color: #f4dfcf;
- 
+
   scroll-snap-align: start; /* Snap each card to the start */
 }
 
 .scroll-container {
-  width:100vw;
+  width: 100vw;
   overflow: hidden; /* Hide scrollbars */
 }
 
-
-
 @media only screen and (min-width: 801px) {
-    .mobile-view {
-        display: none;
-    }
+  .mobile-view {
+    display: none;
   }
+}
 
 @media only screen and (max-width: 800px) {
-    .desktop-view {
-        display: none;
-    }
-  
-    #flight-table{
-      height: 77svh;
-      font-size: 2.5vw;
-    }
-/* mobileStyles.css */
-.weather-icons {
+  .desktop-view {
+    display: none;
+  }
+
+  #flight-table {
+    height: 77svh;
+    font-size: 2.5vw;
+  }
+  /* mobileStyles.css */
+  .weather-icons {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -56,100 +52,88 @@ flex-direction: column;
     border-radius: 14px;
     width: 100%;
     margin-top: 1em;
-}
+  }
 
-.weather-icon {
+  .weather-icon {
     text-align: center;
-    flex: 1;  /* Allow icons to distribute evenly across the row */
+    flex: 1; /* Allow icons to distribute evenly across the row */
     margin-right: 5px;
-}
+  }
 
-.weather-icon img {
+  .weather-icon img {
     display: block;
     margin: 0 auto;
     width: 2em;
-}
+  }
 
-.weather-icon div {
+  .weather-icon div {
     margin-top: 5px;
     font-size: 1em;
     color: #333;
+  }
 
-}
+  .weather-icon a div {
+    text-decoration: none !important;
+    display: inline-block; /* Ensures it behaves like a normal text element */
+  }
 
+  .weather-icon a img {
+    text-decoration: none; /* Ensure no decoration on image */
+  }
 
-
-.weather-icon a div {
-  text-decoration: none !important;
-  display: inline-block; /* Ensures it behaves like a normal text element */
-}
-
-.weather-icon a img {
-  text-decoration: none; /* Ensure no decoration on image */
-}
-
-
-
-/* Ensure there is no right margin for the last weather icon */
-.weather-icon:last-child {
+  /* Ensure there is no right margin for the last weather icon */
+  .weather-icon:last-child {
     margin-right: 0;
+  }
 
-
-}
-
-    .card {
-        min-width: 100%;
-        scroll-snap-align: start;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  .card {
+    min-width: 100%;
+    scroll-snap-align: start;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: row;
-border-radius: 8px;
-line-height: 0;
- overflow: hidden;
- margin: 0px 0px 20px 0px;
-    }
+    border-radius: 8px;
+    line-height: 0;
+    overflow: hidden;
+    margin: 0px 0px 20px 0px;
+  }
 
-.clickable {
-  color: #007BFF;
-  text-decoration: none;
-text-align: right;
-}
+  .clickable {
+    color: #007bff;
+    text-decoration: none;
+    text-align: right;
+  }
 
-.clickable:hover {
-  text-decoration: underline;
-}
+  .clickable:hover {
+    text-decoration: underline;
+  }
 
-
-/* 60% of the card for the image */
-.card-image {
+  /* 60% of the card for the image */
+  .card-image {
     flex: 0 0 40%; /* Takes up 60% of the card's width */
     background-size: cover;
     background-position: center;
     height: 100%; /* Ensures the image fills the available height */
-}
+  }
 
-/* 40% of the card for the content */
-.card-content {
+  /* 40% of the card for the content */
+  .card-content {
     flex: 0 0 60%; /* Takes up 40% of the card's width */
-  /*  padding: 20px;*/
+    /*  padding: 20px;*/
     background-color: white;
     display: flex;
     flex-direction: column;
     box-sizing: border-box; /* Prevents padding from adding to the content's width */
     overflow: hidden; /* Ensures no content overflows */
-background-color: #f4dfcf;
-opacity: 0.9;
-justify-content: space-between;
-padding: 20px;
-}
+    background-color: #f4dfcf;
+    opacity: 0.9;
+    justify-content: space-between;
+    padding: 20px;
+  }
 
-h2 {
-/*margin-top: 0.2em;*/
-/*  margin-bottom: 0.8em;*/
+  h2 {
+    /*margin-top: 0.2em;*/
+    /*  margin-bottom: 0.8em;*/
     font-size: 3vw;
+  }
 }
-
-
-
-}
-
