@@ -150,22 +150,16 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Build the query
 
-	// Build query
-
 	query, args := buildQuery(expr, maxAccommodationPrice, cities, orderClause)
 
-	/*
-		params := append([]interface{}{city1, city1}, 1.0, 10.0, maxPrice) // Prepare parameters
-		for _, city := range additionalCities {
-			params = append(params, city)
-		}
-	*/
 	// Output the query for debugging
 	fmt.Println("Generated SQL Query:")
 	fmt.Println(query)
 	fmt.Println("Arguments:")
 	fmt.Println(args)
-	// Execute the queryfunc buildQuery(expr Expression, maxAccommodationPrice float64, originCities []string, orderClause string) (string, []interface{}) {
+	// Log the interpolated query for debugging
+	fullQuery := interpolateQuery(query, args)
+	log.Printf("Full Query:\n%s\n", fullQuery)
 
 	rows, err := db.Query(query, args...)
 	if err != nil {
@@ -221,6 +215,14 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 			return nil, err
 		}
 		// Use the image_1 URL from the database, or fallback to a placeholder if not available
+
+		// Log the weather data for debugging
+		log.Printf("Row Data - Destination: %s, Date: %s, Temp: %.2f, Icon: %s",
+			flight.DestinationCityName,
+			weather.Date,
+			weather.AvgDaytimeTemp.Float64,
+			weather.WeatherIcon,
+		)
 
 		// Log the imageUrl for debugging
 		log.Printf("Scanned image URL: '%s', Valid: %t", imageUrl.String, imageUrl.Valid)
@@ -354,7 +356,7 @@ func buildQuery(expr Expression, maxAccommodationPrice float64, originCities []s
 	queryBuilder.WriteString(`
       AND a.booking_pppn IS NOT NULL
       AND a.booking_pppn <= ?
-    GROUP BY ds.destination_city_name, ds.destination_country
+   GROUP BY f.destination_city_name, w.date, f.destination_country, l.avg_wpi
     `)
 
 	// Add the dynamic order clause
@@ -584,4 +586,33 @@ func parseLogicalExpression(cities []string, logicalOperators []string, maxPrice
 	}
 
 	return expr, nil
+}
+
+func interpolateQuery(query string, args []interface{}) string {
+	var result strings.Builder
+	argIndex := 0
+
+	for _, char := range query {
+		if char == '?' && argIndex < len(args) {
+			// Append the argument in place of the '?'
+			arg := args[argIndex]
+			argIndex++
+
+			// Format the argument based on its type
+			switch v := arg.(type) {
+			case string:
+				result.WriteString(fmt.Sprintf("'%s'", v)) // Quote strings
+			case float64:
+				result.WriteString(fmt.Sprintf("%.2f", v))
+			case int:
+				result.WriteString(fmt.Sprintf("%d", v))
+			default:
+				result.WriteString(fmt.Sprintf("%v", v)) // Fallback for other types
+			}
+		} else {
+			result.WriteRune(char)
+		}
+	}
+
+	return result.String()
 }
