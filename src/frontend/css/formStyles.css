@@ -17,11 +17,57 @@
 /* Hover and focus states for a nice interactive feel */
 #add-city-button:hover {
   background-color: #f07a5f;
-  outline: darkorange;
-  outline-style: groove;
+  /* outline: darkorange;
+  outline-style: groove;*/
 }
 
 /* Active state provides feedback on click */
 #add-city-button:active {
   transform: scale(0.98);
+}
+
+.remove-city-button {
+  margin: 10px;
+  background-color: #b5b5b5bf;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.remove-city-button:hover {
+  background-color: #ff3333;
+}
+
+select:hover {
+  background-color: #3fa89d; /* Slightly lighter green for hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  transform: scale(1.02); /* Slight zoom effect */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+select {
+  /* Add smooth transitions for background and other properties */
+  transition:
+    background-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+/* Slider*/
+
+/* Thumb style */
+.price-slider::-webkit-slider-thumb {
+  cursor: pointer;
+}
+
+.price-slider::-moz-range-thumb {
+  cursor: pointer;
+}
+
+.price-slider::-ms-thumb {
+  cursor: pointer;
+}
+.price-slider:hover {
+  cursor: pointer;
 }

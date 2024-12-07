@@ -165,6 +165,15 @@
         }, 2000);
       });
 
+      document
+        .getElementById("city-rows")
+        .addEventListener("click", function (event) {
+          if (event.target.classList.contains("remove-city-button")) {
+            const cityRow = event.target.closest(".city-row");
+            cityRow.remove();
+          }
+        });
+
       // Add event listener for adding additional cities dynamically
 
       let rowCount = 1;
@@ -176,7 +185,7 @@
           const div = document.createElement("div");
           div.className = "form-group city-row";
           div.innerHTML = `
-        <label>Logical Operator:</label>
+ <button type="button" class="remove-city-button">-</button>
         <select name="logical_operator[]">
           <option value="AND">AND</option>
           <option value="OR">OR</option>
@@ -207,6 +216,7 @@
           hx-include="#combinedPrice-slider${rowCount}"
           autocomplete="off"
         />
+      
       `;
           cityRows.appendChild(div);
           htmx.process(div);
