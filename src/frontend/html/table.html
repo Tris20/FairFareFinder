@@ -161,19 +161,17 @@
       <h2>{{ .DestinationCityName }}</h2>
       <div class="weather-icons">
         {{ range $index, $element := .WeatherForecast }} {{ if lt $index 5 }}
-        <div class="weather-icon">
-          <a href="{{ $element.GoogleUrl }}" target="_blank">
-            <img
-              src="{{ $element.WeatherIcon }}"
-              alt="Weather Icon"
-              width="30px"
-            />
-            <div>
-              {{ if $element.AvgDaytimeTemp.Valid }}{{ printf "%.1f°C"
-              $element.AvgDaytimeTemp.Float64 }}{{ else }}N/A{{ end }}
-            </div>
-          </a>
-        </div>
+        <a class="weather-icon" href="{{ $element.GoogleUrl }}" target="_blank">
+          <img
+            src="{{ $element.WeatherIcon }}"
+            alt="Weather Icon"
+            width="30px"
+          />
+          <div>
+            {{ if $element.AvgDaytimeTemp.Valid }}{{ printf "%.1f°C"
+            $element.AvgDaytimeTemp.Float64 }}{{ else }}N/A{{ end }}
+          </div>
+        </a>
         {{ end }} {{ end }}
       </div>
 
