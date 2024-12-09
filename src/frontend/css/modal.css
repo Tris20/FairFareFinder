@@ -9,7 +9,7 @@
   transform: translate(-50%, -50%); /* Adjust by half of the modal's size */
   width: 100vw; /* Ensure full-screen overlay */
   height: 100vh; /* Ensure full-screen overlay */
-  background-color: rgba(0, 0, 0, 0.5); /* Black overlay with opacity */
+  background-color: rgba(0, 0, 0, 0.7); /* Black overlay with opacity */
   justify-content: center; /* Center content horizontally */
   align-items: center; /* Center content vertically */
 }
@@ -49,4 +49,31 @@
 /* Override hover for card-large */
 .card-large:hover {
   transform: none !important; /* Remove scaling */
+}
+
+@media (max-width: 800px) {
+  .modal-content {
+    width: 90%;
+  }
+  /* Larger card styling */
+  .card-large {
+    height: 50vh;
+    flex-direction: column;
+  }
+
+  /* Larger card styling */
+  .card-large .card-image {
+    flex: 0 0 60%;
+  }
+  .card-large .card-content {
+    flex: 0 0 40%;
+  }
+
+  .modal-content {
+    top: 20vh;
+  }
+
+  .modal {
+    background-color: rgba(0, 0, 0, 0.7); /* Black overlay with opacity */
+  }
 }

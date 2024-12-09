@@ -338,7 +338,7 @@ h1 {
     position: fixed; /* Make the banner stick to the top */
     top: 0; /* Ensure it's positioned at the top */
     left: 0; /* Align to the left */
-    z-index: 1000; /* Make sure it's above other content */
+    z-index: 999; /* Make sure it's above other content */
 }
 
 /* When the banner is shown */

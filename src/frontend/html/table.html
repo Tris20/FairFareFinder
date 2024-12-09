@@ -91,7 +91,7 @@
 <!-- Mobile view (card carousel) -->
 <div class="mobile-view card-carousel">
   {{ range .Flights }}
-  <div class="card">
+  <div class="card" onclick="openModal('{{ .DestinationCityName }}')">
     <div
       class="card-image"
       style="
@@ -111,8 +111,8 @@
               width="30px"
             />
             <div>
-              {{ if $element.AvgDaytimeTemp.Valid }}{{ printf "%.1f°C"
-              $element.AvgDaytimeTemp.Float64 }}{{ else }}N/A{{ end }}
+              {{ if $element.AvgDaytimeTemp.Valid }} {{ printf "%.1f°C"
+              $element.AvgDaytimeTemp.Float64 }} {{ else }} N/A {{ end }}
             </div>
           </a>
         </div>
@@ -123,19 +123,19 @@
     Five Nights and Flights: {{if and .FiveNightsFlights.Valid (ne .FiveNightsFlights.Float64 0.00)}}€{{printf "%.2f" .FiveNightsFlights.Float64}}{{else}}N/A{{end}}
   </p-->
 
-      <!-- Link for Flights From -->
       <a href="{{.UrlCity1}}" target="_blank" class="clickable">
         <p>
-          Flights From: {{if and .PriceCity1.Valid (ne .PriceCity1.Float64
-          0.00)}}€{{printf "%.2f" .PriceCity1.Float64}}{{else}}N/A{{end}}
+          Flights From: {{ if and .PriceCity1.Valid (ne .PriceCity1.Float64
+          0.00) }} €{{ printf "%.2f" .PriceCity1.Float64 }} {{ else }} N/A {{
+          end }}
         </p>
       </a>
 
-      <!-- Link for Avg. Hotel Price -->
       <a href="{{.BookingUrl.String}}" target="_blank" class="clickable">
         <p>
-          Avg. Hotel Price: {{if and .BookingPppn.Valid (ne .BookingPppn.Float64
-          0.00)}}€{{printf "%.2f" .BookingPppn.Float64}}{{else}}N/A{{end}}
+          Avg. Hotel Price: {{ if and .BookingPppn.Valid (ne
+          .BookingPppn.Float64 0.00) }} €{{ printf "%.2f" .BookingPppn.Float64
+          }} {{ else }} N/A {{ end }}
         </p>
       </a>
     </div>
@@ -187,7 +187,7 @@
         </p>
       </a>
 
-      <a href="{{ .BookingUrl.String }}" target="_blank" class="clickable">
+      <a href="{{.BookingUrl.String}}" target="_blank" class="clickable">
         <p>
           Avg. Hotel Price: {{ if and .BookingPppn.Valid (ne
           .BookingPppn.Float64 0.00) }} €{{ printf "%.2f" .BookingPppn.Float64
@@ -196,8 +196,12 @@
       </a>
     </div>
   </div>
+  {{ end }}
+</div>
 
-  <!-- Modal -->
+<!-- Centralized Modal Views -->
+<div id="modals">
+  {{ range .Flights }}
   <div
     class="modal"
     id="modal-{{ .DestinationCityName }}"
@@ -250,7 +254,6 @@
       </div>
     </div>
   </div>
-
   {{ end }}
 </div>
 
