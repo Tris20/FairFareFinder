@@ -45,7 +45,7 @@ jobs:
             cd /root/FairFareFinder
 
             # Discard any local changes -- db is ignored
-            git reset --hard HEAD
+            git reset --hard origin/stable
             # Pull the latest changes
             git pull
             
