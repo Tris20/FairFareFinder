@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/tableStyles.css" />
     <link rel="stylesheet" href="/css/mobileStyles.css" />
     <link rel="stylesheet" href="/css/formStyles.css" />
-
+    <link rel="stylesheet" href="/css/modal.css" />
     <!-- Add Google Fonts for Dosis -->
     <link
       href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap"
@@ -104,7 +104,6 @@
 
             <!--<option value="low_price">Most Affordable</option>
             <option value="high_price">Most Expensive</option>-->
-
           </select>
         </div>
       </form>
@@ -223,6 +222,39 @@
           cityRows.appendChild(div);
           htmx.process(div);
           rowCount++;
+        });
+
+      function openModal(cityName) {
+        const modal = document.getElementById(`modal-${cityName}`);
+        if (modal) {
+          modal.style.display = "flex";
+        }
+      }
+
+      function closeModal(destinationCity) {
+        const modal = document.getElementById(`modal-${destinationCity}`);
+        if (modal) {
+          modal.style.display = "none";
+        }
+      }
+
+      function closeModalOnOutsideClick(event, destinationCity) {
+        const modalContent =
+          event.currentTarget.querySelector(".modal-content");
+
+        // Check if the click is outside the modal-content
+        if (!modalContent.contains(event.target)) {
+          closeModal(destinationCity); // Close the modal
+        }
+      }
+
+      document
+        .getElementById("modal-large-card")
+        .addEventListener("click", (event) => {
+          const modalContent = document.querySelector(".modal-content");
+          if (!modalContent.contains(event.target)) {
+            closeModal();
+          }
         });
     </script>
   </body>
