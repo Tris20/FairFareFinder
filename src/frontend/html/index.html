@@ -231,12 +231,31 @@
         }
       }
 
-      function closeModal(cityName) {
-        const modal = document.getElementById(`modal-${cityName}`);
+      function closeModal(destinationCity) {
+        const modal = document.getElementById(`modal-${destinationCity}`);
         if (modal) {
           modal.style.display = "none";
         }
       }
+
+      function closeModalOnOutsideClick(event, destinationCity) {
+        const modalContent =
+          event.currentTarget.querySelector(".modal-content");
+
+        // Check if the click is outside the modal-content
+        if (!modalContent.contains(event.target)) {
+          closeModal(destinationCity); // Close the modal
+        }
+      }
+
+      document
+        .getElementById("modal-large-card")
+        .addEventListener("click", (event) => {
+          const modalContent = document.querySelector(".modal-content");
+          if (!modalContent.contains(event.target)) {
+            closeModal();
+          }
+        });
     </script>
   </body>
 </html>

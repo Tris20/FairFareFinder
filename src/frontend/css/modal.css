@@ -1,0 +1,52 @@
+/* Modal overlay */
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 50%; /* Start positioning at the center horizontally */
+  top: 50%; /* Start positioning at the center vertically */
+  transform: translate(-50%, -50%); /* Adjust by half of the modal's size */
+  width: 100vw; /* Ensure full-screen overlay */
+  height: 100vh; /* Ensure full-screen overlay */
+  background-color: rgba(0, 0, 0, 0.5); /* Black overlay with opacity */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+}
+
+.modal-content {
+  width: 60%; /* 60% of the modal's width */
+  max-width: 800px; /* Optional: Limit width for larger screens */
+  height: auto; /* Adjust height dynamically based on content */
+  border-radius: 8px; /* Optional: Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for depth */
+  overflow-y: auto; /* Add scroll if content exceeds viewport */
+  top: 10vh;
+  position: absolute;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Larger card styling */
+.card-large .card-image {
+  height: 45vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-large .card-content {
+  text-align: center;
+}
+
+/* Override hover for card-large */
+.card-large:hover {
+  transform: none !important; /* Remove scaling */
+}
