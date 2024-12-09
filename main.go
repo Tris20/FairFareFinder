@@ -80,7 +80,8 @@ func main() {
 
 	tmpl = template.Must(template.ParseFiles(
 		"./src/frontend/html/index.html",
-		"./src/frontend/html/table.html"))
+		"./src/frontend/html/table.html",
+		"./src/frontend/html/seo.html"))
 
 	backend.Init(db, tmpl)
 
