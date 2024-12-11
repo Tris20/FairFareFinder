@@ -182,7 +182,7 @@
       <a href="{{ .UrlCity1 }}" target="_blank" class="clickable">
         <p>
           Flights From: {{ if and .PriceCity1.Valid (ne .PriceCity1.Float64
-          0.00) }} €{{ printf "%.2f" .PriceCity1.Float64 }} {{ else }} N/A {{
+          0.00) }} €{{ printf "%.0f" .PriceCity1.Float64 }} {{ else }} N/A {{
           end }}
         </p>
       </a>
@@ -190,7 +190,7 @@
       <a href="{{.BookingUrl.String}}" target="_blank" class="clickable">
         <p>
           Avg. Hotel Price: {{ if and .BookingPppn.Valid (ne
-          .BookingPppn.Float64 0.00) }} €{{ printf "%.2f" .BookingPppn.Float64
+          .BookingPppn.Float64 0.00) }} €{{ printf "%.0f" .BookingPppn.Float64
           }} {{ else }} N/A {{ end }}
         </p>
       </a>
@@ -238,7 +238,7 @@
           <a href="{{ .UrlCity1 }}" target="_blank" class="clickable">
             <p>
               Flights From: {{ if and .PriceCity1.Valid (ne .PriceCity1.Float64
-              0.00) }} €{{ printf "%.2f" .PriceCity1.Float64 }} {{ else }} N/A
+              0.00) }} €{{ printf "%.0f" .PriceCity1.Float64 }} {{ else }} N/A
               {{ end }}
             </p>
           </a>
@@ -246,7 +246,7 @@
           <a href="{{ .BookingUrl.String }}" target="_blank" class="clickable">
             <p>
               Avg. Hotel Price: {{ if and .BookingPppn.Valid (ne
-              .BookingPppn.Float64 0.00) }} €{{ printf "%.2f"
+              .BookingPppn.Float64 0.00) }} €{{ printf "%.0f"
               .BookingPppn.Float64 }} {{ else }} N/A {{ end }}
             </p>
           </a>
