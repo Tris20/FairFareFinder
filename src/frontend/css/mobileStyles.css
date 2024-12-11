@@ -21,6 +21,8 @@
 .scroll-container {
   width: 100vw;
   overflow: hidden; /* Hide scrollbars */
+  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 @media only screen and (min-width: 801px) {
@@ -35,7 +37,9 @@
   }
 
   #flight-table {
+    /*
     height: 77svh;
+    */
     font-size: 2.5vw;
   }
   /* mobileStyles.css */
@@ -113,7 +117,8 @@
     flex: 0 0 40%; /* Takes up 60% of the card's width */
     background-size: cover;
     background-position: center;
-    height: 100%; /* Ensures the image fills the available height */
+
+    height: 21vh;
   }
 
   /* 40% of the card for the content */

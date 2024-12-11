@@ -98,7 +98,7 @@ text-align: center;
     width: 92%; /* Adjust form width on mobile */
     flex-direction: column; /* Align items in a row */
 padding: calc(10px + 2%);
-
+max-width: 1200px;
   padding-bottom: 0px;
 padding-top: 20px;
 background-color: #0b5259;
@@ -168,8 +168,9 @@ width: 30%;
 #flight-table {
 
 font-size: 1em;
-height: 77svh;
 /*
+height: 77svh;
+
 font-size: 1.0vw;
 */
 }
@@ -197,7 +198,10 @@ font-size: 1.0vw;
 
 #flight-table {
 font-size: 1em;
+
+/*
 height: 77svh;
+*/
 }
   .card-content h2 {
     font-size: 1.4em;
@@ -373,10 +377,10 @@ font-size: 1.7em;
 
 .scroll-container {
     position: relative;
-    height: 80vh; /* Set the height for scrolling, e.g., 80% of the viewport */
+    height: 93vh; /* Set the height for scrolling, e.g., 80% of the viewport */top: -10px;
     width: 100vw; /* Ensure the container spans the full width of the viewport */
     overflow-y: scroll; /* Enable vertical scrolling */
-    overflow-x: hidden; /* Disable horizontal scrolling */
+    overflow-x: scroll; /* Disable horizontal scrolling */
     box-sizing: border-box; /* Ensure padding is included in width/height */
     padding: 10px; /* Optional padding for aesthetics */
 }

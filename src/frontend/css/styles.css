@@ -136,12 +136,14 @@ h1 {
 #flight-table {
   width: 100%; /* Ensure the table takes up full width */
   margin: 25px 0;
-  overflow-y: auto; /* Enables vertical scrolling when necessary */
+ /* overflow-y: auto; *//* Enables vertical scrolling when necessary */
   opacity: 0; /* Start invisible */
-  overflow-x: scroll; /* Enable horizontal scrolling for smaller screens */
+  /*overflow-x: scroll; *//* Enable horizontal scrolling for smaller screens */
 text-align: left;
 border-radius: 8px;
+/*
 height:77svh;
+*/
 margin-bottom: 0;
 font-size: 1.2vw;
 }
@@ -231,7 +233,7 @@ color: white;
 /* Initial state for footer */
 #footer-privacy {
   opacity: 0; /* Initially hidden */
-margin-top: 0px;
+margin-top: 6px;
 width: 100%;
 }
 
@@ -358,7 +360,9 @@ border: 0px;
     overflow-x: scroll; /* Enable horizontal scrolling if needed */
 margin-bottom: 0px;
     font-size: 1em;
+  /*
     height: 60svh;
+    */
   }
 
   #flight-table th,

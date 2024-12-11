@@ -53,77 +53,79 @@
     <!-- Table content container that will appear after the text fades out -->
     <!-- Banner structure -->
     <div id="table-container">
-      <form
-        id="flight-form"
-        hx-get="/filter"
-        hx-target="#flight-table"
-        hx-trigger="change, input delay:50ms"
-      >
-        <!-- Dynamic city input rows -->
-        <div id="city-rows" style="width: 100%">
-          <div class="form-group city-row">
-            <label>City:</label>
-            <select name="city[]">
-              <option value="Berlin" selected>Berlin</option>
-              <option value="Munich">Munich</option>
-              <option value="Frankfurt">Frankfurt</option>
-              <option value="Glasgow">Glasgow</option>
-              <option value="Edinburgh">Edinburgh</option>
-              <option value="Sydney">Sydney</option>
-            </select>
-            <label for="priceOutput0"></label>
-            <output id="priceOutput0" class="output-range">€399.00</output>
-            <input
-              type="range"
-              id="combinedPrice-slider0"
-              name="maxPriceLinear[]"
-              min="0"
-              max="100"
-              step="1"
-              value="49"
-              class="price-slider"
-              hx-get="/update-slider-price"
-              hx-target="#priceOutput0"
-              hx-trigger="input"
-              hx-push-url="false"
-              hx-preserve="false"
-              hx-include="#combinedPrice-slider0"
-              autocomplete="off"
-            />
-          </div>
-        </div>
-        <!-- Button to add more origin cities -->
-
-        <div class="form-group">
-          <button type="button" id="add-city-button">
-            Add Another Origin City
-          </button>
-        </div>
-
-        <div class="form-group">
-          <label for="sort">Sort By:</label>
-          <select id="sort" name="sort">
-            <option value="best_weather" selected>Sunniest and Warmest</option>
-            <option value="worst_weather">Coldest and Wettest</option>
-
-            <!--<option value="low_price">Most Affordable</option>
-            <option value="high_price">Most Expensive</option>-->
-          </select>
-        </div>
-      </form>
-
       <div class="scroll-container">
+        <form
+          id="flight-form"
+          hx-get="/filter"
+          hx-target="#flight-table"
+          hx-trigger="change, input delay:50ms"
+        >
+          <!-- Dynamic city input rows -->
+          <div id="city-rows" style="width: 100%">
+            <div class="form-group city-row">
+              <label>City:</label>
+              <select name="city[]">
+                <option value="Berlin" selected>Berlin</option>
+                <option value="Munich">Munich</option>
+                <option value="Frankfurt">Frankfurt</option>
+                <option value="Glasgow">Glasgow</option>
+                <option value="Edinburgh">Edinburgh</option>
+                <option value="Sydney">Sydney</option>
+              </select>
+              <label for="priceOutput0"></label>
+              <output id="priceOutput0" class="output-range">€399.00</output>
+              <input
+                type="range"
+                id="combinedPrice-slider0"
+                name="maxPriceLinear[]"
+                min="0"
+                max="100"
+                step="1"
+                value="49"
+                class="price-slider"
+                hx-get="/update-slider-price"
+                hx-target="#priceOutput0"
+                hx-trigger="input"
+                hx-push-url="false"
+                hx-preserve="false"
+                hx-include="#combinedPrice-slider0"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+          <!-- Button to add more origin cities -->
+
+          <div class="form-group">
+            <button type="button" id="add-city-button">
+              Add Another Origin City
+            </button>
+          </div>
+
+          <div class="form-group">
+            <label for="sort">Sort By:</label>
+            <select id="sort" name="sort">
+              <option value="best_weather" selected>
+                Sunniest and Warmest
+              </option>
+              <option value="worst_weather">Coldest and Wettest</option>
+
+              <!--<option value="low_price">Most Affordable</option>
+            <option value="high_price">Most Expensive</option>-->
+            </select>
+          </div>
+        </form>
+
         <div id="flight-table">
           <!-- The cards will be dynamically updated here -->
         </div>
-      </div>
 
-      <footer id="footer-privacy">
-        <p>
-          &copy; 2024 FairFareFinder |
-          <a href="/privacy-policy">Privacy Policy</a>
-        </p>
-      </footer>
+        <footer id="footer-privacy">
+          <p>
+            &copy; 2024 FairFareFinder |
+            <a href="/privacy-policy">Privacy Policy</a>
+          </p>
+        </footer>
+      </div>
     </div>
 
     <script>
