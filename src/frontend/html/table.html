@@ -169,7 +169,7 @@
             width="30px"
           />
           <div>
-            {{ if $element.AvgDaytimeTemp.Valid }} {{ printf "%.1f°C"
+            {{ if $element.AvgDaytimeTemp.Valid }} {{ printf "%.0f°C"
             $element.AvgDaytimeTemp.Float64 }} {{ else }} N/A {{ end }}
           </div>
         </a>
@@ -228,7 +228,7 @@
                 width="30px"
               />
               <div>
-                {{ if $element.AvgDaytimeTemp.Valid }} {{ printf "%.1f°C"
+                {{ if $element.AvgDaytimeTemp.Valid }} {{ printf "%.0f°C"
                 $element.AvgDaytimeTemp.Float64 }} {{ else }} N/A {{ end }}
               </div>
             </div>
