@@ -255,7 +255,7 @@ width: 100%;
 .form-group select,
 .form-group input[type="range"],
 .form-group output {
-  width: 70%; /* Adjust input width */
+  width: 100%; /* Adjust input width */
 }
 
 
