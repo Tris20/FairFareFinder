@@ -45,7 +45,7 @@ func StartFileCheckRoutine(db **sql.DB, tmpl **template.Template) {
                     log.Println("Successfully reconnected to the new main.db")
 
                     // Reinitialize both the database and the templates in the backend
-                    *tmpl = template.Must(template.ParseFiles("./src/frontend/html/index.html", "./src/frontend/html/table.html"))
+                    *tmpl = template.Must(template.ParseFiles("./src/frontend/html/index.html", "./src/frontend/html/table.html", "./src/frontend/html/seo.html"))
                     Init(*db, *tmpl)
                 }
             }
