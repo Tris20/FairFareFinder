@@ -49,7 +49,6 @@ type FlightsData struct {
 }
 
 // Global variables: template, database, session store
-// TODO: figure out if this can be moved elsewhere
 var (
 	tmpl  *template.Template
 	db    *sql.DB
