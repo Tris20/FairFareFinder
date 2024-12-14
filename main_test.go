@@ -4,15 +4,15 @@ package main
 // it can access the functions and variables in main.go that are private
 
 import (
-	"database/sql"
-	"html/template"
-	"log"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"strings"
 	"testing"
+	"time"
 
+	"github.com/PuerkitoBio/goquery"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -21,23 +21,7 @@ import (
 // This is a feature of the testing package.
 func TestMain(m *testing.M) {
 	// setup resources / set up
-	// Initialize the database
-	var err error
-	db, err = setupTestDB()
-	if err != nil {
-		log.Fatalf("Failed to set up test database: %v", err)
-	}
-	defer db.Close()
-
-	// Initialize the template
-	tmpl, err = template.ParseFiles(
-		"./src/frontend/html/index.html",
-		"./src/frontend/html/table.html",
-		"./src/frontend/html/seo.html")
-	if err != nil {
-		log.Fatalf("Failed to parse templates: %v", err)
-	}
-
+	SetupServer("./testdata/test.db")
 	// Run the test
 	exitVal := m.Run()
 
@@ -47,15 +31,53 @@ func TestMain(m *testing.M) {
 	os.Exit(exitVal)
 }
 
-func setupTestDB() (*sql.DB, error) {
-	// We can keep a database file for testing purposes
-	// From the go book: testdata is a special directory that is reserved by the toolchain
-	// need to use a relative path to the testdata directory
-	testDB, err := sql.Open("sqlite3", "./testdata/test.db")
+func TestFilterHandler(t *testing.T) {
+	// run the server for this test
+	go StartServer()
+	// wait for the server to start
+	time.Sleep(10 * time.Millisecond)
+
+	// Send the request
+	url := "http://127.0.0.1:8080/filter?city[]=Berlin&maxPriceLinear[]=14"
+	resp, err := http.Get(url)
 	if err != nil {
-		return nil, err
+		t.Fatalf("Failed to send request: %v", err)
 	}
-	return testDB, nil
+	defer resp.Body.Close()
+
+	// Check response status
+	if resp.StatusCode != http.StatusOK {
+		t.Errorf("Expected status 200 OK, got %d", resp.StatusCode)
+		bodyBytes, err := io.ReadAll(resp.Body)
+		if err != nil {
+			t.Errorf("Failed to read response body: %v", err)
+		} else {
+			bodyString := string(bodyBytes)
+			t.Errorf("Response body: %s", bodyString)
+		}
+	}
+
+	// Parse the response body using goquery for structured HTML parsing
+	doc, err := goquery.NewDocumentFromReader(resp.Body)
+	if err != nil {
+		t.Fatalf("Failed to parse HTML: %v", err)
+	}
+
+	// Define the expected destination
+	expectedDestination := "Tivat"
+	// Check the first destination
+	firstRow := doc.Find("tbody > tr").First()
+	firstDestination := firstRow.Find("td").First().Text()
+	firstDestination = strings.TrimSpace(firstDestination)
+	if expectedDestination != firstDestination {
+		t.Errorf("Expected '%s' to be the first destination, but got '%s'.", expectedDestination, firstDestination)
+	}
+
+	// Check the number of weather columns in the first row
+	weatherColumns := firstRow.Find("td.weather-column")
+	if weatherColumns.Length() != 5 {
+		t.Errorf("Expected 5 weather columns for '%s', but found %d.", expectedDestination, weatherColumns.Length())
+	}
 }
 
 // test for combinedCardsHandler function

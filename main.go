@@ -56,6 +56,26 @@ var (
 )
 
 func main() {
+	// Parse the "web" flag
+	webFlag := flag.Bool("web", false, "Pass this flag to enable the web server with file check routine")
+	flag.Parse() // Parse command-line flags
+
+	// Set up the server
+	// pass in database path for testing purposes
+	SetupServer("./data/compiled/main.db")
+
+	// On web server, every 2 hours, check for a new database delivery, and swap dbs accordingly
+	fmt.Printf("Flag? Value: %v\n", *webFlag)
+	if *webFlag {
+		fmt.Println("Starting db monitor")
+		go backend.StartFileCheckRoutine(&db, &tmpl)
+	}
+
+	// Start the server
+	StartServer()
+}
+
+func SetupServer(db_path string) {
 	// Set up lumberjack log file rotation config
 	log.SetOutput(&lumberjack.Logger{
 		Filename:   "./app.log", // File to log to
@@ -65,17 +85,12 @@ func main() {
 		Compress:   true,        // Compress the rotated files using gzip
 	})
 
-	// Parse the "web" flag
-	webFlag := flag.Bool("web", false, "Pass this flag to enable the web server with file check routine")
-	flag.Parse() // Parse command-line flags
-
 	var err error
 
-	db, err = sql.Open("sqlite3", "./data/compiled/main.db")
+	db, err = sql.Open("sqlite3", db_path)
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer db.Close()
 
 	tmpl = template.Must(template.ParseFiles(
 		"./src/frontend/html/index.html",
@@ -95,20 +110,11 @@ func main() {
 	http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html") // Make sure the path is correct
 	})
+}
 
-	// TODO: update message to be more specific to what the problem is
-	// On web server, every 2 hours, check for a new database delivery, and swap dbs accordingly
-	fmt.Printf("Flag? Value: %v\n", *webFlag)
-	if *webFlag {
-		fmt.Println("Starting db monitor")
-		go backend.StartFileCheckRoutine(&db, &tmpl)
-	}
-
-	// Listen on all network in  terfaces including localhost
-	var address string = "0.0.0.0:8080"
-	fmt.Println("Listening on port " + address)
-	log.Fatal(http.ListenAndServe(address, nil))
-
+func StartServer() {
+	// Listen on all network interfaces including localhost
+	log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
 }
 
 func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
