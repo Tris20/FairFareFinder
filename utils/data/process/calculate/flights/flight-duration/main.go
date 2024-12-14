@@ -40,6 +40,24 @@ func calculateAdjustedFlightTime(distance float64) float64 {
 	return totalFlightTime
 }
 
+// Convert flight duration to hours.roundedminutes format
+func formatDuration(hours float64) float64 {
+	totalMinutes := math.Round(hours * 60)     // Total minutes
+	hoursPart := math.Floor(totalMinutes / 60) // Full hours
+	minutesPart := totalMinutes - (hoursPart * 60)
+
+	// Round minutes to the nearest 20
+	roundedMinutes := math.Round(minutesPart/20) * 20
+
+	// If rounding pushes minutes to 60, increment the hour
+	if roundedMinutes == 60 {
+		hoursPart++
+		roundedMinutes = 0
+	}
+
+	return hoursPart + roundedMinutes/100 // Format as hours.roundedminutes
+}
+
 func main() {
 	// Paths to the databases
 	mainDBPath := "../../../../../../data/compiled/main.db"
@@ -124,11 +142,12 @@ func main() {
 		distance := haversine(originLat, originLon, destLat, destLon)
 		log.Printf("Calculated distance for flight ID %d: %.2f km", flightID, distance)
 		flightTime := calculateAdjustedFlightTime(distance)
-		log.Printf("Calculated flight time for flight ID %d: %.2f hours", flightID, flightTime)
+		formattedFlightTime := formatDuration(flightTime)
+		log.Printf("Formatted flight time for flight ID %d: %.2f", flightID, formattedFlightTime)
 
 		// Update flight duration within the transaction
-		updateQuery := `UPDATE flight SET duration_in_hours = ? WHERE id = ?`
-		_, err = tx.Exec(updateQuery, flightTime, flightID)
+		updateQuery := `UPDATE flight SET duration_hour_dot_mins = ? WHERE id = ?`
+		_, err = tx.Exec(updateQuery, formattedFlightTime, flightID)
 		if err != nil {
 			log.Printf("Failed to update flight duration for ID %d: %v", flightID, err)
 		} else {
