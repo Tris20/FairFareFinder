@@ -7,17 +7,14 @@ import (
 	"html/template"
 	"log"
 
-	//"math/rand"
 	"net/http"
-	//"os"
-	//"path/filepath"
 	"strconv"
-	//"time"
+	"strings"
+
 	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/gorilla/sessions"
 	_ "github.com/mattn/go-sqlite3"
 	"gopkg.in/natefinch/lumberjack.v2"
-	"strings"
 )
 
 type Weather struct {
@@ -50,6 +47,7 @@ type FlightsData struct {
 	MinFnaf       sql.NullFloat64
 }
 
+// Global variables: template, database, session store
 var (
 	tmpl  *template.Template
 	db    *sql.DB
@@ -73,7 +71,6 @@ func main() {
 	var err error
 
 	db, err = sql.Open("sqlite3", "./data/compiled/main.db")
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -119,7 +116,9 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Validate input lengths
 	if len(cities) == 0 || len(cities) != len(logicalOperators)+1 || len(cities) != len(maxPriceLinearStrs) {
-		http.Error(w, "Mismatched input lengths", http.StatusBadRequest)
+		response := fmt.Sprintf("Mismatched input lengths. Cities: %d, Operators: %d, Prices: %d",
+			len(cities), len(logicalOperators), len(maxPriceLinearStrs))
+		http.Error(w, response, http.StatusBadRequest)
 		return
 	}
 
