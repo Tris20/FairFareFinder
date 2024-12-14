@@ -6,8 +6,7 @@ on:
       - main
   pull_request:
     branches:
-      - main
-  workflow_dispatch: # Add this to enable manual triggering
+      - "*" # Any branch
 
 jobs:
   build_and_test:
