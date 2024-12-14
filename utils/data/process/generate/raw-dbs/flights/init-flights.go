@@ -51,7 +51,8 @@ func main() {
         "destination_iata" TEXT,
         "destination_skyscanner_id" TEXT,
         "this_weekend" REAL,    
-        "next_weekend" REAL
+        "next_weekend" REAL,
+        "duration" INTEGER
     );
     `)
 	if err != nil {
