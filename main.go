@@ -17,7 +17,6 @@ import (
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
-// TODO: move types to a separate file
 type Weather struct {
 	Date           string
 	AvgDaytimeTemp sql.NullFloat64
