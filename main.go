@@ -480,7 +480,6 @@ func determineOrderClause(sortOption string) string {
 	}
 }
 
-// TODO: move these somehwere else.
 /*
 // / Helper to construct SELECT clause
 func selectClause() string {
@@ -577,7 +576,6 @@ func havingClause() string {
 */
 /*---------------Logical Expressions-----------------------*/
 
-// TODO: move types to another file
 // CityInput represents the input for each city
 type CityInput struct {
 	Name       string
@@ -607,7 +605,6 @@ type LogicalExpression struct {
 	Right    Expression
 }
 
-// TODO: find where these can stay, but not here
 func parseLogicalExpression(cities []string, logicalOperators []string, maxPrices []float64) (Expression, error) {
 	// Validate input lengths
 	if len(cities) == 0 || len(cities) != len(maxPrices) || len(cities) != len(logicalOperators)+1 {
