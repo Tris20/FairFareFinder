@@ -17,6 +17,7 @@ import (
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
+// TODO: move types to a separate file
 type Weather struct {
 	Date           string
 	AvgDaytimeTemp sql.NullFloat64
@@ -95,6 +96,7 @@ func main() {
 		http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html") // Make sure the path is correct
 	})
 
+	// TODO: update message to be more specific to what the problem is
 	// On web server, every 2 hours, check for a new database delivery, and swap dbs accordingly
 	fmt.Printf("Flag? Value: %v\n", *webFlag)
 	if *webFlag {
@@ -103,7 +105,9 @@ func main() {
 	}
 
 	// Listen on all network in  terfaces including localhost
-	log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
+	var address string = "0.0.0.0:8080"
+	fmt.Println("Listening on port " + address)
+	log.Fatal(http.ListenAndServe(address, nil))
 
 }
 
@@ -459,6 +463,7 @@ func determineOrderClause(sortOption string) string {
 	}
 }
 
+// TODO: move these somehwere else.
 /*
 // / Helper to construct SELECT clause
 func selectClause() string {
@@ -555,6 +560,7 @@ func havingClause() string {
 */
 /*---------------Logical Expressions-----------------------*/
 
+// TODO: move types to another file
 // CityInput represents the input for each city
 type CityInput struct {
 	Name       string
@@ -584,6 +590,7 @@ type LogicalExpression struct {
 	Right    Expression
 }
 
+// TODO: find where these can stay, but not here
 func parseLogicalExpression(cities []string, logicalOperators []string, maxPrices []float64) (Expression, error) {
 	// Validate input lengths
 	if len(cities) == 0 || len(cities) != len(maxPrices) || len(cities) != len(logicalOperators)+1 {
