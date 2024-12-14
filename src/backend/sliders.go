@@ -30,7 +30,7 @@ func UpdateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
 		priceType = "accommodation"
 		maxLinearStr = maxAccomPriceLinearStrs[0]
 		minRange = 10
-		maxRange = 1200
+		maxRange = 550
 	} else {
 		log.Printf("Missing slider parameter (flight or accommodation)")
 		http.Error(w, "Missing slider parameter", http.StatusBadRequest)
