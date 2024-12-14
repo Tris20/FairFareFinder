@@ -97,7 +97,7 @@ func main() {
 		http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html") // Make sure the path is correct
 	})
 
-	// TODO: update message to be more specific to what the problem is
+	
 	// On web server, every 2 hours, check for a new database delivery, and swap dbs accordingly
 	fmt.Printf("Flag? Value: %v\n", *webFlag)
 	if *webFlag {
