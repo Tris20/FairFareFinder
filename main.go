@@ -171,14 +171,23 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 	query, args := buildQuery(expr, maxAccommodationPrice, cities, orderClause)
 
 	// Output the query for debugging
-	fmt.Println("Generated SQL Query:")
-	fmt.Println(query)
-	fmt.Println("Arguments:")
-	fmt.Println(args)
-	// Log the interpolated query for debugging
-	fullQuery := interpolateQuery(query, args)
-	log.Printf("Full Query:\n%s\n", fullQuery)
+	// Note: uncomment this when debugging. During tests it makes the output too long
+	// fmt.Println("Generated SQL Query:")
+	// fmt.Println(query)
+	// fmt.Println("Arguments:")
+	// fmt.Println(args)
 
+	// // Log the interpolated query for debugging
+	// fullQuery := interpolateQuery(query, args)
+	// log.Printf("Full Query:\n%s\n", fullQuery)
+
+	// Check if db is nil
+	if db == nil {
+		http.Error(w, "Database connection is not initialized", http.StatusInternalServerError)
+		return
+	}
+
+	// BUG: trying to this, query causes a panic
 	rows, err := db.Query(query, args...)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

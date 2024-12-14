@@ -1,11 +1,45 @@
 package main
 
 import (
+	"database/sql"
+	"log"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strings"
 	"testing"
+
+	_ "github.com/mattn/go-sqlite3"
 )
+
+// TestMain is a test setup function. It is called before any tests are run.
+// It is used to set up any resources that are needed by the tests.
+// This is a feature of the testing package.
+func TestMain(m *testing.M) {
+	// setup resources / set up
+	var err error
+	db, err = setupTestDB()
+	if err != nil {
+		log.Fatalf("Failed to set up test database: %v", err)
+	}
+	defer db.Close()
+
+	// Run the test
+	exitVal := m.Run()
+
+	// cleanup resources / additional tear down
+
+	// exit
+	os.Exit(exitVal)
+}
+
+func setupTestDB() (*sql.DB, error) {
+	// We can keep a database file for testing purposes
+	// From the go book: testdata is a special directory that is reserved by the toolchain
+	// path must be relative to the package directory
+	testDB, err := sql.Open("sqlite3", "./testdata/test.db")
+	return testDB, err
+}
 
 // test for combinedCardsHandler function
 func TestCombinedCardsHandler(t *testing.T) {
