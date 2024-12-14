@@ -100,7 +100,14 @@
     ></div>
 
     <div class="card-content">
-      <h2>{{ .DestinationCityName }}</h2>
+      <div class="destination-title">
+        <h2>{{ .DestinationCityName }}</h2>
+        <div class="destination-duration">
+          {{ if .DurationHourDotMins.Valid }} {{ printf "%.0fHrs"
+          .DurationHourDotMins.Float64 }} {{ else }} {{ end }}
+        </div>
+      </div>
+
       <div class="weather-icons">
         {{ range $index, $element := .WeatherForecast }} {{ if lt $index 5 }}
         <div class="weather-icon">
@@ -159,7 +166,14 @@
     ></div>
 
     <div class="card-content">
-      <h2>{{ .DestinationCityName }}</h2>
+      <div class="destination-title">
+        <h2>{{ .DestinationCityName }}</h2>
+        <div class="destination-duration">
+          {{ if .DurationHourDotMins.Valid }} {{ printf "%.0fHrs"
+          .DurationHourDotMins.Float64 }} {{ else }} {{ end }}
+        </div>
+      </div>
+
       <div class="weather-icons">
         {{ range $index, $element := .WeatherForecast }} {{ if lt $index 5 }}
         <a class="weather-icon" href="{{ $element.GoogleUrl }}" target="_blank">
@@ -217,7 +231,14 @@
         ></div>
 
         <div class="card-content">
-          <h2>{{ .DestinationCityName }}</h2>
+          <div class="destination-title">
+            <h2>{{ .DestinationCityName }}</h2>
+            <p>
+              {{ if .DurationHourDotMins.Valid }} {{ printf "%.0fHrs"
+              .DurationHourDotMins.Float64 }} {{ else }} {{ end }}
+            </p>
+          </div>
+
           <div class="weather-icons">
             {{ range $index, $element := .WeatherForecast }} {{ if lt $index 5
             }}

@@ -19,6 +19,7 @@ func UpdateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
 	var priceType string
 	var maxLinearStr string
 	var minRange, maxRange float64
+	var maxPrice float64
 
 	// Check which type of slider value is provided
 	if len(maxPriceLinearStrs) > 0 {
@@ -46,7 +47,11 @@ func UpdateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Map the slider value to the corresponding range
-	maxPrice := MapLinearToExponential(maxLinear, minRange, maxRange)
+	if priceType == "flight" {
+		maxPrice = MapLinearToExponential(maxLinear, minRange, maxRange)
+	} else if priceType == "accommodation" {
+		maxPrice = AccomMapLinearToExponential(maxLinear, minRange, maxRange)
+	}
 
 	// Debug: Log the calculated price
 	log.Printf("Calculated %s price for linear value %f: €%.2f", priceType, maxLinear, maxPrice)

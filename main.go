@@ -38,6 +38,7 @@ type Flight struct {
 	BookingUrl          sql.NullString
 	BookingPppn         sql.NullFloat64
 	FiveNightsFlights   sql.NullFloat64
+	DurationHourDotMins sql.NullFloat64
 }
 
 type FlightsData struct {
@@ -156,7 +157,7 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Invalid accommodation price parameter", http.StatusBadRequest)
 			return
 		}
-		maxAccommodationPrice = backend.MapLinearToExponential(accomLinearValue, 10, 1200)
+		maxAccommodationPrice = backend.AccomMapLinearToExponential(accomLinearValue, 10, 550)
 	} else {
 		// Default value if no accommodation price is provided
 		maxAccommodationPrice = 70.0
@@ -209,7 +210,7 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 		var imageUrl sql.NullString
 		var bookingUrl sql.NullString
 		var priceFnaf sql.NullFloat64
-
+		var duration sql.NullFloat64
 		err := rows.Scan(
 			&flight.DestinationCityName,
 			&flight.PriceCity1,
@@ -223,19 +224,27 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 			&bookingUrl,
 			&flight.BookingPppn,
 			&priceFnaf,
+			&duration,
 		)
 		if err != nil {
 			log.Printf("Error scanning row: %v", err)
 			return nil, err
 		}
-		// Use the image_1 URL from the database, or fallback to a placeholder if not available
+
+		if duration.Valid {
+			flight.DurationHourDotMins = duration
+			log.Printf("Duration: %.2f hours for flight to %s", duration.Float64, flight.DestinationCityName)
+		} else {
+			log.Printf("No valid duration found for flight to %s", flight.DestinationCityName)
+		}
 
 		// Log the weather data for debugging
-		log.Printf("Row Data - Destination: %s, Date: %s, Temp: %.2f, Icon: %s",
+		log.Printf("Row Data - Destination: %s, Date: %s, Temp: %.2f, Icon: %s, Duration.Mins %.2f",
 			flight.DestinationCityName,
 			weather.Date,
 			weather.AvgDaytimeTemp.Float64,
 			weather.WeatherIcon,
+			flight.DurationHourDotMins,
 		)
 
 		// Log the imageUrl for debugging
@@ -328,7 +337,8 @@ func buildQuery(expr Expression, maxAccommodationPrice float64, originCities []s
         l.image_1,
         a.booking_url,
         a.booking_pppn,
-        fnf.price_fnaf
+        fnf.price_fnaf,
+        MIN(f.duration_hour_dot_mins) AS duration_hour_dot_mins
     FROM DestinationSet ds
     JOIN flight f ON ds.destination_city_name = f.destination_city_name 
                    AND ds.destination_country = f.destination_country
@@ -441,6 +451,10 @@ func determineOrderClause(sortOption string) string {
 		return "ORDER BY a.booking_pppn ASC"
 	case "most_expensive_hotel":
 		return "ORDER BY a.booking_pppn DESC"
+	case "shortest_flight":
+		return "ORDER BY f.duration_hour_dot_mins ASC"
+	case "longest_flight":
+		return "ORDER BY f.duration_hour_dot_mins DESC"
 	default:
 		return "ORDER BY fnf.price_fnaf ASC" // Default sorting by lowest FNAF price
 	}

@@ -413,4 +413,20 @@ font-size: 1.7em;
 }
 
 
+.destination-title {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+}
 
+.destination-duration {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+}
+
+#duration-container {
+  display: block; /* Ensure it is visible initially */
+}

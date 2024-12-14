@@ -253,6 +253,10 @@ func main() {
 
 					runExecutableInDir(filepath.Join(absoluteBase, "process/compile/main/locations"), "locations")
 					log.Println("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
+
+					runExecutableInDir(filepath.Join(absoluteBase, "process/calculate/flights/flight-duration"), "flight-duration")
+					log.Println("%sCOMPLETED: process/calculate/flights/flight-duration%s\n", green, reset)
+
 					// add location image paths to table
 					runExecutableInDir(filepath.Join(absoluteBase, "process/compile/locations/location-images"), "location-images")
 					log.Println("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
@@ -281,11 +285,11 @@ func main() {
 					// Calcualte and Compile WPI for Locations
 					runExecutableInDir(filepath.Join(absoluteBase, "process/compile/main/locations"), "locations")
 					log.Println("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
-			
+
 					// add location image paths to table
 					runExecutableInDir(filepath.Join(absoluteBase, "process/compile/locations/location-images"), "location-images")
 					log.Println("%sCOMPLETED: process/compile/main/locations%s\n", green, reset)
-		transfer = true
+					transfer = true
 				}
 
 				if transfer {

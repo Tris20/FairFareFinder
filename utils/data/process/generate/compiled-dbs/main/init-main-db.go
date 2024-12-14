@@ -32,6 +32,7 @@ func main() {
 	"price_next_week"	DECIMAL,
 	"skyscanner_url_next_week"	VARCHAR(255),
 	"duration_in_minutes"	DECIMAL,
+  "duration_in_hours"	DECIMAL,
 	PRIMARY KEY("id" AUTOINCREMENT)
 	);`,
 		`CREATE TABLE IF NOT EXISTS weather (
