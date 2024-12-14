@@ -187,13 +187,16 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// BUG: trying to this, query causes a panic
 	rows, err := db.Query(query, args...)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	defer rows.Close()
+	defer func() {
+		if rows != nil {
+			rows.Close()
+		}
+	}()
 
 	// Process results
 	flights, err := processFlightRows(rows)
@@ -251,23 +254,23 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 		}
 
 		// Log the weather data for debugging
-		log.Printf("Row Data - Destination: %s, Date: %s, Temp: %.2f, Icon: %s, Duration.Mins %.2f",
-			flight.DestinationCityName,
-			weather.Date,
-			weather.AvgDaytimeTemp.Float64,
-			weather.WeatherIcon,
-			flight.DurationHourDotMins,
-		)
+		// log.Printf("Row Data - Destination: %s, Date: %s, Temp: %.2f, Icon: %s, Duration.Mins %.2f",
+		// 	flight.DestinationCityName,
+		// 	weather.Date,
+		// 	weather.AvgDaytimeTemp.Float64,
+		// 	weather.WeatherIcon,
+		//	flight.DurationHourDotMins,
+		// )
 
 		// Log the imageUrl for debugging
-		log.Printf("Scanned image URL: '%s', Valid: %t", imageUrl.String, imageUrl.Valid)
+		// log.Printf("Scanned image URL: '%s', Valid: %t", imageUrl.String, imageUrl.Valid)
 
 		if imageUrl.Valid && len(imageUrl.String) > 5 {
 			flight.RandomImageURL = imageUrl.String
-			log.Printf("Using image URL from database: %s", flight.RandomImageURL)
+			// log.Printf("Using image URL from database: %s", flight.RandomImageURL)
 		} else {
 			flight.RandomImageURL = "/images/location-placeholder-image.png"
-			log.Printf("Using default placeholder image URL: %s", flight.RandomImageURL)
+			// log.Printf("Using default placeholder image URL: %s", flight.RandomImageURL)
 		}
 		flight.BookingUrl = bookingUrl
 		flight.FiveNightsFlights = priceFnaf

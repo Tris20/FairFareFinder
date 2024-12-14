@@ -1,7 +1,11 @@
 package main
 
+// because the file uses the same package and is in the same directory as main.go
+// it can access the functions and variables in main.go that are private
+
 import (
 	"database/sql"
+	"html/template"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -17,12 +21,22 @@ import (
 // This is a feature of the testing package.
 func TestMain(m *testing.M) {
 	// setup resources / set up
+	// Initialize the database
 	var err error
 	db, err = setupTestDB()
 	if err != nil {
 		log.Fatalf("Failed to set up test database: %v", err)
 	}
 	defer db.Close()
+
+	// Initialize the template
+	tmpl, err = template.ParseFiles(
+		"./src/frontend/html/index.html",
+		"./src/frontend/html/table.html",
+		"./src/frontend/html/seo.html")
+	if err != nil {
+		log.Fatalf("Failed to parse templates: %v", err)
+	}
 
 	// Run the test
 	exitVal := m.Run()
@@ -36,9 +50,12 @@ func TestMain(m *testing.M) {
 func setupTestDB() (*sql.DB, error) {
 	// We can keep a database file for testing purposes
 	// From the go book: testdata is a special directory that is reserved by the toolchain
-	// path must be relative to the package directory
+	// need to use a relative path to the testdata directory
 	testDB, err := sql.Open("sqlite3", "./testdata/test.db")
-	return testDB, err
+	if err != nil {
+		return nil, err
+	}
+	return testDB, nil
 }
 
 // test for combinedCardsHandler function
@@ -51,10 +68,7 @@ func TestCombinedCardsHandler(t *testing.T) {
 
 	// Add query parameters to the request
 	q := req.URL.Query()
-	q.Add("city[]", "New York")
-	q.Add("city[]", "Los Angeles")
-	q.Add("logical_operator[]", "AND")
-	q.Add("maxPriceLinear[]", "100")
+	q.Add("city[]", "Berlin")
 	q.Add("maxPriceLinear[]", "200")
 	q.Add("maxAccommodationPrice[]", "150")
 	req.URL.RawQuery = q.Encode()
@@ -67,17 +81,22 @@ func TestCombinedCardsHandler(t *testing.T) {
 	handler.ServeHTTP(rr, req)
 
 	// Check the status code
-	// if status := rr.Code; status != http.StatusOK {
-	// 	t.Errorf("handler returned wrong status code: got %v want %v",
-	// 		status, http.StatusOK)
-	// }
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusOK)
+	}
 
-	// Check the response body
-	// expected := "Generated SQL Query:"
-	// if !strings.Contains(rr.Body.String(), expected) {
-	// 	t.Errorf("handler returned unexpected body: got %v want %v",
-	// 		rr.Body.String(), expected)
-	// }
+	// Check the response body, just look for something from table.html
+	expected := `<th class="fnaf-column">Five Nights and Flights<br />(Per Person)</th>`
+	if !strings.Contains(rr.Body.String(), expected) {
+		if len(rr.Body.String()) < 1000 {
+			t.Errorf("handler returned unexpected body: got %v want %v",
+				rr.Body.String(), expected)
+		} else {
+			t.Errorf("handler returned unexpected body: size too large to show, but want %v",
+				expected)
+		}
+	}
 }
 
 // test for combinedCardsHandler function with invalid input lengths
