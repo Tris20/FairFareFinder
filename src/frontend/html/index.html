@@ -63,14 +63,14 @@
           <!-- Dynamic city input rows -->
           <div id="city-rows" style="width: 100%">
             <div class="form-group city-row">
-              <label>City:</label>
+              <label>From:</label>
               <select name="city[]">
                 <option value="Berlin" selected>Berlin</option>
                 <option value="Munich">Munich</option>
                 <option value="Glasgow">Glasgow</option>
                 <option value="Edinburgh">Edinburgh</option>
               </select>
-              <label for="priceOutput0"></label>
+              <label for="priceOutput0">Flights</label>
               <output id="priceOutput0" class="output-range">€399.00</output>
               <input
                 type="range"
@@ -94,9 +94,31 @@
           <!-- Button to add more origin cities -->
 
           <div class="form-group">
-            <button type="button" id="add-city-button">
-              Add Another Origin City
-            </button>
+            <button type="button" id="add-city-button">Add Another City</button>
+          </div>
+
+          <div class="form-group">
+            <label for="accommodationOutput0">Avg. Hotel Price PPPN:</label>
+            <output id="accommodationOutput0" class="output-range"
+              >€99.00</output
+            >
+            <input
+              type="range"
+              id="accommodationPrice-slider0"
+              name="maxAccommodationPrice[]"
+              min="0"
+              max="100"
+              step="1"
+              value="35"
+              class="price-slider"
+              hx-get="/update-slider-price"
+              hx-target="#accommodationOutput0"
+              hx-trigger="input"
+              hx-push-url="false"
+              hx-preserve="false"
+              hx-include="#accommodationPrice-slider0"
+              autocomplete="off"
+            />
           </div>
 
           <div class="form-group">
@@ -105,8 +127,12 @@
               <option value="best_weather" selected>
                 Sunniest and Warmest
               </option>
+              <option value="cheapest_hotel">Cheapest Hotel Price</option>
               <option value="worst_weather">Coldest and Wettest</option>
 
+              <option value="most_expensive_hotel">
+                Most Expensive Hotel Price
+              </option>
               <!--<option value="low_price">Most Affordable</option>
             <option value="high_price">Most Expensive</option>-->
             </select>
