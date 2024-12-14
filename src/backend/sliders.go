@@ -11,28 +11,45 @@ func UpdateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
 	// Debug: Log the incoming query parameters
 	log.Printf("Received request: %v", r.URL.Query())
 
-	// Get all values of maxPriceLinear[]
+	// Get flight price slider values
 	maxPriceLinearStrs := r.URL.Query()["maxPriceLinear[]"]
-	if len(maxPriceLinearStrs) == 0 {
-		log.Printf("Missing maxPriceLinear parameter")
-		http.Error(w, "Missing maxPriceLinear parameter", http.StatusBadRequest)
+	// Get accommodation price slider values
+	maxAccomPriceLinearStrs := r.URL.Query()["maxAccommodationPrice[]"]
+
+	var priceType string
+	var maxLinearStr string
+	var minRange, maxRange float64
+
+	// Check which type of slider value is provided
+	if len(maxPriceLinearStrs) > 0 {
+		priceType = "flight"
+		maxLinearStr = maxPriceLinearStrs[0]
+		minRange = 50
+		maxRange = 2500
+	} else if len(maxAccomPriceLinearStrs) > 0 {
+		priceType = "accommodation"
+		maxLinearStr = maxAccomPriceLinearStrs[0]
+		minRange = 10
+		maxRange = 1200
+	} else {
+		log.Printf("Missing slider parameter (flight or accommodation)")
+		http.Error(w, "Missing slider parameter", http.StatusBadRequest)
 		return
 	}
 
-	// Parse the first value (assuming one slider value per request)
-	maxPriceLinearStr := maxPriceLinearStrs[0]
-	maxPriceLinear, err := strconv.ParseFloat(maxPriceLinearStr, 64)
+	// Parse the linear slider value
+	maxLinear, err := strconv.ParseFloat(maxLinearStr, 64)
 	if err != nil {
-		log.Printf("Error parsing maxPriceLinear: %v", err)
-		http.Error(w, "Invalid maxPrice value", http.StatusBadRequest)
+		log.Printf("Error parsing %s slider value: %v", priceType, err)
+		http.Error(w, fmt.Sprintf("Invalid %s slider value", priceType), http.StatusBadRequest)
 		return
 	}
 
-	// Map the slider value to the exponential range
-	maxPrice := MapLinearToExponential(maxPriceLinear, 50, 2500)
+	// Map the slider value to the corresponding range
+	maxPrice := MapLinearToExponential(maxLinear, minRange, maxRange)
 
 	// Debug: Log the calculated price
-	log.Printf("Calculated price for maxPriceLinear %f: €%.2f", maxPriceLinear, maxPrice)
+	log.Printf("Calculated %s price for linear value %f: €%.2f", priceType, maxLinear, maxPrice)
 
 	// Respond with the formatted price
 	fmt.Fprintf(w, "€%.2f", maxPrice)

@@ -114,6 +114,7 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 	cities := r.URL.Query()["city[]"]
 	logicalOperators := r.URL.Query()["logical_operator[]"]
 	maxPriceLinearStrs := r.URL.Query()["maxPriceLinear[]"]
+	//maxAccomPriceLinearStrs := r.URL.Query()["maxAccommodationPrice[]"]
 
 	// Validate input lengths
 	if len(cities) == 0 || len(cities) != len(logicalOperators)+1 || len(cities) != len(maxPriceLinearStrs) {
