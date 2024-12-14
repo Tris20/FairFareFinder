@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch: # Add this to enable manual triggering
 
 jobs:
   build_and_test:
@@ -38,11 +39,11 @@ jobs:
         working-directory: utils/tests/mock-main-db-generator
         run: ./mock-main-db-generator
 
-      # Step 6: Start the main application with the --web flag
-      - name: Start Main Application
-        run: |
-          go run main.go --web &
-          sleep 5 # Allow the server time to start
+      # # Step 6: Start the main application with the --web flag
+      # - name: Start Main Application
+      #   run: |
+      #     go run main.go --web &
+      #     sleep 5 # Allow the server time to start
 
       # Step 7: Run the tests
       - name: Run Tests
