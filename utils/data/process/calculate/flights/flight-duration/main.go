@@ -60,7 +60,7 @@ func formatDuration(hours float64) float64 {
 
 func main() {
 	// Paths to the databases
-	mainDBPath := "../../../../../../data/compiled/main.db"
+	mainDBPath := "../../../../../../data/compiled/new_main.db"
 	locationsDBPath := "../../../../../../data/raw/locations/locations.db"
 
 	log.Printf("Connecting to main database at: %s", mainDBPath)
