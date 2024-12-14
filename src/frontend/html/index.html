@@ -69,7 +69,7 @@
                 <option value="Frankfurt">Frankfurt</option>
                 <option value="Munich">Munich</option>
                 <option value="Glasgow">Glasgow</option>
-                <option value="Edinburgh">Edinburgh</option>          
+                <option value="Edinburgh">Edinburgh</option>
                 <option value="Sydney">Sydney</option>
               </select>
               <label for="priceOutput0">Flights</label>
@@ -130,11 +130,13 @@
                 Sunniest and Warmest
               </option>
               <option value="cheapest_hotel">Cheapest Hotel Price</option>
+              <option value="shortest_flight">Shortest Flight</option>
               <option value="worst_weather">Coldest and Wettest</option>
-
               <option value="most_expensive_hotel">
                 Most Expensive Hotel Price
               </option>
+
+              <option value="longest_flight">Longest Flight</option>
               <!--<option value="low_price">Most Affordable</option>
             <option value="high_price">Most Expensive</option>-->
             </select>
@@ -156,7 +158,7 @@
 
     <script>
       let hasFadedIn = false; // Flag to check if the table has already faded in
-
+      let additionalCityCount = 0;
       document.addEventListener("DOMContentLoaded", function () {
         // After the fade-out animation ends, hide the website-name and show the table
         setTimeout(function () {
@@ -204,6 +206,8 @@
           if (event.target.classList.contains("remove-city-button")) {
             const cityRow = event.target.closest(".city-row");
             cityRow.remove();
+            additionalCityCount--;
+            toggleDurationVisibility();
           }
         });
 
@@ -256,7 +260,27 @@
           cityRows.appendChild(div);
           htmx.process(div);
           rowCount++;
+          additionalCityCount++;
+          console.log("New additionalCityCount:", additionalCityCount);
+          toggleDurationVisibility();
         });
+
+      function toggleDurationVisibility() {
+        // Select all elements with the class "destination-duration"
+        const durationContainers = document.querySelectorAll(
+          ".destination-duration",
+        );
+
+        durationContainers.forEach((durationContainer) => {
+          if (additionalCityCount > 0) {
+            console.log("Hiding duration-container");
+            durationContainer.style.display = "none";
+          } else {
+            console.log("Showing duration-container");
+            durationContainer.style.display = "block";
+          }
+        });
+      }
 
       function openModal(cityName) {
         const modal = document.getElementById(`modal-${cityName}`);

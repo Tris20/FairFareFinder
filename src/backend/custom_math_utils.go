@@ -20,6 +20,21 @@ func MapLinearToExponential(linearValue float64, minVal float64, maxVal float64)
 	}
 }
 
+// This function maps a linear slider (0-100) to an exponential range (10-550)
+func AccomMapLinearToExponential(linearValue float64, minVal float64, maxVal float64) float64 {
+	midVal := 200.0
+	percentage := linearValue / 100
+
+	// First 70% of the slider covers 10 to 200
+	if percentage <= 0.7 {
+		return minVal * math.Pow(midVal/minVal, percentage/0.7)
+	} else {
+		// Last 30% covers 100 to 550
+		newPercentage := (percentage - 0.7) / 0.3
+		return midVal + (maxVal-midVal)*newPercentage
+	}
+}
+
 // Helper function to update max value
 func UpdateMaxValue(currentMax, newValue sql.NullFloat64) sql.NullFloat64 {
 	if !currentMax.Valid || (newValue.Valid && newValue.Float64 > currentMax.Float64) {

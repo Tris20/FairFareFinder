@@ -157,7 +157,7 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Invalid accommodation price parameter", http.StatusBadRequest)
 			return
 		}
-		maxAccommodationPrice = backend.MapLinearToExponential(accomLinearValue, 10, 1200)
+		maxAccommodationPrice = backend.AccomMapLinearToExponential(accomLinearValue, 10, 550)
 	} else {
 		// Default value if no accommodation price is provided
 		maxAccommodationPrice = 70.0
@@ -451,6 +451,10 @@ func determineOrderClause(sortOption string) string {
 		return "ORDER BY a.booking_pppn ASC"
 	case "most_expensive_hotel":
 		return "ORDER BY a.booking_pppn DESC"
+	case "shortest_flight":
+		return "ORDER BY f.duration_hour_dot_mins ASC"
+	case "longest_flight":
+		return "ORDER BY f.duration_hour_dot_mins DESC"
 	default:
 		return "ORDER BY fnf.price_fnaf ASC" // Default sorting by lowest FNAF price
 	}
