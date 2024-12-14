@@ -7,7 +7,9 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"runtime/pprof"
 	"strings"
+	"sync"
 	"time"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -75,6 +77,27 @@ var tableSchemas = map[string]string{
 }
 
 func main() {
+	// Profiling setup
+	f, err := os.Create("cpu.prof")
+	if err != nil {
+		log.Fatal("could not create CPU profile: ", err)
+	}
+	defer f.Close()
+	if err := pprof.StartCPUProfile(f); err != nil {
+		log.Fatal("could not start CPU profile: ", err)
+	}
+	defer pprof.StopCPUProfile()
+
+	// Memory profiling
+	memProf, err := os.Create("mem.prof")
+	if err != nil {
+		log.Fatal("could not create memory profile: ", err)
+	}
+	defer func() {
+		pprof.WriteHeapProfile(memProf)
+		memProf.Close()
+	}()
+
 	// Paths
 	inputFolder := "input-data"
 	outputDB := "../../../data/compiled/main.db"
@@ -156,27 +179,60 @@ func loadWeatherData(db *sql.DB, csvFile string) error {
 
 	// Adjust dates and insert data
 	insertQuery := buildInsertQuery("weather", headers)
-	for _, row := range rows[1:] {
-		date, _ := time.Parse("2006-01-02", row[dateIndex])
-		newDate := date.Add(time.Duration(offset) * 24 * time.Hour).Format("2006-01-02")
-		row[dateIndex] = newDate
 
-		placeholders := make([]interface{}, len(row))
-		for i, value := range row {
-			if value == "" { // Handle missing values
-				placeholders[i] = nil
-			} else {
-				placeholders[i] = value
+	// Use a transaction for batch inserts
+	tx, err := db.Begin()
+	if err != nil {
+		return fmt.Errorf("could not begin transaction: %w", err)
+	}
+
+	// Use a wait group to wait for all goroutines to finish
+	var wg sync.WaitGroup
+	numWorkers := 4
+	rowCh := make(chan []string, len(rows)-1)
+
+	// Start worker goroutines
+	for i := 0; i < numWorkers; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for row := range rowCh {
+				date, _ := time.Parse("2006-01-02", row[dateIndex])
+				newDate := date.Add(time.Duration(offset) * 24 * time.Hour).Format("2006-01-02")
+				row[dateIndex] = newDate
+
+				placeholders := make([]interface{}, len(row))
+				for i, value := range row {
+					if value == "" { // Handle missing values
+						placeholders[i] = nil
+					} else {
+						placeholders[i] = value
+					}
+				}
+
+				_, err := tx.Exec(insertQuery, placeholders...)
+				if err != nil {
+					log.Printf("could not insert row into weather table: %v", err)
+				}
+
+				// Increment progress bar
+				bar.Add(1)
 			}
-		}
+		}()
+	}
 
-		_, err := db.Exec(insertQuery, placeholders...)
-		if err != nil {
-			return fmt.Errorf("could not insert row into weather table: %w", err)
-		}
+	// Send rows to workers
+	for _, row := range rows[1:] {
+		rowCh <- row
+	}
+	close(rowCh)
 
-		// Increment progress bar
-		bar.Add(1)
+	// Wait for all workers to finish
+	wg.Wait()
+
+	// Commit the transaction
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("could not commit transaction: %w", err)
 	}
 
 	return nil
@@ -206,23 +262,55 @@ func loadCSVToTable(db *sql.DB, csvFile, tableName string) error {
 	// Prepare progress bar
 	bar := progressbar.Default(int64(len(rows)-1), fmt.Sprintf("Inserting %s data", tableName))
 
-	for _, row := range rows[1:] {
-		placeholders := make([]interface{}, len(row))
-		for i, value := range row {
-			if value == "" { // If the CSV entry is empty, set it to NULL
-				placeholders[i] = nil
-			} else {
-				placeholders[i] = value
+	// Use a transaction for batch inserts
+	tx, err := db.Begin()
+	if err != nil {
+		return fmt.Errorf("could not begin transaction: %w", err)
+	}
+
+	// Use a wait group to wait for all goroutines to finish
+	var wg sync.WaitGroup
+	numWorkers := 4
+	rowCh := make(chan []string, len(rows)-1)
+
+	// Start worker goroutines
+	for i := 0; i < numWorkers; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for row := range rowCh {
+				placeholders := make([]interface{}, len(row))
+				for i, value := range row {
+					if value == "" { // Handle missing values
+						placeholders[i] = nil
+					} else {
+						placeholders[i] = value
+					}
+				}
+
+				_, err := tx.Exec(insertQuery, placeholders...)
+				if err != nil {
+					log.Printf("could not insert row into table %s: %v", tableName, err)
+				}
+
+				// Increment progress bar
+				bar.Add(1)
 			}
-		}
+		}()
+	}
 
-		_, err := db.Exec(insertQuery, placeholders...)
-		if err != nil {
-			return fmt.Errorf("could not insert row into table %s: %w", tableName, err)
-		}
+	// Send rows to workers
+	for _, row := range rows[1:] {
+		rowCh <- row
+	}
+	close(rowCh)
 
-		// Increment progress bar
-		bar.Add(1)
+	// Wait for all workers to finish
+	wg.Wait()
+
+	// Commit the transaction
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("could not commit transaction: %w", err)
 	}
 
 	return nil
