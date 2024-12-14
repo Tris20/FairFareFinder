@@ -114,7 +114,7 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 	cities := r.URL.Query()["city[]"]
 	logicalOperators := r.URL.Query()["logical_operator[]"]
 	maxPriceLinearStrs := r.URL.Query()["maxPriceLinear[]"]
-	//maxAccomPriceLinearStrs := r.URL.Query()["maxAccommodationPrice[]"]
+	maxAccomPriceLinearStrs := r.URL.Query()["maxAccommodationPrice[]"]
 
 	// Validate input lengths
 	if len(cities) == 0 || len(cities) != len(logicalOperators)+1 || len(cities) != len(maxPriceLinearStrs) {
@@ -147,8 +147,20 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	orderClause := determineOrderClause(sortOption)
 
-	// Define max accommodation price (can be dynamic or a user input)
-	maxAccommodationPrice := 70.0
+	// Parse accommodation price limit
+	var maxAccommodationPrice float64
+	if len(maxAccomPriceLinearStrs) > 0 {
+		accomLinearStr := maxAccomPriceLinearStrs[0]
+		accomLinearValue, err := strconv.ParseFloat(accomLinearStr, 64)
+		if err != nil {
+			http.Error(w, "Invalid accommodation price parameter", http.StatusBadRequest)
+			return
+		}
+		maxAccommodationPrice = backend.MapLinearToExponential(accomLinearValue, 10, 1200)
+	} else {
+		// Default value if no accommodation price is provided
+		maxAccommodationPrice = 70.0
+	}
 
 	// Build the query
 
@@ -425,6 +437,10 @@ func determineOrderClause(sortOption string) string {
 		return "ORDER BY avg_wpi DESC"
 	case "worst_weather":
 		return "ORDER BY avg_wpi ASC"
+	case "cheapest_hotel":
+		return "ORDER BY a.booking_pppn ASC"
+	case "most_expensive_hotel":
+		return "ORDER BY a.booking_pppn DESC"
 	default:
 		return "ORDER BY fnf.price_fnaf ASC" // Default sorting by lowest FNAF price
 	}
