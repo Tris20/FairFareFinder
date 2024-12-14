@@ -2,11 +2,15 @@
 
 # Components
 
-## Main
+## Main Component (FairFareFinder)
 
 the main component (FairFareFinder main) is the entry point of the application. It is responsible for parsing the command line arguments, reading the configuration file, and starting the server.
 
-##
+### /filter
+
+The url `/filter` with the function `combinedCardsHandler`
+
+## Utils
 
 # Operation
 

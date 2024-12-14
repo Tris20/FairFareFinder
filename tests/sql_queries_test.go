@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io"
 	"net/http"
 	"strings"
 	"testing"
@@ -23,6 +24,13 @@ func TestFilterHandler(t *testing.T) {
 	// Check response status
 	if resp.StatusCode != http.StatusOK {
 		t.Errorf("Expected status 200 OK, got %d", resp.StatusCode)
+		bodyBytes, err := io.ReadAll(resp.Body)
+		if err != nil {
+			t.Errorf("Failed to read response body: %v", err)
+		} else {
+			bodyString := string(bodyBytes)
+			t.Errorf("Response body: %s", bodyString)
+		}
 	}
 
 	// Parse the response body using goquery for structured HTML parsing
