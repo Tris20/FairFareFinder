@@ -28,10 +28,10 @@ jobs:
       - name: Install Dependencies
         run: go get -v -t ./...
 
-      # Step 4: Build the mock-main-db-generator tool
-      - name: Build Mock DB Generator
-        working-directory: utils/tests/mock-main-db-generator
-        run: go build -o mock-main-db-generator
+      # # Step 4: Build the mock-main-db-generator tool
+      # - name: Build Mock DB Generator
+      #   working-directory: utils/tests/mock-main-db-generator
+      #   run: go build -o mock-main-db-generator
 
       # # Step 5: Generate the test database
       # - name: Generate Test Database
