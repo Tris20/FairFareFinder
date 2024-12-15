@@ -50,7 +50,9 @@ var tableSchemas = map[string]string{
 		skyscanner_url_this_week VARCHAR(255),
 		price_next_week DECIMAL,
 		skyscanner_url_next_week VARCHAR(255),
-		duration_in_minutes DECIMAL
+	"duration_in_minutes"	DECIMAL,
+  "duration_in_hours"	DECIMAL,
+  "duration_hour_dot_mins" REAL
 	)`,
 	"location": `
 	CREATE TABLE location (
