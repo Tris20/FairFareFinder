@@ -27,16 +27,19 @@ type Weather struct {
 }
 
 type Flight struct {
-	DestinationCityName string
-	RandomImageURL      string
-	PriceCity1          sql.NullFloat64
-	UrlCity1            string
-	WeatherForecast     []Weather
-	AvgWpi              sql.NullFloat64
-	BookingUrl          sql.NullString
-	BookingPppn         sql.NullFloat64
-	FiveNightsFlights   sql.NullFloat64
-	DurationHourDotMins sql.NullFloat64
+	DestinationCityName  string
+	RandomImageURL       string
+	PriceCity1           sql.NullFloat64
+	UrlCity1             string
+	WeatherForecast      []Weather
+	AvgWpi               sql.NullFloat64
+	BookingUrl           sql.NullString
+	BookingPppn          sql.NullFloat64
+	FiveNightsFlights    sql.NullFloat64
+	DurationMins         sql.NullInt64
+	DurationHours        sql.NullInt64
+	DurationHoursRounded sql.NullInt64
+	DurationHourDotMins  sql.NullFloat64
 }
 
 type FlightsData struct {
@@ -247,7 +250,11 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 		var imageUrl sql.NullString
 		var bookingUrl sql.NullString
 		var priceFnaf sql.NullFloat64
-		var duration sql.NullFloat64
+		var duration_mins sql.NullInt64
+		var duration_hours sql.NullInt64
+		var duration_hours_rounded sql.NullInt64
+		var duration_hour_dot_mins sql.NullFloat64
+
 		err := rows.Scan(
 			&flight.DestinationCityName,
 			&flight.PriceCity1,
@@ -261,27 +268,48 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 			&bookingUrl,
 			&flight.BookingPppn,
 			&priceFnaf,
-			&duration,
+			&duration_mins,
+			&duration_hours,
+			&duration_hours_rounded,
+			&duration_hour_dot_mins,
 		)
 		if err != nil {
 			log.Printf("Error scanning row: %v", err)
 			return nil, err
 		}
-
-		if duration.Valid {
-			flight.DurationHourDotMins = duration
-			log.Printf("Duration: %.2f hours for flight to %s", duration.Float64, flight.DestinationCityName)
+		if duration_mins.Valid {
+			flight.DurationMins = duration_mins
+			log.Printf("Duration: %d hours for flight to %s", duration_mins.Int64, flight.DestinationCityName)
+		} else {
+			log.Printf("No valid duration found for flight to %s", flight.DestinationCityName)
+		}
+		if duration_hours.Valid {
+			flight.DurationHours = duration_hours
+			log.Printf("Duration: %d hours for flight to %s", duration_hours.Int64, flight.DestinationCityName)
+		} else {
+			log.Printf("No valid duration found for flight to %s", flight.DestinationCityName)
+		}
+		if duration_hours_rounded.Valid {
+			flight.DurationHoursRounded = duration_hours_rounded
+			log.Printf("Duration: %d hours for flight to %s", duration_hours_rounded.Int64, flight.DestinationCityName)
+		} else {
+			log.Printf("No valid duration found for flight to %s", flight.DestinationCityName)
+		}
+		if duration_hour_dot_mins.Valid {
+			flight.DurationHourDotMins = duration_hour_dot_mins
+			log.Printf("Duration: %d hours for flight to %s", duration_hour_dot_mins.Float64, flight.DestinationCityName)
 		} else {
 			log.Printf("No valid duration found for flight to %s", flight.DestinationCityName)
 		}
 
 		// Log the weather data for debugging
-		log.Printf("Row Data - Destination: %s, Date: %s, Temp: %.2f, Icon: %s, Duration.Mins %.2f",
+		log.Printf("Row Data - Destination: %s, Date: %s, Temp: %.2f, Icon: %s, Duration.Hours: %d, Duration.Mins: %d ",
 			flight.DestinationCityName,
 			weather.Date,
 			weather.AvgDaytimeTemp.Float64,
 			weather.WeatherIcon,
-			flight.DurationHourDotMins.Float64,
+			flight.DurationHours.Int64,
+			flight.DurationMins.Int64,
 		)
 
 		// Log the imageUrl for debugging
@@ -375,6 +403,9 @@ func buildQuery(expr Expression, maxAccommodationPrice float64, originCities []s
         a.booking_url,
         a.booking_pppn,
         fnf.price_fnaf,
+        MIN(f.duration_in_minutes) AS duration_mins,
+        MIN(f.duration_in_hours) AS duration_hours,
+        MIN(f.duration_in_hours_rounded) AS duration_hours_rounded,
         MIN(f.duration_hour_dot_mins) AS duration_hour_dot_mins
     FROM DestinationSet ds
     JOIN flight f ON ds.destination_city_name = f.destination_city_name 

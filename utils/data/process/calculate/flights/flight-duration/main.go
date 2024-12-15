@@ -40,22 +40,33 @@ func calculateAdjustedFlightTime(distance float64) float64 {
 	return totalFlightTime
 }
 
-// Convert flight duration to hours.roundedminutes format
-func formatDuration(hours float64) float64 {
-	totalMinutes := math.Round(hours * 60)     // Total minutes
-	hoursPart := math.Floor(totalMinutes / 60) // Full hours
-	minutesPart := totalMinutes - (hoursPart * 60)
+// Convert flight duration into hours.minutes and rounded hours
+func formatDuration(hours float64) (float64, int, float64) {
+	// Total minutes
+	totalMinutes := int(math.Round(hours * 60))
+	hoursPart := totalMinutes / 60
+	minutesPart := totalMinutes % 60
 
-	// Round minutes to the nearest 20
-	roundedMinutes := math.Round(minutesPart/20) * 20
-
-	// If rounding pushes minutes to 60, increment the hour
-	if roundedMinutes == 60 {
-		hoursPart++
-		roundedMinutes = 0
+	// Round minutes to the nearest valid value (0, 20, 40)
+	switch {
+	case minutesPart < 10:
+		minutesPart = 0
+	case minutesPart < 30:
+		minutesPart = 20
+	default:
+		minutesPart = 40
 	}
 
-	return hoursPart + roundedMinutes/100 // Format as hours.roundedminutes
+	// Calculate hours.minutes format
+	durationHourDotMins := float64(hoursPart) + float64(minutesPart)/100
+
+	// Calculate rounded hours
+	durationHoursRounded := float64(hoursPart)
+	if minutesPart == 40 {
+		durationHoursRounded += 1.0
+	}
+
+	return durationHourDotMins, minutesPart, durationHoursRounded
 }
 
 func main() {
@@ -142,12 +153,24 @@ func main() {
 		distance := haversine(originLat, originLon, destLat, destLon)
 		log.Printf("Calculated distance for flight ID %d: %.2f km", flightID, distance)
 		flightTime := calculateAdjustedFlightTime(distance)
-		formattedFlightTime := formatDuration(flightTime)
-		log.Printf("Formatted flight time for flight ID %d: %.2f", flightID, formattedFlightTime)
+
+		// Calculate formatted durations
+		durationHourDotMins, durationMinutes, durationHoursRounded := formatDuration(flightTime)
+		hoursPart := int(math.Floor(flightTime)) // Hours without minutes
+
+		// Log calculated values
+		log.Printf("Flight ID %d: DurationHourDotMins = %.2f, DurationInMinutes = %d, DurationInHours = %d, DurationHoursRounded = %.2f",
+			flightID, durationHourDotMins, durationMinutes, hoursPart, durationHoursRounded)
 
 		// Update flight duration within the transaction
-		updateQuery := `UPDATE flight SET duration_hour_dot_mins = ? WHERE id = ?`
-		_, err = tx.Exec(updateQuery, formattedFlightTime, flightID)
+		updateQuery := `
+			UPDATE flight 
+			SET duration_hour_dot_mins = ?, 
+			    duration_in_minutes = ?, 
+			    duration_in_hours = ?, 
+			    duration_in_hours_rounded = ? 
+			WHERE id = ?`
+		_, err = tx.Exec(updateQuery, durationHourDotMins, durationMinutes, float64(hoursPart), durationHoursRounded, flightID)
 		if err != nil {
 			log.Printf("Failed to update flight duration for ID %d: %v", flightID, err)
 		} else {
