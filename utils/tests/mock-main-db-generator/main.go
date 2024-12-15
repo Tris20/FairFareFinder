@@ -7,12 +7,16 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"runtime/pprof"
 	"strings"
+	"sync"
 	"time"
 
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/schollz/progressbar/v3"
 )
+
+type insertFunc func([]string) error
 
 // Define the schema for each table
 var tableSchemas = map[string]string{
@@ -46,7 +50,9 @@ var tableSchemas = map[string]string{
 		skyscanner_url_this_week VARCHAR(255),
 		price_next_week DECIMAL,
 		skyscanner_url_next_week VARCHAR(255),
-		duration_in_minutes DECIMAL
+	"duration_in_minutes"	DECIMAL,
+  "duration_in_hours"	DECIMAL,
+  "duration_hour_dot_mins" REAL
 	)`,
 	"location": `
 	CREATE TABLE location (
@@ -75,6 +81,10 @@ var tableSchemas = map[string]string{
 }
 
 func main() {
+	// Profiling setup
+	cleanup := setupProfiling()
+	defer cleanup()
+
 	// Paths
 	inputFolder := "input-data"
 	outputDB := "../../../data/compiled/main.db"
@@ -112,120 +122,159 @@ func main() {
 	fmt.Println("Database generation complete: main.db")
 }
 
-// loadWeatherData processes and inserts weather data with adjusted dates and a progress bar
+// loadWeatherData loads weather data from a CSV file into the database
+// It adjusts the date based on the offset between the oldest date and today
+// It uses a transaction for batch inserts and parallel processing for performance
 func loadWeatherData(db *sql.DB, csvFile string) error {
-	file, err := os.Open(csvFile)
+	rows, headers, err := readCSVFile(csvFile)
 	if err != nil {
-		return fmt.Errorf("could not open file %s: %w", csvFile, err)
-	}
-	defer file.Close()
-
-	reader := csv.NewReader(file)
-	rows, err := reader.ReadAll()
-	if err != nil {
-		return fmt.Errorf("could not read CSV data: %w", err)
+		return err
 	}
 
-	if len(rows) < 1 {
-		return fmt.Errorf("CSV file %s is empty", csvFile)
-	}
-
-	headers := rows[0]
 	dateIndex := findColumnIndex(headers, "date")
 	if dateIndex == -1 {
 		return fmt.Errorf("no date column found in %s", csvFile)
 	}
 
-	// Parse dates and calculate offsets
-	today := time.Now()
-	dates := make([]time.Time, len(rows)-1)
-	for i, row := range rows[1:] {
-		date, err := time.Parse("2006-01-02", row[dateIndex])
-		if err != nil {
-			return fmt.Errorf("invalid date format in row %d: %w", i+2, err)
-		}
-		dates[i] = date
+	dates, err := parseDates(rows, dateIndex)
+	if err != nil {
+		return err
 	}
 
-	// Find the oldest date and calculate its offset
-	oldestDate := findOldestDate(dates)
-	offset := today.Sub(oldestDate).Hours() / 24
-
-	// Prepare progress bar
-	bar := progressbar.Default(int64(len(rows)-1), "Inserting weather data")
-
-	// Adjust dates and insert data
+	offset := calculateDateOffset(dates)
 	insertQuery := buildInsertQuery("weather", headers)
+
+	// Use a transaction for batch inserts
+	tx, err := db.Begin()
+	if err != nil {
+		return fmt.Errorf("could not begin transaction: %w", err)
+	}
+
+	// setup insertion function
+	insertionFunc := insertWeatherRowFunc(tx, dateIndex, offset, insertQuery)
+
+	err = genericParallelProcessing(rows, insertionFunc, "weather")
+	if err != nil {
+		return fmt.Errorf("could not insert weather data: %w", err)
+	}
+
+	// Commit the transaction after all rows have been processed
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("could not commit transaction: %w", err)
+	}
+	return nil
+}
+
+// loadCSVToTable loads generic CSV data into a specified table with a progress bar
+// It uses a transaction for batch inserts and parallel processing for performance
+func loadCSVToTable(db *sql.DB, csvFile, tableName string) error {
+	rows, headers, err := readCSVFile(csvFile)
+	if err != nil {
+		return err
+	}
+	insertQuery := buildInsertQuery(tableName, headers)
+
+	// Use a transaction for batch inserts
+	tx, err := db.Begin()
+	if err != nil {
+		return fmt.Errorf("could not begin transaction: %w", err)
+	}
+
+	// setup insertion function
+	insertionFunc := insertRowFunc(tx, insertQuery)
+
+	err = genericParallelProcessing(rows, insertionFunc, tableName)
+	if err != nil {
+		return fmt.Errorf("could not insert data: %w", err)
+	}
+
+	// Commit the transaction
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("could not commit transaction: %w", err)
+	}
+
+	return nil
+}
+
+// genericParallelProcessing processes csv rows in worker groups
+// using a generic insert function. It returns an error if any row fails to insert.
+func genericParallelProcessing(rows [][]string, insertionFunc insertFunc, tableName string) error {
+	// Prepare progress bar
+	bar := progressbar.Default(int64(len(rows)-1), fmt.Sprintf("Inserting %s data", tableName))
+
+	// Use a wait group to wait for all goroutines to finish
+	var wg sync.WaitGroup
+	numWorkers := 4
+	rowCh := make(chan []string, len(rows)-1)
+
+	// start multiple worker goroutines
+	for i := 0; i < numWorkers; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			// get rows from the channel, process them, and increment the progress bar
+			for row := range rowCh {
+				err := insertionFunc(row)
+				if err != nil {
+					log.Printf("error processing row: %v", err)
+				}
+				bar.Add(1)
+			}
+		}()
+	}
+
+	// Send rows to workers
 	for _, row := range rows[1:] {
+		rowCh <- row
+	}
+	close(rowCh)
+	// Wait for all workers to finish
+	wg.Wait()
+	return nil
+}
+
+// creates a function to insert a weather row, used for generic concurrent processing
+func insertWeatherRowFunc(tx *sql.Tx, dateIndex int, offset float64, insertQuery string) insertFunc {
+	return func(row []string) error {
 		date, _ := time.Parse("2006-01-02", row[dateIndex])
 		newDate := date.Add(time.Duration(offset) * 24 * time.Hour).Format("2006-01-02")
 		row[dateIndex] = newDate
 
 		placeholders := make([]interface{}, len(row))
 		for i, value := range row {
-			if value == "" { // Handle missing values
+			if value == "" {
 				placeholders[i] = nil
 			} else {
 				placeholders[i] = value
 			}
 		}
 
-		_, err := db.Exec(insertQuery, placeholders...)
+		_, err := tx.Exec(insertQuery, placeholders...)
 		if err != nil {
-			return fmt.Errorf("could not insert row into weather table: %w", err)
+			log.Printf("could not insert row into weather table: %v", err)
 		}
-
-		// Increment progress bar
-		bar.Add(1)
+		return err
 	}
-
-	return nil
 }
 
-// loadCSVToTable loads generic CSV data into a specified table with a progress bar
-func loadCSVToTable(db *sql.DB, csvFile, tableName string) error {
-	file, err := os.Open(csvFile)
-	if err != nil {
-		return fmt.Errorf("could not open file %s: %w", csvFile, err)
-	}
-	defer file.Close()
-
-	reader := csv.NewReader(file)
-	rows, err := reader.ReadAll()
-	if err != nil {
-		return fmt.Errorf("could not read CSV data: %w", err)
-	}
-
-	if len(rows) < 1 {
-		return fmt.Errorf("CSV file %s is empty", csvFile)
-	}
-
-	headers := rows[0]
-	insertQuery := buildInsertQuery(tableName, headers)
-
-	// Prepare progress bar
-	bar := progressbar.Default(int64(len(rows)-1), fmt.Sprintf("Inserting %s data", tableName))
-
-	for _, row := range rows[1:] {
+// creates a function to insert a generic row, used for generic concurrent processing
+func insertRowFunc(tx *sql.Tx, insertQuery string) insertFunc {
+	return func(row []string) error {
 		placeholders := make([]interface{}, len(row))
 		for i, value := range row {
-			if value == "" { // If the CSV entry is empty, set it to NULL
+			if value == "" {
 				placeholders[i] = nil
 			} else {
 				placeholders[i] = value
 			}
 		}
 
-		_, err := db.Exec(insertQuery, placeholders...)
+		_, err := tx.Exec(insertQuery, placeholders...)
 		if err != nil {
-			return fmt.Errorf("could not insert row into table %s: %w", tableName, err)
+			log.Printf("could not insert row into table: %v", err)
 		}
-
-		// Increment progress bar
-		bar.Add(1)
+		return err
 	}
-
-	return nil
 }
 
 // findColumnIndex finds the index of a column in the CSV headers
@@ -255,4 +304,72 @@ func buildInsertQuery(tableName string, columns []string) string {
 	placeholders := strings.Repeat("?, ", len(columns))
 	placeholders = strings.TrimSuffix(placeholders, ", ")
 	return fmt.Sprintf("INSERT INTO %s (%s) VALUES (%s)", tableName, columnsList, placeholders)
+}
+
+// readCSVFile reads a CSV file and returns the rows and headers
+func readCSVFile(csvFile string) ([][]string, []string, error) {
+	file, err := os.Open(csvFile)
+	if err != nil {
+		return nil, nil, fmt.Errorf("could not open file %s: %w", csvFile, err)
+	}
+	defer file.Close()
+
+	reader := csv.NewReader(file)
+	rows, err := reader.ReadAll()
+	if err != nil {
+		return nil, nil, fmt.Errorf("could not read CSV data: %w", err)
+	}
+
+	if len(rows) < 1 {
+		return nil, nil, fmt.Errorf("CSV file %s is empty", csvFile)
+	}
+
+	headers := rows[0]
+	return rows, headers, nil
+}
+
+// parseDates converts date strings to time.Time objects
+func parseDates(rows [][]string, dateIndex int) ([]time.Time, error) {
+	dates := make([]time.Time, len(rows)-1)
+	for i, row := range rows[1:] {
+		date, err := time.Parse("2006-01-02", row[dateIndex])
+		if err != nil {
+			return nil, fmt.Errorf("invalid date format in row %d: %w", i+2, err)
+		}
+		dates[i] = date
+	}
+	return dates, nil
+}
+
+// calculateDateOffset calculates the offset in days between the oldest date and today
+func calculateDateOffset(dates []time.Time) float64 {
+	today := time.Now()
+	oldestDate := findOldestDate(dates)
+	return today.Sub(oldestDate).Hours() / 24
+}
+
+// setupProfiling sets up CPU and memory profiling and returns a cleanup function
+func setupProfiling() func() {
+	// Profiling setup
+	f, err := os.Create("cpu.prof")
+	if err != nil {
+		log.Fatal("could not create CPU profile: ", err)
+	}
+	if err := pprof.StartCPUProfile(f); err != nil {
+		log.Fatal("could not start CPU profile: ", err)
+	}
+
+	// Memory profiling
+	memProf, err := os.Create("mem.prof")
+	if err != nil {
+		log.Fatal("could not create memory profile: ", err)
+	}
+
+	// Return a cleanup function
+	return func() {
+		pprof.StopCPUProfile()
+		f.Close()
+		pprof.WriteHeapProfile(memProf)
+		memProf.Close()
+	}
 }
