@@ -33,10 +33,10 @@ jobs:
         working-directory: utils/tests/mock-main-db-generator
         run: go build -o mock-main-db-generator
 
-      # Step 5: Generate the test database
-      - name: Generate Test Database
-        working-directory: utils/tests/mock-main-db-generator
-        run: ./mock-main-db-generator
+      # # Step 5: Generate the test database
+      # - name: Generate Test Database
+      #   working-directory: utils/tests/mock-main-db-generator
+      #   run: ./mock-main-db-generator
 
       # # Step 6: Start the main application with the --web flag
       # - name: Start Main Application
