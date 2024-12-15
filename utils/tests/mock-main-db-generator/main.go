@@ -87,7 +87,14 @@ func main() {
 
 	// Paths
 	inputFolder := "input-data"
-	outputDB := "../../../data/compiled/main.db"
+	// path for main_test.go
+	outputDB := "../../../testdata/test.db"
+
+	// Attempt to create the directory
+	err := os.MkdirAll("../../../testdata", os.ModePerm)
+	if err != nil {
+		log.Fatalf("Failed to create directory: %v", err)
+	}
 
 	// Open SQLite database
 	db, err := sql.Open("sqlite3", outputDB)
