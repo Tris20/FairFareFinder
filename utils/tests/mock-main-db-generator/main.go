@@ -16,6 +16,8 @@ import (
 	"github.com/schollz/progressbar/v3"
 )
 
+type insertFunc func([]string) error
+
 // Define the schema for each table
 var tableSchemas = map[string]string{
 	"accommodation": `
@@ -118,7 +120,9 @@ func main() {
 	fmt.Println("Database generation complete: main.db")
 }
 
-// loadWeatherData processes and inserts weather data with adjusted dates and a progress bar
+// loadWeatherData loads weather data from a CSV file into the database
+// It adjusts the date based on the offset between the oldest date and today
+// It uses a transaction for batch inserts and parallel processing for performance
 func loadWeatherData(db *sql.DB, csvFile string) error {
 	rows, headers, err := readCSVFile(csvFile)
 	if err != nil {
@@ -144,7 +148,10 @@ func loadWeatherData(db *sql.DB, csvFile string) error {
 		return fmt.Errorf("could not begin transaction: %w", err)
 	}
 
-	err = insertWeatherData(tx, rows, dateIndex, offset, insertQuery)
+	// setup insertion function
+	insertionFunc := insertWeatherRowFunc(tx, dateIndex, offset, insertQuery)
+
+	err = genericParallelProcessing(rows, insertionFunc, "weather")
 	if err != nil {
 		return fmt.Errorf("could not insert weather data: %w", err)
 	}
@@ -156,9 +163,42 @@ func loadWeatherData(db *sql.DB, csvFile string) error {
 	return nil
 }
 
-// insertWeatherData inserts weather data into the database with adjusted dates
-func insertWeatherData(tx *sql.Tx, rows [][]string, dateIndex int, offset float64, insertQuery string) error {
-	bar := progressbar.Default(int64(len(rows)-1), "Inserting data")
+// loadCSVToTable loads generic CSV data into a specified table with a progress bar
+// It uses a transaction for batch inserts and parallel processing for performance
+func loadCSVToTable(db *sql.DB, csvFile, tableName string) error {
+	rows, headers, err := readCSVFile(csvFile)
+	if err != nil {
+		return err
+	}
+	insertQuery := buildInsertQuery(tableName, headers)
+
+	// Use a transaction for batch inserts
+	tx, err := db.Begin()
+	if err != nil {
+		return fmt.Errorf("could not begin transaction: %w", err)
+	}
+
+	// setup insertion function
+	insertionFunc := insertRowFunc(tx, insertQuery)
+
+	err = genericParallelProcessing(rows, insertionFunc, tableName)
+	if err != nil {
+		return fmt.Errorf("could not insert data: %w", err)
+	}
+
+	// Commit the transaction
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("could not commit transaction: %w", err)
+	}
+
+	return nil
+}
+
+// genericParallelProcessing processes csv rows in worker groups
+// using a generic insert function. It returns an error if any row fails to insert.
+func genericParallelProcessing(rows [][]string, insertionFunc insertFunc, tableName string) error {
+	// Prepare progress bar
+	bar := progressbar.Default(int64(len(rows)-1), fmt.Sprintf("Inserting %s data", tableName))
 
 	// Use a wait group to wait for all goroutines to finish
 	var wg sync.WaitGroup
@@ -172,7 +212,7 @@ func insertWeatherData(tx *sql.Tx, rows [][]string, dateIndex int, offset float6
 			defer wg.Done()
 			// get rows from the channel, process them, and increment the progress bar
 			for row := range rowCh {
-				err := insertWeatherRow(tx, row, dateIndex, offset, insertQuery)
+				err := insertionFunc(row)
 				if err != nil {
 					log.Printf("error processing row: %v", err)
 				}
@@ -191,92 +231,48 @@ func insertWeatherData(tx *sql.Tx, rows [][]string, dateIndex int, offset float6
 	return nil
 }
 
-// insertWeatherRow inserts a single weather row into the database with an adjusted date
-// must be called within a transaction, as it does not commit the transaction
-func insertWeatherRow(tx *sql.Tx, row []string, dateIndex int, offset float64, insertQuery string) error {
-	date, _ := time.Parse("2006-01-02", row[dateIndex])
-	newDate := date.Add(time.Duration(offset) * 24 * time.Hour).Format("2006-01-02")
-	row[dateIndex] = newDate
+// creates a function to insert a weather row, used for generic concurrent processing
+func insertWeatherRowFunc(tx *sql.Tx, dateIndex int, offset float64, insertQuery string) insertFunc {
+	return func(row []string) error {
+		date, _ := time.Parse("2006-01-02", row[dateIndex])
+		newDate := date.Add(time.Duration(offset) * 24 * time.Hour).Format("2006-01-02")
+		row[dateIndex] = newDate
 
-	placeholders := make([]interface{}, len(row))
-	for i, value := range row {
-		if value == "" {
-			placeholders[i] = nil
-		} else {
-			placeholders[i] = value
+		placeholders := make([]interface{}, len(row))
+		for i, value := range row {
+			if value == "" {
+				placeholders[i] = nil
+			} else {
+				placeholders[i] = value
+			}
 		}
-	}
 
-	_, err := tx.Exec(insertQuery, placeholders...)
-	if err != nil {
-		log.Printf("could not insert row into weather table: %v", err)
-	}
-	return err
-}
-
-// loadCSVToTable loads generic CSV data into a specified table with a progress bar
-func loadCSVToTable(db *sql.DB, csvFile, tableName string) error {
-	rows, headers, err := readCSVFile(csvFile)
-	if err != nil {
+		_, err := tx.Exec(insertQuery, placeholders...)
+		if err != nil {
+			log.Printf("could not insert row into weather table: %v", err)
+		}
 		return err
 	}
-	insertQuery := buildInsertQuery(tableName, headers)
+}
 
-	// Prepare progress bar
-	bar := progressbar.Default(int64(len(rows)-1), fmt.Sprintf("Inserting %s data", tableName))
-
-	// Use a transaction for batch inserts
-	tx, err := db.Begin()
-	if err != nil {
-		return fmt.Errorf("could not begin transaction: %w", err)
-	}
-
-	// Use a wait group to wait for all goroutines to finish
-	var wg sync.WaitGroup
-	numWorkers := 4
-	rowCh := make(chan []string, len(rows)-1)
-
-	// Start worker goroutines
-	for i := 0; i < numWorkers; i++ {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			for row := range rowCh {
-				placeholders := make([]interface{}, len(row))
-				for i, value := range row {
-					if value == "" { // Handle missing values
-						placeholders[i] = nil
-					} else {
-						placeholders[i] = value
-					}
-				}
-
-				_, err := tx.Exec(insertQuery, placeholders...)
-				if err != nil {
-					log.Printf("could not insert row into table %s: %v", tableName, err)
-				}
-
-				// Increment progress bar
-				bar.Add(1)
+// creates a function to insert a generic row, used for generic concurrent processing
+func insertRowFunc(tx *sql.Tx, insertQuery string) insertFunc {
+	return func(row []string) error {
+		placeholders := make([]interface{}, len(row))
+		for i, value := range row {
+			if value == "" {
+				placeholders[i] = nil
+			} else {
+				placeholders[i] = value
 			}
-		}()
+		}
+
+		_, err := tx.Exec(insertQuery, placeholders...)
+		if err != nil {
+			log.Printf("could not insert row into table: %v", err)
+		}
+		return err
 	}
-
-	// Send rows to workers
-	for _, row := range rows[1:] {
-		rowCh <- row
-	}
-	close(rowCh)
-
-	// Wait for all workers to finish
-	wg.Wait()
-
-	// Commit the transaction
-	if err := tx.Commit(); err != nil {
-		return fmt.Errorf("could not commit transaction: %w", err)
-	}
-
-	return nil
 }
 
 // findColumnIndex finds the index of a column in the CSV headers
