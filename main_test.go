@@ -21,7 +21,8 @@ import (
 // This is a feature of the testing package.
 func TestMain(m *testing.M) {
 	// setup resources / set up
-	SetupServer("./testdata/test.db")
+	setMutePrints(true)
+	SetupServer("./testdata/test.db", io.Discard)
 	// Run the test
 	exitVal := m.Run()
 

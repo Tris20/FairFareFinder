@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"html/template"
+	"io"
 	"log"
 
 	"net/http"
@@ -49,19 +50,33 @@ type FlightsData struct {
 
 // Global variables: template, database, session store
 var (
-	tmpl  *template.Template
-	db    *sql.DB
-	store *sessions.CookieStore = sessions.NewCookieStore([]byte("your-secret-key"))
+	tmpl       *template.Template
+	db         *sql.DB
+	store      *sessions.CookieStore = sessions.NewCookieStore([]byte("your-secret-key"))
+	mutePrints                       = false
 )
+
+func setMutePrints(value bool) {
+	mutePrints = value
+}
 
 func main() {
 	// Parse the "web" flag
 	webFlag := flag.Bool("web", false, "Pass this flag to enable the web server with file check routine")
 	flag.Parse() // Parse command-line flags
 
+	// Create a lumberjack logger
+	fileLogger := &lumberjack.Logger{
+		Filename:   "./app.log", // File to log to
+		MaxSize:    69,          // Maximum size in megabytes before it gets rotated
+		MaxBackups: 5,           // Max number of old log files to keep
+		MaxAge:     28,          // Max number of days to retain log files
+		Compress:   true,        // Compress the rotated files using gzip
+	}
+
 	// Set up the server
-	// pass in database path for testing purposes
-	SetupServer("./data/compiled/main.db")
+	// pass in database path and logger for testing purposes
+	SetupServer("./data/compiled/main.db", fileLogger)
 
 	// On web server, every 2 hours, check for a new database delivery, and swap dbs accordingly
 	fmt.Printf("Flag? Value: %v\n", *webFlag)
@@ -74,15 +89,9 @@ func main() {
 	StartServer()
 }
 
-func SetupServer(db_path string) {
+func SetupServer(db_path string, logger io.Writer) {
 	// Set up lumberjack log file rotation config
-	log.SetOutput(&lumberjack.Logger{
-		Filename:   "./app.log", // File to log to
-		MaxSize:    69,          // Maximum size in megabytes before it gets rotated
-		MaxBackups: 5,           // Max number of old log files to keep
-		MaxAge:     28,          // Max number of days to retain log files
-		Compress:   true,        // Compress the rotated files using gzip
-	})
+	log.SetOutput(logger)
 
 	var err error
 
@@ -175,16 +184,16 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 
 	query, args := buildQuery(expr, maxAccommodationPrice, cities, orderClause)
 
-	// Output the query for debugging
-	// Note: uncomment this when debugging. During tests it makes the output too long
-	// fmt.Println("Generated SQL Query:")
-	// fmt.Println(query)
-	// fmt.Println("Arguments:")
-	// fmt.Println(args)
-
-	// // Log the interpolated query for debugging
-	// fullQuery := interpolateQuery(query, args)
-	// log.Printf("Full Query:\n%s\n", fullQuery)
+	if !mutePrints {
+		// Output the query for debugging
+		fmt.Println("Generated SQL Query:")
+		fmt.Println(query)
+		fmt.Println("Arguments:")
+		fmt.Println(args)
+	}
+	// Log the interpolated query for debugging
+	fullQuery := interpolateQuery(query, args)
+	log.Printf("Full Query:\n%s\n", fullQuery)
 
 	// Check if db is nil
 	if db == nil {
@@ -259,23 +268,23 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 		}
 
 		// Log the weather data for debugging
-		// log.Printf("Row Data - Destination: %s, Date: %s, Temp: %.2f, Icon: %s, Duration.Mins %.2f",
-		// 	flight.DestinationCityName,
-		// 	weather.Date,
-		// 	weather.AvgDaytimeTemp.Float64,
-		// 	weather.WeatherIcon,
-		//	flight.DurationHourDotMins,
-		// )
+		log.Printf("Row Data - Destination: %s, Date: %s, Temp: %.2f, Icon: %s, Duration.Mins %.2f",
+			flight.DestinationCityName,
+			weather.Date,
+			weather.AvgDaytimeTemp.Float64,
+			weather.WeatherIcon,
+			flight.DurationHourDotMins.Float64,
+		)
 
 		// Log the imageUrl for debugging
-		// log.Printf("Scanned image URL: '%s', Valid: %t", imageUrl.String, imageUrl.Valid)
+		log.Printf("Scanned image URL: '%s', Valid: %t", imageUrl.String, imageUrl.Valid)
 
 		if imageUrl.Valid && len(imageUrl.String) > 5 {
 			flight.RandomImageURL = imageUrl.String
-			// log.Printf("Using image URL from database: %s", flight.RandomImageURL)
+			log.Printf("Using image URL from database: %s", flight.RandomImageURL)
 		} else {
 			flight.RandomImageURL = "/images/location-placeholder-image.png"
-			// log.Printf("Using default placeholder image URL: %s", flight.RandomImageURL)
+			log.Printf("Using default placeholder image URL: %s", flight.RandomImageURL)
 		}
 		flight.BookingUrl = bookingUrl
 		flight.FiveNightsFlights = priceFnaf
