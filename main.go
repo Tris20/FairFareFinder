@@ -76,7 +76,8 @@ func main() {
 
 	// Set up the server
 	// pass in database path and logger for testing purposes
-	SetupServer("./data/compiled/main.db", fileLogger)
+	cleanup := SetupServer("./data/compiled/main.db", fileLogger)
+	defer cleanup()
 
 	// On web server, every 2 hours, check for a new database delivery, and swap dbs accordingly
 	fmt.Printf("Flag? Value: %v\n", *webFlag)
@@ -89,7 +90,7 @@ func main() {
 	StartServer()
 }
 
-func SetupServer(db_path string, logger io.Writer) {
+func SetupServer(db_path string, logger io.Writer) func() {
 	// Set up lumberjack log file rotation config
 	log.SetOutput(logger)
 
@@ -98,6 +99,11 @@ func SetupServer(db_path string, logger io.Writer) {
 	db, err = sql.Open("sqlite3", db_path)
 	if err != nil {
 		log.Fatal(err)
+	}
+	cleanup := func() {
+		if db != nil {
+			db.Close()
+		}
 	}
 
 	tmpl = template.Must(template.ParseFiles(
@@ -118,6 +124,8 @@ func SetupServer(db_path string, logger io.Writer) {
 	http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html") // Make sure the path is correct
 	})
+
+	return cleanup
 }
 
 func StartServer() {
