@@ -78,25 +78,8 @@ var tableSchemas = map[string]string{
 
 func main() {
 	// Profiling setup
-	f, err := os.Create("cpu.prof")
-	if err != nil {
-		log.Fatal("could not create CPU profile: ", err)
-	}
-	defer f.Close()
-	if err := pprof.StartCPUProfile(f); err != nil {
-		log.Fatal("could not start CPU profile: ", err)
-	}
-	defer pprof.StopCPUProfile()
-
-	// Memory profiling
-	memProf, err := os.Create("mem.prof")
-	if err != nil {
-		log.Fatal("could not create memory profile: ", err)
-	}
-	defer func() {
-		pprof.WriteHeapProfile(memProf)
-		memProf.Close()
-	}()
+	cleanup := setupProfiling()
+	defer cleanup()
 
 	// Paths
 	inputFolder := "input-data"
@@ -137,47 +120,22 @@ func main() {
 
 // loadWeatherData processes and inserts weather data with adjusted dates and a progress bar
 func loadWeatherData(db *sql.DB, csvFile string) error {
-	file, err := os.Open(csvFile)
+	rows, headers, err := readCSVFile(csvFile)
 	if err != nil {
-		return fmt.Errorf("could not open file %s: %w", csvFile, err)
-	}
-	defer file.Close()
-
-	reader := csv.NewReader(file)
-	rows, err := reader.ReadAll()
-	if err != nil {
-		return fmt.Errorf("could not read CSV data: %w", err)
+		return err
 	}
 
-	if len(rows) < 1 {
-		return fmt.Errorf("CSV file %s is empty", csvFile)
-	}
-
-	headers := rows[0]
 	dateIndex := findColumnIndex(headers, "date")
 	if dateIndex == -1 {
 		return fmt.Errorf("no date column found in %s", csvFile)
 	}
 
-	// Parse dates and calculate offsets
-	today := time.Now()
-	dates := make([]time.Time, len(rows)-1)
-	for i, row := range rows[1:] {
-		date, err := time.Parse("2006-01-02", row[dateIndex])
-		if err != nil {
-			return fmt.Errorf("invalid date format in row %d: %w", i+2, err)
-		}
-		dates[i] = date
+	dates, err := parseDates(rows, dateIndex)
+	if err != nil {
+		return err
 	}
 
-	// Find the oldest date and calculate its offset
-	oldestDate := findOldestDate(dates)
-	offset := today.Sub(oldestDate).Hours() / 24
-
-	// Prepare progress bar
-	bar := progressbar.Default(int64(len(rows)-1), "Inserting weather data")
-
-	// Adjust dates and insert data
+	offset := calculateDateOffset(dates)
 	insertQuery := buildInsertQuery("weather", headers)
 
 	// Use a transaction for batch inserts
@@ -186,36 +144,38 @@ func loadWeatherData(db *sql.DB, csvFile string) error {
 		return fmt.Errorf("could not begin transaction: %w", err)
 	}
 
+	err = insertWeatherData(tx, rows, dateIndex, offset, insertQuery)
+	if err != nil {
+		return fmt.Errorf("could not insert weather data: %w", err)
+	}
+
+	// Commit the transaction after all rows have been processed
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("could not commit transaction: %w", err)
+	}
+	return nil
+}
+
+// insertWeatherData inserts weather data into the database with adjusted dates
+func insertWeatherData(tx *sql.Tx, rows [][]string, dateIndex int, offset float64, insertQuery string) error {
+	bar := progressbar.Default(int64(len(rows)-1), "Inserting data")
+
 	// Use a wait group to wait for all goroutines to finish
 	var wg sync.WaitGroup
 	numWorkers := 4
 	rowCh := make(chan []string, len(rows)-1)
 
-	// Start worker goroutines
+	// start multiple worker goroutines
 	for i := 0; i < numWorkers; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
+			// get rows from the channel, process them, and increment the progress bar
 			for row := range rowCh {
-				date, _ := time.Parse("2006-01-02", row[dateIndex])
-				newDate := date.Add(time.Duration(offset) * 24 * time.Hour).Format("2006-01-02")
-				row[dateIndex] = newDate
-
-				placeholders := make([]interface{}, len(row))
-				for i, value := range row {
-					if value == "" { // Handle missing values
-						placeholders[i] = nil
-					} else {
-						placeholders[i] = value
-					}
-				}
-
-				_, err := tx.Exec(insertQuery, placeholders...)
+				err := insertWeatherRow(tx, row, dateIndex, offset, insertQuery)
 				if err != nil {
-					log.Printf("could not insert row into weather table: %v", err)
+					log.Printf("error processing row: %v", err)
 				}
-
-				// Increment progress bar
 				bar.Add(1)
 			}
 		}()
@@ -226,16 +186,32 @@ func loadWeatherData(db *sql.DB, csvFile string) error {
 		rowCh <- row
 	}
 	close(rowCh)
-
 	// Wait for all workers to finish
 	wg.Wait()
+	return nil
+}
 
-	// Commit the transaction
-	if err := tx.Commit(); err != nil {
-		return fmt.Errorf("could not commit transaction: %w", err)
+// insertWeatherRow inserts a single weather row into the database with an adjusted date
+// must be called within a transaction, as it does not commit the transaction
+func insertWeatherRow(tx *sql.Tx, row []string, dateIndex int, offset float64, insertQuery string) error {
+	date, _ := time.Parse("2006-01-02", row[dateIndex])
+	newDate := date.Add(time.Duration(offset) * 24 * time.Hour).Format("2006-01-02")
+	row[dateIndex] = newDate
+
+	placeholders := make([]interface{}, len(row))
+	for i, value := range row {
+		if value == "" {
+			placeholders[i] = nil
+		} else {
+			placeholders[i] = value
+		}
 	}
 
-	return nil
+	_, err := tx.Exec(insertQuery, placeholders...)
+	if err != nil {
+		log.Printf("could not insert row into weather table: %v", err)
+	}
+	return err
 }
 
 // loadCSVToTable loads generic CSV data into a specified table with a progress bar
@@ -343,4 +319,72 @@ func buildInsertQuery(tableName string, columns []string) string {
 	placeholders := strings.Repeat("?, ", len(columns))
 	placeholders = strings.TrimSuffix(placeholders, ", ")
 	return fmt.Sprintf("INSERT INTO %s (%s) VALUES (%s)", tableName, columnsList, placeholders)
+}
+
+// readCSVFile reads a CSV file and returns the rows and headers
+func readCSVFile(csvFile string) ([][]string, []string, error) {
+	file, err := os.Open(csvFile)
+	if err != nil {
+		return nil, nil, fmt.Errorf("could not open file %s: %w", csvFile, err)
+	}
+	defer file.Close()
+
+	reader := csv.NewReader(file)
+	rows, err := reader.ReadAll()
+	if err != nil {
+		return nil, nil, fmt.Errorf("could not read CSV data: %w", err)
+	}
+
+	if len(rows) < 1 {
+		return nil, nil, fmt.Errorf("CSV file %s is empty", csvFile)
+	}
+
+	headers := rows[0]
+	return rows, headers, nil
+}
+
+// parseDates converts date strings to time.Time objects
+func parseDates(rows [][]string, dateIndex int) ([]time.Time, error) {
+	dates := make([]time.Time, len(rows)-1)
+	for i, row := range rows[1:] {
+		date, err := time.Parse("2006-01-02", row[dateIndex])
+		if err != nil {
+			return nil, fmt.Errorf("invalid date format in row %d: %w", i+2, err)
+		}
+		dates[i] = date
+	}
+	return dates, nil
+}
+
+// calculateDateOffset calculates the offset in days between the oldest date and today
+func calculateDateOffset(dates []time.Time) float64 {
+	today := time.Now()
+	oldestDate := findOldestDate(dates)
+	return today.Sub(oldestDate).Hours() / 24
+}
+
+// setupProfiling sets up CPU and memory profiling and returns a cleanup function
+func setupProfiling() func() {
+	// Profiling setup
+	f, err := os.Create("cpu.prof")
+	if err != nil {
+		log.Fatal("could not create CPU profile: ", err)
+	}
+	if err := pprof.StartCPUProfile(f); err != nil {
+		log.Fatal("could not start CPU profile: ", err)
+	}
+
+	// Memory profiling
+	memProf, err := os.Create("mem.prof")
+	if err != nil {
+		log.Fatal("could not create memory profile: ", err)
+	}
+
+	// Return a cleanup function
+	return func() {
+		pprof.StopCPUProfile()
+		f.Close()
+		pprof.WriteHeapProfile(memProf)
+		memProf.Close()
+	}
 }
