@@ -22,7 +22,9 @@ import (
 func TestMain(m *testing.M) {
 	// setup resources / set up
 	setMutePrints(true)
-	SetupServer("./testdata/test.db", io.Discard)
+	cleanup := SetupServer("./testdata/test.db", io.Discard)
+	defer cleanup()
+
 	// Run the test
 	exitVal := m.Run()
 
