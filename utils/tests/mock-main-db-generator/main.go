@@ -216,23 +216,10 @@ func insertWeatherRow(tx *sql.Tx, row []string, dateIndex int, offset float64, i
 
 // loadCSVToTable loads generic CSV data into a specified table with a progress bar
 func loadCSVToTable(db *sql.DB, csvFile, tableName string) error {
-	file, err := os.Open(csvFile)
+	rows, headers, err := readCSVFile(csvFile)
 	if err != nil {
-		return fmt.Errorf("could not open file %s: %w", csvFile, err)
+		return err
 	}
-	defer file.Close()
-
-	reader := csv.NewReader(file)
-	rows, err := reader.ReadAll()
-	if err != nil {
-		return fmt.Errorf("could not read CSV data: %w", err)
-	}
-
-	if len(rows) < 1 {
-		return fmt.Errorf("CSV file %s is empty", csvFile)
-	}
-
-	headers := rows[0]
 	insertQuery := buildInsertQuery(tableName, headers)
 
 	// Prepare progress bar
