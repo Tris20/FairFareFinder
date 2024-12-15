@@ -1,4 +1,4 @@
-module github.com/Tris20/FairFareFinder/learn_utils_playground
+module github.com/Tris20/FairFareFinder/learning_utils_playground
 
 go 1.23.1
 

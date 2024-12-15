@@ -80,10 +80,21 @@ var tableSchemas = map[string]string{
 	)`,
 }
 
-func SetupMockDatabase(inputDataDir string, outputDir string) {
-	// Profiling setup
-	cleanup := setupProfiling()
-	defer cleanup()
+var mutePrints = false
+
+func SetMutePrints(mute bool) {
+	mutePrints = mute
+}
+
+func SetupMockDatabase(toolDir string,
+	inputDataDir string,
+	outputDir string,
+	profile bool) {
+	if profile {
+		// Profiling setup
+		cleanup := setupProfiling(toolDir)
+		defer cleanup()
+	}
 
 	// Ensure the output path is formatted correctly
 	outputDB := filepath.Join(outputDir, "test.db")
@@ -103,12 +114,24 @@ func SetupMockDatabase(inputDataDir string, outputDir string) {
 
 	// Iterate through the schemas and process CSV files
 	for tableName, createStmt := range tableSchemas {
+		// Drop table if it exists
+		dropStmt := fmt.Sprintf("DROP TABLE IF EXISTS %s", tableName)
+		_, err := db.Exec(dropStmt)
+		if err != nil {
+			log.Fatalf("Failed to drop table %s: %v", tableName, err)
+		}
+		if !mutePrints {
+			fmt.Printf("Dropped table if exists: %s\n", tableName)
+		}
+
 		// Create table
-		_, err := db.Exec(createStmt)
+		_, err = db.Exec(createStmt)
 		if err != nil {
 			log.Fatalf("Failed to create table %s: %v", tableName, err)
 		}
-		fmt.Printf("Created table: %s\n", tableName)
+		if !mutePrints {
+			fmt.Printf("Created table: %s\n", tableName)
+		}
 
 		// Load data from CSV
 		csvFile := filepath.Join(inputDataDir, tableName+".csv")
@@ -121,10 +144,13 @@ func SetupMockDatabase(inputDataDir string, outputDir string) {
 				log.Fatalf("Failed to load data for table %s: %v", tableName, err)
 			}
 		}
-		fmt.Printf("Loaded data for table: %s\n", tableName)
+		if !mutePrints {
+			fmt.Printf("Loaded data for table: %s\n", tableName)
+		}
 	}
-
-	fmt.Println("Database generation complete: main.db")
+	if !mutePrints {
+		fmt.Println("Database generation complete: main.db")
+	}
 }
 
 // loadWeatherData loads weather data from a CSV file into the database
@@ -205,7 +231,10 @@ func loadCSVToTable(db *sql.DB, csvFile, tableName string) error {
 // using a generic insert function. It returns an error if any row fails to insert.
 func genericParallelProcessing(rows [][]string, insertionFunc insertFunc, tableName string) error {
 	// Prepare progress bar
-	bar := progressbar.Default(int64(len(rows)-1), fmt.Sprintf("Inserting %s data", tableName))
+	var bar *progressbar.ProgressBar
+	if !mutePrints {
+		bar = progressbar.Default(int64(len(rows)-1), fmt.Sprintf("Inserting %s data", tableName))
+	}
 
 	// Use a wait group to wait for all goroutines to finish
 	var wg sync.WaitGroup
@@ -223,7 +252,9 @@ func genericParallelProcessing(rows [][]string, insertionFunc insertFunc, tableN
 				if err != nil {
 					log.Printf("error processing row: %v", err)
 				}
-				bar.Add(1)
+				if !mutePrints {
+					bar.Add(1)
+				}
 			}
 		}()
 	}
@@ -354,9 +385,9 @@ func calculateDateOffset(dates []time.Time) float64 {
 }
 
 // setupProfiling sets up CPU and memory profiling and returns a cleanup function
-func setupProfiling() func() {
+func setupProfiling(toolDir string) func() {
 	// Profiling setup
-	f, err := os.Create("cpu.prof")
+	f, err := os.Create(filepath.Join(toolDir, "cpu.prof"))
 	if err != nil {
 		log.Fatal("could not create CPU profile: ", err)
 	}
@@ -365,7 +396,7 @@ func setupProfiling() func() {
 	}
 
 	// Memory profiling
-	memProf, err := os.Create("mem.prof")
+	memProf, err := os.Create(filepath.Join(toolDir, "cpu.prof"))
 	if err != nil {
 		log.Fatal("could not create memory profile: ", err)
 	}

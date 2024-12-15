@@ -4,6 +4,7 @@ package main
 // it can access the functions and variables in main.go that are private
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -17,12 +18,21 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+var resetDB = true
+
 // TestMain is a test setup function. It is called before any tests are run.
 // It is used to set up any resources that are needed by the tests.
 // This is a feature of the testing package.
 func TestMain(m *testing.M) {
 	// setup resources / set up
-	test_utils.SetupMockDatabase()
+	if resetDB {
+		test_utils.SetMutePrints(true)
+		test_utils.SetupMockDatabase("", "./learning_utils_playground/test_utils/input-data",
+			"./testdata", false)
+		resetDB = false
+		fmt.Println("Database reset")
+	}
+	// from main package
 	setMutePrints(true)
 	SetupServer("./testdata/test.db", io.Discard)
 	// Run the test

@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/Tris20/FairFareFinder/learn_utils_playground/test_utils"
+	"github.com/Tris20/FairFareFinder/learning_utils_playground/test_utils"
 )
 
 func main() {
@@ -26,8 +26,8 @@ func main() {
 	fmt.Println(inputDataDir)
 	fmt.Println(outputDir)
 
-	test_utils.SetupMockDatabase(inputDataDir, outputDir)
-	fmt.Println("Hello, playground")
+	test_utils.SetMutePrints(true)
+	test_utils.SetupMockDatabase(execDir, inputDataDir, outputDir, false)
 }
 
 func getExecutablePath() (string, error) {
