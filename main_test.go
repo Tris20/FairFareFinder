@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/Tris20/FairFareFinder/learning_utils_playground/test_utils"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -21,6 +22,7 @@ import (
 // This is a feature of the testing package.
 func TestMain(m *testing.M) {
 	// setup resources / set up
+	test_utils.SetupMockDatabase()
 	setMutePrints(true)
 	SetupServer("./testdata/test.db", io.Discard)
 	// Run the test
