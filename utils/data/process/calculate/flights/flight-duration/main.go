@@ -154,9 +154,10 @@ func main() {
 		log.Printf("Calculated distance for flight ID %d: %.2f km", flightID, distance)
 		flightTime := calculateAdjustedFlightTime(distance)
 
+		log.Printf("Flight ID %d: Calculated flightTime = %.2f hours", flightID, flightTime)
 		// Calculate formatted durations
 		durationHourDotMins, durationMinutes, durationHoursRounded := formatDuration(flightTime)
-		hoursPart := int(math.Floor(flightTime)) // Hours without minutes
+		hoursPart := int(durationHourDotMins) // Hours without minutes
 
 		// Log calculated values
 		log.Printf("Flight ID %d: DurationHourDotMins = %.2f, DurationInMinutes = %d, DurationInHours = %d, DurationHoursRounded = %.2f",

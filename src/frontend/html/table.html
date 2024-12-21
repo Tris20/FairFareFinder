@@ -103,8 +103,8 @@
       <div class="destination-title">
         <h2>{{ .DestinationCityName }}</h2>
         <div class="destination-duration">
-          {{ if .DurationHourDotMins.Valid }} {{ printf "%.0fHrs"
-          .DurationHourDotMins.Float64 }} {{ else }} {{ end }}
+          {{ if .DurationHoursRounded.Valid }} {{ printf "%dHrs"
+          .DurationHoursRounded.Int64 }} {{ else }} {{ end }}
         </div>
       </div>
 
