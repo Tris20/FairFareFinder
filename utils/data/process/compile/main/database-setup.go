@@ -29,7 +29,17 @@ iata_4 CHAR(3) ,
 iata_5 CHAR(3) ,
 iata_6 CHAR(3) ,
 iata_7 CHAR(3) ,
-			avg_wpi FLOAT(10,1)
+				avg_wpi FLOAT(10,1),
+      image_1 TEXT,
+      image_2 TEXT,
+      image_3 TEXT,
+      image_4 TEXT,
+      image_5 TEXT,
+      image_6 TEXT,
+      image_7 TEXT,
+      image_8 TEXT,
+      image_9 TEXT,
+      UNIQUE(city, country)
 		);`
 	_, err = db.Exec(createLocationsTable)
 	if err != nil {
@@ -68,6 +78,9 @@ CREATE TABLE IF NOT EXISTS "flight" (
 	"price_next_week"	DECIMAL,
 	"skyscanner_url_next_week"	VARCHAR(255),
 	"duration_in_minutes"	DECIMAL,
+  "duration_in_hours"	DECIMAL,
+  "duration_in_hours_rounded"	DECIMAL,
+  "duration_hour_dot_mins" REAL,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 `
