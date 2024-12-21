@@ -103,7 +103,7 @@
       <div class="destination-title">
         <h2>{{ .DestinationCityName }}</h2>
         <div class="destination-duration">
-          {{ if .DurationHoursRounded.Valid }} {{ printf "%dHrs"
+          {{ if .DurationHoursRounded.Valid }} {{ printf "%dh"
           .DurationHoursRounded.Int64 }} {{ else }} {{ end }}
         </div>
       </div>
@@ -169,7 +169,7 @@
       <div class="destination-title">
         <h2>{{ .DestinationCityName }}</h2>
         <div class="destination-duration">
-          {{ if .DurationHoursRounded.Valid }} {{ printf "%dHrs"
+          {{ if .DurationHoursRounded.Valid }} {{ printf "%dh"
           .DurationHoursRounded.Int64 }} {{ else }} {{ end }}
         </div>
       </div>
