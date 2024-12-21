@@ -13,7 +13,6 @@ import (
 	"time"
 
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/schollz/progressbar/v3"
 )
 
 type insertFunc func([]string) error
@@ -231,10 +230,10 @@ func loadCSVToTable(db *sql.DB, csvFile, tableName string) error {
 // using a generic insert function. It returns an error if any row fails to insert.
 func genericParallelProcessing(rows [][]string, insertionFunc insertFunc, tableName string) error {
 	// Prepare progress bar
-	var bar *progressbar.ProgressBar
-	if !mutePrints {
-		bar = progressbar.Default(int64(len(rows)-1), fmt.Sprintf("Inserting %s data", tableName))
-	}
+	// var bar *progressbar.ProgressBar
+	// if !mutePrints {
+	// 	bar = progressbar.Default(int64(len(rows)-1), fmt.Sprintf("Inserting %s data", tableName))
+	// }
 
 	// Use a wait group to wait for all goroutines to finish
 	var wg sync.WaitGroup
@@ -252,9 +251,9 @@ func genericParallelProcessing(rows [][]string, insertionFunc insertFunc, tableN
 				if err != nil {
 					log.Printf("error processing row: %v", err)
 				}
-				if !mutePrints {
-					bar.Add(1)
-				}
+				// if !mutePrints {
+				// 	bar.Add(1)
+				// }
 			}
 		}()
 	}
