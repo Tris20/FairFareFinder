@@ -13,6 +13,7 @@ import (
 	"log"
 	"math"
 	"net/http"
+  "sync"
 )
 
 var apiKey string
@@ -30,9 +31,6 @@ type Itinerary struct {
 		Raw       float64 `json:"raw"`
 		Formatted string  `json:"formatted"`
 	} `json:"price"`
-	Legs []struct {
-		DurationInMinutes int `json:"durationInMinutes"`
-	} `json:"legs"`
 }
 
 var origins []model.OriginInfo
@@ -45,137 +43,127 @@ func main() {
 	UpdateSkyscannerPrices(origins)
 }
 
-func GetBestPrice(origin model.OriginInfo, destination model.DestinationInfo) (float64, int, error) {
+func GetBestPrice(origin model.OriginInfo, destination model.DestinationInfo) (float64, error) {
 	// Load API key from secrets.yaml
 	var err error
 	apiKey, err = config_handlers.LoadApiKey("../../../../../ignore/secrets.yaml", "skyscanner")
 	if err != nil {
-		return 0, 0, fmt.Errorf("error loading API key: %v", err)
+		return 0, fmt.Errorf("error loading API key: %v", err)
 	}
 
-	departureDates, err := timeutils.ListDatesBetween(origin.NextDepartureStartDate, origin.NextDepartureEndDate)
-	if err != nil {
-		return 0, 0, fmt.Errorf("error generating departure dates: %v", err)
-	}
+	println("HERE6\n")
+	fmt.Printf("\nDeparture")
+	departure_dates, err := timeutils.ListDatesBetween(origin.NextDepartureStartDate, origin.NextDepartureEndDate)
+	fmt.Printf("\nReturn")
+	return_dates, err := timeutils.ListDatesBetween(origin.NextArrivalStartDate, origin.NextArrivalEndDate)
 
-	returnDates, err := timeutils.ListDatesBetween(origin.NextArrivalStartDate, origin.NextArrivalEndDate)
-	if err != nil {
-		return 0, 0, fmt.Errorf("error generating return dates: %v", err)
-	}
+	fmt.Printf("\nGetting Departure Price")
+	dep_price, err := GetBestPriceForGivenDates(origin.SkyScannerID, destination.SkyScannerID, departure_dates)
+	fmt.Printf("\nGetting Return Price")
+	return_price, err := GetBestPriceForGivenDates(destination.SkyScannerID, origin.SkyScannerID, return_dates)
 
-	// Get departure price and duration
-	depPrice, depDuration, err := GetBestPriceForGivenDates(origin.SkyScannerID, destination.SkyScannerID, departureDates)
-	if err != nil {
-		return 0, 0, err
-	}
-
-	// Get return price and duration
-	returnPrice, returnDuration, err := GetBestPriceForGivenDates(destination.SkyScannerID, origin.SkyScannerID, returnDates)
-	if err != nil {
-		return 0, 0, err
-	}
-	// Total price and duration
-
-	totalPrice := depPrice + returnPrice
-	totalDuration := depDuration + returnDuration // Total round-trip duration
-
-	return totalPrice, totalDuration, nil
+	return (dep_price + return_price), err
 
 	// price = (get_lowest_departure_price() + get_lowest_arrival_price())
 
 	//return SearchOneWay(origin.SkyScannerID, destination.SkyScannerID )
 }
 
-func GetBestPriceForGivenDates(departureSkyScannerID string, arrivalSkyScannerID string, dates []string) (float64, int, error) {
-	var lowestDayPrice float64 = math.MaxFloat64
-	var err error
-	var lowestDuration int = math.MaxInt
+
+func GetBestPriceForGivenDates(departureSkyScannerID string, arrivalSkyScannerID string, dates []string) (float64, error) {
+	var (
+		lowestDayPrice = math.MaxFloat64
+		mu             sync.Mutex // Protects lowestDayPrice
+		wg             sync.WaitGroup
+	)
+
 	for _, date := range dates {
-		fmt.Printf("\n\nsearching %s", date)
-		price, duration, err := SearchOneWay(departureSkyScannerID, arrivalSkyScannerID, date)
-		if err != nil {
-			// Handle the error according to your error policy.
-			// For example, you can return the error or continue to try other dates.
-			fmt.Println("\nError fetching price for date:", date, "Error:", err)
-			continue
-		}
-
-		if price < lowestDayPrice {
-			lowestDayPrice = price
-		}
-		if duration < lowestDuration {
-			lowestDuration = duration
-		}
-
+		wg.Add(1)
+		go func(d string) {
+			defer wg.Done()
+			fmt.Printf("\n\nsearching %s", d)
+			price, err := SearchOneWay(departureSkyScannerID, arrivalSkyScannerID, d)
+			if err != nil {
+				fmt.Println("\nError fetching price for date:", d, "Error:", err)
+				return
+			}
+			// Safely update lowestDayPrice
+			mu.Lock()
+			if price < lowestDayPrice {
+				lowestDayPrice = price
+			}
+			mu.Unlock()
+		}(date)
 	}
 
-	// Check if lowestDayPrice was updated, return an error if not
+	wg.Wait() // Wait for all Goroutines to finish
+
+	// Check if lowestDayPrice was updated
 	if lowestDayPrice == math.MaxFloat64 {
 		lowestDayPrice = 0.0
-		//	return 0, fmt.Errorf("no valid prices found")
 	}
-
-	// Check if lowestDayPrice was updated, return an error if not
-	if lowestDuration == math.MaxInt {
-		lowestDuration = 0
-		//	return 0, fmt.Errorf("no valid prices found")
-	}
-
 	fmt.Printf("\nLowest Price, %.2f", lowestDayPrice)
-	return lowestDayPrice, lowestDuration, err
+	return lowestDayPrice, nil
 }
 
-func SearchOneWay(Departure_SkyScannerID string, Arrival_SkyScannerID string, date string) (float64, int, error) {
+
+func SearchOneWay(Departure_SkyScannerID string, Arrival_SkyScannerID string, date string) (float64, error) {
 	url := fmt.Sprintf("https://skyscanner80.p.rapidapi.com/api/v1/flights/search-one-way?fromId=%s&toId=%s&departDate=%s&adults=1&currency=EUR&market=US&locale=en-US", Departure_SkyScannerID, Arrival_SkyScannerID, date)
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return 0, 0, err
+		return 0, err
 	}
 
 	req.Header.Add("X-RapidAPI-Key", apiKey)
 	req.Header.Add("X-RapidAPI-Host", "skyscanner80.p.rapidapi.com")
 
+
+
 	res, err := http.DefaultClient.Do(req)
+
 	if err != nil {
-		return 0, 0, err
+		return 0, err
 	}
 	defer res.Body.Close()
 
+if res.StatusCode == 429 {
+	log.Println("Rate limit hit: Too many requests. Waiting to retry...")
+	return 0, fmt.Errorf("rate limit exceeded: status %d", res.StatusCode)
+} else if res.StatusCode >= 500 {
+	log.Printf("Server error: %d. Retrying might help.", res.StatusCode)
+	return 0, fmt.Errorf("server error: status %d", res.StatusCode)
+}
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		return 0, 0, err
+		return 0, err
 	}
 
-	// Parse the JSON response and determine the best price and duration
+	// Parse the JSON response and determine the best price
 	return determineBestPriceFromResponse(body)
 }
-func determineBestPriceFromResponse(body []byte) (float64, int, error) {
+
+func determineBestPriceFromResponse(body []byte) (float64, error) {
 	var response Response
 
 	err := json.Unmarshal(body, &response)
 	if err != nil {
-		return 0, 0, fmt.Errorf("error parsing JSON: %v", err)
+		return 0, fmt.Errorf("error parsing JSON: %v", err)
 	}
 
 	if len(response.Data.Itineraries) == 0 {
-		return 0, 0, fmt.Errorf("no itineraries found")
+		return 0, fmt.Errorf("no itineraries found")
 	}
 
+	// Assume the first itinerary has the best (lowest) price to start
 	bestPrice := response.Data.Itineraries[0].Price.Raw
-	bestDuration := response.Data.Itineraries[0].Legs[0].DurationInMinutes
-
 	for _, itinerary := range response.Data.Itineraries {
 		if itinerary.Price.Raw < bestPrice {
 			bestPrice = itinerary.Price.Raw
-			bestDuration = itinerary.Legs[0].DurationInMinutes
 		}
 	}
 
-	// Convert duration to the nearest hour
-	durationInHours := int(math.Round(float64(bestDuration) / 60))
-
-	return bestPrice, durationInHours, nil
+	return bestPrice, nil
 }
 
 /*
@@ -228,7 +216,7 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 	// HOTFIX setting both this weekend and nextweekend to price value because we don't use both prices in the output table yet
 	updateStmt, err := db.Prepare(`
     UPDATE skyscannerprices 
-    SET next_weekend = ?, this_weekend = ?, duration = ? 
+    SET next_weekend = ?, this_weekend = ? 
     WHERE origin_skyscanner_id = ? 
     AND destination_skyscanner_id = ?`)
 	if err != nil {
@@ -238,8 +226,8 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 
 	insertStmt, err := db.Prepare(`
     INSERT INTO skyscannerprices 
-    (origin_city, origin_country, origin_iata, origin_skyscanner_id, destination_city, destination_country, destination_iata, destination_skyscanner_id, next_weekend, this_weekend, duration) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+    (origin_city, origin_country, origin_iata, origin_skyscanner_id, destination_city, destination_country, destination_iata, destination_skyscanner_id, next_weekend, this_weekend) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
 	if err != nil {
 		log.Fatalf("Failed to prepare insert statement: %v", err)
 	}
@@ -258,7 +246,7 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 
 		println("HERE5\n")
 		for _, destination := range destinationsWithUrls {
-			price, duration, err := GetBestPrice(origin, destination)
+			price, err := GetBestPrice(origin, destination)
 			if err != nil {
 				log.Printf("Error getting best price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
 				bar.Add(1) // Increment progress bar even on error
@@ -266,7 +254,7 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 			}
 
 			// Execute the update statement for each origin-destination pair with the new price
-			result, err := updateStmt.Exec(price, price, duration, origin.SkyScannerID, destination.SkyScannerID)
+			result, err := updateStmt.Exec(price, price, origin.SkyScannerID, destination.SkyScannerID)
 			if err != nil {
 				log.Printf("Failed to update price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
 				bar.Add(1) // Increment progress bar even on error
@@ -283,7 +271,7 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 			// If no rows were updated, insert a new row
 			if rowsAffected == 0 {
 				_, err = insertStmt.Exec(origin.City, origin.Country,
-					origin.IATA, origin.SkyScannerID, destination.City, destination.Country, destination.IATA, destination.SkyScannerID, price, price, duration)
+					origin.IATA, origin.SkyScannerID, destination.City, destination.Country, destination.IATA, destination.SkyScannerID, price, price)
 				if err != nil {
 					log.Printf("Failed to insert price for %s to %s: %v", origin.SkyScannerID, destination.SkyScannerID, err)
 				} else {

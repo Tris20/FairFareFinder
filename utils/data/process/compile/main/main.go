@@ -214,10 +214,10 @@ func main() {
 			transfer := false
 
 			// Generate new db every 6 hours: 3 = 3am; 9am; 3pm; 9pm.
-			if currentHour%6 == 0 {
+			if currentHour%6 == 5 {
 
 				// Monday, 3am, Start a completely new new_main.db
-				if currentDay == time.Monday && currentHour == 3 {
+				if currentDay == time.Tuesday && currentHour == 11{
 
 					// Backup existing database if it exists
 					backupDatabase(absoluteNewMainDbPath, absoluteOutputDir)
