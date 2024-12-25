@@ -212,12 +212,15 @@ func main() {
 			// Get current day and time
 			currentDay, currentHour := getCurrentTime()
 			transfer := false
-
+			shouldLongSleep := false
+			hourInterval := 6 // every 6 hours
+			wakeUpHour := 3   // 3am
 			// Generate new db every 6 hours: 3 = 3am; 9am; 3pm; 9pm.
-			if currentHour%6 == 0 {
-
+			// currentHour%6==0 and currentHour==3 can never happen at the same time
+			if (currentHour+wakeUpHour)%hourInterval == 0 {
+				shouldLongSleep = true
 				// Monday, 3am, Start a completely new new_main.db
-				if currentDay == time.Monday && currentHour == 3 {
+				if currentDay == time.Monday && currentHour == wakeUpHour {
 
 					// Backup existing database if it exists
 					backupDatabase(absoluteNewMainDbPath, absoluteOutputDir)
@@ -300,9 +303,18 @@ func main() {
 					}
 					transfer = false
 				}
-
-				// Sleep for a specified time interval before checking again
-				time.Sleep(50 * time.Minute) // Check every 10 minutes in daemon mode
+			}
+			// sleep should be in the main loop, otherwise it will only sleep when the condition is met
+			// Sleep for a specified time interval before checking again
+			if shouldLongSleep {
+				if hourInterval >= 2 {
+					time.Sleep(time.Duration(hourInterval-2) * time.Hour)
+				} else {
+					time.Sleep(10 * time.Minute)
+				}
+				shouldLongSleep = false
+			} else {
+				time.Sleep(10 * time.Minute) // Check every 10 minutes in daemon mode
 			}
 		}
 	}
