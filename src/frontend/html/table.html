@@ -103,8 +103,8 @@
       <div class="destination-title">
         <h2>{{ .DestinationCityName }}</h2>
         <div class="destination-duration">
-          {{ if .DurationHourDotMins.Valid }} {{ printf "%.0fHrs"
-          .DurationHourDotMins.Float64 }} {{ else }} {{ end }}
+          {{ if .DurationHoursRounded.Valid }} {{ printf "%dh"
+          .DurationHoursRounded.Int64 }} {{ else }} {{ end }}
         </div>
       </div>
 
@@ -169,8 +169,9 @@
       <div class="destination-title">
         <h2>{{ .DestinationCityName }}</h2>
         <div class="destination-duration">
-          {{ if .DurationHourDotMins.Valid }} {{ printf "%.0fHrs"
-          .DurationHourDotMins.Float64 }} {{ else }} {{ end }}
+          <!-- Add a space explicitly after the icon -->
+          {{ if .DurationHoursRounded.Valid }} {{ printf "%dh"
+          .DurationHoursRounded.Int64 }} {{ end }}
         </div>
       </div>
 
@@ -233,9 +234,16 @@
         <div class="card-content">
           <div class="destination-title">
             <h2>{{ .DestinationCityName }}</h2>
+
             <p>
-              {{ if .DurationHourDotMins.Valid }} {{ printf "%.0fHrs"
-              .DurationHourDotMins.Float64 }} {{ else }} {{ end }}
+              {{ if .DurationHours.Valid }} {{ printf "%d Hrs"
+              .DurationHours.Int64 }} {{ end }} {{ if .DurationMins.Valid }} {{
+              printf "%d Mins" .DurationMins.Int64 }} {{ end }}
+              <i
+                class="fa fa-plane"
+                aria-hidden="true"
+                style="color: #6a7575; font-size: 0.8em"
+              ></i>
             </p>
           </div>
 

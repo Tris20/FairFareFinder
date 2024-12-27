@@ -25,3 +25,4 @@ find "$BASE_DIR" -type f -name "main.go" | while read -r MAIN_GO_FILE; do
 done
 
 echo "All folders processed."
+

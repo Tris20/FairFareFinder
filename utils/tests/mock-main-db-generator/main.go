@@ -52,6 +52,7 @@ var tableSchemas = map[string]string{
 		skyscanner_url_next_week VARCHAR(255),
 	"duration_in_minutes"	DECIMAL,
   "duration_in_hours"	DECIMAL,
+  "duration_in_hours_rounded"	DECIMAL,
   "duration_hour_dot_mins" REAL
 	)`,
 	"location": `
