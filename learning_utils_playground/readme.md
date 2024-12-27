@@ -1,3 +1,19 @@
+# Steps to Reconstruct the database
+
+1. Generate all the raw databases
+   This has to be done manually for now, but should be automated.
+
+```shell
+cd ~/play/FairFareFinder/utils/data/process/generate/raw-dbs/flights
+./flights
+
+cd ~/play/FairFareFinder/utils/data/process/generate/raw-dbs/locations/init
+./init
+
+cd ~/play/FairFareFinder/utils/data/process/generate/raw-dbs/weather
+./weather
+```
+
 Current structure of the utils directory:
 
 ```

@@ -11,8 +11,8 @@ func runAllTasks(relativeBase string) {
 	reset := "\033[0m"
 
 	// FETCH
-	runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/schedule"), "aerodatabox")
-	fmt.Printf("%sCOMPLETED: aerodatabox (flight schedule)%s\n", green, reset)
+	// runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/schedule"), "aerodatabox")
+	// fmt.Printf("%sCOMPLETED: aerodatabox (flight schedule)%s\n", green, reset)
 
 	runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/prices"), "prices")
 	fmt.Printf("%sCOMPLETED: prices (flight prices)%s\n", green, reset)

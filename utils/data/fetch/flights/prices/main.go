@@ -4,15 +4,16 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"github.com/Tris20/FairFareFinder/config/handlers"
-	"github.com/Tris20/FairFareFinder/src/backend/model"
-	"github.com/Tris20/FairFareFinder/utils/data/process/generate/urls"
-	"github.com/Tris20/FairFareFinder/utils/time-and-date"
-	"github.com/schollz/progressbar/v3"
 	"io/ioutil"
 	"log"
 	"math"
 	"net/http"
+
+	config_handlers "github.com/Tris20/FairFareFinder/config/handlers"
+	"github.com/Tris20/FairFareFinder/src/backend/model"
+	urlgenerators "github.com/Tris20/FairFareFinder/utils/data/process/generate/urls"
+	timeutils "github.com/Tris20/FairFareFinder/utils/time-and-date"
+	"github.com/schollz/progressbar/v3"
 )
 
 var apiKey string
@@ -209,21 +210,6 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo) {
 		log.Fatal("Failed to update the table:", err)
 	}
 	log.Println("Table updated successfully.")
-
-	/*
-		// Update if entry exists
-		updateStmt, err := db.Prepare("UPDATE skyscannerprices SET next_weekend = ? WHERE origin_skyscanner_id = ? AND destination_skyscanner_id = ?")
-		if err != nil {
-			log.Fatalf("Failed to prepare update statement: %v", err)
-		}
-		defer updateStmt.Close()
-		// Create if entry for dest AND origin does not exist
-		insertStmt, err := db.Prepare("INSERT INTO skyscannerprices (origin_city, origin_country, origin_iata, origin_skyscanner_id, destination_city, destination_country, destination_iata, destination_skyscanner_id, next_weekend) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
-		if err != nil {
-			log.Fatalf("Failed to prepare insert statement: %v", err)
-		}
-		defer insertStmt.Close()
-	*/
 
 	// HOTFIX setting both this weekend and nextweekend to price value because we don't use both prices in the output table yet
 	updateStmt, err := db.Prepare(`

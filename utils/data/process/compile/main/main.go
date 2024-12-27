@@ -232,8 +232,8 @@ func main() {
 					log.Println("%sCOMPLETED: Initialization of new database%s\n", green, reset)
 
 					//Fetch
-					runExecutableInDir(filepath.Join(absoluteBase, "fetch/flights/schedule"), "aerodatabox")
-					log.Println("%sCOMPLETED: aerodatabox (flight schedule)%s\n", green, reset)
+					// runExecutableInDir(filepath.Join(absoluteBase, "fetch/flights/schedule"), "aerodatabox")
+					// log.Println("%sCOMPLETED: aerodatabox (flight schedule)%s\n", green, reset)
 					runExecutableInDir(filepath.Join(absoluteBase, "fetch/flights/prices"), "prices")
 					log.Println("%sCOMPLETED: prices (flight prices)%s\n", green, reset)
 					runExecutableInDir(filepath.Join(absoluteBase, "fetch/weather"), "update-weather-db")
