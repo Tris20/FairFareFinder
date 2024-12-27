@@ -43,13 +43,13 @@ type Itinerary struct {
 
 // var origins []model.OriginInfo
 
-func FetchFlightPrices(originsYamlPath string, flightsDBPath, locationsDBPath string) error {
+func FetchFlightPrices(originsYamlPath, flightsDBPath, airpotsDBPath string) error {
 	// Load IATA, skyscanenrID etc of origins(Berlin, Glasgow, Edi)
 	originsConfig, _ := config_handlers.LoadOrigins(originsYamlPath)
 	origins := config_handlers.ConvertConfigToModel(originsConfig)
 	origins = update_origin_dates(origins)
 	//"../../../../../data/raw/flights/flights.db"
-	UpdateSkyscannerPrices(origins, flightsDBPath, locationsDBPath)
+	UpdateSkyscannerPrices(origins, flightsDBPath, airpotsDBPath)
 	return nil
 }
 
@@ -198,7 +198,7 @@ func sumcosts()
 
 */
 
-func UpdateSkyscannerPrices(origins []model.OriginInfo, flightsDBPath, locationsDBPath string) error {
+func UpdateSkyscannerPrices(origins []model.OriginInfo, flightsDBPath, airpotsDBPath string) error {
 	// Open SQLite database
 	flightDB, err := sql.Open("sqlite3", flightsDBPath)
 	if err != nil {
@@ -207,7 +207,7 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo, flightsDBPath, locations
 	}
 	defer flightDB.Close()
 
-	locationsDB, err := sql.Open("sqlite3", locationsDBPath)
+	airportsDB, err := sql.Open("sqlite3", airpotsDBPath)
 	if err != nil {
 		log.Printf("Failed to open database: %v", err)
 		return err
@@ -215,11 +215,8 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo, flightsDBPath, locations
 
 	fmt.Printf("\n\n\n COPY WEEKEND")
 
-	// todo: there needs to be a check to see if the table exists, if not, create it
-	skyScannerPrice := db_manager.SkyScannerPrice{}
-	_, err = flightDB.Exec(skyScannerPrice.CreateTableQuery())
+	err = db_manager.CreateTable(flightDB, &db_manager.SkyScannerPrice{})
 	if err != nil {
-		log.Printf("Failed to create table: %v", err)
 		return err
 	}
 
@@ -233,21 +230,6 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo, flightsDBPath, locations
 		return err
 	}
 	log.Println("Table updated successfully.")
-
-	/*
-		// Update if entry exists
-		updateStmt, err := db.Prepare("UPDATE skyscannerprices SET next_weekend = ? WHERE origin_skyscanner_id = ? AND destination_skyscanner_id = ?")
-		if err != nil {
-			log.Fatalf("Failed to prepare update statement: %v", err)
-		}
-		defer updateStmt.Close()
-		// Create if entry for dest AND origin does not exist
-		insertStmt, err := db.Prepare("INSERT INTO skyscannerprices (origin_city, origin_country, origin_iata, origin_skyscanner_id, destination_city, destination_country, destination_iata, destination_skyscanner_id, next_weekend) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
-		if err != nil {
-			log.Fatalf("Failed to prepare insert statement: %v", err)
-		}
-		defer insertStmt.Close()
-	*/
 
 	// HOTFIX setting both this weekend and nextweekend to price value because we don't use both prices in the output table yet
 	updateStmt, err := flightDB.Prepare(`
@@ -270,7 +252,7 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo, flightsDBPath, locations
 	defer insertStmt.Close()
 
 	println("HERE4\n")
-	totalDestinations := calculateTotalDestinations(origins, flightDB, locationsDB) // Function to sum up all destinations for all origins
+	totalDestinations := calculateTotalDestinations(origins, flightDB, airportsDB) // Function to sum up all destinations for all origins
 
 	// Create a new progress bar
 	bar := progressbar.Default(int64(totalDestinations))
@@ -278,7 +260,7 @@ func UpdateSkyscannerPrices(origins []model.OriginInfo, flightsDBPath, locations
 	for _, origin := range origins {
 		// Assume DetermineFlightsFromConfig and GenerateFlightsAndHotelsURLs are functions that return valid results
 		// todo: this also happens in calculateTotalDestinations
-		airportDetailsList := DetermineFlightsFromConfig(origin, flightDB, locationsDB)
+		airportDetailsList := DetermineFlightsFromConfig(origin, flightDB, airportsDB)
 		destinationsWithUrls := GenerateFlightsAndHotelsURLs(origin, airportDetailsList)
 
 		println("HERE5\n")

@@ -11,30 +11,22 @@ import (
 	"github.com/Tris20/FairFareFinder/learning_utils_playground/data_management"
 )
 
-// original files: utils/data/fetch/flights/schedule/main.go
 // collect the flight schedule data from Aerodatabox
-func RunAerodatabox(configFilePath, secretsFilePath, flightsDBPath string) {
+func RunAerodatabox(configFilePath, secretsFilePath, flightsDBPath string) error {
 	apiClient := data_management.NewRealFlightAPIClient()
 	err := data_management.FetchFlightSchedule(apiClient, configFilePath, secretsFilePath, flightsDBPath)
 	if err != nil {
 		log.Printf("Failed to fetch flight schedule: %v", err)
-		return
+		return err
 	}
+	return nil
 }
 
-// original files: utils/data/fetch/flights/prices/main.go
-// new file: learning_utils_playground/data_management/fetch_flight_prices.go
-//
-// old code:
-// runExecutableInDir(filepath.Join(relativeBase, "fetch/flights/prices"), "prices")
-// fmt.Printf("%sCOMPLETED: prices (flight prices)%s\n", green, reset)
-func RunFetchFlightPrices() {
+// collect the flight prices
+func RunFetchFlightPrices(originsYamlPath, flightsDBPath, airpotsDBPath string) {
 	// todo: find out if this is actually broken or not
 	// the origins.yaml file hasn't been updated since march
-	originsYamlPath := "../config/origins.yaml"
-	flightsDBPath := "./testdata/flights.db"
-	locationsDBPath := "./testdata/locations.db"
-	err := data_management.FetchFlightPrices(originsYamlPath, flightsDBPath, locationsDBPath)
+	err := data_management.FetchFlightPrices(originsYamlPath, flightsDBPath, airpotsDBPath)
 	if err != nil {
 		log.Fatalf("Failed to fetch flight prices: %v", err)
 	}
@@ -160,7 +152,8 @@ func RunProcessLocationImages() {
 // run-flags.go
 
 // Function to run all tasks in sequence
-func runAllTasks(mainDbPath, configFilePath, secretsFilePath, flightsDBPath string) error {
+func runAllTasks(mainDbPath, configFilePath, secretsFilePath, flightsDBPath string,
+	originsYamlPath, airpotsDBPath string) error {
 	// Backup existing database if it exists
 	err := data_management.BackupDatabase(mainDbPath)
 	if err != nil {
@@ -168,12 +161,20 @@ func runAllTasks(mainDbPath, configFilePath, secretsFilePath, flightsDBPath stri
 		return err
 	}
 	// Initialize the new database and create tables
-	data_management.InitializeDatabase(mainDbPath)
+	err = data_management.InitializeDatabase(mainDbPath)
+	if err != nil {
+		log.Printf("Failed to initialize database: %v", err)
+		return err
+	}
 
 	// FETCH
-	RunAerodatabox(configFilePath, secretsFilePath, flightsDBPath)
+	err = RunAerodatabox(configFilePath, secretsFilePath, flightsDBPath)
+	if err != nil {
+		log.Printf("Failed to run Aerodatabox: %v", err)
+		return err
+	}
 	// possibly broken
-	RunFetchFlightPrices()
+	RunFetchFlightPrices(originsYamlPath, flightsDBPath, airpotsDBPath)
 	// need to setup the database first, "no such table: airport"
 	RunFetchWeather_UpdateWeatherDB()
 	RunBookingComGetProperties()
@@ -256,7 +257,8 @@ func transferFlightsDB(absoluteNewMainDbPath string) error {
 	return fmt.Errorf("failed to run scp command after %d attempts", maxRetries)
 }
 
-func CreateNewMainDB(mainDbPath, configFilePath, secretsFilePath, flightsDBPath string) error {
+func CreateNewMainDB(mainDbPath, configFilePath, secretsFilePath, flightsDBPath string,
+	originsYamlPath, airpotsDBPath string) error {
 	// Backup existing database if it exists
 	err := data_management.BackupDatabase(mainDbPath)
 	if err != nil {
@@ -279,8 +281,13 @@ func CreateNewMainDB(mainDbPath, configFilePath, secretsFilePath, flightsDBPath 
 	}
 
 	//Fetch
-	RunAerodatabox(configFilePath, secretsFilePath, flightsDBPath)
-	RunFetchFlightPrices()
+	err = RunAerodatabox(configFilePath, secretsFilePath, flightsDBPath)
+	if err != nil {
+		log.Printf("Failed to run Aerodatabox: %v", err)
+		return err
+	}
+
+	RunFetchFlightPrices(originsYamlPath, flightsDBPath, airpotsDBPath)
 	RunFetchWeather_UpdateWeatherDB()
 	RunBookingComGetProperties()
 
@@ -325,7 +332,7 @@ func PeriodicDatabaseUpdate(absoluteNewMainDbPath, absoluteOutputDir string) {
 
 func NewProcessCompileMain(mainDbPath, absoluteOutputDir, relativeBase, absoluteBase string,
 	runAll, runCompile, runWeather, daemonMode, transferDB, newDB bool,
-	configFilePath, secretsFilePath, flightsDBPath string) {
+	configFilePath, secretsFilePath, flightsDBPath, originsYamlPath, locationsDBPath string) {
 
 	// Initial log setup
 	if err := data_management.UpdateLogFile(); err != nil {
@@ -333,12 +340,12 @@ func NewProcessCompileMain(mainDbPath, absoluteOutputDir, relativeBase, absolute
 	}
 
 	if newDB {
-		CreateNewMainDB(mainDbPath, configFilePath, secretsFilePath, flightsDBPath)
+		CreateNewMainDB(mainDbPath, configFilePath, secretsFilePath, flightsDBPath, originsYamlPath, locationsDBPath)
 	}
 
 	// If the --all flag is set, run all tasks sequentially
 	if runAll {
-		err := runAllTasks(mainDbPath, configFilePath, secretsFilePath, flightsDBPath)
+		err := runAllTasks(mainDbPath, configFilePath, secretsFilePath, flightsDBPath, originsYamlPath, locationsDBPath)
 		log.Fatalf("Failed to run all tasks: %v", err)
 		return
 	}
@@ -359,7 +366,7 @@ func NewProcessCompileMain(mainDbPath, absoluteOutputDir, relativeBase, absolute
 		return
 	}
 
-	newDaemonMode(daemonMode, mainDbPath, absoluteOutputDir, configFilePath, secretsFilePath, flightsDBPath)
+	newDaemonMode(daemonMode, mainDbPath, absoluteOutputDir, configFilePath, secretsFilePath, flightsDBPath, originsYamlPath, locationsDBPath)
 
 	//	 If no flags are set, print a message
 	log.Println("No flags set. Use --all, --compile, --weather, or --daemon.")
@@ -368,7 +375,7 @@ func NewProcessCompileMain(mainDbPath, absoluteOutputDir, relativeBase, absolute
 }
 
 func newDaemonMode(daemonMode bool, absoluteNewMainDbPath, absoluteOutputDir string,
-	configFilePath, secretsFilePath, flightsDBPath string) {
+	configFilePath, secretsFilePath, flightsDBPath, originsYamlPath, locationsDBPath string) {
 	// If --daemon flag is set, run in an infinite loop
 	if daemonMode {
 		log.Println("Daemon mode is enabled. Running tasks in loop...")
@@ -390,7 +397,7 @@ func newDaemonMode(daemonMode bool, absoluteNewMainDbPath, absoluteOutputDir str
 				shouldLongSleep = true
 				// Monday, 3am, Start a completely new new_main.db
 				if currentDay == time.Monday && currentHour == wakeUpHour {
-					CreateNewMainDB(absoluteNewMainDbPath, configFilePath, secretsFilePath, flightsDBPath)
+					CreateNewMainDB(absoluteNewMainDbPath, configFilePath, secretsFilePath, flightsDBPath, originsYamlPath, locationsDBPath)
 					transfer = true
 				} else {
 					PeriodicDatabaseUpdate(absoluteNewMainDbPath, absoluteOutputDir)

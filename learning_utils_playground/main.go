@@ -25,10 +25,13 @@ import (
 
 // constants
 const (
-	mainDBPath      = "../data/compiled/main.db"
-	flightsDBPath   = "./testdata/flights.db"
+	mainDBPath    = "../data/compiled/main.db"
+	flightsDBPath = "./testdata/flights.db"
+	// locationsDBPath = "./testdata/locations.db"
+	airpotsDBPath   = "./testdata/airports.db"
 	configFilePath  = "../config/config.yaml"
 	secretsFilePath = "../ignore/secrets.yaml"
+	originsYamlPath = "../config/origins.yaml"
 )
 
 func main() {
@@ -42,7 +45,8 @@ func main() {
 	// needs the all_weather table to be  setup first
 	// data_management.RunCalculateWeather()
 
-	workflows.CreateNewMainDB(mainDBPath, configFilePath, secretsFilePath, flightsDBPath)
+	// workflows.CreateNewMainDB(mainDBPath, configFilePath, secretsFilePath, flightsDBPath)
+	workflows.RunFetchFlightPrices(originsYamlPath, flightsDBPath, airpotsDBPath)
 
 	// db, err := initDatabase("test.db")
 	// if err != nil {

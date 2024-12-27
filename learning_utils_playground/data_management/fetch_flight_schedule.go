@@ -246,7 +246,7 @@ func getFileDependencies(configFilePath, secretsFilePath, flightsDBPath string) 
 func FetchFlightSchedule(apiClient FlightAPIClient,
 	configFilePath, secretsFilePath, flightsDBPath string) error {
 	// start := time.Now()
-	profile := true
+	profile := false
 	if profile {
 		// Profiling setup
 		cleanup, err := test_utils.SetupProfiling("testdata/FetchFlightSchedule_cpu.prof", "testdata/FetchFlightSchedule_mem.prof")
@@ -255,9 +255,6 @@ func FetchFlightSchedule(apiClient FlightAPIClient,
 		}
 		defer cleanup()
 	}
-	// configFilePath := "../config/config.yaml"
-	// secretsFilePath := "../ignore/secrets.yaml"
-	// flightsDBPath := "testdata/flights.db"
 
 	configs, apiKey, db, err := getFileDependencies(configFilePath, secretsFilePath, flightsDBPath)
 	if err != nil {
@@ -273,20 +270,13 @@ func FetchFlightSchedule(apiClient FlightAPIClient,
 
 	apiClient.SetAPIKey(apiKey)
 
-	rawDBFlight := db_manager.RawDBFlight{}
-	_, err = db.Exec(rawDBFlight.CreateTableQuery())
+	err = db_manager.CreateTable(db, &db_manager.RawDBFlight{})
 	if err != nil {
-		log.Printf("Error creating table %s: %v", rawDBFlight.TableName(), err)
 		return err
 	}
 
 	// Generate dates using previously discussed CalculateWeekendRange function
 	departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate := time_utils.CalculateWeekendRange(1)
-	// Print the generated dates
-	// fmt.Println("Departure Start Date:", departureStartDate)
-	// fmt.Println("Departure End Date:", departureEndDate)
-	// fmt.Println("Arrival Start Date:", arrivalStartDate)
-	// fmt.Println("Arrival End Date:", arrivalEndDate)
 
 	queryList_depature, err := constructQueryList(configs.Airports, "Departure", departureStartDate, departureEndDate)
 	if err != nil {

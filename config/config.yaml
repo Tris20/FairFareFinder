@@ -1,8 +1,7 @@
 airports:
   - "BER"
-  - "GLA"
-  - "EDI"
-  - "MUC"
-  - "FRA"
-  - "SYD"
-
+  # - "GLA"
+  # - "EDI"
+  # - "MUC"
+  # - "FRA"
+  # - "SYD"
