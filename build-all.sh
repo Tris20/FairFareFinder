@@ -1,27 +1,27 @@
 #!/bin/bash
 
 # Set the base directory
-BASE_DIR=$(pwd)
+BASE_DIR=$(pwd)/utils
 
 # Find all main.go files and build them
-find "$BASE_DIR" -name "main.go" | while read -r MAIN_GO_FILE; do
+find "$BASE_DIR" -type f -name "main.go" | while read -r MAIN_GO_FILE; do
   # Get the directory of the main.go file
   PROJECT_DIR=$(dirname "$MAIN_GO_FILE")
   
-  echo "Building project in $PROJECT_DIR..."
+  echo "Found main.go in $PROJECT_DIR. Building..."
   
   # Change to the project directory
   cd "$PROJECT_DIR" || continue
   
-  # Build the main.go file
-  if go build -o main_binary main.go; then
-    echo "Build succeeded for $PROJECT_DIR"
+  # Run go build in the directory
+  if go build; then
+    echo "Build succeeded in $PROJECT_DIR"
   else
-    echo "Build failed for $PROJECT_DIR"
+    echo "Build failed in $PROJECT_DIR"
   fi
   
   # Return to the base directory
   cd "$BASE_DIR" || exit
 done
 
-echo "All projects processed."
+echo "All folders processed."
