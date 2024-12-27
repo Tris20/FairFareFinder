@@ -214,7 +214,7 @@ func main() {
 			transfer := false
 
 			// Generate new db every 6 hours: 3 = 3am; 9am; 3pm; 9pm.
-			if currentHour%6 == 0 {
+			if currentHour%6 == 3 {
 
 				// Monday, 3am, Start a completely new new_main.db
 				if currentDay == time.Monday && currentHour == 3 {
@@ -238,8 +238,11 @@ func main() {
 					log.Println("%sCOMPLETED: prices (flight prices)%s\n", green, reset)
 					runExecutableInDir(filepath.Join(absoluteBase, "fetch/weather"), "update-weather-db")
 					log.Println("%sCOMPLETED: update-weather-db (weather update)%s\n", green, reset)
-					runExecutableInDir(filepath.Join(absoluteBase, "fetch/accommocation/booking-com/get-properties"), "get-properties")
-					log.Println("%sCOMPLETED: get-properties (properties update)%s\n", green, reset)
+
+					// Temporarily paused due to high API cost. Existing values of accomodation raw db
+					// are used by by the locations compiler stage instead
+					//runExecutableInDir(filepath.Join(absoluteBase, "fetch/accommocation/booking-com/get-properties"), "get-properties")
+					//log.Println("%sCOMPLETED: get-properties (properties update)%s\n", green, reset)
 
 					//Calculate
 					runExecutableInDir(filepath.Join(absoluteBase, "process/calculate/weather"), "weather")
