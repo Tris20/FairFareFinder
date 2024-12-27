@@ -297,7 +297,7 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 		}
 		if duration_hour_dot_mins.Valid {
 			flight.DurationHourDotMins = duration_hour_dot_mins
-			log.Printf("Duration: %d hours for flight to %s", duration_hour_dot_mins.Float64, flight.DestinationCityName)
+			log.Printf("Duration: %.2f hours.mins for flight to %s", duration_hour_dot_mins.Float64, flight.DestinationCityName)
 		} else {
 			log.Printf("No valid duration found for flight to %s", flight.DestinationCityName)
 		}
