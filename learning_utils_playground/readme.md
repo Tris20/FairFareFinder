@@ -1,5 +1,9 @@
 # Steps to Reconstruct the database
 
+0. get the locations.db from tristan
+
+The database creation doesn't create the ascii_name column
+
 1. Generate all the raw databases
    This has to be done manually for now, but should be automated.
 

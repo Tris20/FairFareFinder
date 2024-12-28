@@ -10,23 +10,18 @@ import (
 	"github.com/schollz/progressbar/v3"
 )
 
-
-
-
-
 type WeatherDataBatch struct {
-    Airport     AirportInfo
-    WeatherInfo []WeatherData
+	Airport     AirportInfo
+	WeatherInfo []WeatherData
 }
-
 
 func main() {
 
-	 var batch []WeatherDataBatch
-    batchSize := 50
+	var batch []WeatherDataBatch
+	batchSize := 50
 	flightsDB, err := sql.Open("sqlite3", "../../../../data/raw/locations/locations.db")
-  
-if err != nil {
+
+	if err != nil {
 		log.Fatalf("Error opening locations.db: %v", err)
 	}
 	defer flightsDB.Close()
@@ -35,15 +30,14 @@ if err != nil {
 	weatherDBPath := "../../../../data/raw/weather/weather.db"
 	initWeatherDB(weatherDBPath)
 
+	// Open the database once
+	db, err := sql.Open("sqlite3", weatherDBPath)
+	if err != nil {
+		log.Fatalf("Failed to open the database: %v", err)
+	}
+	defer db.Close()
 
-    // Open the database once
-    db, err := sql.Open("sqlite3", weatherDBPath)
-    if err != nil {
-        log.Fatalf("Failed to open the database: %v", err)
-    }
-    defer db.Close()
-
-    // Fetch airport info with non-empty IATA codes
+	// Fetch airport info with non-empty IATA codes
 
 	airports, err := fetchAirports(flightsDB)
 	if err != nil {
@@ -61,38 +55,43 @@ if err != nil {
 	// Create a new progress bar
 	bar := progressbar.Default(int64(len(airports)))
 
-   for _, airport := range airports {
-        bar.Add(1)
-        fmt.Printf("\ncity: %s  country: %s\n", airport.City, airport.Country)
-        weatherInfo, err := fetchWeatherForCity(airport.City, airport.Country)
-        if err != nil {
-            log.Printf("Error fetching weather for %s: %v", airport.City, err)
-            continue
-        }
+	count := 0
+	for _, airport := range airports {
+		count++
+		if count > 2 {
+			continue
+		}
+		bar.Add(1)
+		fmt.Printf("\ncity: %s  country: %s\n", airport.City, airport.Country)
+		weatherInfo, err := fetchWeatherForCity(airport.City, airport.Country)
+		if err != nil {
+			log.Printf("Error fetching weather for %s: %v", airport.City, err)
+			continue
+		}
 
-        // Add to batch
-        batch = append(batch, WeatherDataBatch{
-            Airport:     airport,
-            WeatherInfo: weatherInfo,
-        })
+		// Add to batch
+		batch = append(batch, WeatherDataBatch{
+			Airport:     airport,
+			WeatherInfo: weatherInfo,
+		})
 
-        if len(batch) >= batchSize {
-            fmt.Println("Storing results...")
-            if err := storeWeatherDataBatch(db, batch); err != nil {
-                log.Printf("Error storing weather data for batch: %v", err)
-            }
-            batch = batch[:0] // Reset the batch
-            fmt.Println("Batch stored")
-        }
+		if len(batch) >= batchSize {
+			fmt.Println("Storing results...")
+			if err := storeWeatherDataBatch(db, batch); err != nil {
+				log.Printf("Error storing weather data for batch: %v", err)
+			}
+			batch = batch[:0] // Reset the batch
+			fmt.Println("Batch stored")
+		}
 
-        // Rate-limiting logic (adjust as needed)
-        time.Sleep(requestInterval)
-    }
+		// Rate-limiting logic (adjust as needed)
+		time.Sleep(requestInterval)
+	}
 
-    // Insert any remaining batch
-    if len(batch) > 0 {
-        if err := storeWeatherDataBatch(db, batch); err != nil {
-            log.Printf("Error storing weather data for final batch: %v", err)
-        }
-    }
+	// Insert any remaining batch
+	if len(batch) > 0 {
+		if err := storeWeatherDataBatch(db, batch); err != nil {
+			log.Printf("Error storing weather data for final batch: %v", err)
+		}
+	}
 }
