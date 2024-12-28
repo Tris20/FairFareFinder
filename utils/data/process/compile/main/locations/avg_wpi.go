@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
+
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/schollz/progressbar/v3"
 )
@@ -53,7 +54,7 @@ func UpdateAvgWPI(db *sql.DB) {
 				fmt.Printf("Failed to update avg_wpi for %s, %s: %v\n", pair.city, pair.country, err)
 			}
 		} else {
-			fmt.Printf("No valid average WPI found for %s, %s, setting avg_wpi to NULL\n", pair.city, pair.country)
+			// fmt.Printf("No valid average WPI found for %s, %s, setting avg_wpi to NULL\n", pair.city, pair.country)
 			_, err = db.Exec("UPDATE location SET avg_wpi = NULL WHERE LOWER(city) = LOWER(?) AND LOWER(country) = LOWER(?)", pair.city, pair.country)
 			if err != nil {
 				fmt.Printf("Failed to set avg_wpi to NULL for %s, %s: %v\n", pair.city, pair.country, err)

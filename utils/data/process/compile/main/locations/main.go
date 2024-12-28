@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
+
 	_ "github.com/mattn/go-sqlite3" // Import go-sqlite3 library
 	"github.com/schollz/progressbar/v3"
 )
@@ -60,10 +61,10 @@ func main() {
 		for airports.Next() {
 			var iata string
 			if err := airports.Scan(&iata); err != nil {
-				fmt.Println("Error scanning IATA code:", err)
+				// fmt.Println("Error scanning IATA code:", err)
 				continue
 			}
-			fmt.Printf("Fetched IATA: %s for city: %s\n", iata, c.CityAscii) // Debug output
+			// fmt.Printf("Fetched IATA: %s for city: %s\n", iata, c.CityAscii) // Debug output
 			c.IATACodes = append(c.IATACodes, iata)
 		}
 		if len(c.IATACodes) == 0 {
@@ -93,15 +94,26 @@ func main() {
 		progressbar.OptionSetItsString("cities"),
 	)
 
+	// create a transaction
+	tx, err := db.Begin()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
 	// Insert into the new database
 	for _, c := range cities {
 		query := "INSERT OR REPLACE INTO location (city, country, iata_1, iata_2, iata_3, iata_4, iata_5, iata_6, iata_7, avg_wpi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 		args := fillIATAs(c.CityAscii, c.Iso2, c.IATACodes)
-		if _, err := db.Exec(query, args...); err != nil {
+		if _, err = tx.Exec(query, args...); err != nil {
 			fmt.Println(err)
 			continue
 		}
 		bar.Add(1) // Increment the progress bar for each city processed
+	}
+	if err = tx.Commit(); err != nil {
+		fmt.Println(err)
+		return
 	}
 	bar.Finish() // End the progress bar when loop is complete
 
