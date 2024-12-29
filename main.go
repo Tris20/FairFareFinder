@@ -114,7 +114,6 @@ func SetupServer(db_path string, logger io.Writer) func() {
 	backend.Init(db, tmpl)
 
 	// Set up routes
-	http.HandleFunc("/", backend.IndexHandler)
 	http.HandleFunc("/filter", combinedCardsHandler)
 	http.HandleFunc("/update-slider-price", backend.UpdateSliderPriceHandler)
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./src/frontend/css/"))))
@@ -123,6 +122,17 @@ func SetupServer(db_path string, logger io.Writer) func() {
 	// Privacy policy route
 	http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html") // Make sure the path is correct
+	})
+
+	// Add this at the end, after all other routes. This is the default route
+	// that will be used if no other route matches the request
+	// rejects all requests that are not to the root
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/" {
+			http.NotFound(w, r)
+			return
+		}
+		backend.IndexHandler(w, r)
 	})
 
 	return cleanup
