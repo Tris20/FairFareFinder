@@ -13,6 +13,7 @@ import (
 	"strings"
 
 	"github.com/Tris20/FairFareFinder/src/backend"
+	"github.com/Tris20/FairFareFinder/src/backend/dev_tools"
 	"github.com/gorilla/sessions"
 	_ "github.com/mattn/go-sqlite3"
 	"gopkg.in/natefinch/lumberjack.v2"
@@ -93,6 +94,14 @@ func main() {
 	StartServer()
 }
 
+func mod(a, b int) int {
+	return a % b
+}
+
+func add(a, b int) int {
+	return a + b
+}
+
 func SetupServer(db_path string, logger io.Writer) func() {
 	// Set up lumberjack log file rotation config
 	log.SetOutput(logger)
@@ -109,10 +118,17 @@ func SetupServer(db_path string, logger io.Writer) func() {
 		}
 	}
 
-	tmpl = template.Must(template.ParseFiles(
+	funcMap := template.FuncMap{
+		"mod": mod,
+		"add": add,
+	}
+
+	tmpl = template.Must(template.New("cities.html").Funcs(funcMap).ParseFiles(
 		"./src/frontend/html/index.html",
 		"./src/frontend/html/table.html",
-		"./src/frontend/html/seo.html"))
+		"./src/frontend/html/seo.html",
+		"./src/frontend/html/cities.html",
+		"./src/frontend/html/all-cities.html")) // Add all-cities.html template
 
 	backend.Init(db, tmpl)
 
@@ -127,6 +143,8 @@ func SetupServer(db_path string, logger io.Writer) func() {
 	http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html") // Make sure the path is correct
 	})
+	http.HandleFunc("/all-cities", dev_tools.AllCitiesHandler(db, tmpl))
+	http.HandleFunc("/load-more-cities", dev_tools.LoadMoreCities(tmpl))
 
 	return cleanup
 }
