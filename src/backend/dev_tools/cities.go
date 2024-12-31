@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"sync"
 )
 
 type City struct {
@@ -13,18 +14,18 @@ type City struct {
 }
 
 var (
-	cityChannel = make(chan []City)
-	doneChannel = make(chan bool)
+	mu           sync.Mutex
+	cityChannels = make(map[string]chan []City)
+	doneChannels = make(map[string]chan bool)
 )
 
-func LoadCitiesInBatches(db *sql.DB) {
-	// fmt.Println("go routine LoadCitiesInBatches")
+func LoadCitiesInBatches(db *sql.DB, clientID string) {
 	offset := 0
 	for {
 		rows, err := db.Query("SELECT city, image_1 FROM location ORDER BY city LIMIT 10 OFFSET $1", offset)
 		if err != nil {
 			fmt.Println("error querying cities")
-			close(cityChannel)
+			close(cityChannels[clientID])
 			return
 		}
 		defer rows.Close()
@@ -36,7 +37,7 @@ func LoadCitiesInBatches(db *sql.DB) {
 			if err := rows.Scan(&city.Name, &imageURL); err != nil {
 				fmt.Println(err)
 				fmt.Println("error scanning city")
-				close(cityChannel)
+				close(cityChannels[clientID])
 				return
 			}
 			if imageURL.Valid {
@@ -48,31 +49,27 @@ func LoadCitiesInBatches(db *sql.DB) {
 		}
 
 		if len(batch) == 0 {
-			close(cityChannel)
+			close(cityChannels[clientID])
 			return
 		}
 
-		cityChannel <- batch
+		cityChannels[clientID] <- batch
 		offset += 10
-		// fmt.Println("added batch to channel")
 	}
 }
 
-func GetNextCitiesBatch() []City {
-	// fmt.Println("GetNextCitiesBatch")
+func GetNextCitiesBatch(clientID string) []City {
 	select {
-	case batch := <-cityChannel:
+	case batch := <-cityChannels[clientID]:
 		return batch
-	case <-doneChannel:
+	case <-doneChannels[clientID]:
 		return nil
 	}
 }
 
-func LoadMoreCities(tmpl *template.Template) http.HandlerFunc {
-	// fmt.Println("LoadMoreCities")
+func LoadMoreCities(tmpl *template.Template, clientID string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// fmt.Println("LoadMoreCities serving request")
-		cities := GetNextCitiesBatch()
+		cities := GetNextCitiesBatch(clientID)
 		if cities == nil {
 			http.Error(w, "No more cities to load", http.StatusNoContent)
 			return
@@ -83,14 +80,18 @@ func LoadMoreCities(tmpl *template.Template) http.HandlerFunc {
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
-		// fmt.Println("LoadMoreCities served request")
 	}
 }
 
-func AllCitiesHandler(db *sql.DB, tmpl *template.Template) http.HandlerFunc {
+func AllCitiesHandler(db *sql.DB, tmpl *template.Template, clientID string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		go LoadCitiesInBatches(db)                             // Start the Go routine here
-		err := tmpl.ExecuteTemplate(w, "all-cities.html", nil) // Serve the all-cities.html template
+		mu.Lock()
+		cityChannels[clientID] = make(chan []City)
+		doneChannels[clientID] = make(chan bool)
+		mu.Unlock()
+
+		go LoadCitiesInBatches(db, clientID)
+		err := tmpl.ExecuteTemplate(w, "all-cities.html", nil)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}

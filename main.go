@@ -143,8 +143,16 @@ func SetupServer(db_path string, logger io.Writer) func() {
 	http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html") // Make sure the path is correct
 	})
-	http.HandleFunc("/all-cities", dev_tools.AllCitiesHandler(db, tmpl))
-	http.HandleFunc("/load-more-cities", dev_tools.LoadMoreCities(tmpl))
+	http.HandleFunc("/all-cities", func(w http.ResponseWriter, r *http.Request) {
+		session, _ := store.Get(r, "session")
+		clientID := session.ID
+		dev_tools.AllCitiesHandler(db, tmpl, clientID)(w, r)
+	})
+	http.HandleFunc("/load-more-cities", func(w http.ResponseWriter, r *http.Request) {
+		session, _ := store.Get(r, "session")
+		clientID := session.ID
+		dev_tools.LoadMoreCities(tmpl, clientID)(w, r)
+	})
 
 	return cleanup
 }
