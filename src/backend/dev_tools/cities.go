@@ -97,3 +97,30 @@ func AllCitiesHandler(db *sql.DB, tmpl *template.Template, clientID string) http
 		}
 	}
 }
+
+func removeDuplicateCities(db *sql.DB) error {
+	query := `
+		DELETE FROM location
+		WHERE rowid NOT IN (
+			SELECT MAX(rowid)
+			FROM location
+			GROUP BY city
+		)
+	`
+	_, err := db.Exec(query)
+	if err != nil {
+		return fmt.Errorf("error removing duplicate cities: %v", err)
+	}
+	return nil
+}
+
+func RemoveDuplicateCitiesHandler(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		err := removeDuplicateCities(db)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		w.Write([]byte("Duplicate cities removed"))
+	}
+}

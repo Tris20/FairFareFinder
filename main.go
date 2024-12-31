@@ -153,6 +153,7 @@ func SetupServer(db_path string, logger io.Writer) func() {
 		clientID := session.ID
 		dev_tools.LoadMoreCities(tmpl, clientID)(w, r)
 	})
+	http.HandleFunc("/dev-tools-remove-duplicate-cities", dev_tools.RemoveDuplicateCitiesHandler(db))
 
 	return cleanup
 }
