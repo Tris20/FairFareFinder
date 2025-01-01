@@ -30,6 +30,13 @@ type CompiledWeather struct {
 	AvgDaytimeWPI  float64
 }
 
+func fixWeatherIconURL(url string) string {
+	if strings.HasSuffix(url, "n.png") {
+		return strings.Replace(url, "n.png", "d.png", 1)
+	}
+	return url
+}
+
 func main() {
 	db, err := sql.Open("sqlite3", "../../../../../../data/raw/weather/weather.db")
 	if err != nil {
@@ -63,7 +70,7 @@ func main() {
 			Country:        wd.CountryCode,
 			Date:           strings.Split(wd.Date, " ")[0],
 			AvgDaytimeTemp: formattedTemp,
-			WeatherIcon:    wd.WeatherIconURL,
+			WeatherIcon:    fixWeatherIconURL(wd.WeatherIconURL),
 			GoogleURL:      wd.GoogleWeatherLink,
 			AvgDaytimeWPI:  formattedWPI,
 		})
