@@ -217,7 +217,7 @@ func main() {
 			if currentHour%6 == 3 {
 
 				// Monday, 3am, Start a completely new new_main.db
-				if currentDay == time.Saturday && currentHour == 12 {
+				if currentDay == time.Monday && currentHour == 3 {
 
 					// Backup existing database if it exists
 					backupDatabase(absoluteNewMainDbPath, absoluteOutputDir)

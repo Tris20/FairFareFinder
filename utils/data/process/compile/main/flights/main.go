@@ -20,6 +20,7 @@ type SkyScannerPrice struct {
 	ThisWeekend             sql.NullFloat64
 	NextWeekend             sql.NullFloat64
 	SkyScannerURL           string
+  SkyscannerDuration      sql.NullInt64
 }
 
 func main() {
@@ -40,7 +41,7 @@ func main() {
 
 	for rows.Next() {
 		var sp SkyScannerPrice
-		err = rows.Scan(&sp.OriginCity, &sp.OriginCountry, &sp.OriginIATA, &sp.OriginSkyScannerID, &sp.DestinationCity, &sp.DestinationCountry, &sp.DestinationIATA, &sp.DestinationSkyScannerID, &sp.ThisWeekend, &sp.NextWeekend)
+		err = rows.Scan(&sp.OriginCity, &sp.OriginCountry, &sp.OriginIATA, &sp.OriginSkyScannerID, &sp.DestinationCity, &sp.DestinationCountry, &sp.DestinationIATA, &sp.DestinationSkyScannerID, &sp.ThisWeekend, &sp.NextWeekend, &sp.SkyscannerDuration )
 		if err != nil {
 			log.Fatal(err)
 		}
