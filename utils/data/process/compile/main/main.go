@@ -31,26 +31,39 @@ NOTE: Fetch and Compile Properties, gest the prices of the nearest wednesday to 
 */
 
 // Helper function to run a command in a specific directory
+
 func runExecutableInDir(dir string, executable string) {
+	// Update the log file for the current day
+	if err := updateLogFile(); err != nil {
+		log.Printf("Error updating log file: %v", err)
+	}
+
 	// Change to the specified directory
 	err := os.Chdir(dir)
 	if err != nil {
 		log.Fatalf("Failed to change directory to %s: %v", dir, err)
 	}
-	log.Printf("Changed to directory: %s\n", dir)
+	log.Printf("Changed to directory: %s", dir)
 
-	// Execute the executable
+	// Prepare the command to run
 	cmd := exec.Command("./" + executable)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
 
-	log.Printf("Running executable: %s\n", executable)
+	// Redirect output to the log file
+	var outputBuf bytes.Buffer
+	multiWriter := io.MultiWriter(&outputBuf, currentLogFile)
+
+	cmd.Stdout = multiWriter
+	cmd.Stderr = multiWriter
+
+	log.Printf("Running executable: %s", executable)
 	err = cmd.Run()
 	if err != nil {
 		log.Fatalf("Failed to run executable %s in directory %s: %v", executable, dir, err)
+		log.Printf("Output:\n%s", outputBuf.String())
+	} else {
+		log.Printf("Successfully executed: %s", executable)
+		log.Printf("Output:\n%s", outputBuf.String())
 	}
-
-	log.Printf("Successfully executed: %s\n", executable)
 }
 
 // Helper function to get the current weekday and hour
@@ -65,15 +78,15 @@ var currentLogFile *os.File
 var currentLogDate string
 
 // Generate the log file path based on the current date (year/month/output.log)
+
 func getDailyLogFilePath() string {
 	currentTime := time.Now()
-	year := currentTime.Format("2006")       // Year in YYYY format
-	month := currentTime.Format("01")        // Month in MM format
-	fileName := currentTime.Format("02.log") // Log file name as DD.log
+	year := currentTime.Format("2006")
+	month := currentTime.Format("01")
+	fileName := currentTime.Format("02.log") // Log file as DD.log
 	return filepath.Join("logs", year, month, fileName)
 }
 
-// Ensure log directories exist for year and month
 func ensureLogDirExists(logFilePath string) error {
 	dir := filepath.Dir(logFilePath)
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
@@ -84,27 +97,31 @@ func ensureLogDirExists(logFilePath string) error {
 	return nil
 }
 
-// Function to update the log file if a new day has started
 func updateLogFile() error {
 	newLogDate := time.Now().Format("2006-01-02") // YYYY-MM-DD
 	if newLogDate != currentLogDate {
+		// Close existing log file if open
 		if currentLogFile != nil {
 			currentLogFile.Close()
 		}
 
+		// Generate new log file path
 		logFilePath := getDailyLogFilePath()
 		if err := ensureLogDirExists(logFilePath); err != nil {
 			return err
 		}
 
+		// Open new log file
 		var err error
 		currentLogFile, err = os.OpenFile(logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 		if err != nil {
 			return fmt.Errorf("failed to open log file %s: %v", logFilePath, err)
 		}
 
+		// Set up multi-writer for stdout and log file
 		multiWriter := io.MultiWriter(os.Stdout, currentLogFile)
 		log.SetOutput(multiWriter)
+
 		currentLogDate = newLogDate
 	}
 	return nil
