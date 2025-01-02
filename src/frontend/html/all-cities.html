@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>All Cities</title>
+        
+        <script src="https://unpkg.com/htmx.org"></script>
+        <!-- Link to the CSS files located in the 'css' folder -->
+        <!-- <link rel="stylesheet" href="/css/resetCSS.css" /> -->
+        <!-- <link rel="stylesheet" href="/css/htmxFilter.css" /> -->
+        <!-- <link rel="stylesheet" href="/css/styles.css" /> -->
+        <!-- <link rel="stylesheet" href="/css/tableStyles.css" /> -->
+        <!-- <link rel="stylesheet" href="/css/mobileStyles.css" /> -->
+        <!-- <link rel="stylesheet" href="/css/formStyles.css" /> -->
+        <!-- <link rel="stylesheet" href="/css/modal.css" /> -->
+        <link rel="stylesheet" href="/css/cities.css">
+    </head>
+    <body>
+        <!-- <div style="position: fixed; top: 0; width: 100%; background-color: white; z-index: 1000;">
+            <button hx-get="/load-more-cities" hx-trigger="click" hx-target="#cities-container" hx-swap="beforeend">
+                Load More Cities
+            </button>
+        </div> -->
+        <div style="margin-top: 50px;">
+            <table class="all-cities-table" id="cities-container">
+                <!-- Rows of cities will be appended here -->
+            </table>
+        </div>
+        <div 
+            hx-get="/load-more-cities" 
+            hx-trigger="every 10ms" 
+            hx-target="#cities-container" 
+            hx-swap="beforeend" 
+            hx-on="htmx:afterRequest: if (event.detail.xhr.status !== 200) this.remove()">
+        </div>
+    </body>
+</html>
