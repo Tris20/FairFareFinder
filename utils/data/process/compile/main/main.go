@@ -1,6 +1,7 @@
 package main
 
 import (
+	//	"bufio"
 	"bytes"
 	"flag"
 	"fmt"
@@ -45,25 +46,77 @@ func runExecutableInDir(dir string, executable string) {
 	}
 	log.Printf("Changed to directory: %s", dir)
 
-	// Prepare the command to run
+	// Prepare the command
 	cmd := exec.Command("./" + executable)
 
-	// Redirect output to the log file
-	var outputBuf bytes.Buffer
-	multiWriter := io.MultiWriter(&outputBuf, currentLogFile)
-
-	cmd.Stdout = multiWriter
-	cmd.Stderr = multiWriter
-
-	log.Printf("Running executable: %s", executable)
-	err = cmd.Run()
+	// Create pipes for real-time output
+	stdoutPipe, err := cmd.StdoutPipe()
 	if err != nil {
-		log.Fatalf("Failed to run executable %s in directory %s: %v", executable, dir, err)
-		log.Printf("Output:\n%s", outputBuf.String())
+		log.Fatalf("Failed to create stdout pipe: %v", err)
+	}
+	stderrPipe, err := cmd.StderrPipe()
+	if err != nil {
+		log.Fatalf("Failed to create stderr pipe: %v", err)
+	}
+
+	// Start the command
+	log.Printf("Running executable: %s", executable)
+	if err := cmd.Start(); err != nil {
+		log.Fatalf("Failed to start executable %s: %v", executable, err)
+	}
+
+	// Process streams without buffering (character or chunk-based)
+	go processStreamRealTime(stdoutPipe, "stdout")
+	go processStreamRealTime(stderrPipe, "stderr")
+
+	// Wait for the command to complete
+	if err := cmd.Wait(); err != nil {
+		log.Printf("Executable %s finished with error: %v", executable, err)
 	} else {
 		log.Printf("Successfully executed: %s", executable)
-		log.Printf("Output:\n%s", outputBuf.String())
 	}
+}
+
+// Process a stream in real time, handling carriage returns
+func processStreamRealTime(stream io.ReadCloser, prefix string) {
+	defer stream.Close()
+	buf := make([]byte, 1024) // Buffer for reading chunks
+	for {
+		n, err := stream.Read(buf)
+		if n > 0 {
+			output := string(buf[:n])
+			lines := processCarriageReturns(output) // Handle carriage returns
+			for _, line := range lines {
+				log.Printf("[%s] %s", prefix, line)
+			}
+		}
+		if err != nil {
+			if err != io.EOF {
+				log.Printf("Error reading %s stream: %v", prefix, err)
+			}
+			break
+		}
+	}
+}
+
+// Process text to handle carriage returns
+func processCarriageReturns(output string) []string {
+	lines := []string{}
+	currentLine := ""
+	for _, char := range output {
+		if char == '\r' { // Carriage return: reset current line
+			currentLine = ""
+		} else if char == '\n' { // Newline: add current line to results
+			lines = append(lines, currentLine)
+			currentLine = ""
+		} else {
+			currentLine += string(char)
+		}
+	}
+	if currentLine != "" {
+		lines = append(lines, currentLine)
+	}
+	return lines
 }
 
 // Helper function to get the current weekday and hour
@@ -100,29 +153,31 @@ func ensureLogDirExists(logFilePath string) error {
 func updateLogFile() error {
 	newLogDate := time.Now().Format("2006-01-02") // YYYY-MM-DD
 	if newLogDate != currentLogDate {
-		// Close existing log file if open
+		// Close the existing log file if open
 		if currentLogFile != nil {
 			currentLogFile.Close()
 		}
 
-		// Generate new log file path
+		// Generate the new log file path
 		logFilePath := getDailyLogFilePath()
 		if err := ensureLogDirExists(logFilePath); err != nil {
 			return err
 		}
 
-		// Open new log file
+		// Open the new log file
 		var err error
 		currentLogFile, err = os.OpenFile(logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 		if err != nil {
 			return fmt.Errorf("failed to open log file %s: %v", logFilePath, err)
 		}
 
-		// Set up multi-writer for stdout and log file
+		// Set the log output to both the log file and console
 		multiWriter := io.MultiWriter(os.Stdout, currentLogFile)
 		log.SetOutput(multiWriter)
 
+		// Update the current log date
 		currentLogDate = newLogDate
+		log.Printf("Log file updated: %s", logFilePath)
 	}
 	return nil
 }
@@ -231,7 +286,7 @@ func main() {
 			transfer := false
 
 			// Generate new db every 6 hours: 3 = 3am; 9am; 3pm; 9pm.
-			if currentHour%6 == 3 {
+			if currentHour%6 == 1 {
 
 				// Monday, 3am, Start a completely new new_main.db
 				if currentDay == time.Monday && currentHour == 3 {
