@@ -278,16 +278,25 @@ func main() {
 		log.Println("Daemon mode is enabled. Running tasks in loop...")
 		// Infinite loop for daemon mode
 		for {
-			if err := updateLogFile(); err != nil {
-				log.Printf("Error updating log file: %v", err)
-			}
 			// Get current day and time
 			currentDay, currentHour := getCurrentTime()
 			transfer := false
 
-			// Generate new db every 6 hours: 3 = 3am; 9am; 3pm; 9pm.
-			if currentHour%6 == 3 {
+			log.Printf("Daemon is alive: Current Hour: %d, Current Day: %s", currentHour, currentDay)
+			// Recover from panics
+			defer func() {
+				if r := recover(); r != nil {
+					log.Printf("Recovered from panic: %v", r)
+				}
+			}()
 
+			if err := updateLogFile(); err != nil {
+				log.Printf("Error updating log file: %v", err)
+			}
+
+			// Generate new db every 6 hours: 3 = 3am; 9am; 3pm; 9pm.
+			if currentHour%6 == 1 {
+				startTime := time.Now()
 				// Monday, 3am, Start a completely new new_main.db
 				if currentDay == time.Monday && currentHour == 3 {
 
@@ -376,8 +385,23 @@ func main() {
 					transfer = false
 				}
 
-				// Sleep for a specified time interval before checking again
-				time.Sleep(50 * time.Minute) // Check every 10 minutes in daemon mode
+				// Calculate elapsed time
+				elapsed := time.Since(startTime)
+
+				// Calculate the remaining sleep duration
+				intervalDuration := 5*time.Hour + 55*time.Minute
+				remainingSleep := intervalDuration - elapsed
+
+				if remainingSleep > 5 {
+					log.Printf("Tasks completed in %s. Sleeping for %s until the next interval...", elapsed, remainingSleep)
+					time.Sleep(remainingSleep)
+				} else {
+					log.Printf("Tasks took longer than the interval (%s). Skipping sleep.", elapsed)
+				}
+			} else {
+				// Sleep for a short interval to avoid busy waiting
+				log.Println("No tasks to run. Sleeping for 3 minutes...")
+				time.Sleep(3 * time.Minute)
 			}
 		}
 	}
