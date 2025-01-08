@@ -1,11 +1,9 @@
 <!doctype html>
-
-<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Custom Dropdown List</title>
+    <title>Custom Dropdown with Button</title>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
@@ -16,6 +14,9 @@
         placeholder="Select a European capital"
         autocomplete="off"
       />
+      <button id="dropdown-btn" class="dropdown-btn" type="button">
+        <span class="caret">▼</span>
+      </button>
       <ul id="custom-dropdown-list" class="dropdown-list hidden"></ul>
     </div>
 
@@ -66,6 +67,7 @@
 
       const input = document.getElementById("custom-dropdown-input");
       const dropdown = document.getElementById("custom-dropdown-list");
+      const button = document.getElementById("dropdown-btn");
 
       // Populate the list
       function populateDropdown(filteredCities) {
@@ -75,14 +77,14 @@
           li.textContent = city;
           li.classList.add("dropdown-item");
           li.addEventListener("click", () => {
-            input.value = city;
-            dropdown.classList.add("hidden");
+            input.value = city; // Set input value
+            dropdown.classList.add("hidden"); // Hide dropdown
           });
           dropdown.appendChild(li);
         });
       }
 
-      // Show dropdown on input
+      // Show dropdown when typing
       input.addEventListener("input", () => {
         const value = input.value.toLowerCase();
         const filteredCities = cities.filter((city) =>
@@ -92,12 +94,22 @@
         dropdown.classList.remove("hidden");
       });
 
+      // Show all options when the button is clicked
+      button.addEventListener("click", () => {
+        if (dropdown.classList.contains("hidden")) {
+          populateDropdown(cities); // Populate with all cities
+          dropdown.classList.remove("hidden"); // Show dropdown
+        } else {
+          dropdown.classList.add("hidden"); // Hide dropdown if already visible
+        }
+      });
+
       // Hide dropdown on blur
       input.addEventListener("blur", () => {
         setTimeout(() => dropdown.classList.add("hidden"), 200);
       });
 
-      // Initial population of the list
+      // Initial population of the list (optional)
       populateDropdown(cities);
     </script>
   </body>

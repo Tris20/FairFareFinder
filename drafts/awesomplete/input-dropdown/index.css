@@ -1,8 +1,11 @@
 /* Container styling */
 .dropdown-container {
   position: relative;
-  width: 300px;
   margin: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 300px;
 }
 
 /* Input field styling */
@@ -46,5 +49,28 @@
 }
 
 .dropdown-item:hover {
-  background-color: #f0f0f0;
+  background-color: #2f686d;
+}
+
+/* Button styling */
+.dropdown-btn {
+  padding: 8px;
+  background-color: #3fa89d;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* Caret styling */
+.caret {
+  font-size: 12px;
+}
+
+/* Hidden class to toggle dropdown visibility */
+.hidden {
+  display: none;
 }
