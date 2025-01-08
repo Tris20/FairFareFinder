@@ -2,12 +2,12 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"html/template"
 	"io"
 	"log"
-
 	"net/http"
 	"strconv"
 	"strings"
@@ -112,11 +112,20 @@ func SetupServer(db_path string, logger io.Writer) func() {
 			db.Close()
 		}
 	}
-
-	tmpl = template.Must(template.ParseFiles(
+	// Register custom functions for templates
+	tmpl = template.Must(template.New("").Funcs(template.FuncMap{
+		"toJson": func(v interface{}) (string, error) {
+			a, err := json.Marshal(v)
+			if err != nil {
+				return "", err
+			}
+			return string(a), nil
+		},
+	}).ParseFiles(
 		"./src/frontend/html/index.html",
 		"./src/frontend/html/table.html",
-		"./src/frontend/html/seo.html"))
+		"./src/frontend/html/seo.html",
+	))
 
 	backend.Init(db, tmpl)
 
@@ -127,12 +136,13 @@ func SetupServer(db_path string, logger io.Writer) func() {
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./src/frontend/css/"))))
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./src/frontend/images"))))
 	http.Handle("/location-images/", http.StripPrefix("/location-images/", http.FileServer(http.Dir("./ignore/location-images"))))
+
+	http.HandleFunc("/city-country-pairs", backend.CityCountryHandler)
 	// Privacy policy route
 	http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html") // Make sure the path is correct
 	})
 
-	http.HandleFunc("/autocomplete-cities", backend.AutocompleteCitiesHandler)
 	return cleanup
 }
 

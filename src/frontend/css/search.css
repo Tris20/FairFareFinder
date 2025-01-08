@@ -1,143 +1,71 @@
-.awesomplete {
-  position: relative;
-  display: inline-block;
-}
-
-.awesomplete ul {
-  position: absolute;
-  left: 0;
-  right: 0;
-  background-color: #3fa89d; /* Your desired background color */
-  color: white;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  max-height: 200px;
-  overflow-y: auto;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  z-index: 1000;
-}
-
-.awesomplete li {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.awesomplete li:hover,
-.awesomplete li[aria-selected="true"] {
-  background-color: #2d8774; /* Slightly darker green for hover effect */
-}
-
-/* Style the input field */
-input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-/* Style the dropdown (only works in some browsers) */
-datalist option {
-  background-color: #3fa89d; /* Your desired background color */
-  color: white;
-  padding: 8px;
-}
-
-/* Style the dropdown container */
-.origin-search {
-  position: relative;
-  width: 100%;
-}
-
-/* Style the input field */
-.origin-search input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-/* Style the dropdown suggestions */
-.origin-search datalist {
-  position: absolute;
-  z-index: 1000;
-  width: 100%;
-  max-height: 200px;
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #3fa89d; /* Your desired background color */
-  overflow-y: auto;
-}
-
-/* Style each suggestion */
-.suggestions-list li {
-  padding: 8px;
-  cursor: pointer;
-  color: white;
-}
-
-.suggestions-list li:hover {
-  background-color: #2d8774; /* Slightly darker green for hover effect */
-}
-
 /* Container styling */
-.dropdown {
+.dropdown-container {
   position: relative;
+  margin: 20px;
   display: flex;
   align-items: center;
+  gap: 5px;
+  width: 300px;
 }
 
-/* Input styling */
+/* Input field styling */
 .dropdown-input {
   width: 100%;
-  padding: 10px;
-  border: 2px solid #3fa89d;
-  border-radius: 4px 0 0 4px;
-  font-size: 16px;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-/* Dropdown button styling */
-.dropdown-btn {
-  padding: 10px;
+/* Dropdown list */
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-top: none;
   background-color: #3fa89d;
-  color: white;
-  border: none;
-  border-radius: 0 4px 4px 0;
+  list-style: none;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+/* Hidden class to toggle dropdown visibility */
+.hidden {
+  display: none;
+}
+
+/* Dropdown list items */
+.dropdown-item {
+  padding: 10px;
   cursor: pointer;
-  font-size: 16px;
+  transition: background-color 0.2s ease;
 }
 
-.dropdown-btn:hover {
-  background-color: #2d8774;
+.dropdown-item:hover {
+  background-color: #2f686d;
 }
 
-.awesomplete > ul {
-  border-radius: 0.3em;
-  margin: 0.2em 0 0;
-  background: hsla(0, 0%, 100%, 0.9);
-  /*! background: linear-gradient(to bottom right, #3fa89d, hsla(0,0%,100%,.8)); */
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  box-shadow: 0.05em 0.2em 0.6em rgba(0, 0, 0, 0.2);
-  text-shadow: none;
+/* Button styling */
+.dropdown-btn {
+  padding: 8px;
   background-color: #3fa89d;
-  color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
 }
 
-.awesomplete mark {
-  background: hsla(204.9, 40.2%, 40%, 0);
-}
-
-.awesomplete li:hover mark {
-  background: hsla(68.6, 100%, 98.6%, 0);
-}
-
-.awesomplete > ul > li[aria-selected="true"] {
-  background: hsla(204.9, 40.2%, 40%, 0);
-  color: white;
+/* Caret styling */
+.caret {
+  font-size: 12px;
 }

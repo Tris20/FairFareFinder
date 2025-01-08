@@ -21,16 +21,14 @@ func Init(dbConn *sql.DB, templates *template.Template) {
 
 // IndexHandler serves the home page
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	// Check if cityCountryPairs is already loaded in memory
-	if len(cityCountryPairs) == 0 {
-		log.Println("City-country pairs are not loaded; loading from database.")
-		LoadCityCountryPairs(db) // Ensure cityCountryPairs is populated
-	}
+	// Ensure cityCountryPairs is loaded
+	LoadCityCountryPairs(db) // sync.Once ensures it only runs once
 
-	// Pass the city-country pairs to the template
-	if err := tmpl.ExecuteTemplate(w, "index.html", map[string]interface{}{
-		"CityCountryPairs": cityCountryPairs,
-	}); err != nil {
+	// Pass city-country pairs to the template
+	err := tmpl.ExecuteTemplate(w, "index.html", map[string]interface{}{
+		"CityCountryPairs": GetCityCountryPairs(), // Use a getter for consistency
+	})
+	if err != nil {
 		log.Printf("Error executing template: %v", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}

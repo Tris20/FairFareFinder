@@ -9,16 +9,6 @@
 
     <!-- Link to the CSS files located in the 'css' folder -->
     <link rel="stylesheet" href="/css/resetCSS.css" />
-
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/awesomplete@1.1.5/awesomplete.css"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/awesomplete@1.1.5/awesomplete.min.js"
-      async
-    ></script>
-
     <link rel="stylesheet" href="/css/htmxFilter.css" />
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/tableStyles.css" />
@@ -37,8 +27,6 @@
       rel="stylesheet"
     />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-
-    <link rel="stylesheet" href="awesomplete.css" />
   </head>
 
   <div id="page-banner">
@@ -80,19 +68,19 @@
           <div id="city-rows" style="width: 100%">
             <div class="form-group city-row">
               <label for="city-search">From:</label>
-              <div class="origin-search">
-                <div class="dropdown">
-                  <input
-                    type="text"
-                    id="city-search"
-                    name="city[]"
-                    class="dropdown-input awesomplete"
-                    placeholder="Search for a city"
-                    autocomplete="off"
-                    data-list="{{ range .CityCountryPairs }}{{ .City }}, {{ .Country }},{{ end }}"
-                  />
-                  <button type="button" class="dropdown-btn">▼</button>
-                </div>
+
+              <div class="dropdown-container">
+                <input
+                  id="city-search"
+                  class="dropdown-input"
+                  name="city[]"
+                  placeholder="Search for a city"
+                  autocomplete="off"
+                />
+                <button id="dropdown-btn" class="dropdown-btn" type="button">
+                  <span class="caret">▼</span>
+                </button>
+                <ul id="city-list" class="dropdown-list hidden"></ul>
               </div>
               <label for="priceOutput0">Flights</label>
               <output id="priceOutput0" class="output-range">€399.00</output>
@@ -177,7 +165,9 @@
         </footer>
       </div>
     </div>
-
+    <script>
+      const cities = {{ .CityCountryPairs | toJson }};
+    </script>
     <script>
       let hasFadedIn = false; // Flag to check if the table has already faded in
       let additionalCityCount = 0;
@@ -244,41 +234,41 @@
           const div = document.createElement("div");
           div.className = "form-group city-row";
           div.innerHTML = `
-       <button type="button" class="remove-city-button">-</button>
-              <select name="logical_operator[]">
-                <option value="AND">AND</option>
-                <option value="OR">OR</option>
-              </select>
-              <label>City:</label>
-              <select name="city[]">
-                      <option value="Berlin" selected>Berlin</option>
-                      <option value="Frankfurt">Frankfurt</option>
-                      <option value="Munich">Munich</option>
-                      <option value="Glasgow">Glasgow</option>
-                      <option value="Edinburgh">Edinburgh</option>
-                      <option value="Sydney">Sydney</option>
-              </select>
-              <label for="priceOutput${rowCount}"></label>
-              <output id="priceOutput${rowCount}" class="output-range">€399.00</output>
-              <input
-                type="range"
-                id="combinedPrice-slider${rowCount}"
-                name="maxPriceLinear[]"
-                min="0"
-                max="100"
-                step="1"
-                value="49"
-                class="price-slider"
-                hx-get="/update-slider-price"
-                hx-target="#priceOutput${rowCount}"
-                hx-trigger="input"
-                hx-push-url="false"
-                hx-preserve="false"
-                hx-include="#combinedPrice-slider${rowCount}"
-                autocomplete="off"
-              />
+                             <button type="button" class="remove-city-button">-</button>
+                                    <select name="logical_operator[]">
+                                      <option value="AND">AND</option>
+                                      <option value="OR">OR</option>
+                                    </select>
+                                    <label>City:</label>
+                                    <select name="city[]">
+                                            <option value="Berlin" selected>Berlin</option>
+                                            <option value="Frankfurt">Frankfurt</option>
+                                            <option value="Munich">Munich</option>
+                                            <option value="Glasgow">Glasgow</option>
+                                            <option value="Edinburgh">Edinburgh</option>
+                                            <option value="Sydney">Sydney</option>
+                                    </select>
+                                    <label for="priceOutput${rowCount}"></label>
+                                    <output id="priceOutput${rowCount}" class="output-range">€399.00</output>
+                                    <input
+                                      type="range"
+                                      id="combinedPrice-slider${rowCount}"
+                                      name="maxPriceLinear[]"
+                                      min="0"
+                                      max="100"
+                                      step="1"
+                                      value="49"
+                                      class="price-slider"
+                                      hx-get="/update-slider-price"
+                                      hx-target="#priceOutput${rowCount}"
+                                      hx-trigger="input"
+                                      hx-push-url="false"
+                                      hx-preserve="false"
+                                      hx-include="#combinedPrice-slider${rowCount}"
+                                      autocomplete="off"
+                                    />
 
-            `;
+                                  `;
           cityRows.appendChild(div);
           htmx.process(div);
           rowCount++;
@@ -328,65 +318,71 @@
         }
       }
 
-      document
-        .getElementById("modal-large-card")
-        .addEventListener("click", (event) => {
-          const modalContent = document.querySelector(".modal-content");
-          if (!modalContent.contains(event.target)) {
-            closeModal();
-          }
-        });
-
       // Search bar for Origin Cities
 
-      document.addEventListener("DOMContentLoaded", function () {
+      // JavaScript for dropdown handling
+
+      document.addEventListener("DOMContentLoaded", () => {
         const input = document.getElementById("city-search");
-        const dropdownBtn = document.querySelector(".dropdown-btn");
+        const dropdown = document.getElementById("city-list");
+        const button = document.getElementById("dropdown-btn");
+        let cities = [];
 
-        // Initialize Awesomplete
-        const comboplete = new Awesomplete(input, {
-          minChars: 0, // Show suggestions even when no characters are typed
-          autoFirst: true, // Automatically highlight the first suggestion
-        });
+        // Populate the list
+        function populateDropdown(filteredCities) {
+          dropdown.innerHTML = ""; // Clear current list
+          filteredCities.forEach(({ city, country }) => {
+            const li = document.createElement("li");
+            li.textContent = `${city}`;
+            li.classList.add("dropdown-item");
+            li.addEventListener("click", () => {
+              input.value = li.textContent; // Set input value
+              dropdown.classList.add("hidden"); // Hide dropdown
+            });
+            dropdown.appendChild(li);
+          });
+        }
 
-        // Fetch city-country pairs from the server
-        fetch("/autocomplete-cities?query=")
-          .then((response) => response.json())
+        // Fetch city-country pairs from the backend
+        fetch("/city-country-pairs")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to fetch city-country pairs");
+            }
+            return response.json();
+          })
           .then((data) => {
-            // Convert city-country pairs to a list for Awesomplete
-            const cityCountryList = data.map(
-              (item) => `${item.city}, ${item.country}`,
-            );
-            comboplete.list = cityCountryList; // Set the list for Awesomplete
+            cities = data; // Populate the cities array
+            console.log("Loaded cities:", cities); // Debugging
+            populateDropdown(cities); // Optional: Populate dropdown on page load
           })
           .catch((error) =>
-            console.error("Error fetching city-country pairs:", error),
+            console.error("Error loading city-country pairs:", error),
           );
 
-        // Handle dropdown button click
-        dropdownBtn.addEventListener("click", function () {
-          if (comboplete.ul.childNodes.length === 0) {
-            comboplete.minChars = 0;
-            comboplete.evaluate(); // Evaluate and open the dropdown
-          } else if (comboplete.ul.hasAttribute("hidden")) {
-            comboplete.open(); // Open the dropdown if hidden
+        // Show dropdown when typing
+        input.addEventListener("input", () => {
+          const value = input.value.toLowerCase();
+          const filteredCities = cities.filter(({ city, country }) =>
+            `${city}, ${country}`.toLowerCase().includes(value),
+          );
+          populateDropdown(filteredCities);
+          dropdown.classList.remove("hidden");
+        });
+
+        // Show all options when the button is clicked
+        button.addEventListener("click", () => {
+          if (dropdown.classList.contains("hidden")) {
+            populateDropdown(cities); // Populate with all cities
+            dropdown.classList.remove("hidden");
           } else {
-            comboplete.close(); // Close the dropdown if already open
+            dropdown.classList.add("hidden");
           }
         });
-      });
 
-      document.addEventListener("DOMContentLoaded", function () {
-        const input = document.getElementById("city-search");
-
-        // Initialize Awesomplete with custom item renderer
-        const comboplete = new Awesomplete(input, {
-          minChars: 0,
-          autoFirst: true,
-          item: function (text, input) {
-            // Simply return the suggestion text without <mark>
-            return Awesomplete.$.create("li", { innerHTML: text });
-          },
+        // Hide dropdown on blur
+        input.addEventListener("blur", () => {
+          setTimeout(() => dropdown.classList.add("hidden"), 200);
         });
       });
     </script>
