@@ -9,12 +9,23 @@
 
     <!-- Link to the CSS files located in the 'css' folder -->
     <link rel="stylesheet" href="/css/resetCSS.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/awesomplete@1.1.5/awesomplete.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/awesomplete@1.1.5/awesomplete.min.js"
+      async
+    ></script>
+
     <link rel="stylesheet" href="/css/htmxFilter.css" />
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/tableStyles.css" />
     <link rel="stylesheet" href="/css/mobileStyles.css" />
     <link rel="stylesheet" href="/css/formStyles.css" />
     <link rel="stylesheet" href="/css/modal.css" />
+    <link rel="stylesheet" href="/css/search.css" />
     <!-- Add Google Fonts for Dosis -->
     <link
       href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap"
@@ -26,7 +37,8 @@
       rel="stylesheet"
     />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-    <script src="https://unpkg.com/htmx.org"></script>
+
+    <link rel="stylesheet" href="awesomplete.css" />
   </head>
 
   <div id="page-banner">
@@ -67,15 +79,21 @@
           <!-- Dynamic city input rows -->
           <div id="city-rows" style="width: 100%">
             <div class="form-group city-row">
-              <label>From:</label>
-              <select name="city[]">
-                <option value="Berlin" selected>Berlin</option>
-                <option value="Frankfurt">Frankfurt</option>
-                <option value="Munich">Munich</option>
-                <option value="Glasgow">Glasgow</option>
-                <option value="Edinburgh">Edinburgh</option>
-                <option value="Sydney">Sydney</option>
-              </select>
+              <label for="city-search">From:</label>
+              <div class="origin-search">
+                <div class="dropdown">
+                  <input
+                    type="text"
+                    id="city-search"
+                    name="city[]"
+                    class="dropdown-input awesomplete"
+                    placeholder="Search for a city"
+                    autocomplete="off"
+                    data-list="{{ range .CityCountryPairs }}{{ .City }}, {{ .Country }},{{ end }}"
+                  />
+                  <button type="button" class="dropdown-btn">▼</button>
+                </div>
+              </div>
               <label for="priceOutput0">Flights</label>
               <output id="priceOutput0" class="output-range">€399.00</output>
               <input
@@ -226,41 +244,41 @@
           const div = document.createElement("div");
           div.className = "form-group city-row";
           div.innerHTML = `
- <button type="button" class="remove-city-button">-</button>
-        <select name="logical_operator[]">
-          <option value="AND">AND</option>
-          <option value="OR">OR</option>
-        </select>
-        <label>City:</label>
-        <select name="city[]">
-                <option value="Berlin" selected>Berlin</option>
-                <option value="Frankfurt">Frankfurt</option>
-                <option value="Munich">Munich</option>
-                <option value="Glasgow">Glasgow</option>
-                <option value="Edinburgh">Edinburgh</option>          
-                <option value="Sydney">Sydney</option>
-        </select>
-        <label for="priceOutput${rowCount}"></label>
-        <output id="priceOutput${rowCount}" class="output-range">€399.00</output>
-        <input
-          type="range"
-          id="combinedPrice-slider${rowCount}"
-          name="maxPriceLinear[]"
-          min="0"
-          max="100"
-          step="1"
-          value="49"
-          class="price-slider"
-          hx-get="/update-slider-price"
-          hx-target="#priceOutput${rowCount}"
-          hx-trigger="input"
-          hx-push-url="false"
-          hx-preserve="false"
-          hx-include="#combinedPrice-slider${rowCount}"
-          autocomplete="off"
-        />
-      
-      `;
+       <button type="button" class="remove-city-button">-</button>
+              <select name="logical_operator[]">
+                <option value="AND">AND</option>
+                <option value="OR">OR</option>
+              </select>
+              <label>City:</label>
+              <select name="city[]">
+                      <option value="Berlin" selected>Berlin</option>
+                      <option value="Frankfurt">Frankfurt</option>
+                      <option value="Munich">Munich</option>
+                      <option value="Glasgow">Glasgow</option>
+                      <option value="Edinburgh">Edinburgh</option>
+                      <option value="Sydney">Sydney</option>
+              </select>
+              <label for="priceOutput${rowCount}"></label>
+              <output id="priceOutput${rowCount}" class="output-range">€399.00</output>
+              <input
+                type="range"
+                id="combinedPrice-slider${rowCount}"
+                name="maxPriceLinear[]"
+                min="0"
+                max="100"
+                step="1"
+                value="49"
+                class="price-slider"
+                hx-get="/update-slider-price"
+                hx-target="#priceOutput${rowCount}"
+                hx-trigger="input"
+                hx-push-url="false"
+                hx-preserve="false"
+                hx-include="#combinedPrice-slider${rowCount}"
+                autocomplete="off"
+              />
+
+            `;
           cityRows.appendChild(div);
           htmx.process(div);
           rowCount++;
@@ -318,6 +336,59 @@
             closeModal();
           }
         });
+
+      // Search bar for Origin Cities
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const input = document.getElementById("city-search");
+        const dropdownBtn = document.querySelector(".dropdown-btn");
+
+        // Initialize Awesomplete
+        const comboplete = new Awesomplete(input, {
+          minChars: 0, // Show suggestions even when no characters are typed
+          autoFirst: true, // Automatically highlight the first suggestion
+        });
+
+        // Fetch city-country pairs from the server
+        fetch("/autocomplete-cities?query=")
+          .then((response) => response.json())
+          .then((data) => {
+            // Convert city-country pairs to a list for Awesomplete
+            const cityCountryList = data.map(
+              (item) => `${item.city}, ${item.country}`,
+            );
+            comboplete.list = cityCountryList; // Set the list for Awesomplete
+          })
+          .catch((error) =>
+            console.error("Error fetching city-country pairs:", error),
+          );
+
+        // Handle dropdown button click
+        dropdownBtn.addEventListener("click", function () {
+          if (comboplete.ul.childNodes.length === 0) {
+            comboplete.minChars = 0;
+            comboplete.evaluate(); // Evaluate and open the dropdown
+          } else if (comboplete.ul.hasAttribute("hidden")) {
+            comboplete.open(); // Open the dropdown if hidden
+          } else {
+            comboplete.close(); // Close the dropdown if already open
+          }
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const input = document.getElementById("city-search");
+
+        // Initialize Awesomplete with custom item renderer
+        const comboplete = new Awesomplete(input, {
+          minChars: 0,
+          autoFirst: true,
+          item: function (text, input) {
+            // Simply return the suggestion text without <mark>
+            return Awesomplete.$.create("li", { innerHTML: text });
+          },
+        });
+      });
     </script>
   </body>
 </html>
