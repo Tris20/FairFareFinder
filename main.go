@@ -103,6 +103,10 @@ func SetupServer(db_path string, logger io.Writer) func() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// Load city-country pairs into memory searchbar to use
+	backend.LoadCityCountryPairs(db)
+
 	cleanup := func() {
 		if db != nil {
 			db.Close()
@@ -128,6 +132,7 @@ func SetupServer(db_path string, logger io.Writer) func() {
 		http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html") // Make sure the path is correct
 	})
 
+	http.HandleFunc("/autocomplete-cities", backend.AutocompleteCitiesHandler)
 	return cleanup
 }
 
