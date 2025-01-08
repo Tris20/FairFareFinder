@@ -27,6 +27,7 @@
       rel="stylesheet"
     />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <script src="https://unpkg.com/htmx.org"></script>
   </head>
 
   <div id="page-banner">
@@ -328,7 +329,7 @@
         const button = document.getElementById("dropdown-btn");
         let cities = [];
 
-        // Populate the list
+        // Populate the dropdown with filtered cities
         function populateDropdown(filteredCities) {
           dropdown.innerHTML = ""; // Clear current list
           filteredCities.forEach(({ city, country }) => {
@@ -338,29 +339,15 @@
             li.addEventListener("click", () => {
               input.value = li.textContent; // Set input value
               dropdown.classList.add("hidden"); // Hide dropdown
+
+              // Trigger HTMX-compatible "change" event
+              input.dispatchEvent(new Event("change", { bubbles: true }));
             });
             dropdown.appendChild(li);
           });
         }
 
-        // Fetch city-country pairs from the backend
-        fetch("/city-country-pairs")
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Failed to fetch city-country pairs");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            cities = data; // Populate the cities array
-            console.log("Loaded cities:", cities); // Debugging
-            populateDropdown(cities); // Optional: Populate dropdown on page load
-          })
-          .catch((error) =>
-            console.error("Error loading city-country pairs:", error),
-          );
-
-        // Show dropdown when typing
+        // Handle typing in the input
         input.addEventListener("input", () => {
           const value = input.value.toLowerCase();
           const filteredCities = cities.filter(({ city, country }) =>
@@ -370,7 +357,7 @@
           dropdown.classList.remove("hidden");
         });
 
-        // Show all options when the button is clicked
+        // Show all options when the dropdown button is clicked
         button.addEventListener("click", () => {
           if (dropdown.classList.contains("hidden")) {
             populateDropdown(cities); // Populate with all cities
@@ -380,10 +367,36 @@
           }
         });
 
-        // Hide dropdown on blur
+        // Validate input on blur (when user clicks away)
         input.addEventListener("blur", () => {
-          setTimeout(() => dropdown.classList.add("hidden"), 200);
+          setTimeout(() => dropdown.classList.add("hidden"), 200); // Hide dropdown
+
+          const value = input.value.trim();
+          const isValid = cities.some(
+            ({ city, country }) =>
+              `${city}, ${country}`.toLowerCase() === value.toLowerCase(),
+          );
+
+          if (!isValid) {
+            console.error("Invalid city on blur:", value);
+            input.value = ""; // Optionally clear the input field
+            return;
+          }
+
+          console.log("Valid city on blur:", value);
+
+          // Trigger HTMX-compatible "change" event
+          input.dispatchEvent(new Event("change", { bubbles: true }));
         });
+
+        // Fetch cities from the backend
+        fetch("/city-country-pairs")
+          .then((response) => response.json())
+          .then((data) => {
+            cities = data; // Populate cities array
+            populateDropdown(cities); // Optional: Populate dropdown initially
+          })
+          .catch((error) => console.error("Error loading cities:", error));
       });
     </script>
   </body>
