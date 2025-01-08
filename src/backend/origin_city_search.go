@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"sort"
 	"sync"
 )
 
@@ -37,7 +38,12 @@ func LoadCityCountryPairs(db *sql.DB) {
 			}
 		}
 
-		log.Printf("Loaded %d city-country pairs into memory.", len(cityCountryPairs))
+		// Sort the city-country pairs alphabetically by city name
+		sort.Slice(cityCountryPairs, func(i, j int) bool {
+			return cityCountryPairs[i].City < cityCountryPairs[j].City
+		})
+
+		log.Printf("Loaded and sorted %d city-country pairs into memory.", len(cityCountryPairs))
 	})
 }
 

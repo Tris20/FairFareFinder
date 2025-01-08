@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  width: 300px;
+  width: 70vw;
 }
 
 /* Input field styling */
@@ -56,7 +56,6 @@
 .dropdown-btn {
   padding: 8px;
   background-color: #3fa89d;
-  border: 1px solid #ccc;
   border-radius: 6px;
   cursor: pointer;
   display: flex;
@@ -68,4 +67,9 @@
 /* Caret styling */
 .caret {
   font-size: 12px;
+}
+
+.highlighted {
+  background-color: #ddd; /* Light gray background */
+  color: #000; /* Black text */
 }

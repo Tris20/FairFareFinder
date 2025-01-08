@@ -77,6 +77,7 @@
                   name="city[]"
                   placeholder="Search for a city"
                   autocomplete="off"
+                  value="Berlin"
                 />
                 <button id="dropdown-btn" class="dropdown-btn" type="button">
                   <span class="caret">▼</span>
@@ -166,10 +167,9 @@
         </footer>
       </div>
     </div>
+
     <script>
-      const cities = {{ .CityCountryPairs | toJson }};
-    </script>
-    <script>
+      let cities = [];
       let hasFadedIn = false; // Flag to check if the table has already faded in
       let additionalCityCount = 0;
       document.addEventListener("DOMContentLoaded", function () {
@@ -241,14 +241,20 @@
                                       <option value="OR">OR</option>
                                     </select>
                                     <label>City:</label>
-                                    <select name="city[]">
-                                            <option value="Berlin" selected>Berlin</option>
-                                            <option value="Frankfurt">Frankfurt</option>
-                                            <option value="Munich">Munich</option>
-                                            <option value="Glasgow">Glasgow</option>
-                                            <option value="Edinburgh">Edinburgh</option>
-                                            <option value="Sydney">Sydney</option>
-                                    </select>
+<div class="dropdown-container">
+                <input
+                  id="city-search"
+                  class="dropdown-input"
+                  name="city[]"
+                  placeholder="Search for a city"
+                  autocomplete="off"
+                />
+                <button class="dropdown-btn" type="button">
+                  <span class="caret">▼</span>
+                </button>
+                <ul class="dropdown-list hidden"></ul>
+              </div>
+
                                     <label for="priceOutput${rowCount}"></label>
                                     <output id="priceOutput${rowCount}" class="output-range">€399.00</output>
                                     <input
@@ -272,6 +278,79 @@
                                   `;
           cityRows.appendChild(div);
           htmx.process(div);
+          rowCount++;
+          // Initialize dropdown for the new input
+          const input = div.querySelector(".dropdown-input");
+          const dropdown = div.querySelector(".dropdown-list");
+          const button = div.querySelector(".dropdown-btn");
+
+          // Reuse the dropdown logic for the new city input
+          let highlightedIndex = -1;
+
+          function populateDropdown(filteredCities) {
+            dropdown.innerHTML = ""; // Clear current list
+            filteredCities.forEach(({ city, country }, index) => {
+              const li = document.createElement("li");
+              li.textContent = `${city}`;
+              li.classList.add("dropdown-item");
+
+              // Highlight the item if it matches the current index
+              if (index === highlightedIndex) {
+                li.classList.add("highlighted");
+              }
+
+              li.addEventListener("click", () => {
+                input.value = li.textContent; // Set input value
+                dropdown.classList.add("hidden"); // Hide dropdown
+
+                // Trigger HTMX-compatible "change" event
+                input.dispatchEvent(new Event("change", { bubbles: true }));
+              });
+
+              dropdown.appendChild(li);
+            });
+          }
+
+          input.addEventListener("input", () => {
+            const value = input.value.toLowerCase();
+            const filteredCities = cities.filter(({ city, country }) =>
+              `${city}, ${country}`.toLowerCase().includes(value),
+            );
+            highlightedIndex = -1; // Reset the highlighted index
+            populateDropdown(filteredCities);
+            dropdown.classList.remove("hidden");
+          });
+
+          button.addEventListener("click", () => {
+            if (dropdown.classList.contains("hidden")) {
+              populateDropdown(cities); // Populate with all cities
+              dropdown.classList.remove("hidden");
+            } else {
+              dropdown.classList.add("hidden");
+            }
+          });
+
+          input.addEventListener("blur", () => {
+            setTimeout(() => dropdown.classList.add("hidden"), 200); // Hide dropdown
+
+            const value = input.value.trim();
+            const isValid = cities.some(
+              ({ city, country }) =>
+                `${city}, ${country}`.toLowerCase() === value.toLowerCase(),
+            );
+
+            if (!isValid) {
+              console.error("Invalid city on blur:", value);
+              input.value = ""; // Clear invalid input
+              return;
+            }
+
+            console.log("Valid city on blur:", value);
+
+            // Trigger HTMX-compatible "change" event
+            input.dispatchEvent(new Event("change", { bubbles: true }));
+          });
+
           rowCount++;
           additionalCityCount++;
           console.log("New additionalCityCount:", additionalCityCount);
@@ -327,15 +406,21 @@
         const input = document.getElementById("city-search");
         const dropdown = document.getElementById("city-list");
         const button = document.getElementById("dropdown-btn");
-        let cities = [];
 
-        // Populate the dropdown with filtered cities
+        let highlightedIndex = -1; // Index of the highlighted item
+
         function populateDropdown(filteredCities) {
           dropdown.innerHTML = ""; // Clear current list
-          filteredCities.forEach(({ city, country }) => {
+          filteredCities.forEach(({ city, country }, index) => {
             const li = document.createElement("li");
             li.textContent = `${city}`;
             li.classList.add("dropdown-item");
+
+            // Highlight the item if it matches the current index
+            if (index === highlightedIndex) {
+              li.classList.add("highlighted");
+            }
+
             li.addEventListener("click", () => {
               input.value = li.textContent; // Set input value
               dropdown.classList.add("hidden"); // Hide dropdown
@@ -343,21 +428,59 @@
               // Trigger HTMX-compatible "change" event
               input.dispatchEvent(new Event("change", { bubbles: true }));
             });
+
             dropdown.appendChild(li);
           });
         }
 
-        // Handle typing in the input
+        function highlightItem(index) {
+          const items = dropdown.querySelectorAll("li");
+          if (items.length === 0) return;
+
+          // Remove highlight from all items
+          items.forEach((item) => item.classList.remove("highlighted"));
+
+          // Highlight the new item
+          if (index >= 0 && index < items.length) {
+            items[index].classList.add("highlighted");
+            highlightedIndex = index;
+
+            // Ensure the highlighted item is visible in the dropdown
+            items[index].scrollIntoView({ block: "nearest" });
+          }
+        }
+
         input.addEventListener("input", () => {
           const value = input.value.toLowerCase();
           const filteredCities = cities.filter(({ city, country }) =>
             `${city}, ${country}`.toLowerCase().includes(value),
           );
+          highlightedIndex = -1; // Reset the highlighted index
           populateDropdown(filteredCities);
           dropdown.classList.remove("hidden");
         });
 
-        // Show all options when the dropdown button is clicked
+        input.addEventListener("keydown", (event) => {
+          const items = dropdown.querySelectorAll("li");
+          if (items.length === 0) return;
+
+          if (event.key === "ArrowDown") {
+            // Highlight the next item
+            event.preventDefault(); // Prevent cursor movement
+            highlightItem(highlightedIndex + 1);
+          } else if (event.key === "ArrowUp") {
+            // Highlight the previous item
+            event.preventDefault(); // Prevent cursor movement
+            highlightItem(highlightedIndex - 1);
+          } else if (event.key === "Enter") {
+            // Select the highlighted item
+            event.preventDefault(); // Prevent form submission
+            if (highlightedIndex >= 0 && highlightedIndex < items.length) {
+              items[highlightedIndex].click(); // Simulate a click
+            }
+          }
+        });
+
         button.addEventListener("click", () => {
           if (dropdown.classList.contains("hidden")) {
             populateDropdown(cities); // Populate with all cities
@@ -367,7 +490,6 @@
           }
         });
 
-        // Validate input on blur (when user clicks away)
         input.addEventListener("blur", () => {
           setTimeout(() => dropdown.classList.add("hidden"), 200); // Hide dropdown
 
@@ -379,7 +501,6 @@
 
           if (!isValid) {
             console.error("Invalid city on blur:", value);
-            input.value = ""; // Optionally clear the input field
             return;
           }
 
