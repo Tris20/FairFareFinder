@@ -175,6 +175,18 @@ document
 document
   .getElementById("add-city-button")
   .addEventListener("click", function () {
+    // 1) Get the city from the first row’s input
+    const firstRowInput = document.querySelector(".city-row .dropdown-input");
+    let firstRowCityValue = firstRowInput ? firstRowInput.value.trim() : "";
+
+    // 2) Validate the first-row city. If invalid, default to "Berlin"
+    const isValidCity = cities.some(
+      ({ city }) => city.toLowerCase() === firstRowCityValue.toLowerCase(),
+    );
+    if (!isValidCity) {
+      firstRowCityValue = "Berlin";
+    }
+
     const cityRows = document.getElementById("city-rows");
     const div = document.createElement("div");
     div.className = "form-group city-row";
@@ -226,6 +238,9 @@ document
     const input = div.querySelector(".dropdown-input");
     const dropdown = div.querySelector(".dropdown-list");
     const button = div.querySelector(".dropdown-btn");
+
+    //Assign the value from the first row
+    input.value = firstRowCityValue;
 
     setupCitySearch({
       input,
