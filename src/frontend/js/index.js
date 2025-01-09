@@ -70,14 +70,19 @@ function setupCitySearch({
     // Remove highlight from all items
     items.forEach((item) => item.classList.remove("highlighted"));
 
-    // Highlight the new item
-    if (index >= 0 && index < items.length) {
-      items[index].classList.add("highlighted");
-      highlightedIndex = index;
-
-      // Ensure the highlighted item is visible in the dropdown
-      items[index].scrollIntoView({ block: "nearest" });
+    // Make sure the new index is within the range, and wrap around if not
+    if (index < 0) {
+      index = items.length - 1; // Wrap to the last item
+    } else if (index >= items.length) {
+      index = 0; // Wrap back to the first item
     }
+
+    // Highlight the new item
+    items[index].classList.add("highlighted");
+    highlightedIndex = index;
+
+    // Ensure the highlighted item is visible in the dropdown
+    items[index].scrollIntoView({ block: "nearest" });
   }
 
   // Handle the input event
