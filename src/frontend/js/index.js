@@ -4,12 +4,14 @@ let additionalCityCount = 0;
 let rowCount = 1;
 
 // --------------------- Functions ---------------------
+/* Hide the duration when there is more than one city as input(because we don't have ways to disply the duration from different origins yet)*/
 function toggleDurationVisibility() {
-  // Select all elements with the class "destination-duration"
   const durationContainers = document.querySelectorAll(".destination-duration");
+  // Count how many .city-row elements are in the DOM right now
+  const cityRowsCount = document.querySelectorAll(".city-row").length;
 
   durationContainers.forEach((durationContainer) => {
-    if (additionalCityCount > 0) {
+    if (cityRowsCount > 1) {
       console.log("Hiding duration-container");
       durationContainer.style.display = "none";
     } else {
@@ -122,6 +124,17 @@ function setupCitySearch({
       populateDropdown(cities);
       dropdown.classList.remove("hidden");
     } else {
+      dropdown.classList.add("hidden");
+    }
+  });
+
+  // Hide dropdown when user clicks anywhere outside of input, dropdown, or button
+  document.addEventListener("click", (event) => {
+    if (
+      !input.contains(event.target) &&
+      !dropdown.contains(event.target) &&
+      !button.contains(event.target)
+    ) {
       dropdown.classList.add("hidden");
     }
   });
@@ -278,4 +291,10 @@ document.addEventListener("DOMContentLoaded", () => {
     button,
     shouldSaveCookie: true,
   });
+});
+
+// Listen for the HTMX afterSwap event on the document or a parent container
+document.body.addEventListener("htmx:afterSwap", function (event) {
+  // After HTMX swaps in the server response, re-check city rows
+  toggleDurationVisibility();
 });
