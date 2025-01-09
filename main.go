@@ -133,14 +133,18 @@ func SetupServer(db_path string, logger io.Writer) func() {
 	http.HandleFunc("/", backend.IndexHandler)
 	http.HandleFunc("/filter", combinedCardsHandler)
 	http.HandleFunc("/update-slider-price", backend.UpdateSliderPriceHandler)
+
+	// Serve static files
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./src/frontend/css/"))))
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./src/frontend/images"))))
 	http.Handle("/location-images/", http.StripPrefix("/location-images/", http.FileServer(http.Dir("./ignore/location-images"))))
+	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("./src/frontend/js/")))) // New JS route
 
 	http.HandleFunc("/city-country-pairs", backend.CityCountryHandler)
+
 	// Privacy policy route
 	http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html") // Make sure the path is correct
+		http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html") // Ensure the path is correct
 	})
 
 	return cleanup
