@@ -209,71 +209,11 @@ document
     const dropdown = div.querySelector(".dropdown-list");
     const button = div.querySelector(".dropdown-btn");
 
-    // Reuse the dropdown logic for the new city input
-    let highlightedIndex = -1;
-
-    function populateDropdown(filteredCities) {
-      dropdown.innerHTML = ""; // Clear current list
-      filteredCities.forEach(({ city, country }, index) => {
-        const li = document.createElement("li");
-        li.textContent = `${city}`;
-        li.classList.add("dropdown-item");
-
-        // Highlight the item if it matches the current index
-        if (index === highlightedIndex) {
-          li.classList.add("highlighted");
-        }
-
-        li.addEventListener("click", () => {
-          input.value = li.textContent; // Set input value
-          dropdown.classList.add("hidden"); // Hide dropdown
-
-          // Trigger HTMX-compatible "change" event
-          input.dispatchEvent(new Event("change", { bubbles: true }));
-        });
-
-        dropdown.appendChild(li);
-      });
-    }
-
-    input.addEventListener("input", () => {
-      const value = input.value.toLowerCase();
-      const filteredCities = cities.filter(({ city, country }) =>
-        `${city}, ${country}`.toLowerCase().includes(value),
-      );
-      highlightedIndex = -1; // Reset the highlighted index
-      populateDropdown(filteredCities);
-      dropdown.classList.remove("hidden");
-    });
-
-    button.addEventListener("click", () => {
-      if (dropdown.classList.contains("hidden")) {
-        populateDropdown(cities); // Populate with all cities
-        dropdown.classList.remove("hidden");
-      } else {
-        dropdown.classList.add("hidden");
-      }
-    });
-
-    input.addEventListener("blur", () => {
-      setTimeout(() => dropdown.classList.add("hidden"), 200); // Hide dropdown
-
-      const value = input.value.trim();
-      const isValid = cities.some(
-        ({ city, country }) =>
-          `${city}, ${country}`.toLowerCase() === value.toLowerCase(),
-      );
-
-      if (!isValid) {
-        console.error("Invalid city on blur:", value);
-        input.value = ""; // Clear invalid input
-        return;
-      }
-
-      console.log("Valid city on blur:", value);
-
-      // Trigger HTMX-compatible "change" event
-      input.dispatchEvent(new Event("change", { bubbles: true }));
+    setupCitySearch({
+      input,
+      dropdown,
+      button,
+      shouldSaveCookie: false, // <-- No cookie saving for extra rows
     });
 
     rowCount++;
