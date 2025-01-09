@@ -19,6 +19,126 @@ function toggleDurationVisibility() {
   });
 }
 
+// Helper function to set up city search dropdown behavior
+function setupCitySearch({
+  input,
+  dropdown,
+  button,
+  shouldSaveCookie = false,
+}) {
+  let highlightedIndex = -1;
+
+  // Utility: Populate the dropdown list
+  function populateDropdown(filteredCities) {
+    dropdown.innerHTML = ""; // Clear current list
+    filteredCities.forEach(({ city, country }, index) => {
+      const li = document.createElement("li");
+      li.textContent = `${city}`;
+      li.classList.add("dropdown-item");
+
+      // Highlight the item if it matches the current index
+      if (index === highlightedIndex) {
+        li.classList.add("highlighted");
+      }
+
+      li.addEventListener("click", () => {
+        input.value = li.textContent; // Set input value
+        dropdown.classList.add("hidden"); // Hide dropdown
+
+        // If this search bar should save cookies, do it here
+        if (shouldSaveCookie) {
+          setCookie("selectedCity", li.textContent, 7);
+          console.log(
+            "Cookie set for city selected via dropdown:",
+            li.textContent,
+          );
+        }
+
+        // Trigger HTMX-compatible "change" event
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+
+      dropdown.appendChild(li);
+    });
+  }
+
+  // Utility: Highlight the selected dropdown item
+  function highlightItem(index) {
+    const items = dropdown.querySelectorAll("li");
+    if (items.length === 0) return;
+
+    // Remove highlight from all items
+    items.forEach((item) => item.classList.remove("highlighted"));
+
+    // Highlight the new item
+    if (index >= 0 && index < items.length) {
+      items[index].classList.add("highlighted");
+      highlightedIndex = index;
+
+      // Ensure the highlighted item is visible in the dropdown
+      items[index].scrollIntoView({ block: "nearest" });
+    }
+  }
+
+  // Handle the input event
+  input.addEventListener("input", () => {
+    const value = input.value.toLowerCase();
+    const filteredCities = cities.filter(({ city, country }) =>
+      `${city}, ${country}`.toLowerCase().includes(value),
+    );
+    highlightedIndex = -1; // Reset the highlighted index
+    populateDropdown(filteredCities);
+    dropdown.classList.remove("hidden");
+  });
+
+  // Handle arrow key navigation + enter key
+  input.addEventListener("keydown", (event) => {
+    const items = dropdown.querySelectorAll("li");
+    if (items.length === 0) return;
+
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      highlightItem(highlightedIndex + 1);
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      highlightItem(highlightedIndex - 1);
+    } else if (event.key === "Enter") {
+      event.preventDefault();
+      if (highlightedIndex >= 0 && highlightedIndex < items.length) {
+        items[highlightedIndex].click(); // Simulate a click
+      }
+    }
+  });
+
+  // Handle dropdown button click (expand/collapse)
+  button.addEventListener("click", () => {
+    if (dropdown.classList.contains("hidden")) {
+      // Show all cities
+      populateDropdown(cities);
+      dropdown.classList.remove("hidden");
+    } else {
+      dropdown.classList.add("hidden");
+    }
+  });
+
+  // Handle blur event
+  input.addEventListener("blur", () => {
+    const value = input.value.trim();
+    const isValidCity = cities.some(
+      ({ city }) => city.toLowerCase() === value.toLowerCase(),
+    );
+
+    if (isValidCity && shouldSaveCookie) {
+      setCookie("selectedCity", value, 7);
+      console.log("Valid city saved (cookie):", value);
+    } else if (!isValidCity && shouldSaveCookie) {
+      console.warn("Invalid city, not saving:", value);
+    }
+    // Trigger HTMX-compatible "change" event
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+}
+
 // --------------------- Event Listeners ---------------------
 
 // 1) Remove City Row (event delegation on #city-rows)
@@ -163,166 +283,54 @@ document
   });
 
 // 3) DOMContentLoaded - Search bar for Origin Cities & cookie handling
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Check if cookie for search
+  // Grab DOM elements for the main search bar
   const input = document.getElementById("city-search");
-  const savedCity = getCookie("selectedCity");
-  if (savedCity) {
-    // Validate the saved city before using it
-    const isValidCity = cities.some(
-      ({ city }) => city.toLowerCase() === savedCity.toLowerCase(),
-    );
-
-    if (isValidCity) {
-      input.value = savedCity; // Set input to the saved city from the cookie
-      console.log("Loaded valid city from cookie:", savedCity);
-    } else {
-      console.warn("Invalid city in cookie, defaulting to Berlin.");
-      input.value = "Berlin"; // Set to default value if cookie is invalid
-    }
-  } else {
-    console.log("No cookie found, defaulting to Berlin.");
-    input.value = "Berlin"; // Set to default value if no cookie exists
-  }
-
-  // Search bar inputs
   const dropdown = document.getElementById("city-list");
   const button = document.getElementById("dropdown-btn");
-  let highlightedIndex = -1; // Index of the highlighted item
 
-  function populateDropdown(filteredCities) {
-    dropdown.innerHTML = ""; // Clear current list
-    filteredCities.forEach(({ city, country }, index) => {
-      const li = document.createElement("li");
-      li.textContent = `${city}`;
-      li.classList.add("dropdown-item");
-
-      // Highlight the item if it matches the current index
-      if (index === highlightedIndex) {
-        li.classList.add("highlighted");
-      }
-
-      li.addEventListener("click", () => {
-        input.value = li.textContent; // Set input value
-        dropdown.classList.add("hidden"); // Hide dropdown
-
-        // Set the cookie when a valid city is selected
-        setCookie("selectedCity", li.textContent, 7);
-        console.log(
-          "Cookie set for city selected via dropdown:",
-          li.textContent,
-        );
-
-        // Trigger HTMX-compatible "change" event
-        input.dispatchEvent(new Event("change", { bubbles: true }));
-      });
-
-      dropdown.appendChild(li);
-    });
-  }
-
-  function highlightItem(index) {
-    const items = dropdown.querySelectorAll("li");
-    if (items.length === 0) return;
-
-    // Remove highlight from all items
-    items.forEach((item) => item.classList.remove("highlighted"));
-
-    // Highlight the new item
-    if (index >= 0 && index < items.length) {
-      items[index].classList.add("highlighted");
-      highlightedIndex = index;
-
-      // Ensure the highlighted item is visible in the dropdown
-      items[index].scrollIntoView({ block: "nearest" });
-    }
-  }
-
-  input.addEventListener("input", () => {
-    const value = input.value.toLowerCase();
-    const filteredCities = cities.filter(({ city, country }) =>
-      `${city}, ${country}`.toLowerCase().includes(value),
-    );
-    highlightedIndex = -1; // Reset the highlighted index
-    populateDropdown(filteredCities);
-    dropdown.classList.remove("hidden");
-  });
-
-  input.addEventListener("keydown", (event) => {
-    const items = dropdown.querySelectorAll("li");
-    if (items.length === 0) return;
-
-    if (event.key === "ArrowDown") {
-      // Highlight the next item
-      event.preventDefault(); // Prevent cursor movement
-      highlightItem(highlightedIndex + 1);
-    } else if (event.key === "ArrowUp") {
-      // Highlight the previous item
-      event.preventDefault(); // Prevent cursor movement
-      highlightItem(highlightedIndex - 1);
-    } else if (event.key === "Enter") {
-      // Select the highlighted item
-      event.preventDefault(); // Prevent form submission
-      if (highlightedIndex >= 0 && highlightedIndex < items.length) {
-        items[highlightedIndex].click(); // Simulate a click
-      }
-    }
-  });
-
-  button.addEventListener("click", () => {
-    if (dropdown.classList.contains("hidden")) {
-      populateDropdown(cities); // Populate with all cities
-      dropdown.classList.remove("hidden");
-    } else {
-      dropdown.classList.add("hidden");
-    }
-  });
-
-  input.addEventListener("blur", () => {
-    const value = input.value.trim();
-    const isValidCity = cities.some(
-      ({ city }) => city.toLowerCase() === value.toLowerCase(),
-    );
-
-    if (isValidCity) {
-      setCookie("selectedCity", value, 7); // Save only valid city
-      console.log("Valid city saved:", value);
-    } else {
-      console.warn("Invalid city, not saving:", value);
-    }
-    // Trigger HTMX-compatible "change" event
-    input.dispatchEvent(new Event("change", { bubbles: true }));
-  });
-
-  // Cookie Monsters
-  // Fetch cities from the backend
+  // 1) Fetch city list from backend
   fetch("/city-country-pairs")
     .then((response) => response.json())
     .then((data) => {
-      cities = data; // Populate cities array
+      cities = data; // Populate the global 'cities' array
       console.log("Cities loaded:", cities);
 
-      // Validate and load the selectedCity cookie
+      // 2) Read cookie once (AFTER cities are fetched)
       const savedCity = getCookie("selectedCity");
+
       if (savedCity) {
+        // Check if the cookie value is valid
         const isValidCity = cities.some(
           ({ city }) => city.toLowerCase() === savedCity.toLowerCase(),
         );
 
         if (isValidCity) {
+          // If valid, set it
           input.value = savedCity;
           console.log("Loaded valid city from cookie:", savedCity);
         } else {
+          // If invalid, default to Berlin
           console.warn("Invalid city in cookie, defaulting to Berlin.");
           input.value = "Berlin";
         }
       } else {
+        // If no cookie exists, default to Berlin
         console.log("No cookie found, defaulting to Berlin.");
         input.value = "Berlin";
       }
 
-      // Populate dropdown with initial cities
-      populateDropdown(cities);
+      // Optional: if you have a function like populateDropdown to show all cities
+      // populateDropdown(cities);
     })
     .catch((error) => console.error("Error loading cities:", error));
+
+  // 3) Set up the city search logic with cookie saving enabled
+  setupCitySearch({
+    input,
+    dropdown,
+    button,
+    shouldSaveCookie: true,
+  });
 });
