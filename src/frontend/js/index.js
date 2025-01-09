@@ -62,6 +62,13 @@ function setupCitySearch({
 
       dropdown.appendChild(li);
     });
+
+    // Automatically highlight the first item (if any exist)
+    if (filteredCities.length > 0) {
+      highlightItem(0);
+    } else {
+      highlightedIndex = -1;
+    }
   }
 
   // Utility: Highlight the selected dropdown item
