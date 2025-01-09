@@ -77,7 +77,6 @@
                   name="city[]"
                   placeholder="Search for a city"
                   autocomplete="off"
-                  value="Berlin"
                 />
                 <button id="dropdown-btn" class="dropdown-btn" type="button">
                   <span class="caret">▼</span>
@@ -235,47 +234,47 @@
           const div = document.createElement("div");
           div.className = "form-group city-row";
           div.innerHTML = `
-                             <button type="button" class="remove-city-button">-</button>
-                                    <select name="logical_operator[]">
-                                      <option value="AND">AND</option>
-                                      <option value="OR">OR</option>
-                                    </select>
-                                    <label>City:</label>
-<div class="dropdown-container">
-                <input
-                  id="city-search"
-                  class="dropdown-input"
-                  name="city[]"
-                  placeholder="Search for a city"
-                  autocomplete="off"
-                />
-                <button class="dropdown-btn" type="button">
-                  <span class="caret">▼</span>
-                </button>
-                <ul class="dropdown-list hidden"></ul>
-              </div>
+                                   <button type="button" class="remove-city-button">-</button>
+                                          <select name="logical_operator[]">
+                                            <option value="AND">AND</option>
+                                            <option value="OR">OR</option>
+                                          </select>
+                                          <label>City:</label>
+      <div class="dropdown-container">
+                      <input
+                        id="city-search"
+                        class="dropdown-input"
+                        name="city[]"
+                        placeholder="Search for a city"
+                        autocomplete="off"
+                      />
+                      <button class="dropdown-btn" type="button">
+                        <span class="caret">▼</span>
+                      </button>
+                      <ul class="dropdown-list hidden"></ul>
+                    </div>
 
-                                    <label for="priceOutput${rowCount}"></label>
-                                    <output id="priceOutput${rowCount}" class="output-range">€399.00</output>
-                                    <input
-                                      type="range"
-                                      id="combinedPrice-slider${rowCount}"
-                                      name="maxPriceLinear[]"
-                                      min="0"
-                                      max="100"
-                                      step="1"
-                                      value="49"
-                                      class="price-slider"
-                                      hx-get="/update-slider-price"
-                                      hx-target="#priceOutput${rowCount}"
-                                      hx-trigger="input"
-                                      hx-push-url="false"
-                                      hx-preserve="false"
-                                      hx-include="#combinedPrice-slider${rowCount}"
-                                      autocomplete="off"
-                                    />
+                                          <label for="priceOutput${rowCount}"></label>
+                                          <output id="priceOutput${rowCount}" class="output-range">€399.00</output>
+                                          <input
+                                            type="range"
+                                            id="combinedPrice-slider${rowCount}"
+                                            name="maxPriceLinear[]"
+                                            min="0"
+                                            max="100"
+                                            step="1"
+                                            value="49"
+                                            class="price-slider"
+                                            hx-get="/update-slider-price"
+                                            hx-target="#priceOutput${rowCount}"
+                                            hx-trigger="input"
+                                            hx-push-url="false"
+                                            hx-preserve="false"
+                                            hx-include="#combinedPrice-slider${rowCount}"
+                                            autocomplete="off"
+                                          />
 
-                                  `;
+                                        `;
           cityRows.appendChild(div);
           htmx.process(div);
           rowCount++;
@@ -403,7 +402,28 @@
       // JavaScript for dropdown handling
 
       document.addEventListener("DOMContentLoaded", () => {
+        // Check if cookie for search
         const input = document.getElementById("city-search");
+        const savedCity = getCookie("selectedCity");
+        if (savedCity) {
+          // Validate the saved city before using it
+          const isValidCity = cities.some(
+            ({ city }) => city.toLowerCase() === savedCity.toLowerCase(),
+          );
+
+          if (isValidCity) {
+            input.value = savedCity; // Set input to the saved city from the cookie
+            console.log("Loaded valid city from cookie:", savedCity);
+          } else {
+            console.warn("Invalid city in cookie, defaulting to Berlin.");
+            input.value = "Berlin"; // Set to default value if cookie is invalid
+          }
+        } else {
+          console.log("No cookie found, defaulting to Berlin.");
+          input.value = "Berlin"; // Set to default value if no cookie exists
+        }
+        // Search bar inputs
+
         const dropdown = document.getElementById("city-list");
         const button = document.getElementById("dropdown-btn");
 
@@ -424,6 +444,13 @@
             li.addEventListener("click", () => {
               input.value = li.textContent; // Set input value
               dropdown.classList.add("hidden"); // Hide dropdown
+
+              // Set the cookie when a valid city is selected
+              setCookie("selectedCity", li.textContent, 7);
+              console.log(
+                "Cookie set for city selected via dropdown:",
+                li.textContent,
+              );
 
               // Trigger HTMX-compatible "change" event
               input.dispatchEvent(new Event("change", { bubbles: true }));
@@ -491,33 +518,76 @@
         });
 
         input.addEventListener("blur", () => {
-          setTimeout(() => dropdown.classList.add("hidden"), 200); // Hide dropdown
-
           const value = input.value.trim();
-          const isValid = cities.some(
-            ({ city, country }) =>
-              `${city}, ${country}`.toLowerCase() === value.toLowerCase(),
+          const isValidCity = cities.some(
+            ({ city }) => city.toLowerCase() === value.toLowerCase(),
           );
 
-          if (!isValid) {
-            console.error("Invalid city on blur:", value);
-            return;
+          if (isValidCity) {
+            setCookie("selectedCity", value, 7); // Save only valid city
+            console.log("Valid city saved:", value);
+          } else {
+            console.warn("Invalid city, not saving:", value);
           }
-
-          console.log("Valid city on blur:", value);
-
           // Trigger HTMX-compatible "change" event
           input.dispatchEvent(new Event("change", { bubbles: true }));
         });
 
+        // Cookie Monsters
         // Fetch cities from the backend
         fetch("/city-country-pairs")
           .then((response) => response.json())
           .then((data) => {
             cities = data; // Populate cities array
-            populateDropdown(cities); // Optional: Populate dropdown initially
+            console.log("Cities loaded:", cities);
+
+            // Validate and load the selectedCity cookie
+            const savedCity = getCookie("selectedCity");
+            if (savedCity) {
+              const isValidCity = cities.some(
+                ({ city }) => city.toLowerCase() === savedCity.toLowerCase(),
+              );
+
+              if (isValidCity) {
+                input.value = savedCity;
+                console.log("Loaded valid city from cookie:", savedCity);
+              } else {
+                console.warn("Invalid city in cookie, defaulting to Berlin.");
+                input.value = "Berlin";
+              }
+            } else {
+              console.log("No cookie found, defaulting to Berlin.");
+              input.value = "Berlin";
+            }
+
+            // Populate dropdown with initial cities
+            populateDropdown(cities);
           })
           .catch((error) => console.error("Error loading cities:", error));
+
+        function setCookie(name, value, days) {
+          const date = new Date();
+          date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+          const expires = "expires=" + date.toUTCString();
+          const cookieString = `${name}=${value}; ${expires}; path=/`;
+          console.log("Setting cookie:", cookieString); // Debug log
+          document.cookie = cookieString;
+        }
+
+        function getCookie(name) {
+          console.log("Checking for cookie:", name); // Debug log
+          const cookies = document.cookie.split("; ");
+          console.log("All cookies:", cookies); // Debug log
+
+          for (let i = 0; i < cookies.length; i++) {
+            const [cookieName, cookieValue] = cookies[i].split("=");
+            console.log("Checking cookie:", cookieName, cookieValue); // Debug log
+            if (cookieName === name) {
+              return cookieValue;
+            }
+          }
+          return null; // Return null if not found
+        }
       });
     </script>
   </body>
