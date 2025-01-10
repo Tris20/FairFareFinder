@@ -5,7 +5,9 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  width: 70vw;
+  width: 61vw;
+  max-width: -webkit-fill-available;
+  min-width: 120px;
 }
 
 /* Input field styling */
@@ -15,6 +17,7 @@
   font-size: 1em;
   border: 1px solid #ccc;
   border-radius: 4px;
+  min-width: 80px;
 }
 
 /* Dropdown list */

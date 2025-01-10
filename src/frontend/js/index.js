@@ -198,12 +198,13 @@ document
     const div = document.createElement("div");
     div.className = "form-group city-row";
     div.innerHTML = `
+<div class="form-group city-row operators">
     <button type="button" class="remove-city-button">-</button>
     <select name="logical_operator[]">
       <option value="AND">AND</option>
       <option value="OR">OR</option>
     </select>
-    <label>City:</label>
+    </div>
     <div class="dropdown-container">
       <input
         id="city-search"
@@ -217,6 +218,7 @@ document
       </button>
       <ul class="dropdown-list hidden"></ul>
     </div>
+<div class="flight-price-slider">
     <label for="priceOutput${rowCount}"></label>
     <output id="priceOutput${rowCount}" class="output-range">€399.00</output>
     <input
@@ -236,6 +238,7 @@ document
       hx-include="#combinedPrice-slider${rowCount}"
       autocomplete="off"
     />
+    </div>
   `;
     cityRows.appendChild(div);
     htmx.process(div);

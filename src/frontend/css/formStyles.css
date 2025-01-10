@@ -71,3 +71,16 @@ select {
 .price-slider:hover {
   cursor: pointer;
 }
+
+.flight-price-slider {
+  width: 100%;
+}
+.form-group.city-row {
+  background-color: #237275;
+  border-radius: 10px;
+  display: flow-root;
+  padding: 1em;
+}
+.form-group.city-row.operators {
+  display: flex;
+}

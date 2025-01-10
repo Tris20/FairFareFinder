@@ -83,25 +83,27 @@
                 </button>
                 <ul id="city-list" class="dropdown-list hidden"></ul>
               </div>
-              <label for="priceOutput0">Flights</label>
-              <output id="priceOutput0" class="output-range">€399.00</output>
-              <input
-                type="range"
-                id="combinedPrice-slider0"
-                name="maxPriceLinear[]"
-                min="0"
-                max="100"
-                step="1"
-                value="49"
-                class="price-slider"
-                hx-get="/update-slider-price"
-                hx-target="#priceOutput0"
-                hx-trigger="input"
-                hx-push-url="false"
-                hx-preserve="false"
-                hx-include="#combinedPrice-slider0"
-                autocomplete="off"
-              />
+              <div class="flight-price-slider">
+                <label for="priceOutput0">Flights</label>
+                <output id="priceOutput0" class="output-range">€399.00</output>
+                <input
+                  type="range"
+                  id="combinedPrice-slider0"
+                  name="maxPriceLinear[]"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="49"
+                  class="price-slider"
+                  hx-get="/update-slider-price"
+                  hx-target="#priceOutput0"
+                  hx-trigger="input"
+                  hx-push-url="false"
+                  hx-preserve="false"
+                  hx-include="#combinedPrice-slider0"
+                  autocomplete="off"
+                />
+              </div>
             </div>
           </div>
           <!-- Button to add more origin cities -->
