@@ -51,7 +51,7 @@ margin: 0px;
 }
 
 .card-image {
-  height: 25svh;
+  height: 35svh;
   background-size: cover;
   background-position: center;
 }
@@ -80,6 +80,7 @@ margin-top: 10px;
 text-align: center;
     padding-top: 5px;
     padding-bottom: 5px;
+margin-bottom: 13px;
 }
 
 .clickable {

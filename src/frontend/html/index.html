@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/css/mobileStyles.css" />
     <link rel="stylesheet" href="/css/formStyles.css" />
     <link rel="stylesheet" href="/css/modal.css" />
+    <link rel="stylesheet" href="/css/search.css" />
     <!-- Add Google Fonts for Dosis -->
     <link
       href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap"
@@ -67,15 +68,21 @@
           <!-- Dynamic city input rows -->
           <div id="city-rows" style="width: 100%">
             <div class="form-group city-row">
-              <label>From:</label>
-              <select name="city[]">
-                <option value="Berlin" selected>Berlin</option>
-                <option value="Frankfurt">Frankfurt</option>
-                <option value="Munich">Munich</option>
-                <option value="Glasgow">Glasgow</option>
-                <option value="Edinburgh">Edinburgh</option>
-                <option value="Sydney">Sydney</option>
-              </select>
+              <label for="city-search">From:</label>
+
+              <div class="dropdown-container">
+                <input
+                  id="city-search"
+                  class="dropdown-input"
+                  name="city[]"
+                  placeholder="Search for a city"
+                  autocomplete="off"
+                />
+                <button id="dropdown-btn" class="dropdown-btn" type="button">
+                  <span class="caret">▼</span>
+                </button>
+                <ul id="city-list" class="dropdown-list hidden"></ul>
+              </div>
               <label for="priceOutput0">Flights</label>
               <output id="priceOutput0" class="output-range">€399.00</output>
               <input
@@ -159,165 +166,9 @@
         </footer>
       </div>
     </div>
-
-    <script>
-      let hasFadedIn = false; // Flag to check if the table has already faded in
-      let additionalCityCount = 0;
-      document.addEventListener("DOMContentLoaded", function () {
-        // After the fade-out animation ends, hide the website-name and show the table
-        setTimeout(function () {
-          document.getElementById("website-name").style.display = "none";
-
-          // Show the table content with the fade-in animation and move it up
-          const tableContainer = document.getElementById("table-container");
-          tableContainer.classList.add("show");
-
-          // Also show the header and move it with the form
-          const pageHeader = document.getElementById("page-banner");
-          pageHeader.classList.add("show");
-
-          // Wait for the 'moveUp' animation to finish (animationend event)
-          tableContainer.addEventListener("animationend", function (event) {
-            if (event.animationName === "moveUp") {
-              // Manually trigger the form submission after the animation is complete
-              htmx.trigger("#flight-form", "change");
-            }
-          });
-
-          // Handle HTMX table swap event for the first time only
-          document
-            .getElementById("flight-table")
-            .addEventListener("htmx:afterSwap", function () {
-              if (!hasFadedIn) {
-                const flightTable = document.getElementById("flight-table");
-                flightTable.classList.add("fade-in");
-                hasFadedIn = true;
-
-                // Show the footer after the table has been loaded
-                const footer = document.querySelector("#footer-privacy");
-                footer.classList.add("fade-in");
-              }
-            });
-
-          // Show the background image with a fade-in effect
-          document.getElementById("bg-image-dreams").style.opacity = "1";
-        }, 2000);
-      });
-
-      document
-        .getElementById("city-rows")
-        .addEventListener("click", function (event) {
-          if (event.target.classList.contains("remove-city-button")) {
-            const cityRow = event.target.closest(".city-row");
-            cityRow.remove();
-            additionalCityCount--;
-            toggleDurationVisibility();
-          }
-        });
-
-      // Add event listener for adding additional cities dynamically
-
-      let rowCount = 1;
-
-      document
-        .getElementById("add-city-button")
-        .addEventListener("click", function () {
-          const cityRows = document.getElementById("city-rows");
-          const div = document.createElement("div");
-          div.className = "form-group city-row";
-          div.innerHTML = `
- <button type="button" class="remove-city-button">-</button>
-        <select name="logical_operator[]">
-          <option value="AND">AND</option>
-          <option value="OR">OR</option>
-        </select>
-        <label>City:</label>
-        <select name="city[]">
-                <option value="Berlin" selected>Berlin</option>
-                <option value="Frankfurt">Frankfurt</option>
-                <option value="Munich">Munich</option>
-                <option value="Glasgow">Glasgow</option>
-                <option value="Edinburgh">Edinburgh</option>          
-                <option value="Sydney">Sydney</option>
-        </select>
-        <label for="priceOutput${rowCount}"></label>
-        <output id="priceOutput${rowCount}" class="output-range">€399.00</output>
-        <input
-          type="range"
-          id="combinedPrice-slider${rowCount}"
-          name="maxPriceLinear[]"
-          min="0"
-          max="100"
-          step="1"
-          value="49"
-          class="price-slider"
-          hx-get="/update-slider-price"
-          hx-target="#priceOutput${rowCount}"
-          hx-trigger="input"
-          hx-push-url="false"
-          hx-preserve="false"
-          hx-include="#combinedPrice-slider${rowCount}"
-          autocomplete="off"
-        />
-      
-      `;
-          cityRows.appendChild(div);
-          htmx.process(div);
-          rowCount++;
-          additionalCityCount++;
-          console.log("New additionalCityCount:", additionalCityCount);
-          toggleDurationVisibility();
-        });
-
-      function toggleDurationVisibility() {
-        // Select all elements with the class "destination-duration"
-        const durationContainers = document.querySelectorAll(
-          ".destination-duration",
-        );
-
-        durationContainers.forEach((durationContainer) => {
-          if (additionalCityCount > 0) {
-            console.log("Hiding duration-container");
-            durationContainer.style.display = "none";
-          } else {
-            console.log("Showing duration-container");
-            durationContainer.style.display = "block";
-          }
-        });
-      }
-
-      function openModal(cityName) {
-        const modal = document.getElementById(`modal-${cityName}`);
-        if (modal) {
-          modal.style.display = "flex";
-        }
-      }
-
-      function closeModal(destinationCity) {
-        const modal = document.getElementById(`modal-${destinationCity}`);
-        if (modal) {
-          modal.style.display = "none";
-        }
-      }
-
-      function closeModalOnOutsideClick(event, destinationCity) {
-        const modalContent =
-          event.currentTarget.querySelector(".modal-content");
-
-        // Check if the click is outside the modal-content
-        if (!modalContent.contains(event.target)) {
-          closeModal(destinationCity); // Close the modal
-        }
-      }
-
-      document
-        .getElementById("modal-large-card")
-        .addEventListener("click", (event) => {
-          const modalContent = document.querySelector(".modal-content");
-          if (!modalContent.contains(event.target)) {
-            closeModal();
-          }
-        });
-    </script>
+    <script src="/js/cookie-utils.js" defer></script>
+    <script src="/js/index-animation.js" defer></script>
+    <script src="/js/index.js" defer></script>
+    <script src="/js/index-modal.js" defer></script>
   </body>
 </html>
