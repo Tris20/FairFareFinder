@@ -167,14 +167,21 @@ function setupCitySearch({
 // --------------------- Event Listeners ---------------------
 
 // 1) Remove City Row (event delegation on #city-rows)
+
 document
-  .getElementById("city-rows")
+  .getElementById("city-rows") // Parent container wrapping all city rows
   .addEventListener("click", function (event) {
     if (event.target.classList.contains("remove-city-button")) {
-      const cityRow = event.target.closest(".city-row");
-      cityRow.remove();
-      additionalCityCount--;
-      toggleDurationVisibility();
+      // Find the button's parent and then the top-level .form-group.city-row
+      const cityRow = event.target.closest(".form-group.city-row"); // Start from the button's immediate parent
+      if (cityRow && cityRow.classList.contains("operators")) {
+        const outerCityRow = cityRow.parentElement; // Move to the outer .form-group.city-row
+        if (outerCityRow && outerCityRow.classList.contains("city-row")) {
+          outerCityRow.remove(); // Remove the entire row
+          additionalCityCount--; // Adjust count
+          toggleDurationVisibility(); // Update UI
+        }
+      }
     }
   });
 
