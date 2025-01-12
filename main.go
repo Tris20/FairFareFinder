@@ -13,6 +13,7 @@ import (
 	"strings"
 
 	"github.com/Tris20/FairFareFinder/src/backend"
+	"github.com/Tris20/FairFareFinder/src/backend/dev_tools"
 	"github.com/gorilla/sessions"
 	_ "github.com/mattn/go-sqlite3"
 	"gopkg.in/natefinch/lumberjack.v2"
@@ -93,6 +94,14 @@ func main() {
 	StartServer()
 }
 
+func mod(a, b int) int {
+	return a % b
+}
+
+func add(a, b int) int {
+	return a + b
+}
+
 func SetupServer(db_path string, logger io.Writer) func() {
 	// Set up lumberjack log file rotation config
 	log.SetOutput(logger)
@@ -112,8 +121,10 @@ func SetupServer(db_path string, logger io.Writer) func() {
 			db.Close()
 		}
 	}
-	// Register custom functions for templates
-	tmpl = template.Must(template.New("").Funcs(template.FuncMap{
+
+	funcMap := template.FuncMap{
+		"mod": mod,
+		"add": add,
 		"toJson": func(v interface{}) (string, error) {
 			a, err := json.Marshal(v)
 			if err != nil {
@@ -121,10 +132,14 @@ func SetupServer(db_path string, logger io.Writer) func() {
 			}
 			return string(a), nil
 		},
-	}).ParseFiles(
+	}
+
+	tmpl = template.Must(template.New("").Funcs(funcMap).ParseFiles(
 		"./src/frontend/html/index.html",
 		"./src/frontend/html/table.html",
 		"./src/frontend/html/seo.html",
+		"./src/frontend/html/cities.html",
+		"./src/frontend/html/all-cities.html", // Add all-cities.html template
 	))
 
 	backend.Init(db, tmpl)
@@ -145,6 +160,16 @@ func SetupServer(db_path string, logger io.Writer) func() {
 	// Privacy policy route
 	http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html") // Ensure the path is correct
+	})
+	http.HandleFunc("/all-cities", func(w http.ResponseWriter, r *http.Request) {
+		session, _ := store.Get(r, "session")
+		clientID := session.ID
+		dev_tools.AllCitiesHandler(db, tmpl, clientID)(w, r)
+	})
+	http.HandleFunc("/load-more-cities", func(w http.ResponseWriter, r *http.Request) {
+		session, _ := store.Get(r, "session")
+		clientID := session.ID
+		dev_tools.LoadMoreCities(tmpl, clientID)(w, r)
 	})
 
 	return cleanup
