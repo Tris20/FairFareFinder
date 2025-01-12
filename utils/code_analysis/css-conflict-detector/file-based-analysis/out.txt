@@ -1,216 +1,146 @@
 === CSS Conflicts Detected ===
+Selector: ::-webkit-scrollbar-thumb
+  Property: background-color
+    Value: #a0a0a000
+      -> /styles.css:383 (media: @media screen and (max-width: 800px))
+    Value: #d8d8d8
+      -> /styles.css:405
+    Value: transparent
+      -> /styles.css:463 (media: @media screen and (max-width: 800px))
+
+Selector: #flight-table
+  Property: margin-bottom
+    Value: 0
+      -> /styles.css:147
+    Value: 0px
+      -> /styles.css:363 (media: @media screen and (max-width: 800px))
+  Property: font-size
+    Value: 2.5vw
+      -> /mobileStyles.css:43 (media: @media only screen and (max-width: 800px))
+    Value: 1.2vw
+      -> /styles.css:148
+    Value: 1em
+      -> /styles.css:364 (media: @media screen and (max-width: 800px))
+      -> /tableStyles.css:174 (media: @media only screen and (min-width: 1000px))
+      -> /tableStyles.css:195 (media: @media only screen and (min-width: 1200px))
+
 Selector: .desktop-card-grid
+  Property: grid-template-columns
+    Value: repeat(3, 1fr)
+      -> /tableStyles.css:35 (media: @media only screen and (min-width: 801px))
+      -> /tableStyles.css:187 (media: @media only screen and (min-width: 1200px))
+      -> /tableStyles.css:209 (media: @media only screen and (min-width: 1200px))
+    Value: repeat(1, 1fr)
+      -> /tableStyles.css:159 (media: @media only screen and (max-width: 800px))
   Property: margin
     Value: 0px 5%;*/
       -> /tableStyles.css:37 (media: @media only screen and (min-width: 801px))
     Value: 0px 5%
-      -> /tableStyles.css:162 (media: @media only screen and (max-width: 800px))
+      -> /tableStyles.css:161 (media: @media only screen and (max-width: 800px))
     Value: 0 auto
-      -> /tableStyles.css:223 (media: @media only screen and (min-width: 1200px))
-  Property: display
-    Value: inline-grid
-      -> /tableStyles.css:158 (media: @media only screen and (max-width: 800px))
-    Value: none
-      -> /styles.css:488 (media: @media only screen and (max-width: 800px))
-    Value: grid
-      -> /tableStyles.css:34 (media: @media only screen and (min-width: 801px))
-      -> /tableStyles.css:159 (media: @media only screen and (max-width: 800px))
-      -> /tableStyles.css:218 (media: @media only screen and (min-width: 1200px))
-  Property: grid-template-columns
-    Value: repeat(3, 1fr)
-      -> /tableStyles.css:35 (media: @media only screen and (min-width: 801px))
-      -> /tableStyles.css:197 (media: @media only screen and (min-width: 1200px))
-      -> /tableStyles.css:219 (media: @media only screen and (min-width: 1200px))
-    Value: repeat(2, 1fr)
-      -> /tableStyles.css:160 (media: @media only screen and (max-width: 800px))
-
-Selector: .flight-price-slider
-  Property: width
-    Value: 70vw
-      -> /formStyles.css:128 (media: @media screen and (max-width: 800px))
-    Value: 50%
-      -> /formStyles.css:76
-
-Selector: .form-group label
-  Property: width
-    Value: 40%
-      -> /styles.css:311 (media: @media screen and (max-width: 800px))
-    Value: 30%
-      -> /styles.css:252
-
-Selector: #flight-form
-  Property: width
-    Value: 92%
-      -> /tableStyles.css:99 (media: @media only screen and (min-width: 801px))
-    Value: 100%
-      -> /mobileStyles.css:147 (media: @media only screen and (max-width: 800px))
-    Value: 80%
-      -> /styles.css:190
-    Value: 90%
-      -> /styles.css:293 (media: @media screen and (max-width: 800px))
-  Property: background-color
-    Value: #ffffff
-      -> /styles.css:182
-    Value: #0b5259
-      -> /styles.css:298 (media: @media screen and (max-width: 800px))
-      -> /tableStyles.css:105 (media: @media only screen and (min-width: 801px))
-  Property: flex-direction
-    Value: row
-      -> /styles.css:186
-    Value: column
-      -> /styles.css:294 (media: @media screen and (max-width: 800px))
-      -> /tableStyles.css:100 (media: @media only screen and (min-width: 801px))
-
-Selector: button[type="submit"]
-  Property: padding
-    Value: 16px
-      -> /htmxFilter.css:99 (media: @media (max-width: 800px))
-    Value: 14px 20px
-      -> /htmxFilter.css:70
-
-Selector: #flight-form output
-  Property: font-size
-    Value: 1.1em
-      -> /styles.css:201
-    Value: 1.2em
-      -> /styles.css:208
-    Value: 1em
-      -> /styles.css:351 (media: @media screen and (max-width: 800px))
-
-Selector: .weather-icons
-  Property: padding-bottom
-    Value: 14px
-      -> /mobileStyles.css:50 (media: @media only screen and (max-width: 800px))
-    Value: 5px
-      -> /tableStyles.css:82 (media: @media only screen and (min-width: 801px))
-  Property: margin-right
-    Value: 1em
-      -> /mobileStyles.css:51 (media: @media only screen and (max-width: 800px))
-    Value: 1.5em
-      -> /mobileStyles.css:54 (media: @media only screen and (max-width: 800px))
-      -> /tableStyles.css:75 (media: @media only screen and (min-width: 801px))
-  Property: margin-top
-    Value: 10px
-      -> /tableStyles.css:79 (media: @media only screen and (min-width: 801px))
-    Value: 0.2em
-      -> /mobileStyles.css:58 (media: @media only screen and (max-width: 800px))
-  Property: justify-content
-    Value: space-between
-      -> /mobileStyles.css:48 (media: @media only screen and (max-width: 800px))
-    Value: space-around
-      -> /mobileStyles.css:53 (media: @media only screen and (max-width: 800px))
-      -> /tableStyles.css:74 (media: @media only screen and (min-width: 801px))
-  Property: background-color
-    Value: #add8e6bf
-      -> /mobileStyles.css:55 (media: @media only screen and (max-width: 800px))
-    Value: #add8e670
-      -> /tableStyles.css:76 (media: @media only screen and (min-width: 801px))
-
-Selector: .nav-button
-  Property: margin
-    Value: 4px 2px
-      -> /styles.css:77
-    Value: 2px 0
-      -> /styles.css:289 (media: @media screen and (max-width: 800px))
+      -> /tableStyles.css:213 (media: @media only screen and (min-width: 1200px))
 
 Selector: h1
   Property: font-size
     Value: inherit
       -> /resetCSS.css:30
     Value: 2rem
-      -> /tableStyles.css:263
+      -> /tableStyles.css:253
     Value: 1.7em
-      -> /tableStyles.css:368
+      -> /tableStyles.css:358
   Property: margin
-    Value: 0.67em 0
-      -> /resetCSS.css:32
     Value: 0
       -> /styles.css:42
-      -> /tableStyles.css:264
+      -> /tableStyles.css:254
     Value: 6px
-      -> /tableStyles.css:367
+      -> /tableStyles.css:357
+    Value: 0.67em 0
+      -> /resetCSS.css:32
 
-Selector: .clickable
-  Property: color
-    Value: #007bff
-      -> /mobileStyles.css:106 (media: @media only screen and (max-width: 800px))
-    Value: #007BFF
-      -> /styles.css:533
-      -> /tableStyles.css:87 (media: @media only screen and (min-width: 801px))
-
-Selector: .card-content
-  Property: padding
-    Value: 9px
-      -> /mobileStyles.css:137 (media: @media only screen and (max-width: 800px))
-    Value: 20px
-      -> /styles.css:501 (media: @media only screen and (max-width: 800px))
-    Value: 15px
-      -> /tableStyles.css:60 (media: @media only screen and (min-width: 801px))
-    Value: 10px
-      -> /tableStyles.css:120 (media: @media only screen and (min-width: 801px))
+Selector: #add-city-button
+  Property: transition
+    Value: background-color 0.3s ease, transform 0.1s ease
+      -> /styles.css:612
+    Value: 
+      -> /formStyles.css:12
   Property: background-color
-    Value: #f4dfcf
-      -> /mobileStyles.css:134 (media: @media only screen and (max-width: 800px))
-      -> /tableStyles.css:117 (media: @media only screen and (min-width: 801px))
-    Value: white
-      -> /mobileStyles.css:129 (media: @media only screen and (max-width: 800px))
-      -> /styles.css:502 (media: @media only screen and (max-width: 800px))
+    Value: #ff7f50
+      -> /styles.css:603
+    Value: #db8363f2
+      -> /formStyles.css:3
 
-Selector: .form-group.city-row.operators
-  Property: width
-    Value: 50%
-      -> /formStyles.css:90
-    Value: 100%
-      -> /formStyles.css:133 (media: @media screen and (max-width: 800px))
+Selector: #table-container.show
+  Property: animation
+    Value: 
+      -> /styles.css:155
+    Value: moveUp 1s ease forwards
+      -> /styles.css:571
 
-Selector: .dropdown-list
-  Property: width
-    Value: 61vw
-      -> /search.css:86 (media: @media screen and (max-width: 800px))
-    Value: 100%
-      -> /search.css:32
-
-Selector: #table-container
-  Property: display
-    Value: flex
-      -> /tableStyles.css:269
-    Value: none
-      -> /styles.css:121
-  Property: width
-    Value: 95%
-      -> /styles.css:355 (media: @media screen and (max-width: 800px))
-    Value: 1200px
-      -> /tableStyles.css:201 (media: @media only screen and (min-width: 1200px))
-    Value: 90%
-      -> /styles.css:119
-      -> /tableStyles.css:171 (media: @media only screen and (min-width: 1000px))
-
-Selector: select
-  Property: border
-    Value: 1px solid #ccc
-      -> /styles.css:267
-    Value: 0px
-      -> /styles.css:277
-      -> /styles.css:342 (media: @media screen and (max-width: 800px))
-  Property: background-color
-    Value: #f9f9f9
-      -> /styles.css:269
-    Value: #338c84
-      -> /styles.css:275
-      -> /styles.css:340 (media: @media screen and (max-width: 800px))
-  Property: font-size
-    Value: 16px
-      -> /styles.css:270
-    Value: 12px
-      -> /styles.css:276
-      -> /styles.css:341 (media: @media screen and (max-width: 800px))
+Selector: .card-image
+  Property: height
+    Value: 35svh
+      -> /tableStyles.css:54 (media: @media only screen and (min-width: 801px))
+    Value: 21vh
+      -> /mobileStyles.css:122 (media: @media only screen and (max-width: 800px))
 
 Selector: .card-content h2
   Property: font-size
-    Value: 1.4em
-      -> /tableStyles.css:212 (media: @media only screen and (min-width: 1200px))
     Value: 1.7vw
       -> /tableStyles.css:64 (media: @media only screen and (min-width: 801px))
+    Value: 1.4em
+      -> /tableStyles.css:202 (media: @media only screen and (min-width: 1200px))
+
+Selector: .scroll-container
+  Property: width
+    Value: 100vw
+      -> /mobileStyles.css:22
+      -> /tableStyles.css:372
+    Value: 110vw
+      -> /mobileStyles.css:153 (media: @media only screen and (max-width: 800px))
+
+Selector: .card
+  Property: background-color
+    Value: white
+      -> /tableStyles.css:42 (media: @media only screen and (min-width: 801px))
+    Value: #f4dfcf
+      -> /mobileStyles.css:16
+  Property: border-radius
+    Value: 8px
+      -> /mobileStyles.css:97 (media: @media only screen and (max-width: 800px))
+    Value: 10px
+      -> /tableStyles.css:43 (media: @media only screen and (min-width: 801px))
+      -> /tableStyles.css:133 (media: @media only screen and (min-width: 801px))
+  Property: box-shadow
+    Value: 0px 4px 6px rgba(0, 0, 0, 0.1)
+      -> /mobileStyles.css:95 (media: @media only screen and (max-width: 800px))
+      -> /styles.css:496 (media: @media only screen and (max-width: 800px))
+    Value: 0 4px 8px rgba(0, 0, 0, 0.1)
+      -> /tableStyles.css:44 (media: @media only screen and (min-width: 801px))
+    Value: 0 2px 8px rgba(0, 0, 0, 0.1)
+      -> /mobileStyles.css:15
+
+Selector: #flight-form
+  Property: flex-direction
+    Value: column
+      -> /styles.css:294 (media: @media screen and (max-width: 800px))
+      -> /tableStyles.css:100 (media: @media only screen and (min-width: 801px))
+    Value: row
+      -> /styles.css:186
+  Property: background-color
+    Value: #0b5259
+      -> /styles.css:298 (media: @media screen and (max-width: 800px))
+      -> /tableStyles.css:105 (media: @media only screen and (min-width: 801px))
+    Value: #ffffff
+      -> /styles.css:182
+  Property: width
+    Value: 80%
+      -> /styles.css:190
+    Value: 90%
+      -> /styles.css:293 (media: @media screen and (max-width: 800px))
+    Value: 92%
+      -> /tableStyles.css:99 (media: @media only screen and (min-width: 801px))
+    Value: 100%
+      -> /mobileStyles.css:148 (media: @media only screen and (max-width: 800px))
 
 Selector: .modal-content
   Property: top
@@ -225,6 +155,12 @@ Selector: .modal-content
       -> /modal.css:56 (media: @media (max-width: 800px))
 
 Selector: body
+  Property: background-color
+    Value: #f4f4f4
+      -> /htmxFilter.css:2
+      -> /styles.css:15
+    Value: white
+      -> /resetCSS.css:21
   Property: padding
     Value: 20px
       -> /htmxFilter.css:4
@@ -238,61 +174,175 @@ Selector: body
       -> /styles.css:3
     Value: 8px
       -> /resetCSS.css:19
-  Property: background-color
-    Value: #f4f4f4
-      -> /htmxFilter.css:2
-      -> /styles.css:15
-    Value: white
-      -> /resetCSS.css:21
   Property: line-height
     Value: 1.6
       -> /htmxFilter.css:3
     Value: 1.45
       -> /resetCSS.css:24
 
-Selector: .card
-  Property: box-shadow
-    Value: 0 2px 8px rgba(0, 0, 0, 0.1)
-      -> /mobileStyles.css:15
-    Value: 0px 4px 6px rgba(0, 0, 0, 0.1)
-      -> /mobileStyles.css:95 (media: @media only screen and (max-width: 800px))
-      -> /styles.css:497 (media: @media only screen and (max-width: 800px))
-    Value: 0 4px 8px rgba(0, 0, 0, 0.1)
-      -> /tableStyles.css:44 (media: @media only screen and (min-width: 801px))
+Selector: .weather-icons
   Property: background-color
-    Value: #f4dfcf
-      -> /mobileStyles.css:16
-    Value: white
-      -> /tableStyles.css:42 (media: @media only screen and (min-width: 801px))
-  Property: border-radius
-    Value: 8px
-      -> /mobileStyles.css:97 (media: @media only screen and (max-width: 800px))
+    Value: #add8e6bf
+      -> /mobileStyles.css:55 (media: @media only screen and (max-width: 800px))
+    Value: #add8e670
+      -> /tableStyles.css:76 (media: @media only screen and (min-width: 801px))
+  Property: margin-top
+    Value: 0.2em
+      -> /mobileStyles.css:58 (media: @media only screen and (max-width: 800px))
     Value: 10px
-      -> /tableStyles.css:43 (media: @media only screen and (min-width: 801px))
-      -> /tableStyles.css:133 (media: @media only screen and (min-width: 801px))
-
-Selector: #flight-table
-  Property: margin-bottom
-    Value: 0
-      -> /styles.css:147
-    Value: 0px
-      -> /styles.css:363 (media: @media screen and (max-width: 800px))
-  Property: font-size
-    Value: 1.2vw
-      -> /styles.css:148
+      -> /tableStyles.css:79 (media: @media only screen and (min-width: 801px))
+  Property: justify-content
+    Value: space-between
+      -> /mobileStyles.css:48 (media: @media only screen and (max-width: 800px))
+    Value: space-around
+      -> /mobileStyles.css:53 (media: @media only screen and (max-width: 800px))
+      -> /tableStyles.css:74 (media: @media only screen and (min-width: 801px))
+  Property: padding-bottom
+    Value: 5px
+      -> /tableStyles.css:82 (media: @media only screen and (min-width: 801px))
+    Value: 14px
+      -> /mobileStyles.css:50 (media: @media only screen and (max-width: 800px))
+  Property: margin-right
     Value: 1em
-      -> /styles.css:364 (media: @media screen and (max-width: 800px))
-      -> /tableStyles.css:175 (media: @media only screen and (min-width: 1000px))
-      -> /tableStyles.css:205 (media: @media only screen and (min-width: 1200px))
-    Value: 2.5vw
-      -> /mobileStyles.css:43 (media: @media only screen and (max-width: 800px))
+      -> /mobileStyles.css:51 (media: @media only screen and (max-width: 800px))
+    Value: 1.5em
+      -> /mobileStyles.css:54 (media: @media only screen and (max-width: 800px))
+      -> /tableStyles.css:75 (media: @media only screen and (min-width: 801px))
 
-Selector: .card-image
-  Property: height
-    Value: 21vh
-      -> /mobileStyles.css:122 (media: @media only screen and (max-width: 800px))
-    Value: 35svh
-      -> /tableStyles.css:54 (media: @media only screen and (min-width: 801px))
+Selector: #table-container
+  Property: width
+    Value: 1200px
+      -> /tableStyles.css:191 (media: @media only screen and (min-width: 1200px))
+    Value: 90%
+      -> /styles.css:119
+      -> /tableStyles.css:170 (media: @media only screen and (min-width: 1000px))
+    Value: 95%
+      -> /styles.css:355 (media: @media screen and (max-width: 800px))
+  Property: display
+    Value: none
+      -> /styles.css:121
+    Value: flex
+      -> /tableStyles.css:259
+
+Selector: .dropdown-list
+  Property: width
+    Value: 100%
+      -> /search.css:32
+    Value: 61vw
+      -> /search.css:86 (media: @media screen and (max-width: 800px))
+
+Selector: .card-content
+  Property: background-color
+    Value: white
+      -> /mobileStyles.css:129 (media: @media only screen and (max-width: 800px))
+      -> /styles.css:501 (media: @media only screen and (max-width: 800px))
+    Value: #f4dfcf
+      -> /mobileStyles.css:134 (media: @media only screen and (max-width: 800px))
+      -> /tableStyles.css:117 (media: @media only screen and (min-width: 801px))
+  Property: padding
+    Value: 15px
+      -> /tableStyles.css:60 (media: @media only screen and (min-width: 801px))
+    Value: 10px
+      -> /tableStyles.css:120 (media: @media only screen and (min-width: 801px))
+    Value: 1em
+      -> /mobileStyles.css:137 (media: @media only screen and (max-width: 800px))
+    Value: 20px
+      -> /styles.css:500 (media: @media only screen and (max-width: 800px))
+
+Selector: .banner-content
+  Property: justify-content
+    Value: left
+      -> /tableStyles.css:349
+    Value: center
+      -> /tableStyles.css:290
+
+Selector: #page-banner
+  Property: background-color
+    Value: #009879
+      -> /tableStyles.css:272
+    Value: #0b5259
+      -> /tableStyles.css:322
+  Property: padding
+    Value: 20px 0
+      -> /tableStyles.css:274
+    Value: 0px 
+      -> /tableStyles.css:329
+
+Selector: .clickable
+  Property: color
+    Value: #007bff
+      -> /mobileStyles.css:106 (media: @media only screen and (max-width: 800px))
+    Value: #007BFF
+      -> /styles.css:532
+      -> /tableStyles.css:87 (media: @media only screen and (min-width: 801px))
+
+Selector: select
+  Property: border
+    Value: 1px solid #ccc
+      -> /styles.css:267
+    Value: 0px
+      -> /styles.css:277
+      -> /styles.css:342 (media: @media screen and (max-width: 800px))
+  Property: background-color
+    Value: #338c84
+      -> /styles.css:275
+      -> /styles.css:340 (media: @media screen and (max-width: 800px))
+    Value: #f9f9f9
+      -> /styles.css:269
+  Property: font-size
+    Value: 12px
+      -> /styles.css:276
+      -> /styles.css:341 (media: @media screen and (max-width: 800px))
+    Value: 16px
+      -> /styles.css:270
+
+Selector: .nav-button
+  Property: margin
+    Value: 4px 2px
+      -> /styles.css:77
+    Value: 2px 0
+      -> /styles.css:289 (media: @media screen and (max-width: 800px))
+
+Selector: button[type="submit"]
+  Property: padding
+    Value: 14px 20px
+      -> /htmxFilter.css:70
+    Value: 16px
+      -> /htmxFilter.css:99 (media: @media (max-width: 800px))
+
+Selector: .flight-price-slider
+  Property: width
+    Value: 50%
+      -> /formStyles.css:76
+    Value: 70vw
+      -> /formStyles.css:128 (media: @media screen and (max-width: 800px))
+
+Selector: .form-group label
+  Property: width
+    Value: 30%
+      -> /styles.css:252
+    Value: 40%
+      -> /styles.css:311 (media: @media screen and (max-width: 800px))
+
+Selector: td
+  Property: text-align
+    Value: left
+      -> /htmxFilter.css:18
+      -> /resetCSS.css:64
+    Value: center
+      -> /styles.css:522
+  Property: padding
+    Value: 7px
+      -> /styles.css:521
+    Value: 12px
+      -> /htmxFilter.css:19
+    Value: 0
+      -> /resetCSS.css:63
+  Property: font-size
+    Value: 0.9rem
+      -> /htmxFilter.css:90 (media: @media (max-width: 800px))
+    Value: 15px
+      -> /styles.css:523
 
 Selector: .form-group.city-row
   Property: display
@@ -301,78 +351,19 @@ Selector: .form-group.city-row
     Value: flow-root
       -> /formStyles.css:125 (media: @media screen and (max-width: 800px))
 
-Selector: ::-webkit-scrollbar-thumb
-  Property: background-color
-    Value: transparent
-      -> /styles.css:463 (media: @media screen and (max-width: 800px))
-    Value: #a0a0a000
-      -> /styles.css:383 (media: @media screen and (max-width: 800px))
-    Value: #d8d8d8
-      -> /styles.css:405
-
-Selector: td
-  Property: text-align
-    Value: center
-      -> /styles.css:523
-    Value: left
-      -> /htmxFilter.css:18
-      -> /resetCSS.css:64
-  Property: padding
-    Value: 12px
-      -> /htmxFilter.css:19
-    Value: 0
-      -> /resetCSS.css:63
-    Value: 7px
-      -> /styles.css:522
+Selector: #flight-form output
   Property: font-size
-    Value: 0.9rem
-      -> /htmxFilter.css:90 (media: @media (max-width: 800px))
-    Value: 15px
-      -> /styles.css:524
+    Value: 1.2em
+      -> /styles.css:208
+    Value: 1em
+      -> /styles.css:351 (media: @media screen and (max-width: 800px))
+    Value: 1.1em
+      -> /styles.css:201
 
-Selector: .banner-content
-  Property: justify-content
-    Value: center
-      -> /tableStyles.css:300
-    Value: left
-      -> /tableStyles.css:359
-
-Selector: #table-container.show
-  Property: animation
-    Value: 
-      -> /styles.css:155
-    Value: moveUp 1s ease forwards
-      -> /styles.css:572
-
-Selector: .scroll-container
+Selector: .form-group.city-row.operators
   Property: width
-    Value: 100vw
-      -> /mobileStyles.css:22
-      -> /tableStyles.css:382
-    Value: 110vw
-      -> /mobileStyles.css:152 (media: @media only screen and (max-width: 800px))
-
-Selector: #page-banner
-  Property: background-color
-    Value: #0b5259
-      -> /tableStyles.css:332
-    Value: #009879
-      -> /tableStyles.css:282
-  Property: padding
-    Value: 20px 0
-      -> /tableStyles.css:284
-    Value: 0px 
-      -> /tableStyles.css:339
-
-Selector: #add-city-button
-  Property: background-color
-    Value: #db8363f2
-      -> /formStyles.css:3
-    Value: #ff7f50
-      -> /styles.css:604
-  Property: transition
-    Value: 
-      -> /formStyles.css:12
-    Value: background-color 0.3s ease, transform 0.1s ease
-      -> /styles.css:613
+    Value: 50%
+      -> /formStyles.css:90
+    Value: 100%
+      -> /formStyles.css:133 (media: @media screen and (max-width: 800px))
 
