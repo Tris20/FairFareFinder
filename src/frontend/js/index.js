@@ -182,6 +182,7 @@ document
           toggleDurationVisibility(); // Update UI
         }
       }
+
     }
   });
 
@@ -211,6 +212,7 @@ document
       <option value="AND">AND</option>
       <option value="OR">OR</option>
     </select>
+
     <div class="dropdown-container">
       <input
         id="city-search"
@@ -224,6 +226,7 @@ document
       </button>
       <ul class="dropdown-list hidden"></ul>
     </div>
+
 
     </div>
 <div class="flight-price-slider">
@@ -245,7 +248,9 @@ document
       hx-include="#combinedPrice-slider${rowCount}"
       autocomplete="off"
     />
+
     </div>
+
   `;
     cityRows.appendChild(div);
     htmx.process(div);
