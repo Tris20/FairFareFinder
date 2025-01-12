@@ -13,12 +13,10 @@ import (
 	"strings"
 )
 
-// CSSInfo holds all the discovered CSS declarations
-// key:   selector name (e.g. ".button", "#header", "h1", etc.)
-// value: map[propertyName][]ConflictDetail
+// CSSInfo holds all discovered CSS declarations
 type CSSInfo map[string]map[string][]ConflictDetail
 
-// ConflictDetail stores info about where and how a property was declared
+// ConflictDetail stores info about where/how a property was declared
 type ConflictDetail struct {
 	FilePath   string
 	Line       int
@@ -59,7 +57,6 @@ func main() {
 		if err != nil {
 			return err
 		}
-		// Check if it's a CSS file
 		if !d.IsDir() && strings.HasSuffix(strings.ToLower(path), ".css") {
 			parseCSSFile(path, cssInfo)
 		}
@@ -102,12 +99,26 @@ func parseCSSFile(filePath string, cssInfo CSSInfo) {
 	var insideKeyframes bool
 	var keyframesBraceDepth int
 
+	// Track if we're currently inside a multi-line comment
+	var inComment bool
+
 	lineNum := 0
 	for scanner.Scan() {
-		line := scanner.Text()
+		rawLine := scanner.Text()
 		lineNum++
 
-		trimmed := strings.TrimSpace(line)
+		// First strip out any comment text
+		cleanLine, stillInComment := stripComments(rawLine, inComment)
+		inComment = stillInComment
+
+		// If after removing comments the line is blank or we remain inside a comment, skip
+		cleanLine = strings.TrimSpace(cleanLine)
+		if cleanLine == "" || inComment {
+			continue
+		}
+
+		// We can now do the naive parse (media, keyframes, selectors, etc.) with `cleanLine`
+		trimmed := cleanLine
 
 		// Check if we start an @media block
 		if strings.HasPrefix(trimmed, "@media") {
@@ -121,11 +132,9 @@ func parseCSSFile(filePath string, cssInfo CSSInfo) {
 		}
 		// If inside a @media block, track braces
 		if insideMedia {
-			// Update brace depth for this line
 			mediaBraceDepth += strings.Count(trimmed, "{")
 			mediaBraceDepth -= strings.Count(trimmed, "}")
 			if mediaBraceDepth <= 0 {
-				// We've closed the @media block
 				insideMedia = false
 				mediaQueryContext = ""
 			}
@@ -133,7 +142,6 @@ func parseCSSFile(filePath string, cssInfo CSSInfo) {
 
 		// Check if we start an @keyframes block
 		// e.g. "@keyframes fadeIn {"
-		// or "@-webkit-keyframes fadeIn {"
 		if strings.HasPrefix(trimmed, "@keyframes") ||
 			strings.HasPrefix(trimmed, "@-webkit-keyframes") ||
 			strings.HasPrefix(trimmed, "@-moz-keyframes") ||
@@ -143,8 +151,7 @@ func parseCSSFile(filePath string, cssInfo CSSInfo) {
 			if strings.Contains(trimmed, "{") {
 				keyframesBraceDepth++
 			}
-			// We skip processing inside keyframes entirely,
-			// or you can store them in a separate structure if you like.
+			// We skip processing inside keyframes entirely
 			continue
 		}
 		// If inside keyframes, skip lines until we close the block
@@ -158,8 +165,7 @@ func parseCSSFile(filePath string, cssInfo CSSInfo) {
 			continue
 		}
 
-		// If we're here, we're not inside a keyframes block
-		// Check if this line starts a new selector block
+		// If we're here, we’re not in keyframes block. Check if this line starts a new selector block.
 		if selectorRegex.MatchString(trimmed) {
 			matches := selectorRegex.FindStringSubmatch(trimmed)
 			if len(matches) > 1 {
@@ -170,7 +176,6 @@ func parseCSSFile(filePath string, cssInfo CSSInfo) {
 			}
 		} else if insideBlock {
 			// We are inside a selector block
-			// Check if we reached a closing brace
 			if strings.Contains(trimmed, "}") {
 				insideBlock = false
 				currentSelector = ""
@@ -178,7 +183,7 @@ func parseCSSFile(filePath string, cssInfo CSSInfo) {
 			}
 
 			// Attempt to parse a property-value pair: "color: red;" or "background: #fff;"
-			parts := strings.Split(line, ":")
+			parts := strings.Split(trimmed, ":")
 			if len(parts) == 2 {
 				prop := strings.TrimSpace(parts[0])
 				val := parts[1]
@@ -201,6 +206,44 @@ func parseCSSFile(filePath string, cssInfo CSSInfo) {
 	if err := scanner.Err(); err != nil {
 		log.Printf("Scanner error in file %s: %v\n", filePath, err)
 	}
+}
+
+// stripComments removes anything inside /* ... */ from a single line,
+// allowing for partial inline removal. Also manages multi-line comment state.
+func stripComments(line string, inComment bool) (string, bool) {
+	var sb strings.Builder
+	i := 0
+	for i < len(line) {
+		// If we're currently inside a comment, look for the closing '*/'
+		if inComment {
+			idx := strings.Index(line[i:], "*/")
+			if idx == -1 {
+				// No closing '*/' this line, skip entire remainder
+				return "", true
+			} else {
+				// Found closing '*/'
+				i += idx + 2 // move past the '*/'
+				inComment = false
+				continue
+			}
+		} else {
+			// Not in a comment, look for '/*'
+			idx := strings.Index(line[i:], "/*")
+			if idx == -1 {
+				// No comment start, append remainder to output
+				sb.WriteString(line[i:])
+				break
+			} else {
+				// Append everything up to the '/*'
+				sb.WriteString(line[i : i+idx])
+				// Move index to after '/*'
+				i += idx + 2
+				inComment = true
+				// Now we loop again and look for '*/'
+			}
+		}
+	}
+	return sb.String(), inComment
 }
 
 // parseMediaQuery tries to extract the entire `@media` line up to the first "{"
@@ -289,7 +332,6 @@ func printConflicts(conflicts map[string]map[string][]ConflictDetail, w io.Write
 				for _, vd := range valDetails {
 					shortPath := shortenPath(vd.FilePath, folderDepth)
 					if vd.MediaQuery != "" {
-						// Indicate if we were inside a media query
 						fmt.Fprintf(w, "      -> %s:%d (media: %s)\n", shortPath, vd.Line, vd.MediaQuery)
 					} else {
 						fmt.Fprintf(w, "      -> %s:%d\n", shortPath, vd.Line)
@@ -304,20 +346,15 @@ func printConflicts(conflicts map[string]map[string][]ConflictDetail, w io.Write
 // shortenPath keeps only the last `folderDepth` segments of `fullPath`.
 func shortenPath(fullPath string, folderDepth int) string {
 	parts := strings.Split(fullPath, "/")
-
-	// Filter out empty parts if leading slash is present
 	filtered := make([]string, 0, len(parts))
 	for _, p := range parts {
 		if p != "" {
 			filtered = append(filtered, p)
 		}
 	}
-	// If folderDepth >= length of filtered, return "/" + join(all)
 	if folderDepth >= len(filtered) {
 		return "/" + strings.Join(filtered, "/")
 	}
-
-	// Keep last folderDepth segments
 	lastSegments := filtered[len(filtered)-folderDepth:]
 	return "/" + strings.Join(lastSegments, "/")
 }

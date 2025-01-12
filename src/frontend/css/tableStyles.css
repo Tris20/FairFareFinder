@@ -155,7 +155,6 @@ width: 30%;
         display: none;
     }
     .desktop-card-grid {
-        display: inline-grid;
 display: grid;
 grid-template-columns: repeat(2, 1fr);
 grid-gap: 20px;
@@ -181,16 +180,7 @@ font-size: 1.0vw;
 }
 }
 
-/* for super wide screens reduce table width for readability*/
-/*@media only screen and (min-width: 1400px) {
-#table-container {
-  width: 80%;
-}
-#flight-table {
-font-size: 1.0vw;
-}
-}*/
-/*For bigger monitors*/
+
 
 @media only screen and (min-width: 1200px) {
 .desktop-card-grid {
@@ -253,9 +243,9 @@ height: 77svh;
 
 /* Icon styling */
 #fff-icon {
-    height: 30px;          /* Adjust the size of the icon */
-    margin-right: 10px;     /* Add some spacing between the icon and the text */
     margin-left:10%;
+    height: 42px; 
+    margin-right: 5px; 
 }
 
 /* Optional: Adjust the text style */
@@ -301,11 +291,7 @@ h1 {
     align-items: center; /* Vertically align the icon and the text */
 }
 
-/* Icon styling */
-#fff-icon {
-    height: 42px; /* Adjust the icon size */
-    margin-right: 5px; /* Space between the icon and the text */
-}
+
 
 
 
