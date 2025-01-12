@@ -63,6 +63,8 @@ label {
   margin-bottom: 5px;
 }
 
+
+/*
 button[type="submit"] {
   width: 100%;
   background-color: #4caf50;
@@ -73,10 +75,12 @@ button[type="submit"] {
   border-radius: 4px;
   cursor: pointer;
 }
-
 button[type="submit"]:hover {
   background-color: #45a049;
 }
+
+*/
+
 
 /* Mobile responsive adjustments */
 @media (max-width: 800px) {
@@ -94,15 +98,13 @@ button[type="submit"]:hover {
   input[type="date"] {
     width: 100%; /* Ensure form inputs take up full width on mobile */
   }
-
+/*
   button[type="submit"] {
     padding: 16px;
-    font-size: 1.1rem; /* Increase button size for easier tap targets */
+    font-size: 1.1rem;    */
   }
 
   table {
     overflow-x: auto; /* Enable horizontal scrolling for large tables on mobile */
   }
-
-
 }

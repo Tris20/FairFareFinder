@@ -17,14 +17,6 @@
 
   scroll-snap-align: start; /* Snap each card to the start */
 }
-
-.scroll-container {
-  width: 100vw;
-  overflow: hidden; /* Hide scrollbars */
-  overflow-x: scroll;
-  overflow-y: scroll;
-}
-
 @media only screen and (min-width: 801px) {
   .mobile-view {
     display: none;
@@ -103,14 +95,7 @@
   }
 
   .clickable {
-    color: #007bff;
-    text-decoration: none;
-    text-align: right;
     padding: 6px;
-  }
-
-  .clickable:hover {
-    text-decoration: underline;
   }
 
   /* 60% of the card for the image */

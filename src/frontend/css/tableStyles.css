@@ -1,113 +1,96 @@
-
-
 /* Hide mobile and table view */
 @media only screen and (min-width: 801px) {
-      .mobile-view {
-        display: none;
-    }
+  .mobile-view {
+    display: none;
+  }
 
-.desktop-view {
-  display: none; /* Ensures table view is hidden in card grid view */
-}
+  .desktop-view {
+    display: none; /* Ensures table view is hidden in card grid view */
+  }
 
+  .weather-icon a {
+    text-decoration: none !important;
+    display: ruby-text; /* Ensures it behaves like a normal text element */
+    color: black;
+    font-family: "Dosis", sans-serif;
+    padding: 0px;
+    margin: 0px;
+  }
 
-.weather-icon a {
-  text-decoration: none !important;
-  display: ruby-text; /* Ensures it behaves like a normal text element */
-  color: black;
-font-family: 'Dosis', sans-serif;
-padding: 0px;
-margin: 0px;
+  .weather-icons .weather-icon {
+    text-decoration: none; /* Removes underline from links */
+    display: inline-block; /* Ensures it behaves like a block for layout */
+    color: #000000c7; /* Sets the text color */
+    padding: 0; /* Removes extra space */
+    margin: 0; /* Removes extra space */
+  }
 
-}
+  /* Desktop card grid */
+  .desktop-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 cards per row */
+    grid-gap: 20px; /* Space between cards */
+    margin: 0px 5%;
+    padding: 10px;
+  }
 
-.weather-icons .weather-icon {
-  text-decoration: none; /* Removes underline from links */
-  display: inline-block; /* Ensures it behaves like a block for layout */
-  color: #000000c7; /* Sets the text color */
-  padding: 0; /* Removes extra space */
-  margin: 0; /* Removes extra space */
-}
+  .card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
 
-/* Desktop card grid */
-.desktop-card-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
-  grid-gap: 20px; /* Space between cards */
- margin: 0px 5%;*/
-  padding: 10px;
-}
+  .card:hover {
+    transform: translateY(-10px);
+  }
 
-.card {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease;
-}
+  .card-image {
+    height: 35svh;
+    background-size: cover;
+    background-position: center;
+  }
 
-.card:hover {
-  transform: translateY(-10px);
-}
+  .card-content {
+    padding: 15px;
+  }
 
-.card-image {
-  height: 35svh;
-  background-size: cover;
-  background-position: center;
-}
+  .card-content h2 {
+    font-size: 1.7vw;
+    margin: 0;
+  }
 
-.card-content {
-  padding: 15px;
-}
+  .card-content p {
+    margin: 5px 0;
+  }
 
-.card-content h2 {
-  font-size: 1.7vw;
-  margin: 0;
-}
-
-.card-content p {
-  margin: 5px 0;
-}
-
-.weather-icons {
-  display: flex;
-  justify-content: space-around;
-margin-right: 1.5em;
-background-color: #add8e670;
-border-radius: 14px;
-width: 100%;
-margin-top: 10px;
-text-align: center;
+  .weather-icons {
+    display: flex;
+    justify-content: space-around;
+    margin-right: 1.5em;
+    background-color: #add8e670;
+    border-radius: 14px;
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
     padding-top: 5px;
     padding-bottom: 5px;
-margin-bottom: 13px;
-}
+    margin-bottom: 13px;
+  }
 
-.clickable {
-  color: #007BFF;
-  text-decoration: none;
-  text-align:right;
-}
-
-.clickable:hover {
-  text-decoration: underline;
-}
-
-
-/* mobile card styles copied into grid view*/
+  /* mobile card styles copied into grid view*/
   #flight-form {
     width: 92%; /* Adjust form width on mobile */
     flex-direction: column; /* Align items in a row */
-padding: calc(10px + 2%);
-max-width: 1200px;
-  padding-bottom: 0px;
-padding-top: 20px;
-background-color: #0b5259;
-font-family: 'Dosis', sans-serif;
- }
+    padding: calc(10px + 2%);
+    max-width: 1200px;
+    padding-bottom: 0px;
+    padding-top: 20px;
+    background-color: #0b5259;
+    font-family: "Dosis", sans-serif;
+  }
 
-.card-content {
-  /*  flex: 0 0 60%;
+  .card-content {
+    /*  flex: 0 0 60%;
     padding: 20px;
     background-color: white;
     display: flex;
@@ -120,245 +103,184 @@ font-family: 'Dosis', sans-serif;
     padding: 10px;
   }
 
-.card {
-  /*
-    min-width: 100%;
-    scroll-snap-align: start;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    flex-direction: row;
-    line-height: 0;
-    overflow: hidden;
-*/
-
-    border-radius: 10px;
+  #flight-form output {
+    width: 30%;
   }
-
-#flight-form output {
-width: 30%;
-}
-
-
-
-
-
 } /* end of desktop grid*/
-
-
-
-
-
-
 
 /* For mobile devices, hide the table and show the carousel */
 @media only screen and (max-width: 800px) {
-    .desktop-view {
-        display: none;
-    }
-    .desktop-card-grid {
-display: grid;
-grid-template-columns: repeat(1, 1fr);
-grid-gap: 20px;
-margin: 0px 5%;
-    }
-
-
+  .desktop-view {
+    display: none;
   }
+  .desktop-card-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
+    margin: 0px 5%;
+  }
+}
 
 /* for super wide screens reduce table width for readability*/
 @media only screen and (min-width: 1000px) {
-#table-container {
-  width: 90%;
-}
-#flight-table {
-
-font-size: 1em;
-/*
+  #table-container {
+    width: 90%;
+  }
+  #flight-table {
+    font-size: 1em;
+    /*
 height: 77svh;
 
 font-size: 1.0vw;
 */
+  }
 }
-}
-
-
 
 @media only screen and (min-width: 1200px) {
-.desktop-card-grid {
-    grid-template-columns: repeat(3, 1fr);
+  #table-container {
+    width: 1200px;
   }
 
-#table-container {
-  width: 1200px;
-}
+  #flight-table {
+    font-size: 1em;
 
-#flight-table {
-font-size: 1em;
-
-/*
+    /*
 height: 77svh;
 */
-}
+  }
   .card-content h2 {
     font-size: 1.4em;
     margin: 0;
   }
 
-
   .desktop-card-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
-    grid-gap: 20px; /* Space between cards */
-    width: calc(100% - 10%); /* Full width minus 10% padding */
-    max-width: 1200px; /* Restrict maximum width to 1200px */
-    margin: 0 auto; /* Center the grid horizontally */
-    padding: 10px; /* Internal padding for aesthetics */
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    width: calc(100% - 10%);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
   }
 }
 
-
-
-
-
 #page-header {
-    display: none; /* Initially hidden */
-    text-align: center;
-    margin-bottom: 20px;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    width: 100%; /* Make sure the header spans the width of the container */
+  display: none; /* Initially hidden */
+  text-align: center;
+  margin-bottom: 20px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  width: 100%; /* Make sure the header spans the width of the container */
 }
 
 #page-header.show {
-    display: block;
-    opacity: 1;
+  display: block;
+  opacity: 1;
   /*  animation: moveUp 1s ease forwards;*/
 }
 
 /* Flexbox to align the icon and text side by side */
 .header-content {
-    display: flex;
-    align-items: center;    /* Vertically align icon and text */
-    justify-content: left; /* Horizontally center icon and text within the header */
+  display: flex;
+  align-items: center; /* Vertically align icon and text */
+  justify-content: left; /* Horizontally center icon and text within the header */
 }
 
 /* Icon styling */
 #fff-icon {
-    margin-left:10%;
-    height: 42px; 
-    margin-right: 5px; 
-}
-
-/* Optional: Adjust the text style */
-h1 {
-    font-size: 2rem;
-    margin: 0;
+  margin-left: 10%;
+  height: 42px;
+  margin-right: 5px;
 }
 
 /* Ensure the header and its content are centered within the table container */
 #table-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Horizontally center the content inside the container */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Horizontally center the content inside the container */
 }
-
-
-
-
 
 /* Banner styling */
 #page-banner {
-    display: none; /* Initially hidden */
-    width: 100%; /* Full-width banner */
-    background-color: #009879; /* Banner background color */
-    color: white; /* Text color */
-    padding: 20px 0; /* Padding to create space inside the banner */
-    text-align: center; /* Center content horizontally */
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+  display: none; /* Initially hidden */
+  width: 100%; /* Full-width banner */
+  background-color: #009879; /* Banner background color */
+  color: white; /* Text color */
+  padding: 20px 0; /* Padding to create space inside the banner */
+  text-align: center; /* Center content horizontally */
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
 }
 
 /* Show the banner with an animation */
 #page-banner.show {
-    display: block;
-    opacity: 1;
-    animation: fadeIn 1s ease forwards;
+  display: block;
+  opacity: 1;
+  animation: fadeIn 1s ease forwards;
 }
 
 /* Flexbox to align the icon and text side by side */
 .banner-content {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Vertically align the icon and the text */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Vertically align the icon and the text */
 }
-
-
-
-
 
 /* Fade-in animation */
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-
-
-
-
 
 /* Banner Styling */
 #page-banner {
-    display: none; /* Initially hidden */
-    width: 100%; /* Full-width banner */
- /*   background-color: #7cdbdbc7; sky blue */
-/*    background-color: #2a8a8ac7;*/
-   /* background-color: #009879c7;*/
+  display: none; /* Initially hidden */
+  width: 100%; /* Full-width banner */
+  /*   background-color: #7cdbdbc7; sky blue */
+  /*    background-color: #2a8a8ac7;*/
+  /* background-color: #009879c7;*/
 
+  height: 55px;
+  background-color: #0b5259;
 
-    height:55px;
- background-color: #0b5259;
+  color: white; /* Text color */
 
-
-    color: white; /* Text color */
-
-
-
-    padding: 0px ; /* Padding for spacing */
-    text-align: center;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    position: fixed; /* Make the banner stick to the top */
-    top: 0; /* Ensure it's positioned at the top */
-    left: 0; /* Align to the left */
-    z-index: 999; /* Make sure it's above other content */
+  padding: 0px; /* Padding for spacing */
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  position: fixed; /* Make the banner stick to the top */
+  top: 0; /* Ensure it's positioned at the top */
+  left: 0; /* Align to the left */
+  z-index: 999; /* Make sure it's above other content */
 }
 
 /* When the banner is shown */
 #page-banner.show {
-    display: block;
-    opacity: 1;
-    animation: fadeIn 1s ease forwards;
+  display: block;
+  opacity: 1;
+  animation: fadeIn 1s ease forwards;
 }
 
 /* Flexbox to align the icon and text side by side */
 .banner-content {
-    display: flex;
-    justify-content: left; /* Center horizontally */
-    align-items: center; /* Vertically align the icon and the text */
+  display: flex;
+  justify-content: left; /* Center horizontally */
+  align-items: center; /* Vertically align the icon and the text */
 }
-
 
 /* Apply Dosis specifically to headings */
-h1, h2, h3 {
-    font-family: 'Dosis', sans-serif;
-margin: 6px;
-font-size: 1.7em;
+h1,
+h2,
+h3 {
+  font-family: "Dosis", sans-serif;
+  margin: 6px;
+  font-size: 1.7em;
 }
-
-
 
 /*
 .first-letter {
@@ -367,55 +289,56 @@ font-size: 1.7em;
 */
 
 .scroll-container {
-    position: relative;
-    height: 93vh; /* Set the height for scrolling, e.g., 80% of the viewport */top: -10px;
-    width: 100vw; /* Ensure the container spans the full width of the viewport */
-    overflow-y: scroll; /* Enable vertical scrolling */
-    overflow-x: scroll; /* Disable horizontal scrolling */
-    box-sizing: border-box; /* Ensure padding is included in width/height */
-    padding: 10px; /* Optional padding for aesthetics */
+  position: relative;
+  height: 93vh;
+  top: -10px;
+  width: 100vw;
+  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 /* Customize the scrollbar for better UX */
 .scroll-container::-webkit-scrollbar {
-    width: 8px; /* Width of the scrollbar */
+  width: 8px; /* Width of the scrollbar */
 }
 
 .scroll-container::-webkit-scrollbar-thumb {
-    background-color: #888; /* Scrollbar thumb color */
-    border-radius: 4px; /* Rounded scrollbar corners */
+  background-color: #888; /* Scrollbar thumb color */
+  border-radius: 4px; /* Rounded scrollbar corners */
 }
 
 .scroll-container::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Darker color on hover */
+  background-color: #555; /* Darker color on hover */
 }
 
 /* Table styles inside the scroll container */
 .scroll-container table {
-    width: 100%; /* Table stretches to fill the container width */
-    border-collapse: collapse; /* Collapse table borders */
+  width: 100%; /* Table stretches to fill the container width */
+  border-collapse: collapse; /* Collapse table borders */
 }
 
 .scroll-container th,
 .scroll-container td {
-    text-align: center;
-    padding: 10px;
-    border: 1px solid #ddd; /* Light gray border */
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd; /* Light gray border */
 }
 
-
 .destination-title {
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .destination-duration {
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #duration-container {

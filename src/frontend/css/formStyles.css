@@ -1,6 +1,6 @@
 /* Additional styling for the add city button */
 #add-city-button {
-  background-color: #db8363f2; /* A coral-like color */
+  background-color: #db8363f2;
   border: none;
   border-radius: 4px;
   color: #ffffff;
@@ -19,6 +19,12 @@
   background-color: #f07a5f;
   /* outline: darkorange;
   outline-style: groove;*/
+}
+
+#add-city-button:hover,
+#add-city-button:focus {
+  background-color: #ff6347; /* A slightly darker coral */
+  outline: none; /* Remove default focus outline, if desired */
 }
 
 /* Active state provides feedback on click */
@@ -41,10 +47,11 @@
 }
 
 select:hover {
-  background-color: #3fa89d; /* Slightly lighter green for hover */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-  transform: scale(1.02); /* Slight zoom effect */
-  cursor: pointer; /* Change cursor to pointer */
+  background-color: #3fa89d;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  transform: scale(1.02);
+  cursor: pointer;
 }
 
 select {
@@ -120,6 +127,8 @@ select {
   display: flex;
   width: 100%;
 }
+
+/* MOBILE*/
 @media screen and (max-width: 800px) {
   .form-group.city-row {
     display: flow-root;

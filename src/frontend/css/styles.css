@@ -37,10 +37,7 @@ overscroll-behavior: none;
   }
 }
 
-h1 {
-  color: white;
-  margin: 0;
-}
+
 
 .image-container {
   display: flex;
@@ -210,6 +207,16 @@ color: white;
 max-width: 75px;
 }
 
+.clickable {
+  color: #007BFF;
+  text-decoration: none;
+ text-align: right;
+}
+
+
+.clickable:hover {
+  text-decoration: underline;
+}
 /* Fullscreen background image */
 #bg-image-dreams {
   position: fixed;
@@ -280,112 +287,119 @@ background-color: #338c84;
 
 
 @media screen and (max-width: 800px) {
-  .navbar-container nav {
-    flex-direction: column;
-  }
+.navbar-container nav {
+  flex-direction: column;
+}
 
-  .nav-button {
-    width: 100%;
-    margin: 2px 0;
-  }
+.nav-button {
+  width: 100%;
+  margin: 2px 0;
+}
 
-  #flight-form {
-    width: 90%; /* Adjust form width on mobile */
-    flex-direction: column; /* Align items in a row */
+#flight-form {
+  width: 90%; /* Adjust form width on mobile */
+  flex-direction: column; /* Align items in a row */
 padding: calc(10px + 2%);
 
-  padding-bottom: 0px;
+padding-bottom: 0px;
 background-color: #0b5259;
- }
+}
 
-  /* On smaller screens, keep the label and input in a row */
-  .form-group {
-    flex-direction: row;
-  }
+/* On smaller screens, keep the label and input in a row */
+.form-group {
+  flex-direction: row;
+}
 
-  .form-group label[for="combinedPrice-slider"] {
-    display: none; /* Hide label for slider on mobile */
-  }
+.form-group label[for="combinedPrice-slider"] {
+  display: none; /* Hide label for slider on mobile */
+}
 
-  .form-group label {
-    width: 40%; /* Adjust label width on smaller screens */
-  }
+.form-group label {
+  width: 40%; /* Adjust label width on smaller screens */
+}
 
-  /* Adjust combined price slider container */
-  .form-group input[type="range"] {
-    width: 100%; /* Make slider take full width */
-    /*margin-left: 10px;  Add space between output and slider */
-  }
+/* Adjust combined price slider container */
+.form-group input[type="range"] {
+  width: 100%; /* Make slider take full width */
+  /*margin-left: 10px;  Add space between output and slider */
+}
 
-  /* Ensure the output appears to the left of the slider */
-  .form-group.output-range {
-    display: flex;
-    flex-direction: row; /* Ensure output and slider are side by side */
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-  }
+/* Ensure the output appears to the left of the slider */
+.form-group.output-range {
+  display: flex;
+  flex-direction: row; /* Ensure output and slider are side by side */
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
 
-  .form-group.output-range output {
-    width: 60%; /* Allow output to size based on its content */
-    min-width: 50px; /* Set a minimum width */
-  }
+.form-group.output-range output {
+  width: 60%; /* Allow output to size based on its content */
+  min-width: 50px; /* Set a minimum width */
+}
 
-  .combinedPrice-slider {
-    display: none;
-  }
+.combinedPrice-slider {
+  display: none;
+}
 
 
 select {
 background-color: #338c84;
-  font-size: 12px;
+font-size: 12px;
 border: 0px;
 }
 
 #flight-form label{
-  font-size: 1em;
-  width: 20%
+font-size: 1em;
+width: 20%
 }
 /* Center-align the output values for sliders */
 #flight-form output {
-  font-size: 1em; /* Increase the font size for better visibility */
+font-size: 1em; /* Increase the font size for better visibility */
 }
 
-  #table-container {
-    width: 95%;
-    height: 101%;
-    top: calc(50% + 50px);
-  }
+#table-container {
+  width: 95%;
+  height: 101%;
+  top: calc(50% + 50px);
+}
 
-  #flight-table {
-    width: 100%; /* Ensure table width is consistent on mobile */
-    overflow-x: scroll; /* Enable horizontal scrolling if needed */
+#flight-table {
+  width: 100%; /* Ensure table width is consistent on mobile */
+  overflow-x: scroll; /* Enable horizontal scrolling if needed */
 margin-bottom: 0px;
-    font-size: 1em;
-  /*
-    height: 60svh;
-    */
-  }
+  font-size: 1em;
+/*
+  height: 60svh;
+  */
+}
 
-  #flight-table th,
-  #flight-table td {
-    width: auto; /* Make sure the table's columns resize accordingly */
-  }
+#flight-table th,
+#flight-table td {
+  width: auto; /* Make sure the table's columns resize accordingly */
+}
 
-    .scroll-container::-webkit-scrollbar {
-        display: none; /* Hide scrollbar for WebKit browsers on mobile */
+  .scroll-container::-webkit-scrollbar {
+      display: none; 
     }
 
-    .scroll-container {
-        scrollbar-width: none; /* Hide scrollbar for Firefox on mobile */
+  .scroll-container {
+      scrollbar-width: none; 
     }
 ::-webkit-scrollbar-thumb {
-    background-color: #a0a0a000;
-    border-radius: 10px;
+  background-color: #a0a0a000;
+ /*  background-color: transparent; */
+  border-radius: 10px;
 
 }
 
+    ::-webkit-scrollbar {
+        display: none; 
+    }
+    
 }
+
+
 
 
 
@@ -453,20 +467,7 @@ margin-bottom: 0px;
     scrollbar-color: #a0a0a0 transparent;
 }
 
-/* Hide scrollbar completely on mobile */
-@media screen and (max-width: 800px) {
-    ::-webkit-scrollbar {
-        display: none; /* Hide entire scrollbar on mobile */
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background-color: transparent; /* Ensure thumb is transparent (optional) */
-    }
 
-    .scroll-container {
-        scrollbar-width: none; /* Firefox: hide scrollbar on mobile */
-    }
-}
 
 
 
@@ -493,7 +494,6 @@ margin-bottom: 0px;
     .card {
         min-width: 100%;
         scroll-snap-align: start;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .card-content {
@@ -528,14 +528,8 @@ td {
 }
 
 
-.clickable {
-  color: #007BFF;
-  text-decoration: none;
-}
 
-.clickable:hover {
-  text-decoration: underline;
-}
+
 
 
 
@@ -598,28 +592,4 @@ td {
 
 
 
-/* Additional styling for the add city button */
-#add-city-button {
-  background-color: #ff7f50; /* A coral-like color */
-  border: none;
-  border-radius: 4px;
-  color: #ffffff;
-  font-family: "Dosis", sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 0.5em 1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease;
-}
 
-/* Hover and focus states for a nice interactive feel */
-#add-city-button:hover,
-#add-city-button:focus {
-  background-color: #ff6347; /* A slightly darker coral */
-  outline: none; /* Remove default focus outline, if desired */
-}
-
-/* Active state provides feedback on click */
-#add-city-button:active {
-  transform: scale(0.98);
-}
