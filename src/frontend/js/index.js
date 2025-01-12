@@ -207,11 +207,10 @@ document
     div.innerHTML = `
 <div class="form-group city-row operators">
     <button type="button" class="remove-city-button">-</button>
-    <select name="logical_operator[]">
+    <select class="logical-operator" name="logical_operator[]">
       <option value="AND">AND</option>
       <option value="OR">OR</option>
     </select>
-    </div>
     <div class="dropdown-container">
       <input
         id="city-search"
@@ -225,8 +224,9 @@ document
       </button>
       <ul class="dropdown-list hidden"></ul>
     </div>
+
+    </div>
 <div class="flight-price-slider">
-    <label for="priceOutput${rowCount}"></label>
     <output id="priceOutput${rowCount}" class="output-range">€399.00</output>
     <input
       type="range"

@@ -143,4 +143,13 @@
     /*  margin-bottom: 0.8em;*/
     font-size: 3vw;
   }
+
+  #flight-form {
+    width: 100%; /* Adjust form width on mobile */
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .scroll-container {
+    width: 110vw;
+  }
 }

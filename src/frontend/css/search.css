@@ -5,19 +5,21 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  width: 61vw;
+  width: auto;
+
   max-width: -webkit-fill-available;
   min-width: 120px;
 }
 
 /* Input field styling */
 .dropdown-input {
-  width: 100%;
   padding: 8px;
   font-size: 1em;
   border: 1px solid #ccc;
   border-radius: 4px;
   min-width: 80px;
+  max-width: 300px;
+  flex: 1;
 }
 
 /* Dropdown list */
@@ -75,4 +77,10 @@
 .highlighted {
   background-color: #ddd; /* Light gray background */
   color: #000; /* Black text */
+}
+
+@media screen and (max-width: 800px) {
+  .dropdown-list {
+    width: 61vw;
+  }
 }

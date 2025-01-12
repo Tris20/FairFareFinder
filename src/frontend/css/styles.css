@@ -207,6 +207,7 @@ color: white;
 #flight-form output {
   font-size: 1.2em; /* Increase the font size for better visibility */
  /* width: 30%;*/
+max-width: 75px;
 }
 
 /* Fullscreen background image */
