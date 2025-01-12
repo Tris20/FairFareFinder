@@ -1,297 +1,532 @@
-File: formStyles.css, Line: 128, Class:   .flight-price-slider, Attribute: width
-File: formStyles.css, Line: 133, Class:   .flight-price-slider, Attribute: width
-File: formStyles.css, Line: 107, Class: .accom-and-sort, Attribute: display
-File: formStyles.css, Line: 117, Class: .accom-and-sort, Attribute: display
-File: mobileStyles.css, Line: 15, Class: .card, Attribute: box-shadow
-File: tableStyles.css, Line: 44, Class: .card, Attribute: box-shadow
-File: tableStyles.css, Line: 127, Class: .card, Attribute: box-shadow
-File: mobileStyles.css, Line: 18, Class: .card, Attribute: scroll-snap-align
-File: tableStyles.css, Line: 126, Class: .card, Attribute: scroll-snap-align
-File: tableStyles.css, Line: 45, Class: .card, Attribute: overflow
-File: tableStyles.css, Line: 130, Class: .card, Attribute: overflow
-File: mobileStyles.css, Line: 16, Class: .card, Attribute: background-color
-File: tableStyles.css, Line: 42, Class: .card, Attribute: background-color
-File: tableStyles.css, Line: 43, Class: .card, Attribute: border-radius
-File: tableStyles.css, Line: 133, Class: .card, Attribute: border-radius
-File: tableStyles.css, Line: 35, Class: .desktop-card-grid, Attribute: grid-template-columns
-File: tableStyles.css, Line: 197, Class: .desktop-card-grid, Attribute: grid-template-columns
-File: tableStyles.css, Line: 37, Class: .desktop-card-grid, Attribute: margin
-File: tableStyles.css, Line: 213, Class: .desktop-card-grid, Attribute: margin
-File: tableStyles.css, Line: 205, Class: .desktop-card-grid, Attribute: font-size
-File: tableStyles.css, Line: 212, Class: .desktop-card-grid, Attribute: font-size
-File: mobileStyles.css, Line: 64, Class:   .weather-icon, Attribute: margin-right
-File: mobileStyles.css, Line: 90, Class:   .weather-icon, Attribute: margin-right
-File: mobileStyles.css, Line: 80, Class:   .weather-icon, Attribute: text-decoration
-File: mobileStyles.css, Line: 85, Class:   .weather-icon, Attribute: text-decoration
-File: mobileStyles.css, Line: 68, Class:   .weather-icon, Attribute: display
-File: mobileStyles.css, Line: 81, Class:   .weather-icon, Attribute: display
-File: styles.css, Line: 247, Class: .form-group, Attribute: width
-File: styles.css, Line: 252, Class: .form-group, Attribute: width
-File: styles.css, Line: 259, Class: .form-group, Attribute: width
-File: styles.css, Line: 272, Class: .form-group, Attribute: width
-File: styles.css, Line: 267, Class: .form-group, Attribute: border
-File: styles.css, Line: 277, Class: .form-group, Attribute: border
-File: styles.css, Line: 269, Class: .form-group, Attribute: background-color
-File: styles.css, Line: 275, Class: .form-group, Attribute: background-color
-File: styles.css, Line: 270, Class: .form-group, Attribute: font-size
-File: styles.css, Line: 276, Class: .form-group, Attribute: font-size
-File: styles.css, Line: 341, Class:   .combinedPrice-slider, Attribute: font-size
-File: styles.css, Line: 346, Class:   .combinedPrice-slider, Attribute: font-size
-File: styles.css, Line: 351, Class:   .combinedPrice-slider, Attribute: font-size
-File: styles.css, Line: 364, Class:   .combinedPrice-slider, Attribute: font-size
-File: styles.css, Line: 356, Class:   .combinedPrice-slider, Attribute: height
-File: styles.css, Line: 366, Class:   .combinedPrice-slider, Attribute: height
-File: styles.css, Line: 335, Class:   .combinedPrice-slider, Attribute: display
-File: styles.css, Line: 376, Class:   .combinedPrice-slider, Attribute: display
-File: styles.css, Line: 355, Class:   .combinedPrice-slider, Attribute: width
-File: styles.css, Line: 361, Class:   .combinedPrice-slider, Attribute: width
-File: styles.css, Line: 372, Class:   .combinedPrice-slider, Attribute: width
-File: formStyles.css, Line: 83, Class: .flight-price-slider, Attribute: padding
-File: formStyles.css, Line: 88, Class: .flight-price-slider, Attribute: padding
-File: formStyles.css, Line: 96, Class: .flight-price-slider, Attribute: padding
-File: formStyles.css, Line: 87, Class: .flight-price-slider, Attribute: margin-bottom
-File: formStyles.css, Line: 95, Class: .flight-price-slider, Attribute: margin-bottom
-File: formStyles.css, Line: 76, Class: .flight-price-slider, Attribute: width
-File: formStyles.css, Line: 90, Class: .flight-price-slider, Attribute: width
-File: formStyles.css, Line: 77, Class: .flight-price-slider, Attribute: display
-File: formStyles.css, Line: 82, Class: .flight-price-slider, Attribute: display
-File: formStyles.css, Line: 86, Class: .flight-price-slider, Attribute: display
-File: formStyles.css, Line: 94, Class: .flight-price-slider, Attribute: display
-File: tableStyles.css, Line: 249, Class: .header-content, Attribute: display
-File: tableStyles.css, Line: 269, Class: .header-content, Attribute: display
-File: tableStyles.css, Line: 280, Class: .header-content, Attribute: display
-File: tableStyles.css, Line: 292, Class: .header-content, Attribute: display
-File: tableStyles.css, Line: 250, Class: .header-content, Attribute: align-items
-File: tableStyles.css, Line: 271, Class: .header-content, Attribute: align-items
-File: tableStyles.css, Line: 286, Class: .header-content, Attribute: opacity
-File: tableStyles.css, Line: 293, Class: .header-content, Attribute: opacity
-File: tableStyles.css, Line: 221, Class:   .desktop-card-grid, Attribute: width
-File: tableStyles.css, Line: 238, Class:   .desktop-card-grid, Attribute: width
-File: tableStyles.css, Line: 236, Class:   .desktop-card-grid, Attribute: opacity
-File: tableStyles.css, Line: 243, Class:   .desktop-card-grid, Attribute: opacity
-File: tableStyles.css, Line: 218, Class:   .desktop-card-grid, Attribute: display
-File: tableStyles.css, Line: 233, Class:   .desktop-card-grid, Attribute: display
-File: tableStyles.css, Line: 242, Class:   .desktop-card-grid, Attribute: display
-File: styles.css, Line: 288, Class:   .nav-button, Attribute: width
-File: styles.css, Line: 293, Class:   .nav-button, Attribute: width
-File: formStyles.css, Line: 31, Class: .remove-city-button, Attribute: background-color
-File: formStyles.css, Line: 40, Class: .remove-city-button, Attribute: background-color
-File: formStyles.css, Line: 44, Class: .remove-city-button, Attribute: background-color
-File: formStyles.css, Line: 36, Class: .remove-city-button, Attribute: cursor
-File: formStyles.css, Line: 47, Class: .remove-city-button, Attribute: cursor
-File: formStyles.css, Line: 61, Class: .remove-city-button, Attribute: cursor
-File: formStyles.css, Line: 65, Class: .remove-city-button, Attribute: cursor
-File: formStyles.css, Line: 69, Class: .remove-city-button, Attribute: cursor
-File: formStyles.css, Line: 72, Class: .remove-city-button, Attribute: cursor
-File: styles.css, Line: 586, Class: .clickable, Attribute: flex-direction
-File: styles.css, Line: 595, Class: .clickable, Attribute: flex-direction
-File: tableStyles.css, Line: 100, Class: .clickable, Attribute: flex-direction
-File: styles.css, Line: 604, Class: .clickable, Attribute: background-color
-File: styles.css, Line: 619, Class: .clickable, Attribute: background-color
-File: tableStyles.css, Line: 105, Class: .clickable, Attribute: background-color
-File: styles.css, Line: 534, Class: .clickable, Attribute: text-decoration
-File: styles.css, Line: 538, Class: .clickable, Attribute: text-decoration
-File: tableStyles.css, Line: 88, Class: .clickable, Attribute: text-decoration
-File: tableStyles.css, Line: 93, Class: .clickable, Attribute: text-decoration
-File: styles.css, Line: 546, Class: .clickable, Attribute: display
-File: styles.css, Line: 554, Class: .clickable, Attribute: display
-File: styles.css, Line: 585, Class: .clickable, Attribute: display
-File: styles.css, Line: 594, Class: .clickable, Attribute: display
-File: styles.css, Line: 550, Class: .clickable, Attribute: transition
-File: styles.css, Line: 613, Class: .clickable, Attribute: transition
-File: styles.css, Line: 608, Class: .clickable, Attribute: font-family
-File: tableStyles.css, Line: 106, Class: .clickable, Attribute: font-family
-File: styles.css, Line: 533, Class: .clickable, Attribute: color
-File: styles.css, Line: 607, Class: .clickable, Attribute: color
-File: tableStyles.css, Line: 87, Class: .clickable, Attribute: color
-File: styles.css, Line: 556, Class: .clickable, Attribute: animation
-File: styles.css, Line: 572, Class: .clickable, Attribute: animation
-File: styles.css, Line: 561, Class: .clickable, Attribute: transform
-File: styles.css, Line: 565, Class: .clickable, Attribute: transform
-File: styles.css, Line: 625, Class: .clickable, Attribute: transform
-File: styles.css, Line: 549, Class: .clickable, Attribute: opacity
-File: styles.css, Line: 555, Class: .clickable, Attribute: opacity
-File: styles.css, Line: 562, Class: .clickable, Attribute: opacity
-File: styles.css, Line: 566, Class: .clickable, Attribute: opacity
-File: styles.css, Line: 573, Class: .clickable, Attribute: opacity
-File: styles.css, Line: 611, Class: .clickable, Attribute: padding
-File: tableStyles.css, Line: 101, Class: .clickable, Attribute: padding
-File: styles.css, Line: 547, Class: .clickable, Attribute: text-align
-File: tableStyles.css, Line: 89, Class: .clickable, Attribute: text-align
-File: styles.css, Line: 587, Class: .clickable, Attribute: align-items
-File: styles.css, Line: 596, Class: .clickable, Attribute: align-items
-File: styles.css, Line: 588, Class: .clickable, Attribute: width
-File: styles.css, Line: 593, Class: .clickable, Attribute: width
-File: tableStyles.css, Line: 99, Class: .clickable, Attribute: width
-File: tableStyles.css, Line: 60, Class: .card-content, Attribute: padding
-File: tableStyles.css, Line: 111, Class: .card-content, Attribute: padding
-File: tableStyles.css, Line: 120, Class: .card-content, Attribute: padding
-File: tableStyles.css, Line: 65, Class: .card-content, Attribute: margin
-File: tableStyles.css, Line: 69, Class: .card-content, Attribute: margin
-File: tableStyles.css, Line: 112, Class: .card-content, Attribute: background-color
-File: tableStyles.css, Line: 117, Class: .card-content, Attribute: background-color
-File: mobileStyles.css, Line: 48, Class:   .weather-icons, Attribute: justify-content
-File: mobileStyles.css, Line: 53, Class:   .weather-icons, Attribute: justify-content
-File: mobileStyles.css, Line: 51, Class:   .weather-icons, Attribute: margin-right
-File: mobileStyles.css, Line: 54, Class:   .weather-icons, Attribute: margin-right
-File: mobileStyles.css, Line: 47, Class:   .weather-icons, Attribute: display
-File: mobileStyles.css, Line: 52, Class:   .weather-icons, Attribute: display
-File: styles.css, Line: 30, Class: .title-container, Attribute: background-position
-File: styles.css, Line: 33, Class: .title-container, Attribute: background-position
-File: styles.css, Line: 36, Class: .title-container, Attribute: background-position
-File: tableStyles.css, Line: 429, Class: .destination-duration, Attribute: display
-File: tableStyles.css, Line: 436, Class: .destination-duration, Attribute: display
-File: styles.css, Line: 430, Class:     .scroll-container, Attribute: border-color
-File: styles.css, Line: 435, Class:     .scroll-container, Attribute: border-color
-File: styles.css, Line: 441, Class:     .scroll-container, Attribute: border-color
-File: styles.css, Line: 446, Class:     .scroll-container, Attribute: border-color
-File: styles.css, Line: 384, Class:     .scroll-container, Attribute: border-radius
-File: styles.css, Line: 406, Class:     .scroll-container, Attribute: border-radius
-File: styles.css, Line: 396, Class:     .scroll-container, Attribute: width
-File: styles.css, Line: 425, Class:     .scroll-container, Attribute: width
-File: styles.css, Line: 422, Class:     .scroll-container, Attribute: display
-File: styles.css, Line: 431, Class:     .scroll-container, Attribute: display
-File: styles.css, Line: 436, Class:     .scroll-container, Attribute: display
-File: styles.css, Line: 442, Class:     .scroll-container, Attribute: display
-File: styles.css, Line: 447, Class:     .scroll-container, Attribute: display
-File: styles.css, Line: 459, Class:     .scroll-container, Attribute: display
-File: styles.css, Line: 429, Class:     .scroll-container, Attribute: border-width
-File: styles.css, Line: 440, Class:     .scroll-container, Attribute: border-width
-File: styles.css, Line: 380, Class:     .scroll-container, Attribute: scrollbar-width
-File: styles.css, Line: 452, Class:     .scroll-container, Attribute: scrollbar-width
-File: styles.css, Line: 467, Class:     .scroll-container, Attribute: scrollbar-width
-File: styles.css, Line: 383, Class:     .scroll-container, Attribute: background-color
-File: styles.css, Line: 405, Class:     .scroll-container, Attribute: background-color
-File: styles.css, Line: 414, Class:     .scroll-container, Attribute: background-color
-File: styles.css, Line: 418, Class:     .scroll-container, Attribute: background-color
-File: styles.css, Line: 421, Class:     .scroll-container, Attribute: background-color
-File: styles.css, Line: 463, Class:     .scroll-container, Attribute: background-color
-File: tableStyles.css, Line: 171, Class:     .desktop-card-grid, Attribute: width
-File: tableStyles.css, Line: 187, Class:     .desktop-card-grid, Attribute: width
-File: tableStyles.css, Line: 175, Class:     .desktop-card-grid, Attribute: font-size
-File: tableStyles.css, Line: 179, Class:     .desktop-card-grid, Attribute: font-size
-File: tableStyles.css, Line: 190, Class:     .desktop-card-grid, Attribute: font-size
-File: styles.css, Line: 488, Class:     .desktop-card-grid, Attribute: display
-File: tableStyles.css, Line: 158, Class:     .desktop-card-grid, Attribute: display
-File: tableStyles.css, Line: 159, Class:     .desktop-card-grid, Attribute: display
-File: formStyles.css, Line: 120, Class: .accom-pricebar, Attribute: display
-File: formStyles.css, Line: 125, Class: .accom-pricebar, Attribute: display
-File: styles.css, Line: 57, Class: .navbar-container, Attribute: display
-File: styles.css, Line: 63, Class: .navbar-container, Attribute: display
-File: tableStyles.css, Line: 20, Class: .desktop-view, Attribute: margin
-File: tableStyles.css, Line: 29, Class: .desktop-view, Attribute: margin
-File: tableStyles.css, Line: 10, Class: .desktop-view, Attribute: display
-File: tableStyles.css, Line: 16, Class: .desktop-view, Attribute: display
-File: tableStyles.css, Line: 26, Class: .desktop-view, Attribute: display
-File: tableStyles.css, Line: 15, Class: .desktop-view, Attribute: text-decoration
-File: tableStyles.css, Line: 25, Class: .desktop-view, Attribute: text-decoration
-File: tableStyles.css, Line: 17, Class: .desktop-view, Attribute: color
-File: tableStyles.css, Line: 27, Class: .desktop-view, Attribute: color
-File: tableStyles.css, Line: 19, Class: .desktop-view, Attribute: padding
-File: tableStyles.css, Line: 28, Class: .desktop-view, Attribute: padding
-File: mobileStyles.css, Line: 24, Class: .scroll-container, Attribute: overflow-x
-File: tableStyles.css, Line: 388, Class: .scroll-container, Attribute: overflow-x
-File: tableStyles.css, Line: 399, Class: .scroll-container, Attribute: background-color
-File: tableStyles.css, Line: 404, Class: .scroll-container, Attribute: background-color
-File: mobileStyles.css, Line: 22, Class: .scroll-container, Attribute: width
-File: tableStyles.css, Line: 386, Class: .scroll-container, Attribute: width
-File: tableStyles.css, Line: 395, Class: .scroll-container, Attribute: width
-File: tableStyles.css, Line: 409, Class: .scroll-container, Attribute: width
-File: mobileStyles.css, Line: 25, Class: .scroll-container, Attribute: overflow-y
-File: tableStyles.css, Line: 387, Class: .scroll-container, Attribute: overflow-y
-File: tableStyles.css, Line: 390, Class: .scroll-container, Attribute: padding
-File: tableStyles.css, Line: 416, Class: .scroll-container, Attribute: padding
-File: mobileStyles.css, Line: 107, Class:   .clickable, Attribute: text-decoration
-File: mobileStyles.css, Line: 113, Class:   .clickable, Attribute: text-decoration
-File: styles.css, Line: 485, Class:     .desktop-view, Attribute: display
-File: tableStyles.css, Line: 155, Class:     .desktop-view, Attribute: display
-File: styles.css, Line: 501, Class:     .card-content, Attribute: padding
-File: styles.css, Line: 522, Class:     .card-content, Attribute: padding
-File: styles.css, Line: 516, Class:     .card-content, Attribute: width
-File: styles.css, Line: 528, Class:     .card-content, Attribute: width
-File: tableStyles.css, Line: 299, Class: .banner-content, Attribute: display
-File: tableStyles.css, Line: 328, Class: .banner-content, Attribute: display
-File: tableStyles.css, Line: 355, Class: .banner-content, Attribute: display
-File: tableStyles.css, Line: 362, Class: .banner-content, Attribute: display
-File: tableStyles.css, Line: 300, Class: .banner-content, Attribute: justify-content
-File: tableStyles.css, Line: 363, Class: .banner-content, Attribute: justify-content
-File: tableStyles.css, Line: 315, Class: .banner-content, Attribute: opacity
-File: tableStyles.css, Line: 318, Class: .banner-content, Attribute: opacity
-File: tableStyles.css, Line: 345, Class: .banner-content, Attribute: opacity
-File: tableStyles.css, Line: 356, Class: .banner-content, Attribute: opacity
-File: tableStyles.css, Line: 301, Class: .banner-content, Attribute: align-items
-File: tableStyles.css, Line: 364, Class: .banner-content, Attribute: align-items
-File: tableStyles.css, Line: 306, Class: .banner-content, Attribute: height
-File: tableStyles.css, Line: 335, Class: .banner-content, Attribute: height
-File: modal.css, Line: 66, Class:   .card-large, Attribute: flex
-File: modal.css, Line: 69, Class:   .card-large, Attribute: flex
-File: styles.css, Line: 73, Class: .nav-button, Attribute: text-align
-File: styles.css, Line: 142, Class: .nav-button, Attribute: text-align
-File: styles.css, Line: 199, Class: .nav-button, Attribute: text-align
-File: styles.css, Line: 125, Class: .nav-button, Attribute: left
-File: styles.css, Line: 217, Class: .nav-button, Attribute: left
-File: styles.css, Line: 85, Class: .nav-button, Attribute: box-shadow
-File: styles.css, Line: 184, Class: .nav-button, Attribute: box-shadow
-File: styles.css, Line: 69, Class: .nav-button, Attribute: background-color
-File: styles.css, Line: 83, Class: .nav-button, Attribute: background-color
-File: styles.css, Line: 182, Class: .nav-button, Attribute: background-color
-File: styles.css, Line: 76, Class: .nav-button, Attribute: font-size
-File: styles.css, Line: 91, Class: .nav-button, Attribute: font-size
-File: styles.css, Line: 148, Class: .nav-button, Attribute: font-size
-File: styles.css, Line: 201, Class: .nav-button, Attribute: font-size
-File: styles.css, Line: 208, Class: .nav-button, Attribute: font-size
-File: styles.css, Line: 93, Class: .nav-button, Attribute: opacity
-File: styles.css, Line: 101, Class: .nav-button, Attribute: opacity
-File: styles.css, Line: 104, Class: .nav-button, Attribute: opacity
-File: styles.css, Line: 110, Class: .nav-button, Attribute: opacity
-File: styles.css, Line: 113, Class: .nav-button, Attribute: opacity
-File: styles.css, Line: 122, Class: .nav-button, Attribute: opacity
-File: styles.css, Line: 140, Class: .nav-button, Attribute: opacity
-File: styles.css, Line: 163, Class: .nav-button, Attribute: opacity
-File: styles.css, Line: 166, Class: .nav-button, Attribute: opacity
-File: styles.css, Line: 224, Class: .nav-button, Attribute: opacity
-File: styles.css, Line: 132, Class: .nav-button, Attribute: align-items
-File: styles.css, Line: 187, Class: .nav-button, Attribute: align-items
-File: styles.css, Line: 143, Class: .nav-button, Attribute: border-radius
-File: styles.css, Line: 183, Class: .nav-button, Attribute: border-radius
-File: styles.css, Line: 131, Class: .nav-button, Attribute: justify-content
-File: styles.css, Line: 188, Class: .nav-button, Attribute: justify-content
-File: styles.css, Line: 86, Class: .nav-button, Attribute: transition
-File: styles.css, Line: 225, Class: .nav-button, Attribute: transition
-File: styles.css, Line: 120, Class: .nav-button, Attribute: height
-File: styles.css, Line: 145, Class: .nav-button, Attribute: height
-File: styles.css, Line: 219, Class: .nav-button, Attribute: height
-File: styles.css, Line: 77, Class: .nav-button, Attribute: margin
-File: styles.css, Line: 138, Class: .nav-button, Attribute: margin
-File: styles.css, Line: 189, Class: .nav-button, Attribute: margin
-File: styles.css, Line: 124, Class: .nav-button, Attribute: top
-File: styles.css, Line: 216, Class: .nav-button, Attribute: top
-File: styles.css, Line: 130, Class: .nav-button, Attribute: flex-direction
-File: styles.css, Line: 186, Class: .nav-button, Attribute: flex-direction
-File: styles.css, Line: 75, Class: .nav-button, Attribute: display
-File: styles.css, Line: 121, Class: .nav-button, Attribute: display
-File: styles.css, Line: 153, Class: .nav-button, Attribute: display
-File: styles.css, Line: 185, Class: .nav-button, Attribute: display
-File: styles.css, Line: 123, Class: .nav-button, Attribute: position
-File: styles.css, Line: 215, Class: .nav-button, Attribute: position
-File: styles.css, Line: 71, Class: .nav-button, Attribute: color
-File: styles.css, Line: 92, Class: .nav-button, Attribute: color
-File: styles.css, Line: 202, Class: .nav-button, Attribute: color
-File: styles.css, Line: 84, Class: .nav-button, Attribute: transform
-File: styles.css, Line: 126, Class: .nav-button, Attribute: transform
-File: styles.css, Line: 173, Class: .nav-button, Attribute: transform
-File: styles.css, Line: 176, Class: .nav-button, Attribute: transform
-File: styles.css, Line: 119, Class: .nav-button, Attribute: width
-File: styles.css, Line: 137, Class: .nav-button, Attribute: width
-File: styles.css, Line: 190, Class: .nav-button, Attribute: width
-File: styles.css, Line: 218, Class: .nav-button, Attribute: width
-File: mobileStyles.css, Line: 129, Class:   .card-content, Attribute: background-color
-File: mobileStyles.css, Line: 134, Class:   .card-content, Attribute: background-color
-File: styles.css, Line: 303, Class:   .form-group, Attribute: flex-direction
-File: styles.css, Line: 323, Class:   .form-group, Attribute: flex-direction
-File: styles.css, Line: 307, Class:   .form-group, Attribute: display
-File: styles.css, Line: 322, Class:   .form-group, Attribute: display
-File: styles.css, Line: 311, Class:   .form-group, Attribute: width
-File: styles.css, Line: 316, Class:   .form-group, Attribute: width
-File: styles.css, Line: 326, Class:   .form-group, Attribute: width
-File: styles.css, Line: 330, Class:   .form-group, Attribute: width
+=== CSS Conflicts Detected ===
+Selector: #flight-form
+  Property: background-color
+    Value: #ffffff
+      -> /styles.css:182
+    Value: #0b5259
+      -> /styles.css:298
+      -> /tableStyles.css:105
+  Property: flex-direction
+    Value: row; /* Align items in a row */
+      -> /styles.css:186
+    Value: column; /* Align items in a row */
+      -> /styles.css:294
+      -> /tableStyles.css:100
+  Property: width
+    Value: 100%; /* Adjust form width on mobile */
+      -> /mobileStyles.css:147
+    Value: 80%
+      -> /styles.css:190
+    Value: 90%; /* Adjust form width on mobile */
+      -> /styles.css:293
+    Value: 92%; /* Adjust form width on mobile */
+      -> /tableStyles.css:99
+
+Selector: #add-city-button
+  Property: transition
+    Value: background-color 0.3s ease, transform 0.1s ease
+      -> /styles.css:613
+    Value: 
+      -> /formStyles.css:12
+  Property: background-color
+    Value: #db8363f2; /* A coral-like color */
+      -> /formStyles.css:3
+    Value: #ff7f50; /* A coral-like color */
+      -> /styles.css:604
+
+Selector: #page-header
+  Property: display
+    Value: none; /* Initially hide the header */
+      -> /styles.css:546
+    Value: none; /* Initially hidden */
+      -> /tableStyles.css:233
+
+Selector: .nav-button
+  Property: margin
+    Value: 2px 0
+      -> /styles.css:289
+    Value: 4px 2px
+      -> /styles.css:77
+
+Selector: #table-container
+  Property: width
+    Value: 90%
+      -> /styles.css:119
+      -> /tableStyles.css:171
+    Value: 95%
+      -> /styles.css:355
+    Value: 80%
+      -> /tableStyles.css:187
+    Value: 1200px
+      -> /tableStyles.css:201
+  Property: flex-direction
+    Value: column; /* Stack children vertically */
+      -> /styles.css:130
+    Value: column
+      -> /tableStyles.css:270
+  Property: align-items
+    Value: center; /* Stretch children width to fill the container */
+      -> /styles.css:132
+    Value: center; /* Horizontally center the content inside the container */
+      -> /tableStyles.css:271
+  Property: display
+    Value: none
+      -> /styles.css:121
+    Value: flex
+      -> /tableStyles.css:269
+
+Selector: .card-content h2
+  Property: font-size
+    Value: 1.4em
+      -> /tableStyles.css:212
+    Value: 1.7vw
+      -> /tableStyles.css:64
+
+Selector: .card-image
+  Property: height
+    Value: 21vh
+      -> /mobileStyles.css:122
+    Value: 35svh
+      -> /tableStyles.css:54
+
+Selector: .card-content
+  Property: box-sizing
+    Value: border-box;*/
+      -> /tableStyles.css:115
+    Value: border-box; /* Prevents padding from adding to the content's width */
+      -> /mobileStyles.css:132
+  Property: overflow
+    Value: hidden; /* Ensures no content overflows */
+      -> /mobileStyles.css:133
+    Value: hidden
+      -> /tableStyles.css:116
+  Property: padding
+    Value: 9px
+      -> /mobileStyles.css:137
+    Value: 20px
+      -> /styles.css:501
+      -> /tableStyles.css:111
+    Value: 15px
+      -> /tableStyles.css:60
+    Value: 10px
+      -> /tableStyles.css:120
+  Property: background-color
+    Value: white
+      -> /mobileStyles.css:129
+      -> /styles.css:502
+      -> /tableStyles.css:112
+    Value: #f4dfcf
+      -> /mobileStyles.css:134
+      -> /tableStyles.css:117
+
+Selector: .desktop-card-grid
+  Property: grid-gap
+    Value: 20px
+      -> /tableStyles.css:161
+    Value: 20px; /* Space between cards */
+      -> /tableStyles.css:36
+      -> /tableStyles.css:220
+  Property: margin
+    Value: 0 auto; /* Center the grid horizontally */
+      -> /tableStyles.css:223
+    Value: 0px 5%;*/
+      -> /tableStyles.css:37
+    Value: 0px 5%
+      -> /tableStyles.css:162
+  Property: padding
+    Value: 10px; /* Internal padding for aesthetics */
+      -> /tableStyles.css:224
+    Value: 10px
+      -> /tableStyles.css:38
+  Property: display
+    Value: none
+      -> /styles.css:488
+    Value: grid
+      -> /tableStyles.css:34
+      -> /tableStyles.css:159
+      -> /tableStyles.css:218
+    Value: inline-grid
+      -> /tableStyles.css:158
+  Property: grid-template-columns
+    Value: repeat(3, 1fr)
+      -> /tableStyles.css:197
+    Value: repeat(3, 1fr); /* 3 cards per row */
+      -> /tableStyles.css:35
+      -> /tableStyles.css:219
+    Value: repeat(2, 1fr)
+      -> /tableStyles.css:160
+
+Selector: .flight-price-slider
+  Property: width
+    Value: 50%
+      -> /formStyles.css:76
+    Value: 70vw
+      -> /formStyles.css:128
+
+Selector: .modal-content
+  Property: top
+    Value: 10vh
+      -> /modal.css:24
+    Value: 20vh
+      -> /modal.css:73
+  Property: width
+    Value: 60%; /* 60% of the modal's width */
+      -> /modal.css:18
+    Value: 90%
+      -> /modal.css:56
+
+Selector: input[type="date"]
+  Property: width
+    Value: 100%; /* Ensure form inputs take up full width on mobile */
+      -> /htmxFilter.css:95
+    Value: 100%
+      -> /htmxFilter.css:46
+
+Selector: #page-header.show
+  Property: display
+    Value: block; /* Show the header when the 'show' class is added */
+      -> /styles.css:554
+    Value: block
+      -> /tableStyles.css:242
+
+Selector: select
+  Property: border
+    Value: 1px solid #ccc
+      -> /styles.css:267
+    Value: 0px
+      -> /styles.css:277
+      -> /styles.css:342
+  Property: background-color
+    Value: #f9f9f9
+      -> /styles.css:269
+    Value: #338c84
+      -> /styles.css:275
+      -> /styles.css:340
+  Property: font-size
+    Value: 16px
+      -> /styles.css:270
+    Value: 12px
+      -> /styles.css:276
+      -> /styles.css:341
+
+Selector: .weather-icons
+  Property: margin-right
+    Value: 1em
+      -> /mobileStyles.css:51
+    Value: 1.5em
+      -> /mobileStyles.css:54
+      -> /tableStyles.css:75
+  Property: background-color
+    Value: #add8e6bf
+      -> /mobileStyles.css:55
+    Value: #add8e670
+      -> /tableStyles.css:76
+  Property: margin-top
+    Value: 0.2em
+      -> /mobileStyles.css:58
+    Value: 10px
+      -> /tableStyles.css:79
+  Property: padding-bottom
+    Value: 14px
+      -> /mobileStyles.css:50
+    Value: 5px
+      -> /tableStyles.css:82
+  Property: justify-content
+    Value: space-around
+      -> /mobileStyles.css:53
+      -> /tableStyles.css:74
+    Value: space-between
+      -> /mobileStyles.css:48
+
+Selector: td
+  Property: text-align
+    Value: left
+      -> /htmxFilter.css:18
+      -> /resetCSS.css:64
+    Value: center
+      -> /styles.css:523
+  Property: padding
+    Value: 0
+      -> /resetCSS.css:63
+    Value: 7px
+      -> /styles.css:522
+    Value: 12px
+      -> /htmxFilter.css:19
+  Property: font-size
+    Value: 0.9rem; /* Adjust text size for smaller screens */
+      -> /htmxFilter.css:90
+    Value: 15px
+      -> /styles.css:524
+
+Selector: .scroll-container
+  Property: overflow-y
+    Value: scroll
+      -> /mobileStyles.css:25
+    Value: scroll; /* Enable vertical scrolling */
+      -> /tableStyles.css:387
+  Property: width
+    Value: 100vw
+      -> /mobileStyles.css:22
+    Value: 110vw
+      -> /mobileStyles.css:152
+    Value: 100vw; /* Ensure the container spans the full width of the viewport */
+      -> /tableStyles.css:386
+  Property: overflow-x
+    Value: scroll; /* Disable horizontal scrolling */
+      -> /tableStyles.css:388
+    Value: scroll
+      -> /mobileStyles.css:24
+
+Selector: #table-container.show
+  Property: animation
+    Value: 
+      -> /styles.css:155
+    Value: moveUp 1s ease forwards
+      -> /styles.css:572
+
+Selector: .form-group.city-row.operators
+  Property: width
+    Value: 50%
+      -> /formStyles.css:90
+    Value: 100%
+      -> /formStyles.css:133
+
+Selector: .form-group.city-row
+  Property: display
+    Value: flow-root
+      -> /formStyles.css:125
+    Value: flex
+      -> /formStyles.css:82
+
+Selector: .desktop-view
+  Property: display
+    Value: none
+      -> /mobileStyles.css:36
+      -> /styles.css:485
+      -> /tableStyles.css:155
+    Value: none; /* Ensures table view is hidden in card grid view */
+      -> /tableStyles.css:10
+
+Selector: h1
+  Property: font-size
+    Value: inherit
+      -> /resetCSS.css:30
+    Value: 2rem
+      -> /tableStyles.css:263
+    Value: 1.7em
+      -> /tableStyles.css:372
+  Property: margin
+    Value: 0.67em 0
+      -> /resetCSS.css:32
+    Value: 0
+      -> /styles.css:42
+      -> /tableStyles.css:264
+    Value: 6px
+      -> /tableStyles.css:371
+
+Selector: ::-webkit-scrollbar-thumb
+  Property: background-color
+    Value: transparent; /* Ensure thumb is transparent (optional) */
+      -> /styles.css:463
+    Value: #a0a0a000
+      -> /styles.css:383
+    Value: #d8d8d8
+      -> /styles.css:405
+
+Selector: .card
+  Property: flex-direction
+    Value: row
+      -> /tableStyles.css:128
+    Value: column
+      -> /mobileStyles.css:101
+  Property: box-shadow
+    Value: 0 2px 8px rgba(0, 0, 0, 0.1)
+      -> /mobileStyles.css:15
+    Value: 0px 4px 6px rgba(0, 0, 0, 0.1)
+      -> /mobileStyles.css:95
+      -> /styles.css:497
+      -> /tableStyles.css:127
+    Value: 0 4px 8px rgba(0, 0, 0, 0.1)
+      -> /tableStyles.css:44
+  Property: border-radius
+    Value: 8px
+      -> /mobileStyles.css:97
+    Value: 10px
+      -> /tableStyles.css:43
+      -> /tableStyles.css:133
+  Property: background-color
+    Value: #f4dfcf
+      -> /mobileStyles.css:16
+    Value: white
+      -> /tableStyles.css:42
+  Property: scroll-snap-align
+    Value: start; /* Snap each card to the start */
+      -> /mobileStyles.css:18
+    Value: start
+      -> /mobileStyles.css:94
+      -> /styles.css:496
+      -> /tableStyles.css:126
+
+Selector: .clickable
+  Property: color
+    Value: #007bff
+      -> /mobileStyles.css:106
+    Value: #007BFF
+      -> /styles.css:533
+      -> /tableStyles.css:87
+
+Selector: 100%
+  Property: transform
+    Value: translate(-50%, -50%); /* End 15% away from the top */
+      -> /styles.css:176
+    Value: translateY(0)
+      -> /styles.css:565
+  Property: opacity
+    Value: 0
+      -> /styles.css:104
+    Value: 1
+      -> /styles.css:113
+      -> /styles.css:166
+      -> /styles.css:566
+      -> /tableStyles.css:318
+
+Selector: .banner-content
+  Property: justify-content
+    Value: left; /* Center horizontally */
+      -> /tableStyles.css:363
+    Value: center; /* Center horizontally */
+      -> /tableStyles.css:300
+
+Selector: #fff-icon
+  Property: height
+    Value: 30px;          /* Adjust the size of the icon */
+      -> /tableStyles.css:256
+    Value: 42px; /* Adjust the icon size */
+      -> /tableStyles.css:306
+  Property: margin-right
+    Value: 5px; /* Space between the icon and the text */
+      -> /tableStyles.css:307
+    Value: 10px;     /* Add some spacing between the icon and the text */
+      -> /tableStyles.css:257
+
+Selector: #flight-table
+  Property: width
+    Value: 100%; /* Ensure the table takes up full width */
+      -> /styles.css:137
+    Value: 100%; /* Ensure table width is consistent on mobile */
+      -> /styles.css:361
+  Property: margin-bottom
+    Value: 0
+      -> /styles.css:147
+    Value: 0px
+      -> /styles.css:363
+  Property: font-size
+    Value: 2.5vw
+      -> /mobileStyles.css:43
+    Value: 1.2vw
+      -> /styles.css:148
+    Value: 1em
+      -> /styles.css:364
+      -> /tableStyles.css:175
+      -> /tableStyles.css:205
+    Value: 1.0vw
+      -> /tableStyles.css:179
+      -> /tableStyles.css:190
+  Property: height
+    Value: 77svh
+      -> /mobileStyles.css:41
+      -> /styles.css:145
+      -> /tableStyles.css:177
+      -> /tableStyles.css:208
+    Value: 60svh
+      -> /styles.css:366
+
+Selector: button[type="submit"]
+  Property: padding
+    Value: 14px 20px
+      -> /htmxFilter.css:70
+    Value: 16px
+      -> /htmxFilter.css:99
+
+Selector: 0%
+  Property: opacity
+    Value: 0
+      -> /styles.css:110
+      -> /styles.css:163
+      -> /styles.css:562
+      -> /tableStyles.css:315
+    Value: 1
+      -> /styles.css:101
+  Property: transform
+    Value: translate(-50%, -10%); /* Start at the center */
+      -> /styles.css:173
+    Value: translateY(100px)
+      -> /styles.css:561
+
+Selector: #page-banner
+  Property: text-align
+    Value: center; /* Center content horizontally */
+      -> /tableStyles.css:285
+    Value: center
+      -> /tableStyles.css:344
+  Property: background-color
+    Value: #009879; /* Banner background color */
+      -> /tableStyles.css:282
+    Value: #0b5259
+      -> /tableStyles.css:336
+  Property: padding
+    Value: 20px 0; /* Padding to create space inside the banner */
+      -> /tableStyles.css:284
+    Value: 0px ; /* Padding for spacing */
+      -> /tableStyles.css:343
+
+Selector: .dropdown-list
+  Property: width
+    Value: 61vw
+      -> /search.css:86
+    Value: 100%
+      -> /search.css:32
+
+Selector: body
+  Property: background-color
+    Value: #f4f4f4; /* Ensure only one background-color is effective */
+      -> /styles.css:15
+    Value: #f4f4f4
+      -> /htmxFilter.css:2
+    Value: white
+      -> /resetCSS.css:21
+  Property: line-height
+    Value: 1.6
+      -> /htmxFilter.css:3
+    Value: 1.45
+      -> /resetCSS.css:24
+  Property: padding
+    Value: 20px
+      -> /htmxFilter.css:4
+    Value: 10px
+      -> /htmxFilter.css:84
+    Value: 0
+      -> /styles.css:4
+  Property: margin
+    Value: 0
+      -> /htmxFilter.css:5
+      -> /styles.css:3
+    Value: 8px; /* Firefox body margin */
+      -> /resetCSS.css:19
+
+Selector: #flight-form output
+  Property: font-size
+    Value: 1.1em
+      -> /styles.css:201
+    Value: 1.2em; /* Increase the font size for better visibility */
+      -> /styles.css:208
+    Value: 1em; /* Increase the font size for better visibility */
+      -> /styles.css:351
+
+Selector: .form-group label
+  Property: width
+    Value: 30%; /* Adjust label width */
+      -> /styles.css:252
+    Value: 40%; /* Adjust label width on smaller screens */
+      -> /styles.css:311
+
