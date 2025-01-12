@@ -79,6 +79,7 @@ Thumbs.db
 # Log Files
 *.log
 /logs/
+*.txt
 
 # Go Build Cache
 /pkg/
