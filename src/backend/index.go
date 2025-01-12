@@ -1,4 +1,3 @@
-
 package backend
 
 import (
@@ -19,31 +18,17 @@ func Init(dbConn *sql.DB, templates *template.Template) {
 }
 
 // IndexHandler serves the home page
+
+// IndexHandler serves the home page
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	// Query to fetch distinct origin city names
-	rows, err := db.Query("SELECT DISTINCT origin_city_name FROM flight")
+	// Ensure cityCountryPairs is loaded
+	LoadCityCountryPairs(db) // sync.Once ensures it only runs once
+
+	// Pass city-country pairs to the template
+	err := tmpl.ExecuteTemplate(w, "index.html", map[string]interface{}{
+		"CityCountryPairs": GetCityCountryPairs(), // Use a getter for consistency
+	})
 	if err != nil {
-		log.Printf("Error querying cities: %v", err)
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-	defer rows.Close()
-
-	var cities []string
-	for rows.Next() {
-		var city string
-		if err := rows.Scan(&city); err != nil {
-			log.Printf("Error scanning city: %v", err)
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-			return
-		}
-		cities = append(cities, city)
-	}
-
-	// Pass cities to template
-	if err := tmpl.ExecuteTemplate(w, "index.html", map[string]interface{}{
-		"Cities": cities,
-	}); err != nil {
 		log.Printf("Error executing template: %v", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}

@@ -1,6 +1,7 @@
 package main
 
 import (
+	//	"bufio"
 	"bytes"
 	"flag"
 	"fmt"
@@ -31,26 +32,91 @@ NOTE: Fetch and Compile Properties, gest the prices of the nearest wednesday to 
 */
 
 // Helper function to run a command in a specific directory
+
 func runExecutableInDir(dir string, executable string) {
+	// Update the log file for the current day
+	if err := updateLogFile(); err != nil {
+		log.Printf("Error updating log file: %v", err)
+	}
+
 	// Change to the specified directory
 	err := os.Chdir(dir)
 	if err != nil {
 		log.Fatalf("Failed to change directory to %s: %v", dir, err)
 	}
-	log.Printf("Changed to directory: %s\n", dir)
+	log.Printf("Changed to directory: %s", dir)
 
-	// Execute the executable
+	// Prepare the command
 	cmd := exec.Command("./" + executable)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
 
-	log.Printf("Running executable: %s\n", executable)
-	err = cmd.Run()
+	// Create pipes for real-time output
+	stdoutPipe, err := cmd.StdoutPipe()
 	if err != nil {
-		log.Fatalf("Failed to run executable %s in directory %s: %v", executable, dir, err)
+		log.Fatalf("Failed to create stdout pipe: %v", err)
+	}
+	stderrPipe, err := cmd.StderrPipe()
+	if err != nil {
+		log.Fatalf("Failed to create stderr pipe: %v", err)
 	}
 
-	log.Printf("Successfully executed: %s\n", executable)
+	// Start the command
+	log.Printf("Running executable: %s", executable)
+	if err := cmd.Start(); err != nil {
+		log.Fatalf("Failed to start executable %s: %v", executable, err)
+	}
+
+	// Process streams without buffering (character or chunk-based)
+	go processStreamRealTime(stdoutPipe, "stdout")
+	go processStreamRealTime(stderrPipe, "stderr")
+
+	// Wait for the command to complete
+	if err := cmd.Wait(); err != nil {
+		log.Printf("Executable %s finished with error: %v", executable, err)
+	} else {
+		log.Printf("Successfully executed: %s", executable)
+	}
+}
+
+// Process a stream in real time, handling carriage returns
+func processStreamRealTime(stream io.ReadCloser, prefix string) {
+	defer stream.Close()
+	buf := make([]byte, 1024) // Buffer for reading chunks
+	for {
+		n, err := stream.Read(buf)
+		if n > 0 {
+			output := string(buf[:n])
+			lines := processCarriageReturns(output) // Handle carriage returns
+			for _, line := range lines {
+				log.Printf("[%s] %s", prefix, line)
+			}
+		}
+		if err != nil {
+			if err != io.EOF {
+				log.Printf("Error reading %s stream: %v", prefix, err)
+			}
+			break
+		}
+	}
+}
+
+// Process text to handle carriage returns
+func processCarriageReturns(output string) []string {
+	lines := []string{}
+	currentLine := ""
+	for _, char := range output {
+		if char == '\r' { // Carriage return: reset current line
+			currentLine = ""
+		} else if char == '\n' { // Newline: add current line to results
+			lines = append(lines, currentLine)
+			currentLine = ""
+		} else {
+			currentLine += string(char)
+		}
+	}
+	if currentLine != "" {
+		lines = append(lines, currentLine)
+	}
+	return lines
 }
 
 // Helper function to get the current weekday and hour
@@ -65,15 +131,15 @@ var currentLogFile *os.File
 var currentLogDate string
 
 // Generate the log file path based on the current date (year/month/output.log)
+
 func getDailyLogFilePath() string {
 	currentTime := time.Now()
-	year := currentTime.Format("2006")       // Year in YYYY format
-	month := currentTime.Format("01")        // Month in MM format
-	fileName := currentTime.Format("02.log") // Log file name as DD.log
+	year := currentTime.Format("2006")
+	month := currentTime.Format("01")
+	fileName := currentTime.Format("02.log") // Log file as DD.log
 	return filepath.Join("logs", year, month, fileName)
 }
 
-// Ensure log directories exist for year and month
 func ensureLogDirExists(logFilePath string) error {
 	dir := filepath.Dir(logFilePath)
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
@@ -84,28 +150,34 @@ func ensureLogDirExists(logFilePath string) error {
 	return nil
 }
 
-// Function to update the log file if a new day has started
 func updateLogFile() error {
 	newLogDate := time.Now().Format("2006-01-02") // YYYY-MM-DD
 	if newLogDate != currentLogDate {
+		// Close the existing log file if open
 		if currentLogFile != nil {
 			currentLogFile.Close()
 		}
 
+		// Generate the new log file path
 		logFilePath := getDailyLogFilePath()
 		if err := ensureLogDirExists(logFilePath); err != nil {
 			return err
 		}
 
+		// Open the new log file
 		var err error
 		currentLogFile, err = os.OpenFile(logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 		if err != nil {
 			return fmt.Errorf("failed to open log file %s: %v", logFilePath, err)
 		}
 
+		// Set the log output to both the log file and console
 		multiWriter := io.MultiWriter(os.Stdout, currentLogFile)
 		log.SetOutput(multiWriter)
+
+		// Update the current log date
 		currentLogDate = newLogDate
+		log.Printf("Log file updated: %s", logFilePath)
 	}
 	return nil
 }
@@ -206,18 +278,27 @@ func main() {
 		log.Println("Daemon mode is enabled. Running tasks in loop...")
 		// Infinite loop for daemon mode
 		for {
-			if err := updateLogFile(); err != nil {
-				log.Printf("Error updating log file: %v", err)
-			}
 			// Get current day and time
 			currentDay, currentHour := getCurrentTime()
 			transfer := false
 
+			log.Printf("Daemon is alive: Current Hour: %d, Current Day: %s", currentHour, currentDay)
+			// Recover from panics
+			defer func() {
+				if r := recover(); r != nil {
+					log.Printf("Recovered from panic: %v", r)
+				}
+			}()
+
+			if err := updateLogFile(); err != nil {
+				log.Printf("Error updating log file: %v", err)
+			}
+
 			// Generate new db every 6 hours: 3 = 3am; 9am; 3pm; 9pm.
 			if currentHour%6 == 3 {
-
+				startTime := time.Now()
 				// Monday, 3am, Start a completely new new_main.db
-				if currentDay == time.Saturday && currentHour == 12 {
+				if currentDay == time.Monday && currentHour == 3 {
 
 					// Backup existing database if it exists
 					backupDatabase(absoluteNewMainDbPath, absoluteOutputDir)
@@ -304,8 +385,23 @@ func main() {
 					transfer = false
 				}
 
-				// Sleep for a specified time interval before checking again
-				time.Sleep(50 * time.Minute) // Check every 10 minutes in daemon mode
+				// Calculate elapsed time
+				elapsed := time.Since(startTime)
+
+				// Calculate the remaining sleep duration
+				intervalDuration := 5*time.Hour + 55*time.Minute
+				remainingSleep := intervalDuration - elapsed
+
+				if remainingSleep > 5 {
+					log.Printf("Tasks completed in %s. Sleeping for %s until the next interval...", elapsed, remainingSleep)
+					time.Sleep(remainingSleep)
+				} else {
+					log.Printf("Tasks took longer than the interval (%s). Skipping sleep.", elapsed)
+				}
+			} else {
+				// Sleep for a short interval to avoid busy waiting
+				log.Println("No tasks to run. Sleeping for 3 minutes...")
+				time.Sleep(3 * time.Minute)
 			}
 		}
 	}

@@ -71,3 +71,65 @@ select {
 .price-slider:hover {
   cursor: pointer;
 }
+
+.flight-price-slider {
+  width: 50%;
+  display: flex;
+}
+.form-group.city-row {
+  background-color: #237275;
+  border-radius: 10px;
+  display: flex;
+  padding: 1em;
+}
+.form-group.city-row.operators {
+  display: flex;
+  margin-bottom: -10px;
+  padding: 0em;
+
+  width: 50%;
+}
+
+.form-group.city-row.operators {
+  display: flex;
+  margin-bottom: -10px;
+  padding: 0em;
+}
+
+.logical-operator {
+  max-width: 100px;
+  min-width: 75px;
+
+  flex: 1;
+  font-size: 1em;
+}
+.accom-and-sort {
+  display: flex;
+  background-color: #237275;
+  border-radius: 10px;
+  padding: 10px;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.form-group.accom {
+  display: flex;
+}
+.accom-pricebar {
+  display: flex;
+  width: 100%;
+}
+@media screen and (max-width: 800px) {
+  .form-group.city-row {
+    display: flow-root;
+  }
+  .flight-price-slider {
+    width: 70vw;
+    display: flex;
+  }
+
+  .form-group.city-row.operators {
+    width: 100%;
+  }
+}
