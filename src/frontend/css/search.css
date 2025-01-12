@@ -5,8 +5,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  width: auto;
-
+  flex: 1;
   max-width: -webkit-fill-available;
   min-width: 120px;
 }

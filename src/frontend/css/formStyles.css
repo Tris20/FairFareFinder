@@ -73,7 +73,7 @@ select {
 }
 
 .flight-price-slider {
-  width: 70vw;
+  width: 50%;
   display: flex;
 }
 .form-group.city-row {
@@ -86,8 +86,16 @@ select {
   display: flex;
   margin-bottom: -10px;
   padding: 0em;
-  width: auto;
+
+  width: 50%;
 }
+
+.form-group.city-row.operators {
+  display: flex;
+  margin-bottom: -10px;
+  padding: 0em;
+}
+
 .logical-operator {
   max-width: 100px;
   min-width: 75px;
@@ -115,5 +123,13 @@ select {
 @media screen and (max-width: 800px) {
   .form-group.city-row {
     display: flow-root;
+  }
+  .flight-price-slider {
+    width: 70vw;
+    display: flex;
+  }
+
+  .form-group.city-row.operators {
+    width: 100%;
   }
 }
