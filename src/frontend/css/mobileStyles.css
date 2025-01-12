@@ -1,5 +1,5 @@
 .card-carousel {
-  display: flex;
+  display: none;
 
   /* overflow-y: auto;*/
   scroll-snap-type: y mandatory; /* Snap each card into view */
@@ -47,7 +47,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 20px;
+    padding-bottom: 14px;
     margin-right: 1em;
     display: flex;
     justify-content: space-around;
@@ -55,7 +55,7 @@
     background-color: #add8e6bf;
     border-radius: 14px;
     width: 100%;
-    margin-top: 1em;
+    margin-top: 0.2em;
   }
 
   .weather-icon {
@@ -91,21 +91,22 @@
   }
 
   .card {
-    min-width: 100%;
     scroll-snap-align: start;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: row;
     border-radius: 8px;
     line-height: 0;
     overflow: hidden;
     margin: 0px 0px 20px 0px;
+    flex-direction: column;
+    height: 36vh;
   }
 
   .clickable {
     color: #007bff;
     text-decoration: none;
     text-align: right;
+    padding: 6px;
   }
 
   .clickable:hover {
@@ -114,7 +115,7 @@
 
   /* 60% of the card for the image */
   .card-image {
-    flex: 0 0 40%; /* Takes up 60% of the card's width */
+    flex: 0 0 61.8%; /* Takes up 60% of the card's width */
     background-size: cover;
     background-position: center;
 
@@ -123,7 +124,7 @@
 
   /* 40% of the card for the content */
   .card-content {
-    flex: 0 0 60%; /* Takes up 40% of the card's width */
+    flex: 0 0 38.2%; /* Takes up 40% of the card's width */
     /*  padding: 20px;*/
     background-color: white;
     display: flex;
@@ -133,12 +134,21 @@
     background-color: #f4dfcf;
     opacity: 0.9;
     justify-content: space-between;
-    padding: 20px;
+    padding: 9px;
   }
 
   h2 {
     /*margin-top: 0.2em;*/
     /*  margin-bottom: 0.8em;*/
     font-size: 3vw;
+  }
+
+  #flight-form {
+    width: 100%; /* Adjust form width on mobile */
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .scroll-container {
+    width: 110vw;
   }
 }

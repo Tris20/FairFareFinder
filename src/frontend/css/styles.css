@@ -207,6 +207,7 @@ color: white;
 #flight-form output {
   font-size: 1.2em; /* Increase the font size for better visibility */
  /* width: 30%;*/
+max-width: 75px;
 }
 
 /* Fullscreen background image */
@@ -313,7 +314,7 @@ background-color: #0b5259;
   /* Adjust combined price slider container */
   .form-group input[type="range"] {
     width: 100%; /* Make slider take full width */
-    margin-left: 10px; /* Add space between output and slider */
+    /*margin-left: 10px;  Add space between output and slider */
   }
 
   /* Ensure the output appears to the left of the slider */
@@ -343,6 +344,7 @@ border: 0px;
 
 #flight-form label{
   font-size: 1em;
+  width: 20%
 }
 /* Center-align the output values for sliders */
 #flight-form output {
