@@ -51,7 +51,7 @@ func main() {
 	}
 	defer f.Close()
 
-	// We will store all of our CSS parse results here
+	// We'll store all of our CSS parse results here
 	cssInfo := make(CSSInfo)
 
 	// Walk the directory and parse each .css file
@@ -87,16 +87,20 @@ func parseCSSFile(filePath string, cssInfo CSSInfo) {
 
 	scanner := bufio.NewScanner(file)
 
-	// Very naive regex to find selectors
+	// Regex to find selectors that start a block, e.g. ".foo {"
 	selectorRegex := regexp.MustCompile(`^([^{}]+)\{`)
 
 	var currentSelector string
 	var insideBlock bool
 
-	// Track whether we’re inside a media query and store the media query string
-	var mediaQueryContext string
+	// Track whether we’re inside a media query
 	var insideMedia bool
-	var braceDepth int // used for naive tracking of when a @media block ends
+	var mediaQueryContext string
+	var mediaBraceDepth int
+
+	// Track whether we’re inside a keyframes block
+	var insideKeyframes bool
+	var keyframesBraceDepth int
 
 	lineNum := 0
 	for scanner.Scan() {
@@ -105,44 +109,69 @@ func parseCSSFile(filePath string, cssInfo CSSInfo) {
 
 		trimmed := strings.TrimSpace(line)
 
-		// Check if we’re starting an @media block
-		// Example: "@media screen and (max-width: 800px) {"
+		// Check if we start an @media block
 		if strings.HasPrefix(trimmed, "@media") {
 			insideMedia = true
 			mediaQueryContext = parseMediaQuery(trimmed)
-			braceDepth = 0
-			// If the line also has '{', increment braceDepth
+			mediaBraceDepth = 0
 			if strings.Contains(trimmed, "{") {
-				braceDepth++
+				mediaBraceDepth++
 			}
 			continue
 		}
-
-		// If inside a @media block, track braces to see when it closes
+		// If inside a @media block, track braces
 		if insideMedia {
-			// Count how many '{' and '}' appear
-			braceDepth += strings.Count(trimmed, "{")
-			braceDepth -= strings.Count(trimmed, "}")
-			if braceDepth <= 0 {
+			// Update brace depth for this line
+			mediaBraceDepth += strings.Count(trimmed, "{")
+			mediaBraceDepth -= strings.Count(trimmed, "}")
+			if mediaBraceDepth <= 0 {
 				// We've closed the @media block
 				insideMedia = false
 				mediaQueryContext = ""
 			}
 		}
 
-		// Check if this line starts a new selector block (similar logic as before)
-		if selectorRegex.MatchString(line) {
-			matches := selectorRegex.FindStringSubmatch(line)
+		// Check if we start an @keyframes block
+		// e.g. "@keyframes fadeIn {"
+		// or "@-webkit-keyframes fadeIn {"
+		if strings.HasPrefix(trimmed, "@keyframes") ||
+			strings.HasPrefix(trimmed, "@-webkit-keyframes") ||
+			strings.HasPrefix(trimmed, "@-moz-keyframes") ||
+			strings.HasPrefix(trimmed, "@-o-keyframes") {
+			insideKeyframes = true
+			keyframesBraceDepth = 0
+			if strings.Contains(trimmed, "{") {
+				keyframesBraceDepth++
+			}
+			// We skip processing inside keyframes entirely,
+			// or you can store them in a separate structure if you like.
+			continue
+		}
+		// If inside keyframes, skip lines until we close the block
+		if insideKeyframes {
+			keyframesBraceDepth += strings.Count(trimmed, "{")
+			keyframesBraceDepth -= strings.Count(trimmed, "}")
+			if keyframesBraceDepth <= 0 {
+				insideKeyframes = false
+			}
+			// Skip processing lines inside keyframes
+			continue
+		}
+
+		// If we're here, we're not inside a keyframes block
+		// Check if this line starts a new selector block
+		if selectorRegex.MatchString(trimmed) {
+			matches := selectorRegex.FindStringSubmatch(trimmed)
 			if len(matches) > 1 {
 				selectors := strings.Split(matches[1], ",")
-				// For simplicity, we’ll just track the first selector as “current.”
+				// For simplicity, track the first selector as 'current'
 				currentSelector = strings.TrimSpace(selectors[0])
 				insideBlock = true
 			}
 		} else if insideBlock {
 			// We are inside a selector block
-			// Check if we reached the closing brace
-			if strings.Contains(line, "}") {
+			// Check if we reached a closing brace
+			if strings.Contains(trimmed, "}") {
 				insideBlock = false
 				currentSelector = ""
 				continue
@@ -156,7 +185,15 @@ func parseCSSFile(filePath string, cssInfo CSSInfo) {
 				// remove trailing ';'
 				val = strings.TrimSuffix(strings.TrimSpace(val), ";")
 
-				storeCSSDeclaration(cssInfo, currentSelector, prop, val, filePath, lineNum, mediaQueryContext)
+				storeCSSDeclaration(
+					cssInfo,
+					currentSelector,
+					prop,
+					val,
+					filePath,
+					lineNum,
+					mediaQueryContext,
+				)
 			}
 		}
 	}
@@ -167,9 +204,7 @@ func parseCSSFile(filePath string, cssInfo CSSInfo) {
 }
 
 // parseMediaQuery tries to extract the entire `@media` line up to the first "{"
-// Example: "@media screen and (max-width: 800px) {" -> "@media screen and (max-width: 800px)"
 func parseMediaQuery(line string) string {
-	// remove trailing '{'
 	idx := strings.Index(line, "{")
 	if idx != -1 {
 		return strings.TrimSpace(line[:idx])
@@ -178,7 +213,15 @@ func parseMediaQuery(line string) string {
 }
 
 // storeCSSDeclaration updates the global map with a newly found declaration
-func storeCSSDeclaration(cssInfo CSSInfo, selector, property, value, filePath string, line int, mediaQuery string) {
+func storeCSSDeclaration(
+	cssInfo CSSInfo,
+	selector,
+	property,
+	value,
+	filePath string,
+	line int,
+	mediaQuery string,
+) {
 	if _, ok := cssInfo[selector]; !ok {
 		cssInfo[selector] = make(map[string][]ConflictDetail)
 	}
@@ -195,21 +238,12 @@ func storeCSSDeclaration(cssInfo CSSInfo, selector, property, value, filePath st
 
 // collectConflicts goes through the entire CSSInfo and identifies
 // if a given selector-property pair has multiple distinct values.
-//
-// NOTE: This does *not* differentiate by media query. So if you declare
-// color: red inside @media(max-width:800px) *and* color: blue outside that media query,
-// it will show as a conflict. If you want them *not* to conflict, you must
-// incorporate MediaQuery into your conflict detection logic.
 func collectConflicts(cssInfo CSSInfo) map[string]map[string][]ConflictDetail {
 	// Return structure similar to CSSInfo, but only including conflicts
 	conflicts := make(map[string]map[string][]ConflictDetail)
 
 	for selector, propMap := range cssInfo {
 		for prop, conflictDetails := range propMap {
-			// Group by (Value + MediaQuery) if you want to treat "same value in different queries" as same or different
-			// For simplicity: group by the Value only. That means "color: red" inside different media queries
-			// is treated the same. If you'd prefer to separate them by media query,
-			// you'd do e.g. distinctValues[detail.Value + detail.MediaQuery] below.
 			distinctValues := make(map[string][]ConflictDetail)
 			for _, detail := range conflictDetails {
 				distinctValues[detail.Value] = append(distinctValues[detail.Value], detail)
@@ -219,7 +253,6 @@ func collectConflicts(cssInfo CSSInfo) map[string]map[string][]ConflictDetail {
 				if conflicts[selector] == nil {
 					conflicts[selector] = make(map[string][]ConflictDetail)
 				}
-				// Flatten all details
 				var combined []ConflictDetail
 				for _, detSlice := range distinctValues {
 					combined = append(combined, detSlice...)
@@ -270,7 +303,6 @@ func printConflicts(conflicts map[string]map[string][]ConflictDetail, w io.Write
 
 // shortenPath keeps only the last `folderDepth` segments of `fullPath`.
 func shortenPath(fullPath string, folderDepth int) string {
-	// Split on "/" (naïve; might break on Windows).
 	parts := strings.Split(fullPath, "/")
 
 	// Filter out empty parts if leading slash is present
@@ -287,6 +319,5 @@ func shortenPath(fullPath string, folderDepth int) string {
 
 	// Keep last folderDepth segments
 	lastSegments := filtered[len(filtered)-folderDepth:]
-	// Prepend a slash
 	return "/" + strings.Join(lastSegments, "/")
 }
