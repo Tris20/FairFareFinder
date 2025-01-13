@@ -194,21 +194,24 @@
         Five Nights and Flights: {{if and .FiveNightsFlights.Valid (ne .FiveNightsFlights.Float64 0.00)}}€{{printf "%.2f" .FiveNightsFlights.Float64}}{{else}}N/A{{end}}
       </p-->
 
-      <a href="{{ .UrlCity1 }}" target="_blank" class="clickable">
-        <p>
-          Flights From: {{ if and .PriceCity1.Valid (ne .PriceCity1.Float64
-          0.00) }} €{{ printf "%.0f" .PriceCity1.Float64 }} {{ else }} N/A {{
-          end }}
-        </p>
-      </a>
-
-      <a href="{{.BookingUrl.String}}" target="_blank" class="clickable">
-        <p>
-          Avg. Hotel Price: {{ if and .BookingPppn.Valid (ne
-          .BookingPppn.Float64 0.00) }} €{{ printf "%.0f" .BookingPppn.Float64
-          }} {{ else }} N/A {{ end }}
-        </p>
-      </a>
+      <div class="flight-accom-prices">
+        <label> Flights From: </label>
+        <a href="{{ .UrlCity1 }}" target="_blank" class="clickable">
+          <p>
+            {{ if and .PriceCity1.Valid (ne .PriceCity1.Float64 0.00) }} €{{
+            printf "%.0f" .PriceCity1.Float64 }} {{ else }} N/A {{ end }}
+          </p>
+        </a>
+      </div>
+      <div class="flight-accom-prices">
+        <label>Avg. Hotel Price: </label>
+        <a href="{{ .BookingUrl.String }}" target="_blank" class="clickable">
+          <p>
+            {{ if and .BookingPppn.Valid (ne .BookingPppn.Float64 0.00) }} €{{
+            printf "%.0f" .BookingPppn.Float64 }} {{ else }} N/A {{ end }}
+          </p>
+        </a>
+      </div>
     </div>
   </div>
   {{ end }}

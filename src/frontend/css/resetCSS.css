@@ -1,116 +1,127 @@
-
 /* Base Reset */
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* General Elements */
 html {
-    font-family: sans-serif;
-    line-height: 1.15; /* Firefox default */
-    text-size-adjust: 100%; /* Prevent iOS zoom issues */
+  font-family: sans-serif;
+  line-height: 1.15; /* Firefox default */
+  text-size-adjust: 100%; /* Prevent iOS zoom issues */
 }
 
 body {
-    margin: 8px; /* Firefox body margin */
-    color: black;
-    background-color: white;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.45;
-    text-align: left;
+  margin: 8px; /* Firefox body margin */
+  color: black;
+  background-color: white;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: left;
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
-    font-size: inherit;
-    font-weight: bold;
-    margin: 0.67em 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: bold;
+  margin: 0.67em 0;
 }
 
 /* Lists */
-ul, ol {
-    padding-left: 40px;
-    list-style-type: disc;
+ul,
+ol {
+  padding-left: 40px;
+  list-style-type: disc;
 }
 
 li {
-    margin: 0;
+  margin: 0;
 }
 
 /* Links */
 a {
-    background-color: transparent;
-    text-decoration: none;
-    color: blue;
+  background-color: transparent;
+  text-decoration: none;
+  color: blue;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* Tables */
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-td, th {
-    padding: 0;
-    text-align: left;
+td,
+th {
+  padding: 0;
+  text-align: left;
 }
 
 /* Forms */
-button, input, select, textarea {
-    font: inherit;
-    margin: 0;
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  margin: 0;
 }
 
 button {
-    background-color: ButtonFace;
-    color: ButtonText;
-    border: none;
+  background-color: ButtonFace;
+  color: ButtonText;
+  border: none;
 }
 
 input {
-    background-color: white;
-    color: initial;
-    border: 1px solid #a9a9a9; /* Match Firefox default border */
-    padding: 1px;
+  background-color: white;
+  color: initial;
+  border: 1px solid #a9a9a9; /* Match Firefox default border */
+  padding: 1px;
 }
 
 textarea {
-    resize: vertical;
+  resize: vertical;
 }
 
 /* Fieldsets */
 fieldset {
-    border: 1px solid #a9a9a9;
-    margin: 0 2px;
-    padding: 0.35em 0.75em 0.625em;
+  border: 1px solid #a9a9a9;
+  margin: 0 2px;
+  padding: 0.35em 0.75em 0.625em;
 }
 
 legend {
-    color: inherit;
-    display: block;
-    font-size: 1.15em;
-    font-weight: bold;
-    padding: 0;
+  color: inherit;
+  display: block;
+  font-size: 1.15em;
+  font-weight: bold;
+  padding: 0;
 }
 
 /* Buttons */
-button, [type="button"], [type="reset"], [type="submit"] {
-    -webkit-appearance: button;
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
 }
 
 /* Remove extra padding in Safari */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-    border: 0;
-    padding: 0;
+  border: 0;
+  padding: 0;
 }
-

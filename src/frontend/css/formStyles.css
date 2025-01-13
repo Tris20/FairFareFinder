@@ -14,17 +14,10 @@
     transform 0.1s ease;
 }
 
-/* Hover and focus states for a nice interactive feel */
-#add-city-button:hover {
-  background-color: #f07a5f;
-  /* outline: darkorange;
-  outline-style: groove;*/
-}
-
 #add-city-button:hover,
 #add-city-button:focus {
-  background-color: #ff6347; /* A slightly darker coral */
-  outline: none; /* Remove default focus outline, if desired */
+  background-color: #ff6347;
+  outline: none;
 }
 
 /* Active state provides feedback on click */
@@ -48,9 +41,7 @@
 
 select:hover {
   background-color: #3fa89d;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-  transform: scale(1.02);
   cursor: pointer;
 }
 
@@ -126,6 +117,23 @@ select {
 .accom-pricebar {
   display: flex;
   width: 100%;
+}
+
+#flight-form {
+  border-radius: 8px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 92%;
+  flex-direction: column;
+  padding: calc(10px + 2%);
+  max-width: 1200px;
+  padding-bottom: 0px;
+  padding-top: 20px;
+  background-color: #0b5259;
+  font-family: "Dosis", sans-serif;
 }
 
 /* MOBILE*/

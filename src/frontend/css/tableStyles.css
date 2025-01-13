@@ -50,57 +50,13 @@
     background-position: center;
   }
 
-  .card-content {
-    padding: 15px;
-  }
-
   .card-content h2 {
-    font-size: 1.7vw;
+    font-size: 1.3em;
     margin: 0;
   }
 
   .card-content p {
     margin: 5px 0;
-  }
-
-  .weather-icons {
-    display: flex;
-    justify-content: space-around;
-    margin-right: 1.5em;
-    background-color: #add8e670;
-    border-radius: 14px;
-    width: 100%;
-    margin-top: 10px;
-    text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-bottom: 13px;
-  }
-
-  /* mobile card styles copied into grid view*/
-  #flight-form {
-    width: 92%; /* Adjust form width on mobile */
-    flex-direction: column; /* Align items in a row */
-    padding: calc(10px + 2%);
-    max-width: 1200px;
-    padding-bottom: 0px;
-    padding-top: 20px;
-    background-color: #0b5259;
-    font-family: "Dosis", sans-serif;
-  }
-
-  .card-content {
-    /*  flex: 0 0 60%;
-    padding: 20px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;*/
-    overflow: hidden;
-    background-color: #f4dfcf;
-    opacity: 0.9;
-    justify-content: space-between;
-    padding: 10px;
   }
 
   #flight-form output {
@@ -119,20 +75,17 @@
     grid-gap: 20px;
     margin: 0px 5%;
   }
-}
 
-/* for super wide screens reduce table width for readability*/
-@media only screen and (min-width: 1000px) {
-  #table-container {
-    width: 90%;
-  }
-  #flight-table {
-    font-size: 1em;
-    /*
-height: 77svh;
-
-font-size: 1.0vw;
-*/
+  .card {
+    scroll-snap-align: start;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    border-radius: 8px;
+    line-height: 0;
+    overflow: hidden;
+    margin: 0px 0px 20px 0px;
+    flex-direction: row;
+    height: auto;
   }
 }
 
@@ -141,13 +94,6 @@ font-size: 1.0vw;
     width: 1200px;
   }
 
-  #flight-table {
-    font-size: 1em;
-
-    /*
-height: 77svh;
-*/
-  }
   .card-content h2 {
     font-size: 1.4em;
     margin: 0;
@@ -179,51 +125,38 @@ height: 77svh;
   /*  animation: moveUp 1s ease forwards;*/
 }
 
-/* Flexbox to align the icon and text side by side */
 .header-content {
   display: flex;
-  align-items: center; /* Vertically align icon and text */
-  justify-content: left; /* Horizontally center icon and text within the header */
+  align-items: center;
+  justify-content: left;
 }
 
-/* Icon styling */
 #fff-icon {
   margin-left: 10%;
   height: 42px;
   margin-right: 5px;
 }
 
-/* Ensure the header and its content are centered within the table container */
-#table-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Horizontally center the content inside the container */
-}
-
-/* Banner styling */
 #page-banner {
-  display: none; /* Initially hidden */
-  width: 100%; /* Full-width banner */
-  background-color: #009879; /* Banner background color */
-  color: white; /* Text color */
-  padding: 20px 0; /* Padding to create space inside the banner */
-  text-align: center; /* Center content horizontally */
+  display: none;
+  width: 100%;
+  height: 55px;
+  background-color: #0b5259;
+  color: white;
+  padding: 0px;
+  text-align: center;
   opacity: 0;
   transition: opacity 1s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
 }
 
-/* Show the banner with an animation */
 #page-banner.show {
   display: block;
   opacity: 1;
   animation: fadeIn 1s ease forwards;
-}
-
-/* Flexbox to align the icon and text side by side */
-.banner-content {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Vertically align the icon and the text */
 }
 
 /* Fade-in animation */
@@ -236,29 +169,6 @@ height: 77svh;
   }
 }
 
-/* Banner Styling */
-#page-banner {
-  display: none; /* Initially hidden */
-  width: 100%; /* Full-width banner */
-  /*   background-color: #7cdbdbc7; sky blue */
-  /*    background-color: #2a8a8ac7;*/
-  /* background-color: #009879c7;*/
-
-  height: 55px;
-  background-color: #0b5259;
-
-  color: white; /* Text color */
-
-  padding: 0px; /* Padding for spacing */
-  text-align: center;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  position: fixed; /* Make the banner stick to the top */
-  top: 0; /* Ensure it's positioned at the top */
-  left: 0; /* Align to the left */
-  z-index: 999; /* Make sure it's above other content */
-}
-
 /* When the banner is shown */
 #page-banner.show {
   display: block;
@@ -266,11 +176,11 @@ height: 77svh;
   animation: fadeIn 1s ease forwards;
 }
 
-/* Flexbox to align the icon and text side by side */
 .banner-content {
   display: flex;
-  justify-content: left; /* Center horizontally */
-  align-items: center; /* Vertically align the icon and the text */
+  align-items: center;
+  justify-content: left;
+  line-height: 1.6;
 }
 
 /* Apply Dosis specifically to headings */
@@ -281,12 +191,6 @@ h3 {
   margin: 6px;
   font-size: 1.7em;
 }
-
-/*
-.first-letter {
-    color: #efa56d;
-}
-*/
 
 .scroll-container {
   position: relative;
@@ -343,4 +247,37 @@ h3 {
 
 #duration-container {
   display: block; /* Ensure it is visible initially */
+}
+
+.weather-icons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-right: 1.5em;
+  background-color: #add8e69e;
+  border-radius: 14px;
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 13px;
+  /*  font-family: Arial, sans-serif;*/
+}
+
+.card-content {
+  padding: 1.1em;
+  justify-content: space-between;
+  background-color: #f4dfcf;
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+  opacity: 0.9;
+  font-size: 1.8vh;
+}
+
+.flight-accom-prices {
+  display: flex;
+  justify-content: inherit;
 }
