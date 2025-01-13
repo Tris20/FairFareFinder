@@ -71,7 +71,7 @@ select {
 }
 
 .flight-price-slider {
-  width: 50%;
+  width: 100%;
   display: flex;
 }
 .form-group.city-row {
@@ -79,13 +79,14 @@ select {
   border-radius: 10px;
   display: flex;
   padding: 1em;
+  flex-direction: column;
 }
 .form-group.city-row.operators {
   display: flex;
   margin-bottom: -10px;
   padding: 0em;
-
-  width: 50%;
+  flex-direction: row;
+  width: 100%;
 }
 
 .form-group.city-row.operators {
@@ -126,7 +127,7 @@ select {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  width: 92%;
+  width: 38%;
   flex-direction: column;
   padding: calc(10px + 2%);
   max-width: 1200px;
@@ -134,19 +135,30 @@ select {
   padding-top: 20px;
   background-color: #0b5259;
   font-family: "Dosis", sans-serif;
+  height: 100%;
 }
 
 /* MOBILE*/
 @media screen and (max-width: 800px) {
   .form-group.city-row {
+    flex-direction: row;
     display: flow-root;
   }
   .flight-price-slider {
-    width: 70vw;
+    width: 50%;
     display: flex;
   }
 
   .form-group.city-row.operators {
-    width: 100%;
+    width: 92%;
+    height: 100%;
+    flex-direction: column;
+  }
+
+  #table-container.show {
+    flex-direction: column;
+  }
+  .flight-form {
+    width: 92%;
   }
 }

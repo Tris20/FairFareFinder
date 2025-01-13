@@ -90,10 +90,6 @@
 }
 
 @media only screen and (min-width: 1200px) {
-  #table-container {
-    width: 1200px;
-  }
-
   .card-content h2 {
     font-size: 1.4em;
     margin: 0;
@@ -146,7 +142,7 @@
   padding: 0px;
   text-align: center;
   opacity: 0;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
   position: fixed;
   top: 0;
   left: 0;
@@ -156,7 +152,7 @@
 #page-banner.show {
   display: block;
   opacity: 1;
-  animation: fadeIn 1s ease forwards;
+  animation: fadeIn 0.1s forwards;
 }
 
 /* Fade-in animation */
@@ -194,9 +190,9 @@ h3 {
 
 .scroll-container {
   position: relative;
-  height: 93vh;
   top: -10px;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
   overflow-y: scroll;
   overflow-x: scroll;

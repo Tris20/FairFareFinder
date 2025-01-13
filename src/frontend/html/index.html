@@ -58,107 +58,106 @@
     <!-- Table content container that will appear after the text fades out -->
     <!-- Banner structure -->
     <div id="table-container">
-      <div class="scroll-container">
-        <form
-          id="flight-form"
-          hx-get="/filter"
-          hx-target="#flight-table"
-          hx-trigger="change, input delay:50ms"
-        >
-          <!-- Dynamic city input rows -->
-          <div id="city-rows" style="width: 100%">
-            <div class="form-group city-row">
-              <div class="dropdown-container">
-                <label for="city-search">Flying From:</label>
+      <form
+        id="flight-form"
+        hx-get="/filter"
+        hx-target="#flight-table"
+        hx-trigger="change, input delay:50ms"
+      >
+        <!-- Dynamic city input rows -->
+        <div id="city-rows" style="width: 100%">
+          <div class="form-group city-row">
+            <div class="dropdown-container">
+              <label for="city-search">Flying From:</label>
 
-                <input
-                  id="city-search"
-                  class="dropdown-input"
-                  name="city[]"
-                  placeholder="Search for a city"
-                  autocomplete="off"
-                />
-                <button id="dropdown-btn" class="dropdown-btn" type="button">
-                  <span class="caret">▼</span>
-                </button>
-                <ul id="city-list" class="dropdown-list hidden"></ul>
-              </div>
-              <div class="flight-price-slider">
-                <!--label for="priceOutput0"></label-->
-                <output id="priceOutput0" class="output-range">€399.00</output>
-                <input
-                  type="range"
-                  id="combinedPrice-slider0"
-                  name="maxPriceLinear[]"
-                  min="0"
-                  max="100"
-                  step="1"
-                  value="49"
-                  class="price-slider"
-                  hx-get="/update-slider-price"
-                  hx-target="#priceOutput0"
-                  hx-trigger="input"
-                  hx-push-url="false"
-                  hx-preserve="false"
-                  hx-include="#combinedPrice-slider0"
-                  autocomplete="off"
-                />
-              </div>
+              <input
+                id="city-search"
+                class="dropdown-input"
+                name="city[]"
+                placeholder="Search for a city"
+                autocomplete="off"
+              />
+              <button id="dropdown-btn" class="dropdown-btn" type="button">
+                <span class="caret">▼</span>
+              </button>
+              <ul id="city-list" class="dropdown-list hidden"></ul>
+            </div>
+            <div class="flight-price-slider">
+              <!--label for="priceOutput0"></label-->
+              <output id="priceOutput0" class="output-range">€399.00</output>
+              <input
+                type="range"
+                id="combinedPrice-slider0"
+                name="maxPriceLinear[]"
+                min="0"
+                max="100"
+                step="1"
+                value="49"
+                class="price-slider"
+                hx-get="/update-slider-price"
+                hx-target="#priceOutput0"
+                hx-trigger="input"
+                hx-push-url="false"
+                hx-preserve="false"
+                hx-include="#combinedPrice-slider0"
+                autocomplete="off"
+              />
             </div>
           </div>
-          <!-- Button to add more origin cities -->
+        </div>
+        <!-- Button to add more origin cities -->
 
+        <div class="form-group">
+          <button type="button" id="add-city-button">Add Another City</button>
+        </div>
+        <div class="accom-and-sort">
+          <div class="form-group accom">
+            <label for="accommodationOutput0">Avg. Hotel PPPN:</label>
+
+            <div class="accom-pricebar">
+              <output id="accommodationOutput0" class="output-range"
+                >€99.00</output
+              >
+              <input
+                type="range"
+                id="accommodationPrice-slider0"
+                name="maxAccommodationPrice[]"
+                min="0"
+                max="100"
+                step="1"
+                value="35"
+                class="price-slider"
+                hx-get="/update-slider-price"
+                hx-target="#accommodationOutput0"
+                hx-trigger="input"
+                hx-push-url="false"
+                hx-preserve="false"
+                hx-include="#accommodationPrice-slider0"
+                autocomplete="off"
+              />
+            </div>
+          </div>
           <div class="form-group">
-            <button type="button" id="add-city-button">Add Another City</button>
-          </div>
-          <div class="accom-and-sort">
-            <div class="form-group accom">
-              <label for="accommodationOutput0">Avg. Hotel PPPN:</label>
+            <label for="sort">Sort By:</label>
+            <select id="sort" name="sort">
+              <option value="best_weather" selected>
+                Sunniest and Warmest
+              </option>
+              <option value="cheapest_hotel">Cheapest Hotel Price</option>
+              <option value="shortest_flight">Shortest Flight</option>
+              <option value="worst_weather">Coldest and Wettest</option>
+              <option value="most_expensive_hotel">
+                Most Expensive Hotel Price
+              </option>
 
-              <div class="accom-pricebar">
-                <output id="accommodationOutput0" class="output-range"
-                  >€99.00</output
-                >
-                <input
-                  type="range"
-                  id="accommodationPrice-slider0"
-                  name="maxAccommodationPrice[]"
-                  min="0"
-                  max="100"
-                  step="1"
-                  value="35"
-                  class="price-slider"
-                  hx-get="/update-slider-price"
-                  hx-target="#accommodationOutput0"
-                  hx-trigger="input"
-                  hx-push-url="false"
-                  hx-preserve="false"
-                  hx-include="#accommodationPrice-slider0"
-                  autocomplete="off"
-                />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="sort">Sort By:</label>
-              <select id="sort" name="sort">
-                <option value="best_weather" selected>
-                  Sunniest and Warmest
-                </option>
-                <option value="cheapest_hotel">Cheapest Hotel Price</option>
-                <option value="shortest_flight">Shortest Flight</option>
-                <option value="worst_weather">Coldest and Wettest</option>
-                <option value="most_expensive_hotel">
-                  Most Expensive Hotel Price
-                </option>
-
-                <option value="longest_flight">Longest Flight</option>
-                <!--<option value="low_price">Most Affordable</option>
+              <option value="longest_flight">Longest Flight</option>
+              <!--<option value="low_price">Most Affordable</option>
             <option value="high_price">Most Expensive</option>-->
-              </select>
-            </div>
+            </select>
           </div>
-        </form>
-
+        </div>
+      </form>
+      <div class="scroll-container">
         <div id="flight-table">
           <!-- The cards will be dynamically updated here -->
         </div>
