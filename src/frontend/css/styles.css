@@ -2,7 +2,6 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,8 +11,10 @@ body {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-color: #f4f4f4; /* Ensure only one background-color is effective */
-overscroll-behavior: none;
+  background-color: #f4f4f4;
+  overscroll-behavior: none;
+  box-sizing: border-box;
+  font-family: "Dosis", sans-serif;
 }
 
 .title-container {
@@ -37,11 +38,6 @@ overscroll-behavior: none;
   }
 }
 
-h1 {
-  color: white;
-  margin: 0;
-}
-
 .image-container {
   display: flex;
   justify-content: center;
@@ -63,27 +59,6 @@ h1 {
   display: flex;
   justify-content: space-around;
   width: 100%;
-}
-
-.nav-button {
-  background-color: #eea53c; /* Green background */
-  border: none;
-  color: white;
-  padding: 20px; /* Fixed height */
-  text-align: center;
-  text-decoration: wavy;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  flex: 1; /* Allows dynamic width */
-}
-
-.nav-button:hover {
-  background-color: #1ca2b3; /* Slightly lighter or different color */
-  transform: scale(1.05); /* Slightly increase size */
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Add shadow for depth */
-  transition: all 0.3s ease-in-out; /* Smooth transition for the effect */
 }
 
 /* Fade-in animation for the text */
@@ -118,7 +93,6 @@ h1 {
 #table-container {
   width: 90%;
   height: 101%;
-  display: none;
   opacity: 0;
   position: fixed;
   top: calc(50% + 50px);
@@ -127,34 +101,35 @@ h1 {
   transition:
     opacity 0.5s ease,
     transform 0.5s ease;
-  flex-direction: column; /* Stack children vertically */
   justify-content: flex-start; /* Align content to the top */
-  align-items: center; /* Stretch children width to fill the container */
   line-height: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #flight-table {
   width: 100%; /* Ensure the table takes up full width */
   margin: 25px 0;
- /* overflow-y: auto; *//* Enables vertical scrolling when necessary */
+  /* overflow-y: auto; */ /* Enables vertical scrolling when necessary */
   opacity: 0; /* Start invisible */
-  /*overflow-x: scroll; *//* Enable horizontal scrolling for smaller screens */
-text-align: left;
-border-radius: 8px;
-/*
+  /*overflow-x: scroll; */ /* Enable horizontal scrolling for smaller screens */
+  text-align: left;
+  border-radius: 8px;
+  /*
 height:77svh;
 */
-margin-bottom: 0;
-font-size: 1.2vw;
+  margin-bottom: 0;
+  font-size: 1em;
 }
 
 /* Trigger animations when the 'show' class is added via JavaScript */
 #table-container.show {
   display: flex;
-
   animation:
     fadeIn 0.5s forwards,
-    moveUp 0.5s 1s forwards; /* First fade in, then move up after a 2-second delay */
+    moveUp 0.5s 1s ease forwards;
+  opacity: 1;
 }
 
 /* Keyframes for the fade-in effect */
@@ -177,39 +152,32 @@ font-size: 1.2vw;
   }
 }
 
-/* Center the form elements in a row */
-#flight-form {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-  display: flex; /* Use flexbox for layout */
-  flex-direction: row; /* Align items in a row */
-  align-items: center; /* Center-align the items vertically */
-  justify-content: center; /* Center-align the entire row horizontally */
-  margin: 0 auto; /* Center the form horizontally on the page */
-  width: 80%;
-padding-bottom: 0px;
-}
-
 /* Ensure the input elements, labels, and selects are not too wide */
 #flight-form label,
 #flight-form select,
 #flight-form input[type="range"],
 #flight-form output {
   text-align: center; /* Center text in the labels */
-font-family: 'Dosis', sans-serif;
-font-size: 1.1em;
-color: white;
-
+  font-family: "Dosis", sans-serif;
+  color: white;
 }
 
 /* Center-align the output values for sliders */
 #flight-form output {
-  font-size: 1.2em; /* Increase the font size for better visibility */
- /* width: 30%;*/
-max-width: 75px;
+  /* width: 30%;*/
+  max-width: 75px;
 }
 
+.clickable {
+  color: #007bff;
+  text-decoration: none;
+  text-align: right;
+  font-weight: bold;
+}
+
+.clickable:hover {
+  text-decoration: underline;
+}
 /* Fullscreen background image */
 #bg-image-dreams {
   position: fixed;
@@ -224,7 +192,7 @@ max-width: 75px;
   opacity: 0;
   transition: opacity 1s ease; /* Smooth opacity transition */
 
- filter: blur(69px) grayscale(35.8%);
+  filter: blur(69px) grayscale(35.8%);
 }
 
 .fade-in {
@@ -234,8 +202,8 @@ max-width: 75px;
 /* Initial state for footer */
 #footer-privacy {
   opacity: 0; /* Initially hidden */
-margin-top: 6px;
-width: 100%;
+  margin-top: 6px;
+  width: 100%;
 }
 
 /* For each label-select/input pair */
@@ -259,25 +227,20 @@ width: 100%;
   width: 100%; /* Adjust input width */
 }
 
-
-
+#flight-form output {
+  font-size: 1.1em;
+}
 
 select {
   padding: 8px 12px;
-  border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #f9f9f9;
-  font-size: 16px;
   color: #333;
   width: 100%; /* Adjust to match form layout */
-
-
-background-color: #338c84;
-    font-size: 12px;
-    border: 0px;
+  background-color: #338c84;
+  font-size: 1.1em;
+  border: 0px;
+  margin: 4px;
 }
-
-
 
 @media screen and (max-width: 800px) {
   .navbar-container nav {
@@ -288,15 +251,6 @@ background-color: #338c84;
     width: 100%;
     margin: 2px 0;
   }
-
-  #flight-form {
-    width: 90%; /* Adjust form width on mobile */
-    flex-direction: column; /* Align items in a row */
-padding: calc(10px + 2%);
-
-  padding-bottom: 0px;
-background-color: #0b5259;
- }
 
   /* On smaller screens, keep the label and input in a row */
   .form-group {
@@ -335,21 +289,10 @@ background-color: #0b5259;
     display: none;
   }
 
-
-select {
-background-color: #338c84;
-  font-size: 12px;
-border: 0px;
-}
-
-#flight-form label{
-  font-size: 1em;
-  width: 20%
-}
-/* Center-align the output values for sliders */
-#flight-form output {
-  font-size: 1em; /* Increase the font size for better visibility */
-}
+  #flight-form label {
+    font-size: 1em;
+    width: 20%;
+  }
 
   #table-container {
     width: 95%;
@@ -358,268 +301,53 @@ border: 0px;
   }
 
   #flight-table {
-    width: 100%; /* Ensure table width is consistent on mobile */
-    overflow-x: scroll; /* Enable horizontal scrolling if needed */
-margin-bottom: 0px;
-    font-size: 1em;
-  /*
-    height: 60svh;
-    */
+    width: 100%;
+    overflow-x: scroll;
+    /*
+  height: 60svh;
+  */
   }
 
   #flight-table th,
   #flight-table td {
-    width: auto; /* Make sure the table's columns resize accordingly */
+    width: auto;
   }
 
-    .scroll-container::-webkit-scrollbar {
-        display: none; /* Hide scrollbar for WebKit browsers on mobile */
-    }
+  .scroll-container::-webkit-scrollbar {
+    display: none;
+  }
 
-    .scroll-container {
-        scrollbar-width: none; /* Hide scrollbar for Firefox on mobile */
-    }
-::-webkit-scrollbar-thumb {
+  .scroll-container {
+    scrollbar-width: none;
+  }
+  ::-webkit-scrollbar-thumb {
     background-color: #a0a0a000;
+    /*  background-color: transparent; */
     border-radius: 10px;
+  }
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
-
-}
-
-
-
-
 
 /* WebKit Browsers (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    /*background-color: #a0a0a0;*/
- background-color: #d8d8d8;
+  /*background-color: #a0a0a0;*/
+  background-color: #d8d8d8;
   border-radius: 10px;
-
 }
 
 ::-webkit-scrollbar-thumb:hover {
-/*    background-color: #808080;*/
- 
+  /*    background-color: #808080;*/
 
-  background-color: #dd6c20;  
-  }
-
-::-webkit-scrollbar-corner {
-    background-color: transparent; /* Match the background color of the content */
-/* Buttons */
-::-webkit-scrollbar-button:single-button {
-  background-color: #bbbbbb;
-  display: none;
-  border-style: solid;
-  height: 13px;
-  width: 16px;
-}
-/* Up */
-::-webkit-scrollbar-button:single-button:vertical:decrement {
-  border-width: 0 8px 8px 8px;
-  border-color: transparent transparent #555555 transparent;
- display: none;
-}
-
-::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
-  border-color: transparent transparent #777777 transparent;
- display: none;
-}
-/* Down */
-::-webkit-scrollbar-button:single-button:vertical:increment {
-  border-width: 8px 8px 0 8px;
-  border-color: #555555 transparent transparent transparent;
- display: none;
-}
-
-::-webkit-scrollbar-button:vertical:single-button:increment:hover {
-  border-color: #777777 transparent transparent transparent;
- display: none;
-}
-
-/* Firefox */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: #a0a0a0 transparent;
-}
-
-/* Hide scrollbar completely on mobile */
-@media screen and (max-width: 800px) {
-    ::-webkit-scrollbar {
-        display: none; /* Hide entire scrollbar on mobile */
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background-color: transparent; /* Ensure thumb is transparent (optional) */
-    }
-
-    .scroll-container {
-        scrollbar-width: none; /* Firefox: hide scrollbar on mobile */
-    }
-}
-
-
-
-.accommodation-column {
-  word-wrap: break-word;
-  white-space: normal;
-  text-align: center;
-}
-
-
-
-/* mobileStyles.css */
-/* For mobile devices, hide the table and show the carousel */
-@media only screen and (max-width: 800px) {
-    .desktop-view {
-        display: none;
-    }
-    .desktop-card-grid {
-    }
-
-
-
-
-    .card {
-        min-width: 100%;
-        scroll-snap-align: start;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .card-content {
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-    }
-
-
-
-
-
-}
-
-
-
-
-  .weather-icons img {
-    width: 40px; /* Adjust the width as per your preference */
-    height: auto; /* Ensures the image keeps its aspect ratio */
-  }
-
-th,
-td {
-  padding: 7px;
-  text-align: center;
-  font-size: 15px;
-}
-#footer-privacy{
-  margin-bottom: 0px;
-  width:100%;
-}
-
-
-.clickable {
-  color: #007BFF;
-  text-decoration: none;
-}
-
-.clickable:hover {
-  text-decoration: underline;
-}
-
-
-
-
-
-#page-header {
-    display: none; /* Initially hide the header */
-    text-align: center;
-    margin-bottom: 20px;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-#page-header.show {
-    display: block; /* Show the header when the 'show' class is added */
-    opacity: 1;
-    animation: moveUp 1s ease forwards;
-}
-/* Move Up Animation */
-@keyframes moveUp {
-    0% {
-        transform: translateY(100px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Ensure the form and table move up with the animation */
-#table-container.show {
-    animation: moveUp 1s ease forwards;
-    opacity: 1;
-}
-
-/* Ensure the form and header move up together */
-#table-container,
-#page-header {
-    position: relative;
-}
-
-
-
-#additional-cities {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-
-.form-group.additional-city {
-    width: 100%;  /* Ensures that the div takes up the full width of its parent */
-    display: flex; /* Uses flexbox to allow child elements to be more flexibly styled */
-    flex-direction: column; /* Stacks child elements vertically */
-    align-items: center; /* Centers child elements horizontally */
-}
-
-
-
-
-/* Additional styling for the add city button */
-#add-city-button {
-  background-color: #ff7f50; /* A coral-like color */
-  border: none;
-  border-radius: 4px;
-  color: #ffffff;
-  font-family: "Dosis", sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 0.5em 1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease;
-}
-
-/* Hover and focus states for a nice interactive feel */
-#add-city-button:hover,
-#add-city-button:focus {
-  background-color: #ff6347; /* A slightly darker coral */
-  outline: none; /* Remove default focus outline, if desired */
-}
-
-/* Active state provides feedback on click */
-#add-city-button:active {
-  transform: scale(0.98);
+  background-color: #dd6c20;
 }

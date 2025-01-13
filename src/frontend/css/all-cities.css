@@ -1,0 +1,32 @@
+.card {
+  width: 100px;
+  height: 150px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-image {
+  width: 100%;
+  height: 80%;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-content {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+}
+
+.city-name {
+  font-size: 0.8em;
+  font-weight: bold;
+  text-align: center;
+}

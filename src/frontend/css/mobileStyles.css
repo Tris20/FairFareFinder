@@ -18,13 +18,6 @@
   scroll-snap-align: start; /* Snap each card to the start */
 }
 
-.scroll-container {
-  width: 100vw;
-  overflow: hidden; /* Hide scrollbars */
-  overflow-x: scroll;
-  overflow-y: scroll;
-}
-
 @media only screen and (min-width: 801px) {
   .mobile-view {
     display: none;
@@ -36,26 +29,10 @@
     display: none;
   }
 
-  #flight-table {
-    /*
-    height: 77svh;
-    */
-    font-size: 2.5vw;
-  }
   /* mobileStyles.css */
   .weather-icons {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     padding-bottom: 14px;
-    margin-right: 1em;
-    display: flex;
-    justify-content: space-around;
-    margin-right: 1.5em;
-    background-color: #add8e6bf;
-    border-radius: 14px;
-    width: 100%;
-    margin-top: 0.2em;
   }
 
   .weather-icon {
@@ -90,27 +67,8 @@
     margin-right: 0;
   }
 
-  .card {
-    scroll-snap-align: start;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    border-radius: 8px;
-    line-height: 0;
-    overflow: hidden;
-    margin: 0px 0px 20px 0px;
-    flex-direction: row;
-    height: auto;
-  }
-
   .clickable {
-    color: #007bff;
-    text-decoration: none;
-    text-align: right;
     padding: 6px;
-  }
-
-  .clickable:hover {
-    text-decoration: underline;
   }
 
   /* 60% of the card for the image */
@@ -122,30 +80,17 @@
     height: 21vh;
   }
 
-  /* 40% of the card for the content */
-  .card-content {
-    flex: auto; /* Takes up 40% of the card's width */
-    /*  padding: 20px;*/
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box; /* Prevents padding from adding to the content's width */
-    overflow: hidden; /* Ensures no content overflows */
-    background-color: #f4dfcf;
-    opacity: 0.9;
-    justify-content: space-between;
-    padding: 1em;
-    font-size: 1.2em;
-  }
-
   h2 {
     /*margin-top: 0.2em;*/
     /*  margin-bottom: 0.8em;*/
     font-size: 1.3em;
   }
-
   #flight-form {
-    width: 100%; /* Adjust form width on mobile */
+    flex-direction: column;
+    padding: calc(10px + 2%);
+    padding-bottom: 0px;
+    background-color: #0b5259;
+    width: 100%;
     padding-left: 10%;
     padding-right: 10%;
   }

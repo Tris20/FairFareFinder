@@ -1,6 +1,6 @@
 /* Additional styling for the add city button */
 #add-city-button {
-  background-color: #db8363f2; /* A coral-like color */
+  background-color: #db8363f2;
   border: none;
   border-radius: 4px;
   color: #ffffff;
@@ -14,11 +14,10 @@
     transform 0.1s ease;
 }
 
-/* Hover and focus states for a nice interactive feel */
-#add-city-button:hover {
-  background-color: #f07a5f;
-  /* outline: darkorange;
-  outline-style: groove;*/
+#add-city-button:hover,
+#add-city-button:focus {
+  background-color: #ff6347;
+  outline: none;
 }
 
 /* Active state provides feedback on click */
@@ -41,10 +40,9 @@
 }
 
 select:hover {
-  background-color: #3fa89d; /* Slightly lighter green for hover */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-  transform: scale(1.02); /* Slight zoom effect */
-  cursor: pointer; /* Change cursor to pointer */
+  background-color: #3fa89d;
+
+  cursor: pointer;
 }
 
 select {
@@ -120,6 +118,25 @@ select {
   display: flex;
   width: 100%;
 }
+
+#flight-form {
+  border-radius: 8px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 92%;
+  flex-direction: column;
+  padding: calc(10px + 2%);
+  max-width: 1200px;
+  padding-bottom: 0px;
+  padding-top: 20px;
+  background-color: #0b5259;
+  font-family: "Dosis", sans-serif;
+}
+
+/* MOBILE*/
 @media screen and (max-width: 800px) {
   .form-group.city-row {
     display: flow-root;
