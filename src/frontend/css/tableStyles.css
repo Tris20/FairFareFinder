@@ -110,27 +110,6 @@
   }
 }
 
-#page-header {
-  display: none; /* Initially hidden */
-  text-align: center;
-  margin-bottom: 20px;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  width: 100%; /* Make sure the header spans the width of the container */
-}
-
-#page-header.show {
-  display: block;
-  opacity: 1;
-  /*  animation: moveUp 1s ease forwards;*/
-}
-
-.header-content {
-  display: flex;
-  align-items: center;
-  justify-content: left;
-}
-
 #fff-icon {
   margin-left: 10%;
   height: 42px;
@@ -218,19 +197,6 @@ h3 {
   background-color: #555; /* Darker color on hover */
 }
 
-/* Table styles inside the scroll container */
-.scroll-container table {
-  width: 100%; /* Table stretches to fill the container width */
-  border-collapse: collapse; /* Collapse table borders */
-}
-
-.scroll-container th,
-.scroll-container td {
-  text-align: center;
-  padding: 10px;
-  border: 1px solid #ddd; /* Light gray border */
-}
-
 .destination-title {
   display: flex;
   flex-direction: row;
@@ -243,10 +209,6 @@ h3 {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}
-
-#duration-container {
-  display: block; /* Ensure it is visible initially */
 }
 
 .weather-icons {

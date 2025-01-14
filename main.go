@@ -138,8 +138,8 @@ func SetupServer(db_path string, logger io.Writer) func() {
 		"./src/frontend/html/index.html",
 		"./src/frontend/html/table.html",
 		"./src/frontend/html/seo.html",
-		"./src/frontend/html/cities.html",
-		"./src/frontend/html/all-cities.html", // Add all-cities.html template
+		"./src/frontend/html/dev_and_debug/cities.html",
+		"./src/frontend/html/dev_and_debug/all-cities.html", // Add all-cities.html template
 	))
 
 	backend.Init(db, tmpl)

@@ -25,16 +25,6 @@
   position: absolute;
 }
 
-/* Close button */
-.close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
 /* Larger card styling */
 .card-large .card-image {
   height: 45vh;
@@ -53,6 +43,7 @@
 
 @media (max-width: 800px) {
   .modal-content {
+    top: 20vh;
     width: 90%;
   }
   /* Larger card styling */
@@ -67,10 +58,6 @@
   }
   .card-large .card-content {
     flex: 0 0 40%;
-  }
-
-  .modal-content {
-    top: 20vh;
   }
 
   .modal {

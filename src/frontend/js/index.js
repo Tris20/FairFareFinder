@@ -182,7 +182,6 @@ document
           toggleDurationVisibility(); // Update UI
         }
       }
-
     }
   });
 

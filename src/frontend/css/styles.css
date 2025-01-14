@@ -17,50 +17,6 @@ body {
   font-family: "Dosis", sans-serif;
 }
 
-.title-container {
-  text-align: center;
-  /* Animation Name */
-  background: linear-gradient(to right, #d87d6d, #005a84, #012353);
-  background-size: 200% 200%; /* Enlarge background size to allow movement */
-  animation: GradientMove 8s linear infinite; /* Apply the animation */
-  padding: 20px;
-}
-
-@keyframes GradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.image-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 0px;
-}
-
-.image-container img {
-  max-width: 100%;
-  height: auto;
-}
-
-.navbar-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.navbar-container nav {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-}
-
 /* Fade-in animation for the text */
 #website-name {
   font-size: 6rem;
@@ -77,15 +33,6 @@ body {
   }
   100% {
     opacity: 0;
-  }
-}
-
-@keyframes fadeInTable {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }
 
@@ -243,10 +190,6 @@ select {
 }
 
 @media screen and (max-width: 800px) {
-  .navbar-container nav {
-    flex-direction: column;
-  }
-
   .nav-button {
     width: 100%;
     margin: 2px 0;
@@ -306,11 +249,6 @@ select {
     /*
   height: 60svh;
   */
-  }
-
-  #flight-table th,
-  #flight-table td {
-    width: auto;
   }
 
   .scroll-container::-webkit-scrollbar {
