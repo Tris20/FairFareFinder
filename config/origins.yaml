@@ -52,3 +52,22 @@ origins:
     ArrivalStartDate: "2024-03-24"
     ArrivalEndDate: "2024-03-26"
     SkyScannerID: "eyJzIjoiU1lEIiwiZSI6IjEyODY2NzA1OCIsImgiOiIyNzU0NzA5NyJ9"
+      
+  - IATA: "BRE"
+    City: "Bremen"
+    Country: "Germany"
+    DepartureStartDate: "2024-03-20"
+    DepartureEndDate: "2024-03-22"
+    ArrivalStartDate: "2024-03-24"
+    ArrivalEndDate: "2024-03-26"
+    SkyScannerID: "eyJzIjoiQlJFIiwiZSI6IjEyODY2ODI4NiIsImgiOiIyNzUzOTU1NSJ9"
+  
+  - IATA: "LEJ"
+    City: "Leipzig"
+    Country: "Germany"
+    DepartureStartDate: "2024-03-20"
+    DepartureEndDate: "2024-03-22"
+    ArrivalStartDate: "2024-03-24"
+    ArrivalEndDate: "2024-03-26"
+    SkyScannerID: "eyJzIjoiTEVKIiwiZSI6Ijk1NjczNzQxIiwiaCI6IjI3NTQ0MDI1In0="
+
