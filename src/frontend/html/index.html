@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/css/formStyles.css" />
     <link rel="stylesheet" href="/css/modal.css" />
     <link rel="stylesheet" href="/css/search.css" />
+    <link rel="stylesheet" href="/css/price-slider.css" />
     <!-- Add Google Fonts for Dosis -->
     <link
       href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap"
@@ -83,6 +84,7 @@
                 </button>
                 <ul id="city-list" class="dropdown-list hidden"></ul>
               </div>
+
               <div class="flight-price-slider">
                 <!--label for="priceOutput0"></label-->
                 <output id="priceOutput0" class="output-range">€399.00</output>
@@ -114,19 +116,22 @@
           <div class="accom-and-sort">
             <div class="form-group accom">
               <label for="accommodationOutput0">Avg. Hotel PPPN:</label>
+              <output id="accommodationOutput0" class="output-range"
+                >€99.00</output
+              >
 
               <div class="accom-pricebar">
-                <output id="accommodationOutput0" class="output-range"
-                  >€99.00</output
-                >
+                <div id="chart-container">
+                  <div id="chart"></div>
+                </div>
                 <input
                   type="range"
                   id="accommodationPrice-slider0"
                   name="maxAccommodationPrice[]"
                   min="0"
                   max="100"
-                  step="1"
-                  value="35"
+                  step="0.01"
+                  value="50"
                   class="price-slider"
                   hx-get="/update-slider-price"
                   hx-target="#accommodationOutput0"
@@ -135,6 +140,7 @@
                   hx-preserve="false"
                   hx-include="#accommodationPrice-slider0"
                   autocomplete="off"
+                  oninput="handleSliderChange(this.value)"
                 />
               </div>
             </div>
@@ -175,5 +181,6 @@
     <script src="/js/index-animation.js" defer></script>
     <script src="/js/index.js" defer></script>
     <script src="/js/index-modal.js" defer></script>
+    <script src="/js/price-slider.js" defer></script>
   </body>
 </html>
