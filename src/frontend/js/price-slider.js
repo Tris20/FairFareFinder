@@ -7,30 +7,35 @@ let globalMaxLin = 0;
 let globalMinLog = 0;
 let globalMaxLog = 0;
 
-// Fetch and process the CSV data
+// --- 1. Fetch CSV and initialize ---
 fetch("/js/dummy.csv")
   .then((response) => response.text())
   .then((csvText) => {
     const lines = csvText.trim().split("\n");
     lines.shift(); // Remove header
 
+    // Parse floats, filter out invalid entries < 1
     rawValues = lines
       .map((line) => parseFloat(line.trim()))
       .filter((v) => !isNaN(v) && v >= 1);
 
+    // Linear stats
     globalMinLin = Math.min(...rawValues);
     globalMaxLin = Math.max(...rawValues);
 
-    logValues = rawValues.map((v) => Math.log10(v + 1));
+    // Log values: log10(price+1)
+    logValues = rawValues.map((val) => Math.log10(val + 1));
     globalMinLog = Math.min(...logValues);
     globalMaxLog = Math.max(...logValues);
 
+    // Init slider
     const slider = document.getElementById("accommodationPrice-slider0");
-    slider.min = globalMinLog;
-    slider.max = globalMaxLog;
-    slider.value = globalMaxLog;
+    slider.min = 0;
+    slider.max = 100;
+    slider.value = 50;
 
-    const initialFilterVal = Math.pow(10, globalMaxLog) - 1;
+    // Draw chart for initial filter
+    const initialFilterVal = mapLinearToExponential(50, 10, 550);
     drawHistogram(
       rawValues,
       logValues,
@@ -39,16 +44,14 @@ fetch("/js/dummy.csv")
       globalMaxLog,
       BIN_COUNT,
     );
-
-    updatePriceOutput(globalMaxLog); // Initialize price output
+    updatePriceOutput(50);
   })
   .catch((err) => console.error("Error fetching CSV:", err));
 
 function handleSliderChange(sliderValue) {
-  const logVal = parseFloat(sliderValue);
-  const filterVal = Math.pow(10, logVal) - 1;
+  const linearValue = parseFloat(sliderValue);
+  const filterVal = mapLinearToExponential(linearValue, 10, 550);
 
-  // Update the chart
   drawHistogram(
     rawValues,
     logValues,
@@ -57,24 +60,30 @@ function handleSliderChange(sliderValue) {
     globalMaxLog,
     BIN_COUNT,
   );
-
-  // Update price output
-  updatePriceOutput(logVal);
+  updatePriceOutput(linearValue);
 }
 
-// Function to update the price output display
-function updatePriceOutput(logValue) {
-  const linearValue = Math.pow(10, logValue) - 1;
+function updatePriceOutput(linearValue) {
+  const mappedValue = mapLinearToExponential(linearValue, 10, 550);
   const outputElement = document.getElementById("accommodationOutput0");
-  outputElement.textContent = `€${linearValue.toFixed(2)}`;
+  outputElement.textContent = `€${mappedValue.toFixed(2)}`;
 }
 
-// Draw the histogram (unchanged)
+// Pure log-based mapping: 0 => minVal, 100 => maxVal
+function mapLinearToExponential(sliderValue, minVal, maxVal) {
+  const fraction = sliderValue / 100;
+  const logMin = Math.log10(minVal);
+  const logMax = Math.log10(maxVal);
+  const logVal = logMin + fraction * (logMax - logMin);
+  return Math.pow(10, logVal);
+}
+
+// Draw the histogram
 function drawHistogram(rawVals, logVals, filterVal, minLog, maxLog, binCount) {
   const chart = document.getElementById("chart");
   chart.innerHTML = "";
 
-  if (rawVals.length === 0) {
+  if (!rawVals.length) {
     chart.textContent = "No data";
     return;
   }
@@ -90,12 +99,15 @@ function drawHistogram(rawVals, logVals, filterVal, minLog, maxLog, binCount) {
   for (let i = 0; i < logVals.length; i++) {
     const lv = logVals[i];
     const rv = rawVals[i];
+
     let binIndex = Math.floor((lv - minLog) / binSize);
     if (binIndex < 0) binIndex = 0;
     if (binIndex >= binCount) binIndex = binCount - 1;
 
     bins[binIndex].total += 1;
-    if (rv <= filterVal) bins[binIndex].included += 1;
+    if (rv <= filterVal) {
+      bins[binIndex].included += 1;
+    }
   }
 
   const maxCount = Math.max(...bins.map((b) => b.total));
@@ -129,7 +141,6 @@ function drawHistogram(rawVals, logVals, filterVal, minLog, maxLog, binCount) {
   });
 }
 
-// Helper function to format numbers
 function formatNumber(num) {
   if (num < 1) {
     return num.toFixed(2);
