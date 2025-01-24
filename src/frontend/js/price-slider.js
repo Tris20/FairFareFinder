@@ -2,12 +2,9 @@ const BIN_COUNT = 30;
 
 let rawValues = [];
 let logValues = [];
-let globalMinLin = 0;
-let globalMaxLin = 0;
 let globalMinLog = 0;
 let globalMaxLog = 0;
 
-// --- 1. Fetch CSV and initialize ---
 fetch("/js/dummy.csv")
   .then((response) => response.text())
   .then((csvText) => {
@@ -19,57 +16,39 @@ fetch("/js/dummy.csv")
       .map((line) => parseFloat(line.trim()))
       .filter((v) => !isNaN(v) && v >= 1);
 
-    // Linear stats
-    globalMinLin = Math.min(...rawValues);
-    globalMaxLin = Math.max(...rawValues);
+    // Compute log10(price+1) if you want to shift zero out,
+    // or log10(price) if all prices > 1. Let's do log10(v) for simplicity:
+    logValues = rawValues.map((v) => Math.log10(v));
 
-    // Log values: log10(price+1)
-    logValues = rawValues.map((val) => Math.log10(val + 1));
-    globalMinLog = Math.min(...logValues);
-    globalMaxLog = Math.max(...logValues);
+    globalMinLog = Math.log10(10);
+    globalMaxLog = Math.log10(550);
 
-    // Init slider
+    // Initialize slider: 0..100
     const slider = document.getElementById("accommodationPrice-slider0");
     slider.min = 0;
     slider.max = 100;
     slider.value = 50;
 
-    // Draw chart for initial filter
-    const initialFilterVal = mapLinearToExponential(50, 10, 550);
-    drawHistogram(
-      rawValues,
-      logValues,
-      initialFilterVal,
-      globalMinLog,
-      globalMaxLog,
-      BIN_COUNT,
-    );
+    // Draw initial histogram (assume 10..550)
+    const initialVal = mapLinearToExponential(50, 10, 550);
+    drawHistogram(rawValues, logValues, initialVal, BIN_COUNT);
     updatePriceOutput(50);
   })
-  .catch((err) => console.error("Error fetching CSV:", err));
+  .catch((err) => console.error("Error:", err));
 
 function handleSliderChange(sliderValue) {
-  const linearValue = parseFloat(sliderValue);
-  const filterVal = mapLinearToExponential(linearValue, 10, 550);
-
-  drawHistogram(
-    rawValues,
-    logValues,
-    filterVal,
-    globalMinLog,
-    globalMaxLog,
-    BIN_COUNT,
-  );
-  updatePriceOutput(linearValue);
+  const filterVal = mapLinearToExponential(sliderValue, 10, 550);
+  drawHistogram(rawValues, logValues, filterVal, BIN_COUNT);
+  updatePriceOutput(sliderValue);
 }
 
 function updatePriceOutput(linearValue) {
-  const mappedValue = mapLinearToExponential(linearValue, 10, 550);
-  const outputElement = document.getElementById("accommodationOutput0");
-  outputElement.textContent = `€${mappedValue.toFixed(2)}`;
+  const mapped = mapLinearToExponential(linearValue, 10, 550);
+  document.getElementById("accommodationOutput0").textContent =
+    `€${mapped.toFixed(2)}`;
 }
 
-// Pure log-based mapping: 0 => minVal, 100 => maxVal
+// --- Pure log slider mapping: 0 => minVal, 100 => maxVal
 function mapLinearToExponential(sliderValue, minVal, maxVal) {
   const fraction = sliderValue / 100;
   const logMin = Math.log10(minVal);
@@ -78,8 +57,8 @@ function mapLinearToExponential(sliderValue, minVal, maxVal) {
   return Math.pow(10, logVal);
 }
 
-// Draw the histogram
-function drawHistogram(rawVals, logVals, filterVal, minLog, maxLog, binCount) {
+// Example histogram: log-based bins or however you prefer
+function drawHistogram(rawVals, logVals, filterVal, binCount) {
   const chart = document.getElementById("chart");
   chart.innerHTML = "";
 
@@ -88,10 +67,19 @@ function drawHistogram(rawVals, logVals, filterVal, minLog, maxLog, binCount) {
     return;
   }
 
+  // Create bins in log space
+
+  // Force the histogram range to 10..550
+  const minVal = 10;
+  const maxVal = 550;
+
+  const minLog = Math.log10(minVal);
+  const maxLog = Math.log10(maxVal);
+
   const logRange = maxLog - minLog;
   const binSize = logRange / binCount;
 
-  let bins = Array.from({ length: binCount }, () => ({
+  const bins = Array.from({ length: binCount }, () => ({
     total: 0,
     included: 0,
   }));
@@ -104,9 +92,9 @@ function drawHistogram(rawVals, logVals, filterVal, minLog, maxLog, binCount) {
     if (binIndex < 0) binIndex = 0;
     if (binIndex >= binCount) binIndex = binCount - 1;
 
-    bins[binIndex].total += 1;
+    bins[binIndex].total++;
     if (rv <= filterVal) {
-      bins[binIndex].included += 1;
+      bins[binIndex].included++;
     }
   }
 
@@ -115,8 +103,8 @@ function drawHistogram(rawVals, logVals, filterVal, minLog, maxLog, binCount) {
   bins.forEach((bin, i) => {
     const barWrapper = document.createElement("div");
     barWrapper.className = "bar";
-
-    const totalPct = bin.total > 0 ? (bin.total / maxCount) * 100 : 0;
+    // scale bar by total
+    const totalPct = (bin.total / maxCount) * 100;
     barWrapper.style.height = totalPct + "%";
 
     if (bin.total > 0) {
@@ -127,14 +115,15 @@ function drawHistogram(rawVals, logVals, filterVal, minLog, maxLog, binCount) {
       barWrapper.appendChild(includedDiv);
     }
 
+    // Label
     const binStartLog = minLog + i * binSize;
-    const binEndLog = minLog + (i + 1) * binSize;
-    const lowerLin = Math.pow(10, binStartLog) - 1;
-    const upperLin = Math.pow(10, binEndLog) - 1;
+    const binEndLog = binStartLog + binSize;
+    const lowerVal = Math.pow(10, binStartLog);
+    const upperVal = Math.pow(10, binEndLog);
 
     const label = document.createElement("div");
     label.className = "bar-label";
-    label.textContent = `${formatNumber(lowerLin)} – ${formatNumber(upperLin)}`;
+    label.textContent = `${formatNumber(lowerVal)} – ${formatNumber(upperVal)}`;
     barWrapper.appendChild(label);
 
     chart.appendChild(barWrapper);
@@ -142,11 +131,7 @@ function drawHistogram(rawVals, logVals, filterVal, minLog, maxLog, binCount) {
 }
 
 function formatNumber(num) {
-  if (num < 1) {
-    return num.toFixed(2);
-  } else if (num < 100) {
-    return num.toFixed(1);
-  } else {
-    return Math.round(num).toString();
-  }
+  if (num < 1) return num.toFixed(1);
+  if (num < 100) return num.toFixed(0);
+  return Math.round(num).toString();
 }
