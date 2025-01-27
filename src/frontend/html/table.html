@@ -291,4 +291,12 @@
 
 <div id="loading-indicator" style="display: none">Loading more cards...</div>
 
+<script>
+  var accomPrices = {{ .AllAccommodationPrices | toJson }};
+  console.log("Accommodation prices from Go:", accomPrices);
+
+  // Actually call the chart update
+  window.updateAccommodationPrices(accomPrices);
+</script>
+
 {{ end }}
