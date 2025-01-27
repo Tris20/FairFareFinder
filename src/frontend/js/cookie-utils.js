@@ -21,3 +21,30 @@ function getCookie(name) {
   }
   return null; // Return null if not found
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  // 1) Try to read the city from the cookie
+  let savedCity = getCookie("selectedCity");
+  if (!savedCity) {
+    savedCity = "Berlin"; // fallback if no cookie
+  }
+
+  // 2) Build the HTMX request URL.
+  //    For example, we do an initial flight price slider of 49 => ~€399
+  //    (use your own defaults as needed).
+  let flightPriceLinear = 49;
+  let accomPriceLinear = 57;
+
+  let url =
+    "/filter?city[]=" +
+    encodeURIComponent(savedCity) +
+    "&maxPriceLinear[]=" +
+    flightPriceLinear +
+    "&maxAccommodationPrice[]=" +
+    accomPriceLinear;
+
+  console.log("Auto-loading data with city:", savedCity, "via:", url);
+
+  // 3) Fire an HTMX request to /filter, putting results into #results-container
+  htmx.ajax("GET", url, "#flight-table");
+});

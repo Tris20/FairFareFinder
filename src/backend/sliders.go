@@ -57,5 +57,5 @@ func UpdateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Calculated %s price for linear value %f: €%.2f", priceType, maxLinear, maxPrice)
 
 	// Respond with the formatted price
-	fmt.Fprintf(w, "€%.2f", maxPrice)
+	fmt.Fprintf(w, "€%.0f", maxPrice)
 }

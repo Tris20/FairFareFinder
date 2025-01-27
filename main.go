@@ -44,12 +44,13 @@ type Flight struct {
 }
 
 type FlightsData struct {
-	SelectedCity1 string
-	Flights       []Flight
-	MaxWpi        sql.NullFloat64
-	MinFlight     sql.NullFloat64
-	MinHotel      sql.NullFloat64
-	MinFnaf       sql.NullFloat64
+	SelectedCity1          string
+	Flights                []Flight
+	MaxWpi                 sql.NullFloat64
+	MinFlight              sql.NullFloat64
+	MinHotel               sql.NullFloat64
+	MinFnaf                sql.NullFloat64
+	AllAccommodationPrices []float64
 }
 
 // Global variables: template, database, session store
@@ -235,7 +236,9 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 		maxAccommodationPrice = 70.0
 	}
 
-	// Build the query
+	//----------------------------------------------------------------
+	// 1) MAIN QUERY with user-defined maxAccommodationPrice
+	//----------------------------------------------------------------
 
 	query, args := buildQuery(expr, maxAccommodationPrice, cities, orderClause)
 
@@ -258,7 +261,7 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 
 	rows, err := db.Query(query, args...)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Error querying main results", http.StatusInternalServerError)
 		return
 	}
 	defer func() {
@@ -274,11 +277,49 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//----------------------------------------------------------------
+	// 2) SECOND QUERY max accommodation = 550
+	// This is used to return the list of all accom prices for the chosen
+	// origin(s) and logical operators
+	//----------------------------------------------------------------
+	allPricesQuery, allPricesArgs := buildQuery(expr, 550.0, cities, orderClause)
+
+	if !mutePrints {
+		fmt.Println("Generated SQL Query (ALL PRICES):")
+		fmt.Println(allPricesQuery)
+		fmt.Println("Arguments:", allPricesArgs)
+	}
+	fullAllPricesQuery := interpolateQuery(allPricesQuery, allPricesArgs)
+	log.Printf("Full ALL-PRICES Query:\n%s\n", fullAllPricesQuery)
+
+	rows2, err2 := db.Query(allPricesQuery, allPricesArgs...)
+	if err2 != nil {
+		http.Error(w, "Error querying all accom prices", http.StatusInternalServerError)
+		return
+	}
+	defer rows2.Close()
+
+	flightsAll, err2 := processFlightRows(rows2)
+	if err2 != nil {
+		http.Error(w, "Error processing flight rows for all accom prices", http.StatusInternalServerError)
+		return
+	}
+
+	// Collect those booking_pppn
+	allAccomPrices := gatherBookingPppn(flightsAll)
+	log.Printf("All accom prices (no user limit): %v", allAccomPrices)
+
+	//----------------------------------------------------------------
+	// Build final data (table) + also attach the full accom array
+	//----------------------------------------------------------------
+	data := buildFlightsData(cities, flights)
+	// Overwrite data.AllAccommodationPrices with the *unfiltered* array
+	data.AllAccommodationPrices = allAccomPrices
+
 	// Save the session and render the response
 	//session.Values["city1"] = cities[0] // Save the first city
 	session.Save(r, w)
 
-	data := buildFlightsData(cities, flights)
 	err = tmpl.ExecuteTemplate(w, "table.html", data)
 	if err != nil {
 		http.Error(w, "Error rendering results", http.StatusInternalServerError)
@@ -399,22 +440,29 @@ func buildFlightsData(cities []string, flights []Flight) FlightsData {
 	// Initialize variables for max/min values
 	var maxWpi, minFlightPrice, minHotelPrice, minFnafPrice sql.NullFloat64
 
+	// Collect *all* booking_pppn into a slice
+	var allAccomPrices []float64
+
 	// Process each flight to find max/min values
 	for _, flight := range flights {
 		maxWpi = backend.UpdateMaxValue(maxWpi, flight.AvgWpi)
 		minFlightPrice = backend.UpdateMinValue(minFlightPrice, flight.PriceCity1)
 		minHotelPrice = backend.UpdateMinValue(minHotelPrice, flight.BookingPppn)
 		minFnafPrice = backend.UpdateMinValue(minFnafPrice, flight.FiveNightsFlights)
+		if flight.BookingPppn.Valid {
+			allAccomPrices = append(allAccomPrices, flight.BookingPppn.Float64)
+		}
 	}
 
 	// Build and return the FlightsData
 	return FlightsData{
-		SelectedCity1: selectedCity1,
-		Flights:       flights,
-		MaxWpi:        maxWpi,
-		MinFlight:     minFlightPrice,
-		MinHotel:      minHotelPrice,
-		MinFnaf:       minFnafPrice,
+		SelectedCity1:          selectedCity1,
+		Flights:                flights,
+		MaxWpi:                 maxWpi,
+		MinFlight:              minFlightPrice,
+		MinHotel:               minHotelPrice,
+		MinFnaf:                minFnafPrice,
+		AllAccommodationPrices: allAccomPrices,
 	}
 }
 
@@ -759,4 +807,15 @@ func interpolateQuery(query string, args []interface{}) string {
 	}
 
 	return result.String()
+}
+
+// gatherBookingPppn just extracts all booking_pppn values from flights
+func gatherBookingPppn(flights []Flight) []float64 {
+	var prices []float64
+	for _, f := range flights {
+		if f.BookingPppn.Valid {
+			prices = append(prices, f.BookingPppn.Float64)
+		}
+	}
+	return prices
 }
