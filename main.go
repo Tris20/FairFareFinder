@@ -1,6 +1,7 @@
 package main
 
 import (
+	// Standard Library
 	"database/sql"
 	"flag"
 	"fmt"
@@ -11,12 +12,15 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Tris20/FairFareFinder/src/backend"
-	"github.com/Tris20/FairFareFinder/src/backend/dev_tools"
-	"github.com/Tris20/FairFareFinder/src/backend/model"
+	// Third-Party Packages
 	"github.com/gorilla/sessions"
 	_ "github.com/mattn/go-sqlite3"
 	"gopkg.in/natefinch/lumberjack.v2"
+
+	// Local Packages
+	"github.com/Tris20/FairFareFinder/src/backend"
+	"github.com/Tris20/FairFareFinder/src/backend/dev_tools"
+	"github.com/Tris20/FairFareFinder/src/backend/model"
 )
 
 // Global variables: template, database, session store
@@ -91,7 +95,7 @@ func SetupServer(db_path string, logger io.Writer) func() {
 
 	// Set up routes
 	http.HandleFunc("/", backend.IndexHandler)
-	http.HandleFunc("/filter", combinedCardsHandler)
+	http.HandleFunc("/filter", filterRequestHandler)
 	http.HandleFunc("/update-slider-price", backend.UpdateSliderPriceHandler)
 
 	// Serve static files
@@ -125,41 +129,66 @@ func StartServer() {
 	log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
 }
 
-func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
-	session, _ := store.Get(r, "session")
+/*
+#
+#
+#
+*/
+type FilterInput struct {
+	Cities                []string
+	LogicalOperators      []string
+	MaxFlightPrices       []float64
+	MaxAccommodationPrice float64
+	OrderClause           string
+	LogicalExpression     Expression
+}
+
+func handleHTTPError(w http.ResponseWriter, message string, code int) {
+	log.Printf("Error: %s", message)
+	http.Error(w, message, code)
+}
+
+func getUserSession(r *http.Request) (*sessions.Session, error) {
+	session, err := store.Get(r, "session")
+	if err != nil {
+		log.Printf("Error retrieving user session: %v", err)
+		return nil, err
+	}
+	return session, nil
+}
+
+func parseAndValidateFilterInputs(r *http.Request) (*FilterInput, error) {
+	// Extract query parameters
 	cities := r.URL.Query()["city[]"]
 	logicalOperators := r.URL.Query()["logical_operator[]"]
 	maxFlightPriceLinearStrs := r.URL.Query()["maxFlightPriceLinear[]"]
 	maxAccomPriceLinearStrs := r.URL.Query()["maxAccommodationPrice[]"]
+	sortOption := r.URL.Query().Get("sort")
 
 	// Validate input lengths
 	if len(cities) == 0 || len(cities) != len(logicalOperators)+1 || len(cities) != len(maxFlightPriceLinearStrs) {
-		response := fmt.Sprintf("Mismatched input lengths. Cities: %d, Operators: %d, Prices: %d",
+		return nil, fmt.Errorf("mismatched input lengths. Cities: %d, Operators: %d, Prices: %d",
 			len(cities), len(logicalOperators), len(maxFlightPriceLinearStrs))
-		http.Error(w, response, http.StatusBadRequest)
-		return
 	}
 
 	// Parse flight price limits
-	var maxFlightPrices []float64
+	maxFlightPrices := make([]float64, 0, len(maxFlightPriceLinearStrs))
 	for _, linearStr := range maxFlightPriceLinearStrs {
 		linearValue, err := strconv.ParseFloat(linearStr, 64)
 		if err != nil {
-			http.Error(w, "Invalid flight price parameter", http.StatusBadRequest)
-			return
+			return nil, fmt.Errorf("invalid flight price parameter")
 		}
-		maxFlightPrices = append(maxFlightPrices, backend.MapLinearToExponential(linearValue, 50, 1000, 2500))
+		mappedValue := backend.MapLinearToExponential(linearValue, 50, 1000, 2500)
+		maxFlightPrices = append(maxFlightPrices, mappedValue)
 	}
 
 	// Parse logical expression
 	expr, err := parseLogicalExpression(cities, logicalOperators, maxFlightPrices)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
+		return nil, err
 	}
 
-	// Retrieve and process sort option
-	sortOption := r.URL.Query().Get("sort")
+	// Determine sort option and order clause
 	if sortOption == "" {
 		sortOption = "low_price" // default
 	}
@@ -171,105 +200,147 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 		accomLinearStr := maxAccomPriceLinearStrs[0]
 		accomLinearValue, err := strconv.ParseFloat(accomLinearStr, 64)
 		if err != nil {
-			http.Error(w, "Invalid accommodation price parameter", http.StatusBadRequest)
-			return
+			return nil, fmt.Errorf("invalid accommodation price parameter")
 		}
 		maxAccommodationPrice = backend.MapLinearToExponential(accomLinearValue, 10, 200, 550)
 	} else {
-		// Default value if no accommodation price is provided
-		maxAccommodationPrice = 70.0
+		maxAccommodationPrice = 70.0 // Default value
 	}
 
-	//----------------------------------------------------------------
-	// 1) MAIN QUERY with user-defined maxAccommodationPrice
-	//----------------------------------------------------------------
+	return &FilterInput{
+		Cities:                cities,
+		LogicalOperators:      logicalOperators,
+		MaxFlightPrices:       maxFlightPrices,
+		MaxAccommodationPrice: maxAccommodationPrice,
+		OrderClause:           orderClause,
+		LogicalExpression:     expr,
+	}, nil
+}
 
-	query, args := buildQuery(expr, maxAccommodationPrice, cities, orderClause)
+func executeMainQuery(input *FilterInput) ([]model.Flight, error) {
+	query, args := buildQuery(input.LogicalExpression, input.MaxAccommodationPrice, input.Cities, input.OrderClause)
 
 	if !mutePrints {
-		// Output the query for debugging
-		fmt.Println("Generated SQL Query:")
+		fmt.Println("Generated SQL Query (MAIN):")
 		fmt.Println(query)
-		fmt.Println("Arguments:")
-		fmt.Println(args)
+		fmt.Println("Arguments:", args)
 	}
-	// Log the interpolated query for debugging
-	fullQuery := interpolateQuery(query, args)
-	log.Printf("Full Query:\n%s\n", fullQuery)
 
-	// Check if db is nil
+	fullQuery := interpolateQuery(query, args)
+	log.Printf("Full MAIN Query:\n%s\n", fullQuery)
+
 	if db == nil {
-		http.Error(w, "Database connection is not initialized", http.StatusInternalServerError)
-		return
+		return nil, fmt.Errorf("database connection is not initialized")
 	}
 
 	rows, err := db.Query(query, args...)
 	if err != nil {
-		http.Error(w, "Error querying main results", http.StatusInternalServerError)
-		return
+		log.Printf("Error querying main results: %v", err)
+		return nil, err
 	}
-	defer func() {
-		if rows != nil {
-			rows.Close()
-		}
-	}()
+	defer rows.Close()
 
-	// Process results
 	flights, err := processFlightRows(rows)
 	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
+		log.Printf("Error processing flight rows: %v", err)
+		return nil, err
 	}
 
-	//----------------------------------------------------------------
-	// 2) SECOND QUERY max accommodation = 550
-	// This is used to return the list of all accom prices for the chosen
-	// origin(s) and logical operators
-	//----------------------------------------------------------------
-	allPricesQuery, allPricesArgs := buildQuery(expr, 550.0, cities, orderClause)
+	return flights, nil
+}
+
+func executeAccommodationPricesHistogramQuery(input *FilterInput) ([]model.Flight, error) {
+	// Build query with fixed maxAccommodationPrice = 550.0
+	allPricesQuery, allPricesArgs := buildQuery(input.LogicalExpression, 550.0, input.Cities, input.OrderClause)
 
 	if !mutePrints {
 		fmt.Println("Generated SQL Query (ALL PRICES):")
 		fmt.Println(allPricesQuery)
 		fmt.Println("Arguments:", allPricesArgs)
 	}
+
 	fullAllPricesQuery := interpolateQuery(allPricesQuery, allPricesArgs)
 	log.Printf("Full ALL-PRICES Query:\n%s\n", fullAllPricesQuery)
 
-	rows2, err2 := db.Query(allPricesQuery, allPricesArgs...)
-	if err2 != nil {
-		http.Error(w, "Error querying all accom prices", http.StatusInternalServerError)
-		return
-	}
-	defer rows2.Close()
-
-	flightsAll, err2 := processFlightRows(rows2)
-	if err2 != nil {
-		http.Error(w, "Error processing flight rows for all accom prices", http.StatusInternalServerError)
-		return
+	if db == nil {
+		return nil, fmt.Errorf("database connection is not initialized")
 	}
 
-	// Collect those booking_pppn
-	allAccomPrices := gatherBookingPppn(flightsAll)
-	log.Printf("All accom prices (no user limit): %v", allAccomPrices)
-
-	//----------------------------------------------------------------
-	// Build final data (table) + also attach the full accom array
-	//----------------------------------------------------------------
-	data := buildFlightsData(cities, flights)
-	// Overwrite data.AllAccommodationPrices with the *unfiltered* array
-	data.AllAccommodationPrices = allAccomPrices
-
-	// Save the session and render the response
-	//session.Values["city1"] = cities[0] // Save the first city
-	session.Save(r, w)
-
-	err = tmpl.ExecuteTemplate(w, "table.html", data)
+	rows, err := db.Query(allPricesQuery, allPricesArgs...)
 	if err != nil {
-		http.Error(w, "Error rendering results", http.StatusInternalServerError)
+		log.Printf("Error querying all accommodation prices: %v", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	flightsAll, err := processFlightRows(rows)
+	if err != nil {
+		log.Printf("Error processing flight rows for all accommodation prices: %v", err)
+		return nil, err
+	}
+
+	return flightsAll, nil
+}
+
+func buildTemplateData(cities []string, flights []model.Flight, allAccomPrices []float64) model.FlightsData {
+	data := buildFlightsData(cities, flights)
+	data.AllAccommodationPrices = allAccomPrices
+	return data
+}
+
+func filterRequestHandler(w http.ResponseWriter, r *http.Request) {
+	//  Session Management
+	session, err := getUserSession(r)
+	if err != nil {
+		handleHTTPError(w, "Session retrieval error", http.StatusInternalServerError)
+		return
+	}
+
+	//  Input Extraction and Validation
+	input, err := parseAndValidateFilterInputs(r)
+	if err != nil {
+		handleHTTPError(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Execute Main Query to Populate Destination Cards
+	flights, err := executeMainQuery(input)
+	if err != nil {
+		handleHTTPError(w, "Error executing main query", http.StatusInternalServerError)
+		return
+	}
+
+	//  Execute Second Query to Populate Accommodation Price Slider Histogram
+	flightsAll, err := executeAccommodationPricesHistogramQuery(input)
+	if err != nil {
+		handleHTTPError(w, "Error executing all prices query", http.StatusInternalServerError)
+		return
+	}
+
+	//  Collect Accommodation Prices
+	allAccomPrices := gatherBookingPppn(flightsAll)
+	log.Printf("All accommodation prices (no user limit): %v", allAccomPrices)
+
+	//  Prepare Data for the Template
+	data := buildTemplateData(input.Cities, flights, allAccomPrices)
+
+	// Save Session and Render the Response
+	if err := session.Save(r, w); err != nil {
+		handleHTTPError(w, "Session save error", http.StatusInternalServerError)
+		return
+	}
+
+	if err := tmpl.ExecuteTemplate(w, "table.html", data); err != nil {
+		handleHTTPError(w, "Error rendering results", http.StatusInternalServerError)
+		return
 	}
 }
 
+/*
+#
+#
+#
+*/
 // Helper function to process rows into flight and weather data
 func processFlightRows(rows *sql.Rows) ([]model.Flight, error) {
 	var flights []model.Flight
