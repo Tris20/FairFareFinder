@@ -377,30 +377,11 @@ func processFlightRows(rows *sql.Rows) ([]model.Flight, error) {
 			log.Printf("Error scanning row: %v", err)
 			return nil, err
 		}
-		if duration_mins.Valid {
-			flight.DurationMins = duration_mins
-			log.Printf("Duration: %d hours for flight to %s", duration_mins.Int64, flight.DestinationCityName)
-		} else {
-			log.Printf("No valid duration found for flight to %s", flight.DestinationCityName)
-		}
-		if duration_hours.Valid {
-			flight.DurationHours = duration_hours
-			log.Printf("Duration: %d hours for flight to %s", duration_hours.Int64, flight.DestinationCityName)
-		} else {
-			log.Printf("No valid duration found for flight to %s", flight.DestinationCityName)
-		}
-		if duration_hours_rounded.Valid {
-			flight.DurationHoursRounded = duration_hours_rounded
-			log.Printf("Duration: %d hours for flight to %s", duration_hours_rounded.Int64, flight.DestinationCityName)
-		} else {
-			log.Printf("No valid duration found for flight to %s", flight.DestinationCityName)
-		}
-		if duration_hour_dot_mins.Valid {
-			flight.DurationHourDotMins = duration_hour_dot_mins
-			log.Printf("Duration: %.2f hours.mins for flight to %s", duration_hour_dot_mins.Float64, flight.DestinationCityName)
-		} else {
-			log.Printf("No valid duration found for flight to %s", flight.DestinationCityName)
-		}
+
+		backend.SetFlightDurationInt(&flight, duration_mins, &flight.DurationMins, "Duration: %d minutes for flight to %s")
+		backend.SetFlightDurationInt(&flight, duration_hours, &flight.DurationHours, "Duration: %d hours for flight to %s")
+		backend.SetFlightDurationInt(&flight, duration_hours_rounded, &flight.DurationHoursRounded, "Duration: %d rounded hours for flight to %s")
+		backend.SetFlightDurationFloat(&flight, duration_hour_dot_mins, &flight.DurationHourDotMins, "Duration: %.2f hours.mins for flight to %s")
 
 		// Log the weather data for debugging
 		log.Printf("Row Data - Destination: %s, Date: %s, Temp: %.2f, Icon: %s, Duration.Hours: %d, Duration.Mins: %d ",
