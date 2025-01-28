@@ -6,6 +6,7 @@ require (
 	github.com/PuerkitoBio/goquery v1.10.0
 	github.com/Tris20/FairFareFinder/src/backend v0.0.1
 	github.com/Tris20/FairFareFinder/src/backend/model v0.0.1
+github.com/Tris20/FairFareFinder/utils/common/model v0.0.1
 	github.com/Tris20/FairFareFinder/utils/time-and-date v0.0.1
 	github.com/chromedp/chromedp v0.11.1
 	github.com/gorilla/sessions v1.4.0
@@ -39,3 +40,4 @@ replace github.com/Tris20/FairFareFinder/utils/time-and-date => ./utils/time-and
 replace github.com/Tris20/FairFareFinder/src/backend => ./src/backend
 
 replace github.com/Tris20/FairFareFinder/src/backend/model => ./src/backend/model
+replace github.com/Tris20/FairFareFinder/utils/common/model => ./utils/common/model

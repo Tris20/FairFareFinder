@@ -2,7 +2,7 @@ package urlgenerators
 
 import (
 	"fmt"
-	"github.com/Tris20/FairFareFinder/src/backend/model" //import types
+	"github.com/Tris20/FairFareFinder/utils/common/model" //import types
 	"strings"
 	"time"
 )
