@@ -14,44 +14,11 @@ import (
 
 	"github.com/Tris20/FairFareFinder/src/backend"
 	"github.com/Tris20/FairFareFinder/src/backend/dev_tools"
+	"github.com/Tris20/FairFareFinder/src/backend/model"
 	"github.com/gorilla/sessions"
 	_ "github.com/mattn/go-sqlite3"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
-
-type Weather struct {
-	Date           string
-	AvgDaytimeTemp sql.NullFloat64
-	WeatherIcon    string
-	GoogleUrl      string
-	AvgDaytimeWpi  sql.NullFloat64
-}
-
-type Flight struct {
-	DestinationCityName  string
-	RandomImageURL       string
-	PriceCity1           sql.NullFloat64
-	UrlCity1             string
-	WeatherForecast      []Weather
-	AvgWpi               sql.NullFloat64
-	BookingUrl           sql.NullString
-	BookingPppn          sql.NullFloat64
-	FiveNightsFlights    sql.NullFloat64
-	DurationMins         sql.NullInt64
-	DurationHours        sql.NullInt64
-	DurationHoursRounded sql.NullInt64
-	DurationHourDotMins  sql.NullFloat64
-}
-
-type FlightsData struct {
-	SelectedCity1          string
-	Flights                []Flight
-	MaxWpi                 sql.NullFloat64
-	MinFlight              sql.NullFloat64
-	MinHotel               sql.NullFloat64
-	MinFnaf                sql.NullFloat64
-	AllAccommodationPrices []float64
-}
 
 // Global variables: template, database, session store
 var (
@@ -327,11 +294,11 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // Helper function to process rows into flight and weather data
-func processFlightRows(rows *sql.Rows) ([]Flight, error) {
-	var flights []Flight
+func processFlightRows(rows *sql.Rows) ([]model.Flight, error) {
+	var flights []model.Flight
 	for rows.Next() {
-		var flight Flight
-		var weather Weather
+		var flight model.Flight
+		var weather model.Weather
 		var imageUrl sql.NullString
 		var bookingUrl sql.NullString
 		var priceFnaf sql.NullFloat64
@@ -415,7 +382,7 @@ func processFlightRows(rows *sql.Rows) ([]Flight, error) {
 }
 
 // Helper function to add or update flight entries
-func addOrUpdateFlight(flights *[]Flight, flight Flight, weather Weather) {
+func addOrUpdateFlight(flights *[]model.Flight, flight model.Flight, weather model.Weather) {
 	for i := range *flights {
 		if (*flights)[i].DestinationCityName == flight.DestinationCityName {
 			(*flights)[i].WeatherForecast = append((*flights)[i].WeatherForecast, weather)
@@ -423,12 +390,12 @@ func addOrUpdateFlight(flights *[]Flight, flight Flight, weather Weather) {
 		}
 	}
 
-	flight.WeatherForecast = []Weather{weather}
+	flight.WeatherForecast = []model.Weather{weather}
 	*flights = append(*flights, flight)
 }
 
 // Helper function to build the data for the template
-func buildFlightsData(cities []string, flights []Flight) FlightsData {
+func buildFlightsData(cities []string, flights []model.Flight) model.FlightsData {
 	// Ensure there is at least one city in the list
 	var selectedCity1 string
 	if len(cities) > 0 {
@@ -455,7 +422,7 @@ func buildFlightsData(cities []string, flights []Flight) FlightsData {
 	}
 
 	// Build and return the FlightsData
-	return FlightsData{
+	return model.FlightsData{
 		SelectedCity1:          selectedCity1,
 		Flights:                flights,
 		MaxWpi:                 maxWpi,
@@ -710,7 +677,7 @@ func interpolateQuery(query string, args []interface{}) string {
 }
 
 // gatherBookingPppn just extracts all booking_pppn values from flights
-func gatherBookingPppn(flights []Flight) []float64 {
+func gatherBookingPppn(flights []model.Flight) []float64 {
 	var prices []float64
 	for _, f := range flights {
 		if f.BookingPppn.Valid {
