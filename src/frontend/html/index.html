@@ -32,6 +32,23 @@
 
     <!-- JS -->
     <script src="/js/price-slider.js"></script>
+
+    <script>
+      let accomSlider; // define in a higher scope
+      document.addEventListener("DOMContentLoaded", () => {
+        window.accomSlider = createPriceSlider({
+          sliderId: "accommodationPrice-slider0",
+          outputId: "accommodationOutput0",
+          chartId: "chart",
+          dataArray: [], // start empty
+          minVal: 10,
+          midVal: 200,
+          maxVal: 550,
+          defaultValue: 53.57,
+          binCount: 30,
+        });
+      });
+    </script>
   </head>
 
   <div id="page-banner">
@@ -94,7 +111,7 @@
                 <input
                   type="range"
                   id="combinedPrice-slider0"
-                  name="maxPriceLinear[]"
+                  name="maxFlightPriceLinear[]"
                   min="0"
                   max="100"
                   step="1"
@@ -116,6 +133,7 @@
           <div class="form-group">
             <button type="button" id="add-city-button">Add Another City</button>
           </div>
+
           <div class="accom-and-sort">
             <div class="form-group accom">
               <label for="accommodationOutput0">Avg. Hotel PPPN:</label>
@@ -140,7 +158,7 @@
                   hx-preserve="false"
                   hx-include="#accommodationPrice-slider0"
                   autocomplete="off"
-                  oninput="handleSliderChange(this.value)"
+                  oninput="window.accomSlider.updateData(window.allAccomPrices);"
                 />
               </div>
             </div>
@@ -164,15 +182,6 @@
             </div>
           </div>
         </form>
-        <!-- ping off a default load-->
-        <!--div
-          id="auto-request"
-          hx-get="/filter?city[]=Berlin&maxPriceLinear[]=49&maxAccommodationPrice[]=57&sort=best_weather"
-          hx-target="#flight-table"
-          hx-trigger="load"
-          style="display: none"
-        ></div-->
-
         <div id="flight-table">
           <!-- The cards will be dynamically updated here -->
         </div>

@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let url =
     "/filter?city[]=" +
     encodeURIComponent(savedCity) +
-    "&maxPriceLinear[]=" +
+    "&maxFlightPriceLinear[]=" +
     flightPriceLinear +
     "&maxAccommodationPrice[]=" +
     accomPriceLinear;

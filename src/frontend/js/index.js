@@ -229,11 +229,11 @@ document
 
     </div>
 <div class="flight-price-slider">
-    <output id="priceOutput${rowCount}" class="output-range">€399.00</output>
+    <output id="priceOutput${rowCount}" class="output-range">€399</output>
     <input
       type="range"
       id="combinedPrice-slider${rowCount}"
-      name="maxPriceLinear[]"
+      name="maxFlightPriceLinear[]"
       min="0"
       max="100"
       step="1"

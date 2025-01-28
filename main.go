@@ -185,30 +185,30 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session")
 	cities := r.URL.Query()["city[]"]
 	logicalOperators := r.URL.Query()["logical_operator[]"]
-	maxPriceLinearStrs := r.URL.Query()["maxPriceLinear[]"]
+	maxFlightPriceLinearStrs := r.URL.Query()["maxFlightPriceLinear[]"]
 	maxAccomPriceLinearStrs := r.URL.Query()["maxAccommodationPrice[]"]
 
 	// Validate input lengths
-	if len(cities) == 0 || len(cities) != len(logicalOperators)+1 || len(cities) != len(maxPriceLinearStrs) {
+	if len(cities) == 0 || len(cities) != len(logicalOperators)+1 || len(cities) != len(maxFlightPriceLinearStrs) {
 		response := fmt.Sprintf("Mismatched input lengths. Cities: %d, Operators: %d, Prices: %d",
-			len(cities), len(logicalOperators), len(maxPriceLinearStrs))
+			len(cities), len(logicalOperators), len(maxFlightPriceLinearStrs))
 		http.Error(w, response, http.StatusBadRequest)
 		return
 	}
 
-	// Parse price limits
-	var maxPrices []float64
-	for _, linearStr := range maxPriceLinearStrs {
+	// Parse flight price limits
+	var maxFlightPrices []float64
+	for _, linearStr := range maxFlightPriceLinearStrs {
 		linearValue, err := strconv.ParseFloat(linearStr, 64)
 		if err != nil {
-			http.Error(w, "Invalid price parameter", http.StatusBadRequest)
+			http.Error(w, "Invalid flight price parameter", http.StatusBadRequest)
 			return
 		}
-		maxPrices = append(maxPrices, backend.MapLinearToExponential(linearValue, 50, 2500))
+		maxFlightPrices = append(maxFlightPrices, backend.MapLinearToExponential(linearValue, 50, 1000, 2500))
 	}
 
 	// Parse logical expression
-	expr, err := parseLogicalExpression(cities, logicalOperators, maxPrices)
+	expr, err := parseLogicalExpression(cities, logicalOperators, maxFlightPrices)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -230,7 +230,7 @@ func combinedCardsHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Invalid accommodation price parameter", http.StatusBadRequest)
 			return
 		}
-		maxAccommodationPrice = backend.AccomMapLinearToExponential(accomLinearValue, 10, 550)
+		maxAccommodationPrice = backend.MapLinearToExponential(accomLinearValue, 10, 200, 550)
 	} else {
 		// Default value if no accommodation price is provided
 		maxAccommodationPrice = 70.0
@@ -596,124 +596,24 @@ func buildSubquery(expr Expression) (string, []interface{}) {
 	}
 }
 
-// Helper function to determine the ORDER BY clause
+var orderByClauses = map[string]string{
+	"low_price":            "ORDER BY fnf.price_fnaf ASC",
+	"high_price":           "ORDER BY fnf.price_fnaf DESC",
+	"best_weather":         "ORDER BY avg_wpi DESC",
+	"worst_weather":        "ORDER BY avg_wpi ASC",
+	"cheapest_hotel":       "ORDER BY a.booking_pppn ASC",
+	"most_expensive_hotel": "ORDER BY a.booking_pppn DESC",
+	"shortest_flight":      "ORDER BY f.duration_hour_dot_mins ASC",
+	"longest_flight":       "ORDER BY f.duration_hour_dot_mins DESC",
+}
+
 func determineOrderClause(sortOption string) string {
-	switch sortOption {
-	case "low_price":
-		return "ORDER BY fnf.price_fnaf ASC"
-	case "high_price":
-		return "ORDER BY fnf.price_fnaf DESC"
-	case "best_weather":
-		return "ORDER BY avg_wpi DESC"
-	case "worst_weather":
-		return "ORDER BY avg_wpi ASC"
-	case "cheapest_hotel":
-		return "ORDER BY a.booking_pppn ASC"
-	case "most_expensive_hotel":
-		return "ORDER BY a.booking_pppn DESC"
-	case "shortest_flight":
-		return "ORDER BY f.duration_hour_dot_mins ASC"
-	case "longest_flight":
-		return "ORDER BY f.duration_hour_dot_mins DESC"
-	default:
-		return "ORDER BY fnf.price_fnaf ASC" // Default sorting by lowest FNAF price
+	if clause, found := orderByClauses[sortOption]; found {
+		return clause
 	}
+	return "ORDER BY fnf.price_fnaf ASC" // Default
 }
 
-/*
-// / Helper to construct SELECT clause
-func selectClause() string {
-	return `
-        SELECT f1.destination_city_name,
-               MIN(f1.price_this_week) AS price_city1,
-               MIN(f1.skyscanner_url_this_week) AS url_city1,
-               w.date,
-               w.avg_daytime_temp,
-               w.weather_icon,
-               w.google_url,
-               l.avg_wpi,
-               l.image_1,
-               a.booking_url,
-               a.booking_pppn,
-               fnf.price_fnaf
-    `
-}
-
-// Helper to construct JOIN clause
-func joinClause() string {
-	return `
-        FROM flight f1
-        JOIN location l ON f1.destination_city_name = l.city AND f1.destination_country = l.country
-        JOIN weather w ON w.city = f1.destination_city_name AND w.country = f1.destination_country
-        LEFT JOIN accommodation a ON a.city = f1.destination_city_name AND a.country = f1.destination_country
-        LEFT JOIN five_nights_and_flights fnf ON fnf.destination_city = f1.destination_city_name AND fnf.origin_city = ?
-    `
-}
-
-// Helper to construct WHERE clause
-
-func whereClause(city1 string, additionalCities []string, logicalOperators []string) string {
-	// Start with the primary condition for city1
-	whereClause := "WHERE f1.origin_city_name = ?"
-
-	if len(additionalCities) > 0 {
-		// Use INTERSECT for AND logic, or UNION for OR logic
-		subqueries := []string{}
-		for i := range additionalCities {
-			if i < len(logicalOperators) && logicalOperators[i] == "AND" {
-				// Create an INTERSECT query for the additional city
-				subqueries = append(subqueries, fmt.Sprintf(`
-					SELECT f.destination_city_name
-					FROM flight f
-					WHERE f.origin_city_name = ?
-				`))
-			} else if i < len(logicalOperators) && logicalOperators[i] == "OR" {
-				// Create a UNION query for the additional city
-				subqueries = append(subqueries, fmt.Sprintf(`
-					SELECT f.destination_city_name
-					FROM flight f
-					WHERE f.origin_city_name = ?
-				`))
-			} else {
-				log.Printf("Warning: Mismatch between additionalCities and logicalOperators at index %d", i)
-			}
-		}
-
-		// Combine subqueries into the WHERE clause
-		if len(subqueries) > 0 {
-			whereClause += " AND f1.destination_city_name IN ("
-			if logicalOperators[0] == "AND" {
-				whereClause += strings.Join(subqueries, " INTERSECT ")
-			} else {
-				whereClause += strings.Join(subqueries, " UNION ")
-			}
-			whereClause += ")"
-		}
-	}
-
-	// Add static conditions
-	whereClause += `
-        AND l.avg_wpi BETWEEN ? AND ?
-        AND w.date >= date('now')
-    `
-	log.Printf("Generated WHERE Clause: %s", whereClause)
-	return whereClause
-}
-
-// Helper to construct GROUP BY clause
-func groupByClause() string {
-	return `
-        GROUP BY f1.destination_city_name, w.date, f1.destination_country, l.avg_wpi
-    `
-}
-
-// Helper to construct HAVING clause
-func havingClause() string {
-	return `
-        HAVING MIN(f1.price_this_week) <= ?
-    `
-}
-*/
 /*---------------Logical Expressions-----------------------*/
 
 // CityInput represents the input for each city
