@@ -9,7 +9,6 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"strconv"
 	"strings"
 
 	// Third-Party Packages
@@ -134,76 +133,8 @@ func StartServer() {
 #
 #
 */
-type FilterInput struct {
-	Cities                []string
-	LogicalOperators      []string
-	MaxFlightPrices       []float64
-	MaxAccommodationPrice float64
-	OrderClause           string
-	LogicalExpression     Expression
-}
 
-func parseAndValidateFilterInputs(r *http.Request) (*FilterInput, error) {
-	// Extract query parameters
-	cities := r.URL.Query()["city[]"]
-	logicalOperators := r.URL.Query()["logical_operator[]"]
-	maxFlightPriceLinearStrs := r.URL.Query()["maxFlightPriceLinear[]"]
-	maxAccomPriceLinearStrs := r.URL.Query()["maxAccommodationPrice[]"]
-	sortOption := r.URL.Query().Get("sort")
-
-	// Validate input lengths
-	if len(cities) == 0 || len(cities) != len(logicalOperators)+1 || len(cities) != len(maxFlightPriceLinearStrs) {
-		return nil, fmt.Errorf("mismatched input lengths. Cities: %d, Operators: %d, Prices: %d",
-			len(cities), len(logicalOperators), len(maxFlightPriceLinearStrs))
-	}
-
-	// Parse flight price limits
-	maxFlightPrices := make([]float64, 0, len(maxFlightPriceLinearStrs))
-	for _, linearStr := range maxFlightPriceLinearStrs {
-		linearValue, err := strconv.ParseFloat(linearStr, 64)
-		if err != nil {
-			return nil, fmt.Errorf("invalid flight price parameter")
-		}
-		mappedValue := backend.MapLinearToExponential(linearValue, 50, 1000, 2500)
-		maxFlightPrices = append(maxFlightPrices, mappedValue)
-	}
-
-	// Parse logical expression
-	expr, err := parseLogicalExpression(cities, logicalOperators, maxFlightPrices)
-	if err != nil {
-		return nil, err
-	}
-
-	// Determine sort option and order clause
-	if sortOption == "" {
-		sortOption = "low_price" // default
-	}
-	orderClause := determineOrderClause(sortOption)
-
-	// Parse accommodation price limit
-	var maxAccommodationPrice float64
-	if len(maxAccomPriceLinearStrs) > 0 {
-		accomLinearStr := maxAccomPriceLinearStrs[0]
-		accomLinearValue, err := strconv.ParseFloat(accomLinearStr, 64)
-		if err != nil {
-			return nil, fmt.Errorf("invalid accommodation price parameter")
-		}
-		maxAccommodationPrice = backend.MapLinearToExponential(accomLinearValue, 10, 200, 550)
-	} else {
-		maxAccommodationPrice = 70.0 // Default value
-	}
-
-	return &FilterInput{
-		Cities:                cities,
-		LogicalOperators:      logicalOperators,
-		MaxFlightPrices:       maxFlightPrices,
-		MaxAccommodationPrice: maxAccommodationPrice,
-		OrderClause:           orderClause,
-		LogicalExpression:     expr,
-	}, nil
-}
-
-func executeMainQuery(input *FilterInput) ([]model.Flight, error) {
+func executeMainQuery(input *backend.FilterInput) ([]model.Flight, error) {
 	query, args := buildQuery(input.LogicalExpression, input.MaxAccommodationPrice, input.Cities, input.OrderClause)
 
 	if !mutePrints {
@@ -235,7 +166,7 @@ func executeMainQuery(input *FilterInput) ([]model.Flight, error) {
 	return flights, nil
 }
 
-func executeAccommodationPricesHistogramQuery(input *FilterInput) ([]model.Flight, error) {
+func executeAccommodationPricesHistogramQuery(input *backend.FilterInput) ([]model.Flight, error) {
 	// Build query with fixed maxAccommodationPrice = 550.0
 	allPricesQuery, allPricesArgs := buildQuery(input.LogicalExpression, 550.0, input.Cities, input.OrderClause)
 
@@ -284,7 +215,7 @@ func filterRequestHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//  Input Extraction and Validation
-	input, err := parseAndValidateFilterInputs(r)
+	input, err := backend.ParseAndValidateFilterInputs(r)
 	if err != nil {
 		backend.HandleHTTPError(w, err.Error(), http.StatusBadRequest)
 		return
@@ -451,7 +382,7 @@ func buildFlightsData(cities []string, flights []model.Flight) model.FlightsData
 
 // Unified Query Builder
 
-func buildQuery(expr Expression, maxAccommodationPrice float64, originCities []string, orderClause string) (string, []interface{}) {
+func buildQuery(expr backend.Expression, maxAccommodationPrice float64, originCities []string, orderClause string) (string, []interface{}) {
 	var queryBuilder strings.Builder
 	var args []interface{}
 	// Begin the query with the DestinationSet CTE
@@ -544,9 +475,9 @@ func buildQuery(expr Expression, maxAccommodationPrice float64, originCities []s
 	return queryBuilder.String(), args
 }
 
-func buildSubquery(expr Expression) (string, []interface{}) {
+func buildSubquery(expr backend.Expression) (string, []interface{}) {
 	switch e := expr.(type) {
-	case *CityCondition:
+	case *backend.CityCondition:
 		// Return the subquery for a city condition
 		subquery := `
             SELECT 
@@ -558,14 +489,14 @@ func buildSubquery(expr Expression) (string, []interface{}) {
         `
 		args := []interface{}{e.City.Name, e.City.PriceLimit}
 		return subquery, args
-	case *LogicalExpression:
+	case *backend.LogicalExpression:
 		// Build the left and right subqueries
 		leftSubquery, leftArgs := buildSubquery(e.Left)
 		rightSubquery, rightArgs := buildSubquery(e.Right)
 		var operator string
-		if e.Operator == AndOperator {
+		if e.Operator == backend.AndOperator {
 			operator = "INTERSECT"
-		} else if e.Operator == OrOperator {
+		} else if e.Operator == backend.OrOperator {
 			operator = "UNION"
 		} else {
 			panic("Unknown operator")
@@ -577,90 +508,6 @@ func buildSubquery(expr Expression) (string, []interface{}) {
 	default:
 		panic("Unknown expression type")
 	}
-}
-
-var orderByClauses = map[string]string{
-	"low_price":            "ORDER BY fnf.price_fnaf ASC",
-	"high_price":           "ORDER BY fnf.price_fnaf DESC",
-	"best_weather":         "ORDER BY avg_wpi DESC",
-	"worst_weather":        "ORDER BY avg_wpi ASC",
-	"cheapest_hotel":       "ORDER BY a.booking_pppn ASC",
-	"most_expensive_hotel": "ORDER BY a.booking_pppn DESC",
-	"shortest_flight":      "ORDER BY f.duration_hour_dot_mins ASC",
-	"longest_flight":       "ORDER BY f.duration_hour_dot_mins DESC",
-}
-
-func determineOrderClause(sortOption string) string {
-	if clause, found := orderByClauses[sortOption]; found {
-		return clause
-	}
-	return "ORDER BY fnf.price_fnaf ASC" // Default
-}
-
-/*---------------Logical Expressions-----------------------*/
-
-// CityInput represents the input for each city
-type CityInput struct {
-	Name       string
-	PriceLimit float64
-}
-
-// LogicalOperator represents a logical operator (AND, OR)
-type LogicalOperator string
-
-const (
-	AndOperator LogicalOperator = "AND"
-	OrOperator  LogicalOperator = "OR"
-)
-
-// Expression represents a logical expression
-type Expression interface{}
-
-// CityCondition represents a condition for a single city
-type CityCondition struct {
-	City CityInput
-}
-
-// LogicalExpression represents a logical combination of expressions
-type LogicalExpression struct {
-	Operator LogicalOperator
-	Left     Expression
-	Right    Expression
-}
-
-func parseLogicalExpression(cities []string, logicalOperators []string, maxPrices []float64) (Expression, error) {
-	// Validate input lengths
-	if len(cities) == 0 || len(cities) != len(maxPrices) || len(cities) != len(logicalOperators)+1 {
-		return nil, fmt.Errorf("mismatched input lengths")
-	}
-
-	// Base case: Only one city
-	if len(cities) == 1 {
-		log.Printf("parseLogicalExpression: Single city: %s, PriceLimit: %.2f", cities[0], maxPrices[0])
-		return &CityCondition{
-			City: CityInput{Name: cities[0], PriceLimit: maxPrices[0]},
-		}, nil
-	}
-
-	// Start with the first city as the base expression
-	log.Printf("parseLogicalExpression: Starting with city: %s, PriceLimit: %.2f", cities[0], maxPrices[0])
-	var expr Expression = &CityCondition{
-		City: CityInput{Name: cities[0], PriceLimit: maxPrices[0]},
-	}
-
-	// Process subsequent cities with their logical operators
-	for i := 1; i < len(cities); i++ {
-		log.Printf("parseLogicalExpression: Adding city: %s, PriceLimit: %.2f with Operator: %s", cities[i], maxPrices[i], logicalOperators[i-1])
-		expr = &LogicalExpression{
-			Operator: LogicalOperator(logicalOperators[i-1]),
-			Left:     expr,
-			Right: &CityCondition{
-				City: CityInput{Name: cities[i], PriceLimit: maxPrices[i]},
-			},
-		}
-	}
-
-	return expr, nil
 }
 
 // gatherBookingPppn just extracts all booking_pppn values from flights
