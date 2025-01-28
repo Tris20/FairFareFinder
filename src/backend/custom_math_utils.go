@@ -40,3 +40,11 @@ func UpdateMinValue(currentMin, newValue sql.NullFloat64) sql.NullFloat64 {
 	// Return currentMin if none of the above conditions are met
 	return currentMin
 }
+
+func Mod(a, b int) int {
+	return a % b
+}
+
+func Add(a, b int) int {
+	return a + b
+}

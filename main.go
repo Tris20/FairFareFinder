@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"encoding/json"
 	"flag"
 	"fmt"
 	"html/template"
@@ -62,14 +61,6 @@ func main() {
 	StartServer()
 }
 
-func mod(a, b int) int {
-	return a % b
-}
-
-func add(a, b int) int {
-	return a + b
-}
-
 func SetupServer(db_path string, logger io.Writer) func() {
 	// Set up lumberjack log file rotation config
 	log.SetOutput(logger)
@@ -90,25 +81,11 @@ func SetupServer(db_path string, logger io.Writer) func() {
 		}
 	}
 
-	funcMap := template.FuncMap{
-		"mod": mod,
-		"add": add,
-		"toJson": func(v interface{}) (string, error) {
-			a, err := json.Marshal(v)
-			if err != nil {
-				return "", err
-			}
-			return string(a), nil
-		},
+	// Initialize templates
+	tmpl, err = backend.InitializeTemplates()
+	if err != nil {
+		log.Fatalf("Failed to initialize templates: %v", err)
 	}
-
-	tmpl = template.Must(template.New("").Funcs(funcMap).ParseFiles(
-		"./src/frontend/html/index.html",
-		"./src/frontend/html/table.html",
-		"./src/frontend/html/seo.html",
-		"./src/frontend/html/dev_and_debug/cities.html",
-		"./src/frontend/html/dev_and_debug/all-cities.html", // Add all-cities.html template
-	))
 
 	backend.Init(db, tmpl)
 

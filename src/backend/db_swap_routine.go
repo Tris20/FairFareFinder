@@ -2,7 +2,6 @@ package backend
 
 import (
 	"database/sql"
-	"encoding/json"
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
 	"html/template"
@@ -44,26 +43,12 @@ func StartFileCheckRoutine(db **sql.DB, tmpl **template.Template) {
 				} else {
 					log.Println("Successfully reconnected to the new main.db")
 
-					// Reinitialize both the database and the templates in the backend
-					funcMap := template.FuncMap{
-						"mod": mod,
-						"add": add,
-						"toJson": func(v interface{}) (string, error) {
-							a, err := json.Marshal(v)
-							if err != nil {
-								return "", err
-							}
-							return string(a), nil
-						},
+					// Reinitialize templates
+					*tmpl, err = InitializeTemplates()
+					if err != nil {
+						log.Printf("Failed to reinitialize templates: %v", err)
+						continue
 					}
-
-					*tmpl = template.Must(template.New("").Funcs(funcMap).ParseFiles(
-						"./src/frontend/html/index.html",
-						"./src/frontend/html/table.html",
-						"./src/frontend/html/seo.html",
-						"./src/frontend/html/dev_and_debug/cities.html",
-						"./src/frontend/html/dev_and_debug/all-cities.html",
-					))
 
 					Init(*db, *tmpl)
 				}
@@ -75,12 +60,4 @@ func StartFileCheckRoutine(db **sql.DB, tmpl **template.Template) {
 		// Check every 2 hours
 		time.Sleep(2 * time.Hour)
 	}
-}
-
-func mod(a, b int) int {
-	return a % b
-}
-
-func add(a, b int) int {
-	return a + b
 }
