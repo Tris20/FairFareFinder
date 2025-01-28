@@ -103,6 +103,52 @@ func StartServer() {
 	log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
 }
 
+func filterRequestHandler(w http.ResponseWriter, r *http.Request) {
+	//  Session Management
+	session, err := backend.GetUserSession(store, r)
+	if err != nil {
+		backend.HandleHTTPError(w, "Session retrieval error", http.StatusInternalServerError)
+		return
+	}
+
+	//  Input Extraction and Validation
+	input, err := backend.ParseAndValidateFilterInputs(r)
+	if err != nil {
+		backend.HandleHTTPError(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Execute Main Query to Populate Destination Cards
+	flights, err := executeMainQuery(input)
+	if err != nil {
+		backend.HandleHTTPError(w, "Error executing main query", http.StatusInternalServerError)
+		return
+	}
+
+	//  Execute Second Query to Populate Accommodation Price Slider Histogram
+	allAccomPrices, err := executeAccommodationPricesHistogramQuery(input)
+	if err != nil {
+		backend.HandleHTTPError(w, "Error executing all prices query", http.StatusInternalServerError)
+		return
+	}
+
+	log.Printf("All accommodation prices (no user limit): %v", allAccomPrices)
+
+	//  Prepare Data for the Template
+	data := backend.BuildTemplateData(input.Cities, flights, allAccomPrices)
+
+	// Save Session and Render the Response
+	if err := session.Save(r, w); err != nil {
+		backend.HandleHTTPError(w, "Session save error", http.StatusInternalServerError)
+		return
+	}
+
+	if err := tmpl.ExecuteTemplate(w, "table.html", data); err != nil {
+		backend.HandleHTTPError(w, "Error rendering results", http.StatusInternalServerError)
+		return
+	}
+}
+
 /*
 #
 #
@@ -132,7 +178,7 @@ func executeMainQuery(input *backend.FilterInput) ([]model.Flight, error) {
 	}
 	defer rows.Close()
 
-	flights, err := processFlightRows(rows)
+	flights, err := backend.ProcessFlightRows(rows)
 	if err != nil {
 		log.Printf("Error processing flight rows: %v", err)
 		return nil, err
@@ -141,7 +187,7 @@ func executeMainQuery(input *backend.FilterInput) ([]model.Flight, error) {
 	return flights, nil
 }
 
-func executeAccommodationPricesHistogramQuery(input *backend.FilterInput) ([]model.Flight, error) {
+func executeAccommodationPricesHistogramQuery(input *backend.FilterInput) ([]float64, error) {
 	// Build query with fixed maxAccommodationPrice = 550.0
 	allPricesQuery, allPricesArgs := buildQuery(input.LogicalExpression, 550.0, input.Cities, input.OrderClause)
 
@@ -165,67 +211,19 @@ func executeAccommodationPricesHistogramQuery(input *backend.FilterInput) ([]mod
 	}
 	defer rows.Close()
 
-	flightsAll, err := processFlightRows(rows)
+	flightsAll, err := backend.ProcessFlightRows(rows)
 	if err != nil {
 		log.Printf("Error processing flight rows for all accommodation prices: %v", err)
 		return nil, err
 	}
 
-	return flightsAll, nil
-}
-
-func buildTemplateData(cities []string, flights []model.Flight, allAccomPrices []float64) model.FlightsData {
-	data := buildFlightsData(cities, flights)
-	data.AllAccommodationPrices = allAccomPrices
-	return data
-}
-
-func filterRequestHandler(w http.ResponseWriter, r *http.Request) {
-	//  Session Management
-	session, err := backend.GetUserSession(store, r)
-	if err != nil {
-		backend.HandleHTTPError(w, "Session retrieval error", http.StatusInternalServerError)
-		return
+	var prices []float64
+	for _, f := range flightsAll {
+		if f.BookingPppn.Valid {
+			prices = append(prices, f.BookingPppn.Float64)
+		}
 	}
-
-	//  Input Extraction and Validation
-	input, err := backend.ParseAndValidateFilterInputs(r)
-	if err != nil {
-		backend.HandleHTTPError(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	// Execute Main Query to Populate Destination Cards
-	flights, err := executeMainQuery(input)
-	if err != nil {
-		backend.HandleHTTPError(w, "Error executing main query", http.StatusInternalServerError)
-		return
-	}
-
-	//  Execute Second Query to Populate Accommodation Price Slider Histogram
-	flightsAll, err := executeAccommodationPricesHistogramQuery(input)
-	if err != nil {
-		backend.HandleHTTPError(w, "Error executing all prices query", http.StatusInternalServerError)
-		return
-	}
-
-	//  Collect Accommodation Prices
-	allAccomPrices := gatherBookingPppn(flightsAll)
-	log.Printf("All accommodation prices (no user limit): %v", allAccomPrices)
-
-	//  Prepare Data for the Template
-	data := buildTemplateData(input.Cities, flights, allAccomPrices)
-
-	// Save Session and Render the Response
-	if err := session.Save(r, w); err != nil {
-		backend.HandleHTTPError(w, "Session save error", http.StatusInternalServerError)
-		return
-	}
-
-	if err := tmpl.ExecuteTemplate(w, "table.html", data); err != nil {
-		backend.HandleHTTPError(w, "Error rendering results", http.StatusInternalServerError)
-		return
-	}
+	return prices, nil
 }
 
 /*
@@ -233,126 +231,6 @@ func filterRequestHandler(w http.ResponseWriter, r *http.Request) {
 #
 #
 */
-// Helper function to process rows into flight and weather data
-func processFlightRows(rows *sql.Rows) ([]model.Flight, error) {
-	var flights []model.Flight
-	for rows.Next() {
-		var flight model.Flight
-		var weather model.Weather
-		var imageUrl sql.NullString
-		var bookingUrl sql.NullString
-		var priceFnaf sql.NullFloat64
-		var duration_mins sql.NullInt64
-		var duration_hours sql.NullInt64
-		var duration_hours_rounded sql.NullInt64
-		var duration_hour_dot_mins sql.NullFloat64
-
-		err := rows.Scan(
-			&flight.DestinationCityName,
-			&flight.PriceCity1,
-			&flight.UrlCity1,
-			&weather.Date,
-			&weather.AvgDaytimeTemp,
-			&weather.WeatherIcon,
-			&weather.GoogleUrl,
-			&flight.AvgWpi,
-			&imageUrl,
-			&bookingUrl,
-			&flight.BookingPppn,
-			&priceFnaf,
-			&duration_mins,
-			&duration_hours,
-			&duration_hours_rounded,
-			&duration_hour_dot_mins,
-		)
-		if err != nil {
-			log.Printf("Error scanning row: %v", err)
-			return nil, err
-		}
-
-		backend.SetFlightDurationInt(&flight, duration_mins, &flight.DurationMins, "Duration: %d minutes for flight to %s")
-		backend.SetFlightDurationInt(&flight, duration_hours, &flight.DurationHours, "Duration: %d hours for flight to %s")
-		backend.SetFlightDurationInt(&flight, duration_hours_rounded, &flight.DurationHoursRounded, "Duration: %d rounded hours for flight to %s")
-		backend.SetFlightDurationFloat(&flight, duration_hour_dot_mins, &flight.DurationHourDotMins, "Duration: %.2f hours.mins for flight to %s")
-
-		// Log the weather data for debugging
-		log.Printf("Row Data - Destination: %s, Date: %s, Temp: %.2f, Icon: %s, Duration.Hours: %d, Duration.Mins: %d ",
-			flight.DestinationCityName,
-			weather.Date,
-			weather.AvgDaytimeTemp.Float64,
-			weather.WeatherIcon,
-			flight.DurationHours.Int64,
-			flight.DurationMins.Int64,
-		)
-
-		// Log the imageUrl for debugging
-		log.Printf("Scanned image URL: '%s', Valid: %t", imageUrl.String, imageUrl.Valid)
-
-		if imageUrl.Valid && len(imageUrl.String) > 5 {
-			flight.RandomImageURL = imageUrl.String
-			log.Printf("Using image URL from database: %s", flight.RandomImageURL)
-		} else {
-			flight.RandomImageURL = "/images/location-placeholder-image.png"
-			log.Printf("Using default placeholder image URL: %s", flight.RandomImageURL)
-		}
-		flight.BookingUrl = bookingUrl
-		flight.FiveNightsFlights = priceFnaf
-		addOrUpdateFlight(&flights, flight, weather)
-	}
-	return flights, nil
-}
-
-// Helper function to add or update flight entries
-func addOrUpdateFlight(flights *[]model.Flight, flight model.Flight, weather model.Weather) {
-	for i := range *flights {
-		if (*flights)[i].DestinationCityName == flight.DestinationCityName {
-			(*flights)[i].WeatherForecast = append((*flights)[i].WeatherForecast, weather)
-			return
-		}
-	}
-
-	flight.WeatherForecast = []model.Weather{weather}
-	*flights = append(*flights, flight)
-}
-
-// Helper function to build the data for the template
-func buildFlightsData(cities []string, flights []model.Flight) model.FlightsData {
-	// Ensure there is at least one city in the list
-	var selectedCity1 string
-	if len(cities) > 0 {
-		selectedCity1 = cities[0]
-	} else {
-		selectedCity1 = "" // Default to an empty string if no cities are provided
-	}
-
-	// Initialize variables for max/min values
-	var maxWpi, minFlightPrice, minHotelPrice, minFnafPrice sql.NullFloat64
-
-	// Collect *all* booking_pppn into a slice
-	var allAccomPrices []float64
-
-	// Process each flight to find max/min values
-	for _, flight := range flights {
-		maxWpi = backend.UpdateMaxValue(maxWpi, flight.AvgWpi)
-		minFlightPrice = backend.UpdateMinValue(minFlightPrice, flight.PriceCity1)
-		minHotelPrice = backend.UpdateMinValue(minHotelPrice, flight.BookingPppn)
-		minFnafPrice = backend.UpdateMinValue(minFnafPrice, flight.FiveNightsFlights)
-		if flight.BookingPppn.Valid {
-			allAccomPrices = append(allAccomPrices, flight.BookingPppn.Float64)
-		}
-	}
-
-	// Build and return the FlightsData
-	return model.FlightsData{
-		SelectedCity1:          selectedCity1,
-		Flights:                flights,
-		MaxWpi:                 maxWpi,
-		MinFlight:              minFlightPrice,
-		MinHotel:               minHotelPrice,
-		MinFnaf:                minFnafPrice,
-		AllAccommodationPrices: allAccomPrices,
-	}
-}
 
 // Unified Query Builder
 
@@ -439,15 +317,4 @@ func buildSubquery(expr backend.Expression) (string, []interface{}) {
 	default:
 		panic("Unknown expression type")
 	}
-}
-
-// gatherBookingPppn just extracts all booking_pppn values from flights
-func gatherBookingPppn(flights []model.Flight) []float64 {
-	var prices []float64
-	for _, f := range flights {
-		if f.BookingPppn.Valid {
-			prices = append(prices, f.BookingPppn.Float64)
-		}
-	}
-	return prices
 }
