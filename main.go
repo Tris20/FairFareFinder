@@ -143,20 +143,6 @@ type FilterInput struct {
 	LogicalExpression     Expression
 }
 
-func handleHTTPError(w http.ResponseWriter, message string, code int) {
-	log.Printf("Error: %s", message)
-	http.Error(w, message, code)
-}
-
-func getUserSession(r *http.Request) (*sessions.Session, error) {
-	session, err := store.Get(r, "session")
-	if err != nil {
-		log.Printf("Error retrieving user session: %v", err)
-		return nil, err
-	}
-	return session, nil
-}
-
 func parseAndValidateFilterInputs(r *http.Request) (*FilterInput, error) {
 	// Extract query parameters
 	cities := r.URL.Query()["city[]"]
@@ -226,7 +212,7 @@ func executeMainQuery(input *FilterInput) ([]model.Flight, error) {
 		fmt.Println("Arguments:", args)
 	}
 
-	fullQuery := interpolateQuery(query, args)
+	fullQuery := backend.InterpolateQuery(query, args)
 	log.Printf("Full MAIN Query:\n%s\n", fullQuery)
 
 	if db == nil {
@@ -259,7 +245,7 @@ func executeAccommodationPricesHistogramQuery(input *FilterInput) ([]model.Fligh
 		fmt.Println("Arguments:", allPricesArgs)
 	}
 
-	fullAllPricesQuery := interpolateQuery(allPricesQuery, allPricesArgs)
+	fullAllPricesQuery := backend.InterpolateQuery(allPricesQuery, allPricesArgs)
 	log.Printf("Full ALL-PRICES Query:\n%s\n", fullAllPricesQuery)
 
 	if db == nil {
@@ -290,30 +276,31 @@ func buildTemplateData(cities []string, flights []model.Flight, allAccomPrices [
 
 func filterRequestHandler(w http.ResponseWriter, r *http.Request) {
 	//  Session Management
-	session, err := getUserSession(r)
+	session, err := backend.GetUserSession(store, r)
+
 	if err != nil {
-		handleHTTPError(w, "Session retrieval error", http.StatusInternalServerError)
+		backend.HandleHTTPError(w, "Session retrieval error", http.StatusInternalServerError)
 		return
 	}
 
 	//  Input Extraction and Validation
 	input, err := parseAndValidateFilterInputs(r)
 	if err != nil {
-		handleHTTPError(w, err.Error(), http.StatusBadRequest)
+		backend.HandleHTTPError(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
 	// Execute Main Query to Populate Destination Cards
 	flights, err := executeMainQuery(input)
 	if err != nil {
-		handleHTTPError(w, "Error executing main query", http.StatusInternalServerError)
+		backend.HandleHTTPError(w, "Error executing main query", http.StatusInternalServerError)
 		return
 	}
 
 	//  Execute Second Query to Populate Accommodation Price Slider Histogram
 	flightsAll, err := executeAccommodationPricesHistogramQuery(input)
 	if err != nil {
-		handleHTTPError(w, "Error executing all prices query", http.StatusInternalServerError)
+		backend.HandleHTTPError(w, "Error executing all prices query", http.StatusInternalServerError)
 		return
 	}
 
@@ -326,12 +313,12 @@ func filterRequestHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Save Session and Render the Response
 	if err := session.Save(r, w); err != nil {
-		handleHTTPError(w, "Session save error", http.StatusInternalServerError)
+		backend.HandleHTTPError(w, "Session save error", http.StatusInternalServerError)
 		return
 	}
 
 	if err := tmpl.ExecuteTemplate(w, "table.html", data); err != nil {
-		handleHTTPError(w, "Error rendering results", http.StatusInternalServerError)
+		backend.HandleHTTPError(w, "Error rendering results", http.StatusInternalServerError)
 		return
 	}
 }
@@ -674,35 +661,6 @@ func parseLogicalExpression(cities []string, logicalOperators []string, maxPrice
 	}
 
 	return expr, nil
-}
-
-func interpolateQuery(query string, args []interface{}) string {
-	var result strings.Builder
-	argIndex := 0
-
-	for _, char := range query {
-		if char == '?' && argIndex < len(args) {
-			// Append the argument in place of the '?'
-			arg := args[argIndex]
-			argIndex++
-
-			// Format the argument based on its type
-			switch v := arg.(type) {
-			case string:
-				result.WriteString(fmt.Sprintf("'%s'", v)) // Quote strings
-			case float64:
-				result.WriteString(fmt.Sprintf("%.2f", v))
-			case int:
-				result.WriteString(fmt.Sprintf("%d", v))
-			default:
-				result.WriteString(fmt.Sprintf("%v", v)) // Fallback for other types
-			}
-		} else {
-			result.WriteRune(char)
-		}
-	}
-
-	return result.String()
 }
 
 // gatherBookingPppn just extracts all booking_pppn values from flights
