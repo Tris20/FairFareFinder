@@ -32,7 +32,7 @@
 
     <!-- JS -->
     <script src="/js/price-slider.js"></script>
-
+    <!--Create Accomodation Price Slider functionality-->
     <script>
       let accomSlider; // define in a higher scope
       document.addEventListener("DOMContentLoaded", () => {
@@ -45,6 +45,24 @@
           midVal: 200,
           maxVal: 550,
           defaultValue: 53.57,
+          binCount: 30,
+        });
+      });
+    </script>
+
+    <!--Create Flight Price Slider functionality-->
+    <script>
+      let flightSlider; // define in a higher scope
+      document.addEventListener("DOMContentLoaded", () => {
+        window.flightSlider = createPriceSlider({
+          sliderId: "combinedPrice-slider0",
+          outputId: "priceOutput0",
+          chartId: "flight-chart",
+          dataArray: [], // start empty
+          minVal: 10,
+          midVal: 1000,
+          maxVal: 2500,
+          defaultValue: 57,
           binCount: 30,
         });
       });
@@ -107,6 +125,9 @@
               </div>
 
               <div class="flight-price-slider">
+                <div class="chart-container">
+                  <div class="chart" id="flight-chart"></div>
+                </div>
                 <!--label for="priceOutput0"></label-->
                 <output id="priceOutput0" class="output-range">€399</output>
                 <input
@@ -115,16 +136,14 @@
                   name="maxFlightPriceLinear[]"
                   min="0"
                   max="100"
-                  step="1"
+                  step="0.01"
                   value="49"
                   class="price-slider"
-                  hx-get="/update-slider-price"
-                  hx-target="#priceOutput0"
-                  hx-trigger="input"
                   hx-push-url="false"
                   hx-preserve="false"
                   hx-include="#combinedPrice-slider0"
                   autocomplete="off"
+                  oninput="window.flightSlider.updateData(window.allAccomPrices);"
                 />
               </div>
             </div>
@@ -143,8 +162,8 @@
               >
 
               <div class="accom-pricebar">
-                <div id="chart-container">
-                  <div id="chart"></div>
+                <div class="chart-container">
+                  <div class="chart" id="chart"></div>
                 </div>
                 <input
                   type="range"

@@ -205,4 +205,11 @@
   }
 </script>
 
+<script>
+  window.allAccomPrices = {{ .AllAccommodationPrices | toJson }};
+  // if accomSlider is defined, update it:
+  if (window.flightSlider) {
+    window.flightSlider.updateData(window.allAccomPrices);
+  }
+</script>
 {{ end }}

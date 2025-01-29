@@ -73,6 +73,7 @@ select {
 .flight-price-slider {
   width: 50%;
   display: flex;
+  flex-direction: column;
 }
 .form-group.city-row {
   background-color: #237275;
