@@ -1,5 +1,7 @@
 let hasFadedIn = false; // Flag to check if the table has already faded in
-
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
 document.addEventListener("DOMContentLoaded", function () {
   // After the fade-out animation ends, hide the website-name and show the table
   setTimeout(function () {

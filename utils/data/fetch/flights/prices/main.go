@@ -5,7 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Tris20/FairFareFinder/config/handlers"
-	"github.com/Tris20/FairFareFinder/src/backend/model"
+	"github.com/Tris20/FairFareFinder/utils/common/model"
+
 	"github.com/Tris20/FairFareFinder/utils/data/process/generate/urls"
 	"github.com/Tris20/FairFareFinder/utils/time-and-date"
 	"github.com/schollz/progressbar/v3"
