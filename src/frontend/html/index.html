@@ -85,6 +85,7 @@
           hx-get="/filter"
           hx-target="#flight-table"
           hx-trigger="change, input delay:50ms"
+          hx-headers='{"Cache-Control": "no-cache"}'
         >
           <!-- Dynamic city input rows -->
           <div id="city-rows" style="width: 100%">

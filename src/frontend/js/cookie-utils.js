@@ -41,10 +41,17 @@ document.addEventListener("DOMContentLoaded", function () {
     "&maxFlightPriceLinear[]=" +
     flightPriceLinear +
     "&maxAccommodationPrice[]=" +
-    accomPriceLinear;
+    accomPriceLinear +
+    "&sort=best_weather";
 
   console.log("Auto-loading data with city:", savedCity, "via:", url);
 
   // 3) Fire an HTMX request to /filter, putting results into #results-container
   htmx.ajax("GET", url, "#flight-table");
+});
+
+// clear sort option selections
+document.addEventListener("DOMContentLoaded", function () {
+  const sortSelect = document.getElementById("sort");
+  sortSelect.value = "best_weather"; // Default value
 });

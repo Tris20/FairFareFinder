@@ -46,7 +46,7 @@ func ParseAndValidateFilterInputs(r *http.Request) (*FilterInput, error) {
 	}
 
 	if sortOption == "" {
-		sortOption = "low_price" // default
+		sortOption = "best_weather" // default
 	}
 	orderClause := determineOrderClause(sortOption)
 
@@ -87,7 +87,7 @@ func determineOrderClause(sortOption string) string {
 	if clause, found := orderByClauses[sortOption]; found {
 		return clause
 	}
-	return "ORDER BY fnf.price_fnaf ASC" // Default
+	return "ORDER BY avg_wpi DESC" // Default
 }
 
 /*---------------Logical Expressions-----------------------*/
