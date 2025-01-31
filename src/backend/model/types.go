@@ -36,5 +36,5 @@ type FlightsData struct {
 	MinHotel               sql.NullFloat64
 	MinFnaf                sql.NullFloat64
 	AllAccommodationPrices []float64
-	AllOriginFlightPrices  []float64
+	AllFlightPrices        []float64
 }

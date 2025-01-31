@@ -33,18 +33,31 @@
     <!-- JS -->
     <script src="/js/price-slider.js"></script>
     <!--Create Accomodation Price Slider functionality-->
+
     <script>
-      let accomSlider; // define in a higher scope
+      const minFlightPrice = {{ .MinFlightPrice }};
+      const midFlightPrice = {{ .MidFlightPrice }};
+      const maxFlightPrice = {{ .MaxFlightPrice }};
+
+      const minAccomPrice = {{ .MinAccomPrice }};
+      const midAccomPrice = {{ .MidAccomPrice }};
+      const maxAccomPrice = {{ .MaxAccomPrice }};
+      const defaultAccomPrice = {{ .DefaultAccomPrice }};
+    </script>
+
+    <!--Create Accommodation Price Slider functionality-->
+    <script>
+      let accomSlider;
       document.addEventListener("DOMContentLoaded", () => {
         window.accomSlider = createPriceSlider({
           sliderId: "accommodationPrice-slider0",
           outputId: "accommodationOutput0",
           chartId: "chart",
-          dataArray: [], // start empty
-          minVal: 10,
-          midVal: 200,
-          maxVal: 550,
-          defaultValue: 53.57,
+          dataArray: [],
+          minVal: minAccomPrice,
+          midVal: midAccomPrice,
+          maxVal: maxAccomPrice,
+          defaultValue: defaultAccomPrice,
           binCount: 30,
         });
       });
@@ -52,16 +65,16 @@
 
     <!--Create Flight Price Slider functionality-->
     <script>
-      let flightSlider; // define in a higher scope
+      let flightSlider;
       document.addEventListener("DOMContentLoaded", () => {
         window.flightSlider = createPriceSlider({
           sliderId: "combinedPrice-slider0",
           outputId: "priceOutput0",
           chartId: "flight-chart",
-          dataArray: [], // start empty
-          minVal: 10,
-          midVal: 1000,
-          maxVal: 2500,
+          dataArray: [],
+          minVal: minFlightPrice,
+          midVal: midFlightPrice,
+          maxVal: maxFlightPrice,
           defaultValue: 57,
           binCount: 30,
         });
@@ -124,12 +137,14 @@
                 <ul id="city-list" class="dropdown-list hidden"></ul>
               </div>
 
+              <!-- <div class="outer-flight-price-slider"> -->
+              <output id="priceOutput0" class="output-range">€399</output>
               <div class="flight-price-slider">
                 <div class="chart-container">
                   <div class="chart" id="flight-chart"></div>
                 </div>
                 <!--label for="priceOutput0"></label-->
-                <output id="priceOutput0" class="output-range">€399</output>
+
                 <input
                   type="range"
                   id="combinedPrice-slider0"
@@ -143,9 +158,10 @@
                   hx-preserve="false"
                   hx-include="#combinedPrice-slider0"
                   autocomplete="off"
-                  oninput="window.flightSlider.updateData(window.allAccomPrices);"
+                  oninput="window.flightSlider.updateData(window.allFlightPrices);"
                 />
               </div>
+              <!-- </div> -->
             </div>
           </div>
           <!-- Button to add more origin cities -->
@@ -189,12 +205,19 @@
                   Sunniest and Warmest
                 </option>
                 <option value="cheapest_hotel">Cheapest Hotel Price</option>
+                <option value="cheapest_flight">Cheapest Flight</option>
+                <option value="cheapest_fnaf">Cheapest 5 Day Trip</option>
                 <option value="shortest_flight">Shortest Flight</option>
                 <option value="worst_weather">Coldest and Wettest</option>
                 <option value="most_expensive_hotel">
                   Most Expensive Hotel Price
                 </option>
-
+                <option value="most_expensive_flight">
+                  Most Expensive Flight
+                </option>
+                <option value="most_expensive_fnaf">
+                  Most Expensive 5 Day Trip
+                </option>
                 <option value="longest_flight">Longest Flight</option>
                 <!--<option value="low_price">Most Affordable</option>
             <option value="high_price">Most Expensive</option>-->

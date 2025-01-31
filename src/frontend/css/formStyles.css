@@ -74,6 +74,7 @@ select {
   width: 50%;
   display: flex;
   flex-direction: column;
+  top: -8px;
 }
 .form-group.city-row {
   background-color: #237275;

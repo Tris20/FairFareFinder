@@ -68,3 +68,11 @@
   top: -16px;
   position: relative;
 }
+
+#flight-chart {
+  top: 14px;
+}
+
+#combinedPrice-slider0 {
+  z-index: 20;
+}

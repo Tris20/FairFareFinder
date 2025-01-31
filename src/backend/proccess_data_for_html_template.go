@@ -19,35 +19,30 @@ func buildFlightsData(cities []string, flights []model.Flight) model.FlightsData
 	// Initialize variables for max/min values
 	var maxWpi, minFlightPrice, minHotelPrice, minFnafPrice sql.NullFloat64
 
-	// Collect *all* booking_pppn into a slice
-	var allAccomPrices []float64
-
 	// Process each flight to find max/min values
 	for _, flight := range flights {
 		maxWpi = UpdateMaxValue(maxWpi, flight.AvgWpi)
 		minFlightPrice = UpdateMinValue(minFlightPrice, flight.PriceCity1)
 		minHotelPrice = UpdateMinValue(minHotelPrice, flight.BookingPppn)
 		minFnafPrice = UpdateMinValue(minFnafPrice, flight.FiveNightsFlights)
-		if flight.BookingPppn.Valid {
-			allAccomPrices = append(allAccomPrices, flight.BookingPppn.Float64)
-		}
+
 	}
 
 	// Build and return the FlightsData
 	return model.FlightsData{
-		SelectedCity1:          selectedCity1,
-		Flights:                flights,
-		MaxWpi:                 maxWpi,
-		MinFlight:              minFlightPrice,
-		MinHotel:               minHotelPrice,
-		MinFnaf:                minFnafPrice,
-		AllAccommodationPrices: allAccomPrices,
+		SelectedCity1: selectedCity1,
+		Flights:       flights,
+		MaxWpi:        maxWpi,
+		MinFlight:     minFlightPrice,
+		MinHotel:      minHotelPrice,
+		MinFnaf:       minFnafPrice,
 	}
 }
 
-func BuildTemplateData(cities []string, flights []model.Flight, allAccomPrices []float64) model.FlightsData {
+func BuildTemplateData(cities []string, flights []model.Flight, allAccomPrices []float64, allFlightPrices []float64) model.FlightsData {
 	data := buildFlightsData(cities, flights)
 	data.AllAccommodationPrices = allAccomPrices
+	data.AllFlightPrices = allFlightPrices
 	return data
 }
 
