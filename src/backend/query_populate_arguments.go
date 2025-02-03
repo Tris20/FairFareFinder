@@ -5,8 +5,8 @@ import (
 	"strings"
 )
 
-// Interpolates query placeholders (?) with arguments for debugging purposes.
-func InterpolateQuery(query string, args []interface{}) string {
+// Replace query placeholders (?) with arguments for debugging purposes.
+func ReplacePlaceholdersWithArgs(query string, args []interface{}) string {
 	var result strings.Builder
 	argIndex := 0
 

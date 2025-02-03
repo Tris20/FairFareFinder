@@ -1,4 +1,4 @@
-package backend
+package config
 
 const (
 	MinFlightPrice = 20

@@ -5,6 +5,8 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+
+	"github.com/Tris20/FairFareFinder/src/backend/config"
 )
 
 // Declare the required variables (db and tmpl) to be accessible from this package
@@ -25,14 +27,14 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	// Pass city-country pairs and backend constants to the template
 	err := tmpl.ExecuteTemplate(w, "index.html", map[string]interface{}{
 		"CityCountryPairs":  GetCityCountryPairs(), // Use a getter for consistency
-		"MinFlightPrice":    MinFlightPrice,
-		"MidFlightPrice":    MidFlightPrice,
-		"MaxFlightPrice":    MaxFlightPrice,
-		"MinAccomPrice":     MinAccomPrice,
-		"MidAccomPrice":     MidAccomPrice,
-		"MaxAccomPrice":     MaxAccomPrice,
-		"DefaultAccomPrice": DefaultAccomPrice,
-		"DefaultSortOption": DefaultSortOption,
+		"MinFlightPrice":    config.MinFlightPrice,
+		"MidFlightPrice":    config.MidFlightPrice,
+		"MaxFlightPrice":    config.MaxFlightPrice,
+		"MinAccomPrice":     config.MinAccomPrice,
+		"MidAccomPrice":     config.MidAccomPrice,
+		"MaxAccomPrice":     config.MaxAccomPrice,
+		"DefaultAccomPrice": config.DefaultAccomPrice,
+		"DefaultSortOption": config.DefaultSortOption,
 	})
 	if err != nil {
 		log.Printf("Error executing template: %v", err)
