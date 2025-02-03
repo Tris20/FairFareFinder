@@ -18,7 +18,14 @@ func ExecuteMainQuery(input *FilterInput) ([]model.Flight, error) {
 		fmt.Println("Arguments:", args)
 	}
 
-	fullQuery := ReplacePlaceholdersWithArgs(query, args)
+	fullQuery, err := ReplacePlaceholdersWithArgs(query, args)
+
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println(fullQuery)
+	}
+
 	log.Printf("Full MAIN Query:\n%s\n", fullQuery)
 
 	if db == nil {

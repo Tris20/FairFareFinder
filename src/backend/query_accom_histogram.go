@@ -16,7 +16,13 @@ func ExecuteAccommodationPricesHistogramQuery(input *FilterInput) ([]float64, er
 		fmt.Println("Arguments:", allPricesArgs)
 	}
 
-	fullAllPricesQuery := ReplacePlaceholdersWithArgs(allPricesQuery, allPricesArgs)
+	fullAllPricesQuery, err := ReplacePlaceholdersWithArgs(allPricesQuery, allPricesArgs)
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println(fullAllPricesQuery)
+	}
+
 	log.Printf("Full ALL-PRICES Query:\n%s\n", fullAllPricesQuery)
 
 	if db == nil {
