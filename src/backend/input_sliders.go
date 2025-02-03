@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/Tris20/FairFareFinder/src/backend/config"
 )
 
 func UpdateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
@@ -24,15 +26,15 @@ func UpdateSliderPriceHandler(w http.ResponseWriter, r *http.Request) {
 	if len(maxFlightPriceLinearStrs) > 0 {
 		priceType = "flight"
 		maxLinearStr = maxFlightPriceLinearStrs[0]
-		minRange = 50
-		midRange = 1000
-		maxRange = 2500
+		minRange = config.MinFlightPrice
+		midRange = config.MidFlightPrice
+		maxRange = config.MaxFlightPrice
 	} else if len(maxAccomPriceLinearStrs) > 0 {
 		priceType = "accommodation"
 		maxLinearStr = maxAccomPriceLinearStrs[0]
-		minRange = 10
-		midRange = 200
-		maxRange = 550
+		minRange = config.MinAccomPrice
+		midRange = config.MidAccomPrice
+		maxRange = config.MaxAccomPrice
 	} else {
 		log.Printf("Missing slider parameter (flight or accommodation)")
 		http.Error(w, "Missing slider parameter", http.StatusBadRequest)

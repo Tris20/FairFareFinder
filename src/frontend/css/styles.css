@@ -189,6 +189,14 @@ select {
   margin: 4px;
 }
 
+.outer-flight-price-slider {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  height: fit-content;
+  align-items: center;
+}
+
 @media screen and (max-width: 800px) {
   .nav-button {
     width: 100%;
@@ -236,6 +244,10 @@ select {
     font-size: 1em;
     width: 20%;
   }
+  #flight-form output {
+    position: relative;
+    height: auto;
+  }
 
   #table-container {
     width: 95%;
@@ -266,6 +278,14 @@ select {
 
   ::-webkit-scrollbar {
     display: none;
+  }
+
+  .outer-flight-price-slider {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    height: fit-content;
+    align-items: center;
   }
 }
 

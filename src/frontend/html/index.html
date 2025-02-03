@@ -28,23 +28,61 @@
       rel="stylesheet"
     />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <!--Counting Visitor numbers etc-->
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="9ba49997-4950-4a09-b812-da2ffcfa2170"
+    ></script>
+    <!--HTMX-->
     <script src="https://unpkg.com/htmx.org"></script>
 
     <!-- JS -->
     <script src="/js/price-slider.js"></script>
+    <!--Create Accomodation Price Slider functionality-->
 
     <script>
-      let accomSlider; // define in a higher scope
+      const minFlightPrice = {{ .MinFlightPrice }};
+      const midFlightPrice = {{ .MidFlightPrice }};
+      const maxFlightPrice = {{ .MaxFlightPrice }};
+
+      const minAccomPrice = {{ .MinAccomPrice }};
+      const midAccomPrice = {{ .MidAccomPrice }};
+      const maxAccomPrice = {{ .MaxAccomPrice }};
+      const defaultAccomPrice = {{ .DefaultAccomPrice }};
+    </script>
+
+    <!--Create Accommodation Price Slider functionality-->
+    <script>
+      let accomSlider;
       document.addEventListener("DOMContentLoaded", () => {
         window.accomSlider = createPriceSlider({
           sliderId: "accommodationPrice-slider0",
           outputId: "accommodationOutput0",
           chartId: "chart",
-          dataArray: [], // start empty
-          minVal: 10,
-          midVal: 200,
-          maxVal: 550,
-          defaultValue: 53.57,
+          dataArray: [],
+          minVal: minAccomPrice,
+          midVal: midAccomPrice,
+          maxVal: maxAccomPrice,
+          defaultValue: defaultAccomPrice,
+          binCount: 30,
+        });
+      });
+    </script>
+
+    <!--Create Flight Price Slider functionality-->
+    <script>
+      let flightSlider;
+      document.addEventListener("DOMContentLoaded", () => {
+        window.flightSlider = createPriceSlider({
+          sliderId: "combinedPrice-slider0",
+          outputId: "priceOutput0",
+          chartId: "flight-chart",
+          dataArray: [],
+          minVal: minFlightPrice,
+          midVal: midFlightPrice,
+          maxVal: maxFlightPrice,
+          defaultValue: 57,
           binCount: 30,
         });
       });
@@ -106,27 +144,31 @@
                 <ul id="city-list" class="dropdown-list hidden"></ul>
               </div>
 
+              <!-- <div class="outer-flight-price-slider"> -->
+              <output id="priceOutput0" class="output-range">€399</output>
               <div class="flight-price-slider">
+                <div class="chart-container">
+                  <div class="chart" id="flight-chart"></div>
+                </div>
                 <!--label for="priceOutput0"></label-->
-                <output id="priceOutput0" class="output-range">€399</output>
+
                 <input
                   type="range"
                   id="combinedPrice-slider0"
                   name="maxFlightPriceLinear[]"
                   min="0"
                   max="100"
-                  step="1"
+                  step="0.01"
                   value="49"
                   class="price-slider"
-                  hx-get="/update-slider-price"
-                  hx-target="#priceOutput0"
-                  hx-trigger="input"
                   hx-push-url="false"
                   hx-preserve="false"
                   hx-include="#combinedPrice-slider0"
                   autocomplete="off"
+                  oninput="window.flightSlider.updateData(window.allFlightPrices);"
                 />
               </div>
+              <!-- </div> -->
             </div>
           </div>
           <!-- Button to add more origin cities -->
@@ -143,8 +185,8 @@
               >
 
               <div class="accom-pricebar">
-                <div id="chart-container">
-                  <div id="chart"></div>
+                <div class="chart-container">
+                  <div class="chart" id="chart"></div>
                 </div>
                 <input
                   type="range"
@@ -170,12 +212,19 @@
                   Sunniest and Warmest
                 </option>
                 <option value="cheapest_hotel">Cheapest Hotel Price</option>
+                <option value="cheapest_flight">Cheapest Flight</option>
+                <option value="cheapest_fnaf">Cheapest 5 Day Trip</option>
                 <option value="shortest_flight">Shortest Flight</option>
                 <option value="worst_weather">Coldest and Wettest</option>
                 <option value="most_expensive_hotel">
                   Most Expensive Hotel Price
                 </option>
-
+                <option value="most_expensive_flight">
+                  Most Expensive Flight
+                </option>
+                <option value="most_expensive_fnaf">
+                  Most Expensive 5 Day Trip
+                </option>
                 <option value="longest_flight">Longest Flight</option>
                 <!--<option value="low_price">Most Affordable</option>
             <option value="high_price">Most Expensive</option>-->
