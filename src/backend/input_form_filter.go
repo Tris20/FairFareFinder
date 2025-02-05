@@ -40,7 +40,7 @@ func ParseAndValidateFilterInputs(r *http.Request) (*FilterInput, error) {
 		maxFlightPrices = append(maxFlightPrices, mappedValue)
 	}
 
-	expr, err := parseLogicalExpression(cities, logicalOperators, maxFlightPrices)
+	expr, err := ParseLogicalExpression(cities, logicalOperators, maxFlightPrices)
 	if err != nil {
 		return nil, err
 	}

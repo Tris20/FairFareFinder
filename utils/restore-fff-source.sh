@@ -1,9 +1,8 @@
-
 #!/bin/bash
 
 # Set the base directory for the search
 BASE_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
-
+echo $BASE_DIR
 # Search for FFF folders
 FFF_FOLDERS=$(find "$BASE_DIR" -maxdepth 1 -type d -name "FFF-*")
 

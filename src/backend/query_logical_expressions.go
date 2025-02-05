@@ -9,6 +9,7 @@ import (
 type CityInput struct {
 	Name       string
 	PriceLimit float64
+	Country    string
 }
 
 // LogicalOperator represents a logical operator (AND, OR)
@@ -34,7 +35,7 @@ type LogicalExpression struct {
 	Right    Expression
 }
 
-func parseLogicalExpression(cities []string, logicalOperators []string, maxPrices []float64) (Expression, error) {
+func ParseLogicalExpression(cities []string, logicalOperators []string, maxPrices []float64) (Expression, error) {
 	// Validate input lengths
 	if len(cities) == 0 || len(cities) != len(maxPrices) || len(cities) != len(logicalOperators)+1 {
 		return nil, fmt.Errorf("mismatched input lengths")
