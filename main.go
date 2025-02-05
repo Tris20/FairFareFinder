@@ -129,13 +129,37 @@ func filterRequestHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("All accommodation prices (no user limit): %v", allAccomPrices)
 
 	//  Execute Second Query to Populate Flight Price Slider Histogram
-	allFlightPrices, err := backend.ExecuteFlightPricesHistogramQuery(input)
+
+	// Execute the query which returns an array of Flight structs.
+	flightsPriceHistogramData, err := backend.ExecuteFlightPricesHistogramQuery(input)
 	if err != nil {
 		backend.HandleHTTPError(w, "Error executing all prices query", http.StatusInternalServerError)
 		return
 	}
 
-	log.Printf("All Flight prices (no user limit): %v", allFlightPrices)
+	// Prepare an array to hold the flight prices (of type float64) for the specified origin city.
+	var allFlightPrices []float64
+
+	// Assume the origin city to filter is in input.Cities[0]
+	originCity := input.Cities[0]
+
+	// Loop through each Flight in the returned slice.
+	for _, flight := range flightsPriceHistogramData {
+		// Only include flights where UrlCity1 matches the specified origin city.
+		if flight.UrlCity1 == originCity {
+			// Check if PriceCity1 is valid before appending.
+			if flight.PriceCity1.Valid {
+				allFlightPrices = append(allFlightPrices, flight.PriceCity1.Float64)
+			} else {
+				// Optionally, decide what to do if the price is not valid.
+				// For example, you could append 0.0 or skip this flight entirely.
+				allFlightPrices = append(allFlightPrices, 0.0)
+			}
+		}
+	}
+
+	// Log the filtered flight prices.
+	log.Printf("Filtered Flight Prices for %s: %v", originCity, allFlightPrices)
 
 	//  Prepare Data for the Template
 	data := backend.BuildTemplateData(input.Cities, flights, allAccomPrices, allFlightPrices)
