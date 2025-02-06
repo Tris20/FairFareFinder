@@ -56,6 +56,7 @@ function setupCitySearch({
           );
         }
 
+ updateFlightSliders();
         // Trigger HTMX-compatible "change" event
         input.dispatchEvent(new Event("change", { bubbles: true }));
       });
@@ -248,7 +249,7 @@ document
         hx-preserve="false"
         hx-include="#combinedPrice-slider${rowCount}"
         autocomplete="off"
-        oninput="window['flightSlider${rowCount}'].updateData(window.allFlightPrices);"
+        oninput="window['flightSlider${rowCount}'].updateData(window.allFlightPrices[${rowCount}]);"
       />
     </div>
   `;
@@ -350,3 +351,6 @@ document.body.addEventListener("htmx:afterSwap", function (event) {
   // After HTMX swaps in the server response, re-check city rows
   toggleDurationVisibility();
 });
+
+
+

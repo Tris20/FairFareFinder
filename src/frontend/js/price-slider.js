@@ -119,7 +119,7 @@
       chartEl.innerHTML = "";
 
       if (!rVals.length) {
-        chartEl.textContent = "No data";
+        chartEl.textContent = "";
         return;
       }
 

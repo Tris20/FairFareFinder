@@ -206,14 +206,38 @@
 </script>
 
 <script>
-   window.allFlightPrices = {{ .AllFlightPrices | toJson }};
-   // if accomSlider is defined, update it:
-   if (window.flightSlider) {
-     window.flightSlider.updateData(window.allFlightPrices);
-   }
+     // Now window.allFlightPrices will be a JSON array of arrays.
+     // Using JSON.parse if needed (only if the output from toJson is a string).
+     window.allFlightPrices = JSON.parse({{ .AllFlightPrices | toJson }});
+     console.log("All flight prices:", window.allFlightPrices);
 
-  if (window['flightSlider1']) {
-     window['flightSlider1'].updateData(window.allFlightPrices);
-   }
+     // Wait until the document is ready or after HTMX swaps.
+    // document.addEventListener("DOMContentLoaded", updateFlightSliders);
+    // document.body.addEventListener("htmx:afterSwap", updateFlightSliders);
+   if (window.flightSlider) {
+      window.flightSlider.updateData(window.allFlightPrices[0]);
+    }
+
+  function updateFlightSliders() {
+    // Make sure window.allFlightPrices is defined and an array of arrays.
+    if (!window.allFlightPrices) {
+      console.warn("No flight prices data available yet.");
+      return;
+    }
+    console.log("Updating flight sliders with:", window.allFlightPrices);
+
+    // Update the default slider (city[0])
+    if (window.flightSlider) {
+      window.flightSlider.updateData(window.allFlightPrices[0]);
+    }
+    // Update additional sliders, assuming they are named flightSlider1, flightSlider2, etc.
+    for (let i = 1; i < window.allFlightPrices.length; i++) {
+      let sliderInstance = window['flightSlider' + i];
+      if (sliderInstance) {
+        sliderInstance.updateData(window.allFlightPrices[i]);
+      }
+    }
+  }
 </script>
+
 {{ end }}
