@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.fairfarefinder.app",
+      "sha256_cert_fingerprints": ["10:C0:94:A6:05:AF:0B:B8:BC:B6:45:51:DB:F8:6A:71:29:CA:01:A3:FB:70:84:13:39:D3:5E:73:B2:84:DC:7E"]
+    }
+  }
+]
