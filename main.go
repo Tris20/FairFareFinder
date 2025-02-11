@@ -137,33 +137,28 @@ func filterRequestHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Prepare an array to hold the flight prices (of type float64) for the specified origin city.
-	var allFlightPrices []float64
+	var allFlightPrices [][]float64
 
-	// Assume the origin city to filter is in input.Cities[0]
-	originCity := input.Cities[0]
+	for _, city := range input.Cities {
+		var flightPricesForCity []float64
 
-	// Loop through each Flight in the returned slice.
-	for _, flight := range flightsPriceHistogramData {
-		// Only include flights where UrlCity1 matches the specified origin city.
-		if flight.UrlCity1 == originCity {
-			// Check if PriceCity1 is valid before appending.
-			if flight.PriceCity1.Valid {
-				allFlightPrices = append(allFlightPrices, flight.PriceCity1.Float64)
-			} else {
-				// Optionally, decide what to do if the price is not valid.
-				// For example, you could append 0.0 or skip this flight entirely.
-				allFlightPrices = append(allFlightPrices, 0.0)
+		for _, flight := range flightsPriceHistogramData {
+			if flight.UrlCity1 == city {
+				if flight.PriceCity1.Valid {
+					flightPricesForCity = append(flightPricesForCity, flight.PriceCity1.Float64)
+				} else {
+					// Optionally append 0.0 or skip if invalid.
+					flightPricesForCity = append(flightPricesForCity, 0.0)
+				}
 			}
 		}
+		log.Printf("Filtered Flight Prices for %s: %v", city, flightPricesForCity)
+		allFlightPrices = append(allFlightPrices, flightPricesForCity)
 	}
-
-	// Log the filtered flight prices.
-	log.Printf("Filtered Flight Prices for %s: %v", originCity, allFlightPrices)
 
 	//  Prepare Data for the Template
 	data := backend.BuildTemplateData(input.Cities, flights, allAccomPrices, allFlightPrices)
-
+	fmt.Printf("AllFlightPrices: %+v\n", data.AllFlightPrices)
 	// Save Session and Render the Response
 	if err := session.Save(r, w); err != nil {
 		backend.HandleHTTPError(w, "Session save error", http.StatusInternalServerError)

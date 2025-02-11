@@ -1,0 +1,21 @@
+
+{
+  "name": "fair fare finder",
+  "short_name": "FFF",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff9800",
+  "icons": [
+    {
+      "src": "/images/favicon_organge_turq.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/favicon_organge_turq.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

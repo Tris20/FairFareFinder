@@ -7,7 +7,7 @@ import (
 	"math"
 	"strings"
 
-	//	"github.com/Tris20/FairFareFinder/src/backend/config"
+	"github.com/Tris20/FairFareFinder/src/backend/config"
 	"github.com/Tris20/FairFareFinder/src/backend/model"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -163,10 +163,10 @@ func ExecuteFlightPricesHistogramQuery(input *FilterInput) ([]model.Flight, erro
 		}
 		rows.Close()
 	}
-	// if !config.MutePrints {
-	// 	for _, f := range flights {
-	// 		fmt.Printf("Destination: %s | Flight Price: %.2f | Active Origin: %s\n", f.DestinationCityName, f.PriceCity1.Float64, f.UrlCity1)
-	// 	}
-	// }
+	if !config.MutePrints {
+		for _, f := range flights {
+			fmt.Printf("Destination: %s | Flight Price: %.2f | Active Origin: %s\n", f.DestinationCityName, f.PriceCity1.Float64, f.UrlCity1)
+		}
+	}
 	return flights, nil
 }

@@ -39,7 +39,7 @@ func buildFlightsData(cities []string, flights []model.Flight) model.FlightsData
 	}
 }
 
-func BuildTemplateData(cities []string, flights []model.Flight, allAccomPrices []float64, allFlightPrices []float64) model.FlightsData {
+func BuildTemplateData(cities []string, flights []model.Flight, allAccomPrices []float64, allFlightPrices [][]float64) model.FlightsData {
 	data := buildFlightsData(cities, flights)
 	data.AllAccommodationPrices = allAccomPrices
 	data.AllFlightPrices = allFlightPrices

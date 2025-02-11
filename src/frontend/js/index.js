@@ -56,6 +56,7 @@ function setupCitySearch({
           );
         }
 
+ updateFlightSliders();
         // Trigger HTMX-compatible "change" event
         input.dispatchEvent(new Event("change", { bubbles: true }));
       });
@@ -186,6 +187,7 @@ document
   });
 
 // 2) Add City Row
+
 document
   .getElementById("add-city-button")
   .addEventListener("click", function () {
@@ -204,78 +206,93 @@ document
     const cityRows = document.getElementById("city-rows");
     const div = document.createElement("div");
     div.className = "form-group city-row";
+
+    // Build the innerHTML without any inline <script> tag.
     div.innerHTML = `
-<div class="form-group city-row operators">
-    <button type="button" class="remove-city-button">-</button>
-    <select class="logical-operator" name="logical_operator[]">
-      <option value="AND">AND</option>
-      <option value="OR">OR</option>
-    </select>
+    <div class="form-group city-row operators">
+      <button type="button" class="remove-city-button">-</button>
+      <select class="logical-operator" name="logical_operator[]">
+        <option value="AND">AND</option>
+        <option value="OR">OR</option>
+      </select>
 
-    <div class="dropdown-container">
-      <input
-        id="city-search"
-        class="dropdown-input"
-        name="city[]"
-        placeholder="Search for a city"
-        autocomplete="off"
-      />
-      <button class="dropdown-btn" type="button">
-        <span class="caret">▼</span>
-      </button>
-      <ul class="dropdown-list hidden"></ul>
+      <div class="dropdown-container">
+        <!-- Use unique IDs if needed; for example, include rowCount in the id -->
+        <input
+          id="city-search-${rowCount}"
+          class="dropdown-input"
+          name="city[]"
+          placeholder="Search for a city"
+          autocomplete="off"
+        />
+        <button class="dropdown-btn" type="button">
+          <span class="caret">▼</span>
+        </button>
+        <ul class="dropdown-list hidden"></ul>
+      </div>
     </div>
-
-
-    </div>
-<div class="flight-price-slider">
     <output id="priceOutput${rowCount}" class="output-range">€399</output>
-    <input
-      type="range"
-      id="combinedPrice-slider${rowCount}"
-      name="maxFlightPriceLinear[]"
-      min="0"
-      max="100"
-      step="1"
-      value="49"
-      class="price-slider"
-      hx-get="/update-slider-price"
-      hx-target="#priceOutput${rowCount}"
-      hx-trigger="input"
-      hx-push-url="false"
-      hx-preserve="false"
-      hx-include="#combinedPrice-slider${rowCount}"
-      autocomplete="off"
-    />
-
+    <div class="flight-price-slider">
+      <div class="chart-container">
+        <div class="chart" id="flight-chart${rowCount}"></div>
+      </div>
+      <input
+        type="range"
+        id="combinedPrice-slider${rowCount}"
+        name="maxFlightPriceLinear[]"
+        min="0"
+        max="100"
+        step="0.01"
+        value="49"
+        class="price-slider"
+        hx-push-url="false"
+        hx-preserve="false"
+        hx-include="#combinedPrice-slider${rowCount}"
+        autocomplete="off"
+        oninput="window['flightSlider${rowCount}'].updateData(window.allFlightPrices[${rowCount}]);"
+      />
     </div>
-
   `;
+
+    // Append and process the new row with HTMX (if needed)
     cityRows.appendChild(div);
     htmx.process(div);
-    rowCount++;
 
-    // Initialize dropdown for the new input
+    // Now initialize the new flight slider programmatically:
+    window["flightSlider" + rowCount] = createPriceSlider({
+      sliderId: "combinedPrice-slider" + rowCount,
+      outputId: "priceOutput" + rowCount,
+      chartId: "flight-chart" + rowCount,
+      dataArray: [],
+      minVal: minFlightPrice,
+      midVal: midFlightPrice,
+      maxVal: maxFlightPrice,
+      defaultValue: 57,
+      binCount: 30,
+    });
+
+    // Initialize the dropdown search functionality for the new row
     const input = div.querySelector(".dropdown-input");
     const dropdown = div.querySelector(".dropdown-list");
     const button = div.querySelector(".dropdown-btn");
 
-    //Assign the value from the first row
+    // Set the input value to the first row's value
     input.value = firstRowCityValue;
-
     setupCitySearch({
       input,
       dropdown,
       button,
-      shouldSaveCookie: false, // <-- No cookie saving for extra rows
+      shouldSaveCookie: false,
     });
 
+    window["flightSlider" + rowCount].updateData(window.allFlightPrices);
+    // Increment rowCount only once per row addition
     rowCount++;
     additionalCityCount++;
     console.log("New additionalCityCount:", additionalCityCount);
     toggleDurationVisibility();
+    // Trigger the slider update with current data:
   });
-
 // 3) DOMContentLoaded - Search bar for Origin Cities & cookie handling
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -334,3 +351,6 @@ document.body.addEventListener("htmx:afterSwap", function (event) {
   // After HTMX swaps in the server response, re-check city rows
   toggleDurationVisibility();
 });
+
+
+

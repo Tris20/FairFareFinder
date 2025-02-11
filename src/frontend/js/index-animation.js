@@ -20,6 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (event.animationName === "moveUp") {
         // Manually trigger the form submission after the animation is complete
         htmx.trigger("#flight-form", "change");
+
+        // *** Trigger update of flight sliders once the table has moved up ***
+        updateFlightSliders();
       }
     });
 
@@ -36,6 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
           const footer = document.querySelector("#footer-privacy");
           footer.classList.add("fade-in");
         }
+        // Also update flight sliders after any HTMX swap on flight-table:
+        updateFlightSliders();
       });
 
     // Show the background image with a fade-in effect
