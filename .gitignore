@@ -118,6 +118,7 @@ package-lock.json
 *.iml
 *.aar
 *.idsig
+manifest-checksum.txt
 
 # Android Build Directories
 /app/build/
@@ -132,6 +133,8 @@ gradle.properties
 gradlew
 gradlew.bat
 local.properties
+settings.gradle
+build.gradle
 
 # Android Studio
 *.idea/
