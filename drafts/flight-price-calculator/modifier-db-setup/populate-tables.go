@@ -335,5 +335,84 @@ func populateTables(db *sql.DB) error {
 		}
 	}
 
+	// 8. Populate aircraft_capacity_lookup table.
+	aircraftLookupTable := `
+	CREATE TABLE IF NOT EXISTS aircraft_capacity_lookup (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		aircraft_model TEXT NOT NULL,
+		seating_capacity TEXT NOT NULL
+	);
+	`
+	_, err = tx.Exec(aircraftLookupTable)
+	if err != nil {
+		return err
+	}
+
+	aircraftLookupData := []struct {
+		Model    string
+		Capacity string
+	}{
+		{"ATR 42-300", "42"},
+		{"ATR 42/72 Freighter", "10"},
+		{"ATR 72", "70"},
+		{"Airbus A220-100", "100"},
+		{"Airbus A220-300", "130"},
+		{"Airbus A318", "107"},
+		{"Airbus A319", "124"},
+		{"Airbus A320", "150"},
+		{"Airbus A320 NEO", "150"},
+		{"Airbus A321", "185"},
+		{"Airbus A330", "250"},
+		{"Airbus A330-200", "247"},
+		{"Airbus A330-300", "277"},
+		{"Airbus A330-900", "287"},
+		{"Airbus A340-300", "295"},
+		{"Airbus A340-600", "380"},
+		{"Airbus A350-900", "325"},
+		{"Airbus A350-1000", "366"},
+		{"Airbus A380-800", "525"},
+		{"Boeing 737", "130"},
+		{"Boeing 737-600", "108"},
+		{"Boeing 737-700", "126"},
+		{"Boeing 737-800", "162"},
+		{"Boeing 737-900", "180"},
+		{"Boeing 747-400", "416"},
+		{"Boeing 747-8", "467"},
+		{"Boeing 747-8f (freighter)", "10"},
+		{"Boeing 757-200", "200"},
+		{"Boeing 757-300", "243"},
+		{"Boeing 767-300", "218"},
+		{"Boeing 767-400", "245"},
+		{"Boeing 777-200", "314"},
+		{"Boeing 777-200LR", "301"},
+		{"Boeing 777-300", "368"},
+		{"Boeing 777-300ER", "365"},
+		{"Boeing 787-8", "242"},
+		{"Boeing 787-9", "280"},
+		{"Bombardier CRJ1000", "100"},
+		{"Bombardier CRJ900", "90"},
+		{"Bombardier Dash 8 / DHC-8", "37"},
+		{"Bombardier Dash 8 Q400 / DHC-8-400", "68"},
+		{"De Havilland Canada DHC-3 Otter", "10"},
+		{"De Havilland Canada DHC-6 Twin Otter", "19"},
+		{"Embraer 170", "70"},
+		{"Embraer 175", "78"},
+		{"Embraer 190", "98"},
+		{"Embraer 195", "104"},
+		{"Embraer RJ145", "50"},
+		{"Fairchild-Swearingen SA226", "19"},
+		{"Saab 340", "34"},
+	}
+
+	for _, a := range aircraftLookupData {
+		_, err = tx.Exec(
+			`INSERT OR IGNORE INTO aircraft_capacity_lookup (aircraft_model, seating_capacity) VALUES (?, ?)`,
+			a.Model, a.Capacity,
+		)
+		if err != nil {
+			return err
+		}
+	}
+
 	return err
 }
