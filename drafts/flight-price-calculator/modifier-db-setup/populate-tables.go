@@ -2,7 +2,7 @@ package main
 
 import (
 	"database/sql"
-
+	"fmt"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -412,6 +412,60 @@ func populateTables(db *sql.DB) error {
 		if err != nil {
 			return err
 		}
+	}
+
+	// 9. Create and populate route_classification_lookup table.
+	// This table will be created in the current (flight_price_modifiers.db) database.
+	createRouteLookupTable := `
+	CREATE TABLE IF NOT EXISTS route_classification_lookup (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		departureAirport TEXT NOT NULL,
+		arrivalAirport TEXT NOT NULL,
+		route_classification TEXT
+	);
+	`
+	_, err = tx.Exec(createRouteLookupTable)
+	if err != nil {
+		return err
+	}
+
+	// Attach the flights.db database (which contains the schedule table)
+	attachStmt := `ATTACH DATABASE '../../../data/raw/flights/flights.db' AS flights_db;`
+	_, err = tx.Exec(attachStmt)
+	if err != nil {
+		return fmt.Errorf("failed to attach flights_db: %w", err)
+	}
+
+	// Query unique routes from the schedule table in flights_db.
+	rows, err := tx.Query(`
+		SELECT DISTINCT departureAirport, arrivalAirport
+		FROM flights_db.schedule
+		ORDER BY departureAirport, arrivalAirport;
+	`)
+	if err != nil {
+		return fmt.Errorf("failed to query unique routes: %w", err)
+	}
+	defer rows.Close()
+
+	// Default classification value; adjust as needed.
+	defaultClassification := "Mixed Business/Leisure"
+
+	for rows.Next() {
+		var dep, arr string
+		if err := rows.Scan(&dep, &arr); err != nil {
+			return err
+		}
+
+		_, err = tx.Exec(`
+			INSERT OR IGNORE INTO route_classification_lookup (departureAirport, arrivalAirport, route_classification)
+			VALUES (?, ?, ?)
+		`, dep, arr, defaultClassification)
+		if err != nil {
+			return err
+		}
+	}
+	if err := rows.Err(); err != nil {
+		return err
 	}
 
 	return err
