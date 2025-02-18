@@ -21,9 +21,11 @@ func SetupRoutes(store *sessions.CookieStore, db *sql.DB, tmpl *template.Templat
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./src/frontend/images"))))
 	http.Handle("/location-images/", http.StripPrefix("/location-images/", http.FileServer(http.Dir("./ignore/location-images"))))
 	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("./src/frontend/js/")))) // New JS route
+	//Android
 	http.HandleFunc("/manifest.json", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "./src/frontend/manifest.json")
+		http.ServeFile(w, r, "./manifest.json")
 	})
+
 	http.Handle("/.well-known/", http.StripPrefix("/.well-known/", http.FileServer(http.Dir("./src/frontend/.well-known"))))
 
 	// API routes

@@ -1,0 +1,44 @@
+package backend
+
+import (
+	"github.com/Tris20/FairFareFinder/src/backend/model"
+)
+
+func groupFlightsByDestination(flights []model.Flight) map[string][]model.Flight {
+	grouped := make(map[string][]model.Flight)
+
+	for _, f := range flights {
+		dest := f.DestinationCityName
+		grouped[dest] = append(grouped[dest], f)
+	}
+
+	return grouped
+}
+
+func BuildDestinationPricing(flights []model.Flight) []model.DestinationPricing {
+	grouped := groupFlightsByDestination(flights)
+	var result []model.DestinationPricing
+
+	for destination, flightsForDest := range grouped {
+		var offers []model.FlightOffer
+		for _, f := range flightsForDest {
+			// Each f has PriceCity1.Float64, UrlCity1, etc.
+			// Build your slice of FlightOffers
+			offers = append(offers, model.FlightOffer{
+				OriginCity: f.UrlCity1,
+				Price:      f.PriceCity1.Float64,
+				Url:        f.UrlCity1, // or a more specific link if you have one
+			})
+		}
+
+		dp := model.DestinationPricing{
+			DestinationCityName: destination,
+			FlightOffers:        offers,
+			// If needed, also fill in things like .RandomImageURL or .WeatherForecast
+			// if you store them in DestinationPricing.
+		}
+		result = append(result, dp)
+	}
+
+	return result
+}
