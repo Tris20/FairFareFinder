@@ -55,7 +55,15 @@ type ArrivalData struct {
 				Local string `json:"local"`
 			} `json:"scheduledTime"`
 		} `json:"arrival"`
-		Number string `json:"number"`
+		Number   string `json:"number"`
+		Aircraft struct {
+			Model string `json:"model"`
+		} `json:"aircraft"`
+		Airline struct {
+			Name string `json:"name"`
+			IATA string `json:"iata"`
+			ICAO string `json:"icao"`
+		} `json:"airline"`
 	} `json:"arrivals"`
 }
 
@@ -78,7 +86,15 @@ type DepartureData struct {
 				Local string `json:"local"`
 			} `json:"scheduledTime"`
 		} `json:"arrival"`
-		Number string `json:"number"`
+		Number   string `json:"number"`
+		Aircraft struct {
+			Model string `json:"model"`
+		} `json:"aircraft"`
+		Airline struct {
+			Name string `json:"name"`
+			IATA string `json:"iata"`
+			ICAO string `json:"icao"`
+		} `json:"airline"`
 	} `json:"departures"`
 }
 
@@ -105,12 +121,12 @@ func fetchFlightData(url, apiKey string) ([]byte, error) {
 	req.Header.Add("X-RapidAPI-Key", apiKey)
 	req.Header.Add("X-RapidAPI-Host", "aerodatabox.p.rapidapi.com")
 
-/*
-	req.Header.Add("x-magicapi-key", apiKey)
-	req.Header.Add("accept", "application/json")
-	req.Header.Add("Content-Type", "application/json")
-*/
-//	req.Header.Add("X-RapidAPI-Host", "aerodatabox.p.rapidapi.com")
+	/*
+		req.Header.Add("x-magicapi-key", apiKey)
+		req.Header.Add("accept", "application/json")
+		req.Header.Add("Content-Type", "application/json")
+	*/
+	//	req.Header.Add("X-RapidAPI-Host", "aerodatabox.p.rapidapi.com")
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -148,7 +164,6 @@ func main() {
 		log.Fatalf("Error reading API key: %v", err)
 	}
 
-
 	db, err := sql.Open("sqlite3", "../../../../../data/raw/flights/flights.db")
 
 	if err != nil {
@@ -163,6 +178,8 @@ func main() {
         arrivalAirport TEXT,
         departureTime TEXT,
         arrivalTime TEXT,
+        aircraft_model TEXT,
+        airline_name TEXT,
         direction TEXT NOT NULL
     );`
 
@@ -183,11 +200,11 @@ func main() {
 
 	// Generate dates using previously discussed CalculateWeekendRange function
 	departureStartDate, departureEndDate, arrivalStartDate, arrivalEndDate := timeutils.CalculateWeekendRange(1)
-    // Print the generated dates
-    fmt.Println("Departure Start Date:", departureStartDate)
-    fmt.Println("Departure End Date:", departureEndDate)
-    fmt.Println("Arrival Start Date:", arrivalStartDate)
-    fmt.Println("Arrival End Date:", arrivalEndDate)
+	// Print the generated dates
+	fmt.Println("Departure Start Date:", departureStartDate)
+	fmt.Println("Departure End Date:", departureEndDate)
+	fmt.Println("Arrival Start Date:", arrivalStartDate)
+	fmt.Println("Arrival End Date:", arrivalEndDate)
 
 	for _, airport := range configs.Airports {
 		// Handle departure data
@@ -207,111 +224,153 @@ func main() {
 	fmt.Println("Flight data successfully fetched and stored.")
 }
 
-
-
 func processFlightData(db *sql.DB, airport, direction, startDate, endDate, apiKey string) error {
-    // Parse the start and end dates into time.Time objects
-    startDateTime, err := time.Parse("2006-01-02", startDate)
-    if err != nil {
-        log.Printf("Error parsing start date: %v", err)
-        return err
-    }
-    endDateTime, err := time.Parse("2006-01-02", endDate)
-    if err != nil {
-        log.Printf("Error parsing end date: %v", err)
-        return err
-    }
+	// Parse the start and end dates into time.Time objects
+	startDateTime, err := time.Parse("2006-01-02", startDate)
+	if err != nil {
+		log.Printf("Error parsing start date: %v", err)
+		return err
+	}
+	endDateTime, err := time.Parse("2006-01-02", endDate)
+	if err != nil {
+		log.Printf("Error parsing end date: %v", err)
+		return err
+	}
 
-    // Define two 12-hour intervals for each day: AM and PM
-    intervals := []struct {
-        start string
-        end   string
-    }{
-        {"T00:00", "T11:59"},
-        {"T12:00", "T23:59"},
-    }
+	// Define two 12-hour intervals for each day: AM and PM
+	intervals := []struct {
+		start string
+		end   string
+	}{
+		{"T00:00", "T11:59"},
+		{"T12:00", "T23:59"},
+	}
 
+	// Set up a ticker for rate limiting: 30 calls/minute, one tick every 2 seconds
+	ticker := time.NewTicker(2 * time.Second)
+	defer ticker.Stop()
 
-   // Set up a ticker for rate limiting: 30 calls/minute, one tick every 2 seconds
-    ticker := time.NewTicker(2 * time.Second)
-    defer ticker.Stop()
+	for d := startDateTime; !d.After(endDateTime); d = d.AddDate(0, 0, 1) {
+		for _, interval := range intervals {
+			<-ticker.C
 
-    for d := startDateTime; !d.After(endDateTime); d = d.AddDate(0, 0, 1) {
-        for _, interval := range intervals {
+			startTime := fmt.Sprintf("%s%s", d.Format("2006-01-02"), interval.start)
+			endTime := fmt.Sprintf("%s%s", d.Format("2006-01-02"), interval.end)
 
-            // Wait on each ticker's tick before proceeding with the API call
-            <-ticker.C
-            // Format start and end times for each interval
-            startTime := fmt.Sprintf("%s%s", d.Format("2006-01-02"), interval.start)
-            endTime := fmt.Sprintf("%s%s", d.Format("2006-01-02"), interval.end)
+			// Construct the API URL
+			url := fmt.Sprintf(
+				"https://aerodatabox.p.rapidapi.com/flights/airports/iata/%s/%s/%s?withLeg=true&direction=%s&withCancelled=true&withCodeshared=true&withLocation=false",
+				airport, startTime, endTime, direction,
+			)
 
+			fmt.Println("Fetching URL:", url)
 
+			// Fetch data
+			data, err := fetchFlightData(url, apiKey)
+			if err != nil {
+				log.Printf("Error fetching flight data for %s: %v", airport, err)
+				return err
+			}
 
-            // Construct the API URL
-            url := fmt.Sprintf("https://aerodatabox.p.rapidapi.com/flights/airports/iata/%s/%s/%s?withLeg=true&direction=%s&withCancelled=true&withCodeshared=true&withLocation=false", 
-                airport, startTime, endTime, direction)
+			if direction == "Arrival" {
+				var arrivals ArrivalData
+				if err := json.Unmarshal(data, &arrivals); err != nil {
+					log.Printf("Error unmarshaling arrivals data: %v", err)
+					return err
+				}
 
-/*
- url := fmt.Sprintf("https://api.magicapi.dev/api/v1/aedbx/aerodatabox/flights/airports/iata/%s/%s/%s?withLeg=true&direction=%s&withCancelled=true&withCodeshared=true&withLocation=false", 
-                airport, startTime, endTime, direction)
+				// Insert each arrival record
+				for _, arrival := range arrivals.Arrivals {
+					var exists bool
+					err := db.QueryRow(
+						`SELECT EXISTS(
+                            SELECT 1 FROM schedule 
+                            WHERE flightNumber = ? 
+                            AND departureTime = ? 
+                            AND arrivalTime = ?
+                        )`,
+						arrival.Number,
+						arrival.Departure.ScheduledTime.Local,
+						arrival.Arrival.ScheduledTime.Local,
+					).Scan(&exists)
 
-*/
-            fmt.Println("Fetching URL:", url) // Print the API request URL
+					if err != nil {
+						log.Printf("Error checking for existing record: %v", err)
+						// Decide if we break or continue. We'll just continue here.
+						continue
+					}
 
-          // Fetch the flight data
-        data, err := fetchFlightData(url, apiKey)
-        if err != nil {
-            log.Printf("Error fetching flight data for %s: %v", airport, err)
-            return err
-        }
-        if direction == "Arrival" {
-            var arrivals ArrivalData
-            if err := json.Unmarshal(data, &arrivals); err != nil {
-                log.Printf("Error unmarshaling arrivals data: %v", err)
-                return err
-            }
+					if !exists {
+						_, err := db.Exec(
+							`INSERT INTO schedule
+                                (flightNumber, departureAirport, arrivalAirport, 
+                                 departureTime, arrivalTime, aircraft_model, airline_name, direction)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+							arrival.Number,
+							arrival.Departure.Airport.IATA,
+							airport,
+							arrival.Departure.ScheduledTime.Local,
+							arrival.Arrival.ScheduledTime.Local,
+							arrival.Aircraft.Model,
+							arrival.Airline.Name,
+							direction,
+						)
+						if err != nil {
+							log.Printf("Error inserting arrival into database: %v", err)
+						}
+					}
+				}
 
-            for _, arrival := range arrivals.Arrivals {
-                // Check if the entry already exists
-                var exists bool
-                err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM schedule WHERE flightNumber = ? AND departureTime = ? AND arrivalTime = ?)",
-                    arrival.Number, arrival.Departure.ScheduledTime.Local, arrival.Arrival.ScheduledTime.Local).Scan(&exists)
-                if err != nil {
-                    log.Printf("Error checking for existing record: %v", err)
-                }
-                if !exists {
-                    _, err := db.Exec("INSERT INTO schedule(flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
-                        arrival.Number, arrival.Departure.Airport.IATA, airport, arrival.Departure.ScheduledTime.Local, arrival.Arrival.ScheduledTime.Local, direction)
-                    if err != nil {
-                        log.Printf("Error inserting arrival into database: %v", err)
-                    }
-                }
-            }
-        } else { // Assume direction == "Departure"
-            var departures DepartureData
-            if err := json.Unmarshal(data, &departures); err != nil {
-                log.Printf("Error unmarshaling departures data: %v", err)
-                return err
-            }
+			} else {
+				// direction == "Departure"
+				var departures DepartureData
+				if err := json.Unmarshal(data, &departures); err != nil {
+					log.Printf("Error unmarshaling departures data: %v", err)
+					return err
+				}
 
-            for _, departure := range departures.Departures {
-                // Check if the entry already exists
-                var exists bool
-                err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM schedule WHERE flightNumber = ? AND departureTime = ? AND arrivalTime = ?)",
-                    departure.Number, departure.Departure.ScheduledTime.Local, departure.Arrival.ScheduledTime.Local).Scan(&exists)
-                if err != nil {
-                    log.Printf("Error checking for existing record: %v", err)
-                }
-                if !exists {
-                    _, err := db.Exec("INSERT INTO schedule (flightNumber, departureAirport, arrivalAirport, departureTime, arrivalTime, direction) VALUES (?, ?, ?, ?, ?, ?)",
-                        departure.Number, airport, departure.Arrival.Airport.IATA, departure.Departure.ScheduledTime.Local, departure.Arrival.ScheduledTime.Local, direction)
-                    if err != nil {
-                        log.Printf("Error inserting departure into database: %v", err)
-                    }
-                }
-            }
-        }
-    }
-  }
-    return nil
+				// Insert each departure record
+				for _, departure := range departures.Departures {
+					var exists bool
+					err := db.QueryRow(
+						`SELECT EXISTS(
+                            SELECT 1 FROM schedule 
+                            WHERE flightNumber = ? 
+                            AND departureTime = ? 
+                            AND arrivalTime = ?
+                        )`,
+						departure.Number,
+						departure.Departure.ScheduledTime.Local,
+						departure.Arrival.ScheduledTime.Local,
+					).Scan(&exists)
+
+					if err != nil {
+						log.Printf("Error checking for existing record: %v", err)
+						continue
+					}
+
+					if !exists {
+						_, err := db.Exec(
+							`INSERT INTO schedule
+                                (flightNumber, departureAirport, arrivalAirport, 
+                                 departureTime, arrivalTime, aircraft_model, airline_name, direction)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+							departure.Number,
+							airport,
+							departure.Arrival.Airport.IATA,
+							departure.Departure.ScheduledTime.Local,
+							departure.Arrival.ScheduledTime.Local,
+							departure.Aircraft.Model,
+							departure.Airline.Name,
+							direction,
+						)
+						if err != nil {
+							log.Printf("Error inserting departure into database: %v", err)
+						}
+					}
+				}
+			}
+		}
+	}
+	return nil
 }
