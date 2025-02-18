@@ -24,7 +24,8 @@ func SetupRoutes(store *sessions.CookieStore, db *sql.DB, tmpl *template.Templat
 	http.HandleFunc("/manifest.json", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./src/frontend/manifest.json")
 	})
-	
+	http.Handle("/.well-known/", http.StripPrefix("/.well-known/", http.FileServer(http.Dir("./src/frontend/.well-known"))))
+
 	// API routes
 	http.HandleFunc("/city-country-pairs", CityCountryHandler)
 
