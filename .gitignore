@@ -99,3 +99,52 @@ package-lock.json
 *.sql
 
 
+# Ignore all Android-generated files
+/android/
+**/android/
+*.keystore
+*.jks
+*.aab
+*.apk
+*.dex
+*.class
+*.so
+*.o
+*.jar
+*.war
+*.ear
+*.iml
+*.aar
+
+# Android Build Directories
+/app/build/
+*/build/
+*/outputs/
+*/intermediates/
+*/generated/
+
+# Gradle and Build System
+.gradle/
+gradle.properties
+gradlew
+gradlew.bat
+local.properties
+
+# Android Studio
+*.idea/
+*.vscode/
+*.iml
+*.kts
+
+# Temporary Files
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# Bubblewrap and TWA-related
+*.bubblewrap/
+*.twa/
+# assetlinks.json
+# .well-known/
