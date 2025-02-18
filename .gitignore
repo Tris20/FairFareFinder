@@ -129,6 +129,7 @@ manifest-checksum.txt
 
 # Gradle and Build System
 .gradle/
+/gradle/
 gradle.properties
 gradlew
 gradlew.bat
