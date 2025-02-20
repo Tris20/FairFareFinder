@@ -2,8 +2,10 @@ package main
 
 import (
 	"database/sql"
+	"encoding/csv"
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
+	"os"
 )
 
 // populateTables inserts the provided data into each table.
@@ -28,70 +30,117 @@ func populateTables(db *sql.DB) error {
 		Airline    string
 		Multiplier float64
 	}{
-		{"Ryanair", 0.6},
-		{"Wizz Air", 0.7},
-		{"EasyJet", 0.8},
-		{"Allegiant Air", 0.8},
-		{"Frontier Airlines", 0.8},
-		{"Spirit Airlines", 0.8},
-		{"Southwest Airlines", 0.9},
-		{"JetBlue", 1.0},
-		{"Alaska Airlines", 1.0},
-		{"AirAsia", 1.0},
-		{"IndiGo", 1.0},
-		{"Vueling", 1.0},
-		{"Norwegian", 1.0},
-		{"Scoot", 1.0},
-		{"Delta Air Lines", 1.2},
-		{"United Airlines", 1.2},
-		{"American Airlines", 1.2},
+		{"AJet", 1.0},
+		{"ANA", 1.6}, // from "ANA (All Nippon Airways)" in the old table
+		{"AZAL Azerbaijan", 1.0},
+		{"Aegean", 1.0},
 		{"Aer Lingus", 1.2},
-		{"Turkish Airlines", 1.3},
-		{"Lufthansa", 1.3},
-		{"British Airways", 1.4},
-		{"Air France", 1.4},
-		{"KLM Royal Dutch Airlines", 1.4},
-		{"TAP Air Portugal", 1.4},
-		{"Iberia", 1.4},
-		{"Virgin Atlantic", 1.4},
+		{"Air Astana", 1.0},
+		{"Air Cairo", 1.0},
 		{"Air Canada", 1.4},
-		{"Emirates", 1.5},
-		{"Qatar Airways", 1.5},
-		{"Thai Airways", 1.5},
-		{"Vietnam Airlines", 1.5},
-		{"Malaysia Airlines", 1.5},
-		{"Japan Airlines (JAL)", 1.6},
-		{"ANA (All Nippon Airways)", 1.6},
-		{"Qantas", 1.7},
-		{"Cathay Pacific", 1.7},
-		{"Finnair", 1.7},
-		{"Swiss International Air Lines", 1.8},
-		{"Austrian Airlines", 1.8},
-		{"Etihad Airways", 1.8},
-		{"Korean Air", 1.9},
-		{"EVA Air", 1.9},
-		{"SAS (Scandinavian Airlines)", 1.9},
-		{"Singapore Airlines", 2.0},
-		{"Hawaiian Airlines", 2.0},
-		{"China Airlines", 2.0},
-		{"LATAM Airlines", 2.0},
-		{"Avianca", 2.0},
-		{"South African Airways", 2.0},
-		{"Philippine Airlines", 2.0},
-		{"Asiana Airlines", 2.1},
-		{"Garuda Indonesia", 2.1},
-		{"Air New Zealand", 2.1},
-		{"Oman Air", 2.1},
-		{"Royal Air Maroc", 2.2},
-		{"Saudi Arabian Airlines (Saudia)", 2.2},
-		{"SriLankan Airlines", 2.2},
+		{"Air China", 1.0},
+		{"Air Dolomiti", 3.0},
+		{"Air Explore", 1.0},
+		{"Air France", 1.4},
 		{"Air India", 2.3},
-		{"Hainan Airlines", 2.3},
-		{"China Southern Airlines", 2.3},
-		{"China Eastern Airlines", 2.3},
+		{"Air Niugini", 1.0},
+		{"Air Serbia", 1.0},
+		{"Air Transat", 1.0},
+		{"American", 1.2}, // corresponds to American Airlines
+		{"Asiana", 2.1},   // corresponds to Asiana Airlines
+		{"Aurigny Air Services", 1.0},
+		{"Austrian", 1.8}, // from Austrian Airlines
+		{"Beijing Capital", 1.0},
+		{"British", 1.0},
+		{"British Airways", 1.4},
+		{"Brussels", 1.0},
+		{"Caspian Airlines", 1.0},
+		{"Cathay Pacific", 1.7},
+		{"China", 1.0},
+		{"China Eastern", 2.3},  // from China Eastern Airlines
+		{"China Southern", 2.3}, // from China Southern Airlines
+		{"Condor", 1.0},
+		{"Croatia", 1.0},
+		{"Danish Air", 1.0},
+		{"Delta Air Lines", 1.2},
+		{"EVA Air", 1.9},
+		{"Edelweiss Air", 1.0},
+		{"EgyptAir", 1.0},
+		{"El Al", 1.0},
+		{"Emirates", 1.5},
+		{"Ethiopian", 1.0},
+		{"Etihad", 1.8}, // using same multiplier as Etihad Airways
+		{"Etihad Airways", 1.8},
+		{"Eurowings", 1.0},
+		{"Fiji Airways", 1.0},
+		{"Finnair", 1.7},
+		{"FlexFlight", 1.0},
+		{"Flight Alaska", 1.0},
+		{"Fly Corporate", 1.0},
+		{"Georgian", 1.0},
+		{"Georgian Airways", 1.0},
 		{"Gulf Air", 2.3},
-		{"Azul Brazilian Airlines", 2.5},
-		{"Singapore Airlines Suites", 3.0},
+		{"Hainan", 2.3},
+		{"Iberia", 1.4},
+		{"Icelandair", 1.0},
+		{"Interjet", 1.0},
+		{"Japan Airlines", 1.6}, // from Japan Airlines (JAL)
+		{"Jet2", 1.0},
+		{"Jetstar", 1.0},
+		{"KLM", 1.4}, // from KLM Royal Dutch Airlines
+		{"KM Malta", 1.0},
+		{"Korean Air", 1.9},
+		{"Kuwait Airways", 1.0},
+		{"LATAM", 2.0},
+		{"LOT - Polish", 1.0},
+		{"Loganair", 3.6},
+		{"Lufthansa", 1.3},
+		{"Luxair", 1.0},
+		{"Malaysia", 1.5}, // from Malaysia Airlines
+		{"Miat - Mongolian", 1.0},
+		{"Middle East", 1.0},
+		{"Norse Atlantic Airways", 1.0},
+		{"Norwegian Air Shuttle", 1.0},
+		{"Norwegian Air Sweden", 1.0},
+		{"Nouvelair Tunisie", 1.0},
+		{"Oman Air", 2.1},
+		{"Pegasus", 1.0},
+		{"Qantas", 1.7},
+		{"Qatar Airways", 1.5},
+		{"Rex Regional Express", 1.0},
+		{"Royal Air Maroc", 2.2},
+		{"Royal Jordanian", 1.0},
+		{"Ryanair", 0.6},
+		{"Ryanair UK", 0.6},    // assuming same as Ryanair
+		{"SAS", 1.9},           // from SAS (Scandinavian Airlines)
+		{"SWISS", 1.8},         // from Swiss International Air Lines
+		{"Saudi Arabian", 2.2}, // from Saudi Arabian Airlines (Saudia)
+		{"Singapore", 2.0},
+		{"Somon Air", 1.0},
+		{"SriLankan", 2.2},
+		{"Sun Express", 1.0},
+		{"SundAir", 1.0},
+		{"TAP Air Portugal", 1.4},
+		{"TUIfly", 1.0},
+		{"Thai Airways International", 1.5}, // from Thai Airways
+		{"Tianjin", 1.0},
+		{"Tunisair", 1.0},
+		{"Turkish", 1.3}, // from Turkish Airlines
+		{"UR", 1.0},
+		{"United", 1.2}, // from United Airlines
+		{"Uzbekistan Airways", 1.0},
+		{"Vietnam", 1.5}, // from Vietnam Airlines
+		{"Virgin Australia", 1.0},
+		{"Volotea", 1.0},
+		{"Vueling", 1.0},
+		{"Wideroe", 1.0},
+		{"Wizz Air", 0.7},
+		{"Wizz Air Malta", 0.7},
+		{"Xiamen", 1.0},
+		{"ZanAir", 1.0},
+		{"airBaltic", 1.0},
+		{"easyJet", 0.8},
+		{"flynas", 1.0},
 	}
 
 	for _, a := range airlineData {
@@ -278,19 +327,33 @@ func populateTables(db *sql.DB) error {
 		}
 	}
 
-	// 6. Populate aircraft_capacity_modifiers table.
+	// 6. Populate aircraft_capacity_modifiers table with higher granularity and stronger weights.
 	aircraftCapacityData := []struct {
 		MinCapacity int
 		MaxCapacity sql.NullInt64
 		Multiplier  float64
 		Description string
 	}{
-		{0, sql.NullInt64{Int64: 49, Valid: true}, 1.3, "Small turboprops (e.g., DHC-6 Twin Otter)"},
-		{50, sql.NullInt64{Int64: 100, Valid: true}, 1.1, "Regional jets (e.g., CRJ-900, Embraer E175)"},
-		{100, sql.NullInt64{Int64: 200, Valid: true}, 1.0, "Narrow-body jets (e.g., A319, B737)"},
-		{200, sql.NullInt64{Int64: 300, Valid: true}, 0.9, "Larger narrow-bodies (e.g., B737-800/Max, A321)"},
-		// For "300+" seats, we use NULL for the max_capacity.
-		{300, sql.NullInt64{Valid: false}, 0.8, "Wide-bodies (e.g., B777, A350)"},
+		// Very small aircraft – typically turboprops and small commuter aircraft.
+		{0, sql.NullInt64{Int64: 20, Valid: true}, 1.5, "Very small turboprops & commuter aircraft (e.g., DHC-6 Twin Otter, Cessna 208)"},
+		// Small turboprops.
+		{21, sql.NullInt64{Int64: 49, Valid: true}, 1.4, "Small turboprops (e.g., DHC-8 Dash 8)"},
+		// Small regional jets.
+		{50, sql.NullInt64{Int64: 75, Valid: true}, 1.2, "Small regional jets (e.g., Embraer E135, CRJ-200)"},
+		// Standard regional jets.
+		{76, sql.NullInt64{Int64: 100, Valid: true}, 1.0, "Regional jets (e.g., Embraer E175, CRJ-900)"},
+		// Smaller narrow-body jets.
+		{101, sql.NullInt64{Int64: 150, Valid: true}, 0.9, "Smaller narrow-body jets (e.g., A319, B737-700)"},
+		// Standard narrow-body jets.
+		{151, sql.NullInt64{Int64: 200, Valid: true}, 0.8, "Standard narrow-body jets (e.g., A320, B737-800)"},
+		// Larger narrow-body jets.
+		{201, sql.NullInt64{Int64: 250, Valid: true}, 0.7, "Larger narrow-body jets (e.g., A321, B737-900)"},
+		// High-capacity narrow-bodies.
+		{251, sql.NullInt64{Int64: 300, Valid: true}, 0.6, "High-capacity narrow-body jets"},
+		// Small wide-body jets.
+		{301, sql.NullInt64{Int64: 350, Valid: true}, 0.55, "Small wide-body jets (e.g., B767, A330)"},
+		// Large wide-body jets.
+		{351, sql.NullInt64{Valid: false}, 0.5, "Large wide-body jets (e.g., B777, A350)"},
 	}
 
 	for _, a := range aircraftCapacityData {
@@ -466,6 +529,40 @@ func populateTables(db *sql.DB) error {
 	}
 	if err := rows.Err(); err != nil {
 		return err
+	}
+
+	// Open the CSV file containing updated route classifications.
+	csvFile, err := os.Open("route_classification_lookup.csv")
+	if err != nil {
+		return fmt.Errorf("failed to open CSV file: %w", err)
+	}
+	defer csvFile.Close()
+
+	csvReader := csv.NewReader(csvFile)
+	records, err := csvReader.ReadAll()
+	if err != nil {
+		return fmt.Errorf("failed to read CSV file: %w", err)
+	}
+
+	// Assume the first row is the header; skip it.
+	for i, record := range records {
+		if i == 0 {
+			continue
+		}
+		// CSV columns: id, departureAirport, arrivalAirport, route_classification.
+		dep := record[1]
+		arr := record[2]
+		classification := record[3]
+
+		// Update the classification for the matching route.
+		_, err = tx.Exec(`
+		UPDATE route_classification_lookup
+		SET route_classification = ?
+		WHERE departureAirport = ? AND arrivalAirport = ?
+	`, classification, dep, arr)
+		if err != nil {
+			return fmt.Errorf("failed to update route classification for %s-%s: %w", dep, arr, err)
+		}
 	}
 
 	return err

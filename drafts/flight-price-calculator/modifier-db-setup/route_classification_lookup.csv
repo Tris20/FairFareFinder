@@ -1,0 +1,1515 @@
+id,departureAirport,arrivalAirport,route_classification
+1,,BER,Mixed Business/Leisure
+2,,EDI,Mixed Business/Leisure
+3,,FRA,Mixed Business/Leisure
+4,,GLA,Mixed Business/Leisure
+5,,LEJ,Mixed Business/Leisure
+6,,MUC,Mixed Business/Leisure
+7,,SYD,Mixed Business/Leisure
+8,ABV,FRA,Pure Business
+9,ABX,SYD,Essential/Remote
+10,ACE,BER,Pure Leisure
+11,ACE,BRE,Pure Leisure
+12,ACE,EDI,Pure Leisure
+13,ACE,FRA,Pure Leisure
+14,ACE,GLA,Pure Leisure
+15,ACE,LEJ,Pure Leisure
+16,ACE,MUC,Pure Leisure
+17,ADB,BER,Mixed Business/Leisure
+18,ADB,FRA,Mixed Business/Leisure
+19,ADB,MUC,Mixed Business/Leisure
+20,ADD,FRA,Mixed Business/Leisure
+21,ADL,SYD,Mixed Business/Leisure
+22,AGA,BER,Pure Leisure
+23,AGA,EDI,Pure Leisure
+24,AGA,FRA,Pure Leisure
+25,AGA,GLA,Pure Leisure
+26,AGA,MUC,Pure Leisure
+27,AGP,BER,Pure Leisure
+28,AGP,BRE,Pure Leisure
+29,AGP,EDI,Pure Leisure
+30,AGP,FRA,Pure Leisure
+31,AGP,GLA,Pure Leisure
+32,AGP,MUC,Pure Leisure
+33,AKL,SYD,Hub-to-Hub
+34,ALA,FRA,Mixed Business/Leisure
+35,ALC,BER,Pure Leisure
+36,ALC,BRE,Pure Leisure
+37,ALC,EDI,Pure Leisure
+38,ALC,FRA,Pure Leisure
+39,ALC,GLA,Pure Leisure
+40,ALC,MUC,Pure Leisure
+41,ALG,FRA,Mixed Business/Leisure
+42,AMM,FRA,Mixed Business/Leisure
+43,AMS,BER,Hub-to-Hub
+44,AMS,BRE,Hub-to-Hub
+45,AMS,EDI,Hub-to-Hub
+46,AMS,FRA,Hub-to-Hub
+47,AMS,GLA,Hub-to-Hub
+48,AMS,MUC,Hub-to-Hub
+49,AOI,MUC,Pure Leisure
+50,ARM,SYD,Essential/Remote
+51,ARN,BER,Hub-to-Hub
+52,ARN,EDI,Hub-to-Hub
+53,ARN,FRA,Hub-to-Hub
+54,ARN,MUC,Hub-to-Hub
+55,ASP,SYD,Essential/Remote
+56,ATH,BER,Pure Leisure
+57,ATH,EDI,Pure Leisure
+58,ATH,FRA,Pure Leisure
+59,ATH,MUC,Pure Leisure
+60,ATL,FRA,Hub-to-Hub
+61,ATL,MUC,Hub-to-Hub
+62,AUH,FRA,Hub-to-Hub
+63,AUH,MUC,Hub-to-Hub
+64,AUH,SYD,Hub-to-Hub
+65,AUS,FRA,Mixed Business/Leisure
+66,AVV,SYD,Low-Cost Tourist
+67,AYQ,SYD,Essential/Remote
+68,AYT,BER,Pure Leisure
+69,AYT,BRE,Pure Leisure
+70,AYT,EDI,Pure Leisure
+71,AYT,FRA,Pure Leisure
+72,AYT,GLA,Pure Leisure
+73,AYT,LEJ,Pure Leisure
+74,AYT,MUC,Pure Leisure
+75,BAH,FRA,Mixed Business/Leisure
+76,BAH,MUC,Mixed Business/Leisure
+77,BCN,BER,Mixed Business/Leisure
+78,BCN,EDI,Mixed Business/Leisure
+79,BCN,FRA,Mixed Business/Leisure
+80,BCN,GLA,Mixed Business/Leisure
+81,BCN,MUC,Mixed Business/Leisure
+82,BEB,GLA,Essential/Remote
+83,BEG,BER,Mixed Business/Leisure
+84,BEG,FRA,Mixed Business/Leisure
+85,BEG,MUC,Mixed Business/Leisure
+86,BER,,Pure Leisure
+87,BER,ACE,Mixed Business/Leisure
+88,BER,ADB,Pure Leisure
+89,BER,AGP,Pure Leisure
+90,BER,ALC,Mixed Business/Leisure
+91,BER,AMM,Hub-to-Hub
+92,BER,AMS,Hub-to-Hub
+93,BER,ARN,Pure Leisure
+94,BER,ATH,Pure Leisure
+95,BER,AYT,Mixed Business/Leisure
+96,BER,BCN,Mixed Business/Leisure
+97,BER,BEG,Mixed Business/Leisure
+98,BER,BEY,Mixed Business/Leisure
+99,BER,BGO,Pure Leisure
+100,BER,BGY,Mixed Business/Leisure
+101,BER,BHX,Mixed Business/Leisure
+102,BER,BLQ,Mixed Business/Leisure
+103,BER,BOD,Pure Leisure
+104,BER,BRI,Mixed Business/Leisure
+105,BER,BRS,Hub-to-Hub
+106,BER,BRU,Mixed Business/Leisure
+107,BER,BSL,Mixed Business/Leisure
+108,BER,BUD,Mixed Business/Leisure
+109,BER,CAI,Mixed Business/Leisure
+110,BER,CDG,Hub-to-Hub
+111,BER,CGN,Mixed Business/Leisure
+112,BER,CPH,Hub-to-Hub
+113,BER,CTA,Pure Leisure
+114,BER,DOH,Hub-to-Hub
+115,BER,DUB,Mixed Business/Leisure
+116,BER,DUS,Hub-to-Hub
+117,BER,DXB,Hub-to-Hub
+118,BER,EBL,Essential/Remote
+119,BER,EDI,Mixed Business/Leisure
+120,BER,ESB,Mixed Business/Leisure
+121,BER,EWR,Hub-to-Hub
+122,BER,FAO,Pure Leisure
+123,BER,FCO,Mixed Business/Leisure
+124,BER,FNC,Pure Leisure
+125,BER,FRA,Hub-to-Hub
+126,BER,FUE,Pure Leisure
+127,BER,GLA,Mixed Business/Leisure
+128,BER,GRZ,Pure Leisure
+129,BER,GVA,Mixed Business/Leisure
+130,BER,GYD,Mixed Business/Leisure
+131,BER,GZT,Pure Leisure
+132,BER,HEL,Hub-to-Hub
+133,BER,HRG,Pure Leisure
+134,BER,IST,Hub-to-Hub
+135,BER,JED,Mixed Business/Leisure
+136,BER,KEF,Pure Leisure
+137,BER,KRK,Pure Leisure
+138,BER,KUN,Pure Leisure
+139,BER,KUT,Essential/Remote
+140,BER,LCA,Mixed Business/Leisure
+141,BER,LCY,Pure Business
+142,BER,LGW,Pure Leisure
+143,BER,LHR,Hub-to-Hub
+144,BER,LIN,Pure Business
+145,BER,LIS,Pure Leisure
+146,BER,LPA,Pure Leisure
+147,BER,LPL,Pure Leisure
+148,BER,LTN,Low-Cost Tourist
+149,BER,LUX,Pure Business
+150,BER,LYS,Mixed Business/Leisure
+151,BER,MAD,Mixed Business/Leisure
+152,BER,MAN,Mixed Business/Leisure
+153,BER,MIA,Mixed Business/Leisure
+154,BER,MIR,Pure Leisure
+155,BER,MLA,Pure Leisure
+156,BER,MRS,Mixed Business/Leisure
+157,BER,MUC,Hub-to-Hub
+158,BER,MXP,Hub-to-Hub
+159,BER,NAP,Pure Leisure
+160,BER,NCE,Pure Leisure
+161,BER,OPO,Pure Leisure
+162,BER,ORY,Hub-to-Hub
+163,BER,OSL,Hub-to-Hub
+164,BER,OTP,Mixed Business/Leisure
+165,BER,PEK,Hub-to-Hub
+166,BER,PFO,Pure Leisure
+167,BER,PMI,Pure Leisure
+168,BER,PMO,Pure Leisure
+169,BER,PRN,Essential/Remote
+170,BER,PSA,Pure Leisure
+171,BER,RAK,Pure Leisure
+172,BER,REG,Pure Leisure
+173,BER,RIX,Mixed Business/Leisure
+174,BER,RMF,Pure Leisure
+175,BER,RVN,Pure Leisure
+176,BER,SAW,Mixed Business/Leisure
+177,BER,SCN,Pure Leisure
+178,BER,SKG,Pure Leisure
+179,BER,SKP,Pure Leisure
+180,BER,SOF,Mixed Business/Leisure
+181,BER,SPC,Pure Leisure
+182,BER,SSH,Pure Leisure
+183,BER,STN,Low-Cost Tourist
+184,BER,STR,Mixed Business/Leisure
+185,BER,SXB,Pure Leisure
+186,BER,SZG,Pure Leisure
+187,BER,TBS,Mixed Business/Leisure
+188,BER,TFS,Pure Leisure
+189,BER,TIA,Pure Leisure
+190,BER,TLL,Mixed Business/Leisure
+191,BER,TLV,Mixed Business/Leisure
+192,BER,TOS,Essential/Remote
+193,BER,TRS,Pure Leisure
+194,BER,TSF,Low-Cost Tourist
+195,BER,TUN,Mixed Business/Leisure
+196,BER,VAR,Pure Leisure
+197,BER,VCE,Pure Leisure
+198,BER,VIE,Hub-to-Hub
+199,BER,VLC,Pure Leisure
+200,BER,VNO,Pure Leisure
+201,BER,VRN,Pure Leisure
+202,BER,WAW,Mixed Business/Leisure
+203,BER,ZRH,Hub-to-Hub
+204,BEY,BER,Mixed Business/Leisure
+205,BEY,FRA,Mixed Business/Leisure
+206,BFS,EDI,Mixed Business/Leisure
+207,BFS,GLA,Mixed Business/Leisure
+208,BGI,FRA,Pure Leisure
+209,BGO,BER,Mixed Business/Leisure
+210,BGO,FRA,Mixed Business/Leisure
+211,BGO,MUC,Mixed Business/Leisure
+212,BGY,BER,Pure Leisure
+213,BGY,EDI,Pure Leisure
+214,BHD,EDI,Pure Leisure
+215,BHD,GLA,Pure Leisure
+216,BHQ,SYD,Essential/Remote
+217,BHX,BER,Mixed Business/Leisure
+218,BHX,EDI,Mixed Business/Leisure
+219,BHX,FRA,Hub-to-Hub
+220,BHX,GLA,Mixed Business/Leisure
+221,BIO,FRA,Mixed Business/Leisure
+222,BIO,MUC,Mixed Business/Leisure
+223,BKK,FRA,Mixed Business/Leisure
+224,BKK,MUC,Mixed Business/Leisure
+225,BKK,SYD,Mixed Business/Leisure
+226,BLL,FRA,Mixed Business/Leisure
+227,BLL,MUC,Mixed Business/Leisure
+228,BLQ,BER,Pure Leisure
+229,BLQ,FRA,Mixed Business/Leisure
+230,BLQ,MUC,Mixed Business/Leisure
+231,BLR,FRA,Mixed Business/Leisure
+232,BLR,MUC,Mixed Business/Leisure
+233,BLR,SYD,Mixed Business/Leisure
+234,BNE,SYD,Mixed Business/Leisure
+235,BNK,SYD,Essential/Remote
+236,BOD,BER,Mixed Business/Leisure
+237,BOD,FRA,Mixed Business/Leisure
+238,BOG,FRA,Mixed Business/Leisure
+239,BOH,EDI,Pure Leisure
+240,BOM,FRA,Mixed Business/Leisure
+241,BOM,MUC,Mixed Business/Leisure
+242,BOS,FRA,Hub-to-Hub
+243,BOS,MUC,Hub-to-Hub
+244,BQB,SYD,Essential/Remote
+245,BRE,AGP,Pure Leisure
+246,BRE,ALC,Pure Leisure
+247,BRE,AMS,Mixed Business/Leisure
+248,BRE,AYT,Pure Leisure
+249,BRE,FRA,Mixed Business/Leisure
+250,BRE,FUE,Pure Leisure
+251,BRE,IST,Mixed Business/Leisure
+252,BRE,LPA,Pure Leisure
+253,BRE,MUC,Mixed Business/Leisure
+254,BRE,PMI,Pure Leisure
+255,BRE,SAW,Mixed Business/Leisure
+256,BRE,STN,Low-Cost Tourist
+257,BRE,STR,Mixed Business/Leisure
+258,BRE,TFS,Pure Leisure
+259,BRE,VIE,Mixed Business/Leisure
+260,BRE,ZRH,Mixed Business/Leisure
+261,BRI,BER,Pure Leisure
+262,BRI,FRA,Mixed Business/Leisure
+263,BRI,MUC,Mixed Business/Leisure
+264,BRR,GLA,Pure Leisure
+265,BRS,BER,Mixed Business/Leisure
+266,BRS,EDI,Mixed Business/Leisure
+267,BRS,GLA,Mixed Business/Leisure
+268,BRU,BER,Hub-to-Hub
+269,BRU,EDI,Mixed Business/Leisure
+270,BRU,FRA,Hub-to-Hub
+271,BRU,MUC,Hub-to-Hub
+272,BSL,BER,Mixed Business/Leisure
+273,BSL,EDI,Mixed Business/Leisure
+274,BSL,FRA,Mixed Business/Leisure
+275,BSL,MUC,Mixed Business/Leisure
+276,BTS,EDI,Pure Leisure
+277,BUD,BER,Mixed Business/Leisure
+278,BUD,EDI,Mixed Business/Leisure
+279,BUD,FRA,Mixed Business/Leisure
+280,BUD,GLA,Mixed Business/Leisure
+281,BUD,MUC,Mixed Business/Leisure
+282,BVA,EDI,Low-Cost Tourist
+283,BXG,SYD,Essential/Remote
+284,BZO,BER,Pure Leisure
+285,CAI,BER,Mixed Business/Leisure
+286,CAI,FRA,Mixed Business/Leisure
+287,CAI,MUC,Mixed Business/Leisure
+288,CAL,GLA,Pure Leisure
+289,CAN,FRA,Mixed Business/Leisure
+290,CAN,SYD,Mixed Business/Leisure
+291,CBR,SYD,Mixed Business/Leisure
+292,CDG,BER,Hub-to-Hub
+293,CDG,EDI,Mixed Business/Leisure
+294,CDG,FRA,Hub-to-Hub
+295,CDG,GLA,Mixed Business/Leisure
+296,CDG,MUC,Hub-to-Hub
+297,CFN,GLA,Pure Leisure
+298,CFS,SYD,Essential/Remote
+299,CGK,SYD,Mixed Business/Leisure
+300,CGN,BER,Mixed Business/Leisure
+301,CGN,MUC,Mixed Business/Leisure
+302,CHC,SYD,Mixed Business/Leisure
+303,CIA,EDI,Pure Leisure
+304,CKG,SYD,Mixed Business/Leisure
+305,CLJ,MUC,Mixed Business/Leisure
+306,CLT,FRA,Hub-to-Hub
+307,CLT,MUC,Hub-to-Hub
+308,CMB,FRA,Mixed Business/Leisure
+309,CMB,SYD,Mixed Business/Leisure
+310,CMN,FRA,Mixed Business/Leisure
+311,CNS,SYD,Mixed Business/Leisure
+312,COV,BER,Mixed Business/Leisure
+313,COV,FRA,Mixed Business/Leisure
+314,CPH,BER,Hub-to-Hub
+315,CPH,EDI,Mixed Business/Leisure
+316,CPH,FRA,Hub-to-Hub
+317,CPH,MUC,Hub-to-Hub
+318,CPT,FRA,Mixed Business/Leisure
+319,CPT,MUC,Mixed Business/Leisure
+320,CRL,EDI,Pure Leisure
+321,CTA,BER,Pure Leisure
+322,CTA,FRA,Pure Leisure
+323,CTA,MUC,Pure Leisure
+324,CUN,FRA,Pure Leisure
+325,CWL,EDI,Mixed Business/Leisure
+326,DBO,SYD,Essential/Remote
+327,DBV,FRA,Pure Leisure
+328,DEB,MUC,Pure Leisure
+329,DEL,FRA,Mixed Business/Leisure
+330,DEL,MUC,Mixed Business/Leisure
+331,DEL,SYD,Mixed Business/Leisure
+332,DEN,FRA,Mixed Business/Leisure
+333,DEN,MUC,Mixed Business/Leisure
+334,DFW,FRA,Mixed Business/Leisure
+335,DFW,SYD,Mixed Business/Leisure
+336,DOH,BER,Hub-to-Hub
+337,DOH,EDI,Mixed Business/Leisure
+338,DOH,FRA,Hub-to-Hub
+339,DOH,MUC,Hub-to-Hub
+340,DOH,SYD,Mixed Business/Leisure
+341,DPS,SYD,Mixed Business/Leisure
+342,DRS,FRA,Pure Leisure
+343,DRS,MUC,Pure Leisure
+344,DRW,SYD,Essential/Remote
+345,DTM,MUC,Mixed Business/Leisure
+346,DTW,FRA,Mixed Business/Leisure
+347,DUB,BER,Mixed Business/Leisure
+348,DUB,EDI,Mixed Business/Leisure
+349,DUB,FRA,Mixed Business/Leisure
+350,DUB,GLA,Mixed Business/Leisure
+351,DUB,MUC,Mixed Business/Leisure
+352,DUS,BER,Mixed Business/Leisure
+353,DUS,EDI,Mixed Business/Leisure
+354,DUS,FRA,Hub-to-Hub
+355,DUS,MUC,Mixed Business/Leisure
+356,DWC,FRA,Mixed Business/Leisure
+357,DWC,MUC,Mixed Business/Leisure
+358,DXB,BER,Hub-to-Hub
+359,DXB,EDI,Mixed Business/Leisure
+360,DXB,FRA,Hub-to-Hub
+361,DXB,GLA,Mixed Business/Leisure
+362,DXB,MUC,Hub-to-Hub
+363,DXB,SYD,Mixed Business/Leisure
+364,EBL,BER,Mixed Business/Leisure
+365,EBL,FRA,Mixed Business/Leisure
+366,EDI,,Pure Leisure
+367,EDI,ACE,Pure Leisure
+368,EDI,AGA,Pure Leisure
+369,EDI,AGP,Pure Leisure
+370,EDI,ALC,Hub-to-Hub
+371,EDI,AMS,Mixed Business/Leisure
+372,EDI,ARN,Pure Leisure
+373,EDI,ATH,Pure Leisure
+374,EDI,AYT,Mixed Business/Leisure
+375,EDI,BCN,Mixed Business/Leisure
+376,EDI,BER,Mixed Business/Leisure
+377,EDI,BFS,Pure Leisure
+378,EDI,BGY,Pure Leisure
+379,EDI,BHD,Pure Business
+380,EDI,BHX,Pure Leisure
+381,EDI,BOH,Mixed Business/Leisure
+382,EDI,BRS,Hub-to-Hub
+383,EDI,BRU,Mixed Business/Leisure
+384,EDI,BSL,Pure Leisure
+385,EDI,BTS,Mixed Business/Leisure
+386,EDI,BUD,Low-Cost Tourist
+387,EDI,BVA,Hub-to-Hub
+388,EDI,CDG,Mixed Business/Leisure
+389,EDI,CIA,Pure Leisure
+390,EDI,CMF,Hub-to-Hub
+391,EDI,CPH,Pure Leisure
+392,EDI,CRL,Mixed Business/Leisure
+393,EDI,CWL,Mixed Business/Leisure
+394,EDI,DOH,Mixed Business/Leisure
+395,EDI,DUB,Mixed Business/Leisure
+396,EDI,DUS,Hub-to-Hub
+397,EDI,DXB,Low-Cost Tourist
+398,EDI,EIN,Mixed Business/Leisure
+399,EDI,EWR,Pure Leisure
+400,EDI,EXT,Pure Leisure
+401,EDI,FAO,Mixed Business/Leisure
+402,EDI,FCO,Pure Leisure
+403,EDI,FNC,Hub-to-Hub
+404,EDI,FRA,Pure Leisure
+405,EDI,FUE,Pure Leisure
+406,EDI,GCI,Mixed Business/Leisure
+407,EDI,GDN,Pure Leisure
+408,EDI,GNB,Hub-to-Hub
+409,EDI,GVA,Mixed Business/Leisure
+410,EDI,HAM,Mixed Business/Leisure
+411,EDI,HEL,Mixed Business/Leisure
+412,EDI,HRG,Pure Leisure
+413,EDI,INN,Pure Leisure
+414,EDI,IOM,Pure Leisure
+415,EDI,IST,Hub-to-Hub
+416,EDI,KEF,Pure Leisure
+417,EDI,KOI,Pure Leisure
+418,EDI,KRK,Pure Leisure
+419,EDI,KUN,Pure Leisure
+420,EDI,LCY,Pure Business
+421,EDI,LDY,Low-Cost Tourist
+422,EDI,LGW,Pure Leisure
+423,EDI,LHR,Hub-to-Hub
+424,EDI,LIS,Pure Leisure
+425,EDI,LPA,Pure Leisure
+426,EDI,LSI,Pure Leisure
+427,EDI,LTN,Low-Cost Tourist
+428,EDI,LYS,Mixed Business/Leisure
+429,EDI,MAD,Mixed Business/Leisure
+430,EDI,MLA,Pure Leisure
+431,EDI,MUC,Hub-to-Hub
+432,EDI,MXP,Hub-to-Hub
+433,EDI,NAP,Pure Leisure
+434,EDI,NOC,Pure Leisure
+435,EDI,NRN,Pure Leisure
+436,EDI,OPO,Pure Leisure
+437,EDI,ORK,Pure Leisure
+438,EDI,OSL,Hub-to-Hub
+439,EDI,OTP,Mixed Business/Leisure
+440,EDI,PFO,Pure Leisure
+441,EDI,PMI,Pure Leisure
+442,EDI,POZ,Pure Leisure
+443,EDI,PRG,Mixed Business/Leisure
+444,EDI,RAK,Pure Leisure
+445,EDI,RIX,Mixed Business/Leisure
+446,EDI,SAW,Mixed Business/Leisure
+447,EDI,SDR,Pure Leisure
+448,EDI,SNN,Pure Leisure
+449,EDI,SOF,Mixed Business/Leisure
+450,EDI,SOU,Pure Leisure
+451,EDI,STN,Low-Cost Tourist
+452,EDI,SVQ,Pure Leisure
+453,EDI,SYY,Pure Leisure
+454,EDI,SZG,Pure Leisure
+455,EDI,TFS,Pure Leisure
+456,EDI,VCE,Pure Leisure
+457,EDI,VIE,Mixed Business/Leisure
+458,EDI,WRO,Pure Leisure
+459,EDI,ZRH,Hub-to-Hub
+460,EIN,EDI,Low-Cost Tourist
+461,ESB,BER,Mixed Business/Leisure
+462,ESB,FRA,Mixed Business/Leisure
+463,ESB,MUC,Mixed Business/Leisure
+464,EVN,BER,Mixed Business/Leisure
+465,EVN,FRA,Mixed Business/Leisure
+466,EWR,BER,Hub-to-Hub
+467,EWR,EDI,Mixed Business/Leisure
+468,EWR,FRA,Hub-to-Hub
+469,EWR,MUC,Hub-to-Hub
+470,EXT,EDI,Pure Leisure
+471,EZE,FRA,Mixed Business/Leisure
+472,FAO,BER,Pure Leisure
+473,FAO,EDI,Pure Leisure
+474,FAO,FRA,Mixed Business/Leisure
+475,FAO,GLA,Pure Leisure
+476,FAO,MUC,Mixed Business/Leisure
+477,FCO,BER,Mixed Business/Leisure
+478,FCO,EDI,Pure Leisure
+479,FCO,FRA,Mixed Business/Leisure
+480,FCO,GLA,Mixed Business/Leisure
+481,FCO,MUC,Mixed Business/Leisure
+482,FDF,FRA,Pure Leisure
+483,FLR,FRA,Mixed Business/Leisure
+484,FLR,MUC,Mixed Business/Leisure
+485,FMO,MUC,Mixed Business/Leisure
+486,FNC,BER,Pure Leisure
+487,FNC,EDI,Pure Leisure
+488,FNC,FRA,Pure Leisure
+489,FNC,GLA,Pure Leisure
+490,FNC,MUC,Pure Leisure
+491,FRA,,Pure Business
+492,FRA,ABV,Pure Leisure
+493,FRA,ACE,Mixed Business/Leisure
+494,FRA,ADB,Mixed Business/Leisure
+495,FRA,ADD,Pure Leisure
+496,FRA,AGA,Pure Leisure
+497,FRA,AGP,Mixed Business/Leisure
+498,FRA,ALA,Pure Leisure
+499,FRA,ALC,Mixed Business/Leisure
+500,FRA,ALG,Mixed Business/Leisure
+501,FRA,AMM,Hub-to-Hub
+502,FRA,AMS,Hub-to-Hub
+503,FRA,ARN,Pure Leisure
+504,FRA,ASR,Pure Leisure
+505,FRA,ATH,Hub-to-Hub
+506,FRA,ATL,Hub-to-Hub
+507,FRA,AUH,Mixed Business/Leisure
+508,FRA,AUS,Pure Leisure
+509,FRA,AYT,Mixed Business/Leisure
+510,FRA,BAH,Mixed Business/Leisure
+511,FRA,BCN,Mixed Business/Leisure
+512,FRA,BEG,Mixed Business/Leisure
+513,FRA,BER,Mixed Business/Leisure
+514,FRA,BEY,Mixed Business/Leisure
+515,FRA,BGO,Pure Leisure
+516,FRA,BHX,Hub-to-Hub
+517,FRA,BIO,Pure Leisure
+518,FRA,BKK,Mixed Business/Leisure
+519,FRA,BLL,Mixed Business/Leisure
+520,FRA,BLQ,Pure Leisure
+521,FRA,BLR,Mixed Business/Leisure
+522,FRA,BOD,Pure Leisure
+523,FRA,BOG,Mixed Business/Leisure
+524,FRA,BOM,Mixed Business/Leisure
+525,FRA,BOS,Hub-to-Hub
+526,FRA,BRE,Pure Leisure
+527,FRA,BRI,Pure Leisure
+528,FRA,BRU,Hub-to-Hub
+529,FRA,BSL,Mixed Business/Leisure
+530,FRA,BUD,Mixed Business/Leisure
+531,FRA,CAI,Mixed Business/Leisure
+532,FRA,CAN,Mixed Business/Leisure
+533,FRA,CDG,Hub-to-Hub
+534,FRA,CLT,Hub-to-Hub
+535,FRA,CMB,Mixed Business/Leisure
+536,FRA,CMN,Mixed Business/Leisure
+537,FRA,CPH,Hub-to-Hub
+538,FRA,CPT,Mixed Business/Leisure
+539,FRA,CTA,Pure Leisure
+540,FRA,CUN,Pure Leisure
+541,FRA,DBV,Pure Leisure
+542,FRA,DEL,Mixed Business/Leisure
+543,FRA,DEN,Mixed Business/Leisure
+544,FRA,DFW,Hub-to-Hub
+545,FRA,DJE,Pure Leisure
+546,FRA,DOH,Hub-to-Hub
+547,FRA,DRS,Pure Leisure
+548,FRA,DTW,Hub-to-Hub
+549,FRA,DUB,Mixed Business/Leisure
+550,FRA,DUS,Hub-to-Hub
+551,FRA,DXB,Hub-to-Hub
+552,FRA,EDI,Mixed Business/Leisure
+553,FRA,ESB,Mixed Business/Leisure
+554,FRA,EVN,Mixed Business/Leisure
+555,FRA,EWR,Hub-to-Hub
+556,FRA,EZE,Mixed Business/Leisure
+557,FRA,FAO,Pure Leisure
+558,FRA,FCO,Mixed Business/Leisure
+559,FRA,FDF,Pure Leisure
+560,FRA,FLR,Mixed Business/Leisure
+561,FRA,FNC,Pure Leisure
+562,FRA,FUE,Pure Leisure
+563,FRA,GDN,Pure Leisure
+564,FRA,GIG,Mixed Business/Leisure
+565,FRA,GLA,Mixed Business/Leisure
+566,FRA,GOT,Mixed Business/Leisure
+567,FRA,GRU,Hub-to-Hub
+568,FRA,GRZ,Pure Leisure
+569,FRA,GVA,Mixed Business/Leisure
+570,FRA,GYD,Mixed Business/Leisure
+571,FRA,HAJ,Mixed Business/Leisure
+572,FRA,HAM,Hub-to-Hub
+573,FRA,HAN,Mixed Business/Leisure
+574,FRA,HAV,Pure Leisure
+575,FRA,HEL,Hub-to-Hub
+576,FRA,HER,Pure Leisure
+577,FRA,HKG,Hub-to-Hub
+578,FRA,HKT,Pure Leisure
+579,FRA,HND,Hub-to-Hub
+580,FRA,HRG,Pure Leisure
+581,FRA,HYD,Mixed Business/Leisure
+582,FRA,IAD,Hub-to-Hub
+583,FRA,IAH,Hub-to-Hub
+584,FRA,IBZ,Pure Leisure
+585,FRA,ICN,Hub-to-Hub
+586,FRA,IKA,Mixed Business/Leisure
+587,FRA,INN,Pure Leisure
+588,FRA,IST,Hub-to-Hub
+589,FRA,IVL,Pure Leisure
+590,FRA,JED,Mixed Business/Leisure
+591,FRA,JFK,Hub-to-Hub
+592,FRA,JNB,Mixed Business/Leisure
+593,FRA,KAO,Mixed Business/Leisure
+594,FRA,KEF,Pure Leisure
+595,FRA,KRK,Pure Leisure
+596,FRA,KTT,Pure Leisure
+597,FRA,KTW,Pure Leisure
+598,FRA,KWI,Mixed Business/Leisure
+599,FRA,LAD,Mixed Business/Leisure
+600,FRA,LAS,Pure Leisure
+601,FRA,LAX,Hub-to-Hub
+602,FRA,LCA,Mixed Business/Leisure
+603,FRA,LCY,Pure Business
+604,FRA,LEJ,Pure Leisure
+605,FRA,LHR,Hub-to-Hub
+606,FRA,LIN,Mixed Business/Leisure
+607,FRA,LIS,Mixed Business/Leisure
+608,FRA,LJU,Pure Leisure
+609,FRA,LNZ,Pure Leisure
+610,FRA,LOS,Mixed Business/Leisure
+611,FRA,LPA,Pure Leisure
+612,FRA,LRM,Pure Leisure
+613,FRA,LUX,Mixed Business/Leisure
+614,FRA,LYS,Mixed Business/Leisure
+615,FRA,MAA,Mixed Business/Leisure
+616,FRA,MAD,Mixed Business/Leisure
+617,FRA,MAN,Mixed Business/Leisure
+618,FRA,MBA,Pure Leisure
+619,FRA,MBJ,Pure Leisure
+620,FRA,MCO,Pure Leisure
+621,FRA,MCT,Mixed Business/Leisure
+622,FRA,MEX,Mixed Business/Leisure
+623,FRA,MIA,Mixed Business/Leisure
+624,FRA,MIR,Pure Leisure
+625,FRA,MLA,Pure Leisure
+626,FRA,MLE,Pure Leisure
+627,FRA,MRS,Mixed Business/Leisure
+628,FRA,MRU,Pure Leisure
+629,FRA,MSP,Mixed Business/Leisure
+630,FRA,MUC,Hub-to-Hub
+631,FRA,MXP,Hub-to-Hub
+632,FRA,NAP,Pure Leisure
+633,FRA,NBO,Mixed Business/Leisure
+634,FRA,NCE,Pure Leisure
+635,FRA,NCL,Pure Leisure
+636,FRA,NQZ,Essential/Remote
+637,FRA,NRT,Hub-to-Hub
+638,FRA,NTE,Mixed Business/Leisure
+639,FRA,NUE,Mixed Business/Leisure
+640,FRA,OPO,Pure Leisure
+641,FRA,ORD,Hub-to-Hub
+642,FRA,OSL,Hub-to-Hub
+643,FRA,OTP,Mixed Business/Leisure
+644,FRA,PEK,Hub-to-Hub
+645,FRA,PHL,Hub-to-Hub
+646,FRA,PMI,Pure Leisure
+647,FRA,PMO,Pure Leisure
+648,FRA,POP,Pure Leisure
+649,FRA,POZ,Pure Leisure
+650,FRA,PRG,Mixed Business/Leisure
+651,FRA,PRN,Pure Leisure
+652,FRA,PUJ,Pure Leisure
+653,FRA,PVG,Mixed Business/Leisure
+654,FRA,RAK,Pure Leisure
+655,FRA,RDU,Mixed Business/Leisure
+656,FRA,RIX,Mixed Business/Leisure
+657,FRA,RMF,Pure Leisure
+658,FRA,RSW,Pure Leisure
+659,FRA,RUH,Mixed Business/Leisure
+660,FRA,RVN,Pure Leisure
+661,FRA,SAW,Mixed Business/Leisure
+662,FRA,SEA,Hub-to-Hub
+663,FRA,SEZ,Pure Leisure
+664,FRA,SFO,Hub-to-Hub
+665,FRA,SGN,Mixed Business/Leisure
+666,FRA,SHE,Mixed Business/Leisure
+667,FRA,SIN,Hub-to-Hub
+668,FRA,SJD,Pure Leisure
+669,FRA,SJJ,Pure Leisure
+670,FRA,SJO,Pure Leisure
+671,FRA,SKG,Pure Leisure
+672,FRA,SKP,Pure Leisure
+673,FRA,SOF,Mixed Business/Leisure
+674,FRA,SPC,Pure Leisure
+675,FRA,SPU,Pure Leisure
+676,FRA,STL,Mixed Business/Leisure
+677,FRA,STR,Mixed Business/Leisure
+678,FRA,SVG,Mixed Business/Leisure
+679,FRA,SVQ,Pure Leisure
+680,FRA,SZG,Pure Leisure
+681,FRA,SZX,Mixed Business/Leisure
+682,FRA,TAS,Mixed Business/Leisure
+683,FRA,TFS,Pure Leisure
+684,FRA,TGD,Pure Leisure
+685,FRA,TIA,Pure Leisure
+686,FRA,TLL,Mixed Business/Leisure
+687,FRA,TLS,Mixed Business/Leisure
+688,FRA,TLV,Mixed Business/Leisure
+689,FRA,TOS,Pure Leisure
+690,FRA,TPA,Mixed Business/Leisure
+691,FRA,TPE,Mixed Business/Leisure
+692,FRA,TRN,Pure Leisure
+693,FRA,TRS,Pure Leisure
+694,FRA,TUN,Mixed Business/Leisure
+695,FRA,UBN,Essential/Remote
+696,FRA,URA,Essential/Remote
+697,FRA,VCE,Pure Leisure
+698,FRA,VIE,Hub-to-Hub
+699,FRA,VLC,Pure Leisure
+700,FRA,VNO,Mixed Business/Leisure
+701,FRA,VRA,Pure Leisure
+702,FRA,VRN,Pure Leisure
+703,FRA,WAW,Mixed Business/Leisure
+704,FRA,WDH,Pure Leisure
+705,FRA,WRO,Pure Leisure
+706,FRA,XRY,Pure Leisure
+707,FRA,YUL,Mixed Business/Leisure
+708,FRA,YVR,Mixed Business/Leisure
+709,FRA,YYC,Mixed Business/Leisure
+710,FRA,YYZ,Hub-to-Hub
+711,FRA,ZAG,Pure Leisure
+712,FRA,ZRH,Hub-to-Hub
+713,FUE,BER,Pure Leisure
+714,FUE,BRE,Pure Leisure
+715,FUE,EDI,Pure Leisure
+716,FUE,FRA,Pure Leisure
+717,FUE,GLA,Pure Leisure
+718,FUE,LEJ,Pure Leisure
+719,FUE,MUC,Pure Leisure
+720,GCI,EDI,Pure Leisure
+721,GDN,EDI,Pure Leisure
+722,GDN,FRA,Pure Leisure
+723,GDN,MUC,Pure Leisure
+724,GFF,SYD,Essential/Remote
+725,GIG,FRA,Mixed Business/Leisure
+726,GLA,ACE,Pure Leisure
+727,GLA,AGP,Pure Leisure
+728,GLA,ALC,Pure Leisure
+729,GLA,AMS,Mixed Business/Leisure
+730,GLA,AYT,Pure Leisure
+731,GLA,BCN,Mixed Business/Leisure
+732,GLA,BEB,Essential/Remote
+733,GLA,BER,Mixed Business/Leisure
+734,GLA,BFS,Mixed Business/Leisure
+735,GLA,BHD,Pure Leisure
+736,GLA,BHX,Mixed Business/Leisure
+737,GLA,BRR,Pure Leisure
+738,GLA,BRS,Mixed Business/Leisure
+739,GLA,BUD,Mixed Business/Leisure
+740,GLA,CAL,Pure Leisure
+741,GLA,CDG,Mixed Business/Leisure
+742,GLA,CFN,Pure Leisure
+743,GLA,DUB,Mixed Business/Leisure
+744,GLA,DXB,Mixed Business/Leisure
+745,GLA,FAO,Pure Leisure
+746,GLA,FCO,Mixed Business/Leisure
+747,GLA,FRA,Mixed Business/Leisure
+748,GLA,FUE,Pure Leisure
+749,GLA,GVA,Mixed Business/Leisure
+750,GLA,HRG,Pure Leisure
+751,GLA,ILY,Pure Leisure
+752,GLA,JER,Pure Leisure
+753,GLA,KEF,Pure Leisure
+754,GLA,KOI,Pure Leisure
+755,GLA,KRK,Pure Leisure
+756,GLA,LCY,Pure Business
+757,GLA,LDY,Low-Cost Tourist
+758,GLA,LGW,Pure Leisure
+759,GLA,LHR,Hub-to-Hub
+760,GLA,LPA,Pure Leisure
+761,GLA,LSI,Pure Leisure
+762,GLA,LTN,Low-Cost Tourist
+763,GLA,MLA,Pure Leisure
+764,GLA,NBE,Pure Leisure
+765,GLA,ORK,Mixed Business/Leisure
+766,GLA,PFO,Pure Leisure
+767,GLA,PMI,Pure Leisure
+768,GLA,PRG,Mixed Business/Leisure
+769,GLA,RAK,Pure Leisure
+770,GLA,SOU,Mixed Business/Leisure
+771,GLA,STN,Low-Cost Tourist
+772,GLA,SYY,Pure Leisure
+773,GLA,TFS,Pure Leisure
+774,GLA,TRE,Pure Leisure
+775,GLA,WRO,Pure Leisure
+776,GOA,MUC,Mixed Business/Leisure
+777,GOT,BER,Mixed Business/Leisure
+778,GOT,FRA,Mixed Business/Leisure
+779,GOT,MUC,Mixed Business/Leisure
+780,GRU,FRA,Hub-to-Hub
+781,GRU,MUC,Hub-to-Hub
+782,GRZ,BER,Pure Leisure
+783,GRZ,FRA,Pure Leisure
+784,GRZ,MUC,Pure Leisure
+785,GVA,BER,Mixed Business/Leisure
+786,GVA,EDI,Mixed Business/Leisure
+787,GVA,FRA,Mixed Business/Leisure
+788,GVA,GLA,Mixed Business/Leisure
+789,GVA,MUC,Mixed Business/Leisure
+790,GYD,BER,Mixed Business/Leisure
+791,GYD,FRA,Mixed Business/Leisure
+792,GZT,FRA,Pure Leisure
+793,HAJ,FRA,Mixed Business/Leisure
+794,HAJ,MUC,Mixed Business/Leisure
+795,HAK,SYD,Mixed Business/Leisure
+796,HAM,EDI,Mixed Business/Leisure
+797,HAM,FRA,Hub-to-Hub
+798,HAM,MUC,Mixed Business/Leisure
+799,HAN,FRA,Mixed Business/Leisure
+800,HAN,MUC,Mixed Business/Leisure
+801,HAN,SYD,Mixed Business/Leisure
+802,HAV,FRA,Pure Leisure
+803,HBA,SYD,Mixed Business/Leisure
+804,HEL,BER,Mixed Business/Leisure
+805,HEL,EDI,Mixed Business/Leisure
+806,HEL,FRA,Hub-to-Hub
+807,HEL,MUC,Hub-to-Hub
+808,HGH,SYD,Mixed Business/Leisure
+809,HKG,FRA,Hub-to-Hub
+810,HKG,SYD,Hub-to-Hub
+811,HKT,FRA,Pure Leisure
+812,HKT,SYD,Pure Leisure
+813,HND,FRA,Hub-to-Hub
+814,HND,MUC,Hub-to-Hub
+815,HND,SYD,Hub-to-Hub
+816,HNL,SYD,Pure Leisure
+817,HOG,FRA,Pure Leisure
+818,HRG,BER,Pure Leisure
+819,HRG,FRA,Pure Leisure
+820,HRG,GLA,Pure Leisure
+821,HRG,LEJ,Pure Leisure
+822,HRG,MUC,Pure Leisure
+823,HTI,SYD,Pure Leisure
+824,HVB,SYD,Essential/Remote
+825,HYD,FRA,Mixed Business/Leisure
+826,IAD,FRA,Hub-to-Hub
+827,IAD,MUC,Hub-to-Hub
+828,IAH,FRA,Hub-to-Hub
+829,IAH,MUC,Hub-to-Hub
+830,IAH,SYD,Hub-to-Hub
+831,IBZ,MUC,Pure Leisure
+832,ICN,FRA,Hub-to-Hub
+833,ICN,MUC,Hub-to-Hub
+834,ICN,SYD,Hub-to-Hub
+835,IKA,FRA,Mixed Business/Leisure
+836,ILY,GLA,Pure Leisure
+837,INN,FRA,Pure Leisure
+838,IOM,EDI,Pure Leisure
+839,IST,BER,Hub-to-Hub
+840,IST,BRE,Mixed Business/Leisure
+841,IST,EDI,Mixed Business/Leisure
+842,IST,FRA,Hub-to-Hub
+843,IST,LEJ,Pure Leisure
+844,IST,MUC,Hub-to-Hub
+845,JED,BER,Mixed Business/Leisure
+846,JED,FRA,Mixed Business/Leisure
+847,JED,MUC,Mixed Business/Leisure
+848,JER,GLA,Pure Leisure
+849,JFK,FRA,Hub-to-Hub
+850,JFK,MUC,Hub-to-Hub
+851,JNB,FRA,Mixed Business/Leisure
+852,JNB,MUC,Mixed Business/Leisure
+853,JNB,SYD,Mixed Business/Leisure
+854,KEF,BER,Pure Leisure
+855,KEF,EDI,Pure Leisure
+856,KEF,FRA,Pure Leisure
+857,KEF,GLA,Pure Leisure
+858,KEF,MUC,Pure Leisure
+859,KIX,MUC,Mixed Business/Leisure
+860,KIX,SYD,Mixed Business/Leisure
+861,KLX,MUC,Pure Leisure
+862,KOI,EDI,Pure Leisure
+863,KOI,GLA,Pure Leisure
+864,KRK,BER,Pure Leisure
+865,KRK,EDI,Pure Leisure
+866,KRK,FRA,Pure Leisure
+867,KRK,GLA,Pure Leisure
+868,KRK,MUC,Pure Leisure
+869,KTT,FRA,Pure Leisure
+870,KTW,FRA,Pure Leisure
+871,KUL,SYD,Mixed Business/Leisure
+872,KUN,BER,Pure Leisure
+873,KUN,EDI,Pure Leisure
+874,KUT,BER,Pure Leisure
+875,KWI,FRA,Mixed Business/Leisure
+876,LAD,FRA,Mixed Business/Leisure
+877,LAS,FRA,Pure Leisure
+878,LAX,FRA,Hub-to-Hub
+879,LAX,MUC,Hub-to-Hub
+880,LAX,SYD,Hub-to-Hub
+881,LCA,BER,Mixed Business/Leisure
+882,LCA,FRA,Mixed Business/Leisure
+883,LCA,MUC,Mixed Business/Leisure
+884,LCY,BER,Pure Business
+885,LCY,EDI,Pure Business
+886,LCY,FRA,Pure Business
+887,LCY,GLA,Pure Business
+888,LDH,SYD,Essential/Remote
+889,LDY,EDI,Pure Leisure
+890,LDY,GLA,Pure Leisure
+891,LEJ,,Unclassified
+892,LEJ,AYT,Pure Leisure
+893,LEJ,FNC,Pure Leisure
+894,LEJ,FRA,Pure Leisure
+895,LEJ,FUE,Pure Leisure
+896,LEJ,HRG,Pure Leisure
+897,LEJ,IST,Pure Leisure
+898,LEJ,LPA,Pure Leisure
+899,LEJ,OTP,Pure Leisure
+900,LEJ,PMI,Pure Leisure
+901,LEJ,RMF,Pure Leisure
+902,LEJ,STN,Low-Cost Tourist
+903,LEJ,TFS,Pure Leisure
+904,LEJ,TIA,Pure Leisure
+905,LEJ,VIE,Mixed Business/Leisure
+906,LEJ,VNO,Pure Leisure
+907,LGW,BER,Mixed Business/Leisure
+908,LGW,EDI,Mixed Business/Leisure
+909,LGW,GLA,Mixed Business/Leisure
+910,LGW,MUC,Mixed Business/Leisure
+911,LHR,BER,Mixed Business/Leisure
+912,LHR,EDI,Mixed Business/Leisure
+913,LHR,FRA,Hub-to-Hub
+914,LHR,GLA,Mixed Business/Leisure
+915,LHR,MUC,Hub-to-Hub
+916,LIN,BER,Mixed Business/Leisure
+917,LIN,FRA,Mixed Business/Leisure
+918,LIN,MUC,Mixed Business/Leisure
+919,LIS,BER,Mixed Business/Leisure
+920,LIS,EDI,Pure Leisure
+921,LIS,FRA,Mixed Business/Leisure
+922,LIS,MUC,Mixed Business/Leisure
+923,LJU,FRA,Mixed Business/Leisure
+924,LJU,MUC,Mixed Business/Leisure
+925,LNZ,FRA,Pure Leisure
+926,LOS,FRA,Mixed Business/Leisure
+927,LPA,BER,Pure Leisure
+928,LPA,BRE,Pure Leisure
+929,LPA,EDI,Pure Leisure
+930,LPA,FRA,Pure Leisure
+931,LPA,GLA,Pure Leisure
+932,LPA,LEJ,Pure Leisure
+933,LPA,MUC,Pure Leisure
+934,LPL,BER,Mixed Business/Leisure
+935,LRM,FRA,Pure Leisure
+936,LSI,EDI,Pure Leisure
+937,LSI,GLA,Pure Leisure
+938,LST,SYD,Essential/Remote
+939,LTN,BER,Low-Cost Tourist
+940,LTN,EDI,Low-Cost Tourist
+941,LTN,GLA,Low-Cost Tourist
+942,LUX,BER,Mixed Business/Leisure
+943,LUX,FRA,Mixed Business/Leisure
+944,LUX,MUC,Mixed Business/Leisure
+945,LYS,BER,Mixed Business/Leisure
+946,LYS,FRA,Mixed Business/Leisure
+947,LYS,MUC,Mixed Business/Leisure
+948,MAA,FRA,Mixed Business/Leisure
+949,MAD,BER,Mixed Business/Leisure
+950,MAD,EDI,Pure Leisure
+951,MAD,FRA,Mixed Business/Leisure
+952,MAD,MUC,Mixed Business/Leisure
+953,MAN,BER,Mixed Business/Leisure
+954,MAN,FRA,Mixed Business/Leisure
+955,MAN,MUC,Mixed Business/Leisure
+956,MBA,FRA,Pure Leisure
+957,MBJ,FRA,Pure Leisure
+958,MCO,FRA,Pure Leisure
+959,MCT,FRA,Mixed Business/Leisure
+960,MCT,MUC,Mixed Business/Leisure
+961,MCY,SYD,Mixed Business/Leisure
+962,MEL,SYD,Hub-to-Hub
+963,MEX,FRA,Hub-to-Hub
+964,MEX,MUC,Hub-to-Hub
+965,MIA,BER,Mixed Business/Leisure
+966,MIA,FRA,Hub-to-Hub
+967,MIA,MUC,Hub-to-Hub
+968,MIM,SYD,Pure Leisure
+969,MLA,BER,Mixed Business/Leisure
+970,MLA,EDI,Pure Leisure
+971,MLA,FRA,Mixed Business/Leisure
+972,MLA,MUC,Mixed Business/Leisure
+973,MLE,FRA,Pure Leisure
+974,MNL,SYD,Mixed Business/Leisure
+975,MQL,SYD,Pure Leisure
+976,MRS,BER,Mixed Business/Leisure
+977,MRS,FRA,Mixed Business/Leisure
+978,MRS,MUC,Mixed Business/Leisure
+979,MRU,FRA,Pure Leisure
+980,MRZ,SYD,Essential/Remote
+981,MSP,FRA,Hub-to-Hub
+982,MUC,,Unclassified
+983,MUC,ACE,Pure Leisure
+984,MUC,ADB,Mixed Business/Leisure
+985,MUC,AGA,Pure Leisure
+986,MUC,AGP,Pure Leisure
+987,MUC,ALC,Pure Leisure
+988,MUC,AMS,Hub-to-Hub
+989,MUC,AOI,Pure Leisure
+990,MUC,ARN,Hub-to-Hub
+991,MUC,ASR,Pure Leisure
+992,MUC,ATH,Pure Leisure
+993,MUC,ATL,Hub-to-Hub
+994,MUC,AUH,Hub-to-Hub
+995,MUC,AYT,Pure Leisure
+996,MUC,BAH,Mixed Business/Leisure
+997,MUC,BCN,Mixed Business/Leisure
+998,MUC,BEG,Mixed Business/Leisure
+999,MUC,BER,Hub-to-Hub
+1000,MUC,BGO,Pure Leisure
+1001,MUC,BIO,Pure Leisure
+1002,MUC,BKK,Hub-to-Hub
+1003,MUC,BLL,Pure Leisure
+1004,MUC,BLQ,Mixed Business/Leisure
+1005,MUC,BLR,Mixed Business/Leisure
+1006,MUC,BOM,Mixed Business/Leisure
+1007,MUC,BOS,Hub-to-Hub
+1008,MUC,BRE,Mixed Business/Leisure
+1009,MUC,BRI,Pure Leisure
+1010,MUC,BRU,Hub-to-Hub
+1011,MUC,BSL,Mixed Business/Leisure
+1012,MUC,BUD,Mixed Business/Leisure
+1013,MUC,BVC,Pure Leisure
+1014,MUC,CAI,Mixed Business/Leisure
+1015,MUC,CDG,Hub-to-Hub
+1016,MUC,CGN,Mixed Business/Leisure
+1017,MUC,CLJ,Pure Leisure
+1018,MUC,CLT,Hub-to-Hub
+1019,MUC,CPH,Hub-to-Hub
+1020,MUC,CPT,Mixed Business/Leisure
+1021,MUC,CTA,Pure Leisure
+1022,MUC,DEB,Pure Leisure
+1023,MUC,DEL,Mixed Business/Leisure
+1024,MUC,DEN,Hub-to-Hub
+1025,MUC,DJE,Pure Leisure
+1026,MUC,DOH,Hub-to-Hub
+1027,MUC,DRS,Pure Leisure
+1028,MUC,DTM,Mixed Business/Leisure
+1029,MUC,DUB,Mixed Business/Leisure
+1030,MUC,DUS,Hub-to-Hub
+1031,MUC,DWC,Mixed Business/Leisure
+1032,MUC,DXB,Hub-to-Hub
+1033,MUC,DYU,Pure Leisure
+1034,MUC,EBL,Mixed Business/Leisure
+1035,MUC,EDI,Mixed Business/Leisure
+1036,MUC,ESB,Mixed Business/Leisure
+1037,MUC,EWR,Hub-to-Hub
+1038,MUC,FAO,Pure Leisure
+1039,MUC,FCO,Mixed Business/Leisure
+1040,MUC,FLR,Pure Leisure
+1041,MUC,FMO,Mixed Business/Leisure
+1042,MUC,FNC,Pure Leisure
+1043,MUC,FRA,Hub-to-Hub
+1044,MUC,FUE,Pure Leisure
+1045,MUC,GDN,Pure Leisure
+1046,MUC,GOA,Mixed Business/Leisure
+1047,MUC,GOT,Mixed Business/Leisure
+1048,MUC,GRU,Hub-to-Hub
+1049,MUC,GRZ,Pure Leisure
+1050,MUC,GVA,Mixed Business/Leisure
+1051,MUC,HAJ,Mixed Business/Leisure
+1052,MUC,HAM,Hub-to-Hub
+1053,MUC,HAN,Mixed Business/Leisure
+1054,MUC,HEL,Hub-to-Hub
+1055,MUC,HND,Hub-to-Hub
+1056,MUC,HRG,Pure Leisure
+1057,MUC,IAD,Hub-to-Hub
+1058,MUC,IAH,Hub-to-Hub
+1059,MUC,ICN,Hub-to-Hub
+1060,MUC,IST,Hub-to-Hub
+1061,MUC,JED,Mixed Business/Leisure
+1062,MUC,JFK,Hub-to-Hub
+1063,MUC,JNB,Mixed Business/Leisure
+1064,MUC,KEF,Pure Leisure
+1065,MUC,KIX,Mixed Business/Leisure
+1066,MUC,KRK,Pure Leisure
+1067,MUC,KTT,Pure Leisure
+1068,MUC,KWI,Mixed Business/Leisure
+1069,MUC,LAX,Hub-to-Hub
+1070,MUC,LCA,Mixed Business/Leisure
+1071,MUC,LGW,Mixed Business/Leisure
+1072,MUC,LHR,Hub-to-Hub
+1073,MUC,LIN,Mixed Business/Leisure
+1074,MUC,LIS,Mixed Business/Leisure
+1075,MUC,LJU,Pure Leisure
+1076,MUC,LPA,Pure Leisure
+1077,MUC,LUX,Mixed Business/Leisure
+1078,MUC,LYS,Mixed Business/Leisure
+1079,MUC,MAD,Mixed Business/Leisure
+1080,MUC,MAN,Mixed Business/Leisure
+1081,MUC,MCT,Mixed Business/Leisure
+1082,MUC,MEX,Hub-to-Hub
+1083,MUC,MIA,Hub-to-Hub
+1084,MUC,MLA,Pure Leisure
+1085,MUC,MRS,Mixed Business/Leisure
+1086,MUC,MXP,Hub-to-Hub
+1087,MUC,NAP,Pure Leisure
+1088,MUC,NCE,Pure Leisure
+1089,MUC,NTE,Mixed Business/Leisure
+1090,MUC,OPO,Pure Leisure
+1091,MUC,ORD,Hub-to-Hub
+1092,MUC,ORK,Pure Leisure
+1093,MUC,OSI,Pure Leisure
+1094,MUC,OSL,Hub-to-Hub
+1095,MUC,OTP,Mixed Business/Leisure
+1096,MUC,OUL,Pure Leisure
+1097,MUC,PAD,Pure Leisure
+1098,MUC,PEK,Hub-to-Hub
+1099,MUC,PMI,Pure Leisure
+1100,MUC,PMO,Pure Leisure
+1101,MUC,POZ,Pure Leisure
+1102,MUC,PRG,Mixed Business/Leisure
+1103,MUC,PRN,Pure Leisure
+1104,MUC,PVG,Hub-to-Hub
+1105,MUC,RAK,Pure Leisure
+1106,MUC,RIX,Mixed Business/Leisure
+1107,MUC,RJK,Pure Leisure
+1108,MUC,RMF,Pure Leisure
+1109,MUC,RUH,Mixed Business/Leisure
+1110,MUC,RVN,Pure Leisure
+1111,MUC,RZE,Pure Leisure
+1112,MUC,SAN,Hub-to-Hub
+1113,MUC,SAW,Mixed Business/Leisure
+1114,MUC,SBZ,Pure Leisure
+1115,MUC,SEA,Hub-to-Hub
+1116,MUC,SFO,Hub-to-Hub
+1117,MUC,SGN,Hub-to-Hub
+1118,MUC,SIN,Hub-to-Hub
+1119,MUC,SKG,Pure Leisure
+1120,MUC,SOF,Mixed Business/Leisure
+1121,MUC,SPC,Pure Leisure
+1122,MUC,SPU,Pure Leisure
+1123,MUC,STR,Mixed Business/Leisure
+1124,MUC,SVQ,Pure Leisure
+1125,MUC,TAS,Mixed Business/Leisure
+1126,MUC,TBS,Mixed Business/Leisure
+1127,MUC,TFS,Pure Leisure
+1128,MUC,TLL,Mixed Business/Leisure
+1129,MUC,TLS,Mixed Business/Leisure
+1130,MUC,TLV,Hub-to-Hub
+1131,MUC,TOS,Pure Leisure
+1132,MUC,TPE,Hub-to-Hub
+1133,MUC,TRN,Pure Leisure
+1134,MUC,TSR,Mixed Business/Leisure
+1135,MUC,TUN,Mixed Business/Leisure
+1136,MUC,VCE,Pure Leisure
+1137,MUC,VIE,Hub-to-Hub
+1138,MUC,VLC,Pure Leisure
+1139,MUC,VNO,Mixed Business/Leisure
+1140,MUC,VRN,Pure Leisure
+1141,MUC,WAW,Mixed Business/Leisure
+1142,MUC,WRO,Pure Leisure
+1143,MUC,YUL,Hub-to-Hub
+1144,MUC,YVR,Hub-to-Hub
+1145,MUC,YYZ,Hub-to-Hub
+1146,MUC,ZAG,Pure Leisure
+1147,MUC,ZRH,Hub-to-Hub
+1148,MXP,BER,Mixed Business/Leisure
+1149,MXP,EDI,Mixed Business/Leisure
+1150,MXP,FRA,Mixed Business/Leisure
+1151,MXP,MUC,Mixed Business/Leisure
+1152,MYA,SYD,Mixed Business/Leisure
+1153,NAN,SYD,Mixed Business/Leisure
+1154,NAP,BER,Pure Leisure
+1155,NAP,EDI,Pure Leisure
+1156,NAP,FRA,Pure Leisure
+1157,NAP,MUC,Pure Leisure
+1158,NBE,GLA,Pure Leisure
+1159,NBO,FRA,Mixed Business/Leisure
+1160,NCE,BER,Pure Leisure
+1161,NCE,FRA,Pure Leisure
+1162,NCE,MUC,Pure Leisure
+1163,NCL,FRA,Mixed Business/Leisure
+1164,NKG,SYD,Hub-to-Hub
+1165,NLK,SYD,Essential/Remote
+1166,NOC,EDI,Pure Leisure
+1167,NOU,SYD,Pure Leisure
+1168,NQZ,FRA,Essential/Remote
+1169,NRA,SYD,Essential/Remote
+1170,NRN,EDI,Pure Leisure
+1171,NRT,FRA,Hub-to-Hub
+1172,NTE,FRA,Pure Leisure
+1173,NUE,FRA,Mixed Business/Leisure
+1174,OAG,SYD,Mixed Business/Leisure
+1175,OOL,SYD,Pure Leisure
+1176,OPO,BER,Pure Leisure
+1177,OPO,EDI,Pure Leisure
+1178,OPO,FRA,Pure Leisure
+1179,OPO,MUC,Pure Leisure
+1180,ORD,FRA,Hub-to-Hub
+1181,ORD,MUC,Hub-to-Hub
+1182,ORK,EDI,Pure Leisure
+1183,ORK,GLA,Pure Leisure
+1184,ORY,BER,Mixed Business/Leisure
+1185,OSI,MUC,Pure Leisure
+1186,OSL,BER,Hub-to-Hub
+1187,OSL,EDI,Mixed Business/Leisure
+1188,OSL,FRA,Hub-to-Hub
+1189,OSL,MUC,Hub-to-Hub
+1190,OTP,BER,Mixed Business/Leisure
+1191,OTP,EDI,Mixed Business/Leisure
+1192,OTP,FRA,Mixed Business/Leisure
+1193,OTP,LEJ,Pure Leisure
+1194,OTP,MUC,Mixed Business/Leisure
+1195,OUL,MUC,Mixed Business/Leisure
+1196,PAD,MUC,Pure Leisure
+1197,PEK,BER,Hub-to-Hub
+1198,PEK,FRA,Hub-to-Hub
+1199,PEK,MUC,Hub-to-Hub
+1200,PEK,SYD,Hub-to-Hub
+1201,PER,SYD,Mixed Business/Leisure
+1202,PFO,BER,Pure Leisure
+1203,PFO,EDI,Pure Leisure
+1204,PFO,GLA,Pure Leisure
+1205,PHL,FRA,Hub-to-Hub
+1206,PKE,SYD,Essential/Remote
+1207,PMI,BER,Pure Leisure
+1208,PMI,BRE,Pure Leisure
+1209,PMI,EDI,Pure Leisure
+1210,PMI,FRA,Pure Leisure
+1211,PMI,GLA,Pure Leisure
+1212,PMI,LEJ,Pure Leisure
+1213,PMI,MUC,Pure Leisure
+1214,PMO,BER,Pure Leisure
+1215,PMO,MUC,Pure Leisure
+1216,POM,SYD,Mixed Business/Leisure
+1217,POZ,EDI,Pure Leisure
+1218,POZ,FRA,Mixed Business/Leisure
+1219,POZ,MUC,Mixed Business/Leisure
+1220,PPP,SYD,Pure Leisure
+1221,PQQ,SYD,Pure Leisure
+1222,PRG,EDI,Mixed Business/Leisure
+1223,PRG,FRA,Mixed Business/Leisure
+1224,PRG,GLA,Mixed Business/Leisure
+1225,PRG,MUC,Mixed Business/Leisure
+1226,PRN,BER,Pure Leisure
+1227,PRN,FRA,Pure Leisure
+1228,PRN,MUC,Pure Leisure
+1229,PSA,BER,Pure Leisure
+1230,PUJ,FRA,Pure Leisure
+1231,PVG,FRA,Hub-to-Hub
+1232,PVG,MUC,Hub-to-Hub
+1233,PVG,SYD,Hub-to-Hub
+1234,RAK,BER,Pure Leisure
+1235,RAK,EDI,Pure Leisure
+1236,RAK,FRA,Pure Leisure
+1237,RAK,GLA,Pure Leisure
+1238,RAK,MUC,Pure Leisure
+1239,RAR,SYD,Pure Leisure
+1240,RDU,FRA,Hub-to-Hub
+1241,REG,BER,Pure Leisure
+1242,RIX,BER,Mixed Business/Leisure
+1243,RIX,EDI,Mixed Business/Leisure
+1244,RIX,FRA,Mixed Business/Leisure
+1245,RIX,MUC,Mixed Business/Leisure
+1246,RJK,MUC,Pure Leisure
+1247,RMF,BER,Pure Leisure
+1248,RMF,FRA,Pure Leisure
+1249,RMF,LEJ,Pure Leisure
+1250,RMF,MUC,Pure Leisure
+1251,RSW,FRA,Hub-to-Hub
+1252,RUH,FRA,Mixed Business/Leisure
+1253,RUH,MUC,Mixed Business/Leisure
+1254,RVN,BER,Pure Leisure
+1255,RVN,FRA,Pure Leisure
+1256,RZE,MUC,Pure Leisure
+1257,SAN,MUC,Hub-to-Hub
+1258,SAW,BER,Mixed Business/Leisure
+1259,SAW,BRE,Mixed Business/Leisure
+1260,SAW,EDI,Mixed Business/Leisure
+1261,SAW,FRA,Mixed Business/Leisure
+1262,SAW,MUC,Mixed Business/Leisure
+1263,SBZ,MUC,Pure Leisure
+1264,SCL,SYD,Hub-to-Hub
+1265,SCN,BER,Pure Leisure
+1266,SDQ,FRA,Hub-to-Hub
+1267,SDR,EDI,Pure Leisure
+1268,SEA,FRA,Hub-to-Hub
+1269,SEA,MUC,Hub-to-Hub
+1270,SEZ,FRA,Pure Leisure
+1271,SFO,FRA,Hub-to-Hub
+1272,SFO,MUC,Hub-to-Hub
+1273,SFO,SYD,Hub-to-Hub
+1274,SGN,FRA,Mixed Business/Leisure
+1275,SGN,MUC,Mixed Business/Leisure
+1276,SGN,SYD,Mixed Business/Leisure
+1277,SID,FRA,Pure Leisure
+1278,SIN,FRA,Hub-to-Hub
+1279,SIN,MUC,Hub-to-Hub
+1280,SIN,SYD,Hub-to-Hub
+1281,SJD,FRA,Pure Leisure
+1282,SJJ,FRA,Pure Leisure
+1283,SJO,FRA,Pure Leisure
+1284,SKG,BER,Pure Leisure
+1285,SKG,FRA,Pure Leisure
+1286,SKG,MUC,Pure Leisure
+1287,SKP,BER,Pure Leisure
+1288,SKP,FRA,Pure Leisure
+1289,SNN,EDI,Pure Leisure
+1290,SOF,BER,Mixed Business/Leisure
+1291,SOF,EDI,Mixed Business/Leisure
+1292,SOF,FRA,Mixed Business/Leisure
+1293,SOF,MUC,Mixed Business/Leisure
+1294,SOU,EDI,Pure Leisure
+1295,SOU,GLA,Pure Leisure
+1296,SPC,BER,Pure Leisure
+1297,SPC,FRA,Pure Leisure
+1298,SPC,MUC,Pure Leisure
+1299,SPU,FRA,Pure Leisure
+1300,SPU,MUC,Pure Leisure
+1301,SSH,BER,Pure Leisure
+1302,STL,FRA,Mixed Business/Leisure
+1303,STN,BER,Low-Cost Tourist
+1304,STN,BRE,Low-Cost Tourist
+1305,STN,EDI,Low-Cost Tourist
+1306,STN,GLA,Low-Cost Tourist
+1307,STN,LEJ,Low-Cost Tourist
+1308,STR,BER,Mixed Business/Leisure
+1309,STR,BRE,Mixed Business/Leisure
+1310,STR,FRA,Mixed Business/Leisure
+1311,STR,MUC,Mixed Business/Leisure
+1312,SVG,FRA,Mixed Business/Leisure
+1313,SVQ,EDI,Pure Leisure
+1314,SVQ,FRA,Pure Leisure
+1315,SVQ,MUC,Pure Leisure
+1316,SXB,BER,Pure Leisure
+1317,SYD,,Unclassified
+1318,SYD,ABX,Essential/Remote
+1319,SYD,ADL,Mixed Business/Leisure
+1320,SYD,AKL,Hub-to-Hub
+1321,SYD,ARM,Essential/Remote
+1322,SYD,ASP,Essential/Remote
+1323,SYD,AUH,Hub-to-Hub
+1324,SYD,AVV,Low-Cost Tourist
+1325,SYD,AYQ,Essential/Remote
+1326,SYD,BHQ,Essential/Remote
+1327,SYD,BKK,Mixed Business/Leisure
+1328,SYD,BLR,Mixed Business/Leisure
+1329,SYD,BNE,Mixed Business/Leisure
+1330,SYD,BNK,Essential/Remote
+1331,SYD,BQB,Essential/Remote
+1332,SYD,BXG,Essential/Remote
+1333,SYD,CAN,Mixed Business/Leisure
+1334,SYD,CBR,Mixed Business/Leisure
+1335,SYD,CFS,Essential/Remote
+1336,SYD,CGK,Mixed Business/Leisure
+1337,SYD,CHC,Mixed Business/Leisure
+1338,SYD,CKG,Mixed Business/Leisure
+1339,SYD,CMB,Mixed Business/Leisure
+1340,SYD,CNS,Pure Leisure
+1341,SYD,DBO,Essential/Remote
+1342,SYD,DEL,Mixed Business/Leisure
+1343,SYD,DFW,Hub-to-Hub
+1344,SYD,DOH,Hub-to-Hub
+1345,SYD,DPS,Pure Leisure
+1346,SYD,DRW,Essential/Remote
+1347,SYD,DXB,Hub-to-Hub
+1348,SYD,GFF,Essential/Remote
+1349,SYD,HAK,Mixed Business/Leisure
+1350,SYD,HAN,Mixed Business/Leisure
+1351,SYD,HBA,Mixed Business/Leisure
+1352,SYD,HGH,Mixed Business/Leisure
+1353,SYD,HKG,Hub-to-Hub
+1354,SYD,HKT,Pure Leisure
+1355,SYD,HND,Hub-to-Hub
+1356,SYD,HNL,Mixed Business/Leisure
+1357,SYD,HTI,Pure Leisure
+1358,SYD,HVB,Essential/Remote
+1359,SYD,IAH,Hub-to-Hub
+1360,SYD,ICN,Hub-to-Hub
+1361,SYD,JNB,Mixed Business/Leisure
+1362,SYD,KIX,Mixed Business/Leisure
+1363,SYD,KUL,Mixed Business/Leisure
+1364,SYD,LAX,Hub-to-Hub
+1365,SYD,LDH,Essential/Remote
+1366,SYD,LST,Essential/Remote
+1367,SYD,MCY,Mixed Business/Leisure
+1368,SYD,MEL,Hub-to-Hub
+1369,SYD,MIM,Pure Leisure
+1370,SYD,MNL,Mixed Business/Leisure
+1371,SYD,MQL,Pure Leisure
+1372,SYD,MRZ,Essential/Remote
+1373,SYD,MYA,Mixed Business/Leisure
+1374,SYD,NAA,Essential/Remote
+1375,SYD,NAN,Mixed Business/Leisure
+1376,SYD,NKG,Hub-to-Hub
+1377,SYD,NLK,Essential/Remote
+1378,SYD,NOU,Pure Leisure
+1379,SYD,NRA,Essential/Remote
+1380,SYD,OAG,Mixed Business/Leisure
+1381,SYD,OOL,Pure Leisure
+1382,SYD,PEK,Hub-to-Hub
+1383,SYD,PER,Hub-to-Hub
+1384,SYD,PKE,Essential/Remote
+1385,SYD,POM,Mixed Business/Leisure
+1386,SYD,PPP,Pure Leisure
+1387,SYD,PQQ,Pure Leisure
+1388,SYD,PVG,Hub-to-Hub
+1389,SYD,RAR,Pure Leisure
+1390,SYD,SCL,Hub-to-Hub
+1391,SYD,SFO,Hub-to-Hub
+1392,SYD,SGN,Mixed Business/Leisure
+1393,SYD,SIN,Hub-to-Hub
+1394,SYD,SZX,Mixed Business/Leisure
+1395,SYD,TAO,Mixed Business/Leisure
+1396,SYD,TBU,Pure Leisure
+1397,SYD,TMW,Essential/Remote
+1398,SYD,TNA,Mixed Business/Leisure
+1399,SYD,TPE,Hub-to-Hub
+1400,SYD,TSV,Mixed Business/Leisure
+1401,SYD,VLI,Pure Leisure
+1402,SYD,WGA,Essential/Remote
+1403,SYD,WLG,Mixed Business/Leisure
+1404,SYD,WTB,Essential/Remote
+1405,SYD,WUH,Hub-to-Hub
+1406,SYD,XMN,Mixed Business/Leisure
+1407,SYD,YVR,Hub-to-Hub
+1408,SYD,ZQN,Pure Leisure
+1409,SYY,EDI,Pure Leisure
+1410,SYY,GLA,Pure Leisure
+1411,SZG,BER,Pure Leisure
+1412,SZG,FRA,Mixed Business/Leisure
+1413,SZX,FRA,Mixed Business/Leisure
+1414,SZX,SYD,Mixed Business/Leisure
+1415,TAO,SYD,Mixed Business/Leisure
+1416,TAS,FRA,Mixed Business/Leisure
+1417,TAS,MUC,Mixed Business/Leisure
+1418,TBS,BER,Mixed Business/Leisure
+1419,TBS,MUC,Mixed Business/Leisure
+1420,TFS,BER,Low-Cost Tourist
+1421,TFS,BRE,Low-Cost Tourist
+1422,TFS,EDI,Low-Cost Tourist
+1423,TFS,FRA,Low-Cost Tourist
+1424,TFS,GLA,Low-Cost Tourist
+1425,TFS,LEJ,Low-Cost Tourist
+1426,TFS,MUC,Low-Cost Tourist
+1427,TGD,FRA,Pure Leisure
+1428,TIA,BER,Pure Leisure
+1429,TIA,FRA,Pure Leisure
+1430,TIA,LEJ,Pure Leisure
+1431,TLL,BER,Low-Cost Tourist
+1432,TLL,FRA,Mixed Business/Leisure
+1433,TLL,MUC,Mixed Business/Leisure
+1434,TLS,FRA,Mixed Business/Leisure
+1435,TLS,MUC,Mixed Business/Leisure
+1436,TLV,BER,Mixed Business/Leisure
+1437,TLV,FRA,Mixed Business/Leisure
+1438,TLV,MUC,Mixed Business/Leisure
+1439,TMW,SYD,Essential/Remote
+1440,TNA,SYD,Mixed Business/Leisure
+1441,TOS,BER,Pure Leisure
+1442,TOS,FRA,Pure Leisure
+1443,TPA,FRA,Mixed Business/Leisure
+1444,TPE,FRA,Hub-to-Hub
+1445,TPE,MUC,Hub-to-Hub
+1446,TPE,SYD,Hub-to-Hub
+1447,TRD,MUC,Pure Leisure
+1448,TRE,GLA,Pure Leisure
+1449,TRN,EDI,Pure Leisure
+1450,TRN,FRA,Pure Leisure
+1451,TRN,MUC,Pure Leisure
+1452,TRS,BER,Pure Leisure
+1453,TRS,FRA,Pure Leisure
+1454,TSF,BER,Pure Leisure
+1455,TSR,MUC,Mixed Business/Leisure
+1456,TSV,SYD,Mixed Business/Leisure
+1457,TUN,BER,Mixed Business/Leisure
+1458,TUN,FRA,Mixed Business/Leisure
+1459,TUN,MUC,Mixed Business/Leisure
+1460,UBN,FRA,Essential/Remote
+1461,URA,FRA,Essential/Remote
+1462,VAR,BER,Pure Leisure
+1463,VCE,BER,Pure Leisure
+1464,VCE,EDI,Pure Leisure
+1465,VCE,FRA,Pure Leisure
+1466,VCE,MUC,Pure Leisure
+1467,VIE,BER,Mixed Business/Leisure
+1468,VIE,BRE,Mixed Business/Leisure
+1469,VIE,EDI,Pure Leisure
+1470,VIE,FRA,Mixed Business/Leisure
+1471,VIE,LEJ,Pure Leisure
+1472,VIE,MUC,Mixed Business/Leisure
+1473,VLC,BER,Pure Leisure
+1474,VLC,FRA,Pure Leisure
+1475,VLC,MUC,Pure Leisure
+1476,VLI,SYD,Pure Leisure
+1477,VNO,BER,Mixed Business/Leisure
+1478,VNO,FRA,Mixed Business/Leisure
+1479,VNO,MUC,Mixed Business/Leisure
+1480,VRA,FRA,Pure Leisure
+1481,VRN,BER,Pure Leisure
+1482,VRN,FRA,Pure Leisure
+1483,VRN,MUC,Pure Leisure
+1484,WAW,BER,Mixed Business/Leisure
+1485,WAW,FRA,Mixed Business/Leisure
+1486,WAW,MUC,Mixed Business/Leisure
+1487,WDH,FRA,Pure Leisure
+1488,WGA,SYD,Essential/Remote
+1489,WLG,SYD,Mixed Business/Leisure
+1490,WRO,EDI,Pure Leisure
+1491,WRO,FRA,Pure Leisure
+1492,WRO,GLA,Pure Leisure
+1493,WRO,MUC,Pure Leisure
+1494,WTB,SYD,Essential/Remote
+1495,WUH,SYD,Hub-to-Hub
+1496,XMN,SYD,Mixed Business/Leisure
+1497,XRY,FRA,Pure Leisure
+1498,YUL,FRA,Hub-to-Hub
+1499,YUL,MUC,Hub-to-Hub
+1500,YVR,FRA,Hub-to-Hub
+1501,YVR,MUC,Hub-to-Hub
+1502,YVR,SYD,Hub-to-Hub
+1503,YYC,FRA,Mixed Business/Leisure
+1504,YYZ,FRA,Hub-to-Hub
+1505,YYZ,GLA,Mixed Business/Leisure
+1506,YYZ,MUC,Hub-to-Hub
+1507,ZAG,FRA,Pure Leisure
+1508,ZAG,MUC,Pure Leisure
+1509,ZQN,SYD,Pure Leisure
+1510,ZRH,BER,Hub-to-Hub
+1511,ZRH,BRE,Mixed Business/Leisure
+1512,ZRH,EDI,Hub-to-Hub
+1513,ZRH,FRA,Hub-to-Hub
+1514,ZRH,MUC,Hub-to-Hub

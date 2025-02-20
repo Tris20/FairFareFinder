@@ -1,0 +1,704 @@
+origin_city_name,origin_country,origin_iata,origin_population,destination_city_name,destination_country,destination_iata,destination_population,route_frequency,route_classification,most_common_airline,most_common_aircraft,most_common_aircraft_seating_capacity,duration_hour_dot_mins,actual_price
+Berlin,DE,BER,4890363,Arrecife,ES,ACE,64497,3,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,4.4,115.18
+Berlin,DE,BER,4890363,Izmir,TR,ADB,4320519,5,Pure Leisure,Sun Express,Boeing 737,130,2.4,134.54
+Berlin,DE,BER,4890363,Malaga,ES,AGP,967250,10,Pure Leisure,Ryanair,Boeing 737-800,162,3,123.66
+Berlin,DE,BER,4890363,Alicante,ES,ALC,349282,2,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,2.4,99.71
+Berlin,DE,BER,4890363,Amsterdam,NL,AMS,1459402,32,Hub-to-Hub,KLM,Airbus A320,150,1,106.91
+Berlin,DE,BER,4890363,Stockholm,SE,ARN,2121000,12,Pure Leisure,SAS,Airbus A320 NEO,150,1.2,87.91
+Berlin,DE,BER,4890363,Athens,GR,ATH,3059764,7,Pure Leisure,Aegean,Boeing 787-8,242,2.4,145.45
+Berlin,DE,BER,4890363,Antalya,TR,AYT,258139,10,Mixed Business/Leisure,Sun Express,Boeing 737,130,3,115.83
+Berlin,DE,BER,4890363,Barcelona,ES,BCN,4800000,19,Mixed Business/Leisure,Vueling,Airbus A321,185,2.2,119.09
+Berlin,DE,BER,4890363,Belgrad,RS,BEG,0,6,Mixed Business/Leisure,Air Serbia,Airbus A320,150,1.4,100.41
+Berlin,DE,BER,4890363,Beirut,LB,BEY,2421354,1,Mixed Business/Leisure,SundAir,Airbus A320,150,3.4,299.09
+Berlin,DE,BER,4890363,Bergen,NO,BGO,291189,1,Pure Leisure,Norwegian Air Shuttle,Boeing 737-800,162,1.4,138.74
+Berlin,DE,BER,4890363,Bergamo,IT,BGY,119534,7,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,1.2,86.52
+Berlin,DE,BER,4890363,Birmingham,GB,BHX,2919600,2,Mixed Business/Leisure,easyJet,Boeing 737,130,1.4,80.48
+Berlin,DE,BER,4890363,Bordeaux,FR,BOD,994920,1,Pure Leisure,easyJet,Airbus A320,150,2,114.43
+Berlin,DE,BER,4890363,Bristol,GB,BRS,707412,2,Hub-to-Hub,easyJet,Airbus A321,185,1.4,115.64
+Berlin,DE,BER,4890363,Brussels,BE,BRU,1235192,14,Mixed Business/Leisure,Brussels,Airbus A320,150,1.2,0
+Berlin,DE,BER,4890363,Basel,CH,BSL,173552,7,Mixed Business/Leisure,easyJet,Airbus A320,150,1.2,56
+Berlin,DE,BER,4890363,Budapest,HU,BUD,2997958,9,Mixed Business/Leisure,Ryanair,Airbus A320,150,1.2,63.43
+Berlin,DE,BER,4890363,Cairo,EG,CAI,20296000,4,Mixed Business/Leisure,EgyptAir,Boeing 737-800,162,3.4,291.65
+Berlin,DE,BER,4890363,Paris,FR,CDG,11060000,29,Hub-to-Hub,Air France,Airbus A220-300,130,1.2,99.58
+Berlin,DE,BER,4890363,Cologne,DE,CGN,1084831,16,Mixed Business/Leisure,Eurowings,Airbus A319,124,0.4,129.55
+Berlin,DE,BER,4890363,Copenhagen,DK,CPH,1366301,17,Hub-to-Hub,SAS,Airbus A320,150,0.4,64.44
+Berlin,DE,BER,4890363,Catania,IT,CTA,298762,3,Pure Leisure,Ryanair,Boeing 737-800,162,2.2,146.17
+Berlin,DE,BER,4890363,Doha,QA,DOH,1186023,10,Hub-to-Hub,Qatar Airways,Boeing 787-9,280,5.4,299.09
+Berlin,DE,BER,4890363,Dublin,IE,DUB,1263219,13,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,2,72.02
+Berlin,DE,BER,4890363,Dusseldorf,DE,DUS,629047,11,Hub-to-Hub,Eurowings,Airbus A320,150,0.4,102.08
+Berlin,DE,BER,4890363,Dubai,AE,DXB,3331420,8,Hub-to-Hub,Eurowings,Airbus A320 NEO,150,6,341.05
+Berlin,DE,BER,4890363,Arbil,IQ,EBL,0,1,Essential/Remote,Eurowings,Airbus A320,150,4,247.63
+Berlin,DE,BER,4890363,Edinburgh,GB,EDI,488050,14,Mixed Business/Leisure,easyJet,Airbus A320,150,1.4,56.83
+Berlin,DE,BER,4890363,Ankara,TR,ESB,5503985,2,Mixed Business/Leisure,AJet,Boeing 737-800,162,2.4,147.26
+Berlin,DE,BER,4890363,Newark,US,EWR,307355,4,Hub-to-Hub,United,Boeing 767-400,245,8.2,687.78
+Berlin,DE,BER,4890363,Faro,PT,FAO,64560,3,Pure Leisure,Ryanair,Boeing 737-800,162,3.2,103.09
+Berlin,DE,BER,4890363,Rome,IT,FCO,2748109,12,Mixed Business/Leisure,easyJet,Airbus A320,150,1.4,83.79
+Berlin,DE,BER,4890363,Funchal,PT,FNC,29403,3,Pure Leisure,easyJet,Airbus A320,150,4.2,205.78
+Berlin,DE,BER,4890363,Frankfurt,DE,FRA,773068,117,Hub-to-Hub,Lufthansa,Airbus A321,185,0.4,88.98
+Berlin,DE,BER,4890363,Puerto Del Rosario,ES,FUE,0,5,Pure Leisure,easyJet,Airbus A320,150,4.4,146.54
+Berlin,DE,BER,4890363,Glasgow,GB,GLA,626410,2,Mixed Business/Leisure,easyJet,Airbus A319,124,1.4,112.43
+Berlin,DE,BER,4890363,Graz,AT,GRZ,292630,1,Pure Leisure,Eurowings,Airbus A319,124,1,239.98
+Berlin,DE,BER,4890363,Geneva,CH,GVA,203840,7,Mixed Business/Leisure,easyJet,Airbus A320,150,1.2,66.79
+Berlin,DE,BER,4890363,Baku,AZ,GYD,2300500,1,Mixed Business/Leisure,AZAL Azerbaijan,Airbus A320,150,4,186.15
+Berlin,DE,BER,4890363,Gaziantep,TR,GZT,374290,1,Pure Leisure,Sun Express,Boeing 737-800,162,3.4,200
+Berlin,DE,BER,4890363,Helsinki,FI,HEL,1360075,13,Hub-to-Hub,Finnair,Airbus A320,150,1.4,184.2
+Berlin,DE,BER,4890363,Hurghada,EG,HRG,0,13,Pure Leisure,Air Cairo,Airbus A320,150,4.2,170.94
+Berlin,DE,BER,4890363,Istanbul,TR,IST,16079000,19,Hub-to-Hub,Turkish,Airbus A321,185,2.2,134.25
+Berlin,DE,BER,4890363,Reykjavik,IS,KEF,139875,5,Pure Leisure,Icelandair,Boeing 737,130,3.2,220.25
+Berlin,DE,BER,4890363,Kraków,PL,KRK,0,1,Pure Leisure,Ryanair,Boeing 737,130,1,34.37
+Berlin,DE,BER,4890363,Kaunas,LT,KUN,393397,2,Pure Leisure,Ryanair,Boeing 737-800,162,1.2,29.98
+Berlin,DE,BER,4890363,Kutaisi,GE,KUT,147900,1,Essential/Remote,Wizz Air,Airbus A320,150,3.2,140.48
+Berlin,DE,BER,4890363,Larnaca,CY,LCA,84900,1,Mixed Business/Leisure,easyJet,Airbus A320,150,3.2,162.89
+Berlin,DE,BER,4890363,London,GB,LCY,11262000,10,Pure Business,British Airways,Embraer 190,98,1.4,213.35
+Berlin,DE,BER,4890363,London,GB,LGW,11262000,11,Pure Leisure,easyJet,Airbus A320,150,1.4,82.17
+Berlin,DE,BER,4890363,London,GB,LHR,11262000,28,Hub-to-Hub,British Airways,Airbus A320,150,1.4,198.02
+Berlin,DE,BER,4890363,Milan,IT,LIN,1354196,6,Pure Business,easyJet,Airbus A320,150,1.2,123.01
+Berlin,DE,BER,4890363,Lisbon,PT,LIS,548703,11,Pure Leisure,TAP Air Portugal,Airbus A320,150,3.2,161.03
+Berlin,DE,BER,4890363,Las Palmas,ES,LPA,635000,11,Pure Leisure,Eurowings,Airbus A320,150,4.4,122.03
+Berlin,DE,BER,4890363,Liverpool,GB,LPL,513441,1,Pure Leisure,easyJet,Airbus A320,150,1.4,85.32
+Berlin,DE,BER,4890363,London,GB,LTN,11262000,3,Low-Cost Tourist,easyJet,Airbus A319,124,1.4,82.87
+Berlin,DE,BER,4890363,Luxembourg,LU,LUX,132780,5,Pure Business,Luxair,Bombardier Dash 8 Q400 / DHC-8-400,68,1,262.14
+Berlin,DE,BER,4890363,Lyon,FR,LYS,522250,2,Mixed Business/Leisure,easyJet,Airbus A320,150,1.4,138.21
+Berlin,DE,BER,4890363,Madrid,ES,MAD,6211000,15,Mixed Business/Leisure,Iberia,Airbus A320,150,2.4,91.7
+Berlin,DE,BER,4890363,Manchester,GB,MAN,547627,9,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,1.4,66.19
+Berlin,DE,BER,4890363,Miami,US,MIA,6080145,2,Mixed Business/Leisure,Norse Atlantic Airways,Boeing 787-9,280,10.2,468.7
+Berlin,DE,BER,4890363,Monastir,TN,MIR,93306,1,Pure Leisure,Nouvelair Tunisie,Airbus A320,150,2.4,226
+Berlin,DE,BER,4890363,Luqa,MT,MLA,5945,1,Pure Leisure,KM Malta,Airbus A320,150,2.4,148.97
+Berlin,DE,BER,4890363,Marseille,FR,MRS,873076,3,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,1.4,105.13
+Berlin,DE,BER,4890363,Munich,DE,MUC,2606021,68,Hub-to-Hub,Lufthansa,Airbus A320,150,0.4,189.76
+Berlin,DE,BER,4890363,Milan,IT,MXP,1354196,4,Hub-to-Hub,Ryanair,Boeing 737-800,162,1.2,47.74
+Berlin,DE,BER,4890363,Napoli,IT,NAP,0,4,Pure Leisure,easyJet,Airbus A320,150,1.4,133.28
+Berlin,DE,BER,4890363,Nice,FR,NCE,348085,3,Pure Leisure,easyJet,Airbus A320,150,1.4,130.36
+Berlin,DE,BER,4890363,Porto,PT,OPO,1278210,3,Pure Leisure,Ryanair,Boeing 737-800,162,2.4,133.8
+Berlin,DE,BER,4890363,Paris,FR,ORY,11060000,13,Hub-to-Hub,easyJet,Airbus A320,150,1.2,88.74
+Berlin,DE,BER,4890363,Oslo,NO,OSL,1064235,8,Hub-to-Hub,Norwegian Air Shuttle,Boeing 737-800,162,1.2,100.29
+Berlin,DE,BER,4890363,Bucharest,RO,OTP,2412530,3,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,1.4,84.94
+Berlin,DE,BER,4890363,Beijing,CN,PEK,18522000,3,Hub-to-Hub,Hainan,Airbus A330-300,277,9.2,983.71
+Berlin,DE,BER,4890363,Paphos,CY,PFO,63600,2,Pure Leisure,Ryanair,Boeing 737-800,162,3.2,136.29
+Berlin,DE,BER,4890363,Palma De Mallorca,ES,PMI,0,21,Pure Leisure,easyJet,Airbus A320,150,2.2,103.01
+Berlin,DE,BER,4890363,Palermo,IT,PMO,630167,2,Pure Leisure,Ryanair,Boeing 737-800,162,2.2,157.59
+Berlin,DE,BER,4890363,Prishtina,XK,PRN,0,2,Essential/Remote,easyJet,Airbus A320,150,1.4,137.13
+Berlin,DE,BER,4890363,Pisa,IT,PSA,88737,3,Pure Leisure,Ryanair,Boeing 737-800,162,1.4,80.98
+Berlin,DE,BER,4890363,Marrakech,MA,RAK,966987,3,Pure Leisure,Ryanair,Boeing 737,130,3.4,110.07
+Berlin,DE,BER,4890363,Reggio Calabria,IT,REG,0,1,Pure Leisure,Ryanair,Boeing 737-800,162,2.2,84.38
+Berlin,DE,BER,4890363,Riga,LV,RIX,920643,8,Mixed Business/Leisure,airBaltic,Airbus A220-300,130,1.2,52.94
+Berlin,DE,BER,4890363,Marsa Alam,EG,RMF,0,2,Pure Leisure,easyJet,Airbus A320,150,4.4,193.71
+Berlin,DE,BER,4890363,Rovaniemi,FI,RVN,62420,4,Pure Leisure,easyJet,Airbus A319,124,2.4,128.61
+Berlin,DE,BER,4890363,Istanbul,TR,SAW,16079000,15,Mixed Business/Leisure,Pegasus,Airbus A321,185,2.4,138.42
+Berlin,DE,BER,4890363,Saarbrucken,DE,SCN,181959,4,Pure Leisure,Danish Air,ATR 42-300,42,1,370.23
+Berlin,DE,BER,4890363,Thessaloniki,GR,SKG,802572,3,Pure Leisure,Ryanair,Boeing 737-800,162,2.2,107.08
+Berlin,DE,BER,4890363,Skopje,MK,SKP,526502,2,Pure Leisure,Wizz Air,Airbus A320,150,2,99.98
+Berlin,DE,BER,4890363,Sofia,BG,SOF,1547779,5,Mixed Business/Leisure,Ryanair,Boeing 737,130,2,78.98
+Berlin,DE,BER,4890363,Sharm el-Sheikh,EG,SSH,0,1,Pure Leisure,easyJet,Airbus A320,150,4.2,238.3
+Berlin,DE,BER,4890363,London,GB,STN,11262000,14,Low-Cost Tourist,Ryanair,Boeing 737-800,162,1.4,50.14
+Berlin,DE,BER,4890363,Stuttgart,DE,STR,2787724,17,Mixed Business/Leisure,Eurowings,Airbus A319,124,1,134.94
+Berlin,DE,BER,4890363,Strasbourg,FR,SXB,291313,1,Pure Leisure,Volotea,Airbus A320,150,1,87.12
+Berlin,DE,BER,4890363,Salzburg,AT,SZG,155021,2,Pure Leisure,Eurowings,Airbus A320,150,1,117.48
+Berlin,DE,BER,4890363,Tbilisi,GE,TBS,1118035,1,Mixed Business/Leisure,Georgian Airways,Boeing 737,130,3.4,189.4
+Berlin,DE,BER,4890363,Tirana,AL,TIA,418495,4,Pure Leisure,Wizz Air Malta,Airbus A321,185,2,97.18
+Berlin,DE,BER,4890363,Tallinn,EE,TLL,614561,2,Mixed Business/Leisure,airBaltic,Boeing 737-800,162,1.4,49.22
+Berlin,DE,BER,4890363,Tel Aviv,IL,TLV,0,5,Mixed Business/Leisure,El Al,Boeing 737-800,162,3.4,274.8
+Berlin,DE,BER,4890363,Tromsø,NO,TOS,0,2,Essential/Remote,easyJet,Boeing 737-800,162,2.4,149.15
+Berlin,DE,BER,4890363,Trieste,IT,TRS,198417,1,Pure Leisure,Ryanair,Boeing 737,130,1.2,150.14
+Berlin,DE,BER,4890363,Treviso,IT,TSF,84607,3,Low-Cost Tourist,Ryanair,Boeing 737-800,162,1.2,0
+Berlin,DE,BER,4890363,Tunis,TN,TUN,602560,1,Mixed Business/Leisure,Nouvelair Tunisie,Airbus A320,150,2.4,237.35
+Berlin,DE,BER,4890363,Varna,BG,VAR,348594,1,Pure Leisure,Wizz Air,Airbus A320,150,2.2,0
+Berlin,DE,BER,4890363,Venice,IT,VCE,250369,4,Pure Leisure,easyJet,Airbus A320,150,1.2,100.08
+Berlin,DE,BER,4890363,Vienna,AT,VIE,2223236,20,Hub-to-Hub,Austrian,Airbus A320,150,1,121.04
+Berlin,DE,BER,4890363,Valencia,ES,VLC,1595000,3,Pure Leisure,easyJet,Boeing 737,130,2.4,115.72
+Berlin,DE,BER,4890363,Vilnius,LT,VNO,716856,4,Pure Leisure,Ryanair,Boeing 737-800,162,1.2,89.66
+Berlin,DE,BER,4890363,Verona,IT,VRN,255588,1,Pure Leisure,Volotea,Airbus A320,150,1.2,0
+Berlin,DE,BER,4890363,Warsaw,PL,WAW,1860281,12,Mixed Business/Leisure,LOT - Polish,Embraer 175,78,1,188.58
+Berlin,DE,BER,4890363,Zurich,CH,ZRH,447082,42,Hub-to-Hub,SWISS,Airbus A320,150,1.2,72.18
+Bremen,DE,BRE,569396,Malaga,ES,AGP,967250,1,Pure Leisure,Ryanair,Boeing 737,130,2.4,125.03
+Bremen,DE,BRE,569396,Alicante,ES,ALC,349282,2,Pure Leisure,Ryanair,Boeing 737-800,162,2.4,89.45
+Bremen,DE,BRE,569396,Amsterdam,NL,AMS,1459402,15,Mixed Business/Leisure,KLM,Embraer 190,98,0.4,223.32
+Bremen,DE,BRE,569396,Antalya,TR,AYT,258139,1,Pure Leisure,Sun Express,Boeing 737,130,3.2,109.76
+Bremen,DE,BRE,569396,Frankfurt,DE,FRA,773068,38,Mixed Business/Leisure,Lufthansa,Airbus A319,124,0.4,80.44
+Bremen,DE,BRE,569396,Puerto Del Rosario,ES,FUE,0,1,Pure Leisure,SundAir,Airbus A319,124,4.2,143.74
+Bremen,DE,BRE,569396,Istanbul,TR,IST,16079000,6,Mixed Business/Leisure,Turkish,Boeing 737-800,162,2.4,96.72
+Bremen,DE,BRE,569396,Munich,DE,MUC,2606021,29,Mixed Business/Leisure,Lufthansa,Airbus A319,124,1,205.41
+Bremen,DE,BRE,569396,Palma De Mallorca,ES,PMI,0,1,Pure Leisure,Ryanair,Boeing 737,130,2.2,101.35
+Bremen,DE,BRE,569396,Istanbul,TR,SAW,16079000,2,Mixed Business/Leisure,Pegasus,Boeing 737-800,162,2.4,96.72
+Bremen,DE,BRE,569396,London,GB,STN,11262000,6,Low-Cost Tourist,Ryanair,Boeing 737-800,162,1,33.03
+Bremen,DE,BRE,569396,Stuttgart,DE,STR,2787724,3,Mixed Business/Leisure,Eurowings,Airbus A319,124,1,149.98
+Bremen,DE,BRE,569396,Santa Cruz de Tenerife,ES,TFS,0,1,Pure Leisure,SundAir,Airbus A319,124,4.4,0
+Bremen,DE,BRE,569396,Vienna,AT,VIE,2223236,2,Mixed Business/Leisure,Austrian,Embraer 195,104,1.2,132.55
+Bremen,DE,BRE,569396,Zurich,CH,ZRH,447082,2,Mixed Business/Leisure,SWISS,Airbus A320,150,1.2,243.28
+Edinburgh,GB,EDI,488050,Arrecife,ES,ACE,64497,8,Pure Leisure,Ryanair,Airbus A320,150,4.2,70.58
+Edinburgh,GB,EDI,488050,Agadir,MA,AGA,421844,3,Pure Leisure,easyJet,Airbus A320,150,3.4,75.54
+Edinburgh,GB,EDI,488050,Malaga,ES,AGP,967250,4,Pure Leisure,Ryanair,Boeing 737-800,162,3,105.04
+Edinburgh,GB,EDI,488050,Alicante,ES,ALC,349282,7,Hub-to-Hub,easyJet,Boeing 737-800,162,2.4,109.94
+Edinburgh,GB,EDI,488050,Amsterdam,NL,AMS,1459402,28,Mixed Business/Leisure,KLM,Airbus A320,150,1.2,110.4
+Edinburgh,GB,EDI,488050,Stockholm,SE,ARN,2121000,1,Pure Leisure,Norwegian Air Sweden,Boeing 737-800,162,2,148.63
+Edinburgh,GB,EDI,488050,Athens,GR,ATH,3059764,1,Pure Leisure,Aegean,Airbus A320 NEO,150,3.4,163.26
+Edinburgh,GB,EDI,488050,Antalya,TR,AYT,258139,3,Mixed Business/Leisure,Sun Express,Boeing 737-800,162,4.2,99.72
+Edinburgh,GB,EDI,488050,Barcelona,ES,BCN,4800000,6,Mixed Business/Leisure,Ryanair,Boeing 737,130,2.2,65.55
+Edinburgh,GB,EDI,488050,Berlin,DE,BER,4890363,14,Mixed Business/Leisure,easyJet,Airbus A320,150,1.4,61.21
+Edinburgh,GB,EDI,488050,Belfast,GB,BFS,345006,20,Pure Leisure,easyJet,Airbus A320,150,0.4,36
+Edinburgh,GB,EDI,488050,Bergamo,IT,BGY,119534,3,Pure Leisure,Ryanair,Boeing 737,130,2.2,87.1
+Edinburgh,GB,EDI,488050,Belfast,GB,BHD,345006,14,Pure Business,Aer Lingus,ATR 72,70,0.4,95.88
+Edinburgh,GB,EDI,488050,Birmingham,GB,BHX,2919600,13,Pure Leisure,easyJet,Airbus A320,150,0.4,43.12
+Edinburgh,GB,EDI,488050,Bournemouth,GB,BOH,187503,2,Mixed Business/Leisure,Ryanair UK,Boeing 737-800,162,1,37.59
+Edinburgh,GB,EDI,488050,Basel,CH,BSL,173552,3,Pure Leisure,easyJet,Airbus A320,150,1.4,98.44
+Edinburgh,GB,EDI,488050,Bratislava,SK,BTS,475503,1,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,2.2,72.18
+Edinburgh,GB,EDI,488050,Budapest,HU,BUD,2997958,3,Low-Cost Tourist,Ryanair,Boeing 737,130,2.4,75.92
+Edinburgh,GB,EDI,488050,Beauvais,FR,BVA,56677,2,Hub-to-Hub,Ryanair UK,Boeing 737-800,162,1.2,55.62
+Edinburgh,GB,EDI,488050,Paris,FR,CDG,11060000,20,Mixed Business/Leisure,easyJet,Airbus A320,150,1.2,109.92
+Edinburgh,GB,EDI,488050,Roma,IT,CIA,0,3,Pure Leisure,Ryanair,Boeing 737,130,2.4,82.3
+Edinburgh,GB,EDI,488050,Copenhagen,DK,CPH,1366301,4,Pure Leisure,Ryanair,Boeing 737-800,162,1.4,95.21
+Edinburgh,GB,EDI,488050,Brussels,BE,CRL,1235192,5,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,1.2,47.85
+Edinburgh,GB,EDI,488050,Cardiff,GB,CWL,0,2,Mixed Business/Leisure,Loganair,Embraer RJ145,50,1,114.41
+Edinburgh,GB,EDI,488050,Doha,QA,DOH,1186023,8,Mixed Business/Leisure,Qatar Airways,Boeing 787-8,242,7.2,407.64
+Edinburgh,GB,EDI,488050,Dublin,IE,DUB,1263219,35,Mixed Business/Leisure,Aer Lingus,ATR 72,70,0.4,34.23
+Edinburgh,GB,EDI,488050,Dusseldorf,DE,DUS,629047,1,Hub-to-Hub,Eurowings,Airbus A320,150,1.2,59.43
+Edinburgh,GB,EDI,488050,Dubai,AE,DXB,3331420,4,Low-Cost Tourist,Emirates,Airbus A350-900,325,7.2,490.39
+Edinburgh,GB,EDI,488050,Eindhoven,NL,EIN,243730,1,Mixed Business/Leisure,Ryanair UK,Boeing 737-800,162,1.2,0
+Edinburgh,GB,EDI,488050,Newark,US,EWR,307355,4,Pure Leisure,United,Boeing 757-200,200,6.4,1118.54
+Edinburgh,GB,EDI,488050,Exeter,GB,EXT,124180,2,Pure Leisure,Loganair,ATR 72,70,1,250.87
+Edinburgh,GB,EDI,488050,Faro,PT,FAO,64560,2,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,3,73.03
+Edinburgh,GB,EDI,488050,Rome,IT,FCO,2748109,1,Pure Leisure,Jet2,Boeing 737-800,162,2.4,145.22
+Edinburgh,GB,EDI,488050,Funchal,PT,FNC,29403,1,Hub-to-Hub,Jet2,Boeing 737-800,162,3.4,217.57
+Edinburgh,GB,EDI,488050,Frankfurt,DE,FRA,773068,18,Pure Leisure,Lufthansa,Airbus A319,124,1.4,78.31
+Edinburgh,GB,EDI,488050,Puerto Del Rosario,ES,FUE,0,4,Pure Leisure,Jet2,Boeing 737-800,162,4.2,107.13
+Edinburgh,GB,EDI,488050,Saint Peter Port,GG,GCI,18958,1,Mixed Business/Leisure,Aurigny Air Services,ATR 72,70,1.2,264
+Edinburgh,GB,EDI,488050,Gdańsk,PL,GDN,0,1,Pure Leisure,Ryanair UK,Boeing 737-800,162,2,69.91
+Edinburgh,GB,EDI,488050,Geneva,CH,GVA,203840,11,Mixed Business/Leisure,easyJet,Airbus A320,150,1.4,95.05
+Edinburgh,GB,EDI,488050,Hamburg,DE,HAM,2484800,1,Mixed Business/Leisure,Ryanair,Boeing 737,130,1.2,61.38
+Edinburgh,GB,EDI,488050,Helsinki,FI,HEL,1360075,4,Mixed Business/Leisure,Finnair,Embraer 190,98,2.4,178.75
+Edinburgh,GB,EDI,488050,Castletown,IM,IOM,0,2,Pure Leisure,Loganair,Embraer RJ145,50,0.4,149.79
+Edinburgh,GB,EDI,488050,Istanbul,TR,IST,16079000,5,Hub-to-Hub,Turkish,Airbus A320,150,3.4,148.75
+Edinburgh,GB,EDI,488050,Reykjavik,IS,KEF,139875,1,Pure Leisure,easyJet,Airbus A320,150,2,198.45
+Edinburgh,GB,EDI,488050,Orkney Islands,GB,KOI,0,7,Pure Leisure,Loganair,ATR 72,70,0.4,0
+Edinburgh,GB,EDI,488050,Kraków,PL,KRK,0,5,Pure Leisure,easyJet,Airbus A320,150,2.2,78.99
+Edinburgh,GB,EDI,488050,Kaunas,LT,KUN,393397,1,Pure Leisure,Ryanair,Boeing 737-800,162,2.4,66.55
+Edinburgh,GB,EDI,488050,London,GB,LCY,11262000,27,Pure Business,British Airways,Embraer 190,98,1,163.87
+Edinburgh,GB,EDI,488050,Derry,GB,LDY,85016,1,Low-Cost Tourist,easyJet,Airbus A320,150,0.4,80.29
+Edinburgh,GB,EDI,488050,London,GB,LGW,11262000,17,Pure Leisure,easyJet,Airbus A320,150,1,79.09
+Edinburgh,GB,EDI,488050,London,GB,LHR,11262000,43,Hub-to-Hub,British Airways,Airbus A320,150,1,139.08
+Edinburgh,GB,EDI,488050,Lisbon,PT,LIS,548703,3,Pure Leisure,Ryanair,Boeing 737-800,162,2.4,131.58
+Edinburgh,GB,EDI,488050,Las Palmas,ES,LPA,635000,5,Pure Leisure,Ryanair,Boeing 737,130,4.2,91.99
+Edinburgh,GB,EDI,488050,Lerwick,GB,LSI,6880,6,Pure Leisure,Loganair,ATR 72,70,0.4,514.83
+Edinburgh,GB,EDI,488050,London,GB,LTN,11262000,10,Low-Cost Tourist,easyJet,Airbus A320,150,1,47.93
+Edinburgh,GB,EDI,488050,Lyon,FR,LYS,522250,2,Mixed Business/Leisure,easyJet,Airbus A320,150,1.4,126.81
+Edinburgh,GB,EDI,488050,Madrid,ES,MAD,6211000,5,Mixed Business/Leisure,Ryanair,Boeing 737,130,2.4,112.48
+Edinburgh,GB,EDI,488050,Luqa,MT,MLA,5945,3,Pure Leisure,Ryanair,Boeing 737,130,3.4,99.88
+Edinburgh,GB,EDI,488050,Munich,DE,MUC,2606021,4,Hub-to-Hub,easyJet,Airbus A320,150,2,149.94
+Edinburgh,GB,EDI,488050,Milan,IT,MXP,1354196,4,Hub-to-Hub,easyJet,Airbus A319,124,2,111.36
+Edinburgh,GB,EDI,488050,Napoli,IT,NAP,0,1,Pure Leisure,Ryanair,Boeing 737,130,2.4,150.99
+Edinburgh,GB,EDI,488050,Swinford,IE,NOC,0,1,Pure Leisure,Ryanair UK,Boeing 737-800,162,0.4,32.99
+Edinburgh,GB,EDI,488050,Weeze,DE,NRN,11587,2,Pure Leisure,Ryanair UK,Boeing 737-800,162,1.2,59.43
+Edinburgh,GB,EDI,488050,Porto,PT,OPO,1278210,1,Pure Leisure,Ryanair,Boeing 737-800,162,2.2,140.47
+Edinburgh,GB,EDI,488050,Cork,IE,ORK,222333,5,Pure Leisure,Ryanair,Boeing 737-800,162,1,45.64
+Edinburgh,GB,EDI,488050,Oslo,NO,OSL,1064235,3,Hub-to-Hub,Norwegian Air Shuttle,Boeing 737-800,162,1.4,67.91
+Edinburgh,GB,EDI,488050,Bucharest,RO,OTP,2412530,2,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,3.2,174.66
+Edinburgh,GB,EDI,488050,Paphos,CY,PFO,63600,3,Pure Leisure,easyJet,Airbus A320,150,4.4,110.61
+Edinburgh,GB,EDI,488050,Palma De Mallorca,ES,PMI,0,1,Pure Leisure,Jet2,Boeing 737-800,162,2.4,129.43
+Edinburgh,GB,EDI,488050,Poznań,PL,POZ,0,4,Pure Leisure,Ryanair UK,Boeing 737-800,162,2,69.41
+Edinburgh,GB,EDI,488050,Prague,CZ,PRG,1357326,5,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,2,71.92
+Edinburgh,GB,EDI,488050,Marrakech,MA,RAK,966987,2,Pure Leisure,Ryanair UK,Boeing 737-800,162,3.4,113.77
+Edinburgh,GB,EDI,488050,Riga,LV,RIX,920643,1,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,2.2,48.43
+Edinburgh,GB,EDI,488050,Istanbul,TR,SAW,16079000,2,Mixed Business/Leisure,Pegasus,Airbus A321,185,3.4,149.21
+Edinburgh,GB,EDI,488050,Santander,ES,SDR,172726,1,Pure Leisure,Ryanair,Boeing 737-800,162,2,83.73
+Edinburgh,GB,EDI,488050,Shannon,IE,SNN,9222,2,Pure Leisure,Ryanair,Boeing 737,130,1,51.93
+Edinburgh,GB,EDI,488050,Sofia,BG,SOF,1547779,2,Mixed Business/Leisure,Ryanair,Boeing 737-800,162,3.2,91.01
+Edinburgh,GB,EDI,488050,Southampton,GB,SOU,855569,12,Pure Leisure,Loganair,Embraer RJ145,50,1,646.24
+Edinburgh,GB,EDI,488050,London,GB,STN,11262000,25,Low-Cost Tourist,easyJet,Airbus A320,150,1,36.27
+Edinburgh,GB,EDI,488050,Sevilla,ES,SVQ,1100000,1,Pure Leisure,Ryanair,Boeing 737,130,2.4,97.66
+Edinburgh,GB,EDI,488050,Stornoway,GB,SYY,0,3,Pure Leisure,Loganair,Embraer RJ145,50,0.4,454.1
+Edinburgh,GB,EDI,488050,Venice,IT,VCE,250369,1,Pure Leisure,Ryanair,Boeing 737-800,162,2.2,88.68
+Edinburgh,GB,EDI,488050,Vienna,AT,VIE,2223236,1,Mixed Business/Leisure,Ryanair,Airbus A320,150,2.2,102.14
+Edinburgh,GB,EDI,488050,Wrocław,PL,WRO,0,3,Pure Leisure,Ryanair,Boeing 737-800,162,2,56.36
+Edinburgh,GB,EDI,488050,Zurich,CH,ZRH,447082,2,Hub-to-Hub,Edelweiss Air,Airbus A320,150,1.4,144.47
+Frankfurt,DE,FRA,773068,Abuja,NG,ABV,3770000,3,Pure Leisure,Lufthansa,Airbus A330-300,277,5.4,1007.12
+Frankfurt,DE,FRA,773068,Arrecife,ES,ACE,64497,5,Mixed Business/Leisure,Flight Alaska,Airbus A320,150,4,197.1
+Frankfurt,DE,FRA,773068,Izmir,TR,ADB,4320519,7,Mixed Business/Leisure,Sun Express,Boeing 737,130,2.4,146.92
+Frankfurt,DE,FRA,773068,Addis Ababa,ET,ADD,3041002,4,Pure Leisure,Ethiopian,Airbus A350-900,325,6.4,761.46
+Frankfurt,DE,FRA,773068,Agadir,MA,AGA,421844,2,Pure Leisure,Condor,Airbus A320,150,3.4,227.98
+Frankfurt,DE,FRA,773068,Malaga,ES,AGP,967250,4,Mixed Business/Leisure,Lufthansa,Airbus A320,150,2.4,239.34
+Frankfurt,DE,FRA,773068,Almaty,KZ,ALA,1916822,2,Pure Leisure,Lufthansa,Airbus A340-300,295,6.4,322.9
+Frankfurt,DE,FRA,773068,Alicante,ES,ALC,349282,2,Mixed Business/Leisure,Lufthansa,Airbus A320,150,2.2,212.61
+Frankfurt,DE,FRA,773068,Amman,JO,AMM,4007526,7,Hub-to-Hub,Royal Jordanian,Airbus A320,150,4,315.22
+Frankfurt,DE,FRA,773068,Amsterdam,NL,AMS,1459402,45,Hub-to-Hub,KLM,Airbus A320,150,0.4,271.9
+Frankfurt,DE,FRA,773068,Stockholm,SE,ARN,2121000,18,Pure Leisure,Lufthansa,Airbus A321,185,1.4,253.86
+Frankfurt,DE,FRA,773068,Athens,GR,ATH,3059764,24,Hub-to-Hub,Lufthansa,Airbus A320 NEO,150,2.4,141.81
+Frankfurt,DE,FRA,773068,Atlanta,US,ATL,5180179,7,Hub-to-Hub,Delta Air Lines,Airbus A330-200,247,9.2,1169.84
+Frankfurt,DE,FRA,773068,Abu Dhabi,AE,AUH,1483000,8,Mixed Business/Leisure,Etihad,Boeing 787-9,280,6.2,376.03
+Frankfurt,DE,FRA,773068,Austin,US,AUS,1905945,2,Pure Leisure,Lufthansa,Boeing 787-9,280,10.4,1219.98
+Frankfurt,DE,FRA,773068,Antalya,TR,AYT,258139,8,Mixed Business/Leisure,Sun Express,Boeing 737,130,3.2,161.09
+Frankfurt,DE,FRA,773068,Manama,BH,BAH,635000,4,Mixed Business/Leisure,Gulf Air,Airbus A320,150,5.4,0
+Frankfurt,DE,FRA,773068,Barcelona,ES,BCN,4800000,25,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1.4,230.75
+Frankfurt,DE,FRA,773068,Belgrad,RS,BEG,0,12,Mixed Business/Leisure,Lufthansa,Embraer 195,104,1.4,292.03
+Frankfurt,DE,FRA,773068,Berlin,DE,BER,4890363,114,Mixed Business/Leisure,Lufthansa,Airbus A321,185,0.4,125.98
+Frankfurt,DE,FRA,773068,Beirut,LB,BEY,2421354,4,Mixed Business/Leisure,Middle East,Airbus A320,150,3.4,338.9
+Frankfurt,DE,FRA,773068,Bergen,NO,BGO,291189,6,Pure Leisure,Lufthansa,Airbus A319,124,1.4,265.03
+Frankfurt,DE,FRA,773068,Birmingham,GB,BHX,2919600,14,Hub-to-Hub,Lufthansa,Bombardier CRJ1000,100,1.2,318.76
+Frankfurt,DE,FRA,773068,Bilbao,ES,BIO,775000,7,Pure Leisure,Lufthansa,Airbus A321,185,1.4,262.21
+Frankfurt,DE,FRA,773068,Bangkok,TH,BKK,18007000,10,Mixed Business/Leisure,Thai Airways International,Boeing 777-300ER,365,11.2,748.31
+Frankfurt,DE,FRA,773068,Billund,DK,BLL,0,14,Mixed Business/Leisure,Lufthansa,Airbus A319,124,1.2,319.55
+Frankfurt,DE,FRA,773068,Bangalore,IN,BLR,15386000,4,Mixed Business/Leisure,Lufthansa,Boeing 747-400,416,9.2,525.13
+Frankfurt,DE,FRA,773068,Bordeaux,FR,BOD,994920,2,Pure Leisure,Lufthansa,Bombardier CRJ900,90,1.4,232.75
+Frankfurt,DE,FRA,773068,Bogota,CO,BOG,7968095,3,Mixed Business/Leisure,Lufthansa,Boeing 787-9,280,11.4,1097.85
+Frankfurt,DE,FRA,773068,Mumbai,IN,BOM,24973000,7,Mixed Business/Leisure,Lufthansa,Airbus A340-300,295,8.2,543.49
+Frankfurt,DE,FRA,773068,Boston,US,BOS,4328315,4,Hub-to-Hub,Lufthansa,Airbus A340-600,380,7.4,898.73
+Frankfurt,DE,FRA,773068,Bremen,DE,BRE,569396,39,Pure Leisure,Lufthansa,Airbus A319,124,0.4,287.72
+Frankfurt,DE,FRA,773068,Brussels,BE,BRU,1235192,28,Hub-to-Hub,Lufthansa,Airbus A320,150,0.4,0
+Frankfurt,DE,FRA,773068,Basel,CH,BSL,173552,16,Mixed Business/Leisure,Lufthansa,Bombardier CRJ900,90,0.4,318.66
+Frankfurt,DE,FRA,773068,Budapest,HU,BUD,2997958,18,Mixed Business/Leisure,Lufthansa,Airbus A321,185,1.2,230.13
+Frankfurt,DE,FRA,773068,Cairo,EG,CAI,20296000,9,Mixed Business/Leisure,Lufthansa,Airbus A320,150,3.4,322.49
+Frankfurt,DE,FRA,773068,Paris,FR,CDG,11060000,36,Hub-to-Hub,Lufthansa,Embraer 190,98,0.4,298.41
+Frankfurt,DE,FRA,773068,Charlotte,US,CLT,1427444,4,Hub-to-Hub,American,Boeing 777-200,314,9,1069.14
+Frankfurt,DE,FRA,773068,Colombo,LK,CMB,2323826,2,Mixed Business/Leisure,SriLankan,Airbus A330-300,277,10.2,991.13
+Frankfurt,DE,FRA,773068,Casablanca,MA,CMN,3499000,6,Mixed Business/Leisure,Royal Air Maroc,Boeing 737-800,162,3.2,348.33
+Frankfurt,DE,FRA,773068,Copenhagen,DK,CPH,1366301,21,Hub-to-Hub,Lufthansa,Airbus A321,185,1.2,253.8
+Frankfurt,DE,FRA,773068,Cape Town,ZA,CPT,4770313,6,Mixed Business/Leisure,Lufthansa,Airbus A340-300,295,11.4,997.7
+Frankfurt,DE,FRA,773068,Catania,IT,CTA,298762,2,Pure Leisure,Lufthansa,Airbus A321,185,2.2,255.37
+Frankfurt,DE,FRA,773068,Cancun,MX,CUN,888797,7,Pure Leisure,Condor,Airbus A330-900,287,10.4,912.79
+Frankfurt,DE,FRA,773068,Dubrovnik,HR,DBV,41562,1,Pure Leisure,Croatia,Airbus A319,124,1.4,369.31
+Frankfurt,DE,FRA,773068,New Delhi,IN,DEL,249998,11,Mixed Business/Leisure,Air India,Boeing 787-9,280,7.4,609.12
+Frankfurt,DE,FRA,773068,Denver,US,DEN,2687458,8,Mixed Business/Leisure,United,Boeing 787-9,280,10.2,1036.32
+Frankfurt,DE,FRA,773068,Doha,QA,DOH,1186023,12,Hub-to-Hub,Qatar Airways,Boeing 787-9,280,6,271.9
+Frankfurt,DE,FRA,773068,Dresden,DE,DRS,563311,15,Pure Leisure,Lufthansa,Airbus A320,150,0.4,340.59
+Frankfurt,DE,FRA,773068,Detroit,US,DTW,3725908,4,Hub-to-Hub,Lufthansa,Airbus A340-300,295,8.4,1408.16
+Frankfurt,DE,FRA,773068,Dublin,IE,DUB,1263219,21,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1.4,133.28
+Frankfurt,DE,FRA,773068,Dusseldorf,DE,DUS,629047,20,Hub-to-Hub,Lufthansa,Airbus A321,185,0.4,186.91
+Frankfurt,DE,FRA,773068,Dubai,AE,DXB,3331420,16,Hub-to-Hub,Emirates,Boeing 777-300ER,365,6.2,380.4
+Frankfurt,DE,FRA,773068,Edinburgh,GB,EDI,488050,17,Mixed Business/Leisure,Lufthansa,Airbus A319,124,1.4,263.45
+Frankfurt,DE,FRA,773068,Ankara,TR,ESB,5503985,5,Mixed Business/Leisure,Sun Express,Boeing 737-800,162,3,157.7
+Frankfurt,DE,FRA,773068,Yerevan,AM,EVN,1075800,4,Mixed Business/Leisure,Lufthansa,Airbus A320,150,4,221.97
+Frankfurt,DE,FRA,773068,Newark,US,EWR,307355,10,Hub-to-Hub,United,Boeing 787,0,7.4,937.36
+Frankfurt,DE,FRA,773068,Ezeiza,AR,EZE,0,4,Mixed Business/Leisure,Lufthansa,Boeing 747-8,467,14.2,1714.1
+Frankfurt,DE,FRA,773068,Faro,PT,FAO,64560,3,Pure Leisure,Lufthansa,Airbus A321,185,2.4,383.04
+Frankfurt,DE,FRA,773068,Rome,IT,FCO,2748109,20,Mixed Business/Leisure,Lufthansa,Airbus A321,185,1.4,229.53
+Frankfurt,DE,FRA,773068,Firenze,IT,FLR,0,13,Mixed Business/Leisure,Air Dolomiti,Embraer 195,104,1.2,251.95
+Frankfurt,DE,FRA,773068,Funchal,PT,FNC,29403,4,Pure Leisure,Flight Alaska,Airbus A320,150,3.4,582.63
+Frankfurt,DE,FRA,773068,Puerto Del Rosario,ES,FUE,0,8,Pure Leisure,TUIfly,Boeing 737-800,162,4,277.55
+Frankfurt,DE,FRA,773068,Gdańsk,PL,GDN,0,8,Pure Leisure,Lufthansa,Bombardier CRJ900,90,1.2,277.49
+Frankfurt,DE,FRA,773068,Rio De Janeiro,BR,GIG,0,3,Mixed Business/Leisure,Lufthansa,Boeing 787-9,280,12,1444.32
+Frankfurt,DE,FRA,773068,Glasgow,GB,GLA,626410,13,Mixed Business/Leisure,Lufthansa,Airbus A319,124,1.4,300.69
+Frankfurt,DE,FRA,773068,Gothenburg,SE,GOT,607882,14,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1.2,277.52
+Frankfurt,DE,FRA,773068,Sao Paulo,BR,GRU,23086000,8,Hub-to-Hub,Lufthansa,Boeing 777-300,368,12.2,1166.08
+Frankfurt,DE,FRA,773068,Graz,AT,GRZ,292630,14,Pure Leisure,Air Dolomiti,Embraer 190,98,1,689.63
+Frankfurt,DE,FRA,773068,Geneva,CH,GVA,203840,26,Mixed Business/Leisure,Lufthansa,Bombardier CRJ1000,100,0.4,291.52
+Frankfurt,DE,FRA,773068,Baku,AZ,GYD,2300500,2,Mixed Business/Leisure,Lufthansa,Airbus A321,185,4.4,255.79
+Frankfurt,DE,FRA,773068,Hannover,DE,HAJ,545045,20,Mixed Business/Leisure,Lufthansa,Bombardier CRJ900,90,0.4,261.21
+Frankfurt,DE,FRA,773068,Hamburg,DE,HAM,2484800,49,Hub-to-Hub,Lufthansa,Airbus A321,185,0.4,124.98
+Frankfurt,DE,FRA,773068,Hanoi,VN,HAN,8246600,4,Mixed Business/Leisure,Vietnam,Boeing 787,0,11,730.38
+Frankfurt,DE,FRA,773068,Havana,CU,HAV,2089532,1,Pure Leisure,Condor,Airbus A330-900,287,10.2,1334.56
+Frankfurt,DE,FRA,773068,Helsinki,FI,HEL,1360075,19,Hub-to-Hub,Lufthansa,Airbus A320,150,2.2,260.68
+Frankfurt,DE,FRA,773068,Hong Kong,HK,HKG,7450000,10,Hub-to-Hub,Cathay Pacific,Airbus A340-600,380,11.4,794.77
+Frankfurt,DE,FRA,773068,Phuket,TH,HKT,77610,2,Pure Leisure,Condor,Airbus A330-900,287,11.4,944.24
+Frankfurt,DE,FRA,773068,Tokyo,JP,HND,37732000,12,Hub-to-Hub,ANA,Boeing 787-9,280,11.4,870.18
+Frankfurt,DE,FRA,773068,Hurghada,EG,HRG,0,8,Pure Leisure,Condor,Boeing 757-300,243,4.2,205.9
+Frankfurt,DE,FRA,773068,Hyderabad,IN,HYD,10494000,3,Mixed Business/Leisure,Lufthansa,Boeing 787-9,280,9,682.93
+Frankfurt,DE,FRA,773068,Washington,US,IAD,5116378,12,Hub-to-Hub,United,Boeing 777-300ER,365,8.2,1242.41
+Frankfurt,DE,FRA,773068,Houston,US,IAH,5970127,3,Hub-to-Hub,Lufthansa,Airbus A330-300,277,10.4,1522.34
+Frankfurt,DE,FRA,773068,Seoul,KR,ICN,23016000,11,Hub-to-Hub,Lufthansa,Boeing 747-400,416,10.4,620.08
+Frankfurt,DE,FRA,773068,Innsbruck,AT,INN,130585,6,Pure Leisure,Air Dolomiti,Embraer 195,104,0.4,428.57
+Frankfurt,DE,FRA,773068,Istanbul,TR,IST,16079000,19,Hub-to-Hub,Turkish,Airbus A321,185,2.4,134.09
+Frankfurt,DE,FRA,773068,New York,US,JFK,18908608,15,Hub-to-Hub,Lufthansa,Boeing 777-300ER,365,7.4,851.09
+Frankfurt,DE,FRA,773068,Johannesburg,ZA,JNB,8500000,5,Mixed Business/Leisure,Lufthansa,Boeing 747-8,467,11,928.63
+Frankfurt,DE,FRA,773068,Reykjavik,IS,KEF,139875,5,Pure Leisure,Icelandair,Boeing 737,130,3.2,607.65
+Frankfurt,DE,FRA,773068,Kraków,PL,KRK,0,15,Pure Leisure,Lufthansa,Airbus A320,150,1.2,268.08
+Frankfurt,DE,FRA,773068,Kittila,FI,KTT,0,1,Pure Leisure,Flight Alaska,Airbus A320,150,3,484.25
+Frankfurt,DE,FRA,773068,Katowice,PL,KTW,285711,8,Pure Leisure,Air Dolomiti,Embraer 190,98,1.2,260.77
+Frankfurt,DE,FRA,773068,Kuwait City,KW,KWI,3000000,1,Mixed Business/Leisure,Kuwait Airways,Airbus A320 NEO,150,5.2,338.17
+Frankfurt,DE,FRA,773068,Luanda,AO,LAD,9051000,1,Mixed Business/Leisure,Lufthansa,Airbus A330-300,277,8.2,1327.21
+Frankfurt,DE,FRA,773068,Las Vegas,US,LAS,2248047,1,Pure Leisure,Flight Alaska,Airbus A330-300,277,11.2,918.99
+Frankfurt,DE,FRA,773068,Los Angeles,US,LAX,11922389,4,Hub-to-Hub,Lufthansa,Boeing 747-8,467,11.4,827.56
+Frankfurt,DE,FRA,773068,Larnaca,CY,LCA,84900,2,Mixed Business/Leisure,Lufthansa,Airbus A321,185,3.4,225.85
+Frankfurt,DE,FRA,773068,London,GB,LCY,11262000,17,Pure Business,Air Dolomiti,Embraer 190,98,1,225.22
+Frankfurt,DE,FRA,773068,Leipzig,DE,LEJ,616093,31,Pure Leisure,Lufthansa,Airbus A319,124,0.4,276.03
+Frankfurt,DE,FRA,773068,London,GB,LHR,11262000,57,Hub-to-Hub,Lufthansa,Airbus A320 NEO,150,1.2,248.53
+Frankfurt,DE,FRA,773068,Milan,IT,LIN,1354196,31,Mixed Business/Leisure,Air Dolomiti,Embraer 190,98,1,262.51
+Frankfurt,DE,FRA,773068,Lisbon,PT,LIS,548703,19,Mixed Business/Leisure,TAP Air Portugal,Airbus A320,150,2.4,217.15
+Frankfurt,DE,FRA,773068,Linz,AT,LNZ,210165,10,Pure Leisure,Austrian,ATR 72,70,0.4,480.9
+Frankfurt,DE,FRA,773068,Las Palmas,ES,LPA,635000,12,Pure Leisure,TUIfly,Airbus A320,150,4.2,187.98
+Frankfurt,DE,FRA,773068,La Romana,DO,LRM,139671,11,Pure Leisure,Condor,Airbus A330-900,287,9.4,1316.02
+Frankfurt,DE,FRA,773068,Luxembourg,LU,LUX,132780,20,Mixed Business/Leisure,Air Dolomiti,Embraer 190,98,0.4,361.08
+Frankfurt,DE,FRA,773068,Lyon,FR,LYS,522250,13,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1,311.69
+Frankfurt,DE,FRA,773068,Chennai,IN,MAA,12395000,3,Mixed Business/Leisure,Lufthansa,Airbus A340-300,295,9.4,585.63
+Frankfurt,DE,FRA,773068,Madrid,ES,MAD,6211000,33,Mixed Business/Leisure,Lufthansa,Airbus A321,185,2,201.86
+Frankfurt,DE,FRA,773068,Manchester,GB,MAN,547627,16,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1.2,255.85
+Frankfurt,DE,FRA,773068,Mombasa,KE,MBA,1208333,4,Pure Leisure,Flight Alaska,Airbus A330-300,277,8.4,1287.99
+Frankfurt,DE,FRA,773068,Montego Bay,JM,MBJ,97890,2,Pure Leisure,Condor,Airbus A330-900,287,10.2,1148.64
+Frankfurt,DE,FRA,773068,Orlando,US,MCO,1882705,3,Pure Leisure,Flight Alaska,Airbus A330-200,247,9.4,1184.99
+Frankfurt,DE,FRA,773068,Muscat,OM,MCT,1421409,4,Mixed Business/Leisure,Oman Air,Boeing 787-9,280,6.4,420.86
+Frankfurt,DE,FRA,773068,Mexico City,MX,MEX,21804000,4,Mixed Business/Leisure,Lufthansa,Boeing 747-8,467,12,1319.43
+Frankfurt,DE,FRA,773068,Miami,US,MIA,6080145,6,Mixed Business/Leisure,Lufthansa,Boeing 747-8,467,9.4,559.98
+Frankfurt,DE,FRA,773068,Luqa,MT,MLA,5945,7,Pure Leisure,Lufthansa,Airbus A321,185,2.2,354.98
+Frankfurt,DE,FRA,773068,Malé,MV,MLE,0,4,Pure Leisure,Condor,Airbus A330-900,287,10,1056.87
+Frankfurt,DE,FRA,773068,Marseille,FR,MRS,873076,8,Mixed Business/Leisure,Lufthansa,Airbus A321,185,1.2,259.1
+Frankfurt,DE,FRA,773068,Port Louis,MU,MRU,149194,2,Pure Leisure,Condor,Airbus A330-900,287,11.4,929.98
+Frankfurt,DE,FRA,773068,Minneapolis,US,MSP,2892569,1,Mixed Business/Leisure,Lufthansa,Boeing 787-9,280,9,1075.69
+Frankfurt,DE,FRA,773068,Munich,DE,MUC,2606021,102,Hub-to-Hub,Lufthansa,Airbus A321,185,0.4,295.27
+Frankfurt,DE,FRA,773068,Milan,IT,MXP,1354196,17,Hub-to-Hub,Air Dolomiti,Embraer 195,104,1,299.99
+Frankfurt,DE,FRA,773068,Napoli,IT,NAP,0,4,Pure Leisure,Lufthansa,Airbus A320,150,1.4,242.16
+Frankfurt,DE,FRA,773068,Nairobi,KE,NBO,5545000,4,Mixed Business/Leisure,Lufthansa,Airbus A340-300,295,8,893.84
+Frankfurt,DE,FRA,773068,Nice,FR,NCE,348085,12,Pure Leisure,Lufthansa,Airbus A321,185,1.2,242.82
+Frankfurt,DE,FRA,773068,Newcastle,GB,NCL,300196,2,Pure Leisure,Lufthansa,Bombardier CRJ900,90,1.2,332.41
+Frankfurt,DE,FRA,773068,Astana,KZ,NQZ,1078362,4,Essential/Remote,Air Astana,Airbus A320,150,5.4,368.9
+Frankfurt,DE,FRA,773068,Tokyo,JP,NRT,37732000,4,Hub-to-Hub,Japan Airlines,Boeing 787-9,280,11.4,770.72
+Frankfurt,DE,FRA,773068,Nantes,FR,NTE,323204,3,Mixed Business/Leisure,Lufthansa,Bombardier CRJ900,90,1.2,310.71
+Frankfurt,DE,FRA,773068,Nuremberg,DE,NUE,523026,20,Mixed Business/Leisure,Lufthansa,Bombardier CRJ900,90,0.4,179.67
+Frankfurt,DE,FRA,773068,Porto,PT,OPO,1278210,11,Pure Leisure,Lufthansa,Airbus A321,185,2.2,285.11
+Frankfurt,DE,FRA,773068,Chicago,US,ORD,8497759,15,Hub-to-Hub,United,Boeing 787,0,8.4,952.63
+Frankfurt,DE,FRA,773068,Oslo,NO,OSL,1064235,17,Hub-to-Hub,Lufthansa,Airbus A321,185,1.4,253.07
+Frankfurt,DE,FRA,773068,Bucharest,RO,OTP,2412530,15,Mixed Business/Leisure,Lufthansa,Airbus A320,150,2.2,340.97
+Frankfurt,DE,FRA,773068,Beijing,CN,PEK,18522000,9,Hub-to-Hub,Air China,Boeing 777-300,368,9.4,840.01
+Frankfurt,DE,FRA,773068,Philadelphia,US,PHL,5683533,2,Hub-to-Hub,Flight Alaska,Airbus A330-300,277,8,1585.37
+Frankfurt,DE,FRA,773068,Palma De Mallorca,ES,PMI,0,14,Pure Leisure,Flight Alaska,Airbus A320,150,1.4,251.92
+Frankfurt,DE,FRA,773068,Poznań,PL,POZ,0,11,Pure Leisure,Lufthansa,Bombardier CRJ900,90,1.2,253.61
+Frankfurt,DE,FRA,773068,Prague,CZ,PRG,1357326,19,Mixed Business/Leisure,Lufthansa,Airbus A320,150,0.4,253.19
+Frankfurt,DE,FRA,773068,Prishtina,XK,PRN,0,1,Pure Leisure,Eurowings,Airbus A319,124,1.4,208.62
+Frankfurt,DE,FRA,773068,Punta Cana,DO,PUJ,0,7,Pure Leisure,Condor,Airbus A330-900,287,9.4,1012.31
+Frankfurt,DE,FRA,773068,Shanghai,CN,PVG,24073000,10,Mixed Business/Leisure,China Eastern,Airbus A350-900,325,11.2,969.15
+Frankfurt,DE,FRA,773068,Marrakech,MA,RAK,966987,2,Pure Leisure,Flight Alaska,Airbus A320,150,3.2,364
+Frankfurt,DE,FRA,773068,Raleigh/Durham,US,RDU,0,2,Mixed Business/Leisure,Lufthansa,Airbus A330-300,277,8.4,1132.78
+Frankfurt,DE,FRA,773068,Riga,LV,RIX,920643,8,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1.4,232.36
+Frankfurt,DE,FRA,773068,Marsa Alam,EG,RMF,0,3,Pure Leisure,TUIfly,Airbus A320,150,4.4,444.67
+Frankfurt,DE,FRA,773068,Riyadh,SA,RUH,7237000,5,Mixed Business/Leisure,Lufthansa,Airbus A330-300,277,5.4,350.7
+Frankfurt,DE,FRA,773068,Istanbul,TR,SAW,16079000,13,Mixed Business/Leisure,Pegasus,Airbus A321,185,2.4,134.09
+Frankfurt,DE,FRA,773068,Seattle,US,SEA,3561397,6,Hub-to-Hub,Lufthansa,Airbus A340-300,295,10.2,839.98
+Frankfurt,DE,FRA,773068,Mahe Island,SC,SEZ,0,1,Pure Leisure,Condor,Airbus A330-900,287,9.4,990.57
+Frankfurt,DE,FRA,773068,San Francisco,US,SFO,3364979,11,Hub-to-Hub,United,Boeing 777-300ER,365,11.4,952.83
+Frankfurt,DE,FRA,773068,Ho Chi Minh City,VN,SGN,15136000,3,Mixed Business/Leisure,Vietnam,Boeing 787,0,12.2,662.4
+Frankfurt,DE,FRA,773068,Singapore,SG,SIN,5983000,12,Hub-to-Hub,Singapore,Boeing 777-300ER,365,12.4,723.34
+Frankfurt,DE,FRA,773068,San Jose del Cabo,MX,SJD,136285,1,Pure Leisure,Condor,Airbus A330-900,287,12.2,923.43
+Frankfurt,DE,FRA,773068,Sarajevo,BA,SJJ,419957,4,Pure Leisure,Lufthansa,Airbus A319,124,1.4,273.57
+Frankfurt,DE,FRA,773068,San Jose,CR,SJO,1543000,2,Pure Leisure,Lufthansa,Airbus A340-300,295,11.4,1198.01
+Frankfurt,DE,FRA,773068,Thessaloniki,GR,SKG,802572,6,Pure Leisure,Aegean,Airbus A320 NEO,150,2.2,163.67
+Frankfurt,DE,FRA,773068,Skopje,MK,SKP,526502,5,Pure Leisure,Lufthansa,Airbus A319,124,2,260.76
+Frankfurt,DE,FRA,773068,Sofia,BG,SOF,1547779,9,Mixed Business/Leisure,Lufthansa,Airbus A320,150,2,222.25
+Frankfurt,DE,FRA,773068,Sta Cruz de la Palma,ES,SPC,0,2,Pure Leisure,Flight Alaska,Airbus A320,150,4.2,242.99
+Frankfurt,DE,FRA,773068,Split,HR,SPU,160577,4,Pure Leisure,Croatia,Airbus A319,124,1.4,412.33
+Frankfurt,DE,FRA,773068,St Louis,US,STL,0,2,Mixed Business/Leisure,Lufthansa,Airbus A330-300,277,9.2,2294.42
+Frankfurt,DE,FRA,773068,Stuttgart,DE,STR,2787724,20,Mixed Business/Leisure,Lufthansa,Airbus A320,150,0.4,209.06
+Frankfurt,DE,FRA,773068,Stavanger,NO,SVG,237369,5,Mixed Business/Leisure,Lufthansa,Airbus A319,124,1.4,285.03
+Frankfurt,DE,FRA,773068,Sevilla,ES,SVQ,1100000,2,Pure Leisure,Lufthansa,Airbus A321,185,2.4,238.77
+Frankfurt,DE,FRA,773068,Salzburg,AT,SZG,155021,14,Pure Leisure,Lufthansa,Airbus A319,124,0.4,422.54
+Frankfurt,DE,FRA,773068,Shenzhen,CN,SZX,17619000,1,Mixed Business/Leisure,Air China,Boeing 777-300,368,11.4,698.64
+Frankfurt,DE,FRA,773068,Tashkent,UZ,TAS,2956384,1,Mixed Business/Leisure,Uzbekistan Airways,,0,6,855.69
+Frankfurt,DE,FRA,773068,Tirana,AL,TIA,418495,8,Pure Leisure,Lufthansa,Airbus A320,150,1.4,195.09
+Frankfurt,DE,FRA,773068,Tallinn,EE,TLL,614561,10,Mixed Business/Leisure,Lufthansa,Airbus A320,150,2.2,261.27
+Frankfurt,DE,FRA,773068,Toulouse/Blagnac,FR,TLS,0,11,Mixed Business/Leisure,Lufthansa,Airbus A319,124,1.4,325.46
+Frankfurt,DE,FRA,773068,Tel Aviv,IL,TLV,0,7,Mixed Business/Leisure,Lufthansa,Airbus A320,150,4,319.2
+Frankfurt,DE,FRA,773068,Tromsø,NO,TOS,0,3,Pure Leisure,Lufthansa,Airbus A319,124,3,377.93
+Frankfurt,DE,FRA,773068,Tampa,US,TPA,2861173,2,Mixed Business/Leisure,Flight Alaska,Airbus A330-300,277,9.4,1182.14
+Frankfurt,DE,FRA,773068,Taipei,TW,TPE,2603150,4,Mixed Business/Leisure,China,Airbus A350-900,325,11.4,939.65
+Frankfurt,DE,FRA,773068,Torino,IT,TRN,0,9,Pure Leisure,Air Dolomiti,Embraer 195,104,1,296.61
+Frankfurt,DE,FRA,773068,Trieste,IT,TRS,198417,7,Pure Leisure,Air Dolomiti,Embraer 190,98,1,226.1
+Frankfurt,DE,FRA,773068,Tunis,TN,TUN,602560,10,Mixed Business/Leisure,Lufthansa,Airbus A321,185,2.2,217.15
+Frankfurt,DE,FRA,773068,Venice,IT,VCE,250369,16,Pure Leisure,Lufthansa,Airbus A320,150,1,320.07
+Frankfurt,DE,FRA,773068,Vienna,AT,VIE,2223236,47,Hub-to-Hub,Austrian,Airbus A320,150,1.2,277.93
+Frankfurt,DE,FRA,773068,Valencia,ES,VLC,1595000,11,Pure Leisure,Lufthansa,Airbus A321,185,2,211.57
+Frankfurt,DE,FRA,773068,Vilnius,LT,VNO,716856,8,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1.4,236.86
+Frankfurt,DE,FRA,773068,Varadero,CU,VRA,21170,1,Pure Leisure,Condor,Airbus A330-900,287,10.2,1789.98
+Frankfurt,DE,FRA,773068,Verona,IT,VRN,255588,8,Pure Leisure,Air Dolomiti,Embraer 195,104,1,394.5
+Frankfurt,DE,FRA,773068,Warsaw,PL,WAW,1860281,26,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1.4,279.28
+Frankfurt,DE,FRA,773068,Windhoek,NA,WDH,431000,4,Pure Leisure,Flight Alaska,Airbus A330-300,277,10.2,1035.01
+Frankfurt,DE,FRA,773068,Wrocław,PL,WRO,0,12,Pure Leisure,Lufthansa,Bombardier CRJ900,90,1,276.54
+Frankfurt,DE,FRA,773068,Montreal,CA,YUL,3675219,4,Mixed Business/Leisure,Air Canada,Airbus A330-300,277,7.4,741.98
+Frankfurt,DE,FRA,773068,Vancouver,CA,YVR,2426160,4,Mixed Business/Leisure,Lufthansa,Airbus A340-300,295,10.2,834.34
+Frankfurt,DE,FRA,773068,Calgary,CA,YYC,1306784,3,Mixed Business/Leisure,Flight Alaska,Airbus A330-300,277,9.4,834.54
+Frankfurt,DE,FRA,773068,Toronto,CA,YYZ,5647656,14,Hub-to-Hub,Air Canada,Boeing 747-400,416,8,662.18
+Frankfurt,DE,FRA,773068,Zagreb,HR,ZAG,767131,19,Pure Leisure,Croatia,Bombardier CRJ900,90,1.2,260.16
+Frankfurt,DE,FRA,773068,Zurich,CH,ZRH,447082,32,Hub-to-Hub,Lufthansa,Airbus A320,150,0.4,277.35
+Glasgow,GB,GLA,626410,Arrecife,ES,ACE,64497,5,Pure Leisure,Jet2,Boeing 737-800,162,4.2,73.8
+Glasgow,GB,GLA,626410,Malaga,ES,AGP,967250,6,Pure Leisure,easyJet,Boeing 737-800,162,3,97.29
+Glasgow,GB,GLA,626410,Alicante,ES,ALC,349282,5,Pure Leisure,Jet2,Boeing 737-800,162,2.4,95.9
+Glasgow,GB,GLA,626410,Amsterdam,NL,AMS,1459402,18,Mixed Business/Leisure,KLM,Boeing 737-800,162,1.2,91.68
+Glasgow,GB,GLA,626410,Antalya,TR,AYT,258139,1,Pure Leisure,Jet2,Boeing 737-800,162,4.4,133.18
+Glasgow,GB,GLA,626410,Barcelona,ES,BCN,4800000,1,Mixed Business/Leisure,easyJet,Airbus A319,124,2.2,57.64
+Glasgow,GB,GLA,626410,Gramisdale,GB,BEB,0,5,Essential/Remote,Loganair,Embraer RJ145,50,0.4,438.55
+Glasgow,GB,GLA,626410,Berlin,DE,BER,4890363,2,Mixed Business/Leisure,easyJet,Airbus A319,124,1.4,119.12
+Glasgow,GB,GLA,626410,Belfast,GB,BFS,345006,12,Mixed Business/Leisure,easyJet,Airbus A320,150,0.4,64.71
+Glasgow,GB,GLA,626410,Belfast,GB,BHD,345006,6,Pure Leisure,Aer Lingus,ATR 72,70,0.4,89.88
+Glasgow,GB,GLA,626410,Birmingham,GB,BHX,2919600,5,Mixed Business/Leisure,easyJet,Airbus A319,124,0.4,59.91
+Glasgow,GB,GLA,626410,Daliburgh,GB,BRR,0,7,Pure Leisure,Loganair,De Havilland Canada DHC-6 Twin Otter,19,0.4,239.39
+Glasgow,GB,GLA,626410,Bristol,GB,BRS,707412,10,Mixed Business/Leisure,easyJet,Airbus A320,150,1,61.11
+Glasgow,GB,GLA,626410,Budapest,HU,BUD,2997958,2,Mixed Business/Leisure,Wizz Air,Airbus A320,150,2.4,81.45
+Glasgow,GB,GLA,626410,Campbeltown,GB,CAL,0,6,Pure Leisure,Loganair,De Havilland Canada DHC-6 Twin Otter,19,0.4,1335.05
+Glasgow,GB,GLA,626410,Paris,FR,CDG,11060000,6,Mixed Business/Leisure,easyJet,Airbus A320,150,1.4,144.73
+Glasgow,GB,GLA,626410,Donegal,IE,CFN,2618,1,Pure Leisure,Loganair,ATR 72,70,0.4,189
+Glasgow,GB,GLA,626410,Dublin,IE,DUB,1263219,25,Mixed Business/Leisure,Aer Lingus,ATR 72,70,0.4,37.42
+Glasgow,GB,GLA,626410,Dubai,AE,DXB,3331420,4,Mixed Business/Leisure,Emirates,Airbus A380-800,525,7.4,549.95
+Glasgow,GB,GLA,626410,Faro,PT,FAO,64560,3,Pure Leisure,easyJet,Airbus A320,150,2.4,99.05
+Glasgow,GB,GLA,626410,Rome,IT,FCO,2748109,1,Mixed Business/Leisure,Jet2,Boeing 737-800,162,2.4,137.67
+Glasgow,GB,GLA,626410,Frankfurt,DE,FRA,773068,12,Mixed Business/Leisure,Lufthansa,Airbus A319,124,1.4,104.62
+Glasgow,GB,GLA,626410,Puerto Del Rosario,ES,FUE,0,4,Pure Leisure,easyJet,Boeing 737-800,162,4.2,157.44
+Glasgow,GB,GLA,626410,Hurghada,EG,HRG,0,2,Pure Leisure,easyJet,Airbus A320,150,5.4,298.58
+Glasgow,GB,GLA,626410,Kintra,GB,ILY,0,7,Pure Leisure,Loganair,ATR 42/72 Freighter,10,0.4,312.01
+Glasgow,GB,GLA,626410,Saint Helier,JE,JER,33522,1,Pure Leisure,easyJet,Airbus A319,124,1.2,0
+Glasgow,GB,GLA,626410,Reykjavik,IS,KEF,139875,3,Pure Leisure,Icelandair,Boeing 737,130,2,199.33
+Glasgow,GB,GLA,626410,Kraków,PL,KRK,0,2,Pure Leisure,Ryanair,Boeing 737-800,162,2.4,119.45
+Glasgow,GB,GLA,626410,London,GB,LCY,11262000,17,Pure Business,British Airways,Embraer 190,98,1,192.13
+Glasgow,GB,GLA,626410,Derry,GB,LDY,85016,1,Low-Cost Tourist,Loganair,Embraer RJ145,50,0.4,166.72
+Glasgow,GB,GLA,626410,London,GB,LGW,11262000,17,Pure Leisure,easyJet,Airbus A320,150,1,69.5
+Glasgow,GB,GLA,626410,London,GB,LHR,11262000,45,Hub-to-Hub,British Airways,Airbus A320,150,1,170.85
+Glasgow,GB,GLA,626410,Las Palmas,ES,LPA,635000,3,Pure Leisure,Jet2,Boeing 737-800,162,4.2,156.53
+Glasgow,GB,GLA,626410,Lerwick,GB,LSI,6880,4,Pure Leisure,Loganair,ATR 42/72 Freighter,10,0.4,622.77
+Glasgow,GB,GLA,626410,London,GB,LTN,11262000,10,Low-Cost Tourist,easyJet,Airbus A319,124,1,44.33
+Glasgow,GB,GLA,626410,Luqa,MT,MLA,5945,1,Pure Leisure,Jet2,Boeing 737-800,162,3.4,0
+Glasgow,GB,GLA,626410,Enfidha,TN,NBE,0,1,Pure Leisure,easyJet,Airbus A319,124,3.2,0
+Glasgow,GB,GLA,626410,Cork,IE,ORK,222333,2,Mixed Business/Leisure,Aer Lingus,ATR 72,70,1,118.31
+Glasgow,GB,GLA,626410,Paphos,CY,PFO,63600,1,Pure Leisure,Jet2,Boeing 737-800,162,4.4,267.46
+Glasgow,GB,GLA,626410,Palma De Mallorca,ES,PMI,0,1,Pure Leisure,Jet2,Boeing 737-800,162,2.4,118.83
+Glasgow,GB,GLA,626410,Prague,CZ,PRG,1357326,2,Mixed Business/Leisure,easyJet,Boeing 737-800,162,2,118.6
+Glasgow,GB,GLA,626410,Marrakech,MA,RAK,966987,2,Pure Leisure,easyJet,Boeing 737-800,162,3.4,126.2
+Glasgow,GB,GLA,626410,Southampton,GB,SOU,855569,4,Mixed Business/Leisure,easyJet,Airbus A320,150,1,907.14
+Glasgow,GB,GLA,626410,London,GB,STN,11262000,7,Low-Cost Tourist,easyJet,Airbus A319,124,1,63.5
+Glasgow,GB,GLA,626410,Stornoway,GB,SYY,0,11,Pure Leisure,Loganair,Embraer RJ145,50,0.4,291.15
+Glasgow,GB,GLA,626410,Santa Cruz de Tenerife,ES,TFS,0,8,Pure Leisure,Jet2,Boeing 737-800,162,4.2,0
+Glasgow,GB,GLA,626410,Baugh,GB,TRE,0,7,Pure Leisure,Loganair,De Havilland Canada DHC-6 Twin Otter,19,0.4,913
+Leipzig,DE,LEJ,616093,Antalya,TR,AYT,258139,6,Pure Leisure,Sun Express,Boeing 737-800,162,3,149.81
+Leipzig,DE,LEJ,616093,Frankfurt,DE,FRA,773068,32,Pure Leisure,Lufthansa,Airbus A319,124,0.4,165.24
+Leipzig,DE,LEJ,616093,Puerto Del Rosario,ES,FUE,0,2,Pure Leisure,Condor,Airbus A320,150,4.4,294.8
+Leipzig,DE,LEJ,616093,Hurghada,EG,HRG,0,7,Pure Leisure,Condor,Airbus A321,185,4.2,241.08
+Leipzig,DE,LEJ,616093,Istanbul,TR,IST,16079000,2,Pure Leisure,Turkish,Boeing 737-900,180,2.2,216.41
+Leipzig,DE,LEJ,616093,Las Palmas,ES,LPA,635000,3,Pure Leisure,Condor,Airbus A321,185,4.4,167.98
+Leipzig,DE,LEJ,616093,Bucharest,RO,OTP,2412530,1,Pure Leisure,Wizz Air Malta,Airbus A321,185,1.4,56.94
+Leipzig,DE,LEJ,616093,Palma De Mallorca,ES,PMI,0,4,Pure Leisure,Eurowings,Airbus A321,185,2.2,247.77
+Leipzig,DE,LEJ,616093,Marsa Alam,EG,RMF,0,1,Pure Leisure,Air Cairo,Airbus A320,150,4.4,525.34
+Leipzig,DE,LEJ,616093,London,GB,STN,11262000,3,Low-Cost Tourist,Ryanair,Boeing 737-800,162,1.2,43.03
+Leipzig,DE,LEJ,616093,Santa Cruz de Tenerife,ES,TFS,0,2,Pure Leisure,Condor,Airbus A320,150,4.4,0
+Leipzig,DE,LEJ,616093,Tirana,AL,TIA,418495,2,Pure Leisure,Wizz Air Malta,Airbus A321,185,1.4,50.96
+Leipzig,DE,LEJ,616093,Vienna,AT,VIE,2223236,6,Mixed Business/Leisure,Austrian,ATR 72,70,0.4,403.74
+Munich,DE,MUC,2606021,Arrecife,ES,ACE,64497,3,Pure Leisure,Flight Alaska,Airbus A320,150,4,200.3
+Munich,DE,MUC,2606021,Izmir,TR,ADB,4320519,5,Mixed Business/Leisure,Sun Express,Boeing 737-800,162,2.2,163.99
+Munich,DE,MUC,2606021,Agadir,MA,AGA,421844,1,Pure Leisure,Condor,Airbus A321,185,3.4,137.51
+Munich,DE,MUC,2606021,Malaga,ES,AGP,967250,6,Pure Leisure,Lufthansa,Airbus A321,185,2.4,181.69
+Munich,DE,MUC,2606021,Alicante,ES,ALC,349282,4,Pure Leisure,Lufthansa,Boeing 737,130,2.2,141.17
+Munich,DE,MUC,2606021,Amsterdam,NL,AMS,1459402,45,Hub-to-Hub,KLM,Embraer 190,98,1.2,296.45
+Munich,DE,MUC,2606021,Ancona,IT,AOI,98356,5,Pure Leisure,Air Dolomiti,Embraer 195,104,1,325.02
+Munich,DE,MUC,2606021,Stockholm,SE,ARN,2121000,14,Hub-to-Hub,Lufthansa,Airbus A320,150,2,261.48
+Munich,DE,MUC,2606021,Athens,GR,ATH,3059764,22,Pure Leisure,Lufthansa,Airbus A320 NEO,150,2.2,144.98
+Munich,DE,MUC,2606021,Atlanta,US,ATL,5180179,3,Hub-to-Hub,Delta Air Lines,Boeing 767-400,245,9.4,1413.2
+Munich,DE,MUC,2606021,Abu Dhabi,AE,AUH,1483000,6,Hub-to-Hub,Etihad Airways,Boeing 787-9,280,6,387.91
+Munich,DE,MUC,2606021,Antalya,TR,AYT,258139,8,Pure Leisure,Sun Express,Boeing 737-800,162,2.4,151
+Munich,DE,MUC,2606021,Manama,BH,BAH,635000,2,Mixed Business/Leisure,Gulf Air,Airbus A320,150,5.2,0
+Munich,DE,MUC,2606021,Barcelona,ES,BCN,4800000,28,Mixed Business/Leisure,Lufthansa,Airbus A321,185,1.4,120.59
+Munich,DE,MUC,2606021,Belgrad,RS,BEG,0,7,Mixed Business/Leisure,Lufthansa,Bombardier CRJ900,90,1.2,312.87
+Munich,DE,MUC,2606021,Berlin,DE,BER,4890363,68,Hub-to-Hub,Lufthansa,Airbus A320,150,0.4,198.82
+Munich,DE,MUC,2606021,Bergen,NO,BGO,291189,2,Pure Leisure,Wideroe,,0,2,280.53
+Munich,DE,MUC,2606021,Bilbao,ES,BIO,775000,11,Pure Leisure,Lufthansa,Airbus A320,150,1.4,186.19
+Munich,DE,MUC,2606021,Bangkok,TH,BKK,18007000,8,Hub-to-Hub,Thai Airways International,Airbus A380-800,525,11,784.46
+Munich,DE,MUC,2606021,Billund,DK,BLL,0,8,Pure Leisure,Air Dolomiti,Embraer 195,104,1.2,263.28
+Munich,DE,MUC,2606021,Bangalore,IN,BLR,15386000,3,Mixed Business/Leisure,Lufthansa,Airbus A350-900,325,9,592.86
+Munich,DE,MUC,2606021,Mumbai,IN,BOM,24973000,4,Mixed Business/Leisure,Lufthansa,Airbus A350-900,325,8,534.88
+Munich,DE,MUC,2606021,Boston,US,BOS,4328315,4,Hub-to-Hub,Lufthansa,Airbus A350-900,325,7.4,804.61
+Munich,DE,MUC,2606021,Bremen,DE,BRE,569396,29,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1,223.34
+Munich,DE,MUC,2606021,Bari,IT,BRI,316015,4,Pure Leisure,Air Dolomiti,Embraer 195,104,1.2,258.82
+Munich,DE,MUC,2606021,Basel,CH,BSL,173552,12,Mixed Business/Leisure,Lufthansa,Bombardier CRJ900,90,0.4,267.73
+Munich,DE,MUC,2606021,Budapest,HU,BUD,2997958,10,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1,260.59
+Munich,DE,MUC,2606021,Cairo,EG,CAI,20296000,7,Mixed Business/Leisure,EgyptAir,Airbus A321,185,3.4,314.55
+Munich,DE,MUC,2606021,Paris,FR,CDG,11060000,34,Hub-to-Hub,Lufthansa,Airbus A320,150,1.2,233.3
+Munich,DE,MUC,2606021,Cologne,DE,CGN,1084831,22,Mixed Business/Leisure,Lufthansa,Airbus A320,150,0.4,175.02
+Munich,DE,MUC,2606021,Cluj-Napoca,RO,CLJ,286598,7,Pure Leisure,Lufthansa,Airbus A319,124,1.4,349.58
+Munich,DE,MUC,2606021,Charlotte,US,CLT,1427444,7,Hub-to-Hub,American,Boeing 777-200,314,9.2,1897.96
+Munich,DE,MUC,2606021,Copenhagen,DK,CPH,1366301,19,Hub-to-Hub,Lufthansa,Airbus A320,150,1.2,275.53
+Munich,DE,MUC,2606021,Cape Town,ZA,CPT,4770313,4,Mixed Business/Leisure,Lufthansa,Airbus A350-900,325,11.4,1206.06
+Munich,DE,MUC,2606021,Catania,IT,CTA,298762,2,Pure Leisure,Lufthansa,Airbus A321,185,1.4,177.76
+Munich,DE,MUC,2606021,Debrecen,HU,DEB,328642,2,Pure Leisure,Lufthansa,Bombardier CRJ900,90,1.2,307.37
+Munich,DE,MUC,2606021,New Delhi,IN,DEL,249998,4,Mixed Business/Leisure,Lufthansa,Airbus A380-800,525,7.4,598.55
+Munich,DE,MUC,2606021,Denver,US,DEN,2687458,4,Hub-to-Hub,United,Boeing 787-9,280,10.4,951.99
+Munich,DE,MUC,2606021,Doha,QA,DOH,1186023,8,Hub-to-Hub,Qatar Airways,Boeing 787-9,280,5.4,270.89
+Munich,DE,MUC,2606021,Dresden,DE,DRS,563311,9,Pure Leisure,Lufthansa,Bombardier CRJ900,90,0.4,244.94
+Munich,DE,MUC,2606021,Dortmund,DE,DTM,593317,4,Mixed Business/Leisure,Eurowings,Airbus A319,124,0.4,199.98
+Munich,DE,MUC,2606021,Dublin,IE,DUB,1263219,16,Mixed Business/Leisure,Lufthansa,Airbus A320,150,2,176.58
+Munich,DE,MUC,2606021,Dusseldorf,DE,DUS,629047,39,Hub-to-Hub,Lufthansa,Airbus A319,124,1,179.98
+Munich,DE,MUC,2606021,Jebel Ali,AE,DWC,0,1,Mixed Business/Leisure,ZanAir,Airbus A321,185,6,938.72
+Munich,DE,MUC,2606021,Dubai,AE,DXB,3331420,11,Hub-to-Hub,Emirates,Airbus A380-800,525,5.4,354.36
+Munich,DE,MUC,2606021,Edinburgh,GB,EDI,488050,4,Mixed Business/Leisure,easyJet,Airbus A320,150,2,175.33
+Munich,DE,MUC,2606021,Ankara,TR,ESB,5503985,2,Mixed Business/Leisure,Sun Express,Boeing 737-800,162,2.4,182
+Munich,DE,MUC,2606021,Newark,US,EWR,307355,8,Hub-to-Hub,United,Boeing 767-400,245,8.2,1886.68
+Munich,DE,MUC,2606021,Faro,PT,FAO,64560,2,Pure Leisure,Lufthansa,Airbus A321,185,2.4,251.95
+Munich,DE,MUC,2606021,Rome,IT,FCO,2748109,24,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1.2,217.91
+Munich,DE,MUC,2606021,Firenze,IT,FLR,0,11,Pure Leisure,Air Dolomiti,Embraer 195,104,1,274.19
+Munich,DE,MUC,2606021,Munster,DE,FMO,320946,8,Mixed Business/Leisure,Lufthansa,Airbus A319,124,1,280.21
+Munich,DE,MUC,2606021,Funchal,PT,FNC,29403,3,Pure Leisure,Condor,Airbus A320,150,4,343.61
+Munich,DE,MUC,2606021,Frankfurt,DE,FRA,773068,101,Hub-to-Hub,Lufthansa,Airbus A321,185,0.4,288.82
+Munich,DE,MUC,2606021,Puerto Del Rosario,ES,FUE,0,7,Pure Leisure,Condor,Airbus A320,150,4.2,229.45
+Munich,DE,MUC,2606021,Gdańsk,PL,GDN,0,8,Pure Leisure,Lufthansa,Airbus A320,150,1.2,263.58
+Munich,DE,MUC,2606021,Genova,IT,GOA,0,4,Mixed Business/Leisure,Air Dolomiti,Embraer 195,104,1,723.9
+Munich,DE,MUC,2606021,Gothenburg,SE,GOT,607882,10,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1.4,304.76
+Munich,DE,MUC,2606021,Sao Paulo,BR,GRU,23086000,2,Hub-to-Hub,Lufthansa,Airbus A350-900,325,12.2,918.07
+Munich,DE,MUC,2606021,Graz,AT,GRZ,292630,16,Pure Leisure,Air Dolomiti,Embraer 195,104,0.4,465.08
+Munich,DE,MUC,2606021,Geneva,CH,GVA,203840,30,Mixed Business/Leisure,Air Dolomiti,Embraer 195,104,1,266.48
+Munich,DE,MUC,2606021,Hannover,DE,HAJ,545045,16,Mixed Business/Leisure,Lufthansa,Airbus A319,124,0.4,291.95
+Munich,DE,MUC,2606021,Hamburg,DE,HAM,2484800,38,Hub-to-Hub,Lufthansa,Airbus A319,124,1,263.21
+Munich,DE,MUC,2606021,Helsinki,FI,HEL,1360075,16,Hub-to-Hub,Finnair,Airbus A320,150,2.2,278.4
+Munich,DE,MUC,2606021,Tokyo,JP,HND,37732000,8,Hub-to-Hub,Lufthansa,Boeing 787-9,280,11.4,1017.7
+Munich,DE,MUC,2606021,Hurghada,EG,HRG,0,11,Pure Leisure,Condor,Airbus A321,185,4,188.29
+Munich,DE,MUC,2606021,Washington,US,IAD,5116378,5,Hub-to-Hub,United,Boeing 767-300,218,8.4,893.21
+Munich,DE,MUC,2606021,Houston,US,IAH,5970127,3,Hub-to-Hub,United,Boeing 767-300,218,11,1702.98
+Munich,DE,MUC,2606021,Seoul,KR,ICN,23016000,4,Hub-to-Hub,Lufthansa,Airbus A350-900,325,10.4,697.36
+Munich,DE,MUC,2606021,Istanbul,TR,IST,16079000,16,Hub-to-Hub,Turkish,Airbus A321,185,2.2,147.71
+Munich,DE,MUC,2606021,New York,US,JFK,18908608,4,Hub-to-Hub,Lufthansa,Airbus A350-900,325,8.2,730.18
+Munich,DE,MUC,2606021,Johannesburg,ZA,JNB,8500000,2,Mixed Business/Leisure,Lufthansa,Airbus A350-900,325,10.4,889.84
+Munich,DE,MUC,2606021,Reykjavik,IS,KEF,139875,4,Pure Leisure,Icelandair,Boeing 737,130,3.4,321.19
+Munich,DE,MUC,2606021,Osaka,JP,KIX,15126000,2,Mixed Business/Leisure,Lufthansa,Airbus A350-900,325,11.4,878.5
+Munich,DE,MUC,2606021,Kraków,PL,KRK,0,8,Pure Leisure,Lufthansa,Airbus A320,150,1,249.86
+Munich,DE,MUC,2606021,Kuwait City,KW,KWI,3000000,2,Mixed Business/Leisure,Kuwait Airways,Airbus A320 NEO,150,4.4,318.61
+Munich,DE,MUC,2606021,Los Angeles,US,LAX,11922389,4,Hub-to-Hub,Lufthansa,Airbus A350-900,325,12,1007.6
+Munich,DE,MUC,2606021,Larnaca,CY,LCA,84900,5,Mixed Business/Leisure,Lufthansa,Airbus A320,150,3.2,228.29
+Munich,DE,MUC,2606021,London,GB,LGW,11262000,8,Mixed Business/Leisure,easyJet,Airbus A320,150,1.4,111.19
+Munich,DE,MUC,2606021,London,GB,LHR,11262000,58,Hub-to-Hub,Lufthansa,Airbus A320 NEO,150,1.4,268.38
+Munich,DE,MUC,2606021,Milan,IT,LIN,1354196,8,Mixed Business/Leisure,Air Dolomiti,Embraer 195,104,0.4,308.67
+Munich,DE,MUC,2606021,Lisbon,PT,LIS,548703,19,Mixed Business/Leisure,TAP Air Portugal,Airbus A320,150,2.4,193.75
+Munich,DE,MUC,2606021,Las Palmas,ES,LPA,635000,7,Pure Leisure,Flight Alaska,Airbus A320,150,4.2,190.93
+Munich,DE,MUC,2606021,Luxembourg,LU,LUX,132780,13,Mixed Business/Leisure,Lufthansa,Bombardier CRJ900,90,0.4,245.31
+Munich,DE,MUC,2606021,Lyon,FR,LYS,522250,11,Mixed Business/Leisure,Lufthansa,Bombardier CRJ900,90,1,218.65
+Munich,DE,MUC,2606021,Madrid,ES,MAD,6211000,31,Mixed Business/Leisure,Iberia,Airbus A321,185,2.2,172.16
+Munich,DE,MUC,2606021,Manchester,GB,MAN,547627,10,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1.4,178.69
+Munich,DE,MUC,2606021,Muscat,OM,MCT,1421409,4,Mixed Business/Leisure,Oman Air,Boeing 737,130,6.2,432.91
+Munich,DE,MUC,2606021,Mexico City,MX,MEX,21804000,2,Hub-to-Hub,Lufthansa,Airbus A350-900,325,12.2,1112.27
+Munich,DE,MUC,2606021,Miami,US,MIA,6080145,4,Hub-to-Hub,Lufthansa,Airbus A350-900,325,10.2,552.12
+Munich,DE,MUC,2606021,Luqa,MT,MLA,5945,10,Pure Leisure,KM Malta,Airbus A320,150,2,177.55
+Munich,DE,MUC,2606021,Marseille,FR,MRS,873076,8,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1.2,266.59
+Munich,DE,MUC,2606021,Milan,IT,MXP,1354196,23,Hub-to-Hub,Air Dolomiti,Embraer 195,104,0.4,172.01
+Munich,DE,MUC,2606021,Napoli,IT,NAP,0,10,Pure Leisure,Lufthansa,Airbus A320,150,1.2,95.01
+Munich,DE,MUC,2606021,Nice,FR,NCE,348085,13,Pure Leisure,Lufthansa,Airbus A319,124,1.2,207.82
+Munich,DE,MUC,2606021,Nantes,FR,NTE,323204,2,Mixed Business/Leisure,Lufthansa,Airbus A319,124,1.4,341.76
+Munich,DE,MUC,2606021,Porto,PT,OPO,1278210,7,Pure Leisure,Lufthansa,Airbus A321,185,2.4,214.51
+Munich,DE,MUC,2606021,Chicago,US,ORD,8497759,8,Hub-to-Hub,United,Boeing 787,0,9.2,1044.32
+Munich,DE,MUC,2606021,Osijek,HR,OSI,96313,1,Pure Leisure,Croatia,Bombardier Dash 8 Q400 / DHC-8-400,68,1.2,283.06
+Munich,DE,MUC,2606021,Oslo,NO,OSL,1064235,17,Hub-to-Hub,Lufthansa,Airbus A320,150,2,219.99
+Munich,DE,MUC,2606021,Bucharest,RO,OTP,2412530,12,Mixed Business/Leisure,Lufthansa,Airbus A320 NEO,150,1.4,243.15
+Munich,DE,MUC,2606021,Paderborn,DE,PAD,154755,7,Pure Leisure,Lufthansa,Bombardier CRJ900,90,0.4,317.72
+Munich,DE,MUC,2606021,Beijing,CN,PEK,18522000,7,Hub-to-Hub,Air China,Boeing 777-300,368,9.4,1142.03
+Munich,DE,MUC,2606021,Palma De Mallorca,ES,PMI,0,14,Pure Leisure,Eurowings,Airbus A320,150,1.4,136.38
+Munich,DE,MUC,2606021,Palermo,IT,PMO,630167,2,Pure Leisure,Lufthansa,Airbus A321,185,1.4,173.39
+Munich,DE,MUC,2606021,Poznań,PL,POZ,0,7,Pure Leisure,Lufthansa,Bombardier CRJ900,90,1,235.93
+Munich,DE,MUC,2606021,Prague,CZ,PRG,1357326,10,Mixed Business/Leisure,Lufthansa,Airbus A319,124,0.4,278.27
+Munich,DE,MUC,2606021,Prishtina,XK,PRN,0,8,Pure Leisure,Caspian Airlines,Airbus A320,150,1.4,163.23
+Munich,DE,MUC,2606021,Shanghai,CN,PVG,24073000,6,Hub-to-Hub,Lufthansa,Airbus A350-900,325,11,1006.58
+Munich,DE,MUC,2606021,Marrakech,MA,RAK,966987,2,Pure Leisure,Flight Alaska,Airbus A320,150,3.2,247.95
+Munich,DE,MUC,2606021,Riga,LV,RIX,920643,6,Mixed Business/Leisure,airBaltic,Airbus A220-300,130,1.4,286.31
+Munich,DE,MUC,2606021,Rijeka,HR,RJK,107964,1,Pure Leisure,Croatia,Bombardier Dash 8 Q400 / DHC-8-400,68,0.4,401.31
+Munich,DE,MUC,2606021,Marsa Alam,EG,RMF,0,1,Pure Leisure,Air Cairo,Airbus A320,150,4.2,230.99
+Munich,DE,MUC,2606021,Riyadh,SA,RUH,7237000,1,Mixed Business/Leisure,Saudi Arabian,Airbus A320,150,5.2,310.04
+Munich,DE,MUC,2606021,Rzeszow,PL,RZE,195871,8,Pure Leisure,Lufthansa,Bombardier CRJ900,90,1.2,346.46
+Munich,DE,MUC,2606021,San Diego,US,SAN,3046560,2,Hub-to-Hub,Lufthansa,Airbus A350-900,325,12.2,1686.32
+Munich,DE,MUC,2606021,Istanbul,TR,SAW,16079000,15,Mixed Business/Leisure,Pegasus,Airbus A321,185,2.2,147.71
+Munich,DE,MUC,2606021,Sibiu,RO,SBZ,134308,7,Pure Leisure,Lufthansa,Bombardier CRJ900,90,1.4,278.14
+Munich,DE,MUC,2606021,Seattle,US,SEA,3561397,1,Hub-to-Hub,Lufthansa,Airbus A350-900,325,10.4,1272.4
+Munich,DE,MUC,2606021,San Francisco,US,SFO,3364979,8,Hub-to-Hub,United,Boeing 777,0,11.4,943.45
+Munich,DE,MUC,2606021,Ho Chi Minh City,VN,SGN,15136000,1,Hub-to-Hub,Vietnam,Boeing 787,0,11.4,748.59
+Munich,DE,MUC,2606021,Singapore,SG,SIN,5983000,8,Hub-to-Hub,Singapore,Airbus A350-900,325,12.4,1033.18
+Munich,DE,MUC,2606021,Thessaloniki,GR,SKG,802572,8,Pure Leisure,Aegean,Airbus A320,150,1.4,148.84
+Munich,DE,MUC,2606021,Sofia,BG,SOF,1547779,11,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1.4,281.69
+Munich,DE,MUC,2606021,Split,HR,SPU,160577,4,Pure Leisure,Croatia,Bombardier Dash 8 Q400 / DHC-8-400,68,1.2,420.62
+Munich,DE,MUC,2606021,Stuttgart,DE,STR,2787724,12,Mixed Business/Leisure,Lufthansa,Bombardier CRJ900,90,0.4,210.78
+Munich,DE,MUC,2606021,Sevilla,ES,SVQ,1100000,2,Pure Leisure,Lufthansa,Airbus A321,185,2.4,207.69
+Munich,DE,MUC,2606021,Tashkent,UZ,TAS,2956384,1,Mixed Business/Leisure,Uzbekistan Airways,,0,5.4,872.77
+Munich,DE,MUC,2606021,Tbilisi,GE,TBS,1118035,3,Mixed Business/Leisure,Lufthansa,Airbus A320,150,3.4,219.1
+Munich,DE,MUC,2606021,Santa Cruz de Tenerife,ES,TFS,0,10,Pure Leisure,Flight Alaska,Airbus A320,150,4.2,0
+Munich,DE,MUC,2606021,Tallinn,EE,TLL,614561,2,Mixed Business/Leisure,airBaltic,Airbus A220-300,130,2.2,254.87
+Munich,DE,MUC,2606021,Toulouse/Blagnac,FR,TLS,0,12,Mixed Business/Leisure,Lufthansa,Airbus A320,150,1.4,322.87
+Munich,DE,MUC,2606021,Tel Aviv,IL,TLV,0,7,Hub-to-Hub,Lufthansa,Airbus A320,150,3.4,410.25
+Munich,DE,MUC,2606021,Taipei,TW,TPE,2603150,2,Hub-to-Hub,EVA Air,Boeing 787-9,280,11.4,1035.6
+Munich,DE,MUC,2606021,Torino,IT,TRN,0,12,Pure Leisure,Air Dolomiti,Embraer 195,104,0.4,252.49
+Munich,DE,MUC,2606021,Timisoara,RO,TSR,250849,3,Mixed Business/Leisure,Lufthansa,Airbus A319,124,1.2,345.84
+Munich,DE,MUC,2606021,Tunis,TN,TUN,602560,4,Mixed Business/Leisure,Tunisair,Airbus A320,150,1.4,248.09
+Munich,DE,MUC,2606021,Venice,IT,VCE,250369,12,Pure Leisure,Air Dolomiti,Embraer 195,104,0.4,347.62
+Munich,DE,MUC,2606021,Vienna,AT,VIE,2223236,23,Hub-to-Hub,Austrian,Airbus A320,150,0.4,256.21
+Munich,DE,MUC,2606021,Valencia,ES,VLC,1595000,2,Pure Leisure,Lufthansa,Airbus A321,185,2,195.5
+Munich,DE,MUC,2606021,Vilnius,LT,VNO,716856,3,Mixed Business/Leisure,airBaltic,Airbus A220-300,130,1.4,268.02
+Munich,DE,MUC,2606021,Verona,IT,VRN,255588,8,Pure Leisure,Air Dolomiti,Embraer 195,104,0.4,325.17
+Munich,DE,MUC,2606021,Warsaw,PL,WAW,1860281,23,Mixed Business/Leisure,Lufthansa,Airbus A319,124,1.2,320.98
+Munich,DE,MUC,2606021,Wrocław,PL,WRO,0,8,Pure Leisure,Lufthansa,Bombardier CRJ900,90,0.4,287.9
+Munich,DE,MUC,2606021,Montreal,CA,YUL,3675219,3,Hub-to-Hub,Lufthansa,Airbus A350-900,325,7.4,1257.69
+Munich,DE,MUC,2606021,Vancouver,CA,YVR,2426160,1,Hub-to-Hub,Lufthansa,Airbus A350-900,325,10.4,948.93
+Munich,DE,MUC,2606021,Toronto,CA,YYZ,5647656,4,Hub-to-Hub,Air Canada,Boeing 777-300ER,365,8.4,959.86
+Munich,DE,MUC,2606021,Zagreb,HR,ZAG,767131,13,Pure Leisure,Croatia,Bombardier Dash 8 Q400 / DHC-8-400,68,0.4,333.39
+Munich,DE,MUC,2606021,Zurich,CH,ZRH,447082,23,Hub-to-Hub,Lufthansa,Airbus A319,124,0.4,221.39
+Sydney,AU,SYD,4840600,Albury,AU,ABX,4804,22,Essential/Remote,Qantas,Bombardier Dash 8 Q400 / DHC-8-400,68,0.4,241.45
+Sydney,AU,SYD,4840600,Adelaide,AU,ADL,1295714,69,Mixed Business/Leisure,Qantas,Boeing 737-800,162,1.4,167.66
+Sydney,AU,SYD,4840600,Auckland,NZ,AKL,1346091,49,Hub-to-Hub,Qantas,Boeing 737-800,162,3,272.29
+Sydney,AU,SYD,4840600,Armidale,AU,ARM,21312,14,Essential/Remote,Qantas,Bombardier Dash 8 Q400 / DHC-8-400,68,0.4,1428.38
+Sydney,AU,SYD,4840600,Alice Springs,AU,ASP,23726,3,Essential/Remote,Qantas,Boeing 737-800,162,2.4,1408.93
+Sydney,AU,SYD,4840600,Abu Dhabi,AE,AUH,1483000,4,Hub-to-Hub,Etihad Airways,Boeing 787-9,280,15,801.3
+Sydney,AU,SYD,4840600,Melbourne,AU,AVV,5031195,20,Low-Cost Tourist,Jetstar,Airbus A320,150,1.2,61.72
+Sydney,AU,SYD,4840600,Ayers Rock,AU,AYQ,0,4,Essential/Remote,Jetstar,Airbus A320,150,3,205.89
+Sydney,AU,SYD,4840600,Broken Hill,AU,BHQ,17706,7,Essential/Remote,Rex Regional Express,Saab 340,34,1.4,386.04
+Sydney,AU,SYD,4840600,Bangkok,TH,BKK,18007000,12,Mixed Business/Leisure,Thai Airways International,Airbus A350-900,325,9.4,361.92
+Sydney,AU,SYD,4840600,Bangalore,IN,BLR,15386000,4,Mixed Business/Leisure,Qantas,Airbus A330-200,247,11.4,518.6
+Sydney,AU,SYD,4840600,Brisbane,AU,BNE,2360241,159,Mixed Business/Leisure,Qantas,Boeing 737-800,162,1.2,101.05
+Sydney,AU,SYD,4840600,Ballina,AU,BNK,8655,21,Essential/Remote,Jetstar,Airbus A320,150,1,90.17
+Sydney,AU,SYD,4840600,Busselton,AU,BQB,25329,2,Essential/Remote,Jetstar,Airbus A320,150,4.2,402.38
+Sydney,AU,SYD,4840600,Guangzhou,CN,CAN,26940000,8,Mixed Business/Leisure,China Southern,Airbus A350-900,325,9.4,2342.5
+Sydney,AU,SYD,4840600,Canberra,AU,CBR,381488,97,Mixed Business/Leisure,Qantas,Bombardier Dash 8 Q400 / DHC-8-400,68,0.4,193.63
+Sydney,AU,SYD,4840600,Coffs Harbour,AU,CFS,25752,21,Essential/Remote,Qantas,Saab 340,34,0.4,240.82
+Sydney,AU,SYD,4840600,Jakarta,ID,CGK,33756000,6,Mixed Business/Leisure,Qantas,Airbus A330-300,277,7,330.43
+Sydney,AU,SYD,4840600,Christchurch,NZ,CHC,383200,17,Mixed Business/Leisure,Qantas,Boeing 737-800,162,3,361.75
+Sydney,AU,SYD,4840600,Chongqing,CN,CKG,12135000,1,Mixed Business/Leisure,Tianjin,Airbus A330-200,247,10.4,443.15
+Sydney,AU,SYD,4840600,Colombo,LK,CMB,2323826,2,Mixed Business/Leisure,SriLankan,Airbus A330-300,277,11,485.29
+Sydney,AU,SYD,4840600,Cairns,AU,CNS,146778,24,Pure Leisure,Jetstar,Boeing 737-800,162,2.4,123.84
+Sydney,AU,SYD,4840600,Dubbo,AU,DBO,38783,29,Essential/Remote,Qantas,Bombardier Dash 8 Q400 / DHC-8-400,68,0.4,262.6
+Sydney,AU,SYD,4840600,New Delhi,IN,DEL,249998,4,Mixed Business/Leisure,Air India,Boeing 787-8,242,13,518.53
+Sydney,AU,SYD,4840600,Dallas-Fort Worth,US,DFW,0,4,Hub-to-Hub,Qantas,Boeing 787-9,280,17.2,0
+Sydney,AU,SYD,4840600,Doha,QA,DOH,1186023,4,Hub-to-Hub,Qatar Airways,Airbus A380-800,525,15.4,815.32
+Sydney,AU,SYD,4840600,Denpasar-Bali Island,ID,DPS,0,22,Pure Leisure,Jetstar,Airbus A320,150,6,272.97
+Sydney,AU,SYD,4840600,Darwin,AU,DRW,139902,8,Essential/Remote,Qantas,Boeing 737-800,162,4.2,281.97
+Sydney,AU,SYD,4840600,Dubai,AE,DXB,3331420,12,Hub-to-Hub,Emirates,Airbus A380-800,525,15,781.16
+Sydney,AU,SYD,4840600,Griffith,AU,GFF,18196,11,Essential/Remote,Rex Regional Express,Saab 340,34,0.4,265.02
+Sydney,AU,SYD,4840600,Haikou,CN,HAK,2873358,2,Mixed Business/Leisure,Hainan,Airbus A330-300,277,9.2,406.75
+Sydney,AU,SYD,4840600,Hanoi,VN,HAN,8246600,3,Mixed Business/Leisure,Vietnam,Airbus A350-900,325,9.4,322.57
+Sydney,AU,SYD,4840600,Hobart,AU,HBA,197451,32,Mixed Business/Leisure,Qantas,Airbus A220-300,130,1.4,101.14
+Sydney,AU,SYD,4840600,Hangzhou,CN,HGH,9523000,1,Mixed Business/Leisure,China Eastern,Airbus A330-200,247,9.4,569.31
+Sydney,AU,SYD,4840600,Hong Kong,HK,HKG,7450000,20,Hub-to-Hub,Cathay Pacific,Airbus A350-900,325,9.2,371.68
+Sydney,AU,SYD,4840600,Phuket,TH,HKT,77610,2,Pure Leisure,Jetstar,Boeing 787-8,242,9.2,374.07
+Sydney,AU,SYD,4840600,Tokyo,JP,HND,37732000,20,Hub-to-Hub,Qantas,Boeing 787-9,280,9.4,415.58
+Sydney,AU,SYD,4840600,Honolulu,US,HNL,348547,7,Mixed Business/Leisure,Qantas,Boeing 787-9,280,10.2,555.71
+Sydney,AU,SYD,4840600,Hamilton Island,AU,HTI,0,10,Pure Leisure,Virgin Australia,Boeing 737-800,162,2.2,138.56
+Sydney,AU,SYD,4840600,Hervey Bay,AU,HVB,57722,2,Essential/Remote,Jetstar,Airbus A320,150,1.4,107.7
+Sydney,AU,SYD,4840600,Houston,US,IAH,5970127,4,Hub-to-Hub,United,Boeing 787-9,280,17.2,952.99
+Sydney,AU,SYD,4840600,Seoul,KR,ICN,23016000,14,Hub-to-Hub,Korean Air,Boeing 777-300ER,365,10.4,328.82
+Sydney,AU,SYD,4840600,Johannesburg,ZA,JNB,8500000,4,Mixed Business/Leisure,Qantas,Airbus A380-800,525,13.4,1122.81
+Sydney,AU,SYD,4840600,Osaka,JP,KIX,15126000,2,Mixed Business/Leisure,Jetstar,Boeing 787-8,242,9.4,517.98
+Sydney,AU,SYD,4840600,Kuala Lumpur,MY,KUL,8911000,12,Mixed Business/Leisure,Malaysia,Airbus A330-300,277,8.2,322.23
+Sydney,AU,SYD,4840600,Los Angeles,US,LAX,11922389,18,Hub-to-Hub,Delta Air Lines,Airbus A350-900,325,15,827.42
+Sydney,AU,SYD,4840600,Lord Howe Island,AU,LDH,0,9,Essential/Remote,Qantas,Bombardier Dash 8 / DHC-8,37,1.2,785.59
+Sydney,AU,SYD,4840600,Launceston,AU,LST,80943,13,Essential/Remote,Jetstar,Airbus A320,150,1.4,83.15
+Sydney,AU,SYD,4840600,Maroochydore,AU,MCY,16800,27,Mixed Business/Leisure,Jetstar,Boeing 737-800,162,1.2,83.5
+Sydney,AU,SYD,4840600,Melbourne,AU,MEL,5031195,274,Hub-to-Hub,Qantas,Boeing 737-800,162,1.2,61.72
+Sydney,AU,SYD,4840600,Merimbula,AU,MIM,3544,9,Pure Leisure,Rex Regional Express,Saab 340,34,0.4,289.24
+Sydney,AU,SYD,4840600,Manila,PH,MNL,24922000,11,Mixed Business/Leisure,Qantas,Airbus A330-300,277,8,382.3
+Sydney,AU,SYD,4840600,Mildura,AU,MQL,34565,3,Pure Leisure,Qantas,Bombardier Dash 8 Q400 / DHC-8-400,68,1.2,313.91
+Sydney,AU,SYD,4840600,Moree,AU,MRZ,7070,6,Essential/Remote,Qantas,Bombardier Dash 8 / DHC-8,37,1,241.82
+Sydney,AU,SYD,4840600,Moruya,AU,MYA,0,3,Mixed Business/Leisure,Rex Regional Express,Saab 340,34,0.4,610.28
+Sydney,AU,SYD,4840600,Narrabri,AU,NAA,5499,2,Essential/Remote,Fly Corporate,Fairchild-Swearingen SA226,19,0.4,303.39
+Sydney,AU,SYD,4840600,Nadi,FJ,NAN,71048,11,Mixed Business/Leisure,Fiji Airways,Boeing 737,130,4.2,303.74
+Sydney,AU,SYD,4840600,Nanjing,CN,NKG,8422000,2,Hub-to-Hub,China Eastern,Airbus A330-200,247,10.2,405.44
+Sydney,AU,SYD,4840600,Burnt Pine,NF,NLK,0,2,Essential/Remote,Qantas,Boeing 737-800,162,2.2,528.69
+Sydney,AU,SYD,4840600,Noumea,NC,NOU,182341,3,Pure Leisure,Qantas,Boeing 737-800,162,2.4,546.42
+Sydney,AU,SYD,4840600,Narrandera,AU,NRA,0,3,Essential/Remote,Rex Regional Express,Saab 340,34,0.4,262.64
+Sydney,AU,SYD,4840600,Orange,AU,OAG,38097,15,Mixed Business/Leisure,Qantas,Bombardier Dash 8 Q400 / DHC-8-400,68,0.4,213.23
+Sydney,AU,SYD,4840600,Gold Coast,AU,OOL,607665,75,Pure Leisure,Virgin Australia,Boeing 737-800,162,1.2,83.83
+Sydney,AU,SYD,4840600,Beijing,CN,PEK,18522000,2,Hub-to-Hub,Air China,Boeing 777-300ER,365,11.2,422.11
+Sydney,AU,SYD,4840600,Perth,AU,PER,2141834,58,Hub-to-Hub,Qantas,Boeing 737-800,162,4.2,293.46
+Sydney,AU,SYD,4840600,Parkes,AU,PKE,9832,3,Essential/Remote,Rex Regional Express,Saab 340,34,0.4,239.25
+Sydney,AU,SYD,4840600,Port Moresby,PG,POM,700000,1,Mixed Business/Leisure,Air Niugini,Boeing 737-800,162,3.4,532.26
+Sydney,AU,SYD,4840600,Proserpine,AU,PPP,3440,3,Pure Leisure,Jetstar,Airbus A320,150,2.2,243.25
+Sydney,AU,SYD,4840600,Port Macquarie,AU,PQQ,44830,22,Pure Leisure,Qantas,Bombardier Dash 8 Q400 / DHC-8-400,68,0.4,241.27
+Sydney,AU,SYD,4840600,Shanghai,CN,PVG,24073000,10,Hub-to-Hub,China Eastern,Airbus A350-900,325,10,337
+Sydney,AU,SYD,4840600,Avarua,CK,RAR,4009,1,Pure Leisure,Jetstar,Airbus A320,150,6.4,818.97
+Sydney,AU,SYD,4840600,Santiago,CL,SCL,7171000,4,Hub-to-Hub,Qantas,Boeing 787-9,280,14.2,2001.6
+Sydney,AU,SYD,4840600,San Francisco,US,SFO,3364979,6,Hub-to-Hub,United,Boeing 777-300ER,365,15,1004.43
+Sydney,AU,SYD,4840600,Ho Chi Minh City,VN,SGN,15136000,8,Mixed Business/Leisure,Vietnam,Airbus A350-900,325,8.4,350.74
+Sydney,AU,SYD,4840600,Singapore,SG,SIN,5983000,39,Hub-to-Hub,Singapore,Boeing 777-300ER,365,8,340.54
+Sydney,AU,SYD,4840600,Shenzhen,CN,SZX,17619000,2,Mixed Business/Leisure,China Southern,Airbus A330,250,9.2,414.67
+Sydney,AU,SYD,4840600,Qingdao,CN,TAO,5818255,2,Mixed Business/Leisure,Beijing Capital,Airbus A330,250,10.4,428.58
+Sydney,AU,SYD,4840600,Nuku'alofa,TO,TBU,0,1,Pure Leisure,Qantas,Boeing 737-800,162,4.4,522.34
+Sydney,AU,SYD,4840600,Tamworth,AU,TMW,180,15,Essential/Remote,Qantas,Bombardier Dash 8 Q400 / DHC-8-400,68,0.4,240.82
+Sydney,AU,SYD,4840600,Jinan,CN,TNA,5606374,1,Mixed Business/Leisure,China Eastern,Airbus A330-200,247,10.4,331.77
+Sydney,AU,SYD,4840600,Taipei,TW,TPE,2603150,2,Hub-to-Hub,China,Airbus A350-900,325,9.2,370.79
+Sydney,AU,SYD,4840600,Townsville,AU,TSV,173724,7,Mixed Business/Leisure,Jetstar,Airbus A320,150,2.2,148.02
+Sydney,AU,SYD,4840600,Port Vila,VU,VLI,0,2,Pure Leisure,Jetstar,Airbus A320,150,3.2,253.31
+Sydney,AU,SYD,4840600,Wagga Wagga,AU,WGA,49686,26,Essential/Remote,Qantas,Bombardier Dash 8 Q400 / DHC-8-400,68,0.4,262.01
+Sydney,AU,SYD,4840600,Wellington,NZ,WLG,216200,11,Mixed Business/Leisure,Qantas,Boeing 737-800,162,3,335.9
+Sydney,AU,SYD,4840600,Wellcamp,AU,WTB,0,2,Essential/Remote,Qantas,Bombardier Dash 8 Q400 / DHC-8-400,68,1.2,329.61
+Sydney,AU,SYD,4840600,Xiamen,CN,XMN,3707090,4,Mixed Business/Leisure,Xiamen,Boeing 787-8,242,9.2,418.92
+Sydney,AU,SYD,4840600,Vancouver,CA,YVR,2426160,6,Hub-to-Hub,Air Canada,Boeing 777-200LR,301,15.4,1072.81
+Sydney,AU,SYD,4840600,Queenstown,NZ,ZQN,0,17,Pure Leisure,Qantas,Boeing 737-800,162,2.4,512.89

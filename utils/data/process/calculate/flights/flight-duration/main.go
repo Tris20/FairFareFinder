@@ -3,11 +3,11 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"log"
-	"math"
-
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/schollz/progressbar/v3"
+	"log"
+	"math"
+	"os"
 )
 
 // Haversine formula to calculate distance between two coordinates
@@ -70,34 +70,53 @@ func formatDuration(hours float64) (float64, int, float64) {
 }
 
 func main() {
-	// Paths to the databases
-	mainDBPath := "../../../../../../data/compiled/new_main.db"
-	locationsDBPath := "../../../../../../data/raw/locations/locations.db"
+	// Determine mode from arguments.
+	// Default mode: update flight durations in the main DB (flight table)
+	// "calculate_prices" mode: update flight durations in flight-prices.db (routes table)
+	mode := "default"
+	if len(os.Args) > 1 && os.Args[1] == "calculate_prices" {
+		mode = "calculate_prices"
+	}
 
-	log.Printf("Connecting to main database at: %s", mainDBPath)
+	var mainDBPath string
+	var tableName string
+
+	if mode == "calculate_prices" {
+		mainDBPath = "../../../../../../data/generated/flight-prices.db"
+		tableName = "routes"
+		log.Printf("Running in calculate_prices mode. Updating %s table in %s", tableName, mainDBPath)
+	} else {
+		mainDBPath = "../../../../../../data/compiled/new_main.db"
+		tableName = "flight"
+		log.Printf("Running in default mode. Updating %s table in %s", tableName, mainDBPath)
+	}
+
+	// Open the main database.
 	mainDB, err := sql.Open("sqlite3", mainDBPath)
 	if err != nil {
-		log.Fatalf("Failed to open main.db: %v", err)
+		log.Fatalf("Failed to open main database: %v", err)
 	}
 	defer mainDB.Close()
 
+	// The locations database (for airport coordinates) remains the same.
+	locationsDBPath := "../../../../../../data/raw/locations/locations.db"
 	log.Printf("Connecting to locations database at: %s", locationsDBPath)
 	locationsDB, err := sql.Open("sqlite3", locationsDBPath)
 	if err != nil {
-		log.Fatalf("Failed to open locations.db: %v", err)
+		log.Fatalf("Failed to open locations database: %v", err)
 	}
 	defer locationsDB.Close()
 
-	// Query flight routes and process them
-	log.Printf("Querying flight routes from flight table")
-	flightQuery := `SELECT id, origin_iata, destination_iata FROM flight`
-	rows, err := mainDB.Query(flightQuery)
+	// Depending on the mode, query from the appropriate table.
+	query := fmt.Sprintf(`SELECT id, origin_iata, destination_iata FROM %s`, tableName)
+	log.Printf("Querying routes from table: %s", tableName)
+	rows, err := mainDB.Query(query)
 	if err != nil {
-		log.Fatalf("Failed to query flight table: %v", err)
+		log.Fatalf("Failed to query %s table: %v", tableName, err)
 	}
 	defer rows.Close()
 
-	// Start transaction for updates
+	// Begin transaction for updates.
 	tx, err := mainDB.Begin()
 	if err != nil {
 		log.Fatalf("Failed to begin transaction: %v", err)
@@ -118,75 +137,74 @@ func main() {
 		}
 	}()
 
-	// Initialize progress bar
-	var totalFlights int
+	// Initialize progress bar.
 	bar := progressbar.NewOptions(-1, progressbar.OptionSetDescription("Calculating flight durations"))
+	var totalRoutes int
 
-	// Iterate through flight routes
+	// Iterate through each route.
 	for rows.Next() {
-		totalFlights++
-		var flightID int
+		totalRoutes++
+		var id int
 		var originIATA, destinationIATA string
-		if err := rows.Scan(&flightID, &originIATA, &destinationIATA); err != nil {
-			log.Fatalf("Failed to scan flight row: %v", err)
+		if err := rows.Scan(&id, &originIATA, &destinationIATA); err != nil {
+			log.Fatalf("Failed to scan row: %v", err)
 		}
 
-		log.Printf("Processing flight ID %d: %s -> %s", flightID, originIATA, destinationIATA)
+		log.Printf("Processing route ID %d: %s -> %s", id, originIATA, destinationIATA)
 
-		// Get lat/lon for origin airport
+		// Get coordinates for origin and destination airports.
 		originLat, originLon, err := getAirportCoordinates(locationsDB, originIATA)
 		if err != nil {
-			log.Printf("Skipping flight ID %d due to missing origin coordinates: %v", flightID, err)
+			log.Printf("Skipping route ID %d due to missing origin coordinates: %v", id, err)
 			bar.Add(1)
 			continue
 		}
 
-		// Get lat/lon for destination airport
 		destLat, destLon, err := getAirportCoordinates(locationsDB, destinationIATA)
 		if err != nil {
-			log.Printf("Skipping flight ID %d due to missing destination coordinates: %v", flightID, err)
+			log.Printf("Skipping route ID %d due to missing destination coordinates: %v", id, err)
 			bar.Add(1)
 			continue
 		}
 
-		// Calculate distance and flight time
+		// Calculate distance and flight time.
 		distance := haversine(originLat, originLon, destLat, destLon)
-		log.Printf("Calculated distance for flight ID %d: %.2f km", flightID, distance)
+		log.Printf("Calculated distance for route ID %d: %.2f km", id, distance)
 		flightTime := calculateAdjustedFlightTime(distance)
+		log.Printf("Route ID %d: Calculated flightTime = %.2f hours", id, flightTime)
 
-		log.Printf("Flight ID %d: Calculated flightTime = %.2f hours", flightID, flightTime)
-		// Calculate formatted durations
+		// Format the duration values.
 		durationHourDotMins, durationMinutes, durationHoursRounded := formatDuration(flightTime)
-		hoursPart := int(durationHourDotMins) // Hours without minutes
+		hoursPart := int(durationHourDotMins) // integer hours part
 
-		// Log calculated values
-		log.Printf("Flight ID %d: DurationHourDotMins = %.2f, DurationInMinutes = %d, DurationInHours = %d, DurationHoursRounded = %.2f",
-			flightID, durationHourDotMins, durationMinutes, hoursPart, durationHoursRounded)
+		log.Printf("Route ID %d: duration_hour_dot_mins = %.2f, duration_in_minutes = %d, duration_in_hours = %d, duration_in_hours_rounded = %.2f",
+			id, durationHourDotMins, durationMinutes, hoursPart, durationHoursRounded)
 
-		// Update flight duration within the transaction
-		updateQuery := `
-			UPDATE flight 
-			SET duration_hour_dot_mins = ?, 
-			    duration_in_minutes = ?, 
-			    duration_in_hours = ?, 
-			    duration_in_hours_rounded = ? 
-			WHERE id = ?`
-		_, err = tx.Exec(updateQuery, durationHourDotMins, durationMinutes, float64(hoursPart), durationHoursRounded, flightID)
+		// Build the update query using the same duration column names.
+		updateQuery := fmt.Sprintf(`
+			UPDATE %s
+			SET duration_hour_dot_mins = ?,
+			    duration_in_minutes = ?,
+			    duration_in_hours = ?,
+			    duration_in_hours_rounded = ?
+			WHERE id = ?`, tableName)
+
+		_, err = tx.Exec(updateQuery, durationHourDotMins, durationMinutes, float64(hoursPart), durationHoursRounded, id)
 		if err != nil {
-			log.Printf("Failed to update flight duration for ID %d: %v", flightID, err)
+			log.Printf("Failed to update duration for route ID %d: %v", id, err)
 		} else {
-			log.Printf("Successfully updated flight ID %d", flightID)
+			log.Printf("Successfully updated route ID %d", id)
 		}
 
 		bar.Add(1)
 	}
 
 	if err := rows.Err(); err != nil {
-		log.Fatalf("Error iterating through flight rows: %v", err)
+		log.Fatalf("Error iterating through rows: %v", err)
 	}
 
 	bar.Finish()
-	log.Printf("Processed %d flight routes successfully", totalFlights)
+	log.Printf("Processed %d routes successfully", totalRoutes)
 }
 
 // Fetch airport coordinates from locations.db
