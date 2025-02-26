@@ -1,25 +1,28 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/csv"
 	"fmt"
 	"log"
+	"math/rand"
 	"os"
 	"strconv"
 	"strings"
+	"time"
 
-	"database/sql"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/sajari/regression"
 )
 
-// (Encoding maps and helper functions from previous code...)
+// Encoding maps and helper functions.
 var (
-	originCityMap              = make(map[string]float64)
-	destinationCityMap         = make(map[string]float64)
-	airlineMap                 = make(map[string]float64)
-	routeClassMap              = make(map[string]float64)
-	aircraftMap                = make(map[string]float64)
+	originCityMap      = make(map[string]float64)
+	destinationCityMap = make(map[string]float64)
+	airlineMap         = make(map[string]float64)
+	routeClassMap      = make(map[string]float64)
+	aircraftMap        = make(map[string]float64)
+
 	nextOriginCityCode float64 = 1
 	nextDestCityCode   float64 = 1
 	nextAirlineCode    float64 = 1
@@ -37,8 +40,9 @@ func encodeString(val string, m map[string]float64, next *float64) float64 {
 	return m[val]
 }
 
-// parseDuration converts a "H.MM" string (e.g. "7.45") into total minutes.
-// If no dot is present, we assume the value represents hours.
+// parseDuration converts a "H.MM" string into total minutes.
+// It calculates: fd = hours*60 + minutes*10.
+// If no dot is present, the value is assumed to represent hours.
 func parseDuration(duration string) (int, error) {
 	if !strings.Contains(duration, ".") {
 		hours, err := strconv.Atoi(duration)
@@ -52,15 +56,16 @@ func parseDuration(duration string) (int, error) {
 		return 0, fmt.Errorf("unexpected duration format: %s", duration)
 	}
 	hours, err1 := strconv.Atoi(parts[0])
-	minutes, err2 := strconv.Atoi(parts[1])
+	mins, err2 := strconv.Atoi(parts[1])
 	if err1 != nil || err2 != nil {
 		return 0, fmt.Errorf("invalid numeric values in duration: %s", duration)
 	}
-	return hours*60 + minutes, nil
+	return hours*60 + mins*10, nil
 }
 
 func main() {
-	// --- Model Training Section (same as before) ---
+	// Seed the random number generator.
+	rand.Seed(time.Now().UnixNano())
 
 	// Open the training CSV file.
 	f, err := os.Open("flight_prices.csv")
@@ -77,26 +82,26 @@ func main() {
 	}
 
 	// Create and configure the regression model.
-	var r regression.Regression
-	r.SetObserved("actual_price")
-	r.SetVar(0, "bias")
-	r.SetVar(1, "origin_population")
-	r.SetVar(2, "destination_population")
-	r.SetVar(3, "route_frequency")
-	r.SetVar(4, "origin_city")
-	r.SetVar(5, "destination_city")
-	r.SetVar(6, "airline")
-	r.SetVar(7, "route_class")
-	r.SetVar(8, "aircraft")
-	r.SetVar(9, "seating_capacity")
-	r.SetVar(10, "duration_minutes")
+	var regModel regression.Regression
+	regModel.SetObserved("actual_price")
+	regModel.SetVar(0, "bias")
+	regModel.SetVar(1, "origin_population")
+	regModel.SetVar(2, "destination_population")
+	regModel.SetVar(3, "route_frequency")
+	regModel.SetVar(4, "origin_city")
+	regModel.SetVar(5, "destination_city")
+	regModel.SetVar(6, "airline")
+	regModel.SetVar(7, "route_class")
+	regModel.SetVar(8, "aircraft")
+	regModel.SetVar(9, "seating_capacity")
+	regModel.SetVar(10, "duration_minutes")
 
 	startRow := 0
 	if strings.Contains(strings.ToLower(records[0][0]), "origin_city_name") {
 		startRow = 1
 	}
 
-	// Train the model.
+	// Train the regression model.
 	for i := startRow; i < len(records); i++ {
 		rec := records[i]
 		if len(rec) < 15 {
@@ -117,6 +122,7 @@ func main() {
 			log.Printf("Skipping record %d: %v", i, err)
 			continue
 		}
+
 		originCityEnc := encodeString(rec[0], originCityMap, &nextOriginCityCode)
 		destCityEnc := encodeString(rec[4], destinationCityMap, &nextDestCityCode)
 		airlineEnc := encodeString(rec[10], airlineMap, &nextAirlineCode)
@@ -132,23 +138,21 @@ func main() {
 			destCityEnc,
 			airlineEnc,
 			routeClassEnc,
-			float64(aircraftEnc),
+			aircraftEnc,
 			float64(seatCapacity),
 			float64(durationMinutes),
 		}
-		r.Train(regression.DataPoint(actualPrice, features))
+		regModel.Train(regression.DataPoint(actualPrice, features))
 	}
-	r.Run()
-	fmt.Printf("Regression Formula:\n%v\n\n", r.Formula)
-
-	// --- Prediction and Output Section ---
+	regModel.Run()
+	fmt.Printf("Regression Formula:\n%v\n\n", regModel.Formula)
 
 	// Open (or create) the predictions SQLite DB.
 	predDB, err := os.OpenFile("predictions.db", os.O_CREATE|os.O_RDWR, 0644)
 	if err != nil {
 		log.Fatalf("Failed to open predictions.db: %v", err)
 	}
-	predDB.Close() // We'll use the sqlite3 driver to create the DB below.
+	predDB.Close()
 
 	// Open a connection using the sqlite3 driver.
 	db, err := sql.Open("sqlite3", "predictions.db")
@@ -201,7 +205,7 @@ INSERT INTO predictions (
 	}
 	defer insertStmt.Close()
 
-	// Iterate over the CSV records again, predict and insert results.
+	// Iterate over the CSV records again to predict and insert results.
 	for i := startRow; i < len(records); i++ {
 		rec := records[i]
 		if len(rec) < 15 {
@@ -223,7 +227,8 @@ INSERT INTO predictions (
 			log.Printf("Skipping record %d: %v", i, err)
 			continue
 		}
-		// Encode the same categorical fields.
+
+		// Encode the categorical fields.
 		originCityEnc := encodeString(rec[0], originCityMap, &nextOriginCityCode)
 		destCityEnc := encodeString(rec[4], destinationCityMap, &nextDestCityCode)
 		airlineEnc := encodeString(rec[10], airlineMap, &nextAirlineCode)
@@ -239,28 +244,67 @@ INSERT INTO predictions (
 			destCityEnc,
 			airlineEnc,
 			routeClassEnc,
-			float64(aircraftEnc),
+			aircraftEnc,
 			float64(seatCapacity),
 			float64(durationMinutes),
 		}
 
-		// Get the predicted price.
-		predictedPrice, _ := r.Predict(features)
-		priceDifference := predictedPrice - actualPrice
+		// Get the predicted price from the regression.
+		predictedPrice, _ := regModel.Predict(features)
+		finalPrice := predictedPrice // start with the regression prediction
 
+		fd := durationMinutes
+		pricePerMinute := finalPrice / float64(fd)
+		randomMultiplier := rand.Float64()*(1.1-0.9) + 0.9
+		// --- Apply new boundary rules ---
+		if fd > 240 {
+			randomMultiplier = rand.Float64()*(1.05-0.95) + 0.95
+			if pricePerMinute < 1.4 {
+				finalPrice = 1.4 * float64(fd) * (randomMultiplier)
+			}
+			if pricePerMinute > 2.3 {
+				finalPrice = 2.3 * float64(fd) * (randomMultiplier)
+
+			}
+		} else if fd <= 60 {
+			if pricePerMinute < 0.9 {
+				finalPrice = 60.0 * (randomMultiplier)
+			}
+			if finalPrice > 210 {
+				finalPrice = 0
+			}
+		} else if fd > 60 && fd <= 120 {
+			if pricePerMinute < 0.9 {
+				finalPrice = 0.9 * float64(fd) * (randomMultiplier)
+			}
+			if finalPrice > 240 {
+				finalPrice = 0
+			}
+		} else if fd > 120 && fd <= 240 {
+			if pricePerMinute < 0.9 {
+				finalPrice = 0.9 * float64(fd) * (randomMultiplier)
+
+			}
+			if finalPrice > 260 {
+				finalPrice = 0
+			}
+		}
+
+		// Compute the price difference and error metrics.
+		priceDifference := finalPrice - actualPrice
 		var errorMultiple float64
-		if actualPrice > 0 && predictedPrice > 0 {
-			if predictedPrice >= actualPrice {
-				errorMultiple = predictedPrice / actualPrice
+		if actualPrice > 0 && finalPrice > 0 {
+			if finalPrice >= actualPrice {
+				errorMultiple = finalPrice / actualPrice
 			} else {
-				errorMultiple = actualPrice / predictedPrice
+				errorMultiple = actualPrice / finalPrice
 			}
 		}
 
 		var errorDirection string
-		if predictedPrice > actualPrice {
+		if finalPrice > actualPrice {
 			errorDirection = "too high"
-		} else if predictedPrice < actualPrice {
+		} else if finalPrice < actualPrice {
 			errorDirection = "too low"
 		} else {
 			errorDirection = "equal"
@@ -283,7 +327,7 @@ INSERT INTO predictions (
 			seatCapacity,
 			rec[13], // duration_hour_dot_mins
 			actualPrice,
-			predictedPrice,
+			finalPrice,
 			priceDifference,
 			errorMultiple,
 			errorDirection,
