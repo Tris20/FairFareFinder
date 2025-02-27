@@ -41,7 +41,7 @@ func encodeString(val string, m map[string]float64, next *float64) float64 {
 }
 
 // parseDuration converts a "H.MM" string into total minutes.
-// It calculates: fd = hours*60 + minutes*10.
+// It calculates: totalMinutes = hours*60 + minutes*10.
 // If no dot is present, the value is assumed to represent hours.
 func parseDuration(duration string) (int, error) {
 	if !strings.Contains(duration, ".") {
@@ -67,6 +67,9 @@ func main() {
 	// Seed the random number generator.
 	rand.Seed(time.Now().UnixNano())
 
+	// ===========================
+	// Training Phase - Build Model
+	// ===========================
 	// Open the training CSV file.
 	f, err := os.Open("flight_prices.csv")
 	if err != nil {
@@ -147,21 +150,17 @@ func main() {
 	regModel.Run()
 	fmt.Printf("Regression Formula:\n%v\n\n", regModel.Formula)
 
-	// Open (or create) the predictions SQLite DB.
-	predDB, err := os.OpenFile("predictions.db", os.O_CREATE|os.O_RDWR, 0644)
+	// ====================================
+	// Prediction Phase - Populate DB Table
+	// ====================================
+	// Open (or create) the predictions SQLite DB in the generated folder.
+	db, err := sql.Open("sqlite3", "../../../data/generated/flight-prices.db")
 	if err != nil {
-		log.Fatalf("Failed to open predictions.db: %v", err)
-	}
-	predDB.Close()
-
-	// Open a connection using the sqlite3 driver.
-	db, err := sql.Open("sqlite3", "predictions.db")
-	if err != nil {
-		log.Fatalf("Error opening predictions.db: %v", err)
+		log.Fatalf("Error opening flight-prices.db: %v", err)
 	}
 	defer db.Close()
 
-	// Create the predictions table.
+	// Create the predictions table if it doesn't exist.
 	createTableSQL := `
 CREATE TABLE IF NOT EXISTS predictions (
 	origin_city_name TEXT,
@@ -190,7 +189,7 @@ CREATE TABLE IF NOT EXISTS predictions (
 		log.Fatalf("Error creating predictions table: %v", err)
 	}
 
-	// Prepare an insert statement.
+	// Prepare an INSERT statement for predictions.
 	insertStmt, err := db.Prepare(`
 INSERT INTO predictions (
 	origin_city_name, origin_country, origin_iata, origin_population,
@@ -253,44 +252,42 @@ INSERT INTO predictions (
 		predictedPrice, _ := regModel.Predict(features)
 		finalPrice := predictedPrice // start with the regression prediction
 
+		// Apply boundary rules based on flight duration.
 		fd := durationMinutes
 		pricePerMinute := finalPrice / float64(fd)
 		randomMultiplier := rand.Float64()*(1.1-0.9) + 0.9
-		// --- Apply new boundary rules ---
 		if fd > 240 {
 			randomMultiplier = rand.Float64()*(1.05-0.95) + 0.95
 			if pricePerMinute < 1.4 {
-				finalPrice = 1.4 * float64(fd) * (randomMultiplier)
+				finalPrice = 1.4 * float64(fd) * randomMultiplier
 			}
 			if pricePerMinute > 2.3 {
-				finalPrice = 2.3 * float64(fd) * (randomMultiplier)
-
+				finalPrice = 2.3 * float64(fd) * randomMultiplier
 			}
 		} else if fd <= 60 {
 			if pricePerMinute < 0.9 {
-				finalPrice = 60.0 * (randomMultiplier)
+				finalPrice = 60.0 * randomMultiplier
 			}
 			if finalPrice > 210 {
 				finalPrice = 0
 			}
 		} else if fd > 60 && fd <= 120 {
 			if pricePerMinute < 0.9 {
-				finalPrice = 0.9 * float64(fd) * (randomMultiplier)
+				finalPrice = 0.9 * float64(fd) * randomMultiplier
 			}
 			if finalPrice > 240 {
 				finalPrice = 0
 			}
 		} else if fd > 120 && fd <= 240 {
 			if pricePerMinute < 0.9 {
-				finalPrice = 0.9 * float64(fd) * (randomMultiplier)
-
+				finalPrice = 0.9 * float64(fd) * randomMultiplier
 			}
 			if finalPrice > 260 {
 				finalPrice = 0
 			}
 		}
 
-		// Compute the price difference and error metrics.
+		// Compute price difference and error metrics.
 		priceDifference := finalPrice - actualPrice
 		var errorMultiple float64
 		if actualPrice > 0 && finalPrice > 0 {
@@ -310,7 +307,7 @@ INSERT INTO predictions (
 			errorDirection = "equal"
 		}
 
-		// Insert all fields into the predictions table.
+		// Insert the data (with the predicted price) into the predictions table.
 		_, err = insertStmt.Exec(
 			rec[0], // origin_city_name
 			rec[1], // origin_country
@@ -337,5 +334,5 @@ INSERT INTO predictions (
 		}
 	}
 
-	fmt.Println("Predictions inserted into predictions.db table 'predictions'")
+	fmt.Println("Predictions inserted into flight-prices.db table 'predictions'")
 }
