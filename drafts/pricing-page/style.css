@@ -40,9 +40,11 @@ body {
 
 .plansHero__title {
   font-size: 2.5rem;
-  color: var(--highlightColor);
+  color: #fdf6f8;
   margin-bottom: 0.5rem;
   font-weight: 700;
+  background-color: #13554feb;
+  border-radius: 10px;
 }
 
 .plansHero__subtitle {
@@ -208,4 +210,17 @@ body {
   .planItem {
     padding: 1.5rem;
   }
+}
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("dreams.png");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  filter: blur(69px) grayscale(35.8%);
 }

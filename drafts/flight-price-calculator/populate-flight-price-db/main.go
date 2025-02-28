@@ -8,8 +8,14 @@ import (
 	"path/filepath"
 
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/schollz/progressbar/v3"
 )
 
+/*
+	This script gets the schedule data from flights.db, figures out a bunch of average traits using the flight_price_modifiers
+
+and returns a flight-prices.db file in data/generated with everything except the predicted prices
+*/
 func main() {
 	// Open the raw flights database.
 	rawDBPath := filepath.Join("../../../data/raw/flights", "flights.db")
@@ -55,6 +61,19 @@ func main() {
 	}
 	defer rows.Close()
 
+	// Get the total number of unique routes for the progress bar.
+	var totalRoutes int
+	countQuery := `SELECT COUNT(DISTINCT departureAirport || '-' || arrivalAirport) FROM schedule;`
+	err = rawDB.QueryRow(countQuery).Scan(&totalRoutes)
+	if err != nil {
+		log.Printf("Failed to count unique routes: %v", err)
+		// Fallback to zero. The progress bar will show unknown total.
+		totalRoutes = 0
+	}
+
+	// Initialize the progress bar.
+	bar := progressbar.Default(int64(totalRoutes))
+
 	// Prepare an INSERT statement for the routes table.
 	insertStmt, err := fpDB.Prepare(`
 		INSERT INTO routes (
@@ -74,6 +93,7 @@ func main() {
 		var departureAirport, arrivalAirport string
 		if err := rows.Scan(&departureAirport, &arrivalAirport); err != nil {
 			log.Printf("Failed to scan route: %v", err)
+			_ = bar.Add(1)
 			continue
 		}
 
@@ -85,6 +105,7 @@ func main() {
 		).Scan(&routeFrequency)
 		if err != nil {
 			log.Printf("Failed to count flights for route %s -> %s: %v", departureAirport, arrivalAirport, err)
+			_ = bar.Add(1)
 			continue
 		}
 
@@ -99,6 +120,7 @@ func main() {
 		).Scan(&mostCommonAirline)
 		if err != nil && err != sql.ErrNoRows {
 			log.Printf("Failed to get most common airline for route %s -> %s: %v", departureAirport, arrivalAirport, err)
+			_ = bar.Add(1)
 			continue
 		}
 
@@ -113,6 +135,7 @@ func main() {
 		).Scan(&mostCommonAircraft)
 		if err != nil && err != sql.ErrNoRows {
 			log.Printf("Failed to get most common aircraft for route %s -> %s: %v", departureAirport, arrivalAirport, err)
+			_ = bar.Add(1)
 			continue
 		}
 
@@ -232,14 +255,16 @@ func main() {
 		)
 		if err != nil {
 			log.Printf("Failed to insert route %s -> %s: %v", departureAirport, arrivalAirport, err)
-			continue
+		} else {
+			log.Printf("Inserted route %s -> %s: frequency=%d, origin=%s (%s, pop=%d), destination=%s (%s, pop=%d), aircraft=%s (seats=%d), classification=%s",
+				departureAirport, arrivalAirport, routeFrequency,
+				originCity, originCountry, originPopulation,
+				destCity, destCountry, destPopulation,
+				mostCommonAircraft, seatingCapacity, routeClassification)
 		}
 
-		log.Printf("Inserted route %s -> %s: frequency=%d, origin=%s (%s, pop=%d), destination=%s (%s, pop=%d), aircraft=%s (seats=%d), classification=%s",
-			departureAirport, arrivalAirport, routeFrequency,
-			originCity, originCountry, originPopulation,
-			destCity, destCountry, destPopulation,
-			mostCommonAircraft, seatingCapacity, routeClassification)
+		// Update the progress bar.
+		_ = bar.Add(1)
 	}
 
 	if err := rows.Err(); err != nil {
@@ -249,12 +274,8 @@ func main() {
 	fmt.Println("Successfully processed and inserted unique routes into flight-prices.db")
 
 	// Call the "flight-duration" executable with the argument "calculate_prices".
-	// The executable is located at "/utils/data/process/calculate/flights/flight-duration".
-	// Set the working directory for the flight-duration executable.
 	flightDurationDir := filepath.Join("../../../utils/data/process/calculate/flights/flight-duration")
-	// Use a relative path to the executable since we are setting the working directory.
 	cmd := exec.Command("./flight-duration", "calculate_prices")
-	// Set the command's working directory to the flight-duration directory.
 	cmd.Dir = flightDurationDir
 
 	output, err := cmd.CombinedOutput()
