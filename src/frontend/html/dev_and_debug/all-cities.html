@@ -14,17 +14,36 @@
                 Load More Cities
             </button>
         </div> -->
+
     <div style="margin-top: 50px">
       <table class="all-cities-table" id="cities-container">
-        <!-- Rows of cities will be appended here -->
+        <!-- Rows of cities will be replaced here -->
       </table>
     </div>
     <div
-      hx-get="/load-more-cities"
-      hx-trigger="every 10ms"
-      hx-target="#cities-container"
-      hx-swap="beforeend"
-      hx-on="htmx:afterRequest: if (event.detail.xhr.status !== 200) this.remove()"
-    ></div>
+      style="
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: white;
+        z-index: 1000;
+      "
+    >
+      <button
+        hx-get="/load-more-cities"
+        hx-trigger="click"
+        hx-target="#cities-container"
+        hx-swap="innerHTML"
+        style="
+          height: 36px;
+          left: 526px;
+          position: absolute;
+          top: 11px;
+          width: 218px;
+        "
+      >
+        Load More Cities
+      </button>
+    </div>
   </body>
 </html>
