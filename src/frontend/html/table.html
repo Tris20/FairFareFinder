@@ -45,8 +45,13 @@
       <a href="{{.UrlCity1}}" target="_blank" class="clickable">
         <p>
           Flights From: {{ if and .PriceCity1.Valid (ne .PriceCity1.Float64
-          0.00) }} €{{ printf "%.0f" .PriceCity1.Float64 }} {{ else }} N/A {{
-          end }}
+          0.00) }} €{{ printf "%.0f" .PriceCity1.Float64 }} {{ else }} Find
+          Fares
+          <i
+            class="fa-solid fa-arrow-up-right-from-square"
+            style="font-size: 65%"
+          ></i>
+          {{ end }}
         </p>
       </a>
 
@@ -104,10 +109,20 @@
 
       <div class="flight-accom-prices">
         <label> Flights From: </label>
-        <a href="{{ .UrlCity1 }}" target="_blank" class="clickable">
+        <a href="{{.UrlCity1}}" target="_blank" class="clickable">
           <p>
             {{ if and .PriceCity1.Valid (ne .PriceCity1.Float64 0.00) }} €{{
-            printf "%.0f" .PriceCity1.Float64 }} {{ else }} N/A {{ end }}
+            printf "%.0f" .PriceCity1.Float64 }}
+            <i
+              class="fa-solid fa-arrow-up-right-from-square"
+              style="font-size: 65%"
+            ></i>
+            {{ else }} Find Fares
+            <i
+              class="fa-solid fa-arrow-up-right-from-square"
+              style="font-size: 65%"
+            ></i>
+            {{ end }}
           </p>
         </a>
       </div>
@@ -116,7 +131,12 @@
         <a href="{{ .BookingUrl.String }}" target="_blank" class="clickable">
           <p>
             {{ if and .BookingPppn.Valid (ne .BookingPppn.Float64 0.00) }} €{{
-            printf "%.0f" .BookingPppn.Float64 }} {{ else }} N/A {{ end }}
+            printf "%.0f" .BookingPppn.Float64 }}
+            <i
+              class="fa-solid fa-arrow-up-right-from-square"
+              style="font-size: 65%"
+            ></i>
+            {{ else }} N/A {{ end }}
           </p>
         </a>
       </div>
@@ -175,10 +195,19 @@
             {{ end }} {{ end }}
           </div>
 
-          <a href="{{ .UrlCity1 }}" target="_blank" class="clickable">
+          <a href="{{.UrlCity1}}" target="_blank" class="clickable">
             <p>
               Flights From: {{ if and .PriceCity1.Valid (ne .PriceCity1.Float64
-              0.00) }} €{{ printf "%.0f" .PriceCity1.Float64 }} {{ else }} N/A
+              0.00) }} €{{ printf "%.0f" .PriceCity1.Float64 }}
+              <i
+                class="fa-solid fa-arrow-up-right-from-square"
+                style="font-size: 65%"
+              ></i
+              >{{ else }} Find Fares
+              <i
+                class="fa-solid fa-arrow-up-right-from-square"
+                style="font-size: 65%"
+              ></i>
               {{ end }}
             </p>
           </a>
@@ -187,7 +216,12 @@
             <p>
               Avg. Hotel Price: {{ if and .BookingPppn.Valid (ne
               .BookingPppn.Float64 0.00) }} €{{ printf "%.0f"
-              .BookingPppn.Float64 }} {{ else }} N/A {{ end }}
+              .BookingPppn.Float64 }}
+              <i
+                class="fa-solid fa-arrow-up-right-from-square"
+                style="font-size: 65%"
+              ></i>
+              {{ else }} N/A {{ end }}
             </p>
           </a>
         </div>
