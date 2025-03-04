@@ -90,7 +90,9 @@
 
       <div class="weather-icons">
         {{ range $index, $element := .WeatherForecast }} {{ if lt $index 5 }}
+
         <a class="weather-icon" href="{{ $element.GoogleUrl }}" target="_blank">
+          <div class="weather-day">{{ getDayOfWeek $index }}</div>
           <img
             src="{{ $element.WeatherIcon }}"
             alt="Weather Icon"
@@ -103,6 +105,7 @@
         </a>
         {{ end }} {{ end }}
       </div>
+
       <!--p>
         Five Nights and Flights: {{if and .FiveNightsFlights.Valid (ne .FiveNightsFlights.Float64 0.00)}}€{{printf "%.2f" .FiveNightsFlights.Float64}}{{else}}N/A{{end}}
       </p-->
@@ -181,7 +184,13 @@
           <div class="weather-icons">
             {{ range $index, $element := .WeatherForecast }} {{ if lt $index 5
             }}
-            <div class="weather-icon">
+
+            <a
+              class="weather-icon"
+              href="{{ $element.GoogleUrl }}"
+              target="_blank"
+            >
+              <div class="weather-day">{{ getDayOfWeek $index }}</div>
               <img
                 src="{{ $element.WeatherIcon }}"
                 alt="Weather Icon"
@@ -191,7 +200,7 @@
                 {{ if $element.AvgDaytimeTemp.Valid }} {{ printf "%.0f°C"
                 $element.AvgDaytimeTemp.Float64 }} {{ else }} N/A {{ end }}
               </div>
-            </div>
+            </a>
             {{ end }} {{ end }}
           </div>
 
