@@ -45,8 +45,13 @@
       <a href="{{.UrlCity1}}" target="_blank" class="clickable">
         <p>
           Flights From: {{ if and .PriceCity1.Valid (ne .PriceCity1.Float64
-          0.00) }} €{{ printf "%.0f" .PriceCity1.Float64 }} {{ else }} N/A {{
-          end }}
+          0.00) }} €{{ printf "%.0f" .PriceCity1.Float64 }} {{ else }} Find
+          Fares
+          <i
+            class="fa-solid fa-arrow-up-right-from-square"
+            style="font-size: 65%"
+          ></i>
+          {{ end }}
         </p>
       </a>
 
@@ -85,7 +90,9 @@
 
       <div class="weather-icons">
         {{ range $index, $element := .WeatherForecast }} {{ if lt $index 5 }}
+
         <a class="weather-icon" href="{{ $element.GoogleUrl }}" target="_blank">
+          <div class="weather-day">{{ getDayOfWeek $index }}</div>
           <img
             src="{{ $element.WeatherIcon }}"
             alt="Weather Icon"
@@ -98,16 +105,27 @@
         </a>
         {{ end }} {{ end }}
       </div>
+
       <!--p>
         Five Nights and Flights: {{if and .FiveNightsFlights.Valid (ne .FiveNightsFlights.Float64 0.00)}}€{{printf "%.2f" .FiveNightsFlights.Float64}}{{else}}N/A{{end}}
       </p-->
 
       <div class="flight-accom-prices">
         <label> Flights From: </label>
-        <a href="{{ .UrlCity1 }}" target="_blank" class="clickable">
+        <a href="{{.UrlCity1}}" target="_blank" class="clickable">
           <p>
             {{ if and .PriceCity1.Valid (ne .PriceCity1.Float64 0.00) }} €{{
-            printf "%.0f" .PriceCity1.Float64 }} {{ else }} N/A {{ end }}
+            printf "%.0f" .PriceCity1.Float64 }}
+            <i
+              class="fa-solid fa-arrow-up-right-from-square"
+              style="font-size: 65%"
+            ></i>
+            {{ else }} Find Fares
+            <i
+              class="fa-solid fa-arrow-up-right-from-square"
+              style="font-size: 65%"
+            ></i>
+            {{ end }}
           </p>
         </a>
       </div>
@@ -116,7 +134,12 @@
         <a href="{{ .BookingUrl.String }}" target="_blank" class="clickable">
           <p>
             {{ if and .BookingPppn.Valid (ne .BookingPppn.Float64 0.00) }} €{{
-            printf "%.0f" .BookingPppn.Float64 }} {{ else }} N/A {{ end }}
+            printf "%.0f" .BookingPppn.Float64 }}
+            <i
+              class="fa-solid fa-arrow-up-right-from-square"
+              style="font-size: 65%"
+            ></i>
+            {{ else }} N/A {{ end }}
           </p>
         </a>
       </div>
@@ -161,7 +184,13 @@
           <div class="weather-icons">
             {{ range $index, $element := .WeatherForecast }} {{ if lt $index 5
             }}
-            <div class="weather-icon">
+
+            <a
+              class="weather-icon"
+              href="{{ $element.GoogleUrl }}"
+              target="_blank"
+            >
+              <div class="weather-day">{{ getDayOfWeek $index }}</div>
               <img
                 src="{{ $element.WeatherIcon }}"
                 alt="Weather Icon"
@@ -171,14 +200,23 @@
                 {{ if $element.AvgDaytimeTemp.Valid }} {{ printf "%.0f°C"
                 $element.AvgDaytimeTemp.Float64 }} {{ else }} N/A {{ end }}
               </div>
-            </div>
+            </a>
             {{ end }} {{ end }}
           </div>
 
-          <a href="{{ .UrlCity1 }}" target="_blank" class="clickable">
+          <a href="{{.UrlCity1}}" target="_blank" class="clickable">
             <p>
               Flights From: {{ if and .PriceCity1.Valid (ne .PriceCity1.Float64
-              0.00) }} €{{ printf "%.0f" .PriceCity1.Float64 }} {{ else }} N/A
+              0.00) }} €{{ printf "%.0f" .PriceCity1.Float64 }}
+              <i
+                class="fa-solid fa-arrow-up-right-from-square"
+                style="font-size: 65%"
+              ></i
+              >{{ else }} Find Fares
+              <i
+                class="fa-solid fa-arrow-up-right-from-square"
+                style="font-size: 65%"
+              ></i>
               {{ end }}
             </p>
           </a>
@@ -187,7 +225,12 @@
             <p>
               Avg. Hotel Price: {{ if and .BookingPppn.Valid (ne
               .BookingPppn.Float64 0.00) }} €{{ printf "%.0f"
-              .BookingPppn.Float64 }} {{ else }} N/A {{ end }}
+              .BookingPppn.Float64 }}
+              <i
+                class="fa-solid fa-arrow-up-right-from-square"
+                style="font-size: 65%"
+              ></i>
+              {{ else }} N/A {{ end }}
             </p>
           </a>
         </div>

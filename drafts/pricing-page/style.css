@@ -1,0 +1,226 @@
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@400;500;600;700&display=swap");
+
+:root {
+  --baseColor: #444;
+  --highlightColor: #ea4c89;
+  --secondaryColor: #1769ff;
+  --lightBackground: #f5f5f5;
+  --white: #fff;
+  --green: #27ae60;
+  --gold: #f1c40f;
+  --shadowColor: rgba(0, 0, 0, 0.1);
+  --fontFamily: "Dosis", sans-serif;
+  --borderRadius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fontFamily);
+  color: var(--baseColor);
+  background-color: var(--lightBackground);
+  line-height: 1.6;
+}
+
+.plans__container {
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.plans {
+  width: 90%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.plansHero__title {
+  font-size: 2.5rem;
+  color: #fdf6f8;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  background-color: #13554feb;
+  border-radius: 10px;
+}
+
+.plansHero__subtitle {
+  font-size: 1.25rem;
+  color: var(--baseColor);
+  margin-bottom: 2rem;
+}
+
+.planItem__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.planItem {
+  background-color: var(--white);
+  border-radius: var(--borderRadius);
+  box-shadow: 0px 4px 10px var(--shadowColor);
+  padding: 2rem;
+  transition: transform 0.3s;
+  position: relative;
+}
+
+.planItem:hover {
+  transform: translateY(-5px);
+}
+
+.card__header {
+  margin-bottom: 1rem;
+}
+
+.card__icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--highlightColor);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.card h2 {
+  font-size: 1.75rem;
+  color: var(--highlightColor);
+  margin: 0;
+}
+
+.card__desc {
+  color: var(--baseColor);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.price {
+  font-size: 2rem;
+  color: var(--secondaryColor);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.price span {
+  font-size: 1rem;
+  color: var(--baseColor);
+}
+
+.featureList {
+  list-style: none;
+  text-align: left;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.featureList li {
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+  color: var(--baseColor);
+  font-size: 1rem;
+}
+
+.featureList li:before {
+  content: "🌿";
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+.featureList li.disabled {
+  color: #ccc;
+  text-decoration: line-through;
+}
+
+.button {
+  display: inline-block;
+  background-color: var(--highlightColor);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--borderRadius);
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: #d43f7b;
+}
+
+.label {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: var(--gold);
+  color: var(--white);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--borderRadius);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.planItem--pro .card h2,
+.planItem--pro .price {
+  color: var(--green);
+}
+
+.planItem--pro .button {
+  background-color: var(--green);
+}
+
+.planItem--pro .button:hover {
+  background-color: #219150;
+}
+
+.planItem--mega .card h2,
+.planItem--mega .price {
+  color: var(--gold);
+}
+
+.planItem--mega .button {
+  background-color: var(--gold);
+}
+
+.planItem--mega .button:hover {
+  background-color: #d4a20d;
+}
+
+/* Responsive */
+@media screen and (max-width: 640px) {
+  .plansHero__title {
+    font-size: 2rem;
+  }
+
+  .plansHero__subtitle {
+    font-size: 1rem;
+  }
+
+  .price {
+    font-size: 1.75rem;
+  }
+
+  .planItem {
+    padding: 1.5rem;
+  }
+}
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("dreams.png");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  filter: blur(69px) grayscale(35.8%);
+}

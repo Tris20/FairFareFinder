@@ -5,9 +5,9 @@ go 1.23.1
 require (
 	github.com/PuerkitoBio/goquery v1.10.0
 	github.com/Tris20/FairFareFinder/src/backend v0.0.1
+	github.com/Tris20/FairFareFinder/src/backend/config v0.0.1
 	github.com/Tris20/FairFareFinder/src/backend/model v0.0.1
-  github.com/Tris20/FairFareFinder/src/backend/config v0.0.1
-  github.com/Tris20/FairFareFinder/utils/common/model v0.0.1
+	github.com/Tris20/FairFareFinder/utils/common/model v0.0.1
 	github.com/Tris20/FairFareFinder/utils/time-and-date v0.0.1
 	github.com/chromedp/chromedp v0.11.1
 	github.com/gorilla/sessions v1.4.0
@@ -31,9 +31,11 @@ require (
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
+	github.com/sajari/regression v1.0.1 // indirect
 	golang.org/x/net v0.30.0 // indirect
 	golang.org/x/sys v0.26.0 // indirect
 	golang.org/x/term v0.25.0 // indirect
+	gonum.org/v1/gonum v0.15.1 // indirect
 )
 
 replace github.com/Tris20/FairFareFinder/utils/time-and-date => ./utils/time-and-date
@@ -41,5 +43,7 @@ replace github.com/Tris20/FairFareFinder/utils/time-and-date => ./utils/time-and
 replace github.com/Tris20/FairFareFinder/src/backend => ./src/backend
 
 replace github.com/Tris20/FairFareFinder/src/backend/model => ./src/backend/model
+
 replace github.com/Tris20/FairFareFinder/src/backend/config => ./src/backend/config
+
 replace github.com/Tris20/FairFareFinder/utils/common/model => ./utils/common/model

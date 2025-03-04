@@ -22,7 +22,7 @@ var (
 func LoadCitiesInBatches(db *sql.DB, clientID string) {
 	offset := 0
 	for {
-		rows, err := db.Query("SELECT city, image_1 FROM location ORDER BY city LIMIT 10 OFFSET $1", offset)
+		rows, err := db.Query("SELECT city, image_1 FROM location ORDER BY city LIMIT 50 OFFSET $1", offset)
 		if err != nil {
 			fmt.Println("error querying cities")
 			close(cityChannels[clientID])
@@ -54,7 +54,7 @@ func LoadCitiesInBatches(db *sql.DB, clientID string) {
 		}
 
 		cityChannels[clientID] <- batch
-		offset += 10
+		offset += 50
 	}
 }
 

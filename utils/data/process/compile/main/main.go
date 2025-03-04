@@ -325,9 +325,11 @@ func main() {
 					//runExecutableInDir(filepath.Join(absoluteBase, "fetch/accommocation/booking-com/get-properties"), "get-properties")
 					//log.Println("%sCOMPLETED: get-properties (properties update)%s\n", green, reset)
 
-					//Calculate
+					//Calculate or Generate
 					runExecutableInDir(filepath.Join(absoluteBase, "process/calculate/weather"), "weather")
 					log.Println("%sCOMPLETED: weather (weather calculation)%s\n", green, reset)
+					runExecutableInDir(filepath.Join(absoluteBase, "process/generate/flight-prices"), "flight-prices")
+					log.Println("%sCOMPLETED: flight-prices (generate flight prices )%s\n", green, reset)
 
 					// Compile
 					runExecutableInDir(filepath.Join(absoluteBase, "process/compile/main/flights"), "flights")
