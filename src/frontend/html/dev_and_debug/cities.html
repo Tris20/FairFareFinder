@@ -1,21 +1,19 @@
 <table>
-{{ range $index, $city := . }}
-{{ if eq (mod $index 10) 0 }}
-<tr>
-{{ end }}
-<td>
-    <div class="card">
-        <div class="card-image" style="background-image: url('{{ $city.ImageURL }}');">
-        </div>
+  {{ range $index, $city := . }} {{ if eq (mod $index 10) 0 }}
+  <tr>
+    {{ end }}
+    <td>
+      <div class="card" data-city-name="{{ $city.Name }}">
+        <div
+          class="card-image"
+          style="background-image: url('{{ $city.ImageURL }}');"
+        ></div>
         <div class="card-content">
-            <div class="city-name">
-                {{ $city.Name }}
-            </div>
+          <div class="city-name">{{ $city.Name }}</div>
         </div>
-    </div>
-</td>
-{{ if eq (mod (add $index 1) 10) 0 }}
-</tr>
-{{ end }}
-{{ end }}
+      </div>
+    </td>
+    {{ if eq (mod (add $index 1) 10) 0 }}
+  </tr>
+  {{ end }} {{ end }}
 </table>
