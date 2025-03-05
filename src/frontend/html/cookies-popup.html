@@ -1,0 +1,161 @@
+<!-- cookies-popup.html -->
+<div
+  id="cookie-popup"
+  style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #0b5259;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    z-index: 1000;
+  "
+>
+  <p>
+    We use cookies to improve your experience.
+    <a href="/cookies-policy" style="color: #fff; text-decoration: underline"
+      >Learn more</a
+    >.
+  </p>
+  <button
+    id="cookie-accept"
+    style="
+      padding: 10px 20px;
+      background: #fff;
+      color: #333;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+    "
+  >
+    Accept
+  </button>
+  <button
+    id="cookie-settings"
+    style="
+      padding: 10px 20px;
+      background: #fff;
+      color: #333;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    "
+  >
+    Settings
+  </button>
+
+  <!-- Hidden settings panel -->
+  <div
+    id="cookie-settings-panel"
+    style="
+      display: none;
+      margin-top: 20px;
+      background: #fff;
+      color: #333;
+      padding: 10px;
+      border-radius: 4px;
+      text-align: left;
+    "
+  >
+    <p style="margin: 0 0 10px 0"><strong>Cookie Settings</strong></p>
+    <p style="margin: 0 0 10px 0">Customize your cookie preferences below:</p>
+
+    <div style="margin-bottom: 10px">
+      <label style="display: block; margin-bottom: 5px">
+        <strong>Essential Cookies:</strong> These cookies are required for our
+        website to function and cannot be disabled.
+      </label>
+      <input type="checkbox" checked disabled />
+    </div>
+
+    <div style="margin-bottom: 10px">
+      <label style="display: block; margin-bottom: 5px">
+        <strong>Performance &amp; Functionality Cookies:</strong> Enable to save
+        search preferences and improve site performance.
+      </label>
+      <input type="checkbox" id="pref-performance" checked />
+    </div>
+
+    <div style="margin-bottom: 10px">
+      <label style="display: block; margin-bottom: 5px">
+        <strong>Affiliate Cookies:</strong> Enable to support FairFareFinder
+        through affiliate commissions.
+      </label>
+      <input type="checkbox" id="pref-affiliate" checked />
+    </div>
+
+    <button
+      id="cookie-save-settings"
+      style="
+        padding: 10px 20px;
+        background: #333;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      "
+    >
+      Save Settings
+    </button>
+  </div>
+</div>
+
+<script>
+  (function () {
+    // Function to record consent and optionally save settings
+    function setCookieConsent(settings) {
+      // If settings are provided, store them (essential cookies are always true)
+      if (settings) {
+        localStorage.setItem("cookieSettings", JSON.stringify(settings));
+      }
+      localStorage.setItem("cookieConsent", "true");
+      var popup = document.getElementById("cookie-popup");
+      if (popup) {
+        popup.style.display = "none";
+      }
+    }
+
+    // Accept button: Accept all cookies with default settings
+    var acceptBtn = document.getElementById("cookie-accept");
+    if (acceptBtn) {
+      acceptBtn.addEventListener("click", function () {
+        setCookieConsent({
+          performance: true,
+          affiliate: true,
+        });
+      });
+    }
+
+    // Settings button: Toggle the settings panel
+    var settingsBtn = document.getElementById("cookie-settings");
+    if (settingsBtn) {
+      settingsBtn.addEventListener("click", function () {
+        var panel = document.getElementById("cookie-settings-panel");
+        if (panel) {
+          panel.style.display =
+            panel.style.display === "none" || panel.style.display === ""
+              ? "block"
+              : "none";
+        }
+      });
+    }
+
+    // Save Settings button: Save user-defined preferences
+    var saveSettingsBtn = document.getElementById("cookie-save-settings");
+    if (saveSettingsBtn) {
+      saveSettingsBtn.addEventListener("click", function () {
+        var performanceEnabled =
+          document.getElementById("pref-performance").checked;
+        var affiliateEnabled =
+          document.getElementById("pref-affiliate").checked;
+        setCookieConsent({
+          performance: performanceEnabled,
+          affiliate: affiliateEnabled,
+        });
+      });
+    }
+  })();
+</script>

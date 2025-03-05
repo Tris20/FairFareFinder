@@ -1,21 +1,26 @@
-<table>
-{{ range $index, $city := . }}
-{{ if eq (mod $index 10) 0 }}
-<tr>
-{{ end }}
-<td>
-    <div class="card">
-        <div class="card-image" style="background-image: url('{{ $city.ImageURL }}');">
-        </div>
-        <div class="card-content">
-            <div class="city-name">
-                {{ $city.Name }}
-            </div>
-        </div>
+<div class="all-cities-card-grid">
+  {{ range $index, $city := . }}
+  <div class="card" data-city-name="{{ $city.Name }}">
+    <div
+      class="card-image"
+      style="background-image: url('{{ $city.ImageURL }}');"
+    ></div>
+    <div class="card-content">
+      <div class="city-name">{{ $city.Name }}</div>
+      <div class="flight-count">Flights: {{ $city.FlightCount }}</div>
+      <div class="google-link">
+        <a href="{{ $city.GoogleLink }}" target="_blank">Google Search</a>
+      </div>
+      <!-- New option to open image folder -->
+      <div class="open-image-folder">
+        <a
+          href="/open-image-folder?image={{ urlquery $city.ImageURL }}"
+          target="_blank"
+        >
+          Open Image Folder
+        </a>
+      </div>
     </div>
-</td>
-{{ if eq (mod (add $index 1) 10) 0 }}
-</tr>
-{{ end }}
-{{ end }}
-</table>
+  </div>
+  {{ end }}
+</div>

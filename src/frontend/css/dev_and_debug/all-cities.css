@@ -1,6 +1,6 @@
 .card {
-  width: 100px;
-  height: 150px;
+  width: 15vw;
+  height: 30vh;
   margin: 5px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -11,7 +11,7 @@
 
 .card-image {
   width: 100%;
-  height: 80%;
+  height: 100%;
   background-size: cover;
   background-position: center;
 }
@@ -22,11 +22,37 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 20%;
+  height: 60%;
 }
 
 .city-name {
   font-size: 0.8em;
   font-weight: bold;
-  text-align: center;
+}
+
+.card {
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card.selected {
+  outline: 3px solid #ff9800;
+  box-shadow: 0px 0px 10px rgba(255, 152, 0, 0.7);
+}
+
+.all-cities-card-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+}
+
+#cities-container {
+  margin: 5vh auto 5vh 3vw;
+  max-width: 1200px;
 }

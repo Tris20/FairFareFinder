@@ -31,9 +31,25 @@ func SetupRoutes(store *sessions.CookieStore, db *sql.DB, tmpl *template.Templat
 	// API routes
 	http.HandleFunc("/city-country-pairs", CityCountryHandler)
 
-	// Privacy policy route
+	// Footer routes
 	http.HandleFunc("/privacy-policy", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./src/frontend/html/privacy-policy.html") // Ensure the path is correct
+	})
+
+	http.HandleFunc("/disclaimer", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "./src/frontend/html/disclaimer.html") // Ensure the path is correct
+	})
+
+	http.HandleFunc("/terms-of-service", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "./src/frontend/html/terms-of-service.html") // Ensure the path is correct
+	})
+
+	http.HandleFunc("/cookies-policy", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "./src/frontend/html/cookies-policy.html") // Ensure the path is correct
+	})
+
+	http.HandleFunc("/cookies-popup", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "./src/frontend/html/cookies-popup.html") // Ensure the path is correct
 	})
 
 	// Dev tools routes
@@ -47,4 +63,6 @@ func SetupRoutes(store *sessions.CookieStore, db *sql.DB, tmpl *template.Templat
 		clientID := session.ID
 		dev_tools.LoadMoreCities(tmpl, clientID)(w, r)
 	})
+
+	http.HandleFunc("/open-image-folder", dev_tools.OpenImageFolderHandler)
 }

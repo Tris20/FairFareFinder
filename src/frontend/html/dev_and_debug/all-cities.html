@@ -7,6 +7,86 @@
     <script src="https://unpkg.com/htmx.org"></script>
 
     <link rel="stylesheet" href="/css/dev_and_debug/all-cities.css" />
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let savedCities =
+          JSON.parse(localStorage.getItem("markedCities")) || [];
+
+        // Highlight previously selected cities
+        savedCities.forEach((city) => {
+          let cityCard = document.querySelector(`[data-city-name="${city}"]`);
+          if (cityCard) {
+            cityCard.classList.add("selected");
+          }
+        });
+
+        document.body.addEventListener("click", function (event) {
+          let card = event.target.closest(".card");
+          if (!card) return;
+
+          let cityName = card.getAttribute("data-city-name");
+          if (!cityName) return;
+
+          let savedCities =
+            JSON.parse(localStorage.getItem("markedCities")) || [];
+
+          if (savedCities.includes(cityName)) {
+            // Remove city if already selected
+            savedCities = savedCities.filter((c) => c !== cityName);
+            card.classList.remove("selected");
+          } else {
+            // Add city to the list
+            savedCities.push(cityName);
+            card.classList.add("selected");
+          }
+
+          localStorage.setItem("markedCities", JSON.stringify(savedCities));
+          console.log(`Updated marked cities:`, savedCities);
+        });
+      });
+
+      // Function to download the saved cities as a CSV file
+      function downloadCSV() {
+        let savedCities =
+          JSON.parse(localStorage.getItem("markedCities")) || [];
+        if (savedCities.length === 0) {
+          alert("No cities marked for review.");
+          return;
+        }
+
+        let csvContent =
+          "data:text/csv;charset=utf-8," + savedCities.join("\n");
+        let encodedUri = encodeURI(csvContent);
+
+        let link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "marked_cities.csv");
+        document.body.appendChild(link);
+        link.click();
+      }
+
+      // Function to download the saved cities as a YAML file
+      function downloadYAML() {
+        let savedCities =
+          JSON.parse(localStorage.getItem("markedCities")) || [];
+        if (savedCities.length === 0) {
+          alert("No cities marked for review.");
+          return;
+        }
+
+        let yamlContent =
+          "marked_cities:\n" +
+          savedCities.map((city) => `  - ${city}`).join("\n");
+        let blob = new Blob([yamlContent], { type: "text/yaml" });
+
+        let link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "marked_cities.yaml";
+        document.body.appendChild(link);
+        link.click();
+      }
+    </script>
   </head>
   <body>
     <!-- <div style="position: fixed; top: 0; width: 100%; background-color: white; z-index: 1000;">
@@ -36,14 +116,28 @@
         hx-swap="innerHTML"
         style="
           height: 36px;
-          left: 526px;
           position: absolute;
-          top: 11px;
-          width: 218px;
+          top: 350px;
+          right: 50px;
+          width: 150px;
         "
       >
         Load More Cities
       </button>
+
+      <div
+        style="
+          position: fixed;
+          bottom: 10px;
+          right: 30px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        "
+      >
+        <button onclick="downloadCSV()">Download CSV</button>
+        <button onclick="downloadYAML()">Download YAML</button>
+      </div>
     </div>
   </body>
 </html>

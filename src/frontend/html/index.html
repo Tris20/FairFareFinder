@@ -90,18 +90,21 @@
     </script>
   </head>
 
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-JHJHSPKL8G"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JHJHSPKL8G"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    gtag("config", "G-JHJHSPKL8G");
+  </script>
 
-  gtag('config', 'G-JHJHSPKL8G');
-</script>
-
-  
   <div id="page-banner">
     <div class="banner-content">
       <img src="/images/favicon_orange_turq.ico" alt="FFF Icon" id="fff-icon" />
@@ -251,15 +254,54 @@
 
         <footer id="footer-privacy">
           <p>
-            &copy; 2024 FairFareFinder |
+            &copy; 2025 FairFareFinder |
             <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/disclaimer"> | Disclaimer</a>
+            <a href="/terms-of-service"> | Terms of Service</a>
+            <a href="/cookies-policy"> | Cookies Policy</a>
           </p>
         </footer>
       </div>
     </div>
+
     <script src="/js/cookie-utils.js" defer></script>
     <script src="/js/index-animation.js" defer></script>
     <script src="/js/index.js" defer></script>
     <script src="/js/index-modal.js" defer></script>
+
+    <!-- Container for Cookie Popup -->
+    <div id="cookies-container"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (localStorage.getItem("cookieConsent") !== "true") {
+          setTimeout(function () {
+            fetch("/cookies-popup")
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error(
+                    "Network response was not ok: " + response.statusText,
+                  );
+                }
+                return response.text();
+              })
+              .then((html) => {
+                const container = document.getElementById("cookies-container");
+                container.innerHTML = html;
+                // Find and re-run inline scripts
+                container.querySelectorAll("script").forEach((oldScript) => {
+                  const newScript = document.createElement("script");
+                  newScript.textContent = oldScript.textContent;
+                  document.body.appendChild(newScript);
+                  document.body.removeChild(newScript);
+                });
+              })
+              .catch((error) =>
+                console.error("Error loading cookie popup:", error),
+              );
+          }, 2000);
+        }
+      });
+    </script>
   </body>
 </html>
