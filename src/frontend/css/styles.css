@@ -151,8 +151,10 @@ height:77svh;
   opacity: 0; /* Initially hidden */
   margin-top: 6px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
 /* For each label-select/input pair */
 .form-group {
   display: flex;
