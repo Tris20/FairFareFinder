@@ -76,8 +76,6 @@
     flex: 0 0 41.8%; /* Takes up 60% of the card's width */
     background-size: cover;
     background-position: center;
-
-    height: 21vh;
   }
 
   h2 {

@@ -1,7 +1,7 @@
 {
   "name": "fairfarefinder",
-  "short_name": "fff",
-  "start_url": "/",
+  "short_name": "fairfarefinder",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0b5259",
