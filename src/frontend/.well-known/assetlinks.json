@@ -4,7 +4,7 @@
     "target": {
       "namespace": "android_app",
       "package_name": "com.fairfarefinder.app",
-      "sha256_cert_fingerprints": ["04:6B:77:F3:10:D3:03:77:A1:FC:13:9D:6E:60:44:1E:F1:EA:63:23:24:C9:3B:D4:BE:70:60:DD:3C:B4:E3:3D"]
+      "sha256_cert_fingerprints": ["24:F2:FD:4D:99:5B:FB:4C:A5:F6:3D:94:29:20:75:96:25:6B:6D:A2:84:C1:46:44:99:4C:75:7E:AC:FB:49:1E"]
     }
   }
 ]
