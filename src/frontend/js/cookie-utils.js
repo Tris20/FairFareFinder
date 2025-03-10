@@ -55,3 +55,31 @@ document.addEventListener("DOMContentLoaded", function () {
   const sortSelect = document.getElementById("sort");
   sortSelect.value = "best_weather"; // Default value
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (localStorage.getItem("cookieConsent") !== "true") {
+    setTimeout(function () {
+      fetch("/cookies-popup")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(
+              "Network response was not ok: " + response.statusText,
+            );
+          }
+          return response.text();
+        })
+        .then((html) => {
+          const container = document.getElementById("cookies-container");
+          container.innerHTML = html;
+          // Find and re-run inline scripts
+          container.querySelectorAll("script").forEach((oldScript) => {
+            const newScript = document.createElement("script");
+            newScript.textContent = oldScript.textContent;
+            document.body.appendChild(newScript);
+            document.body.removeChild(newScript);
+          });
+        })
+        .catch((error) => console.error("Error loading cookie popup:", error));
+    }, 2000);
+  }
+});

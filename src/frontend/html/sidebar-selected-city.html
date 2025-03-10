@@ -1,0 +1,134 @@
+{{define "siderbar-selected-city"}}
+<!-- Your 100+ lines of HTML go here -->
+<div
+  class="card"
+  id="right-sidebar"
+  onclick="openModal('Jeddah')"
+  style="
+    width: 20vw;
+    flex: 0 0 20%;
+    height: 100vh; /*! left: 48px; */ /*! accent-color: ; */
+    position: relative;
+  "
+>
+  <div
+    class="card-image"
+    style="
+      background-image: url(&quot;/location-images/Jeddah/Jeddah_1.jpg&quot;);
+    "
+  ></div>
+
+  <div class="card-content">
+    <div class="destination-title">
+      <h2>Jeddah</h2>
+      <div class="destination-duration" style="display: block">5h</div>
+    </div>
+
+    <div class="weather-icons">
+      <a
+        class="weather-icon"
+        href="https://www.google.com/search?q=weather+Jeddah%2C+SA"
+        target="_blank"
+      >
+        <div class="weather-day">Mon</div>
+        <img
+          src="https://openweathermap.org/img/wn/01d.png"
+          alt="Weather Icon"
+          width="30px"
+        />
+        <div>27°C</div>
+      </a>
+
+      <a
+        class="weather-icon"
+        href="https://www.google.com/search?q=weather+Jeddah%2C+SA"
+        target="_blank"
+      >
+        <div class="weather-day">Tue</div>
+        <img
+          src="https://openweathermap.org/img/wn/01d.png"
+          alt="Weather Icon"
+          width="30px"
+        />
+        <div>27°C</div>
+      </a>
+
+      <a
+        class="weather-icon"
+        href="https://www.google.com/search?q=weather+Jeddah%2C+SA"
+        target="_blank"
+      >
+        <div class="weather-day">Wed</div>
+        <img
+          src="https://openweathermap.org/img/wn/02d.png"
+          alt="Weather Icon"
+          width="30px"
+        />
+        <div>28°C</div>
+      </a>
+
+      <a
+        class="weather-icon"
+        href="https://www.google.com/search?q=weather+Jeddah%2C+SA"
+        target="_blank"
+      >
+        <div class="weather-day">Thu</div>
+        <img
+          src="https://openweathermap.org/img/wn/01d.png"
+          alt="Weather Icon"
+          width="30px"
+        />
+        <div>28°C</div>
+      </a>
+
+      <a
+        class="weather-icon"
+        href="https://www.google.com/search?q=weather+Jeddah%2C+SA"
+        target="_blank"
+      >
+        <div class="weather-day">Fri</div>
+        <img
+          src="https://openweathermap.org/img/wn/01d.png"
+          alt="Weather Icon"
+          width="30px"
+        />
+        <div>29°C</div>
+      </a>
+    </div>
+
+    <div class="flight-accom-prices">
+      <label> Flights From: </label>
+      <a
+        href="https://www.skyscanner.de/transport/fluge/BER/JED/?adults=1&amp;adultsv2=1&amp;cabinclass=economy&amp;children=0&amp;inboundaltsenabled=false&amp;infants=0&amp;outboundaltsenabled=false&amp;preferdirects=true&amp;ref=home&amp;rtn=1"
+        target="_blank"
+        class="clickable"
+      >
+        <p>
+          €426
+          <i
+            class="fa-solid fa-arrow-up-right-from-square"
+            style="font-size: 65%"
+          ></i>
+        </p>
+      </a>
+    </div>
+    <div class="flight-accom-prices">
+      <label>Avg. Hotel Price: </label>
+      <a
+        href="https://www.booking.com/searchresults.en-gb.html?ss=Jeddah&amp;group_adults=1&amp;no_rooms=1&amp;group_children=0&amp;nflt=price%3DEUR-min-110-1%3Breview_score%3D80&amp;flex_window=2&amp;checkin=2024-09-23&amp;checkout=2024-09-30"
+        target="_blank"
+        class="clickable"
+      >
+        <p>
+          €50
+          <i
+            class="fa-solid fa-arrow-up-right-from-square"
+            style="font-size: 65%"
+          ></i>
+        </p>
+      </a>
+    </div>
+  </div>
+</div>
+
+{{end}}

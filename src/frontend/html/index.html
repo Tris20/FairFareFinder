@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/css/modal.css" />
     <link rel="stylesheet" href="/css/search.css" />
     <link rel="stylesheet" href="/css/price-slider.css" />
+    <link rel="stylesheet" href="/css/hamburger-icon.css" />
     <!-- Add Google Fonts for Dosis -->
     <link
       href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap"
@@ -47,69 +48,44 @@
 
     <script>
       const minFlightPrice = {{ .MinFlightPrice }};
-      const midFlightPrice = {{ .MidFlightPrice }};
-      const maxFlightPrice = {{ .MaxFlightPrice }};
+       const midFlightPrice = {{ .MidFlightPrice }};
+       const maxFlightPrice = {{ .MaxFlightPrice }};
 
-      const minAccomPrice = {{ .MinAccomPrice }};
-      const midAccomPrice = {{ .MidAccomPrice }};
-      const maxAccomPrice = {{ .MaxAccomPrice }};
-      const defaultAccomPrice = {{ .DefaultAccomPrice }};
+       const minAccomPrice = {{ .MinAccomPrice }};
+       const midAccomPrice = {{ .MidAccomPrice }};
+       const maxAccomPrice = {{ .MaxAccomPrice }};
+       const defaultAccomPrice = {{ .DefaultAccomPrice }};
     </script>
-
-    <!--Create Accommodation Price Slider functionality-->
-    <script>
-      let accomSlider;
-      document.addEventListener("DOMContentLoaded", () => {
-        window.accomSlider = createPriceSlider({
-          sliderId: "accommodationPrice-slider0",
-          outputId: "accommodationOutput0",
-          chartId: "chart",
-          dataArray: [],
-          minVal: minAccomPrice,
-          midVal: midAccomPrice,
-          maxVal: maxAccomPrice,
-          defaultValue: defaultAccomPrice,
-          binCount: 30,
-        });
-      });
-    </script>
-
-    <!--Create Flight Price Slider functionality-->
-    <script>
-      let flightSlider;
-      document.addEventListener("DOMContentLoaded", () => {
-        window.flightSlider = createPriceSlider({
-          sliderId: "combinedPrice-slider0",
-          outputId: "priceOutput0",
-          chartId: "flight-chart",
-          dataArray: [],
-          minVal: minFlightPrice,
-          midVal: midFlightPrice,
-          maxVal: maxFlightPrice,
-          defaultValue: 57,
-          binCount: 30,
-        });
-      });
-    </script>
+    <script src="/js/price-slider-instances.js"></script>
   </head>
 
-  <!-- Google tag (gtag.js) -->
-  <script
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=G-JHJHSPKL8G"
-  ></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
-
-    gtag("config", "G-JHJHSPKL8G");
-  </script>
+  <script src="/js/google-analytics.js"></script>
 
   <div id="page-banner">
     <div class="banner-content">
+      <button
+        class="button-three"
+        aria-controls="primary-navigation"
+        aria-expanded="true"
+        data-state="open"
+      >
+        <svg
+          stroke="var(--button-color)"
+          fill="none"
+          class="hamburger"
+          viewBox="-10 -10 120 120"
+          width="25.0"
+        >
+          <path
+            class="line"
+            stroke-width="10"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m 20 40 h 60 a 1 1 0 0 1 0 20 h -60 a 1 1 0 0 1 0 -40 h 30 v 70"
+          ></path>
+        </svg>
+      </button>
+
       <img src="/images/favicon_orange_turq.ico" alt="FFF Icon" id="fff-icon" />
       <h2>
         <span><span class="first-letter">f</span>air</span>
@@ -135,122 +111,122 @@
 
     <!-- Table content container that will appear after the text fades out -->
     <!-- Banner structure -->
+
     <div id="table-container">
-      <div class="scroll-container">
-        <form
-          id="flight-form"
-          hx-get="/filter"
-          hx-target="#flight-table"
-          hx-trigger="change, input delay:50ms"
-          hx-headers='{"Cache-Control": "no-cache"}'
-        >
-          <!-- Dynamic city input rows -->
-          <div id="city-rows" style="width: 100%">
-            <div class="form-group city-row">
-              <div class="dropdown-container">
-                <label for="city-search">Flying From:</label>
+      <form
+        id="flight-form"
+        hx-get="/filter"
+        hx-target="#flight-table"
+        hx-trigger="change, input delay:50ms"
+        hx-headers='{"Cache-Control": "no-cache"}'
+      >
+        <!-- Dynamic city input rows -->
+        <div id="city-rows" style="width: 100%">
+          <div class="form-group city-row">
+            <div class="dropdown-container">
+              <label for="city-search">Flying From:</label>
 
-                <input
-                  id="city-search"
-                  class="dropdown-input"
-                  name="city[]"
-                  placeholder="Search for a city"
-                  autocomplete="off"
-                />
-                <button id="dropdown-btn" class="dropdown-btn" type="button">
-                  <span class="caret">▼</span>
-                </button>
-                <ul id="city-list" class="dropdown-list hidden"></ul>
+              <input
+                id="city-search"
+                class="dropdown-input"
+                name="city[]"
+                placeholder="Search for a city"
+                autocomplete="off"
+              />
+              <button id="dropdown-btn" class="dropdown-btn" type="button">
+                <span class="caret">▼</span>
+              </button>
+              <ul id="city-list" class="dropdown-list hidden"></ul>
+            </div>
+
+            <!-- <div class="outer-flight-price-slider"> -->
+            <output id="priceOutput0" class="output-range">€399</output>
+            <div class="flight-price-slider">
+              <div class="chart-container">
+                <div class="chart" id="flight-chart"></div>
               </div>
+              <!--label for="priceOutput0"></label-->
 
-              <!-- <div class="outer-flight-price-slider"> -->
-              <output id="priceOutput0" class="output-range">€399</output>
-              <div class="flight-price-slider">
-                <div class="chart-container">
-                  <div class="chart" id="flight-chart"></div>
-                </div>
-                <!--label for="priceOutput0"></label-->
+              <input
+                type="range"
+                id="combinedPrice-slider0"
+                name="maxFlightPriceLinear[]"
+                min="0"
+                max="100"
+                step="0.01"
+                value="49"
+                class="price-slider"
+                hx-push-url="false"
+                hx-preserve="false"
+                hx-include="#combinedPrice-slider0"
+                autocomplete="off"
+                oninput="window.flightSlider.updateData(window.allFlightPrices[0]);"
+              />
+            </div>
+            <!-- </div> -->
+          </div>
+        </div>
+        <!-- Button to add more origin cities -->
 
-                <input
-                  type="range"
-                  id="combinedPrice-slider0"
-                  name="maxFlightPriceLinear[]"
-                  min="0"
-                  max="100"
-                  step="0.01"
-                  value="49"
-                  class="price-slider"
-                  hx-push-url="false"
-                  hx-preserve="false"
-                  hx-include="#combinedPrice-slider0"
-                  autocomplete="off"
-                  oninput="window.flightSlider.updateData(window.allFlightPrices[0]);"
-                />
+        <div class="form-group">
+          <button type="button" id="add-city-button">Add Another City</button>
+        </div>
+
+        <div class="accom-and-sort">
+          <div class="form-group accom">
+            <label for="accommodationOutput0">Avg. Hotel PPPN:</label>
+            <output id="accommodationOutput0" class="output-range">€99</output>
+
+            <div class="accom-pricebar">
+              <div class="chart-container">
+                <div class="chart" id="chart"></div>
               </div>
-              <!-- </div> -->
+              <input
+                type="range"
+                id="accommodationPrice-slider0"
+                name="maxAccommodationPrice[]"
+                min="0"
+                max="100"
+                step="0.01"
+                value="53.57"
+                class="price-slider"
+                hx-push-url="false"
+                hx-preserve="false"
+                hx-include="#accommodationPrice-slider0"
+                autocomplete="off"
+                oninput="window.accomSlider.updateData(window.allAccomPrices);"
+              />
             </div>
           </div>
-          <!-- Button to add more origin cities -->
-
           <div class="form-group">
-            <button type="button" id="add-city-button">Add Another City</button>
-          </div>
-
-          <div class="accom-and-sort">
-            <div class="form-group accom">
-              <label for="accommodationOutput0">Avg. Hotel PPPN:</label>
-              <output id="accommodationOutput0" class="output-range"
-                >€99</output
-              >
-
-              <div class="accom-pricebar">
-                <div class="chart-container">
-                  <div class="chart" id="chart"></div>
-                </div>
-                <input
-                  type="range"
-                  id="accommodationPrice-slider0"
-                  name="maxAccommodationPrice[]"
-                  min="0"
-                  max="100"
-                  step="0.01"
-                  value="53.57"
-                  class="price-slider"
-                  hx-push-url="false"
-                  hx-preserve="false"
-                  hx-include="#accommodationPrice-slider0"
-                  autocomplete="off"
-                  oninput="window.accomSlider.updateData(window.allAccomPrices);"
-                />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="sort">Sort By:</label>
-              <select id="sort" name="sort">
-                <option value="best_weather" selected>
-                  Sunniest and Warmest
-                </option>
-                <option value="cheapest_hotel">Cheapest Hotel Price</option>
-                <option value="cheapest_flight">Cheapest Flight</option>
-                <option value="cheapest_fnaf">Cheapest 5 Day Trip</option>
-                <option value="shortest_flight">Shortest Flight</option>
-                <option value="worst_weather">Coldest and Wettest</option>
-                <option value="most_expensive_hotel">
-                  Most Expensive Hotel Price
-                </option>
-                <option value="most_expensive_flight">
-                  Most Expensive Flight
-                </option>
-                <option value="most_expensive_fnaf">
-                  Most Expensive 5 Day Trip
-                </option>
-                <option value="longest_flight">Longest Flight</option>
-                <!--<option value="low_price">Most Affordable</option>
+            <label for="sort">Sort By:</label>
+            <select id="sort" name="sort">
+              <option value="best_weather" selected>
+                Sunniest and Warmest
+              </option>
+              <option value="cheapest_hotel">Cheapest Hotel Price</option>
+              <option value="cheapest_flight">Cheapest Flight</option>
+              <option value="cheapest_fnaf">Cheapest 5 Day Trip</option>
+              <option value="shortest_flight">Shortest Flight</option>
+              <option value="worst_weather">Coldest and Wettest</option>
+              <option value="most_expensive_hotel">
+                Most Expensive Hotel Price
+              </option>
+              <option value="most_expensive_flight">
+                Most Expensive Flight
+              </option>
+              <option value="most_expensive_fnaf">
+                Most Expensive 5 Day Trip
+              </option>
+              <option value="longest_flight">Longest Flight</option>
+              <!--<option value="low_price">Most Affordable</option>
             <option value="high_price">Most Expensive</option>-->
-              </select>
-            </div>
+            </select>
           </div>
-        </form>
+        </div>
+      </form>
+
+      <div class="scroll-container">
         <div id="flight-table">
           <!-- The cards will be dynamically updated here -->
         </div>
@@ -264,47 +240,18 @@
             <a href="/cookies-policy"> | Cookies Policy</a>
           </p>
         </footer>
+        <!-- End of scroll-container -->
       </div>
+      {{template "siderbar-selected-city" .}}
+      <!--End of table-container-->
     </div>
-
     <script src="/js/cookie-utils.js" defer></script>
     <script src="/js/index-animation.js" defer></script>
     <script src="/js/index.js" defer></script>
     <script src="/js/index-modal.js" defer></script>
 
+    <script src="/js/hamburger-icon.js"></script>
     <!-- Container for Cookie Popup -->
     <div id="cookies-container"></div>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        if (localStorage.getItem("cookieConsent") !== "true") {
-          setTimeout(function () {
-            fetch("/cookies-popup")
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error(
-                    "Network response was not ok: " + response.statusText,
-                  );
-                }
-                return response.text();
-              })
-              .then((html) => {
-                const container = document.getElementById("cookies-container");
-                container.innerHTML = html;
-                // Find and re-run inline scripts
-                container.querySelectorAll("script").forEach((oldScript) => {
-                  const newScript = document.createElement("script");
-                  newScript.textContent = oldScript.textContent;
-                  document.body.appendChild(newScript);
-                  document.body.removeChild(newScript);
-                });
-              })
-              .catch((error) =>
-                console.error("Error loading cookie popup:", error),
-              );
-          }, 2000);
-        }
-      });
-    </script>
   </body>
 </html>

@@ -1,0 +1,11 @@
+/* This is the css to convert a card into the right sidebar popup*/
+/* combine this with the modal view to make it a clicky appear sidebar*/
+/* but make sure it's different for mobile*/
+{
+left: inherit;
+position: absolute;
+width: 20vw;
+flex: 0 0 20%;
+height: 100vh;
+position: inherit;
+}

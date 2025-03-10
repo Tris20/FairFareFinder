@@ -1,0 +1,46 @@
+/* Global styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  background: hsl(48, 18%, 83%);
+  font-family: sans-serif;
+}
+
+/* Button three styles */
+.button-three {
+  --button-color: black;
+  overflow: hidden;
+  background: transparent;
+  border: 10px solid var(--button-color);
+  border-radius: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.button-three .hamburger {
+  transition: transform 1s;
+}
+
+.button-three[aria-expanded="true"] .hamburger {
+  transform: translate(10px, -10px) rotate(45deg);
+}
+
+.button-three .line {
+  transition:
+    stroke-dasharray 1s,
+    stroke-dashoffset 1s;
+  stroke-dasharray: 60 31 60 300;
+}
+
+.button-three[aria-expanded="true"] .line {
+  stroke-dasharray: 60 105 60 300;
+  stroke-dashoffset: -90;
+}

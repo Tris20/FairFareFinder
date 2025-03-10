@@ -33,6 +33,7 @@ func InitializeTemplates() (*template.Template, error) {
 	tmpl, err := template.New("").Funcs(funcMap).ParseFiles(
 		"./src/frontend/html/index.html",
 		"./src/frontend/html/table.html",
+		"./src/frontend/html/sidebar-selected-city.html",
 		"./src/frontend/html/seo.html",
 		"./src/frontend/html/dev_and_debug/cities.html",
 		"./src/frontend/html/dev_and_debug/all-cities.html",

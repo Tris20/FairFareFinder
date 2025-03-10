@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Hamburger Menu</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="examples">
+      <!-- Button one -->
+      <button
+        class="button-one"
+        aria-controls="primary-navigation"
+        aria-expanded="false"
+        data-state="closed"
+      >
+        <svg
+          fill="var(--button-color)"
+          class="hamburger"
+          viewBox="0 0 100 100"
+          width="250"
+        >
+          <rect
+            class="line top"
+            width="80"
+            height="10"
+            x="10"
+            y="25"
+            rx="5"
+          ></rect>
+          <rect
+            class="line middle"
+            width="80"
+            height="10"
+            x="10"
+            y="45"
+            rx="5"
+          ></rect>
+          <rect
+            class="line bottom"
+            width="80"
+            height="10"
+            x="10"
+            y="65"
+            rx="5"
+          ></rect>
+        </svg>
+      </button>
+
+      <!-- Button two -->
+      <button class="button-two" aria-expanded="false" data-state="closed">
+        <svg
+          stroke="var(--button-color)"
+          class="hamburger"
+          viewBox="0 0 100 100"
+          width="250"
+        >
+          <line
+            class="line top"
+            x1="90"
+            x2="10"
+            y1="40"
+            y2="40"
+            stroke-width="10"
+            stroke-linecap="round"
+            stroke-dasharray="80"
+            stroke-dashoffset="0"
+          ></line>
+          <line
+            class="line bottom"
+            x1="10"
+            x2="90"
+            y1="60"
+            y2="60"
+            stroke-width="10"
+            stroke-linecap="round"
+            stroke-dasharray="80"
+            stroke-dashoffset="0"
+          ></line>
+        </svg>
+      </button>
+
+      <!-- Button three -->
+      <button
+        class="button-three"
+        aria-controls="primary-navigation"
+        aria-expanded="false"
+        data-state="closed"
+      >
+        <svg
+          stroke="var(--button-color)"
+          fill="none"
+          class="hamburger"
+          viewBox="-10 -10 120 120"
+          width="250"
+        >
+          <path
+            class="line"
+            stroke-width="10"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m 20 40 h 60 a 1 1 0 0 1 0 20 h -60 a 1 1 0 0 1 0 -40 h 30 v 70"
+          ></path>
+        </svg>
+      </button>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

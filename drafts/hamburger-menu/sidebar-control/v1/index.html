@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smooth Sidebar Transition with Centered Content</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Toggle buttons for left and right sidebars -->
+    <div id="toggle-buttons">
+      <button id="toggleLeftSidebar">Toggle Left Sidebar</button>
+      <button id="toggleRightSidebar">Toggle Right Sidebar</button>
+    </div>
+
+    <!-- Layout container with three columns -->
+    <div class="layout">
+      <div id="left-sidebar">
+        <p>Left Sidebar Content</p>
+      </div>
+      <div id="center">
+        <!-- Center inner container with max-width -->
+        <div class="center-content">
+          <p>
+            Center Content. This area expands smoothly when the sidebars are
+            toggled.
+          </p>
+        </div>
+      </div>
+      <div id="right-sidebar">
+        <p>Right Sidebar Content</p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
