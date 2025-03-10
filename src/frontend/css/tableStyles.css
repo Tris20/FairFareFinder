@@ -127,6 +127,7 @@
   top: 0;
   left: 0;
   z-index: 999;
+  padding-right: 25px;
 }
 
 #page-banner.show {
@@ -170,14 +171,18 @@ h3 {
 
 .scroll-container {
   position: relative;
-  height: 93vh;
-  top: -10px;
-  width: 60vw;
-  overflow: hidden;
+  height: 100vh;
+  /* height: 93vh; */
+  /* top: -10px; */
+  width: 100vw;
+  /* overflow: hidden; */
   overflow-y: scroll;
   overflow-x: scroll;
   box-sizing: border-box;
   padding: 10px;
+  justify-content: center;
+  flex: 1;
+  display: flex;
 }
 
 /* Customize the scrollbar for better UX */

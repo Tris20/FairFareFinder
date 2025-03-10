@@ -24,7 +24,6 @@ body {
   /* transform: scale(0.2); */
   margin-top: 13px;
   margin-left: 25px;
-  position: absolute:
 }
 
 .button-three .hamburger {
@@ -47,19 +46,23 @@ body {
   stroke-dashoffset: -90;
 }
 
-
-/* Flight form default state: visible */
-#flight-form {
-  display: flex;
-  transition: transform 0.5s, opacity 0.5s;
-  transform: translateX(0);
-  opacity: 1;
-box-shadow: 0 2px 80px rgb(232, 152, 104);
-border-radius: 0px;
+#toggleRightSidebar {
+  margin-left:auto;
 }
-
-/* Flight form hidden state */
-#flight-form.hidden {
-  transform: translateX(-20vw);
-  opacity: 0;
-}
+/* /* Flight form default state: visible */ */
+/* #flight-form { */
+/*   display: flex; */
+/*   transition: */
+/*     transform 0.5s, */
+/*     opacity 0.5s; */
+/*   transform: translateX(0); */
+/*   opacity: 1; */
+/*   box-shadow: 0 2px 80px rgb(232, 152, 104); */
+/*   border-radius: 0px; */
+/* } */
+/**/
+/* /* Flight form hidden state */ */
+/* #flight-form.hidden { */
+/*   transform: translateX(-20vw); */
+/*   opacity: 0; */
+/* } */

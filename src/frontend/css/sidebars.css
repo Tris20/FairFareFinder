@@ -31,7 +31,6 @@
 #left-sidebar {
   width: 20vw;
   background-color: #0b5259;
-  padding: 1rem;
   overflow: hidden;
   /* Prevent text wrapping; clipped content stays on one line */
   white-space: nowrap;
@@ -50,8 +49,8 @@
 /* Center area expands to fill available space and centers content */
 #center {
   flex: 1;
-  background-color: #0b5259;
-  padding: 1rem;
+  width: 60vw;
+  /* background-color: #0b5259; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,6 +79,7 @@
 
 #right-sidebar .card-content {
   margin-bottom: 40px;
+  justify-content: right;
 }
 
 #right-sidebar:hover {
