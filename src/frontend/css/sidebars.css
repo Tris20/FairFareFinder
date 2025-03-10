@@ -1,0 +1,88 @@
+/* Basic Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+/* Toggle button container */
+#toggle-buttons {
+  margin: 1rem;
+  text-align: center;
+}
+
+#toggle-buttons button {
+  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Layout container as flex row */
+.layout {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: calc(100vh - 80px); /* Adjust height if needed */
+  transition: all 0.2s ease;
+}
+
+/* Left sidebar */
+#left-sidebar {
+  width: 20vw;
+  background-color: #ccc;
+  padding: 1rem;
+  overflow: hidden;
+  /* Prevent text wrapping; clipped content stays on one line */
+  white-space: nowrap;
+  transition:
+    width 0.2s ease,
+    padding 0.2s ease;
+}
+
+/* Left sidebar closed state */
+#left-sidebar.closed {
+  width: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Center area expands to fill available space and centers content */
+#center {
+  flex: 1;
+  background-color: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+/* Inner container for center content with max-width */
+.center-content {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Right sidebar */
+#right-sidebar {
+  width: 20vw;
+  background-color: #eee;
+  padding: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    width 0.2s ease,
+    padding 0.2s ease;
+}
+
+/* Right sidebar closed state */
+#right-sidebar.closed {
+  width: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
