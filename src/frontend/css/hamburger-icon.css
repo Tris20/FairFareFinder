@@ -54,7 +54,8 @@ body {
   transition: transform 0.5s, opacity 0.5s;
   transform: translateX(0);
   opacity: 1;
-  /* Adjust additional layout properties as needed */
+box-shadow: 0 2px 80px rgb(232, 152, 104);
+border-radius: 0px;
 }
 
 /* Flight form hidden state */

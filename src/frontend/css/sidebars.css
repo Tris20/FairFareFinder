@@ -7,10 +7,6 @@
   padding: 0;
 }
 
-body {
-  font-family: sans-serif;
-}
-
 /* Toggle button container */
 #toggle-buttons {
   margin: 1rem;
@@ -34,7 +30,7 @@ body {
 /* Left sidebar */
 #left-sidebar {
   width: 20vw;
-  background-color: #ccc;
+  background-color: #0b5259;
   padding: 1rem;
   overflow: hidden;
   /* Prevent text wrapping; clipped content stays on one line */
@@ -54,7 +50,7 @@ body {
 /* Center area expands to fill available space and centers content */
 #center {
   flex: 1;
-  background-color: #fff;
+  background-color: #0b5259;
   padding: 1rem;
   display: flex;
   justify-content: center;
@@ -71,13 +67,23 @@ body {
 /* Right sidebar */
 #right-sidebar {
   width: 20vw;
-  background-color: #eee;
-  padding: 1rem;
-  overflow: hidden;
+  background-color: #f4dfcf;
+  overflow-y: scroll;
+  overflow-x: hidden;
   white-space: nowrap;
   transition:
     width 0.2s ease,
     padding 0.2s ease;
+  box-shadow: 0 2px 80px rgb(232, 152, 104);
+  border-radius: 0px;
+}
+
+#right-sidebar .card-content {
+  margin-bottom: 40px;
+}
+
+#right-sidebar:hover {
+  transform: none;
 }
 
 /* Right sidebar closed state */
